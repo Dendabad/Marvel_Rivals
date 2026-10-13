@@ -35,5 +35,6 @@ tasks.test {
     useJUnitPlatform()
     // ./gradlew test -PguideJson=/path/to/guide.json checks the bot against the plugin's real guide.
     systemProperty("guideJson", findProperty("guideJson") ?: "")
+    systemProperty("writeFirstHundred", findProperty("writeFirstHundred") ?: "")
     testLogging { showStandardStreams = true }
 }

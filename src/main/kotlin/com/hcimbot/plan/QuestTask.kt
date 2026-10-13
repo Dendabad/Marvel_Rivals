@@ -39,6 +39,9 @@ class QuestTask(
         val value = ctx.conditions.readVar(progress.kind, progress.id)
         val start = startValue ?: value.also { startValue = it }
         val instruction = helper.at(value) ?: return TaskResult.Done
+        if (helper.hasGapAt(value)) {
+            return TaskResult.Failed("the guide data has no Quest Helper instructions for this part of $questKey")
+        }
 
         instruction.whenIn.forEach { ctx.conditions.observe(it.condition) }
         val chosen = instruction.whenIn.firstOrNull { branch -> branch.condition?.let { ctx.conditions.holds(it) } == true }

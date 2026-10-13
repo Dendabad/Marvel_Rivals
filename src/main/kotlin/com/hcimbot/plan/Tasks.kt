@@ -66,12 +66,14 @@ class OnlyIf(private val needed: (TaskContext) -> Boolean, private val task: Tas
     }
 }
 
-class WalkTask(val tile: Tile, private val radius: Int = 3) : BaseTask() {
+/** [anyFloor]: being within [radius] on another floor counts, e.g. near a town whose bank is upstairs. */
+class WalkTask(val tile: Tile, private val radius: Int = 3, private val anyFloor: Boolean = false) : BaseTask() {
     override val description = "Walk to $tile"
 
     override fun tick(ctx: TaskContext): TaskResult {
         val at = ctx.game.playerTile ?: return TaskResult.Running
-        if (at.distanceTo(tile) <= radius) return TaskResult.Done
+        val near = if (anyFloor) at.copy(plane = tile.plane) else at
+        if (near.distanceTo(tile) <= radius) return TaskResult.Done
         if (ctx.game.isBusy) return TaskResult.Running
         return attempt(ctx.actions.walkTo(tile), "walk to $tile")
     }
@@ -429,5 +431,68 @@ class TravelTask(
             } else {
                 menuEntry
             }
+    }
+}
+
+/**
+ * Picks up items lying nearby ("Take the Beer", "Collect 3x Logs"). Only items
+ * within [REACH] tiles count: the guide puts the player next to them, and
+ * guide.json's spawn lists cover the whole game, so walking to one could send
+ * the player across the map. Items that respawn are waited for.
+ */
+class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
+    private var waiting = 0
+    override val description = "Take ${items.joinToString { it.name }}"
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val missing = items.filter { ctx.conditions.count(it.ids) < (it.count ?: 1) }
+        val next = missing.firstOrNull() ?: return TaskResult.Done
+        if (ctx.game.isBusy) return TaskResult.Running
+
+        val at = ctx.game.playerTile ?: return TaskResult.Running
+        val ground = ctx.game.nearestGroundItem(next.ids)?.takeIf { it.tile.distanceTo(at) <= REACH }
+        if (ground == null) {
+            // Some already taken means this is a spawn to wait for. None at all means it is not here.
+            val started = ctx.conditions.count(next.ids) > 0
+            if (++waiting < if (started) RESPAWN_TICKS else ARRIVAL_TICKS) return TaskResult.Running
+            return TaskResult.Failed("cannot see ${next.name} nearby")
+        }
+        waiting = 0
+        return attempt(ctx.actions.takeGroundItem(ground), "take ${next.name}")
+    }
+
+    companion object {
+        const val REACH = 15
+        const val RESPAWN_TICKS = 100
+    }
+}
+
+/** Wears or wields items from the inventory ("Take Leather Gloves & wield"). */
+class EquipTask(private val items: List<ItemRef>) : BaseTask() {
+    private val requested = mutableMapOf<Int, Int>()
+    override val description = "Equip ${items.joinToString { it.name }}"
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val worn = ctx.game.equipment()
+        val next = items.firstOrNull { item -> item.ids.none { (worn[it] ?: 0) > 0 } } ?: return TaskResult.Done
+        if (ctx.game.isBusy) return TaskResult.Running
+
+        val id = next.ids.firstOrNull { (ctx.game.inventory()[it] ?: 0) > 0 }
+            ?: return TaskResult.Failed("${next.name} is not in the inventory")
+        val waited = requested[id]
+        if (waited != null) {
+            if (waited >= ARRIVAL_TICKS) return TaskResult.Failed("tried to equip ${next.name} but it is not worn")
+            requested[id] = waited + 1
+            return TaskResult.Running
+        }
+        val option = ctx.game.itemOptions(id).firstOrNull { it in EQUIP_OPTIONS }
+            ?: return TaskResult.Failed("${next.name} has no Wear or Wield option")
+        val started = ctx.actions.itemAction(id, option)
+        if (started) requested[id] = 0
+        return attempt(started, "equip ${next.name}")
+    }
+
+    companion object {
+        val EQUIP_OPTIONS = setOf("Wear", "Wield", "Equip")
     }
 }

@@ -18,19 +18,20 @@ by following the **B0aty HCIM Guide v3** RuneLite plugin step by step.
 
 The bot **pauses** and shows the reason instead of guessing when a step:
 
-- is a tip, warning or note
+- is a tip or note, or warns about something ("hugging the fence to avoid the Jail Guards")
 - would fight, unless `allowCombat` is on (quest fights too)
 - does not say which menu option to click, since a left click on a monster attacks it
 - asks for several actions ("Kill a rat and collect the bones")
 - depends on a condition or repeats ("if", "until", "optional", "roughly")
 - deposits only some items ("Deposit all except Ice Gloves")
 - needs a fairy ring code, sells items, or names an item it cannot identify
-- goes into the Wilderness (quest steps)
+- goes into the Wilderness (quest steps), or reaches a part of a quest the guide data has no Quest Helper instructions for
+- would pick up an item that is not in sight, rather than walking off to find one
 - fails to make progress, or takes too long
 
 It **stops** below 40% hitpoints, eats at 60% when food is set, and pauses if something attacks the player during a step that is not a fight.
 
-Against the real guide, about 1,318 of its 2,925 steps run automatically. The bot pauses on the rest so you can do them by hand, then tick them in the plugin to carry on.
+Against the real guide, about 1,318 of its 2,925 steps run automatically. The first 100 steps are reviewed one by one in [docs/first-100-steps.md](docs/first-100-steps.md). The bot pauses on the rest so you can do them by hand, then tick them in the plugin to carry on.
 
 ## Layout
 
@@ -42,7 +43,7 @@ Against the real guide, about 1,318 of its 2,925 steps run automatically. The bo
 | `engine/StepCompletion.kt`, `engine/Conditions.kt` | The plugin's completion and condition rules |
 | `engine/Safety.kt` | Settings and hardcore checks |
 | `plan/StepPlanner.kt` | Turns a step into tasks, or into a pause |
-| `plan/Tasks.kt`, `plan/QuestTask.kt` | Walk, bank, talk, shop, travel, teleport and quest tasks |
+| `plan/Tasks.kt`, `plan/QuestTask.kt` | Walk, bank, talk, shop, pick up, equip, travel, teleport and quest tasks |
 | `progress/Progress.kt` | Progress shared with the plugin |
 | `sdk/BotClientActions.kt` | **To fill in once the Bot Client SDK arrives** |
 
@@ -66,6 +67,8 @@ The tests run the bot against a fake game. To also check it against the plugin's
 ```
 ./gradlew test -PguideJson=/path/to/guide.json
 ```
+
+That also runs `FirstHundredTest`, which fails if the plan for any of the first 100 steps changes from the reviewed one. After reviewing a deliberate change, record the new plans with `-PwriteFirstHundred=true`.
 
 ## Credits
 

@@ -43,11 +43,29 @@ class StepPlanner(private val guide: Guide, private val settings: BotSettings) {
     fun plan(step: Step): StepPlan {
         if (step.isNote) return StepPlan.Manual("Note: ${step.text}")
         if (step.advice && settings.pauseOnAdvice) return StepPlan.Manual("Tip: ${step.text}")
+        if (hasWarning(step)) return manual(step, "the guide warns about something here")
 
         quest(step)?.let { return it }
+        val plan = action(step)
+        // A quest step whose Quest Helper data does not match the guide text is
+        // done from the text. Its part of the quest is over when the action is.
+        return if (isQuestStep(step) && plan is StepPlan.Auto) plan.copy(trustTasks = true) else plan
+    }
+
+    private fun action(step: Step): StepPlan {
         if (isOpenEnded(step)) return manual(step, "depends on a condition or repeats")
         if (step.banking || step.withdraw || step.depositsAll) return bank(step)
-        if (isCompound(step)) return manual(step, "asks for several things")
+
+        // "Take Leather Gloves & wield": the equip is done as a second task.
+        val core = withoutEquip(step.text)
+        val equip = core != null
+        val text = core ?: step.text
+        val target = step.target?.takeIf { !it.isGuess }
+
+        if (isShop(step, text, target)) return shop(step, text, target, equip)
+        if (isCompound(text)) return manual(step, "asks for several things")
+        if (isCollect(step, text) && (target == null || target.kind == "item")) return collect(step, equip)
+        if (equip) return manual(step, "asks for several things")
 
         step.spell?.let { spell -> return StepPlan.Auto(listOf(CastSpellTask(spell.name, spell.widget))) }
         step.teleport?.takeIf { it.ids.isNotEmpty() }?.let { teleport ->
@@ -56,10 +74,8 @@ class StepPlanner(private val guide: Guide, private val settings: BotSettings) {
             return StepPlan.Auto(listOf(ItemTeleportTask(teleport.via, teleport.ids, destination)))
         }
         step.travel?.let { travel -> return travel(step, travel) }
-        if (step.sellers.isNotEmpty()) return shop(step)
         step.inventoryAction?.let { action -> inventoryAction(step, action.highlightIds)?.let { return it } }
 
-        val target = step.target
         if (target != null && target.kind == "npc") return npc(step, target)
         if (target != null && target.kind == "object") return obj(step, target)
 
@@ -72,20 +88,34 @@ class StepPlanner(private val guide: Guide, private val settings: BotSettings) {
         return StepPlan.Manual(step.text)
     }
 
+    private fun isQuestStep(step: Step) = step.questHelper != null && (step.questStep || step.questFollow)
+
+    /** Null when the step is not a quest step, or its Quest Helper data does not match the guide's text. */
     private fun quest(step: Step): StepPlan? {
-        val key = step.questHelper ?: return null
-        if (!step.questStep && !step.questFollow) return null
+        if (!isQuestStep(step)) return null
+        val key = step.questHelper!!
         val helper = guide.questHelperFor(step) ?: return manual(step, "no Quest Helper data for $key")
         if (step.questStopUnresolved) return manual(step, "the guide's stopping point for this quest is not machine readable")
 
-        val carriesOn = step.questFollow || step.questCompletes || step.questStopValue != null ||
+        // questCompletes alone ("Talk to Dr Harlow", the last step the guide
+        // lists for a quest) is still just that talk. Only an explicit follow or
+        // stopping point carries the quest on.
+        val carriesOn = step.questFollow || step.questStopValue != null ||
             step.questStopCondition != null || step.questStopItems.isNotEmpty()
-        return if (carriesOn) {
-            StepPlan.Auto(listOf(QuestTask(key, helper, settings.allowCombat)), combat = settings.allowCombat)
-        } else {
-            val ids = step.target?.ids.orEmpty().toSet() + step.approach?.ids.orEmpty()
-            StepPlan.Auto(listOf(QuestTask(key, helper, settings.allowCombat, boundedTo = ids)), trustTasks = true, combat = settings.allowCombat)
+        if (carriesOn) {
+            return StepPlan.Auto(listOf(QuestTask(key, helper, settings.allowCombat)), combat = settings.allowCombat)
         }
+        val ids = step.target?.ids.orEmpty().toSet() + step.approach?.ids.orEmpty()
+        val mentioned = helper.steps.values.any { instruction ->
+            (listOf(instruction) + instruction.whenIn).any { branch -> branch.ids.any { it in ids } }
+        }
+        // "Talk to Noah" where Quest Helper says to start with Alina: trust the guide.
+        if (ids.isNotEmpty() && !mentioned) return null
+        return StepPlan.Auto(
+            listOf(QuestTask(key, helper, settings.allowCombat, boundedTo = ids)),
+            trustTasks = true,
+            combat = settings.allowCombat,
+        )
     }
 
     private fun bank(step: Step): StepPlan {
@@ -94,12 +124,15 @@ class StepPlanner(private val guide: Guide, private val settings: BotSettings) {
         if (Regex("\\b(except|keep|but)\\b").containsMatchIn(text)) return manual(step, "deposits only some items")
         val withdraw = if (step.withdraw) step.items else emptyList()
         if ("withdraw" in text && withdraw.isEmpty()) return manual(step, "does not say exactly what to withdraw")
+        // "Deposit the Garlic & Cheese" is not a deposit all.
+        if ("deposit" in text && !step.depositsAll) return manual(step, "deposits only some items")
         val unresolved = withdraw.filter { it.ids.isEmpty() }
         if (unresolved.isNotEmpty()) return manual(step, "cannot identify ${unresolved.joinToString { it.name }}")
         if (isCompound(step, ignoringBanking = true)) return manual(step, "asks for more than banking")
 
         val tasks = mutableListOf<Task>()
-        step.target?.takeIf { it.kind == "place" || it.kind == "bank" }?.tiles?.firstOrNull()?.let { tasks += WalkTask(it, radius = 10) }
+        step.target?.takeIf { it.kind == "place" || it.kind == "bank" }?.tiles?.firstOrNull()
+            ?.let { tasks += WalkTask(it, radius = BANK_AREA, anyFloor = true) }
         tasks += BankTask(depositAll = step.depositsAll, withdraw = withdraw)
         return StepPlan.Auto(tasks, confirm = Regex("\\b(equip|wear|wield)\\b").containsMatchIn(text))
     }
@@ -114,22 +147,45 @@ class StepPlanner(private val guide: Guide, private val settings: BotSettings) {
         return StepPlan.Auto(listOf(TravelTask(travel.place, departures, travel.destination.toTile())))
     }
 
-    private fun shop(step: Step): StepPlan {
-        if (Regex("\\bsell\\b").containsMatchIn(step.text.lowercase())) return manual(step, "selling is not automated")
-        // "Buy 2,100 Iron Arrowtips": guide.json's item counts do not read thousands.
-        if (Regex("\\d,\\d").containsMatchIn(step.text)) return manual(step, "unsure of the amount to buy")
-        val items = buyable(step)
-        if (items.isEmpty()) return manual(step, "cannot identify what to buy")
-        val sellers = step.sellers
-            .map { ShopTask.Seller(it.name, it.ids, it.points.mapNotNull { p -> p.toTile() }) }
-            .filter { it.ids.isNotEmpty() && it.tiles.isNotEmpty() }
-        if (sellers.isEmpty()) return manual(step, "no shop location known")
-        return StepPlan.Auto(listOf(ShopTask(sellers, items)))
+    private fun isShop(step: Step, text: String, target: Target?): Boolean {
+        if (!Regex("(^|[,&.]|\\band\\b)\\s*buy\\b").containsMatchIn(stripped(text))) return false
+        // "Buy a Newspaper from Benny (1,1)" is bought through chat, not a shop window.
+        if (step.dialogue.isNotEmpty()) return false
+        return step.sellers.isNotEmpty() || target?.kind == "npc"
     }
 
-    private fun buyable(step: Step): List<ItemRef> {
+    private fun shop(step: Step, text: String, target: Target?, equip: Boolean): StepPlan {
+        if (Regex("\\bsell\\b").containsMatchIn(text.lowercase())) return manual(step, "selling is not automated")
+        // "Buy 2,100 Iron Arrowtips": guide.json's item counts do not read thousands.
+        if (Regex("\\d,\\d").containsMatchIn(text)) return manual(step, "unsure of the amount to buy")
+        if (hasExtraAction(text)) return manual(step, "asks for more than buying")
+        val items = itemsOf(step)
+        if (items.isEmpty()) return manual(step, "cannot identify what to buy")
+        val sellers = if (step.sellers.isNotEmpty()) {
+            step.sellers.map { ShopTask.Seller(it.name, it.ids, it.points.mapNotNull { p -> p.toTile() }) }
+        } else {
+            listOfNotNull(target?.let { ShopTask.Seller(it.name, it.ids, it.tiles) })
+        }.filter { it.ids.isNotEmpty() && it.tiles.isNotEmpty() }
+        if (sellers.isEmpty()) return manual(step, "no shop location known")
+        val tasks = listOf(ShopTask(sellers, items)) + if (equip) listOf(EquipTask(items)) else emptyList()
+        return StepPlan.Auto(tasks)
+    }
+
+    private fun isCollect(step: Step, text: String): Boolean =
+        step.collects || clauses(text).firstOrNull { !MOVEMENT.containsMatchIn(it) }
+            ?.let { Regex("^(take|collect|pick up|loot|grab)\\b").containsMatchIn(it) } == true
+
+    private fun collect(step: Step, equip: Boolean): StepPlan {
+        val items = itemsOf(step)
+        if (items.isEmpty()) return manual(step, "cannot identify what to pick up")
+        val tasks = listOf(TakeItemTask(items)) + if (equip) listOf(EquipTask(items)) else emptyList()
+        return StepPlan.Auto(tasks)
+    }
+
+    /** The items a buy or pick up step names. Empty unless every one of them is identified. */
+    private fun itemsOf(step: Step): List<ItemRef> {
         if (step.items.isNotEmpty()) {
-            // Every item the step names must be known, or the bot would leave some unbought.
+            // Every item the step names must be known, or the bot would leave some behind.
             return if (step.items.all { it.ids.isNotEmpty() }) step.items else emptyList()
         }
         val target = step.target ?: return emptyList()
@@ -197,6 +253,9 @@ class StepPlanner(private val guide: Guide, private val settings: BotSettings) {
     private fun manual(step: Step, why: String) = StepPlan.Manual("${step.text} ($why)")
 
     companion object {
+        /** How close to a bank's place the bot walks before opening the nearest bank. */
+        private const val BANK_AREA = 30
+
         private val VERBS = listOf(
             "talk to" to "Talk-to",
             "speak to" to "Talk-to",
@@ -227,16 +286,33 @@ class StepPlanner(private val guide: Guide, private val settings: BotSettings) {
             "empty", "trade", "steal", "pickpocket", "give", "read", "dig", "cross", "jump", "complete", "continue",
             "start", "train", "claim", "check", "drink", "eat", "repair", "build", "plant", "harvest", "charter",
             "receive", "spin", "smelt", "tan", "turn", "wait", "hop", "disable", "enable", "set", "toggle",
-            "travel", "home", "minigame",
+            "travel", "home", "minigame", "destroy", "obtain",
         )
 
+        /** In a shop step, "Trade Robyn and buy a hat" is one purchase. */
+        private val SHOP_WORDS = setOf("buy", "trade", "talk", "speak")
+
         /** Movement clauses, which every task already does on its way. */
-        private val MOVEMENT = Regex("^(head|go|walk|run|return|make your way)\\b")
+        private val MOVEMENT = Regex("^(head|go|walk|run|return|make your way|follow)\\b")
 
         private val FAIRY_RING = Regex("(?i)[a-d][i-l][p-s]")
 
         /** Words that make a step conditional or open ended, which the bot cannot judge. */
         private val OPEN_ENDED = Regex("\\b(if|until|optional|optionally|roughly|as many|per inv|unless|or)\\b")
+
+        /** Words the guide uses to warn about a danger the bot's pathing cannot honour. */
+        private val WARNING = Regex("\\b(avoid|hug|hugging|careful|aggressive|aggro|don't|do not|never|warning|beware)\\b")
+
+        private val EQUIP_SUFFIX = Regex("(,|&|\\.|\\band\\b)\\s*(wield|wear|equip)\\s*(it|them|this|these)?\\s*[.!]?\\s*$")
+
+        /** "Head West hugging the fence to avoid the Jail Guards": the walker cannot follow that. */
+        fun hasWarning(step: Step): Boolean = WARNING.containsMatchIn(step.text.lowercase())
+
+        /** The text without a trailing "& wield" or ". Equip it.", or null when it has none. */
+        fun withoutEquip(text: String): String? {
+            val match = EQUIP_SUFFIX.find(text.lowercase()) ?: return null
+            return text.substring(0, match.range.first)
+        }
 
         /**
          * The menu option the step's text asks for. A verb only counts at the
@@ -263,10 +339,31 @@ class StepPlanner(private val guide: Guide, private val settings: BotSettings) {
             if (ignoringBanking) {
                 text = text.lowercase().replace(Regex("deposit all,? (then )?|and deposit all|bank at [^,.&]*|withdraw:?"), "")
             }
-            return clauses(text).count { clause ->
-                !MOVEMENT.containsMatchIn(clause) && clause.substringBefore(' ').trim(':') in ACTION_WORDS
-            } > 1
+            return isCompound(text)
         }
+
+        private fun isCompound(text: String): Boolean {
+            // "Talk to Yarlo, then destroy the furniture": a "then" always starts another action.
+            if (Regex("\\bthen\\b").containsMatchIn(stripped(text))) return true
+            return actionWords(text).size > 1
+        }
+
+        /**
+         * For a shop step: true when it asks for anything besides one purchase.
+         * "Trade Robyn and buy a Chef's Hat" is one purchase. "Buy 5 Jugs of wine.
+         * Hop worlds and buy 10 in total" and "Buy a skirt. Wear it" are not.
+         */
+        fun hasExtraAction(text: String): Boolean {
+            if (Regex("\\bthen\\b").containsMatchIn(stripped(text))) return true
+            val words = actionWords(text)
+            return words.count { it == "buy" } > 1 || words.any { it !in SHOP_WORDS }
+        }
+
+        private fun actionWords(text: String): List<String> =
+            clauses(text)
+                .filterNot { MOVEMENT.containsMatchIn(it) }
+                .map { it.substringBefore(' ').trim(':') }
+                .filter { it in ACTION_WORDS }
 
         fun isOpenEnded(step: Step): Boolean = OPEN_ENDED.containsMatchIn(stripped(step.text))
 
@@ -289,14 +386,15 @@ class StepPlanner(private val guide: Guide, private val settings: BotSettings) {
             return step.target?.takeIf { it.kind == "place" }?.name?.takeIf { it.isNotBlank() }
         }
 
-        /** The step's instructions, lowercased, with [tags] and (chat numbers) removed. */
+        /** The step's instructions, split at commas, "&", "and", "then", brackets and full stops. */
         private fun clauses(text: String): List<String> =
             stripped(text)
-                .split(Regex(",|&|;|->|[.!]\\s|\\band\\b|\\bthen\\b"))
+                .split(Regex(",|&|;|->|[.!]\\s|\\band\\b|\\bthen\\b|[()]"))
                 .map { it.trim(' ', '.', '!') }
                 .filter { it.isNotEmpty() }
 
+        /** Lowercased, without [tags] or chat numbers "(3,1)". Worded asides "(right click and buy 1)" stay. */
         private fun stripped(text: String) =
-            text.lowercase().replace(Regex("\\[[^]]*]"), "").replace(Regex("\\([^)]*\\)"), "")
+            text.lowercase().replace(Regex("\\[[^]]*]"), "").replace(Regex("\\([\\d,\\s]*\\)"), "")
     }
 }

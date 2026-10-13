@@ -42,6 +42,9 @@ interface GameState {
     fun nearestNpc(ids: Collection<Int>, names: Collection<String> = emptyList()): SceneEntity?
     fun nearestObject(ids: Collection<Int>, names: Collection<String> = emptyList()): SceneEntity?
 
+    /** Nearest item lying on the ground (or on a table) with one of these ids. */
+    fun nearestGroundItem(ids: Collection<Int>): SceneEntity?
+
     /** Chat options currently on screen, top to bottom. Empty when none are shown. */
     fun dialogOptions(): List<String>
 
@@ -96,4 +99,7 @@ interface GameActions {
     fun useItemOnObject(itemId: Int, obj: SceneEntity): Boolean
 
     fun buy(itemId: Int, quantity: Int): Boolean
+
+    /** "Take" on a ground item from [GameState.nearestGroundItem]. */
+    fun takeGroundItem(item: SceneEntity): Boolean
 }

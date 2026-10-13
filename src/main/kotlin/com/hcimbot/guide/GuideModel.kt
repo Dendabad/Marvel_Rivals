@@ -93,8 +93,13 @@ class Target(
     val kind: String = "",
     val ids: List<Int> = emptyList(),
     val points: List<List<Int>> = emptyList(),
+    /** How the guide pipeline matched the name: linked, wiki-exact, manual, inferred and so on. */
+    val confidence: String = "",
 ) {
     val tiles: List<Tile> get() = points.mapNotNull { it.toTile() }
+
+    /** "inferred" targets are the pipeline's guess from the text, e.g. "Open Minimap" read as an object. */
+    val isGuess: Boolean get() = confidence == "inferred"
     val allNames: List<String> get() = names.ifEmpty { listOf(name) }.filter { it.isNotBlank() }
 }
 
@@ -202,6 +207,23 @@ class QuestHelper(
         if (lastValue in 1 until value) return null
         return byValue.floorEntry(value)?.value
     }
+
+    /**
+     * True when guide.json has no instruction for [value] even though Quest
+     * Helper has one. Quest Helper keys its steps at a fixed stride (every 1,
+     * 2, 5 or 10), so a value a whole stride or more past the last key is a
+     * part the guide pipeline dropped, like X Marks the Spot's digs. The
+     * instruction [at] would give there is stale.
+     */
+    fun hasGapAt(value: Int): Boolean {
+        val keys = byValue.keys.toList()
+        if (keys.size < 2 || value in byValue) return false
+        val stride = keys.zipWithNext { a, b -> b - a }.reduce(::gcd)
+        val floor = byValue.floorKey(value) ?: return false
+        return value - floor >= stride
+    }
+
+    private fun gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
 }
 
 /** One Quest Helper instruction, or one conditional branch of it. */

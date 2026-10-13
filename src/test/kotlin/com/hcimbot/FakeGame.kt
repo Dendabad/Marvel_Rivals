@@ -51,6 +51,9 @@ class FakeGame : GameState, GameActions {
     override fun nearestNpc(ids: Collection<Int>, names: Collection<String>) = nearest(npcs, ids, names)
     override fun nearestObject(ids: Collection<Int>, names: Collection<String>) = nearest(objects, ids, names)
 
+    val groundItems = mutableListOf<SceneEntity>()
+    override fun nearestGroundItem(ids: Collection<Int>) = nearest(groundItems, ids, emptyList())
+
     private fun nearest(from: List<SceneEntity>, ids: Collection<Int>, names: Collection<String>): SceneEntity? {
         val at = playerTile ?: return null
         return from
@@ -138,6 +141,10 @@ class FakeGame : GameState, GameActions {
 
     override fun itemAction(itemId: Int, action: String): Boolean {
         calls += "item $itemId $action"
+        if (action in setOf("Wear", "Wield", "Equip")) {
+            inv.remove(itemId)
+            worn[itemId] = 1
+        }
         if (action == "Eat") {
             inv.computeIfPresent(itemId) { _, n -> if (n > 1) n - 1 else null }
             hitpoints = maxHitpoints
@@ -152,6 +159,13 @@ class FakeGame : GameState, GameActions {
 
     override fun useItemOnObject(itemId: Int, obj: SceneEntity): Boolean {
         calls += "use $itemId on ${obj.name}"
+        return true
+    }
+
+    override fun takeGroundItem(item: SceneEntity): Boolean {
+        calls += "take ${item.name}"
+        groundItems.remove(item)
+        inv.merge(item.id, 1, Int::plus)
         return true
     }
 

@@ -33,6 +33,7 @@ class BotClientActions : GameActions {
     override fun useItemOnItem(itemId: Int, targetItemId: Int): Boolean = sdk()
     override fun useItemOnObject(itemId: Int, obj: SceneEntity): Boolean = sdk()
     override fun buy(itemId: Int, quantity: Int): Boolean = sdk()
+    override fun takeGroundItem(item: SceneEntity): Boolean = sdk()
 
     private fun sdk(): Nothing = TODO("Needs the Bot Client SDK")
 }
