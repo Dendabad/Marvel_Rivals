@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "sections": [
+    {
+      "id": "s0",
+      "slug": "start",
+      "title": "Start",
+      "steps": [
+        {
+          "id": "quest-part", "ordinal": 0, "depth": 2, "kind": "step",
+          "text": "Talk to the Priest (2,1) [Test Quest]",
+          "target": {"name": "Priest", "names": ["Priest"], "kind": "npc", "ids": [100], "points": [[3243, 3210, 0]]},
+          "questHelper": "testquest", "questStep": true, "dialogue": [[2, 1]], "questDoneAt": 2
+        },
+        {
+          "id": "diary", "ordinal": 1, "depth": 2, "kind": "step",
+          "text": "Pickpocket a man [Test Diary]",
+          "target": {"name": "Man", "names": ["Man"], "kind": "npc", "ids": [200], "points": []},
+          "completion": {"varplayer": 1194, "bit": 6, "kind": "diary"}
+        },
+        {
+          "id": "bank", "ordinal": 2, "depth": 2, "kind": "step",
+          "text": "Deposit all, then Withdraw: Coins, Spade",
+          "banking": true, "depositsAll": true, "withdraw": true,
+          "items": [{"name": "Coins", "ids": [995]}, {"name": "Spade", "ids": [952]}]
+        },
+        {
+          "id": "walk", "ordinal": 3, "depth": 2, "kind": "step",
+          "text": "Head west to the village",
+          "target": {"name": "Village", "kind": "place", "ids": [], "points": [[3103, 3265, 0]]},
+          "arrivesAt": [3103, 3265, 0]
+        },
+        {
+          "id": "tip", "ordinal": 4, "depth": 2, "kind": "step",
+          "text": "Right click the stairs, do not left click them", "advice": true
+        },
+        {
+          "id": "fight", "ordinal": 5, "depth": 2, "kind": "step",
+          "text": "Kill a goblin",
+          "target": {"name": "Goblin", "names": ["Goblin"], "kind": "npc", "ids": [300], "points": []}
+        },
+        {
+          "id": "quest-rest", "ordinal": 6, "depth": 2, "kind": "step",
+          "text": "Complete Test Quest",
+          "questHelper": "testquest", "questStep": true, "questFollow": true, "questCompletes": true
+        }
+      ]
+    }
+  ],
+  "questHelpers": {
+    "testquest": {
+      "var": {"kind": "varplayer", "id": 107},
+      "lastValue": 2,
+      "steps": {
+        "0": {"kind": "npc", "point": [3243, 3210, 0], "text": "Talk to the Priest.", "ids": [100], "dialogue": ["I'm looking for a quest!", "Yes."]},
+        "1": {"kind": "npc", "point": [3147, 3175, 0], "text": "Talk to the Hermit.", "ids": [101], "dialogue": ["The Priest sent me."]},
+        "2": {
+          "kind": "object", "point": [3250, 3193, 0], "text": "Open the coffin.", "ids": [400],
+          "whenIn": [
+            {"kind": "object", "point": [3250, 3193, 0], "text": "Search the open coffin.", "ids": [401],
+             "when": {"here": {"kind": "object", "ids": [401]}}}
+          ]
+        }
+      }
+    }
+  }
+}
