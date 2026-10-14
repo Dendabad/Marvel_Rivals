@@ -602,7 +602,7 @@ class MarkGuardsTask(
     private fun reportBack(helper: com.hcimbot.game.HelperStep, ctx: TaskContext): TaskResult {
         if (helper.npcIds.isEmpty() || !REPORT.containsMatchIn(helper.text)) return TaskResult.Done
         if (report == null) ctx.log("Quest Helper says: ${helper.text.take(80)} (npc ${helper.npcIds}, at ${helper.tile})")
-        val talk = report ?: InteractTask(InteractTask.Kind.NPC, helper.npcIds, emptyList(), listOfNotNull(helper.tile), "Talk-to").also { report = it }
+        val talk = report ?: InteractTask(InteractTask.Kind.NPC, helper.npcIds, emptyList(), listOfNotNull(helper.tile ?: helper.npcIds.firstNotNullOfOrNull(KNOWN_PLACES::get)), "Talk-to").also { report = it }
         return talk.tick(ctx)
     }
 
@@ -676,6 +676,9 @@ class MarkGuardsTask(
         const val MAX_TICKS = 300
         const val LOST_TICKS = 40
         const val AT_POINT = 4
+
+        /** Where an NPC Quest Helper names stands, for when it gives no point: Sergeant Tobyn in Varrock Square. */
+        private val KNOWN_PLACES = mapOf(12648 to Tile(3211, 3437, 0))
         private val REPORT = Regex("^(report back|talk to)", RegexOption.IGNORE_CASE)
         const val MAX_ATTEMPTS = 4
         const val CLICK_RANGE = 4
