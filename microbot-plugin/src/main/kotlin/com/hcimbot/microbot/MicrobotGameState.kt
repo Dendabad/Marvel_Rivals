@@ -130,6 +130,13 @@ class MicrobotGameState : GameState {
         nearest?.let { entity(it.id, it.name, it.worldLocation)?.copy(index = it.index) }
     }
 
+    /** The NPC's current options, transformed for NPCs whose look depends on quest progress. */
+    override fun npcActions(npc: SceneEntity): List<String>? = onClient {
+        val client = Microbot.getClient()
+        val definition = client.getNpcDefinition(npc.id)?.let { it.transform() ?: it } ?: return@onClient null
+        definition.actions?.filterNotNull()?.map(Text::removeTags)?.filter { it.isNotBlank() }
+    }
+
     /** A breadth first search over the scene's collision map, in which a shut door is a wall. */
     override fun canReach(tile: Tile): Boolean? =
         runCatching { Rs2Tile.isTileReachable(WorldPoint(tile.x, tile.y, tile.plane)) }.getOrNull()

@@ -476,7 +476,9 @@ class TravelTask(
         if (game.canContinueDialog) return attempt(ctx.actions.continueDialog(), "continue the dialogue")
         val options = game.dialogOptions()
         if (options.isNotEmpty()) {
+            // The place by name, or else the "take me there" answer of a first trip ("I'd love to come!").
             val pick = options.firstOrNull { it.contains(place, ignoreCase = true) }
+                ?: options.firstOrNull { GOING.containsMatchIn(it.trim()) }
                 ?: return TaskResult.Failed("travel shows $options and none of them is $place")
             return attempt(ctx.actions.chooseDialogOption(pick), "pick $pick")
         }
@@ -499,7 +501,13 @@ class TravelTask(
             }
         }
         val (entity, kind) = transport
-        val option = menuOption(departure.menuEntry, entity.name)
+        var option = menuOption(departure.menuEntry, entity.name)
+        // A first trip has no Travel option yet (Veos, before Great Kourend is unlocked): ask instead.
+        val actions = if (kind == InteractTask.Kind.NPC) game.npcActions(entity) else null
+        if (actions != null && actions.none { it.equals(option, ignoreCase = true) } && actions.any { it.equals("Talk-to", true) }) {
+            ctx.log("${entity.name} has no $option option yet, talking to them instead")
+            option = "Talk-to"
+        }
         val started = when (kind) {
             InteractTask.Kind.OBJECT -> ctx.actions.interactObject(entity, option)
             InteractTask.Kind.NPC -> ctx.actions.interactNpc(entity, option)
@@ -510,6 +518,9 @@ class TravelTask(
 
     companion object {
         const val ARRIVED_TILES = 15
+
+        /** Answers that agree to be taken somewhere. Agreeing is the point of a travel step. */
+        private val GOING = Regex("^(i'd love to|i would love to|yes|sure|take me|can you take me|let's go|travel|okay,? let's)", RegexOption.IGNORE_CASE)
 
         /** "Travel Minecart" on a Minecart is the option "Travel". */
         fun menuOption(menuEntry: String, targetName: String): String =

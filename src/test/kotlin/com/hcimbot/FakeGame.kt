@@ -85,6 +85,9 @@ class FakeGame : GameState, GameActions {
     var alive: ((SceneEntity) -> Boolean?)? = null
     override fun npcAlive(npc: SceneEntity): Boolean? = alive?.invoke(npc)
 
+    val npcMenus = mutableMapOf<Int, List<String>>()
+    override fun npcActions(npc: SceneEntity): List<String>? = npcMenus[npc.id]
+
     val spawns = mutableMapOf<String, List<Tile>>()
     override fun npcSpawns(name: String): List<Tile> = spawns[name.lowercase()].orEmpty()
 

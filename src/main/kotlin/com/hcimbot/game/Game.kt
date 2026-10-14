@@ -61,6 +61,9 @@ interface GameState {
     /** True while [npc] (the very same one) is still alive. Null when the game cannot say. */
     fun npcAlive(npc: SceneEntity): Boolean? = null
 
+    /** The right click options [npc] has now, e.g. Veos has no "Travel" until the first trip. Null when unknown. */
+    fun npcActions(npc: SceneEntity): List<String>? = null
+
     /** What the open shop offers for [itemId], to explain a buy that did not work. Null when unknown. */
     fun shopOffers(itemId: Int): String? = null
 

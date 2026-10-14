@@ -474,6 +474,24 @@ class PartsTest {
     }
 
     @Test
+    fun `a first trip with no Travel option talks and says yes to going`() {
+        val veosAt = Tile(3054, 3245, 0)
+        val game = FakeGame()
+        game.playerTile = Tile(3055, 3247, 0)
+        game.npcs += com.hcimbot.game.SceneEntity(8630, "Veos", veosAt)
+        game.npcMenus[8630] = listOf("Talk-to")
+        game.onNpcInteract = { _, _ -> game.options = listOf("I'd love to come!", "Tell me more about Great Kourend.", "I'm good thanks.") }
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.TravelTask(
+            "Port Piscarilius", listOf(com.hcimbot.plan.TravelTask.Departure(veosAt, 8630, "Travel Veos")), Tile(1824, 3690, 0),
+        )
+        task.tick(ctx)
+        assertEquals("npc Veos Talk-to", game.calls.last())
+        task.tick(ctx)
+        assertEquals("option I'd love to come!", game.calls.last())
+    }
+
+    @Test
     fun `step 19 looks for rats behind Lumbridge castle first`() {
         val game = FakeGame()
         game.playerTile = Tile(3230, 3209, 0)
