@@ -3,22 +3,23 @@ HCIM Guide Bot 0.15.1, PAUSED
 Step 119 of 2925: Collect 1 Sweetcorn [Recipe for Disaster]
 Detail: Walk to (1574, 3139, 1): could not walk to (1574, 3139, 1). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-10:04:11  Paused: Walk to (1574, 3139, 1): could not walk to (1574, 3139, 1)
-10:04:05  Walking from (1631, 3056, 0) to (1574, 3139, 1)
-10:04:05  Step: Collect 1 Sweetcorn [Recipe for Disaster]
-10:04:04  Started version 0.15.1
+10:12:13  Paused: Walk to (1574, 3139, 1): could not walk to (1574, 3139, 1)
+10:12:07  Walking from (1631, 3056, 0) to (1574, 3139, 1)
+10:12:07  Step: Collect 1 Sweetcorn [Recipe for Disaster]
+10:12:06  Started version 0.15.1
 == Player
 world WorldPoint(x=1631, y=3056, plane=0), in instance false, as guide coordinates WorldPoint(x=1631, y=3056, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
 4241x1, 1511x1, 1511x1, 1511x1, 954x1, 233x1, 227x1, 4241x1
 == NPCs within 12 tiles (id name at tile: options)
-13168 Citizen at WorldPoint(x=1621, y=3045, plane=0): [Talk-to, Pickpocket]
-13170 Citizen at WorldPoint(x=1626, y=3059, plane=0): [Talk-to, Pickpocket]
-13233 Farmer at WorldPoint(x=1628, y=3068, plane=0): [Talk-to, Pickpocket]
-12982 Jerboa at WorldPoint(x=1632, y=3050, plane=0): []
-13237 Master Farmer at WorldPoint(x=1635, y=3054, plane=0): [Talk-to, Pickpocket]
-12982 Jerboa at WorldPoint(x=1637, y=3047, plane=0): []
+13168 Citizen at WorldPoint(x=1627, y=3044, plane=0): [Talk-to, Pickpocket]
+13170 Citizen at WorldPoint(x=1622, y=3062, plane=0): [Talk-to, Pickpocket]
+13233 Farmer at WorldPoint(x=1623, y=3067, plane=0): [Talk-to, Pickpocket]
+12982 Jerboa at WorldPoint(x=1632, y=3055, plane=0): []
+13237 Master Farmer at WorldPoint(x=1634, y=3050, plane=0): [Talk-to, Pickpocket]
+12982 Jerboa at WorldPoint(x=1635, y=3050, plane=0): []
+2855 Rat at WorldPoint(x=1641, y=3053, plane=0): [Attack]
 == Objects within 8 tiles (id name at tile)
 51805 null at WorldPoint(x=1623, y=3049, plane=0)
 51805 null at WorldPoint(x=1623, y=3050, plane=0)
@@ -57,7 +58,7 @@ Friends
 Channel
 Clan
 Trade
-00:05:05
+00:13:07
 Boatyguidev3: *
 You pick a handful of nettles.
 Did you know? You can hide the Help button in the Bank interface via the Bank settings.
