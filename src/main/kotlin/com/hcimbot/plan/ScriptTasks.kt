@@ -300,6 +300,7 @@ class DepositItemsTask(private val itemIds: List<Int>) : BaseTask() {
 class HopTask : BaseTask() {
     private var hopped = false
     private var waited = 0
+    private var clearTicks = 0
     override val description = "Hop worlds"
 
     override fun tick(ctx: TaskContext): TaskResult {
@@ -555,9 +556,12 @@ class FollowGuardTask(private val guardIds: List<Int>, private val hides: List<T
         val ahead = next == null || guard.tile.distanceTo(next) < hide.distanceTo(next)
         val losing = guard.tile.distanceTo(me) >= TOO_FAR
         waited++
-        if ((clear && ahead) || losing || waited >= MAX_WAIT) {
+        // Twice in a row, so one tick of the guard turning does not set the bot off early.
+        clearTicks = if (clear && ahead) clearTicks + 1 else 0
+        if (clearTicks >= 2 || losing || waited >= MAX_WAIT) {
             index++
             waited = 0
+            clearTicks = 0
             ctx.log("Guard at ${guard.tile}, moving on to stop ${index + 1} of ${hides.size}")
         }
         return TaskResult.Running
@@ -568,7 +572,7 @@ class FollowGuardTask(private val guardIds: List<Int>, private val hides: List<T
         /** VarbitID.CUTSCENE_STATUS: non zero while the game has taken control of the camera and player. */
         const val CUTSCENE_VARBIT = 542
         const val LOST_TICKS = 40
-        const val CLEAR_OF_HIDE = 6
+        const val CLEAR_OF_HIDE = 8
         /** Ticks to wait hidden before moving on regardless: the guard may be waiting for the player to come on. */
         const val MAX_WAIT = 30
         const val TOO_FAR = 12
