@@ -146,8 +146,10 @@ sealed interface DialoguePlan {
     }
 
     /** Quest Helper's option texts. Any matching option is chosen, in any order. */
-    class Texts(private val wanted: List<String>) : DialoguePlan {
+    class Texts(private val fixed: List<String>, private val live: () -> List<String> = { emptyList() }) : DialoguePlan {
         override fun choose(options: List<String>): Choice {
+            // What Quest Helper lists for the step it is on counts as well, after the ones the guide gives.
+            val wanted = fixed + live()
             for (want in wanted) {
                 options.firstOrNull { it.equals(want, ignoreCase = true) }?.let { return Choice.ByText(it) }
             }

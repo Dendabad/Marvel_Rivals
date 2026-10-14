@@ -215,6 +215,13 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `chat options Quest Helper lists are picked when the guide gives none`() {
+        val plan = com.hcimbot.plan.DialoguePlan.Texts(emptyList()) { listOf("Where does the wizard live?") }
+        val choice = plan.choose(listOf("Can you give me your key?", "Where does the wizard live?"))
+        assertEquals(com.hcimbot.plan.DialoguePlan.Choice.ByText("Where does the wizard live?"), choice)
+    }
+
+    @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
         val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()

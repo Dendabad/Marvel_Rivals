@@ -19,7 +19,7 @@ object QuestHelperProbe {
             var step = call(quest, "getCurrentStep") ?: return "Quest Helper has no current step"
             // A conditional step holds the one actually shown.
             repeat(6) { call(step, "getActiveStep")?.takeIf { it !== step }?.let { step = it } }
-            "${quest.javaClass.simpleName}: ${step.javaClass.simpleName} ${fields(step)}"
+            "${quest.javaClass.simpleName}: ${step.javaClass.simpleName} choices=${choices(step)} ${fields(step)}"
         }.getOrElse { "Quest Helper probe failed: ${it.javaClass.simpleName} ${it.message}" }
     }
 
@@ -36,8 +36,15 @@ object QuestHelperProbe {
         }
         val point = field(step, "worldPoint") as? net.runelite.api.coords.WorldPoint
         val tile = point?.let { Instances.toTemplate(it) }?.let { com.hcimbot.guide.Tile(it.x, it.y, it.plane) }
-        com.hcimbot.game.HelperStep(text, ids, tile)
+        com.hcimbot.game.HelperStep(text, ids, tile, choices(step))
     }.getOrNull()
+
+    /** The chat options Quest Helper wants picked: its DialogChoiceSteps hold a list of steps with a `choice` text. */
+    private fun choices(step: Any): List<String> = runCatching {
+        val holder = field(step, "choices") ?: return emptyList()
+        val list = (field(holder, "choices") as? Collection<*>) ?: (holder as? Collection<*>) ?: return emptyList()
+        list.mapNotNull { item -> item?.let { field(it, "choice") as? String } }.filter { it.isNotBlank() }
+    }.getOrDefault(emptyList())
 
     private fun field(target: Any, name: String): Any? {
         var type: Class<*>? = target.javaClass

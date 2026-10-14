@@ -12,7 +12,10 @@ data class SceneEntity(
 )
 
 /** What the Quest Helper plugin is pointing at: its instruction and the NPC ids it highlights. */
-data class HelperStep(val text: String, val npcIds: List<Int>, val tile: Tile? = null)
+data class HelperStep(val text: String, val npcIds: List<Int>, val tile: Tile? = null,
+    /** The chat options Quest Helper lists for this step, when it has any. */
+    val choices: List<String> = emptyList(),
+)
 
 /**
  * Everything the bot reads from the game. Each member maps onto RuneLite's

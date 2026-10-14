@@ -139,7 +139,7 @@ class QuestTask(
         tooStrong(step.text, ctx)?.let { return Made.Refused(it) }
         val tile = step.tile
         val extra = QuestFills.extraDialogue(questKey)
-        val dialogue = if (step.dialogue.isEmpty() && extra.isEmpty()) DialoguePlan.None else DialoguePlan.Texts(step.dialogue + extra)
+        val dialogue = DialoguePlan.Texts(step.dialogue + extra) { ctx.game.helperStep()?.choices.orEmpty() }
         return when (step.kind) {
             "dig" -> tile?.let { Made.Ready(DigTask(it)) } ?: Made.Refused("no location for this dig")
             "walk" -> tile?.let { Made.Ready(WalkTask(it, radius = 1)) } ?: Made.Refused("no location for this walk")
@@ -153,14 +153,14 @@ class QuestTask(
                 if (questKey == "childrenofthesun" && step.text.startsWith("Mark the guard", ignoreCase = true)) {
                     return Made.Ready(MarkGuardsTask())
                 }
-                if (step.ids.isEmpty()) return Made.Refused("no NPC id for this step")
+                if (step.ids.isEmpty()) return fromHelper(ctx, dialogue) ?: Made.Refused("no NPC id for this step")
                 // Updates give NPCs new ids (Morgan is 16274 before Vampyre Slayer now, where
                 // Quest Helper's data has only 3479). The guide step lists the current ones.
                 val ids = if (boundedTo != null && step.ids.any { it in boundedTo }) (step.ids + boundedTo).distinct() else step.ids
                 // A left click on a monster attacks it, so the option has to be known.
                 val action = StepPlanner.verb(step.text)
                     ?: if (step.dialogue.isNotEmpty() || HANDING_IN.containsMatchIn(step.text)) "Talk-to" else null
-                    ?: return Made.Refused("unclear what to click")
+                    ?: return fromHelper(ctx, dialogue) ?: Made.Refused("unclear what to click")
                 if (action == "Attack" && !allowCombat) return Made.Refused("combat is turned off for safety")
                 Made.Ready(InteractTask(InteractTask.Kind.NPC, ids, emptyList(), listOfNotNull(tile), action, dialogue))
             }
@@ -177,6 +177,19 @@ class QuestTask(
             }
             else -> Made.Refused("unknown quest step kind ${step.kind}")
         }
+    }
+
+    /**
+     * The guide data has no usable target for this step, so do what the Quest Helper plugin is showing:
+     * talk to, or interact with, the NPC it points at. Only for plain talking and handing in, never a fight.
+     */
+    private fun fromHelper(ctx: TaskContext, dialogue: DialoguePlan): Made? {
+        val shown = ctx.game.helperStep() ?: return null
+        if (shown.npcIds.isEmpty()) return null
+        val action = StepPlanner.verb(shown.text)?.takeIf { it != "Attack" }
+            ?: if (HELPER_TALK.containsMatchIn(shown.text)) "Talk-to" else return null
+        ctx.log("Following Quest Helper: ${shown.text.take(80)} (npc ${shown.npcIds})")
+        return Made.Ready(InteractTask(InteractTask.Kind.NPC, shown.npcIds, emptyList(), listOfNotNull(shown.tile), action, dialogue))
     }
 
     /**
@@ -200,6 +213,7 @@ class QuestTask(
 
     companion object {
         const val MAX_REPEATS = 3
+        private val HELPER_TALK = Regex("^(talk|speak|report|return|go back|bring|give|ask)\\b", RegexOption.IGNORE_CASE)
         private val LEVEL = Regex("\\(level[- ](\\d+)\\)", RegexOption.IGNORE_CASE)
         private const val LEVEL_MARGIN = 5
 
