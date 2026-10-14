@@ -40,6 +40,10 @@ class StepScripts(private val guide: Guide) {
 
     private fun has(id: Int, count: Int = 1): (TaskContext) -> Boolean = { it.conditions.count(listOf(id)) >= count }
 
+    /** Step 105 still has logs to collect: under 11 held, and the 10 planks not yet made. */
+    private fun needsLogs(ctx: TaskContext): Boolean =
+        (ctx.game.inventory()[LOGS] ?: 0) < 11 && (ctx.game.inventory()[PLANK] ?: 0) < 10
+
     private fun onPlane(plane: Int): (TaskContext) -> Boolean = { it.game.playerTile?.plane == plane }
 
     private fun diaryBit(ctx: TaskContext, varp: Int, bit: Int): Boolean = (ctx.game.varp(varp) shr bit) and 1 == 1
@@ -473,11 +477,12 @@ class StepScripts(private val guide: Guide) {
             // the planks have been made, or the step would be passed over at once.
             StepPlan.Auto(
                 listOf(
-                    // Only go into the pen for the logs when there are fewer than 11 in the bag.
-                    OnlyIf({ ctx: TaskContext -> (ctx.game.inventory()[LOGS] ?: 0) < 11 && ctx.game.canReach(SAWMILL) == false },
+                    // Only go into the pen for the logs when they are still needed: fewer than 11 in the bag, and the 10 planks
+                    // not already made.
+                    OnlyIf({ ctx: TaskContext -> needsLogs(ctx) && ctx.game.canReach(SAWMILL) == false },
                         obj(emptyList(), listOf("Broken fence"), SAWMILL, "Climb-over")),
-                    OnlyIf({ ctx: TaskContext -> (ctx.game.inventory()[LOGS] ?: 0) < 11 }, WalkTask(SAWMILL, radius = 8)),
-                    TakeYardLogsTask(11),
+                    OnlyIf(::needsLogs, WalkTask(SAWMILL, radius = 8)),
+                    OnlyIf(::needsLogs, TakeYardLogsTask(11)),
                     LeavePenTask(),
                     MakePlanksTask(planks = 10, waxwood = 3),
                 ),
@@ -575,6 +580,7 @@ class StepScripts(private val guide: Guide) {
         private const val BUCKET_WATER = 1929
         private const val GHOSTSPEAK = 552
         private const val LOGS = 1511
+        private const val PLANK = 960
         private const val LEATHER_BOOTS = 1061
         private const val BONES = 526
         private const val TINDERBOX = 590
