@@ -301,8 +301,15 @@ class StepScripts(private val guide: Guide) {
         "0d2ffd5660" to { _ -> skip("Stronghold advice") },
 
         // 68. "RIGHT CLICK Use the bones on the Stray Dog whenever you find him"
-        // "Whenever you find him": the game never shows this as done, so it ends with its actions.
-        "3ad09c7fc7" to { _ -> auto(Optional(UseItemOnNpcTask(526, listOf(2902, 10675, 2922))), trust = true) },
+        // The Stray Dog wanders Varrock: fetch a bone if there is none, walk a round of the places
+        // he is seen, and give it to him. The game never shows this as done, so it ends with its actions.
+        "3ad09c7fc7" to { _ ->
+            auto(
+                OnlyIf({ BONES !in it.game.inventory() }, BankTask(false, listOf(item("Bones", BONES, 1)))),
+                FindAndUseTask(BONES, "Stray dog", VARROCK_ROUND),
+                trust = true,
+            )
+        },
 
         // 72. "Buy Pink Skirt, Brown Apron & Silk. Wear Brown Apron & Pink Skirt in honour of Faux"
         "ff702e072d" to { _ ->
@@ -379,6 +386,12 @@ class StepScripts(private val guide: Guide) {
         /** The Wizards' Tower ground floor, south of its door. */
         private val INSIDE_WIZARDS_TOWER = Tile(3108, 3164, 0)
         private val VEOS_PORT_SARIM = Tile(3054, 3245, 0)
+
+        /** Where Varrock's Stray Dog is seen: the square, both banks, the north and south streets. */
+        private val VARROCK_ROUND = listOf(
+            Tile(3212, 3428, 0), Tile(3230, 3452, 0), Tile(3253, 3420, 0), Tile(3270, 3395, 0),
+            Tile(3236, 3385, 0), Tile(3210, 3396, 0), Tile(3185, 3436, 0),
+        )
         private val GIFT_OF_PEACE = Tile(1907, 5222, 0)
         private val GRAIN_OF_PLENTY = Tile(2022, 5216, 0)
         private val BOX_OF_HEALTH = Tile(2144, 5280, 0)
@@ -414,6 +427,7 @@ class StepScripts(private val guide: Guide) {
         private const val GHOSTSPEAK = 552
         private const val LOGS = 1511
         private const val LEATHER_BOOTS = 1061
+        private const val BONES = 526
         /** The Stronghold's rewards, from Quest Helper's Varrock diary and RuneLite's gameval ObjectID. */
         private const val SOS_WAR_CHEST = 20656
         private const val SOS_FAM_SACK = 19000

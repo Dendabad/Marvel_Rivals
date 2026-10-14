@@ -189,10 +189,26 @@ class StepScriptsTest {
     }
 
     @Test
-    fun `stray dog is optional`() {
-        val game = FakeGame().apply { inv[526] = 1 }
+    fun `stray dog is looked for and given a bone from the inventory`() {
+        val game = FakeGame().apply {
+            inv[526] = 1
+            playerTile = Tile(3212, 3428, 0)
+            npcs += SceneEntity(2902, "Stray dog", Tile(3215, 3430, 0))
+        }
         assertEquals(TaskResult.Done, run(plan("3ad09c7fc7"), game))
-        assertTrue(game.calls.isEmpty())
+        assertEquals(listOf("use 526 on Stray dog"), game.calls)
+    }
+
+    @Test
+    fun `with no bone on hand the bank gives one first`() {
+        val game = FakeGame().apply {
+            bank[526] = 5
+            playerTile = Tile(3185, 3436, 0)
+            npcs += SceneEntity(2902, "Stray dog", Tile(3188, 3438, 0))
+        }
+        assertEquals(TaskResult.Done, run(plan("3ad09c7fc7"), game))
+        assertEquals(1, game.bank[526]?.let { 5 - it })
+        assertTrue("use 526 on Stray dog" in game.calls, game.calls.toString())
     }
 }
 

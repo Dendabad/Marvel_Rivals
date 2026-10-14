@@ -75,7 +75,7 @@ With **Allow combat** on: 89 run, 8 skip, 3 pause. With it off, the two fights (
 | 65 | Collect a Doogle Leaf south of Gertrude | Runs | Walks just south of Gertrude's house and picks up the Doogle leaves lying there. |
 | 66 | Bank at Varrock West Bank and deposit all | Runs | Walk to (3185, 3440, 0), then Bank, deposit all. |
 | 67 | Withdraw: Coins, Bones, Beer (3 Inventory Spaces) | Runs | Bank, withdraw Coins, Bones, Beer. |
-| 68 | RIGHT CLICK Use the bones on the Stray Dog whenever you find him | Runs | Uses bones on the Stray Dog if he is nearby, and moves on if he is not. |
+| 68 | RIGHT CLICK Use the bones on the Stray Dog whenever you find him | Runs | Takes a bone from the bank if there is none in the inventory, walks a round of Varrock until the Stray Dog is in sight, and gives it to him. Pauses if he cannot be found after two rounds. |
 | 69 | Head East and buy an Air Staff from Zaff. Equip it. | Runs | Buy Air Staff, then Equip Air Staff. Buys the staff from Zaff, then wields it. |
 | 70 | Head South & Talk to Aris and start Demon Slayer (1,2,3,4). | Runs | Follows Quest Helper for demonslayer. |
 | 71 | Head South & Trade Thessalia [Varrock Easy Diary] | Runs | Trade Thessalia. Opens the shop until the diary task ticks, then closes it. |

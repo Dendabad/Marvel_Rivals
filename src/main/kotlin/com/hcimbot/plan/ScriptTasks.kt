@@ -56,6 +56,60 @@ class ItemActionTask(
 }
 
 /** Opens a shop and sells each of [itemIds] until none are left in the inventory. */
+/**
+ * Looks for a wandering NPC by walking a round of places it is known to be seen, and uses an item
+ * on it once found ("Use the bones on the Stray Dog whenever you find him"). Any chat the use
+ * starts is clicked through. Gives up after [rounds] full rounds without finding it.
+ */
+class FindAndUseTask(
+    private val itemId: Int,
+    private val npcName: String,
+    private val round: List<Tile>,
+    private val rounds: Int = 2,
+) : BaseTask() {
+    private var index = 0
+    private var done = 0
+    private var walk: WalkTask? = null
+    private var used = false
+    private var settle = 0
+    override val description = "Find the $npcName and use item $itemId on it"
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        if (game.canContinueDialog) return attempt(ctx.actions.continueDialog(), "continue the dialogue")
+        if (game.dialogOptions().isNotEmpty()) {
+            return TaskResult.Failed("the $npcName's chat asks to choose from ${game.dialogOptions()}")
+        }
+        if (used) return if (++settle >= SETTLE_TICKS) TaskResult.Done else TaskResult.Running
+        if (game.isBusy && game.nearestNpc(emptyList(), listOf(npcName)) == null) return TaskResult.Running
+        if (itemId !in game.inventory()) return TaskResult.Failed("item $itemId is not in the inventory")
+
+        val npc = game.nearestNpc(emptyList(), listOf(npcName))
+        if (npc != null) {
+            ctx.log("Found the $npcName at ${npc.tile}")
+            used = ctx.actions.useItemOnNpc(itemId, npc)
+            return attempt(used, "use item $itemId on the $npcName")
+        }
+        if (round.isEmpty()) return TaskResult.Failed("no $npcName nearby and no places to look")
+        val going = walk ?: WalkTask(round[index], radius = 4).also {
+            walk = it
+            ctx.log("No $npcName in sight, looking around ${round[index]}")
+        }
+        return when (val walked = going.tick(ctx)) {
+            TaskResult.Done -> {
+                walk = null
+                index = (index + 1) % round.size
+                if (index == 0 && ++done >= rounds) TaskResult.Failed("looked around $rounds times and did not find the $npcName") else TaskResult.Running
+            }
+            else -> walked
+        }
+    }
+
+    private companion object {
+        const val SETTLE_TICKS = 3
+    }
+}
+
 /** Walks onto [tile] and digs there with a spade, for a clue or quest dig. */
 class DigTask(val tile: Tile) : BaseTask() {
     private var dig: ItemActionTask? = null
