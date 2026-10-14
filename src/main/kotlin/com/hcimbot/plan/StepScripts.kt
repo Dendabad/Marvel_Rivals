@@ -539,6 +539,19 @@ class StepScripts(private val guide: Guide) {
         // stand at x 1681 around y 3070), to Outer Fortis, where the next step's items lie.
         "904a520a61" to { _ -> auto(WalkTask(Tile(1680, 3058, 0), radius = 3)) },
 
+        // 118. "Head West and pick 2 Nettles": the nettle bushes west of Outer Fortis, picked with leather gloves on. The place
+        // is not in the guide, so the bot picks the nearest "Nettles" object it can see, from where step 117 ended (the
+        // bushes should be in view heading west), and pauses if there are none.
+        "56a948d81c" to { _ ->
+            auto(
+                WalkTask(Tile(1640, 3065, 0), radius = 6),
+                RepeatUntil("Pick 2 nettles", has(NETTLES, 2), {
+                    obj(emptyList(), listOf("Nettles"), Tile(1640, 3065, 0), "Pick", near = null)
+                }, maxRounds = 6),
+                trust = true,
+            )
+        },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
@@ -651,6 +664,7 @@ class StepScripts(private val guide: Guide) {
         private const val GARLIC = 1550
         private const val STAKE = 1549
         private const val ASHES = 592
+        private const val NETTLES = 4241
         private const val ROVINS_KEY = 2400
         private const val JUG_WINE = 1993
         private const val XMARKS_LAMP = 23072
