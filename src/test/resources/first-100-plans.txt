@@ -20,8 +20,8 @@
 020 6af6abb1f6 SKIP
 021 ce4913f789 AUTO InteractTask>EquipTask
 022 9980900ea7 AUTO TakeItemTask>EquipTask
-023 0ad397ae61 AUTO WalkTask
-024 a778106253 AUTO TakeItemTask>EquipTask
+023 0ad397ae61 SKIP
+024 a778106253 AUTO WalkTask>TakeItemTask>EquipTask
 025 4732db1883 AUTO TakeItemTask
 026 666fe06edc AUTO+trust QuestTask
 027 0cd68d667b PAUSE

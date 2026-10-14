@@ -4,7 +4,7 @@ What the bot does at each of the first 100 steps of the B0aty HCIM Guide V3. Eve
 
 **Runs** means the bot does the step on its own. **Skips** means there is nothing to do in the game (a heading or a reminder). **Pauses** means it stops and waits for you to do the step and tick it in the plugin.
 
-With **Allow combat** on: 87 run, 7 skip, 6 pause. With it off, the two fights (#19 and #27) pause too.
+With **Allow combat** on: 86 run, 8 skip, 6 pause. With it off, the two fights (#19 and #27) pause too.
 
 | # | Step | Bot | What happens |
 | --- | --- | --- | --- |
@@ -30,8 +30,8 @@ With **Allow combat** on: 87 run, 7 skip, 6 pause. With it off, the two fights (
 | 20 | Head West towards Draynor hugging the fence to avoid the Jail Guards | Skips | Only a direction to set off in. Step 21 walks straight to Father Urhney in Lumbridge Swamp, so the bot does not go to Draynor. |
 | 21 | Talk to Father Urhney in the lumbridge swamp for Ghost Speak Amulet. (2,1) Wield this. | Runs | Talk-to Father Urhney, then Equip Ghostspeak amulet. |
 | 22 | Take Leather Gloves on the table inside his house & wield | Runs | Take Leather Gloves on the table, then Equip Leather Gloves on the table. |
-| 23 | Head to the Wizards Tower | Runs | Walk to (3114, 3181, 0). |
-| 24 | Take Leather Boots off the table & wield | Runs | Take Leather Boots off the table, then Equip Leather Boots off the table. |
+| 23 | Head to the Wizards Tower | Skips | The guide's spot is the north end of the bridge, so step 24 does the walk, right into the tower. |
+| 24 | Take Leather Boots off the table & wield | Runs | Walks into the Wizards' Tower, takes the Leather boots and wears them. |
 | 25 | Collect 3x Logs next to the stairs [Tree Gnome Village] | Runs | Take Logs. |
 | 26 | Head to the basement & Talk to Sedridor to continue Rune Mysteries (1,2,1) | Runs | Follows Quest Helper for runemysteries. |
 | 27 | Kill a Chicken. Take Everything (Make sure you get a feather, else hop worlds and repeat)[Client of Kourend + Druidic Ritual] | Runs | Runs only with Allow combat on. Kills chickens until one drops a feather, and picks up everything. |

@@ -162,6 +162,21 @@ class StepScripts(private val guide: Guide) {
         // Draynor Village, which the route never goes to.
         "6af6abb1f6" to { _ -> skip("only directions, step 21 walks to Father Urhney") },
 
+        // 23. "Head to the Wizards Tower": guide.json's spot is the north end of the bridge,
+        // where the walk would stop. Step 24 walks all the way in, so nothing to do here.
+        "0ad397ae61" to { _ -> skip("step 24 walks into the Wizards' Tower") },
+
+        // 24. "Take Leather Boots off the table & wield"
+        // Go inside the tower first, since the table cannot be seen from outside. The
+        // walker opens the door.
+        "a778106253" to { _ ->
+            auto(
+                WalkTask(INSIDE_WIZARDS_TOWER, radius = 3),
+                TakeItemTask(listOf(item("Leather boots", LEATHER_BOOTS))),
+                EquipTask(listOf(item("Leather boots", LEATHER_BOOTS))),
+            )
+        },
+
         // 21. "Talk to Father Urhney in the lumbridge swamp for Ghost Speak Amulet. (2,1) Wield this."
         "ce4913f789" to { _ ->
             auto(
@@ -321,6 +336,8 @@ class StepScripts(private val guide: Guide) {
         private val LUMBRIDGE_TOP_FLOOR = Tile(3208, 3220, 2)
         private val SOUTH_OF_GERTRUDE = Tile(3152, 3405, 0)
         private val ABOVE_SWORD_SHOP = Tile(3205, 3396, 1)
+        /** The Wizards' Tower ground floor, south of its door. */
+        private val INSIDE_WIZARDS_TOWER = Tile(3108, 3164, 0)
         /** Giant rats spawn just west of the castle, by the second X Marks the Spot dig. */
         private val BEHIND_LUMBRIDGE_CASTLE = Tile(3195, 3205, 0)
         private val LUMBRIDGE_GENERAL_STORE = Tile(3212, 3246, 0)
@@ -349,6 +366,7 @@ class StepScripts(private val guide: Guide) {
         private const val BUCKET_WATER = 1929
         private const val GHOSTSPEAK = 552
         private const val LOGS = 1511
+        private const val LEATHER_BOOTS = 1061
         private const val DOOGLE_LEAVES = 1573
         private const val LIT_CANDLE = 33
         private const val CANDLE = 36
