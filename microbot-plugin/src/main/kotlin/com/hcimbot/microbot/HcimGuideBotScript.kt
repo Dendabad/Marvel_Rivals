@@ -98,13 +98,26 @@ class HcimGuideBotScript : Script() {
             game.refresh()
             current.onGameTick()
             report(current)
-        } catch (e: InterruptedException) {
-            Thread.currentThread().interrupt()
         } catch (e: Exception) {
+            if (interrupted(e)) return
             log.error("HCIM guide bot tick failed", e)
             runner?.halt("unexpected error: ${e.message}. Check the client log.")
             runner?.let(::report)
         }
+    }
+
+    /**
+     * Microbot's walker interrupts the thread that walks when it cancels a walk, and the
+     * next wait for the client thread then throws. That is not a fault: clear the flag so
+     * the next tick runs normally, rather than halting (or keeping the flag, which makes
+     * every later wait fail too). When the bot is being stopped, the flag is left set.
+     */
+    private fun interrupted(e: Throwable): Boolean {
+        val cause = generateSequence(e) { it.cause }.any { it is InterruptedException }
+        if (!cause) return false
+        if (isRunning) Thread.interrupted() else Thread.currentThread().interrupt()
+        log.debug("HCIM guide bot tick interrupted, carrying on", e)
+        return true
     }
 
     /**
@@ -243,6 +256,7 @@ class HcimGuideBotScript : Script() {
                 settings.foodIds.firstOrNull { Rs2Inventory.get(it) != null }?.let { Rs2Inventory.interact(it, "Eat") }
             }
         } catch (e: Exception) {
+            if (interrupted(e)) return
             log.error("HCIM guide bot watchdog failed", e)
         }
     }
