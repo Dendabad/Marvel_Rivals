@@ -40,10 +40,6 @@ class HcimGuideBotScript : Script() {
     private val recent = ArrayDeque<String>()
     private val clock = java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss")
 
-    /** Called now and then from the bot's thread, to stop any other copy of the bot that is running. */
-    @Volatile var everyFewTicks: () -> Unit = {}
-    private var ticks = 0
-
     /** What the on screen box and the sidebar show. */
     fun status(): BotStatus = statusNow.copy(recent = synchronized(recent) { recent.toList() })
 
@@ -76,8 +72,6 @@ class HcimGuideBotScript : Script() {
         note("Retry pressed")
     }
 
-    /** For warnings from the plugin, like another copy of the bot being stopped. */
-    fun warn(line: String) = note(line)
 
     fun run(config: HcimGuideBotConfig): Boolean {
         settings = settingsFrom(config)
@@ -92,7 +86,6 @@ class HcimGuideBotScript : Script() {
     private fun tick(config: HcimGuideBotConfig) {
         try {
             if (!gate() || !Microbot.isLoggedIn()) return
-            if (ticks++ % CHECK_COPIES_TICKS == 0) everyFewTicks()
             if (pausedByPlayer()) return
             val current = runner ?: start(config) ?: return
             restartIfAsked(config, current)
@@ -263,7 +256,6 @@ class HcimGuideBotScript : Script() {
     companion object {
         private const val TICK_MS = 600L
         private const val RECENT_LINES = 12
-        private const val CHECK_COPIES_TICKS = 10
         private const val WATCHDOG_MS = 300L
         private const val MESSAGE_MS = 60_000
         private const val B0ATY_PLUGIN = "com.b0atyguide.B0atyGuidePlugin"

@@ -50,23 +50,51 @@ kotlin {
 }
 
 /*
- * The jar Microbot sideloads from ~/.runelite/microbot-plugins. Microbot names a sideloaded plugin
- * after its jar, so the file name must match the plugin class. Kotlin's runtime goes inside, since
- * the client does not ship it. Gson stays out because RuneLite already has it.
+ * Two jars. HcimGuideBotPlugin.jar is the small loader Microbot sideloads from
+ * ~/.runelite/microbot-plugins: the plugin class, its settings and Kotlin's runtime, which the client
+ * does not ship. Microbot names a sideloaded plugin after its jar, so the name must match the class.
+ *
+ * hcim-guide-bot-core.jar is the bot itself (this project's other classes and the core), which the
+ * loader reads from ~/.runelite/hcim-guide-bot and reloads whenever it changes, with no restart.
+ * Gson stays out of both because RuneLite already has it.
+ *
+ * Both are reproducible, so an unchanged loader is byte for byte the same and need not be replaced.
  */
-val pluginJar = tasks.register<Jar>("pluginJar") {
+val loaderClasses = listOf("com/hcimbot/loader/**", "com/hcimbot/microbot/HcimGuideBotConfig*")
+
+val coreJar = tasks.register<Jar>("coreJar") {
     group = "build"
-    description = "Builds HcimGuideBotPlugin.jar for Microbot's microbot-plugins folder."
-    archiveFileName.set("HcimGuideBotPlugin.jar")
-    from(sourceSets.main.get().output)
+    description = "Builds hcim-guide-bot-core.jar, the bot the loader plugin runs."
+    archiveFileName.set("hcim-guide-bot-core.jar")
+    from(sourceSets.main.get().output) { exclude(loaderClasses) }
     dependsOn(configurations.runtimeClasspath)
     from({
         configurations.runtimeClasspath.get()
-            .filter { it.name.endsWith(".jar") && !it.name.startsWith("gson") && !it.name.startsWith("annotations") }
+            .filter { it.name.endsWith(".jar") && !it.name.startsWith("kotlin") && !it.name.startsWith("gson") && !it.name.startsWith("annotations") }
             .map { zipTree(it) }
     })
     exclude("META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA", "META-INF/versions/**", "module-info.class")
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    isPreserveFileTimestamps = false
+    isReproducibleFileOrder = true
+}
+
+val pluginJar = tasks.register<Jar>("pluginJar") {
+    group = "build"
+    description = "Builds HcimGuideBotPlugin.jar (the loader) and hcim-guide-bot-core.jar (the bot)."
+    archiveFileName.set("HcimGuideBotPlugin.jar")
+    dependsOn(coreJar)
+    from(sourceSets.main.get().output) { include(loaderClasses) }
+    dependsOn(configurations.runtimeClasspath)
+    from({
+        configurations.runtimeClasspath.get()
+            .filter { it.name.endsWith(".jar") && it.name.startsWith("kotlin") }
+            .map { zipTree(it) }
+    })
+    exclude("META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA", "META-INF/versions/**", "module-info.class")
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    isPreserveFileTimestamps = false
+    isReproducibleFileOrder = true
     doFirst {
         if (microbotJar == null) {
             throw GradleException("Set -PmicrobotJar=/path/to/client-<version>-shaded.jar, see microbot-plugin/README.md")
@@ -77,5 +105,5 @@ val pluginJar = tasks.register<Jar>("pluginJar") {
 // Without a Microbot jar there is nothing to compile against, so the rest of the build skips this
 // project instead of failing. `./gradlew test` still runs the core tests.
 if (microbotJar == null) {
-    tasks.matching { it.name != "pluginJar" }.configureEach { onlyIf { false } }
+    tasks.matching { it.name != "pluginJar" && it.name != "coreJar" }.configureEach { onlyIf { false } }
 }

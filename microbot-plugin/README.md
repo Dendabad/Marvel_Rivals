@@ -12,7 +12,9 @@ This folder is the Microbot plugin that runs the guide bot. Setup takes about 15
 
 ## Quick way on Windows: double click
 
-Close Microbot, then double click **`build-and-install.bat`** in the project folder. It finds your Microbot jar, builds the bot, copies `HcimGuideBotPlugin.jar` into `microbot-plugins`, and lists the jars there so you can spot a stray old copy. That does steps 1 and 2 below for you. If it says BUILD FAILED, send the first red lines that start with `e:`.
+Double click **`build-and-install.bat`** in the project folder. It finds your Microbot jar, builds the bot, installs both of its files (see step 2), and lists the jars in `microbot-plugins` so you can spot a stray old copy. That does steps 1 and 2 below for you. If it says BUILD FAILED, send the first red lines that start with `e:`.
+
+**Microbot can stay open.** The bot reloads itself a few seconds after the script finishes and carries on from the current step, with a short message saying which version it is now. Only when the small loader plugin itself changes (rarely) does the script ask you to close Microbot and run it again.
 
 ## 1. Build the plugin
 
@@ -30,14 +32,17 @@ Mac or Linux:
 ./gradlew :microbot-plugin:pluginJar -PmicrobotJar=/path/to/client-2.6.32-shaded.jar
 ```
 
-That makes `microbot-plugin/build/libs/HcimGuideBotPlugin.jar`.
+That makes two files in `microbot-plugin/build/libs/`:
 
-## 2. Put it where Microbot loads plugins
+- `HcimGuideBotPlugin.jar`: a small loader plugin. It rarely changes.
+- `hcim-guide-bot-core.jar`: the bot itself. The loader watches this file and reloads the bot whenever it changes, without restarting the game.
 
-Copy `HcimGuideBotPlugin.jar` into the `microbot-plugins` folder inside RuneLite's folder. Create the folder if it does not exist.
+## 2. Put them where they are loaded
 
-- Windows: `C:\Users\<you>\.runelite\microbot-plugins\`
-- Mac or Linux: `~/.runelite/microbot-plugins/`
+Copy `HcimGuideBotPlugin.jar` into the `microbot-plugins` folder inside RuneLite's folder, and `hcim-guide-bot-core.jar` into the `hcim-guide-bot` folder next to it. Create the folders if they do not exist.
+
+- Windows: `C:\Users\<you>\.runelite\microbot-plugins\` and `C:\Users\<you>\.runelite\hcim-guide-bot\`
+- Mac or Linux: `~/.runelite/microbot-plugins/` and `~/.runelite/hcim-guide-bot/`
 
 Keep only one copy of the bot in that folder. Microbot loads every jar there, so an old one (like `hcim-guide-bot-0.1.0.jar` or `HcimGuideBotPlugin - Copy.jar`) runs alongside the new one and keeps playing when you pause. The bot stops any other copy it finds and tells you which jar to delete.
 

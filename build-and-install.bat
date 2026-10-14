@@ -1,6 +1,7 @@
 @echo off
-rem Builds the HCIM Guide Bot and copies it into Microbot. Double click this file.
-rem Close Microbot first, or Windows will not let the old jar be replaced.
+rem Builds the HCIM Guide Bot and installs it. Double click this file.
+rem Microbot can stay open: the bot reloads itself a few seconds after this finishes.
+rem Only when the small loader plugin itself has changed does Microbot need closing first.
 cd /d "%~dp0"
 title HCIM Guide Bot build
 
@@ -23,20 +24,47 @@ if errorlevel 1 (
     exit /b 1
 )
 
+set "LIBS=microbot-plugin\build\libs"
 set "PLUGINS=%USERPROFILE%\.runelite\microbot-plugins"
+set "HOME_DIR=%USERPROFILE%\.runelite\hcim-guide-bot"
 if not exist "%PLUGINS%" mkdir "%PLUGINS%"
-copy /y "microbot-plugin\build\libs\HcimGuideBotPlugin.jar" "%PLUGINS%\HcimGuideBotPlugin.jar" >nul
+if not exist "%HOME_DIR%" mkdir "%HOME_DIR%"
+
+rem The bot itself. Copied under another name, then renamed, so it is never read half written.
+copy /y "%LIBS%\hcim-guide-bot-core.jar" "%HOME_DIR%\hcim-guide-bot-core.jar.new" >nul
 if errorlevel 1 (
-    echo.
-    echo Built, but could not copy the jar. Close Microbot and run this again.
+    echo Could not copy the bot to %HOME_DIR%
     pause
     exit /b 1
 )
+move /y "%HOME_DIR%\hcim-guide-bot-core.jar.new" "%HOME_DIR%\hcim-guide-bot-core.jar" >nul
+echo The bot is installed. If Microbot is running, it reloads itself in a few seconds.
+
+rem The loader plugin. Only replaced when it changed, since Microbot keeps it open.
+set "LOADER_CHANGED=1"
+if exist "%PLUGINS%\HcimGuideBotPlugin.jar" (
+    fc /b "%LIBS%\HcimGuideBotPlugin.jar" "%PLUGINS%\HcimGuideBotPlugin.jar" >nul 2>&1 && set "LOADER_CHANGED="
+)
+if defined LOADER_CHANGED (
+    copy /y "%LIBS%\HcimGuideBotPlugin.jar" "%PLUGINS%\HcimGuideBotPlugin.jar" >nul 2>&1
+    if errorlevel 1 (
+        echo.
+        echo The loader plugin changed too, and Microbot has the old one open.
+        echo Close Microbot, then run this again. This is only needed when the loader changes.
+        pause
+        exit /b 1
+    )
+    echo The loader plugin was updated. Start Microbot, or restart it if it was open.
+) else (
+    rem Microbot deletes unknown plugin jars once they are 3 days old, so keep its date fresh.
+    pushd "%PLUGINS%"
+    copy /b HcimGuideBotPlugin.jar +,, >nul 2>&1
+    popd
+    echo The loader plugin is unchanged, so Microbot can stay open.
+)
 
 echo.
-echo Done. HcimGuideBotPlugin.jar is now in %PLUGINS%
-echo These are the jars in that folder. Only HcimGuideBotPlugin.jar should be the bot:
+echo These are the jars in %PLUGINS%. Only HcimGuideBotPlugin.jar should be the bot:
 dir /b "%PLUGINS%\*.jar"
 echo.
-echo Start Microbot and turn on HCIM Guide Bot.
 pause
