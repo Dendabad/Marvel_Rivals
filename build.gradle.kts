@@ -14,7 +14,7 @@ repositories {
 dependencies {
     // RuneLite already ships Gson, so swap this to compileOnly once the
     // Bot Client SDK (which brings RuneLite in) is added.
-    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.google.code.gson:gson:2.8.5")
 
     testImplementation(kotlin("test"))
 }

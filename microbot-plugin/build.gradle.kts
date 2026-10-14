@@ -23,8 +23,8 @@ repositories {
 
 dependencies {
     implementation(rootProject)
-    // RuneLite ships Gson at runtime, and the core's loader takes one.
-    compileOnly("com.google.code.gson:gson:2.10.1")
+    // RuneLite ships Gson 2.8.5 at runtime, so build against exactly that.
+    compileOnly("com.google.code.gson:gson:2.8.5")
     if (microbotJar != null) {
         compileOnly(files(microbotJar))
         testImplementation(files(microbotJar))

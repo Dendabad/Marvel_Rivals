@@ -133,15 +133,7 @@ class MicrobotGameState : GameState {
     private val spawns: Map<String, List<Tile>> by lazy {
         runCatching {
             val stream = Microbot::class.java.getResourceAsStream(NPC_LOCATIONS) ?: return@runCatching emptyMap()
-            val json = stream.use { com.google.gson.JsonParser.parseReader(java.io.InputStreamReader(it, Charsets.UTF_8)).asJsonObject }
-            json.entrySet().associate { (npc, places) ->
-                npc.lowercase() to places.asJsonArray.flatMap { place ->
-                    place.asJsonObject.getAsJsonArray("coords")?.map { c ->
-                        val xyz = c.asJsonArray
-                        Tile(xyz[0].asInt, xyz[1].asInt, xyz[2].asInt)
-                    }.orEmpty()
-                }
-            }
+            stream.use { parseSpawns(java.io.InputStreamReader(it, Charsets.UTF_8)) }
         }.getOrElse { emptyMap() }
     }
 
@@ -198,6 +190,20 @@ class MicrobotGameState : GameState {
         private const val NPC_DIALOG_GROUP = 231
         private const val NPC_NAME_CHILD = 4
         private const val PLAYER_DIALOG_GROUP = 217
+
+        /** Reads npcs_locations.json: {"Giant rat": [{"location_name": ..., "coords": [[x, y, plane], ...]}]}. */
+        fun parseSpawns(reader: java.io.Reader): Map<String, List<Tile>> {
+            // RuneLite ships Gson 2.8.5, which has no static JsonParser.parseReader.
+            val json = com.google.gson.Gson().fromJson(reader, com.google.gson.JsonObject::class.java) ?: return emptyMap()
+            return json.entrySet().associate { (npc, places) ->
+                npc.lowercase() to places.asJsonArray.flatMap { place ->
+                    place.asJsonObject.getAsJsonArray("coords")?.map { c ->
+                        val xyz = c.asJsonArray
+                        Tile(xyz[0].asInt, xyz[1].asInt, xyz[2].asInt)
+                    }.orEmpty()
+                }
+            }
+        }
 
         fun <T> onClient(block: () -> T?): T? =
             Microbot.getClientThread().runOnClientThreadOptional(Callable { block() }).orElse(null)
