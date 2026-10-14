@@ -134,3 +134,10 @@ Some steps finish themselves as soon as the game shows they are done, for exampl
 The sidebar's **Copy report** button copies what the bot sees to the clipboard as text: the step and why it stopped, the
 Recent list, where the player is, the bag, the NPCs and objects nearby with the options each has, the text of the open
 windows and chat, and what Quest Helper shows. Paste it into a message instead of sending screenshots.
+
+## Automatic reports
+
+If the Windows environment variable `HCIM_REPORT_TOKEN` is set, the bot uploads its report to the `bot-reports` branch of
+this repo (`reports/latest.txt`) each time it pauses. Use a fine grained GitHub token for this one repo with only
+Contents read and write. The token is read from the environment, never stored by the bot. The report holds position, bag,
+nearby objects and chat text, so keep the repo private. Without the variable nothing is sent.

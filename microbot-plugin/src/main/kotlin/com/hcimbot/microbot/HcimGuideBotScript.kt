@@ -301,6 +301,11 @@ class HcimGuideBotScript(private val bankPin: () -> String? = { null }) : Script
             // The timed message does not block, which matters when the watchdog thread reports.
             Microbot.showMessage("HCIM Guide Bot paused at ${stepLine(runner)}\n\n$why\n\nDo it yourself and the bot carries on once the game shows it is done. If it does not notice, press Skip in the bot's sidebar (the green H) to mark it done, or Retry to have the bot try again.", MESSAGE_MS)
         }
+        if (state != shownState && state is GuideRunner.State.Paused && ReportUploader.enabled()) {
+            // Off the game's threads: the upload is a network call. The report is read here, then sent.
+            val text = runCatching { report() }.getOrNull()
+            if (text != null) Thread { note(ReportUploader.upload(text)) }.apply { isDaemon = true; start() }
+        }
         shownState = state
     }
 
