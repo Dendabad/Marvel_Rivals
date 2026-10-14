@@ -40,6 +40,7 @@ class FirstHundredTest {
 
     private fun shape(plan: StepPlan): String = when (plan) {
         is StepPlan.Manual -> "PAUSE"
+        is StepPlan.Skip -> "SKIP"
         is StepPlan.Auto -> buildString {
             append("AUTO")
             if (plan.trustTasks) append("+trust")

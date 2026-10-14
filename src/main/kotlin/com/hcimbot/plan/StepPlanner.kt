@@ -31,6 +31,9 @@ sealed interface StepPlan {
 
     /** The bot cannot do this step. It pauses and shows [reason] until the step is ticked. */
     data class Manual(val reason: String) : StepPlan
+
+    /** Nothing to do in the game, e.g. a heading or a note to keep an item. The bot ticks it and moves on. */
+    data class Skip(val reason: String) : StepPlan
 }
 
 /**
@@ -39,8 +42,11 @@ sealed interface StepPlan {
  * so the bot pauses rather than guess on a hardcore account.
  */
 class StepPlanner(private val guide: Guide, private val settings: BotSettings) {
+    private val scripts = StepScripts(guide)
 
     fun plan(step: Step): StepPlan {
+        // A hand written script knows more about a step than its guide data does.
+        scripts.planFor(step, settings)?.let { return it }
         if (step.isNote) return StepPlan.Manual("Note: ${step.text}")
         if (step.advice && settings.pauseOnAdvice) return StepPlan.Manual("Tip: ${step.text}")
         if (hasWarning(step)) return manual(step, "the guide warns about something here")

@@ -11,6 +11,9 @@ import net.runelite.client.plugins.microbot.util.dialogues.Rs2Dialogue
 import net.runelite.client.plugins.microbot.util.equipment.Rs2Equipment
 import net.runelite.client.plugins.microbot.util.inventory.Rs2Inventory
 import net.runelite.client.plugins.microbot.util.magic.Rs2Magic
+import net.runelite.client.plugins.microbot.util.player.Rs2Player
+import net.runelite.client.plugins.microbot.util.security.LoginManager
+import net.runelite.client.plugins.microbot.util.settings.Rs2Settings
 import net.runelite.client.plugins.microbot.util.shop.Rs2Shop
 import net.runelite.client.plugins.microbot.util.walker.Rs2Walker
 import net.runelite.client.plugins.microbot.util.walker.WalkerState
@@ -114,6 +117,35 @@ class MicrobotActions : GameActions {
             }
         }
         return bought
+    }
+
+    override fun sell(itemId: Int, quantity: Int): Boolean {
+        val lot = SHOP_LOTS.firstOrNull { it <= quantity } ?: 1
+        return Rs2Inventory.sellItem(itemId, lot.toString())
+    }
+
+    override fun depositItem(itemId: Int): Boolean = Rs2Bank.depositAll(itemId)
+
+    override fun hopWorld(): Boolean = Microbot.hopToWorld(LoginManager.getRandomWorld(Rs2Player.isMember()))
+
+    override fun useItemOnNpc(itemId: Int, npc: SceneEntity): Boolean {
+        val found = onClient {
+            Microbot.getRs2NpcCache().query().withId(npc.id).nearest(npc.tile.toWorldPoint(), RELOCATE)
+        } ?: return false
+        return Rs2Inventory.useItemOnNpc(itemId, found)
+    }
+
+    override fun castOnNpc(spellName: String, npc: SceneEntity): Boolean {
+        val spell = spellFor(spellName) ?: return false
+        val found = onClient {
+            Microbot.getRs2NpcCache().query().withId(npc.id).nearest(npc.tile.toWorldPoint(), RELOCATE)
+        } ?: return false
+        return Rs2Magic.castOn(spell, found.npc)
+    }
+
+    override fun applySetting(setting: String): Boolean = when (setting) {
+        GameActions.DISABLE_LEVEL_UP -> Rs2Settings.disableLevelUpNotifications()
+        else -> false
     }
 
     companion object {

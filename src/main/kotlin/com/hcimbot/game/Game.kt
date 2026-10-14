@@ -38,9 +38,13 @@ interface GameState {
     val isBankOpen: Boolean
     val isShopOpen: Boolean
 
-    /** Nearest matching NPC by id, or by name when [ids] is empty. */
-    fun nearestNpc(ids: Collection<Int>, names: Collection<String> = emptyList()): SceneEntity?
-    fun nearestObject(ids: Collection<Int>, names: Collection<String> = emptyList()): SceneEntity?
+    /**
+     * Nearest matching NPC by id, or by name when [ids] is empty. With [near],
+     * nearest to that tile instead of the player, e.g. the south staircase of
+     * a castle that has two.
+     */
+    fun nearestNpc(ids: Collection<Int>, names: Collection<String> = emptyList(), near: Tile? = null): SceneEntity?
+    fun nearestObject(ids: Collection<Int>, names: Collection<String> = emptyList(), near: Tile? = null): SceneEntity?
 
     /** Nearest item lying on the ground (or on a table) with one of these ids. */
     fun nearestGroundItem(ids: Collection<Int>): SceneEntity?
@@ -102,4 +106,25 @@ interface GameActions {
 
     /** "Take" on a ground item from [GameState.nearestGroundItem]. */
     fun takeGroundItem(item: SceneEntity): Boolean
+
+    /** Sell from the inventory to the open shop. [quantity] is 1, 5, 10 or 50. */
+    fun sell(itemId: Int, quantity: Int): Boolean
+
+    /** Deposit every one of this item into the open bank. */
+    fun depositItem(itemId: Int): Boolean
+
+    /** Hop to another world of the same membership. */
+    fun hopWorld(): Boolean
+
+    fun useItemOnNpc(itemId: Int, npc: SceneEntity): Boolean
+
+    /** Cast a combat spell on an NPC, e.g. "WIND_STRIKE". */
+    fun castOnNpc(spellName: String, npc: SceneEntity): Boolean
+
+    /** Change a game setting the guide asks for. The only one so far is [DISABLE_LEVEL_UP]. */
+    fun applySetting(setting: String): Boolean
+
+    companion object {
+        const val DISABLE_LEVEL_UP = "disable-level-up"
+    }
 }

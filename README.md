@@ -31,7 +31,9 @@ The bot **pauses** and shows the reason instead of guessing when a step:
 
 It **stops** below 40% hitpoints, eats at 60% when food is set, and pauses if something attacks the player during a step that is not a fight.
 
-Against the real guide, about 1,318 of its 2,925 steps run automatically. The first 100 steps are reviewed one by one in [docs/first-100-steps.md](docs/first-100-steps.md). The bot pauses on the rest so you can do them by hand, then tick them in the plugin to carry on.
+Against the real guide, about 1,340 of its 2,925 steps run automatically. Hand written step
+scripts cover what the guide data cannot describe ("drop the runes, then claim more"), and with them
+87 of the first 100 steps run with combat allowed. The first 100 steps are reviewed one by one in [docs/first-100-steps.md](docs/first-100-steps.md). The bot pauses on the rest so you can do them by hand, then tick them in the plugin to carry on.
 
 ## Layout
 
@@ -43,6 +45,7 @@ Against the real guide, about 1,318 of its 2,925 steps run automatically. The fi
 | `engine/StepCompletion.kt`, `engine/Conditions.kt` | The plugin's completion and condition rules |
 | `engine/Safety.kt` | Settings and hardcore checks |
 | `plan/StepPlanner.kt` | Turns a step into tasks, or into a pause |
+| `plan/StepScripts.kt`, `plan/ScriptTasks.kt` | Hand written scripts for steps the guide data cannot describe, and the tasks they use |
 | `plan/Tasks.kt`, `plan/QuestTask.kt` | Walk, bank, talk, shop, pick up, equip, travel, teleport and quest tasks |
 | `progress/Progress.kt` | Progress shared with the plugin |
 | `microbot-plugin/` | The Microbot plugin: game reads, actions, the script loop and a hitpoint watchdog |

@@ -26,6 +26,8 @@ class QuestTask(
     private val helper: QuestHelper,
     private val allowCombat: Boolean,
     private val boundedTo: Set<Int>? = null,
+    /** Done once the quest's progress value reaches this, for a step script that covers a known stretch. */
+    private val stopAtValue: Int? = null,
 ) : Task {
     private var startValue: Int? = null
     private var current: Instruction? = null
@@ -38,6 +40,7 @@ class QuestTask(
         val progress = helper.progressVar ?: return TaskResult.Failed("$questKey has no progress variable in guide.json")
         val value = ctx.conditions.readVar(progress.kind, progress.id)
         val start = startValue ?: value.also { startValue = it }
+        if (stopAtValue != null && value >= stopAtValue) return TaskResult.Done
         val instruction = helper.at(value) ?: return TaskResult.Done
         if (helper.hasGapAt(value)) {
             return TaskResult.Failed("the guide data has no Quest Helper instructions for this part of $questKey")

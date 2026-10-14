@@ -24,11 +24,13 @@ class RealGuideTest {
         val plans = guide.steps.map { it to planner.plan(it) }
         val auto = plans.filter { it.second is StepPlan.Auto }
         val confirm = auto.count { (it.second as StepPlan.Auto).confirm }
-        val manual = plans.size - auto.size
+        val skipped = plans.count { it.second is StepPlan.Skip }
+        val manual = plans.size - auto.size - skipped
 
         println("Steps: ${plans.size}")
         println("Automated: ${auto.size - confirm}")
         println("Automated, then pause to confirm: $confirm")
+        println("Skipped (nothing to do): $skipped")
         println("Manual (bot pauses): $manual")
         auto.groupingBy { (it.second as StepPlan.Auto).tasks.first()::class.simpleName }.eachCount()
             .entries.sortedByDescending { it.value }

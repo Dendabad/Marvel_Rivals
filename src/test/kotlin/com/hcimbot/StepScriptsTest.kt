@@ -1,0 +1,160 @@
+package com.hcimbot
+
+import com.hcimbot.engine.BotSettings
+import com.hcimbot.engine.Conditions
+import com.hcimbot.game.SceneEntity
+import com.hcimbot.guide.Guide
+import com.hcimbot.guide.Step
+import com.hcimbot.guide.Tile
+import com.hcimbot.plan.StepPlan
+import com.hcimbot.plan.StepScripts
+import com.hcimbot.plan.TaskContext
+import com.hcimbot.plan.TaskResult
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertIs
+import kotlin.test.assertTrue
+
+/** Runs step scripts from the guide's first 100 steps against the fake game. */
+class StepScriptsTest {
+    private val scripts = StepScripts(Guide(1))
+
+    private fun plan(id: String, settings: BotSettings = BotSettings()) = scripts.planFor(Step(id = id), settings)
+
+    /** Runs a plan's tasks in order, one tick at a time, like the runner does. */
+    private fun run(plan: StepPlan?, game: FakeGame, ticks: Int = 80): TaskResult {
+        val auto = assertIs<StepPlan.Auto>(plan)
+        val ctx = TaskContext(game, game, Conditions(game))
+        var index = 0
+        repeat(ticks) {
+            val task = auto.tasks.getOrNull(index) ?: return TaskResult.Done
+            when (val result = task.tick(ctx)) {
+                TaskResult.Done -> index++
+                is TaskResult.Failed -> return result
+                TaskResult.Running -> Unit
+            }
+        }
+        return if (index >= auto.tasks.size) TaskResult.Done else TaskResult.Running
+    }
+
+    @Test
+    fun `headings and reminders are skipped`() {
+        assertIs<StepPlan.Skip>(plan("332728ed58"))
+        assertIs<StepPlan.Skip>(plan("caa42731e5"))
+    }
+
+    @Test
+    fun `magic tutor drops the runes then claims new ones`() {
+        val game = FakeGame().apply {
+            inv[556] = 25
+            inv[558] = 15
+            npcs += SceneEntity(3218, "Magic combat tutor", Tile(3218, 3238, 0))
+            onNpcInteract = { _, _ -> options = listOf("Can I have some air and mind runes?", "Goodbye.") }
+            onOption = { if ("runes" in it) { inv[556] = 30; inv[558] = 30 } }
+        }
+        assertEquals(TaskResult.Done, run(plan("cce7a1b4dc"), game))
+        val drops = game.calls.filter { it.startsWith("item") }
+        assertEquals(listOf("item 556 Drop", "item 558 Drop"), drops)
+        assertTrue("option Can I have some air and mind runes?" in game.calls, "${game.calls}")
+        // Dropped before talking, as the tutor requires.
+        assertTrue(game.calls.indexOf("item 558 Drop") < game.calls.indexOfFirst { it.startsWith("npc") })
+    }
+
+    @Test
+    fun `general store sells the starter gear then buys the tools`() {
+        val game = FakeGame().apply {
+            playerTile = Tile(3212, 3246, 0)
+            listOf(1205, 1277, 1171, 841).forEach { inv[it] = 1 }
+            npcs += SceneEntity(2813, "Shop keeper", Tile(3212, 3247, 0))
+            onNpcInteract = { _, action -> if (action == "Trade") isShopOpen = true }
+        }
+        assertEquals(TaskResult.Done, run(plan("42b86f0029"), game))
+        assertEquals(listOf("sell 1205 x5", "sell 1277 x5", "sell 1171 x5", "sell 841 x5"), game.calls.filter { it.startsWith("sell") })
+        assertEquals(listOf("buy 952 x1", "buy 1755 x1", "buy 2347 x1"), game.calls.filter { it.startsWith("buy") })
+        assertTrue(listOf(952, 1755, 2347).all { it in game.inv })
+    }
+
+    @Test
+    fun `combat steps pause unless combat is allowed`() {
+        assertIs<StepPlan.Manual>(plan("0cd68d667b"))
+        assertIs<StepPlan.Auto>(plan("0cd68d667b", BotSettings(allowCombat = true)))
+    }
+
+    @Test
+    fun `chicken kills repeat until a feather drops`() {
+        var kills = 0
+        val chickenAt = Tile(3223, 3218, 0)
+        val game = FakeGame().apply {
+            npcs += SceneEntity(1173, "Chicken", chickenAt)
+            onNpcInteract = { _, action ->
+                if (action == "Attack") {
+                    kills++
+                    groundItems += SceneEntity(526, "Bones", chickenAt)
+                    groundItems += SceneEntity(2138, "Raw chicken", chickenAt)
+                    // The first chicken drops no feather.
+                    if (kills == 2) groundItems += SceneEntity(314, "Feather", chickenAt)
+                }
+            }
+        }
+        assertEquals(TaskResult.Done, run(plan("0cd68d667b", BotSettings(allowCombat = true)), game, ticks = 200))
+        assertEquals(2, kills)
+        assertTrue(listOf(314, 526, 2138).all { it in game.inv })
+    }
+
+    @Test
+    fun `garlic cupboard is searched until there are four`() {
+        val game = FakeGame().apply {
+            playerTile = Tile(3100, 3267, 0)
+            objects += SceneEntity(15645, "Staircase", Tile(3100, 3267, 0))
+            onObjectInteract = { obj, action ->
+                when {
+                    obj.id == 15645 -> {
+                        playerTile = Tile(3097, 3269, 1)
+                        objects.clear()
+                        objects += SceneEntity(2612, "Cupboard", Tile(3096, 3270, 1))
+                    }
+                    action == "Open" -> { objects.clear(); objects += SceneEntity(2613, "Cupboard", Tile(3096, 3270, 1)) }
+                    action == "Search" -> inv.merge(1550, 1, Int::plus)
+                }
+            }
+        }
+        assertEquals(TaskResult.Done, run(plan("1d0e75f508"), game, ticks = 120))
+        assertEquals(4, game.inv[1550])
+        assertEquals(4, game.calls.count { it == "object Cupboard Search" })
+    }
+
+    @Test
+    fun `wine is bought in two lots with a world hop between`() {
+        var stock = 5
+        val game = FakeGame().apply {
+            playerTile = Tile(3085, 3252, 0)
+            npcs += SceneEntity(1260, "Fortunato", Tile(3085, 3253, 0))
+            onNpcInteract = { _, action -> if (action == "Trade") isShopOpen = true }
+            onHop = { stock = 5 }
+        }
+        // The fake shop sells what is asked; cap it at the stock so a single visit cannot finish.
+        val shop = object : FakeGameShopCap(game) {}
+        shop.limit = { stock }
+        shop.bought = { stock -= it }
+        assertEquals(TaskResult.Done, run(plan("e3eead8e86"), shop.game, ticks = 120))
+        assertEquals(10, game.inv[1993])
+        assertTrue("hop" in game.calls)
+    }
+
+    @Test
+    fun `stray dog is optional`() {
+        val game = FakeGame().apply { inv[526] = 1 }
+        assertEquals(TaskResult.Done, run(plan("3ad09c7fc7"), game))
+        assertTrue(game.calls.isEmpty())
+    }
+}
+
+/** Wraps the fake game's buying so a shop only has [limit] in stock. */
+open class FakeGameShopCap(val game: FakeGame) {
+    var limit: () -> Int = { Int.MAX_VALUE }
+    var bought: (Int) -> Unit = {}
+
+    init {
+        game.buyCap = { wanted -> minOf(wanted, limit()).also { bought(it) } }
+    }
+}

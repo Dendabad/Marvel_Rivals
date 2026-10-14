@@ -48,18 +48,19 @@ class FakeGame : GameState, GameActions {
     override fun equipment(): Map<Int, Int> = worn
     override fun bankCount(itemId: Int) = bank[itemId] ?: 0
 
-    override fun nearestNpc(ids: Collection<Int>, names: Collection<String>) = nearest(npcs, ids, names)
-    override fun nearestObject(ids: Collection<Int>, names: Collection<String>) = nearest(objects, ids, names)
+    override fun nearestNpc(ids: Collection<Int>, names: Collection<String>, near: Tile?) = nearest(npcs, ids, names, near)
+    override fun nearestObject(ids: Collection<Int>, names: Collection<String>, near: Tile?) = nearest(objects, ids, names, near)
 
     val groundItems = mutableListOf<SceneEntity>()
-    override fun nearestGroundItem(ids: Collection<Int>) = nearest(groundItems, ids, emptyList())
+    override fun nearestGroundItem(ids: Collection<Int>) = nearest(groundItems, ids, emptyList(), null)
 
-    private fun nearest(from: List<SceneEntity>, ids: Collection<Int>, names: Collection<String>): SceneEntity? {
+    private fun nearest(from: List<SceneEntity>, ids: Collection<Int>, names: Collection<String>, near: Tile?): SceneEntity? {
         val at = playerTile ?: return null
+        val anchor = near ?: at
         return from
             .filter { if (ids.isNotEmpty()) it.id in ids else names.any { n -> n.equals(it.name, ignoreCase = true) } }
             .filter { it.tile.distanceTo(at) <= 20 }
-            .minByOrNull { it.tile.distanceTo(at) }
+            .minByOrNull { it.tile.distanceTo(anchor) }
     }
 
     override fun dialogOptions() = options
@@ -141,6 +142,7 @@ class FakeGame : GameState, GameActions {
 
     override fun itemAction(itemId: Int, action: String): Boolean {
         calls += "item $itemId $action"
+        if (action == "Drop" || action == "Destroy") inv.remove(itemId)
         if (action in setOf("Wear", "Wield", "Equip")) {
             inv.remove(itemId)
             worn[itemId] = 1
@@ -169,9 +171,52 @@ class FakeGame : GameState, GameActions {
         return true
     }
 
+    var onHop: () -> Unit = {}
+    var onSetting: (String) -> Unit = {}
+
+    override fun sell(itemId: Int, quantity: Int): Boolean {
+        calls += "sell $itemId x$quantity"
+        inv.computeIfPresent(itemId) { _, n -> if (n > quantity) n - quantity else null }
+        return true
+    }
+
+    override fun depositItem(itemId: Int): Boolean {
+        calls += "deposit $itemId"
+        inv.remove(itemId)?.let { bank.merge(itemId, it, Int::plus) }
+        return true
+    }
+
+    override fun hopWorld(): Boolean {
+        calls += "hop"
+        onHop()
+        return true
+    }
+
+    override fun useItemOnNpc(itemId: Int, npc: SceneEntity): Boolean {
+        calls += "use $itemId on ${npc.name}"
+        onNpcInteract(npc, "Use")
+        return true
+    }
+
+    override fun castOnNpc(spellName: String, npc: SceneEntity): Boolean {
+        calls += "cast $spellName on ${npc.name}"
+        onNpcInteract(npc, spellName)
+        return true
+    }
+
+    override fun applySetting(setting: String): Boolean {
+        calls += "setting $setting"
+        onSetting(setting)
+        return true
+    }
+
+    /** How many of a purchase the shop actually hands over. Unlimited by default. */
+    var buyCap: (Int) -> Int = { it }
+
     override fun buy(itemId: Int, quantity: Int): Boolean {
         calls += "buy $itemId x$quantity"
-        inv.merge(itemId, quantity, Int::plus)
+        val got = buyCap(quantity)
+        if (got > 0) inv.merge(itemId, got, Int::plus)
         return true
     }
 }

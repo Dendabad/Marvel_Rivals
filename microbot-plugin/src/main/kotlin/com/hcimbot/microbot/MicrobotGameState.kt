@@ -120,16 +120,18 @@ class MicrobotGameState : GameState {
     override val isBankOpen: Boolean get() = Rs2Bank.isOpen()
     override val isShopOpen: Boolean get() = Rs2Shop.isOpen()
 
-    override fun nearestNpc(ids: Collection<Int>, names: Collection<String>): SceneEntity? = onClient {
+    override fun nearestNpc(ids: Collection<Int>, names: Collection<String>, near: Tile?): SceneEntity? = onClient {
         val query = Microbot.getRs2NpcCache().query()
         val found = if (ids.isNotEmpty()) query.withIds(*ids.toIntArray()) else query.withNames(*names.toTypedArray())
-        found.nearest(SEARCH_RADIUS)?.let { entity(it.id, it.name, it.worldLocation) }
+        val nearest = if (near != null) found.nearest(near.toWorldPoint(), SEARCH_RADIUS) else found.nearest(SEARCH_RADIUS)
+        nearest?.let { entity(it.id, it.name, it.worldLocation) }
     }
 
-    override fun nearestObject(ids: Collection<Int>, names: Collection<String>): SceneEntity? = onClient {
+    override fun nearestObject(ids: Collection<Int>, names: Collection<String>, near: Tile?): SceneEntity? = onClient {
         val query = Microbot.getRs2TileObjectCache().query()
         val found = if (ids.isNotEmpty()) query.withIds(*ids.toIntArray()) else query.withNames(*names.toTypedArray())
-        found.nearest(SEARCH_RADIUS)?.let { entity(it.id, it.name, it.worldLocation) }
+        val nearest = if (near != null) found.nearest(near.toWorldPoint(), SEARCH_RADIUS) else found.nearest(SEARCH_RADIUS)
+        nearest?.let { entity(it.id, it.name, it.worldLocation) }
     }
 
     override fun nearestGroundItem(ids: Collection<Int>): SceneEntity? = onClient {
@@ -154,6 +156,8 @@ class MicrobotGameState : GameState {
 
     override fun isInterfaceOpen(packedWidgetId: Int): Boolean =
         onClient { Microbot.getClient().getWidget(packedWidgetId)?.let { !it.isHidden } } ?: false
+
+    private fun Tile.toWorldPoint() = WorldPoint(x, y, plane)
 
     private fun entity(id: Int, name: String?, at: WorldPoint?): SceneEntity? =
         at?.let { SceneEntity(id, name?.let(Text::removeTags).orEmpty(), Tile(it.x, it.y, it.plane)) }

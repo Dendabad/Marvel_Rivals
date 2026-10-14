@@ -128,6 +128,7 @@ class GuideRunner(
 
         when (val plan = current.plan) {
             is StepPlan.Manual -> pause(step, plan.reason)
+            is StepPlan.Skip -> markDone(step, plan.reason)
             is StepPlan.Auto -> runTasks(current, plan)
         }
     }

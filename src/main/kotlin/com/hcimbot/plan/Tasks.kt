@@ -133,6 +133,8 @@ class InteractTask(
     private val dialogue: DialoguePlan = DialoguePlan.None,
     /** For steps that may need several clicks, e.g. pickpocketing until a diary task ticks. */
     private val repeat: Boolean = false,
+    /** Prefer the match nearest this tile, e.g. the south one of two staircases. */
+    private val near: Tile? = null,
 ) : BaseTask() {
     enum class Kind { NPC, OBJECT }
 
@@ -176,8 +178,8 @@ class InteractTask(
     }
 
     private fun find(game: GameState): SceneEntity? = when (kind) {
-        Kind.NPC -> game.nearestNpc(ids, names)
-        Kind.OBJECT -> game.nearestObject(ids, names)
+        Kind.NPC -> game.nearestNpc(ids, names, near)
+        Kind.OBJECT -> game.nearestObject(ids, names, near)
     }
 }
 
@@ -291,14 +293,16 @@ class ItemTeleportTask(
     }
 }
 
-/** Uses one inventory item on another, or on a scene object. */
+/** Uses one inventory item on another, or on a scene object found by id or name, nearest [near] if given. */
 class UseItemTask(
     private val itemId: Int,
     private val targetItemId: Int?,
     private val targetObjectIds: List<Int> = emptyList(),
+    private val targetObjectNames: List<String> = emptyList(),
+    private val near: Tile? = null,
 ) : BaseTask() {
     private var used = false
-    override val description = "Use item $itemId on ${targetItemId ?: targetObjectIds}"
+    override val description = "Use item $itemId on ${targetItemId ?: targetObjectNames.firstOrNull() ?: targetObjectIds}"
 
     override fun tick(ctx: TaskContext): TaskResult {
         if (ctx.game.isBusy) return TaskResult.Running
@@ -307,7 +311,8 @@ class UseItemTask(
         used = if (targetItemId != null) {
             ctx.actions.useItemOnItem(itemId, targetItemId)
         } else {
-            val obj = ctx.game.nearestObject(targetObjectIds) ?: return TaskResult.Failed("no object $targetObjectIds nearby")
+            val obj = ctx.game.nearestObject(targetObjectIds, targetObjectNames, near)
+                ?: return TaskResult.Failed("no ${targetObjectNames.firstOrNull() ?: "object $targetObjectIds"} nearby")
             ctx.actions.useItemOnObject(itemId, obj)
         }
         return attempt(used, description)
