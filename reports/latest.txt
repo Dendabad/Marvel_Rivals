@@ -1,77 +1,92 @@
-HCIM Guide Bot 0.15.4, PAUSED
+HCIM Guide Bot 0.15.8, PAUSED
 == Step
-Step 119 of 2925: Collect 1 Sweetcorn [Recipe for Disaster]
-Detail: Take Sweetcorn: cannot see Sweetcorn nearby. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 124 of 2925: Enter Guildmaster Apatura's building and go up both ladders
+Detail: Enter Guildmaster Apatura: could not Enter Guildmaster Apatura at (1554, 3033, 0). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-10:18:29  Paused: Take Sweetcorn: cannot see Sweetcorn nearby
-10:18:07  Walking from (1581, 3139, 0) to (1574, 3139, 0)
-10:18:07  Step: Collect 1 Sweetcorn [Recipe for Disaster]
-10:18:07  Started version 0.15.4
+10:24:11  Paused: Enter Guildmaster Apatura: could not Enter Guildmaster Apatura at (1554, 3033, 0)
+10:24:07  Step: Enter Guildmaster Apatura's building and go up both ladders
+10:24:06  Done (all actions finished): Deposit all in the bank chest
+10:23:56  Step: Deposit all in the bank chest
+10:23:44  Walking from (1565, 3035, 0) to (1545, 3037, 0)
+10:23:44  Bucket of Water by the bank chest is 20 tiles away, walking over
+10:23:42  Step: Collect a Bucket of Water by the bank chest
+10:23:35  Step: Collect the needle
+10:22:49  Walking from (1581, 3139, 0) to (1559, 3048, 0)
+10:22:43  Step: Head West to the Hunter's Guild
+10:22:43  Resumed by you
+10:22:43  Resumed by you
 == Player
-world WorldPoint(x=1581, y=3142, plane=1), in instance false, as guide coordinates WorldPoint(x=1581, y=3142, plane=1)
+world WorldPoint(x=1542, y=3040, plane=0), in instance false, as guide coordinates WorldPoint(x=1542, y=3040, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-4241x1, 1511x1, 1511x1, 1511x1, 954x1, 233x1, 227x1, 4241x1
+
 == NPCs within 12 tiles (id name at tile: options)
+13129 Banker at WorldPoint(x=1542, y=3041, plane=0): [Talk-to, Bank, Collect]
+13128 Bank buffalo at WorldPoint(x=1546, y=3038, plane=0): []
+12963 Capybara pup at WorldPoint(x=1546, y=3050, plane=0): []
+13120 Guildmaster Apatura at WorldPoint(x=1554, y=3033, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
-52636 Staircase at WorldPoint(x=1581, y=3140, plane=1)
-52432 Crates at WorldPoint(x=1578, y=3139, plane=1)
-52425 Barrel at WorldPoint(x=1578, y=3142, plane=1)
-52431 Crate at WorldPoint(x=1579, y=3139, plane=1)
-52425 Barrel at WorldPoint(x=1580, y=3139, plane=1)
-52431 Crate at WorldPoint(x=1577, y=3139, plane=1)
-52431 Crate at WorldPoint(x=1577, y=3142, plane=1)
-52432 Crates at WorldPoint(x=1576, y=3142, plane=1)
-52431 Crate at WorldPoint(x=1576, y=3143, plane=1)
-52432 Crates at WorldPoint(x=1575, y=3143, plane=1)
-52436 Pillow at WorldPoint(x=1574, y=3139, plane=1)
-46311 Hay bale at WorldPoint(x=1574, y=3143, plane=1)
-52431 Crate at WorldPoint(x=1573, y=3138, plane=1)
-52425 Barrel at WorldPoint(x=1573, y=3139, plane=1)
-52437 Pillows at WorldPoint(x=1573, y=3140, plane=1)
-423 Bed at WorldPoint(x=1573, y=3141, plane=1)
-46311 Hay bale at WorldPoint(x=1573, y=3143, plane=1)
-52432 Crates at WorldPoint(x=1580, y=3133, plane=1)
-52431 Crate at WorldPoint(x=1581, y=3133, plane=1)
-52425 Barrel at WorldPoint(x=1583, y=3133, plane=1)
-52431 Crate at WorldPoint(x=1584, y=3133, plane=1)
-52425 Barrel at WorldPoint(x=1580, y=3132, plane=1)
-51726 Stool at WorldPoint(x=1582, y=3132, plane=1)
-52460 Table at WorldPoint(x=1584, y=3132, plane=1)
-51570 Bunk bed at WorldPoint(x=1581, y=3131, plane=1)
-51570 Bunk bed at WorldPoint(x=1583, y=3131, plane=1)
-52460 Table at WorldPoint(x=1586, y=3129, plane=1)
-52460 Table at WorldPoint(x=1589, y=3129, plane=1)
-52425 Barrel at WorldPoint(x=1590, y=3129, plane=1)
-52437 Pillows at WorldPoint(x=1580, y=3128, plane=1)
-52436 Pillow at WorldPoint(x=1582, y=3127, plane=1)
-52636 Staircase at WorldPoint(x=1584, y=3127, plane=1)
-52453 Bed at WorldPoint(x=1587, y=3127, plane=1)
-52460 Table at WorldPoint(x=1580, y=3126, plane=1)
-51727 Stool at WorldPoint(x=1588, y=3126, plane=1)
-52437 Pillows at WorldPoint(x=1590, y=3126, plane=1)
-52425 Barrel at WorldPoint(x=1580, y=3125, plane=1)
-52511 Potted fan at WorldPoint(x=1585, y=3123, plane=1)
-52511 Potted fan at WorldPoint(x=1589, y=3123, plane=1)
+51748 Food pot at WorldPoint(x=1541, y=3040, plane=0)
+51752 Food pot at WorldPoint(x=1541, y=3041, plane=0)
+53015 Bank chest at WorldPoint(x=1542, y=3039, plane=0)
+52432 Crates at WorldPoint(x=1543, y=3039, plane=0)
+51754 Food basket at WorldPoint(x=1541, y=3042, plane=0)
+52436 Pillow at WorldPoint(x=1542, y=3042, plane=0)
+52430 Barrel at WorldPoint(x=1542, y=3043, plane=0)
+26813 Poll booth at WorldPoint(x=1543, y=3043, plane=0)
+52430 Barrel at WorldPoint(x=1544, y=3037, plane=0)
+3644 Trough at WorldPoint(x=1545, y=3038, plane=0)
+52432 Crates at WorldPoint(x=1544, y=3036, plane=0)
+51728 Fire at WorldPoint(x=1546, y=3042, plane=0)
+51727 Stool at WorldPoint(x=1546, y=3044, plane=0)
+52430 Barrel at WorldPoint(x=1545, y=3035, plane=0)
+1197 Flower at WorldPoint(x=1545, y=3045, plane=0)
+46805 Well at WorldPoint(x=1547, y=3036, plane=0)
+18894 Rockslide at WorldPoint(x=1536, y=3046, plane=0)
+18894 Rockslide at WorldPoint(x=1539, y=3034, plane=0)
+53188 Tree at WorldPoint(x=1544, y=3046, plane=0)
+1198 Flowers at WorldPoint(x=1545, y=3046, plane=0)
+51724 Stool at WorldPoint(x=1548, y=3042, plane=0)
+51464 Tree at WorldPoint(x=1543, y=3047, plane=0)
+1197 Flower at WorldPoint(x=1545, y=3047, plane=0)
+42400 Plant at WorldPoint(x=1534, y=3034, plane=0)
+18894 Rockslide at WorldPoint(x=1534, y=3038, plane=0)
+18893 Rockslide at WorldPoint(x=1534, y=3040, plane=0)
+18894 Rockslide at WorldPoint(x=1534, y=3042, plane=0)
+18894 Rockslide at WorldPoint(x=1534, y=3044, plane=0)
+18893 Rockslide at WorldPoint(x=1534, y=3046, plane=0)
+18893 Rockslide at WorldPoint(x=1539, y=3032, plane=0)
+18894 Rockslide at WorldPoint(x=1541, y=3032, plane=0)
+53188 Tree at WorldPoint(x=1550, y=3043, plane=0)
+42400 Plant at WorldPoint(x=1533, y=3038, plane=0)
+47370 Plant at WorldPoint(x=1533, y=3043, plane=0)
+51761 Cave at WorldPoint(x=1534, y=3049, plane=0)
+18894 Rockslide at WorldPoint(x=1537, y=3031, plane=0)
+52430 Barrel at WorldPoint(x=1551, y=3032, plane=0)
+52430 Barrel at WorldPoint(x=1551, y=3033, plane=0)
+51749 Empty pot at WorldPoint(x=1551, y=3035, plane=0)
+1197 Flower at WorldPoint(x=1551, y=3049, plane=0)
+== Items on the ground within 20 tiles, nearest first (id name at tile)
+863 Iron knife at WorldPoint(x=1545, y=3035, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-52098 at WorldPoint(x=1580, y=3141, plane=1)
-3948 at WorldPoint(x=1580, y=3142, plane=1)
-1263 at WorldPoint(x=1580, y=3143, plane=1)
-52375 at WorldPoint(x=1580, y=3143, plane=1)
-52098 at WorldPoint(x=1581, y=3141, plane=1)
-3949 at WorldPoint(x=1581, y=3143, plane=1)
-52375 at WorldPoint(x=1581, y=3143, plane=1)
-52375 at WorldPoint(x=1582, y=3141, plane=1)
-3949 at WorldPoint(x=1582, y=3142, plane=1)
-52375 at WorldPoint(x=1582, y=3142, plane=1)
-3948 at WorldPoint(x=1582, y=3143, plane=1)
-52375 at WorldPoint(x=1582, y=3143, plane=1)
-52098 at WorldPoint(x=1579, y=3140, plane=1)
-52098 at WorldPoint(x=1579, y=3141, plane=1)
-3949 at WorldPoint(x=1579, y=3142, plane=1)
+52468 at WorldPoint(x=1542, y=3040, plane=0)
+51672 at WorldPoint(x=1541, y=3039, plane=0)
+2738 at WorldPoint(x=1541, y=3040, plane=0)
+51672 at WorldPoint(x=1541, y=3040, plane=0)
+51663 at WorldPoint(x=1541, y=3041, plane=0)
+3949 at WorldPoint(x=1542, y=3039, plane=0)
+51663 at WorldPoint(x=1542, y=3039, plane=0)
+52470 at WorldPoint(x=1542, y=3041, plane=0)
+3948 at WorldPoint(x=1543, y=3039, plane=0)
+51672 at WorldPoint(x=1543, y=3039, plane=0)
+52469 at WorldPoint(x=1543, y=3040, plane=0)
+52472 at WorldPoint(x=1543, y=3041, plane=0)
+51804 at WorldPoint(x=1540, y=3038, plane=0)
+51777 at WorldPoint(x=1540, y=3039, plane=0)
+51783 at WorldPoint(x=1540, y=3040, plane=0)
 == Text in open windows and chat
 10
-94
+47
 100
 All
 Game
@@ -82,8 +97,14 @@ Friends
 Channel
 Clan
 Trade
-00:19:23
+00:25:05
 Boatyguidev3: *
+[10:24:11] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
+[10:24:10] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
+[10:24:09] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
+[10:24:08] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
+[10:24:07] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
+You have unlocked a new music track: @mes_hl_red@Ready for the Hunt
 You pick a handful of nettles.
 Did you know? You can hide the Help button in the Bank interface via the Bank settings.
 Welcome to Old School RuneScape.
