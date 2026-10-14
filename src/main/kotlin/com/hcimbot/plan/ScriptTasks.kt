@@ -3,8 +3,6 @@ package com.hcimbot.plan
 import com.hcimbot.game.SceneEntity
 import com.hcimbot.guide.ItemRef
 import com.hcimbot.guide.Tile
-import com.hcimbot.route.RouteRecorder
-import com.hcimbot.route.RouteStore
 
 /*
  * Tasks used by the hand written step scripts in StepScripts. They follow the
@@ -390,50 +388,3 @@ class PickUpTask(private val itemIds: List<Int>, private val radius: Int = 8) : 
     }
 }
 
-/**
- * Walks a route the player recorded (see RouteRecorder), waypoint by waypoint,
- * instead of the walker's own shortest path. It starts from the waypoint
- * nearest the player, and refuses to start when the player is not near the
- * route at all, since walking to it could cross the danger the route avoids.
- */
-class FollowRouteTask(
-    private val routeName: String,
-    private val store: RouteStore?,
-) : BaseTask() {
-    private var waypoints: List<Tile>? = null
-    private var index = 0
-    private var leg: WalkTask? = null
-    override val description = "Follow the recorded route \"$routeName\""
-
-    override fun tick(ctx: TaskContext): TaskResult {
-        val at = ctx.game.playerTile ?: return TaskResult.Running
-        val route = waypoints ?: run {
-            val tiles = store?.load(routeName)
-                ?: return TaskResult.Failed(
-                    "no recorded route \"$routeName\" yet. Turn on Record route in the bot's settings with the name " +
-                        "\"$routeName\", walk the safe way yourself, then turn it off.",
-                )
-            val thinned = RouteRecorder.waypoints(tiles)
-            val nearest = thinned.indices.minByOrNull { at.distanceTo(thinned[it]) } ?: 0
-            if (at.distanceTo(thinned[nearest]) > START_WITHIN) {
-                return TaskResult.Failed("the player is not near the start of route \"$routeName\"")
-            }
-            index = nearest
-            thinned.also { waypoints = it }
-        }
-        if (index >= route.size) return TaskResult.Done
-        val target = route[index]
-        val walk = leg?.takeIf { it.tile == target } ?: WalkTask(target, radius = 1).also { leg = it }
-        return when (val result = walk.tick(ctx)) {
-            TaskResult.Done -> {
-                index++
-                TaskResult.Running
-            }
-            else -> result
-        }
-    }
-
-    private companion object {
-        const val START_WITHIN = 15
-    }
-}

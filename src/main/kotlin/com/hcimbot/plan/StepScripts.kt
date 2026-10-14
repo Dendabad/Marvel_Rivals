@@ -6,7 +6,6 @@ import com.hcimbot.guide.Guide
 import com.hcimbot.guide.ItemRef
 import com.hcimbot.guide.Step
 import com.hcimbot.guide.Tile
-import com.hcimbot.route.RouteStore
 
 /**
  * Hand written plans for steps whose guide data says less than the step's text.
@@ -21,7 +20,7 @@ import com.hcimbot.route.RouteStore
  * reason rather than guess, so a script that meets something unexpected
  * pauses the bot.
  */
-class StepScripts(private val guide: Guide, private val routes: RouteStore? = null) {
+class StepScripts(private val guide: Guide) {
 
     fun planFor(step: Step, settings: BotSettings): StepPlan? = scripts[step.id]?.invoke(settings)
 
@@ -156,9 +155,10 @@ class StepScripts(private val guide: Guide, private val routes: RouteStore? = nu
             ))
         },
 
+
         // 20. "Head West towards Draynor hugging the fence to avoid the Jail Guards"
-        // The shortest path passes the guards, so this walks a route the player recorded.
-        "6af6abb1f6" to { _ -> auto(FollowRouteTask(DRAYNOR_FENCE_ROUTE, routes)) },
+        // Microbot's walker takes its own path there.
+        "6af6abb1f6" to { _ -> auto(WalkTask(DRAYNOR_VILLAGE)) },
 
         // 21. "Talk to Father Urhney in the lumbridge swamp for Ghost Speak Amulet. (2,1) Wield this."
         "ce4913f789" to { _ ->
@@ -319,6 +319,7 @@ class StepScripts(private val guide: Guide, private val routes: RouteStore? = nu
         private val LUMBRIDGE_TOP_FLOOR = Tile(3208, 3220, 2)
         private val SOUTH_OF_GERTRUDE = Tile(3152, 3405, 0)
         private val ABOVE_SWORD_SHOP = Tile(3205, 3396, 1)
+        private val DRAYNOR_VILLAGE = Tile(3103, 3265, 0)
         /** Giant rats spawn just west of the castle, by the second X Marks the Spot dig. */
         private val BEHIND_LUMBRIDGE_CASTLE = Tile(3195, 3205, 0)
         private val LUMBRIDGE_GENERAL_STORE = Tile(3212, 3246, 0)
@@ -327,8 +328,6 @@ class StepScripts(private val guide: Guide, private val routes: RouteStore? = nu
         private val VARROCK_KITCHEN = Tile(3222, 3495, 0)
         private val YARLO_HOUSE = Tile(3244, 3396, 0)
 
-        /** The recorded route for step 20. Record it under this name. */
-        const val DRAYNOR_FENCE_ROUTE = "draynor-fence"
 
         private const val LUMBRIDGE_DIARY = 1194
         private const val HANS_TASK_BIT = 5

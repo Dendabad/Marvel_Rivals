@@ -101,28 +101,6 @@ public interface HcimGuideBotConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "recordRoute",
-		name = "Record route",
-		description = "While on, the bot does nothing but record the tiles you walk. Turn it off to save the route.",
-		position = 7
-	)
-	default boolean recordRoute()
-	{
-		return false;
-	}
-
-	@ConfigItem(
-		keyName = "routeName",
-		name = "Route name",
-		description = "The name to record under. Step 20 (the walk past the Draynor Jail Guards) uses draynor-fence.",
-		position = 8
-	)
-	default String routeName()
-	{
-		return "draynor-fence";
-	}
-
-	@ConfigItem(
 		keyName = "tickB0atyGuide",
 		name = "Tick steps in B0aty guide",
 		description = "Tick each step the bot finishes in the B0aty guide's own sidebar, as if you had clicked it.",

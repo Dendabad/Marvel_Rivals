@@ -5,7 +5,6 @@ import com.hcimbot.engine.GuideRunner
 import com.hcimbot.guide.Guide
 import com.hcimbot.guide.GuideLoader
 import com.hcimbot.progress.SharedProgressStore
-import com.hcimbot.route.RouteRecorder
 import java.io.File
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.TimeUnit
@@ -27,8 +26,6 @@ class HcimGuideBotScript : Script() {
     private val log = LoggerFactory.getLogger(HcimGuideBotScript::class.java)
     private val game = MicrobotGameState()
     private val actions = MicrobotActions()
-    private val routes = FileRouteStore()
-    private val recorder = RouteRecorder()
     @Volatile private var runner: GuideRunner? = null
     private var settings = BotSettings()
     private var shownState: GuideRunner.State? = null
@@ -96,7 +93,6 @@ class HcimGuideBotScript : Script() {
         try {
             if (!gate() || !Microbot.isLoggedIn()) return
             if (ticks++ % CHECK_COPIES_TICKS == 0) everyFewTicks()
-            if (record(config)) return
             if (pausedByPlayer()) return
             val current = runner ?: start(config) ?: return
             restartIfAsked(config, current)
@@ -115,35 +111,6 @@ class HcimGuideBotScript : Script() {
             runner?.halt("unexpected error: ${e.message}. Check the client log.")
             runner?.let(::report)
         }
-    }
-
-    /**
-     * While Record route is on, the bot only records: each tile the player
-     * stands on is added and the route saved, so closing the client loses
-     * nothing. Turning it off ends the recording. Returns true while recording.
-     */
-    private fun record(config: HcimGuideBotConfig): Boolean {
-        val name = config.routeName()
-        if (!config.recordRoute()) {
-            if (recorder.size > 0) {
-                val file = routes.fileFor(name)
-                Microbot.showMessage("HCIM Guide Bot saved route \"$name\" (${recorder.size} tiles) to\n$file", MESSAGE_MS)
-                recorder.clear()
-                // The plan for the current step may have been made before the route existed.
-                runner?.resume()
-            }
-            return false
-        }
-        val at = MicrobotGameState.onClient {
-            Microbot.getClient().localPlayer?.worldLocation?.let { com.hcimbot.guide.Tile(it.x, it.y, it.plane) }
-        }
-        if (recorder.record(at)) routes.save(name, recorder.tiles())
-        statusNow = BotStatus(
-            "RECORDING", BotStatus.PAUSED,
-            step = "Route \"$name\": ${recorder.size} tiles",
-            detail = "Walk the safe way, then turn off Record route in the settings.",
-        )
-        return true
     }
 
     /**
@@ -207,7 +174,7 @@ class HcimGuideBotScript : Script() {
             writeBot = { configManager.setRSProfileConfiguration(SharedProgressStore.BOT_GROUP, SharedProgressStore.BOT_KEY, it) },
             tickInPlugin = { id, done -> ticker.set(id, done) },
         )
-        return GuideRunner(guide, game, actions, progress, settings, ::note, routes)
+        return GuideRunner(guide, game, actions, progress, settings, ::note)
             .also { it.start(); runner = it }
     }
 

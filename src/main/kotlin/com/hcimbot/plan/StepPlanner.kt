@@ -7,7 +7,6 @@ import com.hcimbot.guide.Step
 import com.hcimbot.guide.Target
 import com.hcimbot.guide.Travel
 import com.hcimbot.guide.toTile
-import com.hcimbot.route.RouteStore
 
 sealed interface StepPlan {
     /**
@@ -45,9 +44,8 @@ sealed interface StepPlan {
 class StepPlanner(
     private val guide: Guide,
     private val settings: BotSettings,
-    routes: RouteStore? = null,
 ) {
-    private val scripts = StepScripts(guide, routes)
+    private val scripts = StepScripts(guide)
 
     fun plan(step: Step): StepPlan {
         // A hand written script knows more about a step than its guide data does.

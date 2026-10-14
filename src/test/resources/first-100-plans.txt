@@ -17,7 +17,7 @@
 017 9a570ec093 AUTO UseItemTask>UseItemTask
 018 09f979095a AUTO QuestTask
 019 9b78ddbf34 PAUSE
-020 6af6abb1f6 AUTO FollowRouteTask
+020 6af6abb1f6 AUTO WalkTask
 021 ce4913f789 AUTO InteractTask>EquipTask
 022 9980900ea7 AUTO TakeItemTask>EquipTask
 023 0ad397ae61 AUTO WalkTask
