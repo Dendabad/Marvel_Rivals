@@ -11,7 +11,10 @@ import java.lang.reflect.Modifier
 object QuestHelperProbe {
     fun describe(): String {
         return runCatching {
-            val plugin = questHelperPlugin() ?: return "Quest Helper plugin not found"
+            val plugins = loadedPlugins()
+            val plugin = plugins.firstOrNull { it.javaClass.name.endsWith("QuestHelperPlugin") }
+                ?: return "Quest Helper plugin not found among ${plugins.size} plugins, quest like: " +
+                    plugins.map { it.javaClass.name }.filter { it.contains("quest", ignoreCase = true) }.take(6)
             val quest = call(plugin, "getSelectedQuest") ?: return "Quest Helper has no quest selected"
             var step = call(quest, "getCurrentStep") ?: return "Quest Helper has no current step"
             // A conditional step holds the one actually shown.
@@ -20,13 +23,13 @@ object QuestHelperProbe {
         }.getOrElse { "Quest Helper probe failed: ${it.javaClass.simpleName} ${it.message}" }
     }
 
-    private fun questHelperPlugin(): Any? {
+    private fun loadedPlugins(): List<Any> {
         val runelite = Class.forName("net.runelite.client.RuneLite")
         val injector = runelite.getMethod("getInjector").invoke(null)
         val managerClass = Class.forName("net.runelite.client.plugins.PluginManager")
         val manager = Class.forName("com.google.inject.Injector").getMethod("getInstance", Class::class.java).invoke(injector, managerClass)
         val plugins = managerClass.getMethod("getPlugins").invoke(manager) as Collection<*>
-        return plugins.firstOrNull { it?.javaClass?.name == "com.questhelper.QuestHelperPlugin" }
+        return plugins.filterNotNull()
     }
 
     private fun call(target: Any, name: String): Any? =
