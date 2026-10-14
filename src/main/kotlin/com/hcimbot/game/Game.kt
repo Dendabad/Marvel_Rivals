@@ -106,6 +106,9 @@ interface GameState {
     fun helperProblem(): String? = null
 
     /** Nearest item lying on the ground (or on a table) with one of these ids. */
+    /** Every object named one of [names] within [within] tiles of [near]. */
+    fun objectsNear(names: Collection<String>, near: Tile, within: Int): List<SceneEntity> = emptyList()
+
     /** Every ground item with one of [ids] within [within] tiles of [near]. */
     fun groundItemsNear(ids: Collection<Int>, near: Tile, within: Int): List<SceneEntity> = emptyList()
 

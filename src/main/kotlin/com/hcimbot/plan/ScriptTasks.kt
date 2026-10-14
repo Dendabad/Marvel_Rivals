@@ -1,6 +1,7 @@
 package com.hcimbot.plan
 
 import com.hcimbot.game.SceneEntity
+import com.hcimbot.game.canReachBeside
 import com.hcimbot.guide.ItemRef
 import com.hcimbot.guide.Tile
 
@@ -741,9 +742,10 @@ class HelperObjectsTask(private val wanted: Regex, private val quest: String, pr
 
 
 /**
- * Fletches [target] arrow shafts from logs picked up in the Lumber Yard: takes the logs lying about, uses the knife
- * on them, and picks All and the first item in the make window. With no logs left in sight it hops worlds, where
- * the piles are back. Pauses if it makes no progress for a long time.
+ * Fletches [target] arrow shafts from logs chopped from the trees around the Lumber Yard, from outside its pen:
+ * chops the nearest tree it can reach, and once it holds a good number of logs uses the knife on them and picks
+ * All and the first item in the make window. With no tree in reach it hops worlds. Pauses if it makes no
+ * progress for a long time.
  */
 class FletchShaftsTask(
     private val target: Int = 2100,
@@ -753,9 +755,9 @@ class FletchShaftsTask(
 ) : BaseTask() {
     override val description = "Fletch $target arrow shafts"
     private var settling = 0
-    private var noLogs = 0
+    private var noTree = 0
     private var hopWait = 0
-    private var lastShafts = -1
+    private var lastProgress = -1
     private var stalled = 0
     private var hops = 0
 
@@ -763,8 +765,11 @@ class FletchShaftsTask(
         val game = ctx.game
         val made = ctx.conditions.count(listOf(shaft)).toInt()
         if (made >= target) return TaskResult.Done
-        if (made != lastShafts) { lastShafts = made; stalled = 0 } else if (++stalled > STALL_TICKS) {
-            return TaskResult.Failed("made no arrow shafts for $STALL_TICKS ticks, stuck at $made of $target")
+        // Progress is shafts made or logs gained.
+        val held = game.inventory()[logs] ?: 0
+        val progress = made * 100 + held
+        if (progress != lastProgress) { lastProgress = progress; stalled = 0 } else if (++stalled > STALL_TICKS) {
+            return TaskResult.Failed("no logs chopped or shafts made for $STALL_TICKS ticks, stuck at $made of $target")
         }
         if (hopWait > 0) { hopWait--; return TaskResult.Running }
         if (settling > 0) { settling--; return TaskResult.Running }
@@ -776,29 +781,32 @@ class FletchShaftsTask(
         }
         if (knife !in game.inventory()) return TaskResult.Failed("no knife to fletch with")
 
-        val held = game.inventory()[logs] ?: 0
-        val at = game.playerTile ?: return TaskResult.Running
-        // Only the piles inside the yard: logs beyond its fence would have the bot walk out of it and round.
-        // And only ones that can be walked to: a pile behind a crate or a fence stays where it is.
-        val ground = game.groundItemsNear(listOf(logs), YARD_CENTRE, YARD_RADIUS)
-            .filter { !it.tile.inWilderness && game.canReach(it.tile) != false }
-            .minByOrNull { it.tile.distanceTo(at) }
-        // Fletch a full handful, or what there is once the piles are gone.
-        if (held >= HANDFUL || (held > 0 && ground == null)) {
-            noLogs = 0
+        // A good number of logs at a time: every click on a tree gives one, and the make window is the slow part.
+        if (held >= HANDFUL) {
+            noTree = 0
             ctx.actions.useItemOnItem(knife, logs)
             settling = 3
             return TaskResult.Running
         }
-        if (ground != null) {
-            noLogs = 0
-            return attempt(ctx.actions.takeGroundItem(ground), "take logs")
+        val at = game.playerTile ?: return TaskResult.Running
+        // The nearest tree that can be reached from where the bot stands: one inside the pen cannot.
+        val tree = game.objectsNear(TREES, YARD_CENTRE, TREE_RADIUS)
+            .filter { game.canReachBeside(it.tile) != false }
+            .minByOrNull { it.tile.distanceTo(at) }
+        if (tree != null) {
+            noTree = 0
+            return attempt(ctx.actions.interactObject(tree, "Chop down"), "chop down the tree at ${tree.tile}").also { settling = 2 }
         }
-        // No logs lying in sight: a moment in case one is being picked up, then another world.
-        if (++noLogs < NO_LOGS_TICKS) return TaskResult.Running
-        noLogs = 0
+        // Nothing to chop in reach: use up what there is, else another world.
+        if (held > 0) {
+            ctx.actions.useItemOnItem(knife, logs)
+            settling = 3
+            return TaskResult.Running
+        }
+        if (++noTree < NO_TREE_TICKS) return TaskResult.Running
+        noTree = 0
         hops++
-        ctx.log("No logs left here, hopping worlds ($made of $target shafts, hop $hops)")
+        ctx.log("No tree in reach here, hopping worlds ($made of $target shafts, hop $hops)")
         ctx.actions.hopWorld()
         hopWait = HOP_TICKS
         return TaskResult.Running
@@ -808,10 +816,11 @@ class FletchShaftsTask(
         const val KNIFE = 946
         const val LOGS = 1511
         const val ARROW_SHAFT = 52
-        const val HANDFUL = 12
-        const val YARD_RADIUS = 13
+        const val HANDFUL = 18
+        const val TREE_RADIUS = 28
         val YARD_CENTRE = Tile(3302, 3497, 0)
-        const val NO_LOGS_TICKS = 6
+        val TREES = listOf("Tree", "Dying tree")
+        const val NO_TREE_TICKS = 6
         const val HOP_TICKS = 12
         const val STALL_TICKS = 400
     }

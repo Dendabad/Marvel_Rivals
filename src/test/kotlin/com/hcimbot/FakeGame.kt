@@ -56,6 +56,9 @@ class FakeGame : GameState, GameActions {
     override fun nearestObject(ids: Collection<Int>, names: Collection<String>, near: Tile?) = nearest(objects, ids, names, near)
 
     val groundItems = mutableListOf<SceneEntity>()
+    override fun objectsNear(names: Collection<String>, near: Tile, within: Int) =
+        objects.filter { o -> names.any { it.equals(o.name, true) } && o.tile.distanceTo(near) <= within }
+
     override fun groundItemsNear(ids: Collection<Int>, near: Tile, within: Int) =
         groundItems.filter { it.id in ids && it.tile.distanceTo(near) <= within }
 

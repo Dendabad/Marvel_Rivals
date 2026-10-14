@@ -449,8 +449,9 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
-        // 104. "Collect the Logs & fletch 2,100 Arrowshafts (hop between 2 worlds)": 2,100 shafts is about 140 logs, from
-        // the piles in the Lumber Yard, fletched with the knife, hopping worlds when the piles are gone.
+        // 104. "Collect the Logs & fletch 2,100 Arrowshafts (hop between 2 worlds)": 2,100 shafts is about 140 logs, chopped
+        // from the trees round the Lumber Yard (outside its pen, where the piles cannot be reached) and fletched with
+        // the knife, hopping worlds if no tree is in reach.
         "acc8776385" to { _ ->
             StepPlan.Auto(
                 listOf(

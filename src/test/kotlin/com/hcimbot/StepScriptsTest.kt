@@ -249,23 +249,20 @@ class StepScriptsTest {
     }
 
     @Test
-    fun `fletching takes logs, uses the knife, then hops when none are left`() {
+    fun `fletching chops a tree it can reach, then uses the knife, and finishes at the target`() {
         val game = FakeGame().apply {
-            playerTile = Tile(3302, 3495, 0)
+            playerTile = Tile(3290, 3497, 0)
             inv[946] = 1
-            groundItems += SceneEntity(1511, "Logs", Tile(3303, 3495, 0))
+            objects += SceneEntity(1276, "Tree", Tile(3291, 3497, 0))
         }
         val ctx = TaskContext(game, game, Conditions(game))
         val task = com.hcimbot.plan.FletchShaftsTask(target = 15)
         task.tick(ctx)
-        assertTrue(game.calls.any { it.startsWith("take Logs") }, game.calls.toString())
-        game.groundItems.clear()
-        game.inv[1511] = 3
-        task.tick(ctx)
+        assertTrue(game.calls.any { it == "object Tree Chop down" }, game.calls.toString())
+        game.inv[1511] = 18
+        repeat(4) { task.tick(ctx) }
         assertTrue(game.calls.any { it == "use 946 on 1511" }, game.calls.toString())
         game.inv.remove(1511)
-        repeat(20) { task.tick(ctx) }
-        assertTrue(game.calls.contains("hop"), game.calls.toString())
         game.inv[52] = 15
         assertEquals(com.hcimbot.plan.TaskResult.Done, task.tick(ctx))
     }
