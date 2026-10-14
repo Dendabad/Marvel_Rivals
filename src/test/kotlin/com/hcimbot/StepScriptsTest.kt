@@ -114,6 +114,16 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `step 74 is done once Dr Harlow has given the stake, without going on to Count Draynor`() {
+        val harlow = com.hcimbot.guide.Instruction(kind = "npc", point = listOf(3222, 3399, 0), text = "Talk to Dr. Harlow.", ids = listOf(3480))
+        val helper = com.hcimbot.guide.QuestHelper(com.hcimbot.guide.QuestVar("varbit", 2561), lastValue = 3, steps = mapOf("2" to harlow, "3" to harlow))
+        val game = FakeGame().apply { varbits[2561] = 3; inv[1549] = 1 }
+        val ctx = TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.QuestTask("vampyreslayer", helper, allowCombat = true, boundedTo = setOf(3480), finishesQuest = true, doneWithItem = 1549)
+        assertEquals(com.hcimbot.plan.TaskResult.Done, task.tick(ctx))
+    }
+
+    @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
         val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()

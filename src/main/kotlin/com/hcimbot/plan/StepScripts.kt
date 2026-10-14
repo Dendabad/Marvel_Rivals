@@ -237,7 +237,7 @@ class StepScripts(private val guide: Guide) {
             } else {
                 auto(
                     Optional(OnlyIf({ GARLIC !in it.game.inventory() }, BankTask(false, listOf(item("Garlic", GARLIC, 1))))),
-                    QuestTask("vampyreslayer", helper, settings.allowCombat, boundedTo = HARLOW, finishesQuest = true),
+                    QuestTask("vampyreslayer", helper, settings.allowCombat, boundedTo = HARLOW, finishesQuest = true, doneWithItem = STAKE),
                     trust = true,
                     combat = settings.allowCombat,
                 )
@@ -512,6 +512,7 @@ class StepScripts(private val guide: Guide) {
         private const val CANDLE = 36
         private const val CHEESE = 1985
         private const val GARLIC = 1550
+        private const val STAKE = 1549
         private const val JUG_WINE = 1993
         private const val XMARKS_LAMP = 23072
         private const val ARRAV_BOOK = 757

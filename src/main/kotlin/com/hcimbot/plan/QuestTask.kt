@@ -34,6 +34,8 @@ class QuestTask(
      * Any other bounded step leaves those to the steps the guide gives them.
      */
     private val finishesQuest: Boolean = false,
+    /** Done as soon as this item is carried: the step's whole point, whatever the quest asks for next. */
+    private val doneWithItem: Int? = null,
 ) : Task {
     private var startValue: Int? = null
     private var current: Instruction? = null
@@ -47,6 +49,7 @@ class QuestTask(
         val value = ctx.conditions.readVar(progress.kind, progress.id)
         val start = startValue ?: value.also { startValue = it }
         if (stopAtValue != null && value >= stopAtValue) return TaskResult.Done
+        if (doneWithItem != null && doneWithItem in ctx.game.inventory()) return TaskResult.Done
         val fill = QuestFills.at(questKey, value)
         val instruction = fill ?: helper.at(value) ?: return TaskResult.Done
         if (fill == null && helper.hasGapAt(value)) {
