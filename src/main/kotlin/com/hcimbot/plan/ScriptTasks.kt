@@ -1183,6 +1183,8 @@ class LootAndHopTask(private val itemId: Int, private val count: Int, private va
         if (held >= count) return TaskResult.Done
         if (hopWait > 0) { hopWait--; return TaskResult.Running }
         if (settling > 0) { settling--; return TaskResult.Running }
+        // Not while the world is still loading: no player, no tile, nothing to do yet.
+        if (!game.isLoggedIn || game.playerTile == null) return TaskResult.Running
         if (game.isBusy || game.isBankOpen || game.isShopOpen) return TaskResult.Running
         if (lastHeld < 0) lastHeld = held
         // One more than before: it was just picked up, so go to another world for the next.
@@ -1196,7 +1198,6 @@ class LootAndHopTask(private val itemId: Int, private val count: Int, private va
         val item = game.nearestGroundItem(listOf(itemId))?.takeIf { it.tile.plane == at.plane && it.tile.distanceTo(at) <= reach }
         if (item != null) {
             noItem = 0
-            settling = 1
             return attempt(ctx.actions.takeGroundItem(item), "take item $itemId at ${item.tile}")
         }
         // Nothing here: a moment for one that is about to show, then another world.
@@ -1215,8 +1216,10 @@ class LootAndHopTask(private val itemId: Int, private val count: Int, private va
     }
 
     private companion object {
-        const val HOP_TICKS = 12
-        const val NO_ITEM_TICKS = 4
+        // Short: the world takes its time to load on its own, and the item is looked for every tick from then on.
+        const val HOP_TICKS = 3
+        // How long after a hop with nothing in sight before concluding it is not there and hopping again.
+        const val NO_ITEM_TICKS = 12
         const val MAX_IDLE_TICKS = 400
     }
 }
