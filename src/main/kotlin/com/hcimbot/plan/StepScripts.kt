@@ -192,6 +192,33 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 58. "Complete 3 Floors of Stronghold of Security": walk to each floor's reward and claim
+        // it. Microbot's walker knows the entrance, the ladders between floors and the security
+        // doors, which it answers. 2,000 + 3,000 + 5,000 coins makes the 10,000 step 61 expects.
+        // Steps 59 and 60: spiders hit 7 and Catablepons 9, so drink a wine on any damage.
+        "5405a57b1e" to { _ ->
+            StepPlan.Auto(
+                listOf(
+                    WalkTask(GIFT_OF_PEACE, radius = 2),
+                    InteractTask(InteractTask.Kind.OBJECT, listOf(SOS_WAR_CHEST), listOf("Gift of Peace"), listOf(GIFT_OF_PEACE), null, DialoguePlan.Continue),
+                    WalkTask(GRAIN_OF_PLENTY, radius = 2),
+                    InteractTask(InteractTask.Kind.OBJECT, listOf(SOS_FAM_SACK), listOf("Grain of Plenty"), listOf(GRAIN_OF_PLENTY), null, DialoguePlan.Continue),
+                    WalkTask(BOX_OF_HEALTH, radius = 2),
+                    InteractTask(InteractTask.Kind.OBJECT, listOf(SOS_PEST_CHEST), listOf("Box of Health"), listOf(BOX_OF_HEALTH), null, DialoguePlan.Continue),
+                ),
+                // Being attacked in there is expected: pausing to stand still would be worse.
+                combat = true,
+                patient = true,
+                drinkOnDamage = listOf(JUG_WINE),
+            )
+        },
+
+        // 61. "Once you have 10,000GP from Floor 3, leave via the ropes": back to the surface,
+        // the walker climbs the vines, ladders and chain on the way.
+        "b2738b149e" to { _ ->
+            StepPlan.Auto(listOf(WalkTask(STRONGHOLD_ENTRANCE, radius = 4)), combat = true, patient = true, drinkOnDamage = listOf(JUG_WINE))
+        },
+
         // 21. "Talk to Father Urhney in the lumbridge swamp for Ghost Speak Amulet. (2,1) Wield this."
         "ce4913f789" to { _ ->
             auto(
@@ -344,6 +371,10 @@ class StepScripts(private val guide: Guide) {
         /** The Wizards' Tower ground floor, south of its door. */
         private val INSIDE_WIZARDS_TOWER = Tile(3108, 3164, 0)
         private val VEOS_PORT_SARIM = Tile(3054, 3245, 0)
+        private val GIFT_OF_PEACE = Tile(1907, 5222, 0)
+        private val GRAIN_OF_PLENTY = Tile(2022, 5216, 0)
+        private val BOX_OF_HEALTH = Tile(2144, 5280, 0)
+        private val STRONGHOLD_ENTRANCE = Tile(3081, 3421, 0)
         /** Where Veos's boat lands, by Veos at Port Piscarilius. */
         private val PISCARILIUS_DOCK = Tile(1824, 3691, 0)
         /** Giant rats spawn just west of the castle, by the second X Marks the Spot dig. */
@@ -375,6 +406,10 @@ class StepScripts(private val guide: Guide) {
         private const val GHOSTSPEAK = 552
         private const val LOGS = 1511
         private const val LEATHER_BOOTS = 1061
+        /** The Stronghold's rewards, from Quest Helper's Varrock diary and RuneLite's gameval ObjectID. */
+        private const val SOS_WAR_CHEST = 20656
+        private const val SOS_FAM_SACK = 19000
+        private const val SOS_PEST_CHEST = 23709
         private const val DOOGLE_LEAVES = 1573
         private const val LIT_CANDLE = 33
         private const val CANDLE = 36

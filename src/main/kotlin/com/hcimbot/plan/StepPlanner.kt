@@ -29,6 +29,11 @@ sealed interface StepPlan {
         val combat: Boolean = false,
         /** Training that takes many minutes: allowed far longer before "taking too long". */
         val patient: Boolean = false,
+        /**
+         * Item ids to drink the moment the player takes any damage, for places where one more
+         * hit could be the last (the Stronghold's spiders and Catablepons at 10 Hitpoints).
+         */
+        val drinkOnDamage: List<Int> = emptyList(),
     ) : StepPlan
 
     /** The bot cannot do this step. It pauses and shows [reason] until the step is ticked. */

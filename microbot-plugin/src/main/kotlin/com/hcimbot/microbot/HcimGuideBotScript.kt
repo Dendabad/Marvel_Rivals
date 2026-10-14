@@ -37,6 +37,7 @@ class HcimGuideBotScript : Script() {
     private val retryRequested = AtomicBoolean(false)
     @Volatile private var statusNow: BotStatus = BotStatus.NOT_STARTED
 
+    @Volatile private var lastDrink = 0L
     private val recent = ArrayDeque<String>()
     private val clock = java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss")
 
@@ -247,6 +248,21 @@ class HcimGuideBotScript : Script() {
                 client.getBoostedSkillLevel(Skill.HITPOINTS) to client.getRealSkillLevel(Skill.HITPOINTS)
             } ?: return
             if (max <= 0) return
+            // Where one more hit could be the last, the step says to drink on any damage. That comes
+            // before stopping: standing still among monsters is worse than drinking and walking on.
+            val drinks = current.drinkOnDamage
+            if (now < max && drinks.isNotEmpty()) {
+                val drink = drinks.firstOrNull { Rs2Inventory.get(it) != null }
+                if (drink != null) {
+                    val time = System.currentTimeMillis()
+                    if (time - lastDrink >= DRINK_GAP_MS) {
+                        lastDrink = time
+                        Rs2Inventory.interact(drink, "Drink")
+                        note("Took damage ($now/$max), drinking")
+                    }
+                    return
+                }
+            }
             val percent = now * 100 / max
             if (percent <= settings.stopAtPercent) {
                 Rs2Walker.setTarget(null, "HCIM guide bot safety stop")
@@ -272,6 +288,9 @@ class HcimGuideBotScript : Script() {
         private const val TICK_MS = 600L
         private const val RECENT_LINES = 12
         private const val WATCHDOG_MS = 300L
+
+        /** A drink takes a game tick or two to show in the hitpoints, so do not drink twice for one hit. */
+        private const val DRINK_GAP_MS = 1_800L
         private const val MESSAGE_MS = 60_000
         private const val B0ATY_PLUGIN = "com.b0atyguide.B0atyGuidePlugin"
 

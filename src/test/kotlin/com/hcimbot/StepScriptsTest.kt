@@ -6,6 +6,7 @@ import com.hcimbot.game.SceneEntity
 import com.hcimbot.guide.Guide
 import com.hcimbot.guide.Step
 import com.hcimbot.guide.Tile
+import com.hcimbot.plan.WalkTask
 import com.hcimbot.plan.StepPlan
 import com.hcimbot.plan.StepScripts
 import com.hcimbot.plan.TaskContext
@@ -17,6 +18,18 @@ import kotlin.test.assertTrue
 
 /** Runs step scripts from the guide's first 100 steps against the fake game. */
 class StepScriptsTest {
+    @Test
+    fun `the Stronghold drinks wine on any damage and does not pause when attacked`() {
+        for (id in listOf("5405a57b1e", "b2738b149e")) {
+            val auto = assertIs<StepPlan.Auto>(plan(id))
+            assertEquals(listOf(1993), auto.drinkOnDamage, id)
+            assertTrue(auto.combat, id)
+        }
+        // Each floor's reward, claimed in order.
+        val floors = assertIs<StepPlan.Auto>(plan("5405a57b1e")).tasks.filterIsInstance<WalkTask>().map { it.tile }
+        assertEquals(listOf(Tile(1907, 5222, 0), Tile(2022, 5216, 0), Tile(2144, 5280, 0)), floors)
+    }
+
     @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()

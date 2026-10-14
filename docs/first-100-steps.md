@@ -4,7 +4,7 @@ What the bot does at each of the first 100 steps of the B0aty HCIM Guide V3. Eve
 
 **Runs** means the bot does the step on its own. **Skips** means there is nothing to do in the game (a heading or a reminder). **Pauses** means it stops and waits for you to do the step and tick it in the plugin.
 
-With **Allow combat** on: 87 run, 8 skip, 5 pause. With it off, the two fights (#19 and #27) pause too.
+With **Allow combat** on: 89 run, 8 skip, 3 pause. With it off, the two fights (#19 and #27) pause too.
 
 | # | Step | Bot | What happens |
 | --- | --- | --- | --- |
@@ -65,10 +65,10 @@ With **Allow combat** on: 87 run, 8 skip, 5 pause. With it off, the two fights (
 | 55 | Talk to Bob and buy a Steel Axe | Runs | Buy Steel Axe. |
 | 56 | Search the Coffin, south-east in the graveyard. Talk to Restless Ghost (1) | Runs | Wears the Ghostspeak amulet, opens and searches the coffin, then talks to the ghost. |
 | 57 | Talk to Count Check and be teleported to Stronghold of Security (3,1) | Runs | Talk-to Count Check. |
-| 58 | Complete 3 Floors of Stronghold of Security. (Answer the questions or spam click doors) | Pauses | Still pauses: the Stronghold of Security needs its own script, and its monsters are a real risk at this level. |
+| 58 | Complete 3 Floors of Stronghold of Security. (Answer the questions or spam click doors) | Runs | Walks to each floor's reward and claims it (Gift of Peace, Grain of Plenty, Box of Health: 10,000 coins). Microbot's walker answers the security doors. Drinks a Jug of wine on any damage, and does not pause when attacked. |
 | 59 | On Floor 3, Spider max is 7 so if you take 3 or more damage, drink a wine before going through the door to avoid being stacked. Take the east doors. | Skips | Stronghold advice. |
 | 60 | Catablepon Max is 9 so drink on any damage. | Skips | Stronghold advice. |
-| 61 | Once you have 10,000GP from Floor 3, leave via the ropes | Pauses | Still pauses, as part of the Stronghold. |
+| 61 | Once you have 10,000GP from Floor 3, leave via the ropes | Runs | Walks back to the surface, climbing the vines, ladders and chain, drinking wine on any damage. |
 | 62 | Collect 3x Beer inside the Longhall | Runs | Take Beer. |
 | 63 | Collect a Cooked Meat [Mournings End Pt 2] | Runs | Take Cooked Meat. |
 | 64 | Head east and Talk to Gertude (1) [Gertrudes Cat] | Runs | Follows Quest Helper for gertrudescat. |

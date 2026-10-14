@@ -55,6 +55,9 @@ class GuideRunner(
 
     val stepCount: Int get() = guide.steps.size
 
+    /** What the current step says to drink on any damage. Read by the hitpoint watchdog. */
+    val drinkOnDamage: List<Int> get() = (active?.plan as? StepPlan.Auto)?.drinkOnDamage.orEmpty()
+
     /** The current step's 1 based place in the guide, matching docs/first-100-steps.md. */
     val currentStepNumber: Int? get() = active?.step?.let { step -> guide.steps.indexOf(step) + 1 }
 
