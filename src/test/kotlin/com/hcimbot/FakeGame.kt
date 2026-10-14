@@ -140,8 +140,11 @@ class FakeGame : GameState, GameActions {
         return true
     }
 
+    var onItemAction: (Int, String) -> Unit = { _, _ -> }
+
     override fun itemAction(itemId: Int, action: String): Boolean {
         calls += "item $itemId $action"
+        onItemAction(itemId, action)
         if (action == "Drop" || action == "Destroy") inv.remove(itemId)
         if (action in setOf("Wear", "Wield", "Equip")) {
             inv.remove(itemId)
@@ -164,10 +167,14 @@ class FakeGame : GameState, GameActions {
         return true
     }
 
+    /** Replaces the default pick up of one item, e.g. to take a whole dropped stack. */
+    var onTake: ((SceneEntity) -> Unit)? = null
+
     override fun takeGroundItem(item: SceneEntity): Boolean {
         calls += "take ${item.name}"
         groundItems.remove(item)
         inv.merge(item.id, 1, Int::plus)
+        onTake?.invoke(item)
         return true
     }
 

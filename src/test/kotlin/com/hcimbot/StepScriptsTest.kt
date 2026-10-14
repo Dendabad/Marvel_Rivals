@@ -17,6 +17,8 @@ import kotlin.test.assertTrue
 
 /** Runs step scripts from the guide's first 100 steps against the fake game. */
 class StepScriptsTest {
+    private val dropped = mutableMapOf<Int, Int>()
+
     private val scripts = StepScripts(Guide(1))
 
     private fun plan(id: String, settings: BotSettings = BotSettings()) = scripts.planFor(Step(id = id), settings)
@@ -44,15 +46,24 @@ class StepScriptsTest {
     }
 
     @Test
-    fun `magic tutor drops the runes then claims new ones`() {
+    fun `magic tutor drops the runes, claims new ones, then picks the old ones back up`() {
+        val tutorAt = Tile(3218, 3238, 0)
         val game = FakeGame().apply {
             inv[556] = 25
             inv[558] = 15
-            npcs += SceneEntity(3218, "Magic combat tutor", Tile(3218, 3238, 0))
-            onNpcInteract = { _, _ -> options = listOf("Can I have some air and mind runes?", "Goodbye.") }
-            onOption = { if ("runes" in it) { inv[556] = 30; inv[558] = 30 } }
+            npcs += SceneEntity(3218, "Magic combat tutor", tutorAt)
         }
+        // Dropping leaves the stack on the ground; the tutor only gives runes to players without any.
+        game.onNpcInteract = { _, _ -> game.options = listOf("Can I have some air and mind runes?", "Goodbye.") }
+        game.onOption = { if ("runes" in it && 556 !in game.inv && 558 !in game.inv) { game.inv[556] = 30; game.inv[558] = 30 } }
+        val drop = { id: Int, count: Int -> game.groundItems += SceneEntity(id, "Rune $id", tutorAt); dropped[id] = count }
+        game.onItemAction = { id, action -> if (action == "Drop") drop(id, game.inv[id] ?: 0) }
+        game.onTake = { item -> game.inv[item.id] = (game.inv[item.id] ?: 0) - 1 + (dropped.remove(item.id) ?: 1) }
+
         assertEquals(TaskResult.Done, run(plan("cce7a1b4dc"), game))
+        assertEquals(55, game.inv[556], "25 picked back up on top of the 30 claimed")
+        assertEquals(45, game.inv[558])
+        assertTrue(game.groundItems.isEmpty())
         val drops = game.calls.filter { it.startsWith("item") }
         assertEquals(listOf("item 556 Drop", "item 558 Drop"), drops)
         assertTrue("option Can I have some air and mind runes?" in game.calls, "${game.calls}")

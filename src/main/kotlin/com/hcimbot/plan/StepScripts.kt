@@ -64,12 +64,13 @@ class StepScripts(private val guide: Guide) {
         "174485548c" to { _ -> auto(SettingTask(GameActions.DISABLE_LEVEL_UP)) },
 
         // 5. "Head North-West to Magic combat tutor & drop Air & Mind Runes and claim more."
-        // The tutor only hands out runes to players who have none.
+        // The tutor only hands out runes to players who have none, so drop them, claim, then pick the dropped ones back up.
         "cce7a1b4dc" to { _ ->
             auto(
                 WalkTask(MAGIC_TUTOR),
                 DropTask(listOf(AIR_RUNE, MIND_RUNE)),
                 talk(listOf(3218), "Magic combat tutor", MAGIC_TUTOR, DialoguePlan.Texts(listOf("rune"))),
+                PickUpTask(listOf(AIR_RUNE, MIND_RUNE)),
             )
         },
 

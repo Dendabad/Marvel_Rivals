@@ -12,7 +12,7 @@ With **Allow combat** on: 87 run, 6 skip, 7 pause. With it off, the two fights (
 | 2 | All Settings -> Disable level-up | Runs | Setting: disable-level-up. |
 | 3 | Talk to Father Aereck (3,1) [Restless Ghost] | Runs | Follows Quest Helper for therestlessghost. Picks the chat options Quest Helper lists, then moves on once the quest leaves Father Aereck. |
 | 4 | Pickpocket a man/woman [Lumbridge Easy Diary] | Runs | Pickpocket Man. Pickpockets until the diary task ticks. Failed pickpockets hit for 1 or 2, so the hitpoint checks matter here. |
-| 5 | Head North-West to Magic combat tutor & drop Air & Mind Runes and claim more. | Runs | The tutor only gives runes to players who have none, so it drops them first, then picks the chat option about runes. |
+| 5 | Head North-West to Magic combat tutor & drop Air & Mind Runes and claim more. | Runs | The tutor only gives runes to players who have none, so it drops them first, picks the chat option about runes, then picks the dropped runes back up. |
 | 6 | Sell Bronze Dagger, Sword, Wooden Shield & Shortbow to General Store. Buy a Spade Chisel & hammer | Runs | Sells the four starter items to the Lumbridge general store, then buys the spade, chisel and hammer. |
 | 7 | Head East & Start X Marks the Spot on Veos (2,1) & complete the first step (Install Quest Helper plug in on Runelite) | Runs | Follows Quest Helper for xmarksthespot. |
 | 8 | Check playtime on Hans [Lumbridge Easy Diary] | Runs | Picks the chat option asking how long you have played. The diary task ticks when Hans answers. |

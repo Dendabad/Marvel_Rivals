@@ -245,3 +245,29 @@ class Optional(private val task: Task) : Task {
         else -> result
     }
 }
+
+/**
+ * Picks up every stack of these items lying near the player, however many are
+ * already carried, e.g. the runes dropped to claim more from the Magic combat
+ * tutor. Done once none are left within [radius].
+ */
+class PickUpTask(private val itemIds: List<Int>, private val radius: Int = 8) : BaseTask() {
+    private var waited = 0
+    override val description = "Pick up $itemIds"
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        if (ctx.game.isBusy) return TaskResult.Running
+        val at = ctx.game.playerTile ?: return TaskResult.Running
+        val stack = ctx.game.nearestGroundItem(itemIds)?.takeIf { it.tile.distanceTo(at) <= radius }
+        if (stack == null) {
+            // A moment for a stack that is still being picked up to leave the ground.
+            return if (++waited >= SETTLE) TaskResult.Done else TaskResult.Running
+        }
+        waited = 0
+        return attempt(ctx.actions.takeGroundItem(stack), "pick up ${stack.name}")
+    }
+
+    private companion object {
+        const val SETTLE = 2
+    }
+}
