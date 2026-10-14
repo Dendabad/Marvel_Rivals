@@ -45,6 +45,28 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `Vampyre Slayer's garlic comes from the bank, not the cupboard it was first taken from`() {
+        val harlow = com.hcimbot.guide.Instruction(kind = "npc", point = listOf(3222, 3399, 0), text = "Talk to Dr. Harlow.", ids = listOf(3480), dialogue = listOf("Morgan needs your help!"))
+        val cupboard = com.hcimbot.guide.Instruction(
+            kind = "object", point = listOf(3100, 3267, 0), text = "Get garlic from the cupboard upstairs in Morgan's house.", ids = listOf(15645),
+            whenIn = listOf(harlow.let { com.hcimbot.guide.Instruction(kind = "npc", point = it.point, text = it.text, ids = it.ids, dialogue = it.dialogue, condition = com.hcimbot.guide.Requirement(item = com.hcimbot.guide.Need("Garlic", 1, listOf(1550)))) }),
+        )
+        val helper = com.hcimbot.guide.QuestHelper(com.hcimbot.guide.QuestVar("varbit", 2561), lastValue = 2, steps = mapOf("1" to cupboard))
+        val own = StepScripts(Guide(1, listOf(com.hcimbot.guide.Section()), mapOf("vampyreslayer" to helper)))
+        val game = FakeGame().apply {
+            bank[1550] = 4
+            playerTile = Tile(3185, 3436, 0)
+            varbits[2561] = 1
+            npcs += SceneEntity(3480, "Dr Harlow", Tile(3188, 3438, 0))
+        }
+        val plan = own.planFor(Step(id = "8c44826480"), BotSettings())
+        run(plan, game, ticks = 40)
+        // Banked for garlic before anything else, and never sent to the cupboard.
+        assertEquals(1, game.inv[1550])
+        assertTrue(game.calls.indexOf("open bank") >= 0 && game.calls.none { it.startsWith("object") }, game.calls.toString())
+    }
+
+    @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
         val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()

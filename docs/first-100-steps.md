@@ -81,7 +81,7 @@ With **Allow combat** on: 89 run, 8 skip, 3 pause. With it off, the two fights (
 | 71 | Head South & Trade Thessalia [Varrock Easy Diary] | Runs | Trade Thessalia. Opens the shop until the diary task ticks, then closes it. |
 | 72 | Buy Pink Skirt, Brown Apron & Silk. Wear Brown Apron & Pink Skirt in honour of Faux | Runs | Buys all three, then wears the apron and skirt. |
 | 73 | Head South to the Sword Shop and go up the ladder. Loot the lit candle. | Runs | Walks up to the room above the Sword Shop (Microbot's walker climbs the ladder) and takes the lit candle. |
-| 74 | Head East and talk to Dr Harlow (1,2 talk again)[Vampyre Slayer] | Runs | Follows Quest Helper for vampyreslayer. Talks to Dr Harlow only, then stops before the Count Draynor fight. |
+| 74 | Head East and talk to Dr Harlow (1,2 talk again)[Vampyre Slayer] | Runs | Takes the Garlic out of the bank first if you are not carrying it (it was banked at step 38), then follows Quest Helper for vampyreslayer. If the bank has none, Quest Helper sends the bot to Morgan's cupboard for it. |
 | 75 | Head North | Runs | Walk to (3211, 3425, 0). |
 | 76 | Talk to Romeo (3,1) [Romeo & Juliet] | Runs | Follows Quest Helper for romeojuliet. |
 | 77 | Buy a Newspaper from Benny(1,1) | Runs | Talk-to Benny. |

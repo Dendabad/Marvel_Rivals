@@ -226,6 +226,24 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 74. "Head East and talk to Dr Harlow (1,2 talk again) [Vampyre Slayer]"
+        // Quest Helper sends a player with no garlic back to Morgan's cupboard. The garlic was banked at
+        // step 38, so take it from the bank first, and only if the bank has none let Quest Helper
+        // send the bot for it.
+        "8c44826480" to { settings ->
+            val helper = guide.questHelpers["vampyreslayer"]
+            if (helper == null) {
+                auto(Fail("no Quest Helper data for vampyreslayer"))
+            } else {
+                auto(
+                    Optional(OnlyIf({ GARLIC !in it.game.inventory() }, BankTask(false, listOf(item("Garlic", GARLIC, 1))))),
+                    QuestTask("vampyreslayer", helper, settings.allowCombat, boundedTo = setOf(HARLOW), finishesQuest = true),
+                    trust = true,
+                    combat = settings.allowCombat,
+                )
+            }
+        },
+
         // 21. "Talk to Father Urhney in the lumbridge swamp for Ghost Speak Amulet. (2,1) Wield this."
         "ce4913f789" to { _ ->
             auto(
@@ -428,6 +446,7 @@ class StepScripts(private val guide: Guide) {
         private const val LOGS = 1511
         private const val LEATHER_BOOTS = 1061
         private const val BONES = 526
+        private const val HARLOW = 3480
         /** The Stronghold's rewards, from Quest Helper's Varrock diary and RuneLite's gameval ObjectID. */
         private const val SOS_WAR_CHEST = 20656
         private const val SOS_FAM_SACK = 19000
