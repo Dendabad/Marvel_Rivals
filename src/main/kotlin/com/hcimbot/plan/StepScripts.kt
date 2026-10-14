@@ -584,6 +584,18 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 124. "Enter Guildmaster Apatura's building and go up both ladders": the Hunter Guild's building. Its ladder is at
+        // (1552, 3033), and a second ladder on the floor above takes the player up again.
+        "e03782f0a1" to { _ ->
+            auto(
+                OnlyIf({ ctx: TaskContext -> (ctx.game.playerTile?.plane ?: 0) == 0 },
+                    obj(listOf(52614), listOf("Ladder"), Tile(1552, 3033, 0), "Climb-up")),
+                OnlyIf({ ctx: TaskContext -> (ctx.game.playerTile?.plane ?: 0) == 1 },
+                    obj(emptyList(), listOf("Ladder"), Tile(1552, 3033, 1), "Climb-up", near = null)),
+                trust = true,
+            )
+        },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
