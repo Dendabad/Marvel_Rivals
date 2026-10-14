@@ -24,7 +24,7 @@ object QuestHelperProbe {
         val runelite = Class.forName("net.runelite.client.RuneLite")
         val injector = runelite.getMethod("getInjector").invoke(null)
         val managerClass = Class.forName("net.runelite.client.plugins.PluginManager")
-        val manager = injector.javaClass.getMethod("getInstance", Class::class.java).invoke(injector, managerClass)
+        val manager = Class.forName("com.google.inject.Injector").getMethod("getInstance", Class::class.java).invoke(injector, managerClass)
         val plugins = managerClass.getMethod("getPlugins").invoke(manager) as Collection<*>
         return plugins.firstOrNull { it?.javaClass?.name == "com.questhelper.QuestHelperPlugin" }
     }
@@ -34,7 +34,7 @@ object QuestHelperProbe {
             val method = generateSequence(target.javaClass as Class<*>?) { it.superclass }
                 .flatMap { it.declaredMethods.asSequence() }
                 .firstOrNull { it.name == name && it.parameterCount == 0 } ?: return null
-            method.isAccessible = true
+            runCatching { method.isAccessible = true }
             method.invoke(target)
         }.getOrNull()
 
