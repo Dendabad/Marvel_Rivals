@@ -3,83 +3,60 @@ HCIM Guide Bot 0.16.2, PAUSED
 Step 125 of 2925: Loot 28 Eclipse Reds (hop worlds)
 Detail: Loot 28 Eclipse Reds (hop worlds) (asks for several things). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-10:47:57  Asking the AI about this pause (try 1)
-10:47:56  Paused: Loot 28 Eclipse Reds (hop worlds) (asks for several things)
-10:47:56  Step: Loot 28 Eclipse Reds (hop worlds)
-10:47:56  Started version 0.16.2
+10:48:51  Asking the AI about this pause (try 1)
+10:48:50  Paused: Loot 28 Eclipse Reds (hop worlds) (asks for several things)
+10:48:50  Step: Loot 28 Eclipse Reds (hop worlds)
+10:48:49  Done (all actions finished): Enter Guildmaster Apatura's building and go up both ladders
+10:48:44  Climbing the other ladder at (1557, 3034, 1)
+10:48:41  Step: Enter Guildmaster Apatura's building and go up both ladders
+10:48:41  Restarting at step 124
+10:48:40  Started version 0.16.2
 == Player
-world WorldPoint(x=1553, y=3033, plane=0), in instance false, as guide coordinates WorldPoint(x=1553, y=3033, plane=0)
+world WorldPoint(x=1556, y=3034, plane=2), in instance false, as guide coordinates WorldPoint(x=1556, y=3034, plane=2)
 hitpoints 10/10
 == Bag (item id x count)
 
 == NPCs within 12 tiles (id name at tile: options)
-13129 Banker at WorldPoint(x=1542, y=3041, plane=0): [Talk-to, Bank, Collect]
-13128 Bank buffalo at WorldPoint(x=1546, y=3038, plane=0): []
-13120 Guildmaster Apatura at WorldPoint(x=1554, y=3033, plane=0): [Talk-to]
-13130 Pellem at WorldPoint(x=1565, y=3034, plane=0): [Talk-to, Trade, Fur-clothing]
+13134 Quetzal at WorldPoint(x=1556, y=3042, plane=2): []
 == Named objects within 25 tiles, nearest first (id name at tile)
-52614 Ladder at WorldPoint(x=1552, y=3033, plane=0)
-51752 Food pot at WorldPoint(x=1554, y=3032, plane=0)
-52430 Barrel at WorldPoint(x=1551, y=3032, plane=0)
-52430 Barrel at WorldPoint(x=1551, y=3033, plane=0)
-51749 Empty pot at WorldPoint(x=1551, y=3035, plane=0)
-51755 Empty basket at WorldPoint(x=1552, y=3035, plane=0)
-51730 Table at WorldPoint(x=1555, y=3032, plane=0)
-51752 Food pot at WorldPoint(x=1552, y=3036, plane=0)
-51727 Stool at WorldPoint(x=1556, y=3033, plane=0)
-52430 Barrel at WorldPoint(x=1552, y=3037, plane=0)
-52430 Barrel at WorldPoint(x=1553, y=3037, plane=0)
-51752 Food pot at WorldPoint(x=1557, y=3035, plane=0)
-51754 Food basket at WorldPoint(x=1557, y=3036, plane=0)
-52430 Barrel at WorldPoint(x=1558, y=3032, plane=0)
-52647 Oven at WorldPoint(x=1558, y=3033, plane=0)
-51753 Empty pot at WorldPoint(x=1558, y=3035, plane=0)
-46805 Well at WorldPoint(x=1547, y=3036, plane=0)
-18894 Rockslide at WorldPoint(x=1558, y=3026, plane=0)
-18893 Rockslide at WorldPoint(x=1560, y=3026, plane=0)
-18894 Rockslide at WorldPoint(x=1545, y=3026, plane=0)
-52430 Barrel at WorldPoint(x=1545, y=3035, plane=0)
-3644 Trough at WorldPoint(x=1545, y=3038, plane=0)
-18894 Rockslide at WorldPoint(x=1556, y=3025, plane=0)
-18893 Rockslide at WorldPoint(x=1544, y=3028, plane=0)
-52432 Crates at WorldPoint(x=1544, y=3036, plane=0)
-52430 Barrel at WorldPoint(x=1544, y=3037, plane=0)
-18894 Rockslide at WorldPoint(x=1546, y=3024, plane=0)
-51728 Fire at WorldPoint(x=1546, y=3042, plane=0)
-18893 Rockslide at WorldPoint(x=1548, y=3024, plane=0)
-51724 Stool at WorldPoint(x=1548, y=3042, plane=0)
-18894 Rockslide at WorldPoint(x=1552, y=3024, plane=0)
-18893 Rockslide at WorldPoint(x=1554, y=3024, plane=0)
-18894 Rockslide at WorldPoint(x=1560, y=3024, plane=0)
-18894 Rockslide at WorldPoint(x=1562, y=3026, plane=0)
-52430 Barrel at WorldPoint(x=1562, y=3034, plane=0)
-18894 Rockslide at WorldPoint(x=1543, y=3030, plane=0)
-52432 Crates at WorldPoint(x=1543, y=3039, plane=0)
-26813 Poll booth at WorldPoint(x=1543, y=3043, plane=0)
-18894 Rockslide at WorldPoint(x=1550, y=3023, plane=0)
-53188 Tree at WorldPoint(x=1550, y=3043, plane=0)
+52620 Ladder at WorldPoint(x=1557, y=3034, plane=2)
+46813 Incense burner at WorldPoint(x=1554, y=3033, plane=2)
+52436 Pillow at WorldPoint(x=1554, y=3034, plane=2)
+52511 Potted fan at WorldPoint(x=1554, y=3035, plane=2)
+52512 Potted fan at WorldPoint(x=1552, y=3033, plane=2)
+51662 Sack at WorldPoint(x=1559, y=3043, plane=2)
+52815 Landing Site at WorldPoint(x=1561, y=3046, plane=2)
+51759 Torch at WorldPoint(x=1563, y=3046, plane=2)
+51757 Quetzal Nest at WorldPoint(x=1553, y=3047, plane=2)
+51644 Rope at WorldPoint(x=1556, y=3047, plane=2)
+51759 Torch at WorldPoint(x=1563, y=3047, plane=2)
+23690 Food pot at WorldPoint(x=1560, y=3048, plane=2)
+51753 Empty pot at WorldPoint(x=1561, y=3048, plane=2)
+52430 Barrel at WorldPoint(x=1558, y=3049, plane=2)
+52430 Barrel at WorldPoint(x=1556, y=3050, plane=2)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
-863 Iron knife at WorldPoint(x=1545, y=3035, plane=0)
-1929 Bucket of water at WorldPoint(x=1545, y=3037, plane=0)
-1733 Needle at WorldPoint(x=1566, y=3035, plane=0)
+29415 Eclipse red at WorldPoint(x=1555, y=3035, plane=2)
+1947 Grain at WorldPoint(x=1561, y=3045, plane=2)
+1947 Grain at WorldPoint(x=1560, y=3047, plane=2)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-51672 at WorldPoint(x=1552, y=3032, plane=0)
-3949 at WorldPoint(x=1552, y=3033, plane=0)
-51663 at WorldPoint(x=1553, y=3032, plane=0)
-3949 at WorldPoint(x=1553, y=3034, plane=0)
-3949 at WorldPoint(x=1554, y=3032, plane=0)
-51672 at WorldPoint(x=1554, y=3032, plane=0)
-50883 at WorldPoint(x=1554, y=3033, plane=0)
-952 at WorldPoint(x=1554, y=3034, plane=0)
-51783 at WorldPoint(x=1551, y=3031, plane=0)
-3949 at WorldPoint(x=1551, y=3032, plane=0)
-51672 at WorldPoint(x=1551, y=3032, plane=0)
-3948 at WorldPoint(x=1551, y=3033, plane=0)
-51663 at WorldPoint(x=1551, y=3033, plane=0)
-3949 at WorldPoint(x=1551, y=3034, plane=0)
-51663 at WorldPoint(x=1551, y=3034, plane=0)
+796 at WorldPoint(x=1556, y=3034, plane=2)
+3949 at WorldPoint(x=1555, y=3033, plane=2)
+51668 at WorldPoint(x=1555, y=3033, plane=2)
+796 at WorldPoint(x=1555, y=3034, plane=2)
+51668 at WorldPoint(x=1555, y=3035, plane=2)
+3949 at WorldPoint(x=1556, y=3033, plane=2)
+51668 at WorldPoint(x=1556, y=3033, plane=2)
+3949 at WorldPoint(x=1556, y=3035, plane=2)
+51668 at WorldPoint(x=1556, y=3035, plane=2)
+51668 at WorldPoint(x=1557, y=3033, plane=2)
+51668 at WorldPoint(x=1557, y=3034, plane=2)
+51668 at WorldPoint(x=1557, y=3035, plane=2)
+51668 at WorldPoint(x=1554, y=3033, plane=2)
+796 at WorldPoint(x=1554, y=3034, plane=2)
+3949 at WorldPoint(x=1554, y=3035, plane=2)
 == Text in open windows and chat
 10
+98
 100
 All
 Game
@@ -90,7 +67,7 @@ Friends
 Channel
 Clan
 Trade
-00:05:18
+00:06:12
 Boatyguidev3: *
 [10:43:33] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
 [10:43:32] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
