@@ -107,11 +107,11 @@ class HcimGuideBotScript(private val bankPin: () -> String? = { null }) : Script
                 current.resume()
             }
             game.refresh()
-            walkerOverrides.apply(current.walkerOverrides)
+            walkerOverrides.apply(NO_SHIPS + current.walkerOverrides)
             if (answerBankPin()) return
             current.onGameTick()
             // A step that just ended takes its walker overrides with it, before the next one walks.
-            walkerOverrides.apply(current.walkerOverrides)
+            walkerOverrides.apply(NO_SHIPS + current.walkerOverrides)
             report(current)
         } catch (e: Exception) {
             if (interrupted(e)) return
@@ -409,6 +409,15 @@ class HcimGuideBotScript(private val bankPin: () -> String? = { null }) : Script
 
     companion object {
         private const val TICK_MS = 600L
+
+        /**
+         * The walker never takes a boat for the bot. Walking from Port Sarim to Varrock it went for Veos's
+         * ship to Land's End (Kourend) instead. Where a boat is wanted (to Port Piscarilius, the minecarts)
+         * a travel step does it on purpose.
+         */
+        private val NO_SHIPS: Map<String, Any> = mapOf(
+            "useShips" to false, "useBoats" to false, "useCharterShips" to false, "useCanoes" to false,
+        )
         private const val RECENT_LINES = 12
         private const val WATCHDOG_MS = 300L
 
