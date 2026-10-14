@@ -16,7 +16,7 @@ class HcimGuideBotOverlay(private val status: () -> BotStatus) : OverlayPanel() 
 
     override fun render(graphics: Graphics2D): Dimension? {
         val now = status()
-        panelComponent.children.add(TitleComponent.builder().text("HCIM Guide Bot").color(Color.WHITE).build())
+        panelComponent.children.add(TitleComponent.builder().text("HCIM Guide Bot ${HcimGuideBotPlugin.VERSION}").color(Color.WHITE).build())
         panelComponent.children.add(LineComponent.builder().left(now.state).leftColor(now.stateColor).build())
         now.step?.let { line(it, Color.WHITE) }
         now.doing?.let { line("Doing: $it", Color.LIGHT_GRAY) }

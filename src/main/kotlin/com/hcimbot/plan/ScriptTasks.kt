@@ -86,6 +86,13 @@ class DigTask(val tile: Tile) : BaseTask() {
  * spawns, waits a little, then tries the next nearest. Only spots close by and
  * outside the Wilderness count, so it never wanders off across the map.
  */
+/**
+ * Whether [npc] still lives: the game's own answer when it has one, otherwise
+ * whether something is still fighting the player. Not "one of its kind is
+ * still around": others of its kind usually are, and the fight would never end.
+ */
+private fun alive(ctx: TaskContext, npc: SceneEntity): Boolean = ctx.game.npcAlive(npc) ?: ctx.game.isInCombat
+
 private const val RECAST_TICKS = 5
 private const val MAX_CASTS = 20
 
@@ -272,20 +279,21 @@ class KillTask(
         }
         if (missing.isEmpty() && !fighting) return TaskResult.Done
         if (fighting) {
-            if (game.isBusy) return TaskResult.Running
             val fought = target
-            when (fought?.let(game::npcAlive)) {
-                true -> {
-                    // A melee fight carries on by itself, but without autocast every spell is a click.
-                    val spellName = spell ?: return TaskResult.Running
-                    if (++sinceCast < RECAST_TICKS) return TaskResult.Running
-                    if (++casts > MAX_CASTS) return TaskResult.Failed("cast $casts times and the ${fought.name} is still alive")
-                    sinceCast = 0
-                    return attempt(ctx.actions.castOnNpc(spellName, fought), "cast on ${fought.name}")
-                }
-                null -> if (game.isInCombat) return TaskResult.Running
-                false -> Unit
+            // Counted every tick: being hit plays a block animation, which must not hold up the next cast.
+            sinceCast++
+            if (spell == null && game.isBusy) return TaskResult.Running
+            if (spell != null && sinceCast < RECAST_TICKS) return TaskResult.Running
+            if (fought != null && alive(ctx, fought)) {
+                // A melee fight carries on by itself, but without autocast every spell is a click.
+                val spellName = spell ?: return TaskResult.Running
+                if (++casts > MAX_CASTS) return TaskResult.Failed("cast $casts times and the ${fought.name} is still alive")
+                sinceCast = 0
+                val clicked = ctx.actions.castOnNpc(spellName, fought)
+                ctx.log(if (clicked) "${fought.name} still alive, cast $spellName again ($casts)" else "could not cast $spellName on ${fought.name}")
+                return attempt(clicked, "cast $spellName on ${fought.name}")
             }
+            ctx.log("${fought?.name ?: "Target"} is dead after $casts ${if (spell != null) "casts" else "attacks"}")
             fighting = false
             target = null
             kills++
@@ -297,6 +305,7 @@ class KillTask(
         val target = game.nearestNpc(npcIds, npcNames) ?: return hunt.tick(ctx)
         hunt.found()
         val started = if (spell != null) ctx.actions.castOnNpc(spell, target) else ctx.actions.interactNpc(target, "Attack")
+        ctx.log(if (started) "Attacking ${target.name}${spell?.let { " with $it" } ?: ""}" else "could not attack ${target.name}")
         if (started) {
             fighting = true
             this.target = target

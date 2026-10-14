@@ -237,6 +237,24 @@ class PartsTest {
     }
 
     @Test
+    fun `wind strike keeps going while the rat fights back, even when the game cannot say if it lives`() {
+        val rat = com.hcimbot.game.SceneEntity(2510, "Giant rat", Tile(3223, 3218, 0))
+        val game = FakeGame()
+        game.npcs += rat
+        game.isBusy = true // hit back every tick, so the block animation never stops
+        game.onNpcInteract = { _, _ -> game.isInCombat = true }
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.KillTask(
+            emptyList(), listOf("Giant rat"), listOf(com.hcimbot.guide.ItemRef("Bones", listOf(526))), spell = "WIND_STRIKE",
+        )
+        game.isBusy = false
+        task.tick(ctx) // first cast
+        game.isBusy = true
+        repeat(11) { task.tick(ctx) }
+        assertEquals(3, game.calls.count { it == "cast WIND_STRIKE on Giant rat" }, game.calls.toString())
+    }
+
+    @Test
     fun `step 19 looks for rats behind Lumbridge castle first`() {
         val game = FakeGame()
         game.playerTile = Tile(3230, 3209, 0)
