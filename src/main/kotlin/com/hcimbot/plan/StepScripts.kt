@@ -3,6 +3,7 @@ package com.hcimbot.plan
 import com.hcimbot.engine.BotSettings
 import com.hcimbot.game.GameActions
 import com.hcimbot.guide.Guide
+import com.hcimbot.game.canReachBeside
 import com.hcimbot.guide.ItemRef
 import com.hcimbot.guide.Step
 import com.hcimbot.guide.Tile
@@ -430,6 +431,24 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 102. "Head North-East to the Lumberyard": the sawmill, where the next steps are. The guide's own point for
+        // "Lumberyard" is a spot north of it, past the fence step 103 climbs.
+        "c5b29450c6" to { _ -> auto(WalkTask(SAWMILL, radius = 5)) },
+
+        // 103. "Cut the Dying tree [Varrock Easy Diary]": the tree is behind a broken fence in the Lumber Yard.
+        // Climb the fence if the tree cannot be reached, then chop it until the diary task ticks.
+        "8cb2f6d1a2" to { _ ->
+            auto(
+                WalkTask(SAWMILL, radius = 5),
+                OnlyIf({ ctx: TaskContext -> ctx.game.nearestObject(emptyList(), listOf("Dying tree"), SAWMILL)?.let { tree -> ctx.game.canReachBeside(tree.tile) } != true },
+                    obj(emptyList(), listOf("Broken fence"), SAWMILL, "Climb-over")),
+                RepeatUntil("Chop down the dying tree", { diaryBit(it, VARROCK_DIARY, DYING_TREE_BIT) }, {
+                    obj(emptyList(), listOf("Dying tree"), SAWMILL, "Chop down")
+                }, maxRounds = 8),
+                trust = true,
+            )
+        },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
@@ -477,6 +496,9 @@ class StepScripts(private val guide: Guide) {
 
 
         private const val LUMBRIDGE_DIARY = 1194
+        private const val VARROCK_DIARY = 1176
+        private const val DYING_TREE_BIT = 7
+        private val SAWMILL = Tile(3302, 3492, 0)
         private const val HANS_TASK_BIT = 5
 
         /** Wordings of Hans's play time question, most specific first. */
