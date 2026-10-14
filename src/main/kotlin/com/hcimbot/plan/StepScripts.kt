@@ -244,6 +244,21 @@ class StepScripts(private val guide: Guide) {
             }
         },
 
+        // 82. "Head North and go up 2x Stairs and talk to Captain Rovin (3,1,2,2,3,1) [Demon Slayer]": the step is
+        // getting Captain Rovin's key (Quest Helper's Silverlight key 2400). Once held, the bot must not go on to
+        // the bucket and the drain, which are the steps after.
+        "087f8c0dc8" to { settings ->
+            val helper = guide.questHelpers["demonslayer"]
+            if (helper == null) {
+                auto(Fail("no Quest Helper data for demonslayer"))
+            } else {
+                auto(
+                    QuestTask("demonslayer", helper, settings.allowCombat, boundedTo = setOf(5085), doneWithItem = ROVINS_KEY),
+                    trust = true,
+                )
+            }
+        },
+
         // 96. "Light both logs in the house right next to the rune shop": Old Man Yarlo's house, east of
         // the castle (the next step talks to him there). The tinderbox was withdrawn at step 94.
         "08e4afe002" to { _ ->
@@ -519,6 +534,7 @@ class StepScripts(private val guide: Guide) {
         private const val CHEESE = 1985
         private const val GARLIC = 1550
         private const val STAKE = 1549
+        private const val ROVINS_KEY = 2400
         private const val JUG_WINE = 1993
         private const val XMARKS_LAMP = 23072
         private const val ARRAV_BOOK = 757
