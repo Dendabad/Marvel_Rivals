@@ -544,6 +544,9 @@ class StepScripts(private val guide: Guide) {
         // bushes should be in view heading west), and pauses if there are none.
         "56a948d81c" to { _ ->
             auto(
+                // Nettles sting: the leather gloves go on before anything else, and a missing pair stops the step.
+                EquipTask(listOf(item("Leather gloves", 1059))),
+                OnlyIf({ ctx: TaskContext -> 1059 !in ctx.game.equipment() }, Fail("the leather gloves are not on, and nettles hurt without them")),
                 WalkTask(Tile(1640, 3065, 0), radius = 6),
                 RepeatUntil("Pick 2 nettles", has(NETTLES, 2), {
                     obj(emptyList(), listOf("Nettles"), Tile(1640, 3065, 0), "Pick", near = null)
