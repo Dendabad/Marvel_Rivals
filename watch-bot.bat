@@ -1,7 +1,7 @@
 @echo off
 rem HCIM Guide Bot watcher. Keep this window open while you play. Every minute it checks GitHub for a new version of the
-rem bot, and when there is one it asks you before it updates (press Y), or updates by itself if started as:
-rem     watch-bot.bat auto
+rem bot, and when there is one it updates by itself. To be asked first (press Y) start it as:
+rem     watch-bot.bat ask
 rem The update is the same as update-bot.bat: it downloads, builds, and only on a good build replaces the installed bot,
 rem which reloads itself while the game runs. Then press Retry or Resume in the bot's sidebar.
 title HCIM Guide Bot watcher
@@ -11,8 +11,8 @@ set "BRANCH=claude/osrs-script-creation-w5mkvb"
 set "API=https://api.github.com/repos/Dendabad/Marvel_Rivals/commits/%BRANCH%"
 set "KNOWN=%USERPROFILE%\.runelite\hcim-guide-bot\installed-commit.txt"
 set "HERE=%~dp0"
-set "MODE=ask"
-if /i "%~1"=="auto" set "MODE=auto"
+set "MODE=auto"
+if /i "%~1"=="ask" set "MODE=ask"
 set "HCIM_NOPAUSE=1"
 
 echo Watching %BRANCH% for new versions. Mode: %MODE%. Close this window to stop.
