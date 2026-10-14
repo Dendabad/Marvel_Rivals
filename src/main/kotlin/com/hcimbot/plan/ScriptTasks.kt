@@ -970,12 +970,18 @@ class MakePlanksTask(private val planks: Int = 10, private val waxwood: Int = 3)
     private var settling = 0
     private var clicks = 0
     private var lastProgress = -1
+    private var announced = false
 
     override fun tick(ctx: TaskContext): TaskResult {
         val game = ctx.game
         val plain = ctx.conditions.count(listOf(PLANK)).toInt()
         val wax = ctx.conditions.count(listOf(WAXWOOD_PLANK)).toInt()
         val window = game.showsChoice(WINDOW)
+        if (!announced) {
+            announced = true
+            ctx.log("Making planks: holding $plain of $planks planks and $wax of $waxwood waxwood planks, " +
+                "${game.inventory()[LOGS] ?: 0} logs, ${game.inventory()[WAXWOOD_LOG] ?: 0} waxwood logs")
+        }
         if (plain >= planks && wax >= waxwood) {
             return if (window) attempt(ctx.actions.closeWindow(), "close the plank window") else TaskResult.Done
         }
