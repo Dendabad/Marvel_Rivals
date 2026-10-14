@@ -578,3 +578,59 @@ class FollowGuardTask(private val guardIds: List<Int>, private val hides: List<T
         const val TOO_FAR = 12
     }
 }
+
+
+/**
+ * Children of the Sun's guard marking in Varrock Square. Each guard to mark is told by its NPC id before
+ * marking (the id goes up by one once marked), and the one marked by mistake is unmarked. Only an exact
+ * id is ever clicked: another guard standing in for a missing one would be marked wrongly.
+ */
+class MarkGuardsTask(
+    private val toMark: List<Int> = TO_MARK,
+    private val markedWrongly: List<Int> = MARKED_WRONGLY,
+) : BaseTask() {
+    override val description = "Mark the guards"
+    private var ticks = 0
+    private var settling = 0
+    private val attempts = mutableMapOf<Int, Int>()
+
+    private fun exact(game: com.hcimbot.game.GameState, id: Int) = game.nearestNpc(listOf(id))?.takeIf { it.id == id }
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        if (++ticks > MAX_TICKS) return TaskResult.Failed("marking the guards took over $MAX_TICKS ticks")
+        if (settling > 0) { settling--; return TaskResult.Running }
+        if (game.isBusy) return TaskResult.Running
+        val me = game.playerTile ?: return TaskResult.Running
+
+        val next = toMark.firstNotNullOfOrNull { id -> exact(game, id)?.let { id to "Mark" } }
+            ?: markedWrongly.firstNotNullOfOrNull { id -> exact(game, id)?.let { id to "Unmark" } }
+        if (next == null) {
+            val unseen = toMark.filter { exact(game, it + 1) == null }
+            return if (unseen.isEmpty()) TaskResult.Done
+            else TaskResult.Failed("cannot see guards $unseen, marked or unmarked, to check they are marked")
+        }
+        val (id, action) = next
+        val guard = exact(game, id) ?: return TaskResult.Running
+        if (guard.tile.distanceTo(me) > CLICK_RANGE) {
+            return attempt(ctx.actions.walkTo(guard.tile), "walk to the guard $id")
+        }
+        if (attempts.merge(id, 1, Int::plus)!! > MAX_ATTEMPTS) return TaskResult.Failed("clicking $action on guard $id did not work")
+        ctx.log("$action guard $id")
+        ctx.actions.interactNpc(guard, action)
+        settling = SETTLE
+        return TaskResult.Running
+    }
+
+    companion object {
+        /** Unmarked ids: outside Aris's tent, by Benny's stand, by Lowe's Archery Emporium, the mace guard. */
+        val TO_MARK = listOf(12668, 12695, 12686, 12674)
+
+        /** The guard Quest Helper has marked by mistake (its marked id), to unmark. */
+        val MARKED_WRONGLY = listOf(12671)
+        const val MAX_TICKS = 300
+        const val MAX_ATTEMPTS = 4
+        const val CLICK_RANGE = 8
+        const val SETTLE = 4
+    }
+}

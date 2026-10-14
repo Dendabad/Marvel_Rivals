@@ -156,6 +156,22 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `marking guards clicks only the exact guard ids, then unmarks the wrong one`() {
+        val game = FakeGame().apply {
+            playerTile = Tile(3211, 3430, 0)
+            npcs += SceneEntity(12668, "Guard", Tile(3212, 3430, 0))
+            npcs += SceneEntity(12670, "Guard", Tile(3213, 3430, 0))
+            npcs += SceneEntity(12696, "Guard", Tile(3214, 3430, 0))
+            npcs += SceneEntity(12687, "Guard", Tile(3215, 3430, 0))
+            npcs += SceneEntity(12675, "Guard", Tile(3216, 3430, 0))
+        }
+        val ctx = TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.MarkGuardsTask()
+        task.tick(ctx)
+        assertEquals(listOf("npc Guard Mark"), game.calls.filter { it.startsWith("npc") })
+    }
+
+    @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
         val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()

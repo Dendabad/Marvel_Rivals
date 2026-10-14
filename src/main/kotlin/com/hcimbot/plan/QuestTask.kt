@@ -150,6 +150,9 @@ class QuestTask(
                     if (ids.isEmpty()) return Made.Refused("no NPC id for the guard to follow")
                     return Made.Ready(FollowGuardTask(ids, step.tiles))
                 }
+                if (questKey == "childrenofthesun" && step.text.startsWith("Mark the guard", ignoreCase = true)) {
+                    return Made.Ready(MarkGuardsTask())
+                }
                 if (step.ids.isEmpty()) return Made.Refused("no NPC id for this step")
                 // Updates give NPCs new ids (Morgan is 16274 before Vampyre Slayer now, where
                 // Quest Helper's data has only 3479). The guide step lists the current ones.
