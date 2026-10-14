@@ -238,10 +238,16 @@ class MicrobotGameState : GameState {
          */
         fun choiceWidget(text: String): net.runelite.api.widgets.Widget? {
             val wanted = text.trim().lowercase()
+            return widgetWhere { shown -> shown.lowercase() == wanted || shown.lowercase().endsWith(": $wanted") }
+        }
+
+        /** The first visible widget whose text, tags removed and trimmed, passes [matches]. Client thread. */
+        fun widgetWhere(matches: (String) -> Boolean): net.runelite.api.widgets.Widget? {
             fun visit(w: net.runelite.api.widgets.Widget?): net.runelite.api.widgets.Widget? {
                 if (w == null || w.isHidden) return null
-                val shown = Text.removeTags(w.text.orEmpty()).trim().lowercase()
-                if (shown == wanted || shown.endsWith(": $wanted")) return w
+                // "<br>" is a line break: a space, not nothing, or "may be<br>dangerous" reads "may bedangerous".
+                val shown = Text.removeTags(w.text.orEmpty().replace("<br>", " ")).replace(Regex("\\s+"), " ").trim()
+                if (shown.isNotEmpty() && matches(shown)) return w
                 for (group in listOf(w.dynamicChildren, w.staticChildren, w.nestedChildren)) {
                     group?.forEach { child -> visit(child)?.let { return it } }
                 }

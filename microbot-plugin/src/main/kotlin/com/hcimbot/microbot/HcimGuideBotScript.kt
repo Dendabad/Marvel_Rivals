@@ -14,6 +14,7 @@ import net.runelite.client.plugins.microbot.Script
 import net.runelite.client.plugins.microbot.util.inventory.Rs2Inventory
 import net.runelite.client.plugins.microbot.util.player.Rs2Player
 import net.runelite.client.plugins.microbot.util.walker.Rs2Walker
+import net.runelite.client.util.Text
 import org.slf4j.LoggerFactory
 
 /**
@@ -38,6 +39,7 @@ class HcimGuideBotScript : Script() {
     @Volatile private var statusNow: BotStatus = BotStatus.NOT_STARTED
 
     @Volatile private var lastDrink = 0L
+    @Volatile private var lastWarning = 0L
     private val recent = ArrayDeque<String>()
     private val clock = java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss")
 
@@ -248,6 +250,7 @@ class HcimGuideBotScript : Script() {
                 client.getBoostedSkillLevel(Skill.HITPOINTS) to client.getRealSkillLevel(Skill.HITPOINTS)
             } ?: return
             if (max <= 0) return
+            answerWarning(current.acceptWarnings)
             // Where one more hit could be the last, the step says to drink on any damage. That comes
             // before stopping: standing still among monsters is worse than drinking and walking on.
             val drinks = current.drinkOnDamage
@@ -277,6 +280,23 @@ class HcimGuideBotScript : Script() {
         }
     }
 
+    /**
+     * Clicks a warning answer the current step allows, like the Stronghold ladders'. Done here
+     * because the walker waits on such a warning without answering it, holding the main loop.
+     */
+    private fun answerWarning(allowed: List<String>) {
+        if (allowed.isEmpty()) return
+        val time = System.currentTimeMillis()
+        if (time - lastWarning < WARNING_GAP_MS) return
+        val found = MicrobotGameState.onClient {
+            MicrobotGameState.widgetWhere { text -> allowed.any { text.startsWith(it, ignoreCase = true) } }
+                ?.let { Text.removeTags(it.text.orEmpty().replace("<br>", " ")) to it.bounds }
+        } ?: return
+        lastWarning = time
+        note("Answering the warning: ${found.first}")
+        Microbot.getMouse().click(found.second)
+    }
+
     override fun shutdown() {
         super.shutdown()
         runner?.stop()
@@ -291,6 +311,7 @@ class HcimGuideBotScript : Script() {
 
         /** A drink takes a game tick or two to show in the hitpoints, so do not drink twice for one hit. */
         private const val DRINK_GAP_MS = 1_800L
+        private const val WARNING_GAP_MS = 1_500L
         private const val MESSAGE_MS = 60_000
         private const val B0ATY_PLUGIN = "com.b0atyguide.B0atyGuidePlugin"
 

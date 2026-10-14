@@ -210,13 +210,17 @@ class StepScripts(private val guide: Guide) {
                 combat = true,
                 patient = true,
                 drinkOnDamage = listOf(JUG_WINE),
+                acceptWarnings = STRONGHOLD_WARNINGS,
             )
         },
 
         // 61. "Once you have 10,000GP from Floor 3, leave via the ropes": back to the surface,
         // the walker climbs the vines, ladders and chain on the way.
         "b2738b149e" to { _ ->
-            StepPlan.Auto(listOf(WalkTask(STRONGHOLD_ENTRANCE, radius = 4)), combat = true, patient = true, drinkOnDamage = listOf(JUG_WINE))
+            StepPlan.Auto(
+                listOf(WalkTask(STRONGHOLD_ENTRANCE, radius = 4)),
+                combat = true, patient = true, drinkOnDamage = listOf(JUG_WINE), acceptWarnings = STRONGHOLD_WARNINGS,
+            )
         },
 
         // 21. "Talk to Father Urhney in the lumbridge swamp for Ghost Speak Amulet. (2,1) Wield this."
@@ -410,6 +414,9 @@ class StepScripts(private val guide: Guide) {
         private const val SOS_WAR_CHEST = 20656
         private const val SOS_FAM_SACK = 19000
         private const val SOS_PEST_CHEST = 23709
+
+        /** "Are you sure you want to climb down?" at each ladder down to a lower floor. */
+        private val STRONGHOLD_WARNINGS = listOf("Yes - I know that it may be")
         private const val DOOGLE_LEAVES = 1573
         private const val LIT_CANDLE = 33
         private const val CANDLE = 36

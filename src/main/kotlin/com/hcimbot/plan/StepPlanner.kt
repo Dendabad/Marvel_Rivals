@@ -34,6 +34,12 @@ sealed interface StepPlan {
          * hit could be the last (the Stronghold's spiders and Catablepons at 10 Hitpoints).
          */
         val drinkOnDamage: List<Int> = emptyList(),
+        /**
+         * Warning answers this step may click, by how they start: only the ones it means to say yes
+         * to, like the Stronghold ladders' "Yes - I know that it may be dangerous down there".
+         * Never a general "yes", so a Wilderness warning is never accepted by accident.
+         */
+        val acceptWarnings: List<String> = emptyList(),
     ) : StepPlan
 
     /** The bot cannot do this step. It pauses and shows [reason] until the step is ticked. */

@@ -55,6 +55,9 @@ class GuideRunner(
 
     val stepCount: Int get() = guide.steps.size
 
+    /** Warning answers the current step may click. Read by the watchdog, which also runs mid-walk. */
+    val acceptWarnings: List<String> get() = (active?.plan as? StepPlan.Auto)?.acceptWarnings.orEmpty()
+
     /** What the current step says to drink on any damage. Read by the hitpoint watchdog. */
     val drinkOnDamage: List<Int> get() = (active?.plan as? StepPlan.Auto)?.drinkOnDamage.orEmpty()
 

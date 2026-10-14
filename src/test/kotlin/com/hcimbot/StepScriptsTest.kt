@@ -24,6 +24,8 @@ class StepScriptsTest {
             val auto = assertIs<StepPlan.Auto>(plan(id))
             assertEquals(listOf(1993), auto.drinkOnDamage, id)
             assertTrue(auto.combat, id)
+            // Only the ladders' own "Yes - I know that it may be dangerous down there", never a bare yes.
+            assertEquals(listOf("Yes - I know that it may be"), auto.acceptWarnings, id)
         }
         // Each floor's reward, claimed in order.
         val floors = assertIs<StepPlan.Auto>(plan("5405a57b1e")).tasks.filterIsInstance<WalkTask>().map { it.tile }
