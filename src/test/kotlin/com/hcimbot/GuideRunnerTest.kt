@@ -176,7 +176,10 @@ class GuideRunnerTest {
         val progress = com.hcimbot.progress.SharedProgressStore({ plugin }, { bot }, { bot = it })
         val runner = GuideRunner(guide, game, game, progress, BotSettings(), log::add).also { it.start() }
         val stillTicked = runner.restartAt(6)
-        assertEquals(listOf("fight", "quest-rest"), stillTicked.map { it.id })
+        assertEquals(listOf("quest-rest"), stillTicked.map { it.id })
+        // The step started at runs even though the plugin has it ticked.
+        runner.ticks(1)
+        assertEquals("fight", runner.currentStep?.id)
     }
 
     @Test

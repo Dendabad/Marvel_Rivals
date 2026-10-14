@@ -98,7 +98,7 @@ The on screen box and the sidebar show the step's number, like `Step 5 of 2925: 
 
 1. In the bot's settings, type the number into **Start at step** and press **Enter**.
 2. The bot forgets its own ticks from that step on and starts there. The setting goes back to 0 by itself.
-3. If the B0aty guide has any of those steps ticked, a message lists them. Untick them in the B0aty sidebar if you want those redone too, since the bot only clears its own ticks.
+3. The step you start at always runs, even if it is ticked in the B0aty guide. If later steps are ticked there, a message lists them. Untick them in the B0aty sidebar if you want those redone too, since the bot only clears its own ticks.
 
 Some steps finish themselves as soon as the game shows they are done, for example a diary task already completed, a quest already past that point, or items already in your inventory. Those cannot be repeated on the same account. Retest them on a fresh account, or drop or bank the items first.
 

@@ -61,6 +61,9 @@ class GuideRunner(
     /** Steps before this index count as done for this session, see [restartAt]. */
     private var floor = 0
 
+    /** The step [restartAt] began at. It runs even if it is ticked in the plugin, until the bot finishes it. */
+    private var redo: String? = null
+
     private val conditions = Conditions(game)
     private val completion = StepCompletion(guide, game, conditions)
     private val planner = StepPlanner(guide, settings, routes)
@@ -131,11 +134,12 @@ class GuideRunner(
         val later = guide.steps.drop(from)
         progress.forget(later.map { it.id })
         floor = from
+        redo = later.firstOrNull()?.id
         active = null
         if (state is State.Paused || state is State.Finished) state = State.Running
         log("Restarting at step $number")
         val stillTicked = progress.completedIds()
-        return later.filter { it.id in stillTicked }
+        return later.drop(1).filter { it.id in stillTicked }
     }
 
     fun clearHalt() {
@@ -147,7 +151,7 @@ class GuideRunner(
         val paused = state as? State.Paused
         if (paused != null) {
             // Ticked in the plugin while we waited: carry on.
-            if (paused.step.id in progress.completedIds()) state = State.Running else return
+            if (paused.step.id in completedIds()) state = State.Running else return
         }
         if (state != State.Running) return
 
@@ -211,9 +215,11 @@ class GuideRunner(
     }
 
     private fun nextStep(): Step? {
-        val done = progress.completedIds()
+        val done = completedIds()
         return guide.steps.drop(floor).firstOrNull { it.id !in done }
     }
+
+    private fun completedIds(): Set<String> = progress.completedIds().let { done -> redo?.let { done - it } ?: done }
 
     private fun begin(step: Step): Active {
         val plan = planner.plan(step)
@@ -222,6 +228,7 @@ class GuideRunner(
     }
 
     private fun markDone(step: Step, why: String) {
+        if (step.id == redo) redo = null
         progress.markComplete(step.id)
         active = null
         log("Done ($why): ${step.text}")
