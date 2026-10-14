@@ -98,9 +98,11 @@ class HcimGuideBotScript(private val bankPin: () -> String? = { null }) : Script
     private fun tick(config: HcimGuideBotConfig) {
         try {
             if (!gate() || !Microbot.isLoggedIn()) return
-            if (pausedByPlayer()) return
             val current = runner ?: start(config) ?: return
+            // Before the pause check: a player who sets Start at step while the bot is paused (which it starts as)
+            // would otherwise never have it applied, and the bot would carry on from where its own ticks say.
             restartIfAsked(config, current)
+            if (pausedByPlayer()) return
             if (skipRequested.getAndSet(false)) current.skipStep()
             if (retryRequested.getAndSet(false)) {
                 current.replan()
