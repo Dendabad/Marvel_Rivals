@@ -99,7 +99,10 @@ class QuestTask(
         }
 
         val missing = chosen.items.filterNot { ctx.conditions.has(it) }
-        if (missing.isNotEmpty()) {
+        // The guide data lists the items for the whole part (Yarlo's 3 planks), but each piece needs fewer, and Quest
+        // Helper's own step is the one being followed for an object: it says what is needed for that piece.
+        val helperPiece = chosen.kind == "object" && ctx.game.helperStep(questKey)?.let { it.objectIds.isNotEmpty() && helperVerb(it.text) != null } == true
+        if (missing.isNotEmpty() && !helperPiece) {
             // Items the guide has not asked for yet are not fetched: the guide has its own bank and shop steps.
             // A step that has already moved the quest on is over once the quest wants more than it was for.
             if (boundedTo != null && value > start) return TaskResult.Done
