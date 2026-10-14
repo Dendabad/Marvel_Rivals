@@ -124,7 +124,7 @@ class MicrobotActions : GameActions {
             Microbot.getMouse().click(all)
             Thread.sleep(MAKE_PAUSE_MS)
         }
-        val first = onClient { MicrobotGameState.makeWindowButton("Space", useParent = true)?.bounds }
+        val first = onClient { MicrobotGameState.makeWindowButton("Space", useParent = false)?.bounds }
         if (first != null) {
             Microbot.getMouse().click(first)
             return true
