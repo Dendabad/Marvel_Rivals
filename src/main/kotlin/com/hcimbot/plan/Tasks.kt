@@ -241,7 +241,7 @@ class CastSpellTask(private val spellName: String, private val widgetId: Int) : 
     override fun tick(ctx: TaskContext): TaskResult {
         if (ctx.game.isBusy) return TaskResult.Running
         if (cast) return TaskResult.Done
-        cast = ctx.actions.castSpell(widgetId)
+        cast = ctx.actions.castSpell(spellName, widgetId)
         return attempt(cast, "cast $spellName")
     }
 }

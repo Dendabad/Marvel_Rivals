@@ -36,6 +36,8 @@ class GuideRunner(
         object Finished : State
     }
 
+    /** Volatile because a safety watchdog on another thread may [halt] the runner. */
+    @Volatile
     var state: State = State.Stopped
         private set
 
@@ -80,6 +82,12 @@ class GuideRunner(
         active = null
     }
 
+    /** Stop at once for a safety reason found outside the tick, e.g. by a watchdog during a long walk. */
+    fun halt(reason: String) {
+        state = State.Halted(reason)
+        log("HALTED: $reason")
+    }
+
     fun clearHalt() {
         if (state is State.Halted) state = State.Stopped
     }
@@ -105,11 +113,7 @@ class GuideRunner(
             SafetyMonitor.Verdict.Safe -> Unit
             SafetyMonitor.Verdict.Handled -> return
             is SafetyMonitor.Verdict.Pause -> return pause(step, verdict.reason)
-            is SafetyMonitor.Verdict.Stop -> {
-                state = State.Halted(verdict.reason)
-                log("HALTED: ${verdict.reason}")
-                return
-            }
+            is SafetyMonitor.Verdict.Stop -> return halt(verdict.reason)
         }
 
         if (completion.check(step, current.baseline) == StepCompletion.Verdict.Done) {

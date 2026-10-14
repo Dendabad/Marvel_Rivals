@@ -90,8 +90,8 @@ interface GameActions {
     fun withdraw(itemId: Int, quantity: Int): Boolean
     fun closeInterface(): Boolean
 
-    /** [widgetId] is the packed spellbook widget id from guide.json. */
-    fun castSpell(widgetId: Int): Boolean
+    /** [spellName] is RuneLite's name from guide.json ("VARROCK_TELEPORT"), [widgetId] its packed spellbook widget. */
+    fun castSpell(spellName: String, widgetId: Int): Boolean
 
     /** Click a menu option on an inventory or worn item, e.g. "Teleport" on a Chronicle. */
     fun itemAction(itemId: Int, action: String): Boolean

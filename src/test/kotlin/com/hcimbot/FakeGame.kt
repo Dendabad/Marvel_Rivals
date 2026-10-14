@@ -133,7 +133,7 @@ class FakeGame : GameState, GameActions {
     }
 
     var onCast: (Int) -> Unit = {}
-    override fun castSpell(widgetId: Int): Boolean {
+    override fun castSpell(spellName: String, widgetId: Int): Boolean {
         calls += "cast $widgetId"
         onCast(widgetId)
         return true

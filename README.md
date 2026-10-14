@@ -9,7 +9,7 @@ by following the **B0aty HCIM Guide v3** RuneLite plugin step by step.
 
 ## How it follows the plugin
 
-- **Same steps.** The bot reads the plugin's own `guide.json` from the classpath, so it always follows exactly the steps the plugin shows. The guide text is not copied into this repo.
+- **Same steps.** The bot reads the plugin's own `guide.json` from the running plugin, so it always follows exactly the steps the plugin shows. The guide text is not copied into this repo.
 - **Same "done" rules.** Completion is a port of the plugin's auto tick rules: diary bits, varbits and skill levels, quest progress (`questDoneAt`, `questCompletes`, stop conditions and so on), arriving within 10 tiles, and having the items.
 - **Same progress.** The bot reads the plugin's ticks. Ticking a step in the plugin's sidebar moves the bot past it. The bot keeps its own ticks under a separate key, because the plugin overwrites outside changes to its save.
 - **Quests** follow the Quest Helper data that ships in `guide.json`: the quest's progress variable picks the instruction, and its branch conditions pick the right branch. A guide step that is only part of a quest ("Talk to Father Aereck") does only that part, since the guide fits other steps in between.
@@ -45,16 +45,17 @@ Against the real guide, about 1,318 of its 2,925 steps run automatically. The fi
 | `plan/StepPlanner.kt` | Turns a step into tasks, or into a pause |
 | `plan/Tasks.kt`, `plan/QuestTask.kt` | Walk, bank, talk, shop, pick up, equip, travel, teleport and quest tasks |
 | `progress/Progress.kt` | Progress shared with the plugin |
-| `sdk/BotClientActions.kt` | **To fill in once the Bot Client SDK arrives** |
+| `microbot-plugin/` | The Microbot plugin: game reads, actions, the script loop and a hitpoint watchdog |
 
-## Hooking it up to Bot Client
+The core under `src/` has no client code in it, so it can move to another RuneLite based client by
+writing new `GameState` and `GameActions` implementations.
 
-Once you have the SDK:
+## Running it on Microbot
 
-1. Fill in `sdk/BotClientActions.kt` with the SDK's calls.
-2. Implement `GameState` on RuneLite's `Client`. It only reads the game, so it needs nothing from the SDK.
-3. In the SDK's script entry point, load the guide with `GuideLoader().loadFromPlugin()`, build a `SharedProgressStore` on RuneLite's `ConfigManager`, create a `GuideRunner`, and call `onGameTick()` from the `GameTick` event.
-4. Change Gson to `compileOnly` in `build.gradle.kts`, since RuneLite already ships it.
+Step by step setup is in [microbot-plugin/README.md](microbot-plugin/README.md). In short: download
+the official Microbot release jar, build the plugin against it, copy `HcimGuideBotPlugin.jar` into
+`.runelite/microbot-plugins`, install the B0aty plugin from the Plugin Hub, and switch on
+**HCIM Guide Bot**.
 
 ## Building and testing
 
