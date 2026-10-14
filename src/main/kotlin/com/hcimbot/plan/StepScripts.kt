@@ -408,6 +408,9 @@ class StepScripts(private val guide: Guide) {
         // 86. "Collect both buckets and fill one up downstairs. Use Bucket of Water on drain outside then refill it."
         "40dc307ca8" to { _ ->
             auto(
+                // The buckets are upstairs in the kitchen. Step 85 climbs there, but from anywhere else on the
+                // ground floor this step has to as well, or the buckets are never in sight.
+                OnlyIf({ it.game.playerTile?.plane == 0 && BUCKET_EMPTY !in it.game.inventory() }, obj(listOf(11789), listOf("Staircase"), VARROCK_KITCHEN_STAIRS, "Climb-up")),
                 TakeItemTask(listOf(item("Bucket", BUCKET_EMPTY, 2))),
                 OnlyIf({ it.game.playerTile?.plane == 1 }, obj(emptyList(), listOf("Staircase"), VARROCK_KITCHEN_STAIRS.copy(plane = 1), "Climb-down")),
                 UseItemTask(BUCKET_EMPTY, null, emptyList(), listOf("Sink"), VARROCK_KITCHEN),

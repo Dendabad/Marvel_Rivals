@@ -192,6 +192,7 @@ class InteractTask(
     private var interacted = false
     private var walk: WalkTask? = null
     private var approaches = 0
+    private var doorTries = 0
 
     override val description: String =
         "${action ?: "Interact with"} ${names.firstOrNull() ?: ids.toString()}"
@@ -235,6 +236,16 @@ class InteractTask(
             ctx.actions.walkTo(entity.tile)
             return TaskResult.Running
         }
+        // The walker did not get through: open the shut door nearest the target ourselves, a few times.
+        if (outOfReach && doorTries < MAX_DOOR_TRIES) {
+            val door = game.nearestObject(emptyList(), DOORS, entity.tile)?.takeIf { it.tile.distanceTo(entity.tile) <= DOOR_RANGE }
+            if (door != null) {
+                doorTries++
+                ctx.log("Still cannot reach ${entity.name}, opening the door at ${door.tile}")
+                ctx.actions.interactObject(door, "Open")
+                return TaskResult.Running
+            }
+        }
         val started = when (kind) {
             Kind.NPC -> ctx.actions.interactNpc(entity, action)
             Kind.OBJECT -> ctx.actions.interactObject(entity, action)
@@ -250,6 +261,9 @@ class InteractTask(
 
     private companion object {
         const val MAX_APPROACHES = 3
+        const val MAX_DOOR_TRIES = 3
+        const val DOOR_RANGE = 6
+        val DOORS = listOf("Door", "Large door")
     }
 }
 
