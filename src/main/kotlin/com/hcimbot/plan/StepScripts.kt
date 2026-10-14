@@ -449,6 +449,19 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 105. "Collect 11 Logs & make 10 into Planks. Make the 3 Waxwood Planks.": back over the broken fence first
+        // (step 103 left the player outside it, by the dying tree), then the logs lying in the yard. Making the planks
+        // is the sawmill operator's window, which is not automated yet, so the step stops there with a message.
+        "5cfa279c9b" to { _ ->
+            auto(
+                OnlyIf({ ctx: TaskContext -> ctx.game.canReach(SAWMILL) == false },
+                    obj(emptyList(), listOf("Broken fence"), SAWMILL, "Climb-over")),
+                WalkTask(SAWMILL, radius = 8),
+                TakeItemTask(listOf(item("Logs", 1511, 11))),
+                Fail("the logs are collected. Make 10 planks and the 3 waxwood planks at the sawmill operator, then press Skip"),
+            )
+        },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
