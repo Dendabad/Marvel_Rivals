@@ -213,10 +213,15 @@ class InteractTask(
                 else -> walked
             }
         }
-        // Clicking someone behind a shut door does nothing ("I can't reach that!"). Walk up to
-        // them first: the walker opens doors on the way. Someone behind a counter also reads
-        // as out of reach, so after a few tries click anyway, which works over a counter.
-        if (kind == Kind.NPC && approaches < MAX_APPROACHES && game.canReach(entity.tile) == false) {
+        // Clicking someone or something behind a shut door does nothing ("I can't reach that!"):
+        // the Restless Ghost's coffin, Father Urhney. Walk up first: the walker opens doors on the
+        // way. An object's own tile is often solid (a coffin, a table), so a tile beside it counts.
+        // Someone behind a counter also reads as out of reach, so after a few tries click anyway.
+        val outOfReach = when (kind) {
+            Kind.NPC -> game.canReach(entity.tile) == false
+            Kind.OBJECT -> game.canReachBeside(entity.tile) == false
+        }
+        if (approaches < MAX_APPROACHES && outOfReach) {
             approaches++
             ctx.log("Cannot reach ${entity.name} from here, walking over (the walker opens doors)")
             ctx.actions.walkTo(entity.tile)

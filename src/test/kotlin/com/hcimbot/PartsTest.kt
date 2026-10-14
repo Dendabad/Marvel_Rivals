@@ -324,6 +324,23 @@ class PartsTest {
     }
 
     @Test
+    fun `an object behind a shut door is walked to before being used`() {
+        // The Restless Ghost's coffin, in the shed by Lumbridge graveyard.
+        val coffinAt = Tile(3249, 3192, 0)
+        val game = FakeGame()
+        game.playerTile = Tile(3245, 3197, 0)
+        game.objects += com.hcimbot.game.SceneEntity(2145, "Coffin", coffinAt)
+        game.unreachable += listOf(coffinAt, Tile(3248, 3192, 0), Tile(3250, 3192, 0), Tile(3249, 3191, 0), Tile(3249, 3193, 0))
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.InteractTask(com.hcimbot.plan.InteractTask.Kind.OBJECT, listOf(2145), listOf("Coffin"), listOf(coffinAt), "Search")
+        task.tick(ctx)
+        assertEquals(listOf("walk (3249, 3192, 0)"), game.calls)
+        game.unreachable.remove(Tile(3249, 3193, 0)) // door open
+        task.tick(ctx)
+        assertEquals("object Coffin Search", game.calls.last())
+    }
+
+    @Test
     fun `someone behind a counter is clicked anyway after a few tries`() {
         val shopAt = Tile(3212, 3247, 0)
         val game = FakeGame()
