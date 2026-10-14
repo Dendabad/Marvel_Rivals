@@ -51,7 +51,7 @@ With **Allow combat** on: 87 run, 8 skip, 5 pause. With it off, the two fights (
 | 41 | Complete 4th Step of X Marks the Spot | Runs | Follows Quest Helper for xmarksthespot. Same as #18. |
 | 42 | Head West to Port Sarim and talk to Veos to complete X Marks The Spot. | Runs | Follows Quest Helper for xmarksthespot. Digs in the pig pen first if that dig is not done yet. |
 | 43 | Destroy the lamp. You can collect this later as you can't bank it. | Runs | Destroys the X Marks the Spot lamp and confirms. |
-| 44 | Travel to Port Piscarilius via Veos | Runs | Uses Veos's Travel option and picks Port Piscarilius. |
+| 44 | Travel to Port Piscarilius via Veos | Runs | Talks to Veos in Port Sarim (Microbot cannot click his Travel option) and says yes to the trip, then lands at Port Piscarilius dock. |
 | 45 | Talk to Veos (4,1) [Client of Kourend] | Runs | Follows Quest Helper for clientofkourend. |
 | 46 | Take the Minecart to Shayzien East (option B) | Runs | Travel to Shayzien East. |
 | 47 | Open Minimap & follow the path South-West to Shayzien | Runs | Walk to (1519, 3592, 0). |

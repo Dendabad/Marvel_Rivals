@@ -181,6 +181,17 @@ class StepScripts(private val guide: Guide) {
         // Laps of the rooftop course until both the level and the diary task are done.
         "0f6d8ccd8b" to { _ -> StepPlan.Auto(listOf(AgilityCourseTask(AgilityCourse.DRAYNOR)), patient = true) },
 
+        // 44. "Travel to Port Piscarilius via Veos": guide.json has no travel data for it, so it
+        // planned as a plain "Travel" click, which Microbot cannot find on Veos (his base
+        // definition has only Talk-to). The travel task talks and says yes instead. The boat
+        // lands at Port Piscarilius dock, where step 45 talks to Veos again, so done on arrival.
+        "12c39282b4" to { _ ->
+            auto(
+                TravelTask("Port Piscarilius", listOf(TravelTask.Departure(VEOS_PORT_SARIM, VEOS.first(), "Travel Veos", VEOS.drop(1))), PISCARILIUS_DOCK),
+                trust = true,
+            )
+        },
+
         // 21. "Talk to Father Urhney in the lumbridge swamp for Ghost Speak Amulet. (2,1) Wield this."
         "ce4913f789" to { _ ->
             auto(
@@ -238,16 +249,6 @@ class StepScripts(private val guide: Guide) {
 
         // 43. "Destroy the lamp. You can collect this later as you can't bank it."
         "90957d3c70" to { _ -> auto(ItemActionTask(XMARKS_LAMP, "Destroy", DialoguePlan.Texts(listOf("Yes")))) },
-
-        // 44. "Travel to Port Piscarilius via Veos"
-        "12c39282b4" to { _ ->
-            auto(
-                InteractTask(
-                    InteractTask.Kind.NPC, VEOS, listOf("Veos"), listOf(Tile(3054, 3245, 0)), "Travel",
-                    DialoguePlan.Texts(listOf("Piscarilius", "Yes")),
-                ),
-            )
-        },
 
         // 47. "Open Minimap & follow the path South-West to Shayzien"
         "a2f6e1e60a" to { _ -> auto(WalkTask(Tile(1519, 3592, 0), radius = 10)) },
@@ -342,6 +343,9 @@ class StepScripts(private val guide: Guide) {
         private val ABOVE_SWORD_SHOP = Tile(3205, 3396, 1)
         /** The Wizards' Tower ground floor, south of its door. */
         private val INSIDE_WIZARDS_TOWER = Tile(3108, 3164, 0)
+        private val VEOS_PORT_SARIM = Tile(3054, 3245, 0)
+        /** Where Veos's boat lands, by Veos at Port Piscarilius. */
+        private val PISCARILIUS_DOCK = Tile(1824, 3691, 0)
         /** Giant rats spawn just west of the castle, by the second X Marks the Spot dig. */
         private val BEHIND_LUMBRIDGE_CASTLE = Tile(3195, 3205, 0)
         private val LUMBRIDGE_GENERAL_STORE = Tile(3212, 3246, 0)

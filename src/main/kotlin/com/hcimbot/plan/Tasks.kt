@@ -462,7 +462,10 @@ class TravelTask(
     private val departures: List<Departure>,
     private val destination: Tile?,
 ) : BaseTask() {
-    class Departure(val origin: Tile, val id: Int, val menuEntry: String)
+    /** [alsoIds]: other ids the same transport goes by, e.g. Veos before and after his travel option. */
+    class Departure(val origin: Tile, val id: Int, val menuEntry: String, val alsoIds: List<Int> = emptyList()) {
+        val ids: List<Int> get() = listOf(id) + alsoIds
+    }
 
     private var leg: Task? = null
     private var used = false
@@ -492,8 +495,8 @@ class TravelTask(
 
         val departure = departures.minByOrNull { at.distanceTo(it.origin) }
             ?: return TaskResult.Failed("the guide lists no way to travel to $place")
-        val transport = game.nearestObject(listOf(departure.id))?.let { it to InteractTask.Kind.OBJECT }
-            ?: game.nearestNpc(listOf(departure.id))?.let { it to InteractTask.Kind.NPC }
+        val transport = game.nearestObject(departure.ids)?.let { it to InteractTask.Kind.OBJECT }
+            ?: game.nearestNpc(departure.ids)?.let { it to InteractTask.Kind.NPC }
         if (transport == null) {
             val walk = (leg as? WalkTask)?.takeIf { it.tile == departure.origin } ?: WalkTask(departure.origin).also { leg = it }
             return when (val walked = walk.tick(ctx)) {

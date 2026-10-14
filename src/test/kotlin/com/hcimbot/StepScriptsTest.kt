@@ -17,6 +17,13 @@ import kotlin.test.assertTrue
 
 /** Runs step scripts from the guide's first 100 steps against the fake game. */
 class StepScriptsTest {
+    @Test
+    fun `no step has two scripts, where the later would silently replace the earlier`() {
+        val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
+        val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()
+        assertEquals(emptyList(), ids.groupBy { it }.filterValues { it.size > 1 }.keys.toList())
+    }
+
     private val dropped = mutableMapOf<Int, Int>()
 
     private val scripts = StepScripts(Guide(1))
