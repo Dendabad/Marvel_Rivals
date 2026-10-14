@@ -263,7 +263,6 @@ class HcimGuideBotScript(private val bankPin: () -> String? = { null }) : Script
             } ?: return
             if (max <= 0) return
             logStalls(current.acceptWarnings.isNotEmpty())
-            probeQuestHelper()
             if (forgetDoorsAt != 0L && System.currentTimeMillis() >= forgetDoorsAt) {
                 forgetDoorsAt = 0L
                 WalkerDoors.forget()
@@ -352,21 +351,6 @@ class HcimGuideBotScript(private val bankPin: () -> String? = { null }) : Script
      * walker working out its next move) shows in the Recent list with what was on screen. Only logged
      * when it is long enough to notice, and only for steps that opt in.
      */
-    private var lastProbe = 0L
-    private var lastProbed = ""
-
-    /** Writes what Quest Helper is showing to the Recent list when it changes, to see what it exposes. */
-    private fun probeQuestHelper() {
-        val time = System.currentTimeMillis()
-        if (time - lastProbe < PROBE_GAP_MS) return
-        lastProbe = time
-        val now = QuestHelperProbe.describe()
-        if (now != lastProbed) {
-            lastProbed = now
-            note("Quest Helper shows: $now")
-        }
-    }
-
     private fun logStalls(wanted: Boolean) {
         if (!wanted || !actions.walking) {
             stillSince = 0L
@@ -439,7 +423,6 @@ class HcimGuideBotScript(private val bankPin: () -> String? = { null }) : Script
 
         /** A drink takes a game tick or two to show in the hitpoints, so do not drink twice for one hit. */
         private const val DRINK_GAP_MS = 1_800L
-        private const val PROBE_GAP_MS = 2_000L
         private const val WARNING_GAP_MS = 1_500L
 
         /** Long enough for the walker to have noted a door crossing the drink cut short. */
