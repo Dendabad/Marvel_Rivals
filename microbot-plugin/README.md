@@ -128,3 +128,9 @@ Some steps finish themselves as soon as the game shows they are done, for exampl
 - **"install and enable the B0aty HCIM Guide v3 plugin":** turn on the B0aty plugin, or set the guide.json path.
 - **It pauses on almost everything:** that is expected for steps it cannot do safely. [docs/first-100-steps.md](../docs/first-100-steps.md) lists what it does at each of the first 100 steps.
 - **Anything else:** RuneLite's log (`.runelite/logs/client.log`) has lines from `HcimGuideBotScript`. Send me those and I can fix it.
+
+## Copy report
+
+The sidebar's **Copy report** button copies what the bot sees to the clipboard as text: the step and why it stopped, the
+Recent list, where the player is, the bag, the NPCs and objects nearby with the options each has, the text of the open
+windows and chat, and what Quest Helper shows. Paste it into a message instead of sending screenshots.

@@ -65,6 +65,71 @@ class HcimGuideBotScript(private val bankPin: () -> String? = { null }) : Script
 
     fun isPaused(): Boolean = paused
 
+    /**
+     * What the bot can see, as plain text for a message: the step and why it stopped, the recent log, where the player
+     * is, the bag, what is nearby with the options each has, the open windows' text, and what Quest Helper shows.
+     * Collected on the client thread, and any part that fails says so instead of losing the rest.
+     */
+    fun report(): String {
+        val now = status()
+        val lines = mutableListOf<String>()
+        fun section(title: String, block: () -> List<String>) {
+            lines += "== $title"
+            lines += runCatching(block).getOrElse { listOf("(failed: ${it.javaClass.simpleName} ${it.message})") }
+        }
+        lines += "HCIM Guide Bot ${BotModuleImpl.VERSION}, ${now.state}"
+        section("Step") { listOfNotNull(now.step, now.doing?.let { "Doing: $it" }, now.detail?.let { "Detail: $it" }) }
+        section("Recent, newest first") { now.recent }
+        section("Player") {
+            MicrobotGameState.onClient {
+                val client = Microbot.getClient()
+                val raw = client.localPlayer?.worldLocation
+                listOf("world ${raw}, in instance ${Instances.inInstance()}, as guide coordinates ${raw?.let(Instances::toTemplate)}",
+                    "hitpoints ${client.getBoostedSkillLevel(Skill.HITPOINTS)}/${client.getRealSkillLevel(Skill.HITPOINTS)}")
+            }.orEmpty()
+        }
+        section("Bag (item id x count)") {
+            listOf(Rs2Inventory.items().collect(java.util.stream.Collectors.toList()).joinToString(", ") { "${it.id}x${it.quantity}" })
+        }
+        section("NPCs within 12 tiles (id name at tile: options)") {
+            MicrobotGameState.onClient {
+                val client = Microbot.getClient()
+                val me = client.localPlayer?.worldLocation ?: return@onClient emptyList<String>()
+                Microbot.getRs2NpcCache().query().where { it.worldLocation.distanceTo(me) <= 12 }.toList().take(25).map {
+                    val options = client.getNpcDefinition(it.id)?.actions?.filterNotNull()?.filter { a -> a.isNotBlank() }
+                    "${it.id} ${it.name} at ${Instances.toTemplate(it.worldLocation)}: $options"
+                }
+            }.orEmpty()
+        }
+        section("Objects within 8 tiles (id name at tile)") {
+            MicrobotGameState.onClient {
+                val me = Microbot.getClient().localPlayer?.worldLocation ?: return@onClient emptyList<String>()
+                Microbot.getRs2TileObjectCache().query().where { it.worldLocation.distanceTo(me) <= 8 }.toList().take(25).map {
+                    "${it.id} ${it.name} at ${Instances.toTemplate(it.worldLocation)}"
+                }
+            }.orEmpty()
+        }
+        section("Text in open windows and chat") {
+            MicrobotGameState.onClient {
+                val seen = LinkedHashSet<String>()
+                fun visit(w: net.runelite.api.widgets.Widget?) {
+                    if (w == null || w.isHidden || seen.size >= 60) return
+                    val shown = net.runelite.client.util.Text.removeTags(w.text.orEmpty().replace("<br>", " ")).trim()
+                    if (shown.length in 2..120) seen += shown
+                    for (group in listOf(w.dynamicChildren, w.staticChildren, w.nestedChildren)) group?.forEach(::visit)
+                }
+                Microbot.getClient().widgetRoots?.forEach(::visit)
+                seen.toList()
+            }.orEmpty()
+        }
+        section("Quest Helper") {
+            val step = QuestHelperProbe.currentStep(null)
+            listOf(step?.let { "${it.kind}: \"${it.text}\" npcs ${it.npcIds} objects ${it.objectIds} at ${it.tile} choices ${it.choices}" }
+                ?: "no step: ${QuestHelperProbe.problem}")
+        }
+        return lines.joinToString("\n")
+    }
+
     fun setPaused(value: Boolean) {
         paused = value
         // Stop a walk in progress straight away, rather than at the end of it.

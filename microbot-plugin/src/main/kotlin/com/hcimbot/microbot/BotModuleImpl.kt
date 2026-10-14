@@ -42,6 +42,7 @@ class BotModuleImpl : BotModule {
             retry = bot::requestRetry,
             setBankPin = { pin -> host.secrets.setBankPin(pin).also { if (it) bot.pinChanged() } },
             hasBankPin = host.secrets::hasBankPin,
+            report = bot::report,
         ).also { panel = it }
         sidebarButton = NavigationButton.builder()
             .tooltip("HCIM Guide Bot")
@@ -84,7 +85,7 @@ class BotModuleImpl : BotModule {
     }
 
     companion object {
-        const val VERSION = "0.13.17"
+        const val VERSION = "0.14.0"
         private const val SIDEBAR_PRIORITY = 8
     }
 }

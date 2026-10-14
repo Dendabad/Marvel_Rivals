@@ -521,12 +521,16 @@ class StepScripts(private val guide: Guide) {
         // guide, so it is found by name.
         "e07bea62a5" to { _ -> auto(ItemByNameTask("crate", "Open"), trust = true) },
 
-        // 115. "Travel east to Regulus Cento & travel to Varlamore": the quetzal master east of Varrock. Travel on him
-        // opens a list of destinations, where Varlamore's Civitas illa Fortis is the one wanted.
+        // 115. "Travel east to Regulus Cento & travel to Varlamore": the quetzal master east of Varrock. Microbot only sees
+        // his base options (Talk-to), so he is talked to, and the destination wanted is picked from the chat options or the
+        // list of destinations that follows.
         "15227aad5e" to { _ ->
             auto(
-                InteractTask(InteractTask.Kind.NPC, listOf(12884, 12885), listOf("Regulus Cento"), listOf(Tile(3281, 3413, 0)), "Travel"),
-                ClickChoiceTask(listOf("Civitas illa Fortis", "Varlamore")),
+                InteractTask(
+                    InteractTask.Kind.NPC, listOf(12884, 12885), listOf("Regulus Cento"), listOf(Tile(3281, 3413, 0)), "Talk-to",
+                    DialoguePlan.Texts(listOf("Civitas illa Fortis", "Varlamore", "Travel")),
+                ),
+                ClickChoiceTask(listOf("Civitas illa Fortis", "Varlamore"), waitTicks = 8),
                 WaitUntilTask("Arrive in Varlamore", maxTicks = 60) { (it.game.playerTile?.x ?: 9999) < 2500 },
                 trust = true,
             )

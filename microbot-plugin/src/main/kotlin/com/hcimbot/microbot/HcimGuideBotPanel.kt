@@ -30,6 +30,8 @@ class HcimGuideBotPanel(
     /** Hands the typed PIN on. False when it is not exactly 4 digits. Held in memory only, never saved. */
     private val setBankPin: (CharArray?) -> Boolean = { true },
     private val hasBankPin: () -> Boolean = { false },
+    /** Everything useful for working out a problem, as text: copied to the clipboard by the Copy report button. */
+    private val report: () -> String = { "" },
 ) : PluginPanel() {
     private val state = JLabel("Starting")
     private val step = text()
@@ -65,6 +67,15 @@ class HcimGuideBotPanel(
                 toolTipText = "Start the current step's actions again from where you are"
                 addActionListener { retry(); update() }
             })
+            val copy = JButton("Copy report")
+            copy.toolTipText = "Copy what the bot sees (step, log, what is nearby, the open windows) to paste in a message, instead of screenshots"
+            copy.addActionListener {
+                val contents = runCatching { report() }.getOrElse { "The report failed: ${it.message}" }
+                java.awt.Toolkit.getDefaultToolkit().systemClipboard.setContents(java.awt.datatransfer.StringSelection(contents), null)
+                copy.text = "Copied"
+                Timer(1500) { copy.text = "Copy report" }.apply { isRepeats = false; start() }
+            }
+            add(copy)
         }
         val pin = JPanel().apply {
             layout = BoxLayout(this, BoxLayout.Y_AXIS)
