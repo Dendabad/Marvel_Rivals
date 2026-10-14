@@ -263,7 +263,7 @@ class InteractTask(
         const val MAX_APPROACHES = 3
         const val MAX_DOOR_TRIES = 3
         const val DOOR_RANGE = 6
-        val DOORS = listOf("Door", "Large door")
+        val DOORS = listOf("Door", "Large door", "Gate")
     }
 }
 
