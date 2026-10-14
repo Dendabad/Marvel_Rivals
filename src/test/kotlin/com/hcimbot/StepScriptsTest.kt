@@ -289,6 +289,23 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `yard logs skips a pile that cannot be walked to`() {
+        val blocked = Tile(3300, 3500, 0)
+        val open = Tile(3305, 3500, 0)
+        val game = FakeGame().apply {
+            playerTile = Tile(3301, 3500, 0)
+            groundItems += SceneEntity(1511, "Logs", blocked)
+            groundItems += SceneEntity(1511, "Logs", open)
+            unreachable += blocked
+        }
+        var taken: Tile? = null
+        game.onTake = { taken = it.tile }
+        val ctx = TaskContext(game, game, Conditions(game))
+        com.hcimbot.plan.TakeYardLogsTask(11).tick(ctx)
+        assertEquals(open, taken)
+    }
+
+    @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
         val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()

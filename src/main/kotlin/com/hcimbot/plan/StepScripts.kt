@@ -472,7 +472,7 @@ class StepScripts(private val guide: Guide) {
                 OnlyIf({ ctx: TaskContext -> ctx.game.canReach(SAWMILL) == false },
                     obj(emptyList(), listOf("Broken fence"), SAWMILL, "Climb-over")),
                 WalkTask(SAWMILL, radius = 8),
-                TakeItemTask(listOf(item("Logs", 1511, 11))),
+                TakeYardLogsTask(11),
                 Fail("the logs are collected. Make 10 planks and the 3 waxwood planks at the sawmill operator, then press Skip"),
             )
         },

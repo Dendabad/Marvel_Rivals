@@ -859,3 +859,49 @@ class FletchShaftsTask(
         const val STALL_TICKS = 400
     }
 }
+
+
+/**
+ * Picks up logs lying inside the Lumber Yard until [count] are held, only ones that can be walked to: a pile behind
+ * a crate or a fence stays where it is, and a pile that several clicks do not get is given up on.
+ */
+class TakeYardLogsTask(private val count: Int, private val logs: Int = 1511) : BaseTask() {
+    override val description = "Take $count logs from the yard"
+    private var settling = 0
+    private val tries = mutableMapOf<Tile, Int>()
+    private val given = mutableSetOf<Tile>()
+    private var lastHeld = -1
+    private var noPile = 0
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        val held = game.inventory()[logs] ?: 0
+        if (held >= count) return TaskResult.Done
+        if (held != lastHeld) { lastHeld = held; tries.clear() }
+        if (settling > 0) { settling--; return TaskResult.Running }
+        if (game.isBusy) return TaskResult.Running
+        val at = game.playerTile ?: return TaskResult.Running
+        val pile = game.groundItemsNear(listOf(logs), CENTRE, RADIUS)
+            .filter { it.tile !in given && !it.tile.inWilderness && game.canReach(it.tile) != false }
+            .minByOrNull { it.tile.distanceTo(at) }
+        if (pile == null) {
+            return if (++noPile >= WAIT_TICKS) TaskResult.Failed("no log pile left in the yard that can be reached ($held of $count)") else TaskResult.Running
+        }
+        noPile = 0
+        val n = tries.merge(pile.tile, 1, Int::plus)!!
+        if (n > MAX_TRIES) {
+            ctx.log("Giving up on the logs at ${pile.tile}, they cannot be taken")
+            given += pile.tile
+            return TaskResult.Running
+        }
+        settling = 1
+        return attempt(ctx.actions.takeGroundItem(pile), "take the logs at ${pile.tile}")
+    }
+
+    companion object {
+        val CENTRE = Tile(3302, 3497, 0)
+        const val RADIUS = 13
+        const val MAX_TRIES = 4
+        const val WAIT_TICKS = 8
+    }
+}
