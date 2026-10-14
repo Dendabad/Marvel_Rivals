@@ -561,7 +561,9 @@ class StepScripts(private val guide: Guide) {
             auto(
                 // The walker cannot path to the first floor tile from outside (it said so), so go to the farm's ground
                 // floor below it, and let the item task climb or walk to the sweetcorn once it can see it.
-                WalkTask(Tile(1574, 3139, 0), radius = 6, anyFloor = true),
+                // Only from the ground floor: asked to walk to a ground tile from upstairs the walker finds no path and falls back
+                // on teleporting home, which is what happened when this step was retried on the first floor.
+                OnlyIf({ ctx: TaskContext -> ctx.game.playerTile?.plane == 0 }, WalkTask(Tile(1574, 3139, 0), radius = 6)),
                 // The sweetcorn lies on the farmhouse's first floor, up the staircase at (1581, 3140) (the walker will not
                 // path to a first floor tile from outside). Climb it, then take the sweetcorn there.
                 OnlyIf({ ctx: TaskContext -> ctx.game.playerTile?.plane == 0 },
