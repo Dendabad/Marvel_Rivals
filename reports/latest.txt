@@ -1,14 +1,12 @@
-HCIM Guide Bot 0.16.1, PAUSED
+HCIM Guide Bot 0.16.2, PAUSED
 == Step
 Step 125 of 2925: Loot 28 Eclipse Reds (hop worlds)
 Detail: Loot 28 Eclipse Reds (hop worlds) (asks for several things). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-10:45:57  Asking the AI about this pause (try 1)
-10:45:57  Paused: Loot 28 Eclipse Reds (hop worlds) (asks for several things)
-10:45:57  Step: Loot 28 Eclipse Reds (hop worlds)
-10:45:56  Done (all actions finished): Enter Guildmaster Apatura's building and go up both ladders
-10:45:48  Step: Enter Guildmaster Apatura's building and go up both ladders
-10:45:48  Started version 0.16.1
+10:47:57  Asking the AI about this pause (try 1)
+10:47:56  Paused: Loot 28 Eclipse Reds (hop worlds) (asks for several things)
+10:47:56  Step: Loot 28 Eclipse Reds (hop worlds)
+10:47:56  Started version 0.16.2
 == Player
 world WorldPoint(x=1553, y=3033, plane=0), in instance false, as guide coordinates WorldPoint(x=1553, y=3033, plane=0)
 hitpoints 10/10
@@ -92,7 +90,7 @@ Friends
 Channel
 Clan
 Trade
-00:03:19
+00:05:18
 Boatyguidev3: *
 [10:43:33] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
 [10:43:32] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
