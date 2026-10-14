@@ -301,7 +301,8 @@ class StepScripts(private val guide: Guide) {
         "0d2ffd5660" to { _ -> skip("Stronghold advice") },
 
         // 68. "RIGHT CLICK Use the bones on the Stray Dog whenever you find him"
-        "3ad09c7fc7" to { _ -> auto(Optional(UseItemOnNpcTask(526, listOf(2902, 10675, 2922)))) },
+        // "Whenever you find him": the game never shows this as done, so it ends with its actions.
+        "3ad09c7fc7" to { _ -> auto(Optional(UseItemOnNpcTask(526, listOf(2902, 10675, 2922))), trust = true) },
 
         // 72. "Buy Pink Skirt, Brown Apron & Silk. Wear Brown Apron & Pink Skirt in honour of Faux"
         "ff702e072d" to { _ ->
