@@ -8,6 +8,15 @@ plugins {
 // `./gradlew :client:assemble` (runelite-client/build/libs/client-<version>-shaded.jar).
 val microbotJar: String? = (findProperty("microbotJar") as String?) ?: System.getenv("MICROBOT_JAR")
 
+// A wrong path would otherwise fail later as hundreds of "Unresolved reference" errors.
+if (microbotJar != null && !file(microbotJar).isFile) {
+    throw GradleException(
+        "Can't find the Microbot jar at: $microbotJar\n" +
+            "Check the file name and folder. On Windows, Shift + right click the jar, choose Copy as path, " +
+            "and paste that after -PmicrobotJar="
+    )
+}
+
 repositories {
     mavenCentral()
 }
