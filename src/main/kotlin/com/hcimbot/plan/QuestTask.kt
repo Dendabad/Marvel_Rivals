@@ -219,7 +219,8 @@ class QuestTask(
     private fun helperVerb(text: String): String? = StepPlanner.verb(text) ?: when {
         text.startsWith("demolish", ignoreCase = true) -> "Demolish"
         text.contains("remove", ignoreCase = true) && text.length < 60 -> "Remove"
-        text.startsWith("build", ignoreCase = true) -> "Build"
+        // "Build the stool", "Right-click build the carpet", "Rebuild the furniture".
+        text.contains("build", ignoreCase = true) && text.length < 60 -> "Build"
         else -> null
     }
 
