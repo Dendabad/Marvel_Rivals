@@ -819,7 +819,8 @@ class FletchShaftsTask(
         }
         // The nearest tree that can be reached from where the bot stands: one inside the pen cannot. Nearest first,
         // and stop at the first that can: working out whether a tree can be reached is slow.
-        val tree = game.objectsNear(TREES, at, TREE_RADIUS)
+        // Only trees near the sawmill: the bot should not wander off across the countryside for one.
+        val tree = game.objectsNear(TREES, SAWMILL, TREE_LEASH)
             .sortedBy { it.tile.distanceTo(at) }
             .firstOrNull { game.canReachBeside(it.tile) != false }
         if (tree != null) {
@@ -849,6 +850,8 @@ class FletchShaftsTask(
         const val HANDFUL = 18
         const val TREE_RADIUS = 25
         val DYING_TREE = listOf("Dying tree")
+        val SAWMILL = Tile(3302, 3492, 0)
+        const val TREE_LEASH = 14
         const val MAX_FENCE_TRIES = 2
         val TREES = listOf("Tree")
         const val NO_TREE_TICKS = 6
