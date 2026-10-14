@@ -189,6 +189,19 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `marking guards finds the guard by where Quest Helper points when the id differs`() {
+        val game = FakeGame().apply {
+            playerTile = Tile(3211, 3430, 0)
+            npcs += SceneEntity(12686, "Guard", Tile(3213, 3430, 0))
+            npcs += SceneEntity(12695, "Guard", Tile(3230, 3440, 0))
+            helper = com.hcimbot.game.HelperStep("Mark the guard leaning on the north wall.", listOf(12677), Tile(3213, 3431, 0))
+        }
+        val ctx = TaskContext(game, game, Conditions(game))
+        com.hcimbot.plan.MarkGuardsTask().tick(ctx)
+        assertEquals(listOf("npc Guard Mark"), game.calls.filter { it.startsWith("npc") })
+    }
+
+    @Test
     fun `marking guards reports back to Sergeant Tobyn when Quest Helper is past the marking`() {
         val game = FakeGame().apply {
             playerTile = Tile(3211, 3430, 0)

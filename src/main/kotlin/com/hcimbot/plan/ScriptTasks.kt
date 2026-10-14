@@ -616,7 +616,7 @@ class MarkGuardsTask(
 
         // Quest Helper points at the guard to mark, and later at the one to unmark: do what it shows.
         val helper = game.helperStep()
-        val next: Pair<Int, String>? = if (helper != null) {
+        val next: Pair<com.hcimbot.game.SceneEntity, String>? = if (helper != null) {
             val action = when {
                 helper.text.contains("unmark", ignoreCase = true) -> "Unmark"
                 helper.text.startsWith("Mark", ignoreCase = true) -> "Mark"
@@ -624,11 +624,17 @@ class MarkGuardsTask(
                 // The quest's own progress value stays put until the report, so do that here when it is next.
                 else -> return reportBack(helper, ctx)
             }
-            helper.npcIds.firstNotNullOfOrNull { id -> exact(game, id)?.let { id to action } }
-                ?: return if (++missing >= LOST_TICKS) TaskResult.Failed("cannot see the guard Quest Helper points at: ${helper.npcIds}") else TaskResult.Running
+            // The ids Quest Helper names are not always the ones the world shows for a guard that changes
+            // with the quest (12677 against 12686), so fall back to the guard standing where it points.
+            val found = helper.npcIds.firstNotNullOfOrNull { id -> exact(game, id) }
+                ?: helper.tile?.let { at -> game.nearestNpc(emptyList(), listOf("Guard"), at)?.takeIf { it.tile.distanceTo(at) <= AT_POINT } }
+            if (found == null) {
+                return if (++missing >= LOST_TICKS) TaskResult.Failed("cannot see the guard Quest Helper points at: ${helper.npcIds} at ${helper.tile}") else TaskResult.Running
+            }
+            found to action
         } else {
-            toMark.firstNotNullOfOrNull { id -> exact(game, id)?.let { id to "Mark" } }
-                ?: markedWrongly.firstNotNullOfOrNull { id -> exact(game, id)?.let { id to "Unmark" } }
+            toMark.firstNotNullOfOrNull { id -> exact(game, id)?.let { it to "Mark" } }
+                ?: markedWrongly.firstNotNullOfOrNull { id -> exact(game, id)?.let { it to "Unmark" } }
         }
         missing = 0
         if (next == null) {
@@ -636,8 +642,8 @@ class MarkGuardsTask(
             return if (unseen.isEmpty()) TaskResult.Done
             else TaskResult.Failed("cannot see guards $unseen, marked or unmarked, to check they are marked")
         }
-        val (id, action) = next
-        val guard = exact(game, id) ?: return TaskResult.Running
+        val (guard, action) = next
+        val id = guard.id
         if (guard.tile.distanceTo(me) > CLICK_RANGE) {
             return attempt(ctx.actions.walkTo(guard.tile), "walk to the guard $id")
         }
@@ -661,6 +667,7 @@ class MarkGuardsTask(
         val MARKED_WRONGLY = emptyList<Int>()
         const val MAX_TICKS = 300
         const val LOST_TICKS = 40
+        const val AT_POINT = 4
         private val REPORT = Regex("^(report back|talk to)", RegexOption.IGNORE_CASE)
         const val MAX_ATTEMPTS = 4
         const val CLICK_RANGE = 4
