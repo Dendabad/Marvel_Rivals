@@ -244,6 +244,24 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `a bounded talk step is over once the talk has moved the quest on, even if the next part is a talk to the same person`() {
+        val again = com.hcimbot.guide.Instruction(kind = "npc", point = listOf(3240, 3395, 0), text = "Talk to Old Man Yarlo again.", ids = listOf(10425))
+        val rebuild = com.hcimbot.guide.Instruction(kind = "npc", point = listOf(3240, 3395, 0), text = "Talk to Old Man Yarlo again after rebuilding.", ids = listOf(10425))
+        val helper = com.hcimbot.guide.QuestHelper(com.hcimbot.guide.QuestVar("varbit", 10570), lastValue = 12, steps = mapOf("3" to again, "5" to rebuild))
+        val game = FakeGame().apply {
+            playerTile = Tile(3240, 3396, 0)
+            varbits[10570] = 3
+            npcs += SceneEntity(10425, "Old Man Yarlo", Tile(3240, 3395, 0))
+            onNpcInteract = { _, _ -> varbits[10570] = 5 }
+        }
+        val ctx = TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.QuestTask("daddyshome", helper, allowCombat = false, boundedTo = setOf(10425), endsAfterTalk = true)
+        val results = (1..12).map { task.tick(ctx) }
+        assertEquals(com.hcimbot.plan.TaskResult.Done, results.last(), results.toString())
+        assertEquals(1, game.calls.count { it.startsWith("npc Old Man Yarlo") })
+    }
+
+    @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
         val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()

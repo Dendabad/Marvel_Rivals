@@ -147,6 +147,7 @@ class StepPlanner(
                 QuestTask(
                     key, helper, settings.allowCombat, boundedTo = ids, finishesQuest = step.questCompletes,
                     stopAtValue = if (startOnly) 1 else null,
+                    endsAfterTalk = ids.isNotEmpty() && !AGAIN.containsMatchIn(step.text),
                 ),
             ),
             trustTasks = true,
@@ -359,6 +360,8 @@ class StepPlanner(
         fun verb(step: Step): String? = verb(step.text)
 
         /** "Start", as in "... to Start A Porcine of Interest". */
+        private val AGAIN = Regex("\\bagain\\b", RegexOption.IGNORE_CASE)
+
         private val START = Regex("\\bstart\\b", RegexOption.IGNORE_CASE)
 
         fun verb(text: String): String? {

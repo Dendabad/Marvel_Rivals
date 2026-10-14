@@ -37,11 +37,17 @@ class QuestTask(
     private val finishesQuest: Boolean = false,
     /** Done as soon as this item is carried: the step's whole point, whatever the quest asks for next. */
     private val doneWithItem: Int? = null,
+    /**
+     * One talk is the whole step ("Talk to Old Man Yarlo to continue Daddy's Home (2)"): over once that talk has
+     * moved the quest on. Not for a step that says to talk again, which is two talks to the same person.
+     */
+    private val endsAfterTalk: Boolean = false,
 ) : Task {
     private var startValue: Int? = null
     private var current: Instruction? = null
     private var currentTask: Task? = null
     private var repeats = 0
+    private var valueWhenChosen = 0
     private var bankTask: Task? = null
     private var settling = 0
     override val description = "Quest: $questKey"
@@ -52,6 +58,14 @@ class QuestTask(
         val start = startValue ?: value.also { startValue = it }
         if (stopAtValue != null && value >= stopAtValue) return TaskResult.Done
         if (doneWithItem != null && doneWithItem in ctx.game.inventory()) return TaskResult.Done
+        // The talk this step is about has moved the quest on: the step is over, even though the quest's
+        // next instruction is a talk to the same person again (Yarlo, from furniture to rebuilding).
+        val talking = current
+        if (endsAfterTalk && boundedTo != null && boundedTo.isNotEmpty() && talking != null && value > valueWhenChosen &&
+            talking.kind == "npc" && talking.ids.any { it in boundedTo }
+        ) {
+            return TaskResult.Done
+        }
         val fill = QuestFills.at(questKey, value)
         val instruction = fill ?: helper.at(value) ?: return TaskResult.Done
         if (fill == null && helper.hasGapAt(value)) {
@@ -96,6 +110,7 @@ class QuestTask(
 
         if (chosen !== current) {
             current = chosen
+            valueWhenChosen = value
             currentTask = null
             repeats = 0
             settling = 0
