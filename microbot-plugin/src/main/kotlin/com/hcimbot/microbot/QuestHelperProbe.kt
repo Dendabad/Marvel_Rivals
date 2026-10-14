@@ -9,6 +9,9 @@ import java.lang.reflect.Modifier
  * to this), so any failure just gives a short reason instead of an error.
  */
 object QuestHelperProbe {
+    /** Why the last [currentStep] gave nothing, or null. */
+    @Volatile var problem: String? = null
+
     fun describe(): String {
         return runCatching {
             val plugins = loadedPlugins()
@@ -25,8 +28,19 @@ object QuestHelperProbe {
 
     /** The step Quest Helper shows, as the bot can use it: its text and the NPC ids it highlights. */
     fun currentStep(wanted: String? = null): com.hcimbot.game.HelperStep? = runCatching {
-        val plugin = loadedPlugins().firstOrNull { it.javaClass.name.endsWith("QuestHelperPlugin") } ?: return null
-        val selected = call(plugin, "getSelectedQuest")
+        problem = null
+        val plugin = loadedPlugins().firstOrNull { it.javaClass.name.endsWith("QuestHelperPlugin") }
+        if (plugin == null) { problem = "the Quest Helper plugin is not running"; return null }
+        var selected = call(plugin, "getSelectedQuest")
+        // The wrong quest open in Quest Helper: open the one being done, if it can be.
+        if (wanted != null && (selected == null || !matches(selected.javaClass.simpleName, wanted))) {
+            val shown = selected?.javaClass?.simpleName ?: "no quest"
+            val helper = helperFor(plugin, wanted)
+            if (helper != null && select(plugin, helper)) selected = call(plugin, "getSelectedQuest")
+            if (selected == null || !matches(selected.javaClass.simpleName, wanted)) {
+                problem = "Quest Helper has $shown open, not $wanted. Select $wanted in the Quest Helper panel"
+            }
+        }
         // Quest Helper follows one quest at a time. Its step for another quest is no use here, and acting on
         // it would be wrong (the Demon Slayer step while doing Daddy's Home).
         val quest = when {
@@ -56,6 +70,25 @@ object QuestHelperProbe {
         val list = (field(holder, "choices") as? Collection<*>) ?: (holder as? Collection<*>) ?: return emptyList()
         list.mapNotNull { item -> item?.let { field(it, "choice") as? String } }.filter { it.isNotBlank() }
     }.getOrDefault(emptyList())
+
+    /** Asks Quest Helper to open [helper], through whichever of its start up calls this version has. */
+    private fun select(plugin: Any, helper: Any): Boolean {
+        val targets = listOfNotNull(plugin, call(plugin, "getQuestManager"))
+        for (target in targets) {
+            for (method in target.javaClass.methods.filter { it.name == "startUpQuest" }) {
+                val args = method.parameterTypes.map { type ->
+                    when {
+                        type.isInstance(helper) -> helper
+                        type == Boolean::class.javaPrimitiveType -> true
+                        else -> null
+                    }
+                }
+                if (args.any { it == null }) continue
+                if (runCatching { method.invoke(target, *args.toTypedArray()) }.isSuccess) return true
+            }
+        }
+        return false
+    }
 
     private fun normal(name: String) = name.lowercase().filter { it.isLetterOrDigit() }
 

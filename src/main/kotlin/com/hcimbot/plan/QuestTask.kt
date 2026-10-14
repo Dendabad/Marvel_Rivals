@@ -100,7 +100,12 @@ class QuestTask(
             repeats = 0
             settling = 0
             ctx.log("Quest step: ${chosen.text}")
-            ctx.game.helperStep(questKey)?.let { ctx.log("Quest Helper: ${it.kind} \"${it.text.take(40)}\" npc ${it.npcIds.take(3)} obj ${it.objectIds.take(3)}") }
+            val shown = ctx.game.helperStep(questKey)
+            if (shown != null) {
+                ctx.log("Quest Helper: ${shown.kind} \"${shown.text.take(40)}\" npc ${shown.npcIds.take(3)} obj ${shown.objectIds.take(3)}")
+            } else {
+                ctx.game.helperProblem()?.let { ctx.log("Quest Helper: $it") }
+            }
         }
         if (settling > 0) {
             settling--

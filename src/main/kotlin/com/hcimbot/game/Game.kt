@@ -102,6 +102,9 @@ interface GameState {
      */
     fun helperStep(quest: String? = null): HelperStep? = null
 
+    /** Why the last [helperStep] gave nothing, for the log: another quest selected, plugin missing. Null when fine. */
+    fun helperProblem(): String? = null
+
     /** Nearest item lying on the ground (or on a table) with one of these ids. */
     fun nearestGroundItem(ids: Collection<Int>): SceneEntity?
 
