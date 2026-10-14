@@ -491,6 +491,16 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 108. "Light 1 log & take the 1x log": in Old Man Yarlo's house again (the next step collects the ashes): light
+        // one of the logs lying there and take the other.
+        "e7c81d37a4" to { _ ->
+            auto(
+                LightLogsTask(listOf(LOGS), TINDERBOX, count = 1, around = YARLOS_HOUSE),
+                PickUpTask(listOf(LOGS), radius = 6),
+                trust = true,
+            )
+        },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 

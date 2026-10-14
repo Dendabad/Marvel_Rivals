@@ -96,12 +96,7 @@ class QuestTask(
         if (missing.isNotEmpty()) {
             // Items the guide has not asked for yet are not fetched: the guide has its own bank and shop steps.
             // A step that has already moved the quest on is over once the quest wants more than it was for.
-            // The same for a step that is only one talk: the quest is already further on than that talk (Daddy's
-            // Home at the rebuilding, which needs planks the guide fetches later), so there is nothing left for it.
-            if (boundedTo != null && (value > start || endsAfterTalk)) {
-                ctx.log("The quest is past this step's part (it now needs ${missing.joinToString { it.name }}). Moving on")
-                return TaskResult.Done
-            }
+            if (boundedTo != null && value > start) return TaskResult.Done
             return TaskResult.Failed("${chosen.text} needs ${missing.joinToString { "${it.count}x ${it.name}" }}")
         }
 
