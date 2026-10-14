@@ -24,11 +24,29 @@ class AgilityCourse(val name: String, val obstacles: List<Obstacle>) {
 
     val start: Obstacle get() = obstacles.first()
 
-    /** The obstacle to take from [at], or null when between obstacles (mid-jump). */
-    fun next(at: Tile): Obstacle? =
-        if (at.plane == 0) start else obstacles.firstOrNull { it.from != null && at in it.from }
+    /** Every rooftop area, with a few tiles to spare for the landing spots between them. */
+    private val rooftops: Area by lazy {
+        val areas = obstacles.mapNotNull { it.from }
+        Area(
+            areas.minOf { it.minX } - MARGIN, areas.minOf { it.minY } - MARGIN,
+            areas.maxOf { it.maxX } + MARGIN, areas.maxOf { it.maxY } + MARGIN,
+            areas.minOf { it.minPlane }, areas.maxOf { it.maxPlane },
+        )
+    }
+
+    /**
+     * The obstacle to take from [at]. Null only when on the course's rooftops
+     * between obstacles (mid-jump). Anywhere else, upstairs in a house nearby
+     * included, the start is next.
+     */
+    fun next(at: Tile): Obstacle? {
+        obstacles.firstOrNull { it.from != null && at in it.from }?.let { return it }
+        return if (at in rooftops) null else start
+    }
 
     companion object {
+        private const val MARGIN = 3
+
         /** Quest Helper's DraynorVillage: object ids from RuneLite's gameval ObjectID. */
         val DRAYNOR = AgilityCourse(
             "Draynor Village Rooftop Course",

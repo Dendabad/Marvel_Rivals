@@ -408,6 +408,15 @@ class PartsTest {
     private val log = mutableListOf<String>()
 
     @Test
+    fun `upstairs in a house next to the course, the bot walks to the start`() {
+        val course = com.hcimbot.plan.AgilityCourse.DRAYNOR
+        // Morgan's house, first floor, where step 35 ends.
+        assertEquals(course.start, course.next(Tile(3099, 3268, 1)))
+        // Between two rooftops mid-jump: wait, do not walk off.
+        assertNull(course.next(Tile(3093, 3279, 3)))
+    }
+
+    @Test
     fun `step 19 looks for rats behind Lumbridge castle first`() {
         val game = FakeGame()
         game.playerTile = Tile(3230, 3209, 0)
