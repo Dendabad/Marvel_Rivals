@@ -637,8 +637,9 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
             ctx.actions.walkTo(ground.tile)
             return TaskResult.Running
         }
-        // Through the doorway, one tile at a time: the game's own path from outside goes along the wall to a side
-        // instead of straight in. First onto the door's tile, then two tiles beyond it, then on to the item.
+        // Through the doorway, one tile at a time, in a straight line to the item: the game's own path from outside goes
+        // along the wall to a side instead of straight in. The tile outside the door, the door's tile, the tile inside.
+        if (settleOpen > 0) { settleOpen--; return TaskResult.Running }
         if (through.isNotEmpty() && throughTicks < THROUGH_TICKS) {
             throughTicks++
             if (at == through.first()) through.removeFirst()
@@ -647,53 +648,32 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
                 return TaskResult.Running
             }
         }
-        // A door has been opened for it: walk right up to the item, through the doorway, before clicking it, or the click
-        // is made from outside, through the wall. Opening it again straight away would shut it, so walking comes first,
-        // for a while, before another door is tried.
-        if (doorTries > 0 && at.distanceTo(ground.tile) > CLOSE && walkTicks < WALK_TICKS) {
-            walkTicks++
-            val inside = inside?.takeIf { it.tile == ground.tile } ?: WalkTask(ground.tile, radius = 1).also { inside = it }
-            return when (val walked = inside.tick(ctx)) {
-                TaskResult.Done -> { this.inside = null; TaskResult.Running }
-                else -> walked
-            }
-        }
-        walkTicks = 0
-        // The walker did not get through, or the map says the item is reachable when a shut door is in the way (it does
-        // for some doors): open the door nearest the item ourselves, a few times. Clicks on the item that have not
-        // brought it in count as the sign that something is in the way.
         val held = ctx.conditions.count(next.ids)
-        if (held != lastHeld) { lastHeld = held; clicks = 0; walkedIn = false; walkFailed = false; doorTries = 0 }
+        if (held != lastHeld) { lastHeld = held; clicks = 0; doorTries = 0; walkFailed = false }
+        // An item in a room: if the click does not bring it in, or the map says it cannot be reached, a door is the
+        // likely reason. Open the one nearest the item (once), then walk through it and in to the item before clicking.
         val blocked = ctx.game.canReachBeside(ground.tile) == false || clicks >= CLICKS_BEFORE_DOOR
-        // First let the walker find the way in to the item: it goes round to a real entrance when the near side is shut,
-        // which short hops and door clicks of ours would only interrupt. Only if it cannot is a door tried by hand.
-        if (blocked && !walkFailed && !walkedIn) {
-            val walker = walkItem ?: WalkTask(ground.tile, radius = 1).also {
-                walkItem = it
-                ctx.log("Cannot get the ${next.name}, walking to it the way the walker finds")
-            }
-            when (val result = walker.tick(ctx)) {
-                TaskResult.Done -> { walkItem = null; walkedIn = true; return TaskResult.Running }
-                is TaskResult.Failed -> { walkItem = null; walkFailed = true; ctx.log("The walker found no way in to the ${next.name}: ${result.reason}") }
-                else -> return result
-            }
-        }
-        if (doorTries < MAX_DOOR_TRIES && blocked && walkFailed) {
+        if (blocked && doorTries < MAX_DOOR_TRIES) {
             val door = ctx.game.nearestObject(emptyList(), InteractTask.DOORS, ground.tile)?.takeIf { it.tile.distanceTo(ground.tile) <= DOOR_RANGE }
             if (door != null) {
                 doorTries++
                 clicks = 0
-                ctx.log("Cannot get the ${next.name}, opening the door at ${door.tile}")
+                ctx.log("Cannot get the ${next.name}, opening the door at ${door.tile} and going in")
                 ctx.actions.interactObject(door, "Open")
-                // Which way in is from where the player stands to the door.
-                val dx = Integer.signum(door.tile.x - at.x)
-                val dy = Integer.signum(door.tile.y - at.y)
+                // In a line from the door to the item, along whichever way the item is further.
+                val ex = ground.tile.x - door.tile.x
+                val ey = ground.tile.y - door.tile.y
+                val dx = if (Math.abs(ex) >= Math.abs(ey)) Integer.signum(ex) else 0
+                val dy = if (Math.abs(ex) >= Math.abs(ey)) 0 else Integer.signum(ey)
                 if (dx != 0 || dy != 0) {
+                    val plane = door.tile.plane
                     through.clear()
+                    through += Tile(door.tile.x - dx, door.tile.y - dy, plane)
                     through += door.tile
-                    through += Tile(door.tile.x + 2 * dx, door.tile.y + 2 * dy, door.tile.plane)
+                    through += Tile(door.tile.x + dx, door.tile.y + dy, plane)
                     throughTicks = 0
                 }
+                settleOpen = SETTLE_OPEN
                 return TaskResult.Running
             }
         }
@@ -704,11 +684,8 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
     private var doorTries = 0
     private var clicks = 0
     private var lastHeld = -1L
-    private var inside: WalkTask? = null
-    private var walkTicks = 0
-    private var walkItem: WalkTask? = null
-    private var walkedIn = false
     private var walkFailed = false
+    private var settleOpen = 0
     private val through = ArrayDeque<Tile>()
     private var throughTicks = 0
 
@@ -716,7 +693,7 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
         const val MAX_APPROACHES = 3
         const val CLICKS_BEFORE_DOOR = 3
         const val CLOSE = 2
-        const val WALK_TICKS = 25
+        const val SETTLE_OPEN = 3
         const val THROUGH_TICKS = 20
         const val MAX_DOOR_TRIES = 3
         const val DOOR_RANGE = 8
