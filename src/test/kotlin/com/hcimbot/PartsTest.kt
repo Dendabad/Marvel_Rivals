@@ -352,6 +352,27 @@ class PartsTest {
     }
 
     @Test
+    fun `a quest NPC with a new id since an update is still found`() {
+        // Quest Helper has Morgan as 3479, but before the quest he is 16274 now.
+        val game = FakeGame()
+        game.playerTile = Tile(3100, 3266, 0)
+        game.npcs += com.hcimbot.game.SceneEntity(16274, "Morgan", Tile(3098, 3268, 0))
+        val helper = com.hcimbot.guide.QuestHelper(
+            com.hcimbot.guide.QuestVar("varp", 178),
+            lastValue = 2,
+            steps = mapOf(
+                "0" to com.hcimbot.guide.Instruction(
+                    kind = "npc", point = listOf(3098, 3268, 0), text = "Talk to Morgan in the north of Draynor Village.",
+                    ids = listOf(3479), dialogue = listOf("Yes."),
+                ),
+            ),
+        )
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        com.hcimbot.plan.QuestTask("vampyreslayer", helper, allowCombat = false, boundedTo = setOf(3479, 16274, 16275)).tick(ctx)
+        assertEquals(listOf("npc Morgan Talk-to"), game.calls)
+    }
+
+    @Test
     fun `step 19 looks for rats behind Lumbridge castle first`() {
         val game = FakeGame()
         game.playerTile = Tile(3230, 3209, 0)

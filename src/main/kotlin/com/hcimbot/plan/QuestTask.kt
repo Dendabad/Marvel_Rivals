@@ -127,12 +127,15 @@ class QuestTask(
             "walk" -> tile?.let { Made.Ready(WalkTask(it, radius = 1)) } ?: Made.Refused("no location for this walk")
             "npc" -> {
                 if (step.ids.isEmpty()) return Made.Refused("no NPC id for this step")
+                // Updates give NPCs new ids (Morgan is 16274 before Vampyre Slayer now, where
+                // Quest Helper's data has only 3479). The guide step lists the current ones.
+                val ids = if (boundedTo != null && step.ids.any { it in boundedTo }) (step.ids + boundedTo).distinct() else step.ids
                 // A left click on a monster attacks it, so the option has to be known.
                 val action = StepPlanner.verb(step.text)
                     ?: if (step.dialogue.isNotEmpty() || HANDING_IN.containsMatchIn(step.text)) "Talk-to" else null
                     ?: return Made.Refused("unclear what to click")
                 if (action == "Attack" && !allowCombat) return Made.Refused("combat is turned off for safety")
-                Made.Ready(InteractTask(InteractTask.Kind.NPC, step.ids, emptyList(), listOfNotNull(tile), action, dialogue))
+                Made.Ready(InteractTask(InteractTask.Kind.NPC, ids, emptyList(), listOfNotNull(tile), action, dialogue))
             }
             "object" -> {
                 // Quest Helper often says "use these stairs" without the stair's id. Its
