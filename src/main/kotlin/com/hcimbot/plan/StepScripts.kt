@@ -479,6 +479,18 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 106. "Buy 5x Bolts of Cloth & 100 Steel Nails": from the sawmill operator. The player may still be inside the
+        // Lumber Yard's pen after step 105, whose only way out is the broken fence, so climb out first.
+        "8714080b94" to { _ ->
+            auto(
+                LeavePenTask(),
+                ShopTask(
+                    listOf(ShopTask.Seller("Sawmill operator", listOf(3101), listOf(SAWMILL))),
+                    listOf(item("Bolt of cloth", 8790, 5), item("Steel nails", 1539, 100)),
+                ),
+            )
+        },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
