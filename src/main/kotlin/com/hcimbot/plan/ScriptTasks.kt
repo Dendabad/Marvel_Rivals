@@ -508,6 +508,7 @@ class FollowGuardTask(private val guardId: Int, private val hides: List<Tile>) :
     private var ticks = 0
     private var unseen = 0
     private var announced = false
+    private var walks = 0
 
     override fun tick(ctx: TaskContext): TaskResult {
         val game = ctx.game
@@ -516,8 +517,14 @@ class FollowGuardTask(private val guardId: Int, private val hides: List<Tile>) :
         val guard = game.nearestNpc(listOf(guardId))
         if (guard == null) {
             // Out of sight behind a wall counts for the later stops: he has walked on.
-            if (++unseen >= LOST_TICKS) return TaskResult.Failed("lost sight of the guard at stop ${index + 1} of ${hides.size}")
-            return if (index >= hides.size) TaskResult.Done else TaskResult.Running
+            unseen++
+            if (unseen == 1 || unseen % 10 == 0) ctx.log("Cannot see the guard (id $guardId), $unseen ticks, at stop ${index + 1} of ${hides.size}")
+            if (unseen >= LOST_TICKS) return TaskResult.Failed("lost sight of the guard at stop ${index + 1} of ${hides.size}")
+            if (index >= hides.size) return TaskResult.Done
+            // Not seen yet, or out of sight: still get to the hiding place, so the bot is never left standing.
+            val hide = hides[index]
+            if (me.distanceTo(hide) > 0 && !game.isMoving) return attempt(ctx.actions.walkTo(hide), "walk to hiding place $hide")
+            return TaskResult.Running
         }
         unseen = 0
         if (!announced) {
@@ -529,6 +536,7 @@ class FollowGuardTask(private val guardId: Int, private val hides: List<Tile>) :
         val hide = hides[index]
         if (me.distanceTo(hide) > 0) {
             if (game.isMoving) return TaskResult.Running
+            if (++walks % 5 == 1) ctx.log("Walking to hiding place ${index + 1} at $hide, guard at ${guard.tile}")
             return attempt(ctx.actions.walkTo(hide), "walk to hiding place $hide")
         }
         // Hidden: wait for the guard to move on. He has when he is clear of this place and nearer the
