@@ -190,6 +190,8 @@ class MicrobotGameState : GameState {
 
     private val npcIds = HashMap<String, Int?>()
 
+    override fun helperStep() = QuestHelperProbe.currentStep()
+
     override fun nearestObject(ids: Collection<Int>, names: Collection<String>, near: Tile?): SceneEntity? = onClient {
         val query = Microbot.getRs2TileObjectCache().query()
         val found = if (ids.isNotEmpty()) query.withIds(*ids.toIntArray()) else query.withNames(*names.toTypedArray())

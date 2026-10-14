@@ -23,6 +23,30 @@ object QuestHelperProbe {
         }.getOrElse { "Quest Helper probe failed: ${it.javaClass.simpleName} ${it.message}" }
     }
 
+    /** The step Quest Helper shows, as the bot can use it: its text and the NPC ids it highlights. */
+    fun currentStep(): com.hcimbot.game.HelperStep? = runCatching {
+        val plugin = loadedPlugins().firstOrNull { it.javaClass.name.endsWith("QuestHelperPlugin") } ?: return null
+        val quest = call(plugin, "getSelectedQuest") ?: return null
+        var step = call(quest, "getCurrentStep") ?: return null
+        repeat(6) { call(step, "getActiveStep")?.takeIf { it !== step }?.let { step = it } }
+        val text = (field(step, "text") as? Collection<*>)?.joinToString(" ") { it.toString() }.orEmpty()
+        val ids = buildList {
+            (field(step, "npcID") as? Number)?.toInt()?.takeIf { it > 0 }?.let(::add)
+            (field(step, "alternateNpcIDs") as? Collection<*>)?.forEach { (it as? Number)?.toInt()?.let(::add) }
+        }
+        com.hcimbot.game.HelperStep(text, ids)
+    }.getOrNull()
+
+    private fun field(target: Any, name: String): Any? {
+        var type: Class<*>? = target.javaClass
+        while (type != null) {
+            val found = type.declaredFields.firstOrNull { it.name == name }
+            if (found != null) return runCatching { found.isAccessible = true; found.get(target) }.getOrNull()
+            type = type.superclass
+        }
+        return null
+    }
+
     private fun loadedPlugins(): List<Any> {
         val runelite = Class.forName("net.runelite.client.RuneLite")
         val injector = runelite.getMethod("getInjector").invoke(null)

@@ -11,6 +11,9 @@ data class SceneEntity(
     val index: Int = -1,
 )
 
+/** What the Quest Helper plugin is pointing at: its instruction and the NPC ids it highlights. */
+data class HelperStep(val text: String, val npcIds: List<Int>)
+
 /**
  * Everything the bot reads from the game. Each member maps onto RuneLite's
  * Client API (getVarbitValue, getVarpValue, getRealSkillLevel, the inventory
@@ -85,6 +88,9 @@ interface GameState {
 
     /** The NPC id RuneLite names [constant] (its gameval NpcID), for quest NPCs the guide data gives no id for. */
     fun npcIdNamed(constant: String): Int? = null
+
+    /** The step the Quest Helper plugin shows now, or null when it is not running or has no quest selected. */
+    fun helperStep(): HelperStep? = null
 
     /** Nearest item lying on the ground (or on a table) with one of these ids. */
     fun nearestGroundItem(ids: Collection<Int>): SceneEntity?

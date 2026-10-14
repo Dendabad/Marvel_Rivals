@@ -593,6 +593,8 @@ class MarkGuardsTask(
     private var ticks = 0
     private var settling = 0
     private val attempts = mutableMapOf<Int, Int>()
+    private var acted = false
+    private var missing = 0
 
     private fun exact(game: com.hcimbot.game.GameState, id: Int) = game.nearestNpc(listOf(id))?.takeIf { it.id == id }
 
@@ -603,8 +605,21 @@ class MarkGuardsTask(
         if (game.isBusy) return TaskResult.Running
         val me = game.playerTile ?: return TaskResult.Running
 
-        val next = toMark.firstNotNullOfOrNull { id -> exact(game, id)?.let { id to "Mark" } }
-            ?: markedWrongly.firstNotNullOfOrNull { id -> exact(game, id)?.let { id to "Unmark" } }
+        // Quest Helper points at the guard to mark, and later at the one to unmark: do what it shows.
+        val helper = game.helperStep()
+        val next: Pair<Int, String>? = if (helper != null) {
+            val action = when {
+                helper.text.contains("unmark", ignoreCase = true) -> "Unmark"
+                helper.text.startsWith("Mark", ignoreCase = true) -> "Mark"
+                else -> return if (acted) TaskResult.Done else TaskResult.Failed("Quest Helper shows \"${helper.text.take(60)}\", not a guard to mark")
+            }
+            helper.npcIds.firstNotNullOfOrNull { id -> exact(game, id)?.let { id to action } }
+                ?: return if (++missing >= LOST_TICKS) TaskResult.Failed("cannot see the guard Quest Helper points at: ${helper.npcIds}") else TaskResult.Running
+        } else {
+            toMark.firstNotNullOfOrNull { id -> exact(game, id)?.let { id to "Mark" } }
+                ?: markedWrongly.firstNotNullOfOrNull { id -> exact(game, id)?.let { id to "Unmark" } }
+        }
+        missing = 0
         if (next == null) {
             val unseen = toMark.filter { exact(game, it + 1) == null }
             return if (unseen.isEmpty()) TaskResult.Done
@@ -616,6 +631,7 @@ class MarkGuardsTask(
             return attempt(ctx.actions.walkTo(guard.tile), "walk to the guard $id")
         }
         if (attempts.merge(id, 1, Int::plus)!! > MAX_ATTEMPTS) return TaskResult.Failed("clicking $action on guard $id did not work")
+        acted = true
         ctx.log("$action guard $id")
         // A click that did not happen (the guard is off screen behind a building) is answered by walking up to him.
         if (!ctx.actions.interactNpc(guard, action)) {
@@ -633,6 +649,7 @@ class MarkGuardsTask(
         /** The guard marked by mistake (its marked id), to unmark. Not known yet, so the bot leaves it to the player. */
         val MARKED_WRONGLY = emptyList<Int>()
         const val MAX_TICKS = 300
+        const val LOST_TICKS = 40
         const val MAX_ATTEMPTS = 4
         const val CLICK_RANGE = 4
         const val SETTLE = 4
