@@ -611,7 +611,8 @@ class MarkGuardsTask(
             val action = when {
                 helper.text.contains("unmark", ignoreCase = true) -> "Unmark"
                 helper.text.startsWith("Mark", ignoreCase = true) -> "Mark"
-                else -> return if (acted) TaskResult.Done else TaskResult.Failed("Quest Helper shows \"${helper.text.take(60)}\", not a guard to mark")
+                // Nothing (more) to mark: Quest Helper has moved on, whether the bot or the player marked them.
+                else -> return TaskResult.Done
             }
             helper.npcIds.firstNotNullOfOrNull { id -> exact(game, id)?.let { id to action } }
                 ?: return if (++missing >= LOST_TICKS) TaskResult.Failed("cannot see the guard Quest Helper points at: ${helper.npcIds}") else TaskResult.Running

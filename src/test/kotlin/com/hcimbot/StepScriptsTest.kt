@@ -189,6 +189,16 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `marking guards is done at once when Quest Helper is past the marking`() {
+        val game = FakeGame().apply {
+            playerTile = Tile(3211, 3430, 0)
+            helper = com.hcimbot.game.HelperStep("Report back to Sergeant Tobyn.", listOf(12648))
+        }
+        val ctx = TaskContext(game, game, Conditions(game))
+        assertEquals(com.hcimbot.plan.TaskResult.Done, com.hcimbot.plan.MarkGuardsTask().tick(ctx))
+    }
+
+    @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
         val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()
