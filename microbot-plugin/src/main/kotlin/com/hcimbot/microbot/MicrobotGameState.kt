@@ -333,10 +333,14 @@ class MicrobotGameState : GameState {
          * made last, so the items' labels cannot be used by name: take the leftmost of the number or Space labels
          * that sit below the quantity buttons. Client thread.
          */
-        fun firstMakeItem(): net.runelite.api.widgets.Widget? = nthMakeItem(1)
+        fun firstMakeItem(): java.awt.Rectangle? = nthMakeItem(1)
 
-        /** The [n]th item (1 based, from the left) of the make window. Client thread. */
-        fun nthMakeItem(n: Int): net.runelite.api.widgets.Widget? {
+        /**
+         * The clickable area of the [n]th item (1 based, from the left) of the make window. The number or Space under an
+         * item is only its label, and clicking that does nothing, so the item's own box is looked for: the widget just
+         * above the label that spans its width. Without one, the area above the label. Client thread.
+         */
+        fun nthMakeItem(n: Int): java.awt.Rectangle? {
             fun textOf(w: net.runelite.api.widgets.Widget?) = Text.removeTags(w?.text.orEmpty()).trim()
             fun descendants(w: net.runelite.api.widgets.Widget?, out: MutableList<net.runelite.api.widgets.Widget>) {
                 if (w == null || w.isHidden) return
@@ -347,11 +351,24 @@ class MicrobotGameState : GameState {
             Microbot.getClient().widgetRoots?.forEach { descendants(it, all) }
             val quantity = makeWindowButton("X", useParent = false) ?: return null
             val below = quantity.bounds.y + quantity.bounds.height
-            return all
+            val label = all
                 .filter { textOf(it) in ITEM_LABELS && it.bounds.width > 0 && it.bounds.y >= below }
                 .sortedBy { it.bounds.x }
-                .getOrNull(n - 1)
+                .getOrNull(n - 1) ?: return null
+            val text = label.bounds
+            val centre = text.x + text.width / 2
+            val box = all
+                .filter { it !== label && it.bounds.width >= MIN_ITEM && it.bounds.height >= MIN_ITEM }
+                .filter { it.bounds.x <= centre && centre <= it.bounds.x + it.bounds.width }
+                .filter { it.bounds.y < text.y && it.bounds.y + it.bounds.height >= text.y - ITEM_GAP }
+                .minByOrNull { it.bounds.width * it.bounds.height }
+            if (box != null) return box.bounds
+            // The area above the label, about as tall as the item is wide.
+            return java.awt.Rectangle(text.x, text.y - text.width, text.width, text.width)
         }
+
+        private const val MIN_ITEM = 30
+        private const val ITEM_GAP = 8
 
         private val ITEM_LABELS = setOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "Space")
 

@@ -126,7 +126,7 @@ class MicrobotActions : GameActions {
         }
         // The 1 key picks the first item, whatever the Space key is on at the moment.
         if (pressKey('1')) return true
-        val first = onClient { MicrobotGameState.firstMakeItem()?.bounds }
+        val first = onClient { MicrobotGameState.firstMakeItem() }
         if (first != null) {
             Microbot.getMouse().click(first)
             return true
@@ -142,7 +142,7 @@ class MicrobotActions : GameActions {
             Microbot.getMouse().click(quantityButton)
             Thread.sleep(MAKE_PAUSE_MS)
         }
-        val chosen = onClient { MicrobotGameState.nthMakeItem(item)?.bounds } ?: return false
+        val chosen = onClient { MicrobotGameState.nthMakeItem(item) } ?: return false
         Microbot.getMouse().click(chosen)
         return true
     }
