@@ -637,23 +637,33 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
             ctx.actions.walkTo(ground.tile)
             return TaskResult.Running
         }
-        // The walker did not get through: open the shut door nearest the item ourselves, a few times.
-        if (doorTries < MAX_DOOR_TRIES && ctx.game.canReachBeside(ground.tile) == false) {
+        // The walker did not get through, or the map says the item is reachable when a shut door is in the way (it does
+        // for some doors): open the door nearest the item ourselves, a few times. Clicks on the item that have not
+        // brought it in count as the sign that something is in the way.
+        val held = ctx.conditions.count(next.ids)
+        if (held != lastHeld) { lastHeld = held; clicks = 0 }
+        val blocked = ctx.game.canReachBeside(ground.tile) == false || clicks >= CLICKS_BEFORE_DOOR
+        if (doorTries < MAX_DOOR_TRIES && blocked) {
             val door = ctx.game.nearestObject(emptyList(), InteractTask.DOORS, ground.tile)?.takeIf { it.tile.distanceTo(ground.tile) <= DOOR_RANGE }
             if (door != null) {
                 doorTries++
-                ctx.log("Still cannot reach the ${next.name}, opening the door at ${door.tile}")
+                clicks = 0
+                ctx.log("Cannot get the ${next.name}, opening the door at ${door.tile}")
                 ctx.actions.interactObject(door, "Open")
                 return TaskResult.Running
             }
         }
+        clicks++
         return attempt(ctx.actions.takeGroundItem(ground), "take ${next.name}")
     }
 
     private var doorTries = 0
+    private var clicks = 0
+    private var lastHeld = -1L
 
     companion object {
         const val MAX_APPROACHES = 3
+        const val CLICKS_BEFORE_DOOR = 3
         const val MAX_DOOR_TRIES = 3
         const val DOOR_RANGE = 8
         const val REACH = 15
