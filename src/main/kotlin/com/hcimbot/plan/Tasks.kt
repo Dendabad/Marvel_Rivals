@@ -643,16 +643,18 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
         if (through.isNotEmpty() && throughTicks < THROUGH_TICKS) {
             throughTicks++
             if (at == through.first()) through.removeFirst()
+            if (through.isEmpty()) wentIn = true
             if (through.isNotEmpty()) {
                 if (!ctx.game.isMoving) ctx.actions.stepOnto(through.first())
                 return TaskResult.Running
             }
         }
         val held = ctx.conditions.count(next.ids)
-        if (held != lastHeld) { lastHeld = held; clicks = 0; doorTries = 0; walkFailed = false }
+        if (held != lastHeld) { lastHeld = held; clicks = 0; doorTries = 0; walkFailed = false; wentIn = false }
         // An item in a room: if the click does not bring it in, or the map says it cannot be reached, a door is the
         // likely reason. Open the one nearest the item (once), then walk through it and in to the item before clicking.
-        val blocked = ctx.game.canReachBeside(ground.tile) == false || clicks >= CLICKS_BEFORE_DOOR
+        // Once the bot has been through the doorway it clicks the item, whatever the map says: it is inside now.
+        val blocked = !wentIn && (ctx.game.canReachBeside(ground.tile) == false || clicks >= CLICKS_BEFORE_DOOR)
         if (blocked && doorTries < MAX_DOOR_TRIES) {
             val door = ctx.game.nearestObject(emptyList(), InteractTask.DOORS, ground.tile)?.takeIf { it.tile.distanceTo(ground.tile) <= DOOR_RANGE }
             if (door != null) {
@@ -677,6 +679,10 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
                 return TaskResult.Running
             }
         }
+        if (wentIn && at.distanceTo(ground.tile) > CLOSE && !ctx.game.isMoving) {
+            ctx.actions.stepOnto(ground.tile)
+            return TaskResult.Running
+        }
         clicks++
         return attempt(ctx.actions.takeGroundItem(ground), "take ${next.name}")
     }
@@ -686,6 +692,7 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
     private var lastHeld = -1L
     private var walkFailed = false
     private var settleOpen = 0
+    private var wentIn = false
     private val through = ArrayDeque<Tile>()
     private var throughTicks = 0
 
