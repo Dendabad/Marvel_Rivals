@@ -1176,6 +1176,8 @@ class LootAndHopTask(private val itemId: Int, private val count: Int, private va
     private var noItem = 0
     private var idle = 0
     private var hops = 0
+    /** World to when the bot was last on it, so a world is not hopped back to within a minute. */
+    private val visited = HashMap<Int, Long>()
 
     override fun tick(ctx: TaskContext): TaskResult {
         val game = ctx.game
@@ -1208,8 +1210,12 @@ class LootAndHopTask(private val itemId: Int, private val count: Int, private va
 
     private fun hop(ctx: TaskContext, why: String): TaskResult {
         hops++
-        ctx.log("Hopping worlds ($why, hop $hops)")
-        ctx.actions.hopWorld()
+        val now = System.currentTimeMillis()
+        val here = ctx.game.world
+        if (here > 0) visited[here] = now
+        val avoid = visited.filter { now - it.value < AVOID_MS }.keys
+        ctx.log("Hopping worlds ($why, hop $hops, not back to ${avoid.sorted()})")
+        ctx.actions.hopWorldAvoiding(avoid)
         hopWait = HOP_TICKS
         noItem = 0
         return TaskResult.Running
@@ -1218,8 +1224,10 @@ class LootAndHopTask(private val itemId: Int, private val count: Int, private va
     private companion object {
         // Short: the world takes its time to load on its own, and the item is looked for every tick from then on.
         const val HOP_TICKS = 3
+        /** A world just left is not gone back to for this long, whatever the bot finds there. */
+        const val AVOID_MS = 60_000L
         // How long after a hop with nothing in sight before concluding it is not there and hopping again.
-        const val NO_ITEM_TICKS = 12
+        const val NO_ITEM_TICKS = 6
         const val MAX_IDLE_TICKS = 400
     }
 }

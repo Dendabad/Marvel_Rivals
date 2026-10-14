@@ -253,6 +253,15 @@ class MicrobotActions : GameActions {
 
     override fun hopWorld(): Boolean = Microbot.hopToWorld(LoginManager.getRandomWorld(Rs2Player.isMember()))
 
+    /** A random world, asked for again until it is one not in [avoid], up to 40 times, then whatever it gave last. */
+    override fun hopWorldAvoiding(avoid: Set<Int>): Boolean {
+        val here = onClient { Microbot.getClient().world } ?: -1
+        var pick = LoginManager.getRandomWorld(Rs2Player.isMember())
+        var tries = 0
+        while ((pick == here || pick in avoid) && ++tries < 40) pick = LoginManager.getRandomWorld(Rs2Player.isMember())
+        return Microbot.hopToWorld(pick)
+    }
+
     override fun useItemOnNpc(itemId: Int, npc: SceneEntity): Boolean {
         val found = onClient {
             Microbot.getRs2NpcCache().query().withId(npc.id).nearest(npc.tile.toWorldPoint(), RELOCATE)

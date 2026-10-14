@@ -356,6 +356,7 @@ class StepScriptsTest {
         task.tick(ctx)
         task.tick(ctx)
         assertTrue(game.calls.contains("hop"), game.calls.toString())
+        assertTrue(game.hopAvoided.isNotEmpty() && 301 in game.hopAvoided.last(), game.hopAvoided.toString())
         game.inv[29415] = 2
         repeat(15) { task.tick(ctx) }
         assertEquals(com.hcimbot.plan.TaskResult.Done, task.tick(ctx))

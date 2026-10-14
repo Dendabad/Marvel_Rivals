@@ -29,6 +29,9 @@ data class HelperStep(val text: String, val npcIds: List<Int>, val tile: Tile? =
  */
 interface GameState {
     val isLoggedIn: Boolean
+
+    /** The world the player is on, or -1 when not known. */
+    val world: Int get() = -1
     val playerName: String?
     val playerTile: Tile?
 
@@ -202,6 +205,9 @@ interface GameActions {
 
     /** Hop to another world of the same membership. */
     fun hopWorld(): Boolean
+
+    /** Hops to a world not in [avoid], when one can be picked. The world the player is on now is never chosen. */
+    fun hopWorldAvoiding(avoid: Set<Int>): Boolean = hopWorld()
 
     /** Uses an inventory item on something lying on the ground, e.g. a tinderbox on logs. */
     fun useItemOnGroundItem(itemId: Int, item: SceneEntity): Boolean = false

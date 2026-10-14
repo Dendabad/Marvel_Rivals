@@ -269,6 +269,15 @@ class FakeGame : GameState, GameActions {
         return true
     }
 
+    var worldNow = 301
+    override val world: Int get() = worldNow
+    val hopAvoided = mutableListOf<Set<Int>>()
+
+    override fun hopWorldAvoiding(avoid: Set<Int>): Boolean {
+        hopAvoided += avoid
+        return hopWorld()
+    }
+
     override fun hopWorld(): Boolean {
         calls += "hop"
         onHop()

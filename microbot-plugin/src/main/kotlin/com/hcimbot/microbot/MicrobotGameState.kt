@@ -102,6 +102,8 @@ class MicrobotGameState : GameState {
     }
 
     override val isLoggedIn: Boolean get() = snapshot != null
+
+    override val world: Int get() = onClient { Microbot.getClient().world } ?: -1
     override val playerName: String? get() = snapshot?.name
     override val playerTile: Tile? get() = snapshot?.tile
     override val isBusy: Boolean get() = busy
