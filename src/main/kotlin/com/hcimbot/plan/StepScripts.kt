@@ -454,10 +454,7 @@ class StepScripts(private val guide: Guide) {
         // the knife, hopping worlds if no tree is in reach.
         "acc8776385" to { _ ->
             StepPlan.Auto(
-                listOf(
-                    WalkTask(SAWMILL, radius = 10),
-                    FletchShaftsTask(),
-                ),
+                listOf(FletchShaftsTask()),
                 trustTasks = true,
                 patient = true,
             )

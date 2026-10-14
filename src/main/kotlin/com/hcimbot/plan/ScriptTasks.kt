@@ -754,6 +754,13 @@ class FletchShaftsTask(
     private val shaft: Int = ARROW_SHAFT,
 ) : BaseTask() {
     override val description = "Fletch $target arrow shafts"
+
+    /**
+     * The guide step reads "Collect the Logs", which holding any logs already satisfies, so the runner would
+     * call the step done before a single shaft is made. Until the target is reached this task is not over.
+     */
+    override fun canStopHere(ctx: TaskContext): Boolean = ctx.conditions.count(listOf(shaft)) >= target
+
     private var settling = 0
     private var noTree = 0
     private var hopWait = 0
@@ -774,6 +781,11 @@ class FletchShaftsTask(
         if (hopWait > 0) { hopWait--; return TaskResult.Running }
         if (settling > 0) { settling--; return TaskResult.Running }
         if (game.isBusy || game.isBankOpen || game.isShopOpen) return TaskResult.Running
+        // Walk to the yard first, from wherever the bot is.
+        val here = game.playerTile ?: return TaskResult.Running
+        if (here.distanceTo(YARD_CENTRE) > TREE_RADIUS && !game.showsChoice("What would you like to make?")) {
+            return attempt(ctx.actions.walkTo(YARD_CENTRE), "walk to the Lumber Yard")
+        }
         if (game.showsChoice("What would you like to make?")) {
             ctx.actions.makeAll()
             settling = 3
