@@ -171,3 +171,45 @@ open class FakeGameShopCap(val game: FakeGame) {
         game.buyCap = { wanted -> minOf(wanted, limit()).also { bought(it) } }
     }
 }
+
+class HansScriptTest {
+    private val scripts = StepScripts(Guide(1))
+
+    private fun run(game: FakeGame): TaskResult {
+        val auto = assertIs<StepPlan.Auto>(scripts.planFor(Step(id = "d3c4ea0a99"), BotSettings()))
+        val ctx = TaskContext(game, game, Conditions(game))
+        var index = 0
+        repeat(60) {
+            val task = auto.tasks.getOrNull(index) ?: return TaskResult.Done
+            when (val result = task.tick(ctx)) {
+                TaskResult.Done -> index++
+                is TaskResult.Failed -> return result
+                TaskResult.Running -> Unit
+            }
+        }
+        return TaskResult.Running
+    }
+
+    private fun hans() = FakeGame().apply { npcs += SceneEntity(3105, "Hans", Tile(3212, 3219, 0)) }
+
+    @Test
+    fun `the Age option is enough when it ticks the diary`() {
+        val game = hans()
+        game.onNpcInteract = { _, action -> if (action == "Age") game.varps[1194] = 1 shl 5 }
+        assertEquals(TaskResult.Done, run(game))
+        assertEquals(listOf("npc Hans Age"), game.calls)
+    }
+
+    @Test
+    fun `otherwise it asks Hans in chat`() {
+        val game = hans()
+        game.onNpcInteract = { _, action ->
+            if (action == "Talk-to") {
+                game.options = listOf("I'm looking for whoever is in charge of this place.", "Can you tell me how long I've been here?", "Nothing.")
+            }
+        }
+        game.onOption = { if ("how long" in it) game.varps[1194] = 1 shl 5 }
+        assertEquals(TaskResult.Done, run(game))
+        assertTrue("option Can you tell me how long I've been here?" in game.calls, "${game.calls}")
+    }
+}

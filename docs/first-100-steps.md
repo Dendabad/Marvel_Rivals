@@ -15,7 +15,7 @@ With **Allow combat** on: 88 run, 6 skip, 6 pause, once the `draynor-fence` rout
 | 5 | Head North-West to Magic combat tutor & drop Air & Mind Runes and claim more. | Runs | The tutor only gives runes to players who have none, so it drops them first, picks the chat option about runes, then picks the dropped runes back up. |
 | 6 | Sell Bronze Dagger, Sword, Wooden Shield & Shortbow to General Store. Buy a Spade Chisel & hammer | Runs | Sells the four starter items to the Lumbridge general store, then buys the spade, chisel and hammer. |
 | 7 | Head East & Start X Marks the Spot on Veos (2,1) & complete the first step (Install Quest Helper plug in on Runelite) | Runs | Follows Quest Helper for xmarksthespot. |
-| 8 | Check playtime on Hans [Lumbridge Easy Diary] | Runs | Picks the chat option asking how long you have played. The diary task ticks when Hans answers. |
+| 8 | Check playtime on Hans [Lumbridge Easy Diary] | Runs | Uses Hans's right click Age option. If that does not tick the diary task, asks him in chat how long you have played. |
 | 9 | Go upstairs and Talk to Duke Horacio (1,1) [Rune Mysteries] | Runs | Follows Quest Helper for runemysteries. |
 | 10 | Go upstairs again and Collect 4x logs on the top floor [Tree Gnome Village] | Runs | Take logs on the top floor. The logs are upstairs and the bot does not climb first, so this pauses unless you are already up there. |
 | 11 | Bank at Lumbridge castle top floor and deposit all | Runs | Walk to (3188, 3220, 1), then Bank, deposit all. Only walks if you are more than 30 tiles from Lumbridge, then opens the nearest bank. |

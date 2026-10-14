@@ -42,6 +42,8 @@ class StepScripts(private val guide: Guide, private val routes: RouteStore? = nu
 
     private fun onPlane(plane: Int): (TaskContext) -> Boolean = { it.game.playerTile?.plane == plane }
 
+    private fun diaryBit(ctx: TaskContext, varp: Int, bit: Int): Boolean = (ctx.game.varp(varp) shr bit) and 1 == 1
+
     private fun quest(key: String, stopAt: Int, allowCombat: Boolean): Task {
         val helper = guide.questHelpers[key] ?: return Fail("no Quest Helper data for $key")
         return QuestTask(key, helper, allowCombat, stopAtValue = stopAt)
@@ -93,8 +95,13 @@ class StepScripts(private val guide: Guide, private val routes: RouteStore? = nu
         },
 
         // 8. "Check playtime on Hans": the diary ticks when Hans says how long you have played.
+        // His right click "Age" says it without the chat menu; if that does not tick the task, ask him in chat.
         "d3c4ea0a99" to { _ ->
-            auto(talk(listOf(3105), "Hans", Tile(3212, 3219, 0), DialoguePlan.Texts(listOf("how long"))))
+            val hans = Tile(3212, 3219, 0)
+            auto(
+                Optional(InteractTask(InteractTask.Kind.NPC, listOf(3105), listOf("Hans"), listOf(hans), "Age", DialoguePlan.Continue)),
+                OnlyIf({ !diaryBit(it, LUMBRIDGE_DIARY, HANS_TASK_BIT) }, talk(listOf(3105), "Hans", hans, DialoguePlan.Texts(HANS_OPTIONS))),
+            )
         },
 
         // 12. "Keep the Shrimps in your bank for later": nothing to do now.
@@ -293,6 +300,12 @@ class StepScripts(private val guide: Guide, private val routes: RouteStore? = nu
 
         /** The recorded route for step 20. Record it under this name. */
         const val DRAYNOR_FENCE_ROUTE = "draynor-fence"
+
+        private const val LUMBRIDGE_DIARY = 1194
+        private const val HANS_TASK_BIT = 5
+
+        /** Wordings of Hans's play time question, most specific first. */
+        private val HANS_OPTIONS = listOf("how long", "been here", "playing", "played", "age")
 
         // Ids from RuneLite's gameval lists.
         private const val AIR_RUNE = 556

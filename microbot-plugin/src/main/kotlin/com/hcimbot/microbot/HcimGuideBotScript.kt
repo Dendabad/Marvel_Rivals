@@ -12,6 +12,7 @@ import net.runelite.api.Skill
 import net.runelite.client.plugins.microbot.Microbot
 import net.runelite.client.plugins.microbot.Script
 import net.runelite.client.plugins.microbot.util.inventory.Rs2Inventory
+import net.runelite.client.plugins.microbot.util.player.Rs2Player
 import net.runelite.client.plugins.microbot.util.walker.Rs2Walker
 import org.slf4j.LoggerFactory
 
@@ -189,8 +190,9 @@ class HcimGuideBotScript : Script() {
         try {
             val current = runner ?: return
             if (config?.paused() == true) {
-                // Pausing mid-walk: the main loop is stuck inside the walker, so stop it from here.
-                if (actions.walking) Rs2Walker.setTarget(null, "HCIM guide bot paused")
+                // The main loop may be stuck inside the walker, ours or one Microbot started itself
+                // (walking to a bank, or up to an NPC it cannot reach yet), so stop any walk from here.
+                if (actions.walking || Rs2Player.isMoving()) Rs2Walker.setTarget(null, "HCIM guide bot paused")
                 return
             }
             if (current.state != GuideRunner.State.Running || !Microbot.isLoggedIn()) return

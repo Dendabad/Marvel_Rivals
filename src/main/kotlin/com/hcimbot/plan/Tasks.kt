@@ -117,6 +117,11 @@ sealed interface DialoguePlan {
     object None : DialoguePlan {
         override fun choose(options: List<String>) = Choice.Stuck("unexpected chat options $options")
     }
+
+    /** Clicks through "continue" lines, and treats any choice of options as a reason to stop. */
+    object Continue : DialoguePlan {
+        override fun choose(options: List<String>) = Choice.Stuck("asked to choose from $options")
+    }
 }
 
 /**
