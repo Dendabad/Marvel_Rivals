@@ -562,7 +562,10 @@ class StepScripts(private val guide: Guide) {
                 // The walker cannot path to the first floor tile from outside (it said so), so go to the farm's ground
                 // floor below it, and let the item task climb or walk to the sweetcorn once it can see it.
                 WalkTask(Tile(1574, 3139, 0), radius = 6, anyFloor = true),
-                TakeItemTask(listOf(item("Sweetcorn", 5986, 1))),
+                // Sweetcorn grows on plants that are picked, so pick one if any is in view, and take one lying about if not.
+                RepeatUntil("Pick sweetcorn", has(5986), {
+                    obj(emptyList(), listOf("Sweetcorn", "Sweetcorn plant"), Tile(1574, 3139, 0), "Pick", near = null)
+                }, maxRounds = 3),
             )
         },
 

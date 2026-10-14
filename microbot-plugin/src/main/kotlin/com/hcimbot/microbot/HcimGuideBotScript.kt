@@ -101,12 +101,20 @@ class HcimGuideBotScript(private val bankPin: () -> String? = { null }) : Script
                 }
             }.orEmpty()
         }
-        section("Objects within 8 tiles (id name at tile)") {
+        section("Named objects within 25 tiles, nearest first (id name at tile)") {
             MicrobotGameState.onClient {
                 val me = Microbot.getClient().localPlayer?.worldLocation ?: return@onClient emptyList<String>()
-                Microbot.getRs2TileObjectCache().query().where { it.worldLocation.distanceTo(me) <= 8 }.toList().take(25).map {
-                    "${it.id} ${it.name} at ${Instances.toTemplate(it.worldLocation)}"
-                }
+                Microbot.getRs2TileObjectCache().query().where { it.worldLocation.distanceTo(me) <= 25 && !it.name.isNullOrBlank() && it.name != "null" }
+                    .toList().sortedBy { it.worldLocation.distanceTo(me) }.take(40).map {
+                        "${it.id} ${it.name} at ${Instances.toTemplate(it.worldLocation)}"
+                    }
+            }.orEmpty()
+        }
+        section("Objects without a name within 6 tiles, nearest first (id at tile)") {
+            MicrobotGameState.onClient {
+                val me = Microbot.getClient().localPlayer?.worldLocation ?: return@onClient emptyList<String>()
+                Microbot.getRs2TileObjectCache().query().where { it.worldLocation.distanceTo(me) <= 6 && (it.name.isNullOrBlank() || it.name == "null") }
+                    .toList().sortedBy { it.worldLocation.distanceTo(me) }.take(15).map { "${it.id} at ${Instances.toTemplate(it.worldLocation)}" }
             }.orEmpty()
         }
         section("Text in open windows and chat") {
