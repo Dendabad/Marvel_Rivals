@@ -201,6 +201,14 @@ class MicrobotGameState : GameState {
         nearest?.let { entity(it.id, it.name, it.worldLocation) }
     }
 
+    override fun groundItemsNear(ids: Collection<Int>, near: Tile, within: Int): List<SceneEntity> = onClient {
+        if (ids.isEmpty()) return@onClient emptyList()
+        val centre = near.toWorldPoint()
+        Microbot.getRs2TileItemCache().query().withIds(*ids.toIntArray())
+            .where { it.worldLocation.distanceTo(centre) <= within }.toList()
+            .mapNotNull { entity(it.id, it.name, it.worldLocation) }
+    } ?: emptyList()
+
     override fun nearestGroundItem(ids: Collection<Int>, near: Tile?, within: Int?): SceneEntity? = onClient {
         if (ids.isEmpty()) return@onClient null
         val found = Microbot.getRs2TileItemCache().query().withIds(*ids.toIntArray())

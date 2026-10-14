@@ -779,7 +779,10 @@ class FletchShaftsTask(
         val held = game.inventory()[logs] ?: 0
         val at = game.playerTile ?: return TaskResult.Running
         // Only the piles inside the yard: logs beyond its fence would have the bot walk out of it and round.
-        val ground = game.nearestGroundItem(listOf(logs), YARD_CENTRE, YARD_RADIUS)?.takeIf { !it.tile.inWilderness }
+        // And only ones that can be walked to: a pile behind a crate or a fence stays where it is.
+        val ground = game.groundItemsNear(listOf(logs), YARD_CENTRE, YARD_RADIUS)
+            .filter { !it.tile.inWilderness && game.canReach(it.tile) != false }
+            .minByOrNull { it.tile.distanceTo(at) }
         // Fletch a full handful, or what there is once the piles are gone.
         if (held >= HANDFUL || (held > 0 && ground == null)) {
             noLogs = 0
