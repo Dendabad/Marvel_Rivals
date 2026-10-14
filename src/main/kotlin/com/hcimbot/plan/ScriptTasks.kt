@@ -798,13 +798,15 @@ class FletchShaftsTask(
             return TaskResult.Running
         }
         val at = here
-        // Step 103 left the player inside the pen, by the dying tree. The trees to chop are outside it, so climb
-        // back over the broken fence first, when the sawmill outside cannot be reached from here.
-        if (game.canReach(SAWMILL) == false && fenceTries < MAX_FENCE_TRIES) {
+        // Step 103 left the player inside the pen, by the dying tree. The trees to chop are outside it. The dying
+        // trees are only inside the pen, so one that can be walked up to means the bot is inside: climb back
+        // over the broken fence then, and never when it is already outside.
+        val inside = game.objectsNear(DYING_TREE, at, TREE_RADIUS).any { game.canReachBeside(it.tile) == true }
+        if (inside && fenceTries < MAX_FENCE_TRIES) {
             val fence = game.nearestObject(emptyList(), listOf("Broken fence"), at)
             if (fence != null) {
                 fenceTries++
-                ctx.log("Climbing back over the broken fence first")
+                ctx.log("Inside the pen, climbing back over the broken fence")
                 ctx.actions.interactObject(fence, "Climb-over")
                 settling = 4
                 return TaskResult.Running
@@ -839,8 +841,8 @@ class FletchShaftsTask(
         const val ARROW_SHAFT = 52
         const val HANDFUL = 18
         const val TREE_RADIUS = 25
-        val SAWMILL = Tile(3302, 3492, 0)
-        const val MAX_FENCE_TRIES = 3
+        val DYING_TREE = listOf("Dying tree")
+        const val MAX_FENCE_TRIES = 2
         val TREES = listOf("Tree")
         const val NO_TREE_TICKS = 6
         const val HOP_TICKS = 12
