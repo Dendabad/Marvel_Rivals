@@ -595,6 +595,7 @@ class MarkGuardsTask(
     private val attempts = mutableMapOf<Int, Int>()
     private var acted = false
     private var missing = 0
+    private var walkLogs = 0
 
     private var report: InteractTask? = null
 
@@ -629,6 +630,13 @@ class MarkGuardsTask(
             val found = helper.npcIds.firstNotNullOfOrNull { id -> exact(game, id) }
                 ?: helper.tile?.let { at -> game.nearestNpc(emptyList(), listOf("Guard"), at)?.takeIf { it.tile.distanceTo(at) <= AT_POINT } }
             if (found == null) {
+                // Not in the game's list of nearby NPCs: it is too far or out of view. Go to where Quest Helper points.
+                val at = helper.tile
+                if (at != null && me.distanceTo(at) > CLICK_RANGE) {
+                    if (game.isMoving) return TaskResult.Running
+                    if (++walkLogs % 5 == 1) ctx.log("Cannot see the guard ${helper.npcIds} yet, walking to $at")
+                    return attempt(ctx.actions.walkTo(at), "walk to where Quest Helper points, $at")
+                }
                 return if (++missing >= LOST_TICKS) TaskResult.Failed("cannot see the guard Quest Helper points at: ${helper.npcIds} at ${helper.tile}") else TaskResult.Running
             }
             found to action
