@@ -174,12 +174,14 @@ class QuestTask(
                 // Quest Helper often says "use these stairs" without the stair's id. Its
                 // branches say where they lead, so walk there: the walker climbs the stairs.
                 stairBranch(step)?.tile?.let { return Made.Ready(WalkTask(it, radius = 3)) }
-                // Quest Helper shows the object it wants clicked, and with what (Daddy's Home's furniture: the guide
-                // data's ids and a left click on a removed piece build it again): do what Quest Helper shows.
-                ctx.game.helperStep(questKey)?.takeIf { it.objectIds.isNotEmpty() }?.let { shown ->
-                    helperVerb(shown.text)?.let { verb ->
-                        ctx.log("Following Quest Helper: ${shown.text.take(80)} (object ${shown.objectIds}, $verb)")
-                        return Made.Ready(InteractTask(InteractTask.Kind.OBJECT, shown.objectIds, emptyList(), listOfNotNull(shown.tile), verb, dialogue))
+                // The guide data comes first. Only when it gives no verb to click (a left click on Daddy's Home's
+                // removed furniture builds it again) is what Quest Helper shows used for the click.
+                if (StepPlanner.verb(step.text) == null) {
+                    ctx.game.helperStep(questKey)?.takeIf { it.objectIds.isNotEmpty() }?.let { shown ->
+                        helperVerb(shown.text)?.let { verb ->
+                            ctx.log("Guide data has no click for this, following Quest Helper: ${shown.text.take(80)} (object ${shown.objectIds}, $verb)")
+                            return Made.Ready(InteractTask(InteractTask.Kind.OBJECT, shown.objectIds, emptyList(), listOfNotNull(shown.tile), verb, dialogue))
+                        }
                     }
                 }
                 // guide.json leaves some ids out but keeps RuneLite's name for the object.
