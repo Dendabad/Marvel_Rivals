@@ -145,10 +145,10 @@ class QuestTask(
             "walk" -> tile?.let { Made.Ready(WalkTask(it, radius = 1)) } ?: Made.Refused("no location for this walk")
             "npc" -> {
                 // "Follow the guard slowly behind them, hiding in the marked locations" (Children of the Sun).
-                if (step.ids.isEmpty() && step.tiles.size >= 2 && step.text.startsWith("Follow the guard", ignoreCase = true)) {
-                    val id = step.constant?.let(ctx.game::npcIdNamed)
-                        ?: return Made.Refused("RuneLite has no NPC named ${step.constant} to follow")
-                    return Made.Ready(FollowGuardTask(id, step.tiles))
+                if (step.tiles.size >= 2 && step.text.startsWith("Follow the guard", ignoreCase = true)) {
+                    val ids = (step.ids + listOfNotNull(step.constant?.let(ctx.game::npcIdNamed))).distinct()
+                    if (ids.isEmpty()) return Made.Refused("no NPC id for the guard to follow")
+                    return Made.Ready(FollowGuardTask(ids, step.tiles))
                 }
                 if (step.ids.isEmpty()) return Made.Refused("no NPC id for this step")
                 // Updates give NPCs new ids (Morgan is 16274 before Vampyre Slayer now, where

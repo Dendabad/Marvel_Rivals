@@ -144,7 +144,7 @@ class StepScriptsTest {
             npcs += SceneEntity(555, "Guard", Tile(3234, 3427, 0))
         }
         val ctx = TaskContext(game, game, Conditions(game))
-        val task = com.hcimbot.plan.FollowGuardTask(555, hides)
+        val task = com.hcimbot.plan.FollowGuardTask(listOf(555), hides)
         task.tick(ctx)
         assertTrue(game.calls.none { it.startsWith("walk") }, "stays hidden while the guard is close: ${game.calls}")
         game.npcs.clear()

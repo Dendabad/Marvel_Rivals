@@ -502,7 +502,7 @@ class PickUpTask(private val itemIds: List<Int>, private val radius: Int = 8) : 
  * place once he has gone. Pauses (rather than risking the quest) if the guard cannot be found for a
  * while, or the walk takes far longer than it should.
  */
-class FollowGuardTask(private val guardId: Int, private val hides: List<Tile>) : BaseTask() {
+class FollowGuardTask(private val guardIds: List<Int>, private val hides: List<Tile>) : BaseTask() {
     override val description = "Follow the guard, hiding at ${hides.size} places"
     private var index = 0
     private var ticks = 0
@@ -522,11 +522,11 @@ class FollowGuardTask(private val guardId: Int, private val hides: List<Tile>) :
             ctx.log(if (cutscene) "A cutscene is playing, waiting" else "The cutscene has ended, following the guard")
         }
         if (cutscene) { ticks--; return TaskResult.Running }
-        val guard = game.nearestNpc(listOf(guardId))
+        val guard = game.nearestNpc(guardIds)
         if (guard == null) {
             // Out of sight behind a wall counts for the later stops: he has walked on.
             unseen++
-            if (unseen == 1 || unseen % 10 == 0) ctx.log("Cannot see the guard (id $guardId), $unseen ticks, at stop ${index + 1} of ${hides.size}")
+            if (unseen == 1 || unseen % 10 == 0) ctx.log("Cannot see the guard (ids $guardIds), $unseen ticks, at stop ${index + 1} of ${hides.size}")
             if (unseen >= LOST_TICKS) return TaskResult.Failed("lost sight of the guard at stop ${index + 1} of ${hides.size}")
             if (index >= hides.size) return TaskResult.Done
             // Not seen yet, or out of sight: still get to the hiding place, so the bot is never left standing.
@@ -537,7 +537,7 @@ class FollowGuardTask(private val guardId: Int, private val hides: List<Tile>) :
         unseen = 0
         if (!announced) {
             announced = true
-            ctx.log("Following the guard (id $guardId) at ${guard.tile}, stops ${hides.joinToString()}")
+            ctx.log("Following the guard (ids $guardIds) at ${guard.tile}, stops ${hides.joinToString()}")
         }
         if (index >= hides.size) return TaskResult.Done
 
