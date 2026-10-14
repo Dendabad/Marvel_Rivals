@@ -82,6 +82,7 @@ class OnlyIf(private val needed: (TaskContext) -> Boolean, private val task: Tas
 
 /** [anyFloor]: being within [radius] on another floor counts, e.g. near a town whose bank is upstairs. */
 class WalkTask(val tile: Tile, private val radius: Int = 3, private val anyFloor: Boolean = false) : BaseTask() {
+    private var announced = false
     override val description = "Walk to $tile"
 
     override fun tick(ctx: TaskContext): TaskResult {
@@ -90,6 +91,10 @@ class WalkTask(val tile: Tile, private val radius: Int = 3, private val anyFloor
         if (near.distanceTo(tile) <= radius) return TaskResult.Done
         // Only a walk in progress holds this back, not an animation: in a fight every hit plays one.
         if (ctx.game.isMoving) return TaskResult.Running
+        if (!announced) {
+            announced = true
+            ctx.log("Walking from $at to $tile")
+        }
         return attempt(ctx.actions.walkTo(tile), "walk to $tile")
     }
 }
