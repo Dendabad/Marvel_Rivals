@@ -269,6 +269,12 @@ class StepScripts(private val guide: Guide) {
         // kudos, so it is left out rather than guessed at.
         "b721b17da2" to { _ -> skip("the Natural History Quiz needs an answer table the bot does not have, and only gives a little Slayer and Hunter XP") },
 
+        // 78. "Talk to Shilop to continue Gertrudes Cat (2,2)": only the talk. Following Quest Helper here
+        // sent the bot off for the doogle leaves and sardine, which the guide fetches at step 201.
+        "f374255214" to { _ ->
+            auto(talk(listOf(3501), "Shilop", Tile(3220, 3435, 0), DialoguePlan.Numbered(listOf(2, 2))))
+        },
+
         // 21. "Talk to Father Urhney in the lumbridge swamp for Ghost Speak Amulet. (2,1) Wield this."
         "ce4913f789" to { _ ->
             auto(
