@@ -77,6 +77,9 @@ class FakeGame : GameState, GameActions {
         return true
     }
 
+    val spawns = mutableMapOf<String, List<Tile>>()
+    override fun npcSpawns(name: String): List<Tile> = spawns[name.lowercase()].orEmpty()
+
     val objectNames = mutableMapOf<String, Int>()
     override fun objectIdNamed(constant: String): Int? = objectNames[constant]
 

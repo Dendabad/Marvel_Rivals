@@ -26,7 +26,7 @@ With **Allow combat** on: 88 run, 6 skip, 6 pause, once the `draynor-fence` rout
 | 16 | Collect the Empty Jug, Bowl & Knife in Lumbridge kitchen | Runs | Take Empty Jug, Bowl, Knife in Lumbridge kitchen. |
 | 17 | Fill the jug & bowl on the sink in the kitchen [Monk's Friend] | Runs | Use item 1935 on Sink, then Use item 1923 on Sink. |
 | 18 | Complete 2nd Step of X Marks The Spot | Runs | Follows Quest Helper for xmarksthespot. guide.json leaves the digs out, so the bot uses the dig spots from Quest Helper's own source: it walks onto the spot and digs with the spade. |
-| 19 | Kill a giant rat with Wind Strike and collect the Bones + Raw Rat Meat [Druidic Ritual] | Runs | Runs only with Allow combat on. Casts Wind Strike on a giant rat and picks up the bones and meat. |
+| 19 | Kill a giant rat with Wind Strike and collect the Bones + Raw Rat Meat [Druidic Ritual] | Runs | Runs only with Allow combat on. Casts Wind Strike on a giant rat and picks up the bones and meat. With no rat in sight, it walks to the nearest spot where giant rats spawn (Lumbridge Swamp, from Microbot's NPC data) and looks there. |
 | 20 | Head West towards Draynor hugging the fence to avoid the Jail Guards | Runs | Follows the route you recorded as `draynor-fence`, so it hugs the fence exactly as you did. Until that route is recorded, it pauses and says how. |
 | 21 | Talk to Father Urhney in the lumbridge swamp for Ghost Speak Amulet. (2,1) Wield this. | Runs | Talk-to Father Urhney, then Equip Ghostspeak amulet. |
 | 22 | Take Leather Gloves on the table inside his house & wield | Runs | Take Leather Gloves on the table, then Equip Leather Gloves on the table. |

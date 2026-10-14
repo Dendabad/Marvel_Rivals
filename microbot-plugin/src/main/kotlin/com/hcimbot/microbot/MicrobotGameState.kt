@@ -127,6 +127,24 @@ class MicrobotGameState : GameState {
         nearest?.let { entity(it.id, it.name, it.worldLocation) }
     }
 
+    override fun npcSpawns(name: String): List<Tile> = spawns[name.lowercase()].orEmpty()
+
+    /** Microbot's NPC location data, by lower case NPC name. Read once, from Microbot's own jar. */
+    private val spawns: Map<String, List<Tile>> by lazy {
+        runCatching {
+            val stream = Microbot::class.java.getResourceAsStream(NPC_LOCATIONS) ?: return@runCatching emptyMap()
+            val json = stream.use { com.google.gson.JsonParser.parseReader(java.io.InputStreamReader(it, Charsets.UTF_8)).asJsonObject }
+            json.entrySet().associate { (npc, places) ->
+                npc.lowercase() to places.asJsonArray.flatMap { place ->
+                    place.asJsonObject.getAsJsonArray("coords")?.map { c ->
+                        val xyz = c.asJsonArray
+                        Tile(xyz[0].asInt, xyz[1].asInt, xyz[2].asInt)
+                    }.orEmpty()
+                }
+            }
+        }.getOrElse { emptyMap() }
+    }
+
     /** Read from RuneLite's gameval ObjectID by name, and remembered. */
     override fun objectIdNamed(constant: String): Int? = synchronized(objectIds) {
         objectIds.getOrPut(constant) { runCatching { Class.forName(OBJECT_IDS).getField(constant).getInt(null) }.getOrNull() }
@@ -172,6 +190,7 @@ class MicrobotGameState : GameState {
     companion object {
         private const val HISTORY = 50
         private const val OBJECT_IDS = "net.runelite.api.gameval.ObjectID"
+        private const val NPC_LOCATIONS = "/npc/npcs_locations.json"
 
         /** How far to look for an NPC, object or item. The loaded scene is about this big. */
         private const val SEARCH_RADIUS = 50

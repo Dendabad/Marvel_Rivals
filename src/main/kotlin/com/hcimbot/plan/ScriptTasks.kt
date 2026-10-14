@@ -80,6 +80,58 @@ class DigTask(val tile: Tile) : BaseTask() {
     }
 }
 
+/**
+ * Goes looking when no target is in sight: walks to the nearest place the NPC
+ * spawns, waits a little, then tries the next nearest. Only spots close by and
+ * outside the Wilderness count, so it never wanders off across the map.
+ */
+class Hunt(private val names: List<String>) {
+    private val tried = mutableListOf<Tile>()
+    private var walk: WalkTask? = null
+    private var looking = 0
+
+    fun found() {
+        walk = null
+        looking = 0
+    }
+
+    fun tick(ctx: TaskContext): TaskResult {
+        val what = names.firstOrNull() ?: "target"
+        val at = ctx.game.playerTile ?: return TaskResult.Running
+        walk?.let { going ->
+            when (val walked = going.tick(ctx)) {
+                TaskResult.Done -> Unit
+                else -> return walked
+            }
+            if (++looking < LOOK_TICKS) return TaskResult.Running
+            walk = null
+            looking = 0
+        }
+        if (tried.size >= MAX_SPOTS) return TaskResult.Failed("looked at ${tried.size} spots where $what spawns and found none")
+        val spot = names.flatMap { ctx.game.npcSpawns(it) }
+            .filter { it.plane == at.plane && !it.inWilderness && it.distanceTo(at) <= RANGE }
+            .filter { spot -> tried.none { it.distanceTo(spot) <= SAME_SPOT } }
+            .minByOrNull { it.distanceTo(at) }
+            ?: return TaskResult.Failed(
+                if (tried.isEmpty()) "no $what nearby, and no known spawn spot within $RANGE tiles"
+                else "looked at ${tried.size} spots where $what spawns and found none",
+            )
+        tried += spot
+        ctx.log("No $what in sight, going to look at $spot")
+        walk = WalkTask(spot, radius = 3)
+        return TaskResult.Running
+    }
+
+    companion object {
+        /** How far to go looking. Lumbridge castle to the swamp is about 40. */
+        const val RANGE = 60
+        /** Spots this close together are one place to look. */
+        const val SAME_SPOT = 8
+        const val LOOK_TICKS = 5
+        const val MAX_SPOTS = 8
+    }
+}
+
 class SellTask(
     private val shopkeeperIds: List<Int>,
     private val shopkeeperNames: List<String>,
@@ -194,6 +246,7 @@ class KillTask(
     private var kills = 0
     private var fighting = false
     private var take: TakeItemTask? = null
+    private val hunt = Hunt(npcNames)
     override val description = "Kill ${npcNames.firstOrNull() ?: npcIds} for ${loot.joinToString { it.name }}"
 
     override fun tick(ctx: TaskContext): TaskResult {
@@ -216,7 +269,8 @@ class KillTask(
         }
         if (kills >= maxKills) return TaskResult.Failed("killed $kills and still have no ${missing.joinToString { it.name }}")
         if (game.isBusy) return TaskResult.Running
-        val target = game.nearestNpc(npcIds, npcNames) ?: return TaskResult.Failed("no ${npcNames.firstOrNull() ?: "target"} nearby")
+        val target = game.nearestNpc(npcIds, npcNames) ?: return hunt.tick(ctx)
+        hunt.found()
         val started = if (spell != null) ctx.actions.castOnNpc(spell, target) else ctx.actions.interactNpc(target, "Attack")
         if (started) fighting = true
         return attempt(started, "attack ${target.name}")

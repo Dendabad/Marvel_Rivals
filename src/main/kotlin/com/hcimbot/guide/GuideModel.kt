@@ -16,6 +16,9 @@ data class Tile(val x: Int, val y: Int, val plane: Int) {
         else maxOf(kotlin.math.abs(x - other.x), kotlin.math.abs(y - other.y))
 
     override fun toString() = "($x, $y, $plane)"
+
+    /** In the Wilderness, where a hardcore account must never wander by itself. */
+    val inWilderness: Boolean get() = plane == 0 && x in 2944..3391 && y in 3520..3967
 }
 
 /** guide.json writes every point as [x, y, plane]. */

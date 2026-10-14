@@ -46,6 +46,9 @@ interface GameState {
     fun nearestNpc(ids: Collection<Int>, names: Collection<String> = emptyList(), near: Tile? = null): SceneEntity?
     fun nearestObject(ids: Collection<Int>, names: Collection<String> = emptyList(), near: Tile? = null): SceneEntity?
 
+    /** Where NPCs called [name] spawn, from Microbot's NPC location data. Empty when unknown. */
+    fun npcSpawns(name: String): List<Tile> = emptyList()
+
     /** The object id RuneLite names [constant] (its gameval ObjectID), for guide data that gives only the name. */
     fun objectIdNamed(constant: String): Int? = null
 

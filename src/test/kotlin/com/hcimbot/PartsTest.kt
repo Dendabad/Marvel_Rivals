@@ -190,6 +190,37 @@ class PartsTest {
     }
 
     @Test
+    fun `with no rat in sight the bot goes to where giant rats spawn`() {
+        val game = FakeGame()
+        game.playerTile = Tile(3222, 3218, 0)
+        game.spawns["giant rat"] = listOf(
+            Tile(3197, 3201, 0), // Lumbridge Swamp, close by
+            Tile(3292, 3377, 0), // Varrock, too far to go looking
+            Tile(3040, 3700, 0), // the Wilderness: never
+        )
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.KillTask(emptyList(), listOf("Giant rat"), listOf(com.hcimbot.guide.ItemRef("Bones", listOf(526))), spell = "WIND_STRIKE")
+
+        task.tick(ctx)
+        task.tick(ctx)
+        assertEquals(listOf("walk (3197, 3201, 0)"), game.calls)
+
+        game.npcs += com.hcimbot.game.SceneEntity(2510, "Giant rat", Tile(3199, 3200, 0))
+        repeat(6) { task.tick(ctx) }
+        assertTrue("cast WIND_STRIKE on Giant rat" in game.calls, game.calls.toString())
+    }
+
+    @Test
+    fun `hunting gives up rather than going far or into the Wilderness`() {
+        val game = FakeGame()
+        game.spawns["giant rat"] = listOf(Tile(3040, 3700, 0), Tile(3292, 3377, 0))
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val result = com.hcimbot.plan.KillTask(emptyList(), listOf("Giant rat"), emptyList<com.hcimbot.guide.ItemRef>() + com.hcimbot.guide.ItemRef("Bones", listOf(526))).tick(ctx)
+        assertTrue(result is com.hcimbot.plan.TaskResult.Failed, result.toString())
+        assertTrue(game.calls.isEmpty())
+    }
+
+    @Test
     fun `quest objects with only a RuneLite name are looked up`() {
         val game = FakeGame()
         game.objectNames["PORCINE_NOTICEBOARD"] = 40307
