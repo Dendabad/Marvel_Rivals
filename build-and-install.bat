@@ -5,6 +5,13 @@ rem Only when the small loader plugin itself has changed does Microbot need clos
 cd /d "%~dp0"
 title HCIM Guide Bot build
 
+rem Unzipping a new download over this folder never deletes files the project removed,
+rem and a stale one breaks the build. These are every file ever removed.
+for %%R in ("microbot-plugin\src\main\kotlin\com\hcimbot\microbot\HcimGuideBotPlugin.kt" "microbot-plugin\src\main\kotlin\com\hcimbot\microbot\FileRouteStore.kt" "src\main\kotlin\com\hcimbot\route\Routes.kt" "src\main\kotlin\com\hcimbot\sdk\BotClientActions.kt" "src\test\kotlin\com\hcimbot\RouteTest.kt") do if exist %%R (
+    del %%R
+    echo Removed an old file the project no longer has: %%~R
+)
+
 set "MICROBOT_JAR="
 for %%F in ("%USERPROFILE%\.microbot\microbot-*.jar") do set "MICROBOT_JAR=%%~fF"
 if not defined MICROBOT_JAR (
