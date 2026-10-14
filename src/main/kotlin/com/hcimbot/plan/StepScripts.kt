@@ -6,6 +6,7 @@ import com.hcimbot.guide.Guide
 import com.hcimbot.guide.ItemRef
 import com.hcimbot.guide.Step
 import com.hcimbot.guide.Tile
+import com.hcimbot.route.RouteStore
 
 /**
  * Hand written plans for steps whose guide data says less than the step's text.
@@ -20,7 +21,7 @@ import com.hcimbot.guide.Tile
  * reason rather than guess, so a script that meets something unexpected
  * pauses the bot.
  */
-class StepScripts(private val guide: Guide) {
+class StepScripts(private val guide: Guide, private val routes: RouteStore? = null) {
 
     fun planFor(step: Step, settings: BotSettings): StepPlan? = scripts[step.id]?.invoke(settings)
 
@@ -118,6 +119,10 @@ class StepScripts(private val guide: Guide) {
         "9b78ddbf34" to { settings ->
             combat(settings, KillTask(emptyList(), listOf("Giant rat"), listOf(item("Bones", 526), item("Raw rat meat", 2134)), spell = "WIND_STRIKE"))
         },
+
+        // 20. "Head West towards Draynor hugging the fence to avoid the Jail Guards"
+        // The shortest path passes the guards, so this walks a route the player recorded.
+        "6af6abb1f6" to { _ -> auto(FollowRouteTask(DRAYNOR_FENCE_ROUTE, routes)) },
 
         // 21. "Talk to Father Urhney in the lumbridge swamp for Ghost Speak Amulet. (2,1) Wield this."
         "ce4913f789" to { _ ->
@@ -271,7 +276,7 @@ class StepScripts(private val guide: Guide) {
         },
     )
 
-    private companion object {
+    companion object {
         // Places used by several scripts.
         private val LUMBRIDGE_SOUTH_STAIRS = Tile(3206, 3208, 0)
         private val LUMBRIDGE_KITCHEN = Tile(3210, 3214, 0)
@@ -280,6 +285,9 @@ class StepScripts(private val guide: Guide) {
         private val VARROCK_KITCHEN_STAIRS = Tile(3219, 3497, 0)
         private val VARROCK_KITCHEN = Tile(3222, 3495, 0)
         private val YARLO_HOUSE = Tile(3244, 3396, 0)
+
+        /** The recorded route for step 20. Record it under this name. */
+        const val DRAYNOR_FENCE_ROUTE = "draynor-fence"
 
         // Ids from RuneLite's gameval lists.
         private const val AIR_RUNE = 556

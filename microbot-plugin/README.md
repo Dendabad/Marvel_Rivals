@@ -65,6 +65,8 @@ Find **HCIM Guide Bot** in Microbot's plugin list and open its settings:
 | Eat at hitpoints % | 60 | |
 | Stop at hitpoints % | 40 | Stops the bot outright. |
 | Pause when attacked | on | Pauses if a monster targets you during a step that is not a fight. |
+| Record route | off | Records a safe route you walk, see below. |
+| Route name | draynor-fence | The name to record under. |
 | guide.json path | empty | Only if the B0aty plugin is not installed. |
 
 Log in, then switch the plugin on. It starts at the first step not yet ticked in the B0aty guide.
@@ -76,6 +78,21 @@ Log in, then switch the plugin on. It starts at the first step not yet ticked in
 - To retry the paused step from scratch, switch the plugin off and on again.
 - To stop, switch the plugin off.
 - It stops for good below the hitpoint limit. A watchdog checks hitpoints three times a second, even in the middle of a long walk, and can stop the walk or eat.
+
+## Recording a safe route
+
+Some steps say to walk a particular way to stay safe, such as step 20, "Head West towards Draynor hugging the fence to avoid the Jail Guards". The walker always takes the shortest path, so for these the bot follows a route you recorded instead. You walk it once, and the bot walks it the same way every time after that.
+
+To record step 20's route:
+
+1. Get to where step 20 starts (the end of step 19). The easiest way is to let the bot run until it pauses on step 20.
+2. In the bot's settings, check **Route name** says `draynor-fence`, then turn on **Record route**.
+3. Walk the safe way yourself, hugging the fence, all the way to Draynor. While recording, the bot does nothing else and the status line counts the tiles.
+4. Turn **Record route** off. A message shows where the route was saved.
+
+The bot carries on with step 20 by itself, following the new route. Routes are saved as plain text in `C:\Users\<you>\.runelite\hcim-guide-bot\routes\`, one file per route, like `draynor-fence.txt`. Send me a file if you want a route built into the bot for good.
+
+The bot only follows a route from close to its start (within 15 tiles), so it never wanders across the danger to reach it. If you record a route again under the same name, the new one replaces the old.
 
 ## If something goes wrong
 

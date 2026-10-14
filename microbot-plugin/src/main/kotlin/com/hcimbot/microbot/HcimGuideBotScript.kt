@@ -5,6 +5,7 @@ import com.hcimbot.engine.GuideRunner
 import com.hcimbot.guide.Guide
 import com.hcimbot.guide.GuideLoader
 import com.hcimbot.progress.SharedProgressStore
+import com.hcimbot.route.RouteRecorder
 import java.io.File
 import java.util.concurrent.TimeUnit
 import net.runelite.api.Skill
@@ -24,6 +25,8 @@ class HcimGuideBotScript : Script() {
     private val log = LoggerFactory.getLogger(HcimGuideBotScript::class.java)
     private val game = MicrobotGameState()
     private val actions = MicrobotActions()
+    private val routes = FileRouteStore()
+    private val recorder = RouteRecorder()
     @Volatile private var runner: GuideRunner? = null
     private var settings = BotSettings()
     private var shownState: GuideRunner.State? = null
@@ -40,6 +43,7 @@ class HcimGuideBotScript : Script() {
     private fun tick(config: HcimGuideBotConfig) {
         try {
             if (!gate() || !Microbot.isLoggedIn()) return
+            if (record(config)) return
             val current = runner ?: start(config) ?: return
             game.refresh()
             current.onGameTick()
@@ -51,6 +55,31 @@ class HcimGuideBotScript : Script() {
             runner?.halt("unexpected error: ${e.message}. Check the client log.")
             runner?.let(::report)
         }
+    }
+
+    /**
+     * While Record route is on, the bot only records: each tile the player
+     * stands on is added and the route saved, so closing the client loses
+     * nothing. Turning it off ends the recording. Returns true while recording.
+     */
+    private fun record(config: HcimGuideBotConfig): Boolean {
+        val name = config.routeName()
+        if (!config.recordRoute()) {
+            if (recorder.size > 0) {
+                val file = routes.fileFor(name)
+                Microbot.showMessage("HCIM Guide Bot saved route \"$name\" (${recorder.size} tiles) to\n$file", MESSAGE_MS)
+                recorder.clear()
+                // The plan for the current step may have been made before the route existed.
+                runner?.resume()
+            }
+            return false
+        }
+        val at = MicrobotGameState.onClient {
+            Microbot.getClient().localPlayer?.worldLocation?.let { com.hcimbot.guide.Tile(it.x, it.y, it.plane) }
+        }
+        if (recorder.record(at)) routes.save(name, recorder.tiles())
+        Microbot.status = "HCIM bot RECORDING route \"$name\": ${recorder.size} tiles. Turn off Record route to finish."
+        return true
     }
 
     /** Loads the guide on the first tick, since it needs the B0aty plugin to be running. */
@@ -69,7 +98,7 @@ class HcimGuideBotScript : Script() {
             readBot = { configManager.getRSProfileConfiguration(SharedProgressStore.BOT_GROUP, SharedProgressStore.BOT_KEY) },
             writeBot = { configManager.setRSProfileConfiguration(SharedProgressStore.BOT_GROUP, SharedProgressStore.BOT_KEY, it) },
         )
-        return GuideRunner(guide, game, actions, progress, settings) { log.info(it) }
+        return GuideRunner(guide, game, actions, progress, settings, { log.info(it) }, routes)
             .also { it.start(); runner = it }
     }
 

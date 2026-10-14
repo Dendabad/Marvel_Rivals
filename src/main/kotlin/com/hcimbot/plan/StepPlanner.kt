@@ -7,6 +7,7 @@ import com.hcimbot.guide.Step
 import com.hcimbot.guide.Target
 import com.hcimbot.guide.Travel
 import com.hcimbot.guide.toTile
+import com.hcimbot.route.RouteStore
 
 sealed interface StepPlan {
     /**
@@ -41,8 +42,12 @@ sealed interface StepPlan {
  * carries for it. Anything the data does not pin down becomes a manual step,
  * so the bot pauses rather than guess on a hardcore account.
  */
-class StepPlanner(private val guide: Guide, private val settings: BotSettings) {
-    private val scripts = StepScripts(guide)
+class StepPlanner(
+    private val guide: Guide,
+    private val settings: BotSettings,
+    routes: RouteStore? = null,
+) {
+    private val scripts = StepScripts(guide, routes)
 
     fun plan(step: Step): StepPlan {
         // A hand written script knows more about a step than its guide data does.

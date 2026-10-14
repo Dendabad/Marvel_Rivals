@@ -10,6 +10,7 @@ import com.hcimbot.plan.Task
 import com.hcimbot.plan.TaskContext
 import com.hcimbot.plan.TaskResult
 import com.hcimbot.progress.ProgressStore
+import com.hcimbot.route.RouteStore
 
 /**
  * Follows the B0aty guide one step at a time. Call [onGameTick] from the
@@ -27,6 +28,7 @@ class GuideRunner(
     private val progress: ProgressStore,
     private val settings: BotSettings = BotSettings(),
     private val log: (String) -> Unit = {},
+    routes: RouteStore? = null,
 ) {
     sealed interface State {
         object Stopped : State
@@ -45,7 +47,7 @@ class GuideRunner(
 
     private val conditions = Conditions(game)
     private val completion = StepCompletion(guide, game, conditions)
-    private val planner = StepPlanner(guide, settings)
+    private val planner = StepPlanner(guide, settings, routes)
     private val safety = SafetyMonitor(settings)
     private val context = TaskContext(game, actions, conditions, log)
 

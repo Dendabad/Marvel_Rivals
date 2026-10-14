@@ -4,7 +4,7 @@ What the bot does at each of the first 100 steps of the B0aty HCIM Guide V3. Eve
 
 **Runs** means the bot does the step on its own. **Skips** means there is nothing to do in the game (a heading or a reminder). **Pauses** means it stops and waits for you to do the step and tick it in the plugin.
 
-With **Allow combat** on: 87 run, 6 skip, 7 pause. With it off, the two fights (#19 and #27) pause too.
+With **Allow combat** on: 88 run, 6 skip, 6 pause, once the `draynor-fence` route is recorded. With it off, the two fights (#19 and #27) pause too.
 
 | # | Step | Bot | What happens |
 | --- | --- | --- | --- |
@@ -27,7 +27,7 @@ With **Allow combat** on: 87 run, 6 skip, 7 pause. With it off, the two fights (
 | 17 | Fill the jug & bowl on the sink in the kitchen [Monk's Friend] | Runs | Use item 1935 on Sink, then Use item 1923 on Sink. |
 | 18 | Complete 2nd Step of X Marks The Spot | Runs | Follows Quest Helper for xmarksthespot. Quest Helper has no data for the digs, so this pauses for you to dig. It moves on as soon as the dig counts. |
 | 19 | Kill a giant rat with Wind Strike and collect the Bones + Raw Rat Meat [Druidic Ritual] | Runs | Runs only with Allow combat on. Casts Wind Strike on a giant rat and picks up the bones and meat. |
-| 20 | Head West towards Draynor hugging the fence to avoid the Jail Guards | Pauses | Still pauses: the walker cannot follow the guide's route along the fence, and the Jail Guards are dangerous at this level. |
+| 20 | Head West towards Draynor hugging the fence to avoid the Jail Guards | Runs | Follows the route you recorded as `draynor-fence`, so it hugs the fence exactly as you did. Until that route is recorded, it pauses and says how. |
 | 21 | Talk to Father Urhney in the lumbridge swamp for Ghost Speak Amulet. (2,1) Wield this. | Runs | Talk-to Father Urhney, then Equip Ghostspeak amulet. |
 | 22 | Take Leather Gloves on the table inside his house & wield | Runs | Take Leather Gloves on the table, then Equip Leather Gloves on the table. |
 | 23 | Head to the Wizards Tower | Runs | Walk to (3114, 3181, 0). |
