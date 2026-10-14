@@ -245,6 +245,9 @@ class Instruction(
     val conditional: Boolean = false,
     val whenIn: List<Instruction> = emptyList(),
     @SerializedName("when") val condition: Requirement? = null,
+    /** Places Quest Helper marks along a route, e.g. the hiding places while following a guard. */
+    @SerializedName("tiles") val points: List<List<Int>> = emptyList(),
 ) {
     val tile: Tile? get() = point.toTile()
+    val tiles: List<Tile> get() = points.mapNotNull { it.toTile() }
 }

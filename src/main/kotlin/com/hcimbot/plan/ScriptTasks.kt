@@ -494,3 +494,60 @@ class PickUpTask(private val itemIds: List<Int>, private val radius: Int = 8) : 
     }
 }
 
+
+
+/**
+ * Children of the Sun's tailing part: follow a guard through Varrock, standing still at each marked hiding
+ * place until he has walked on, then moving to the next, so he never sees the player. Done at the last
+ * place once he has gone. Pauses (rather than risking the quest) if the guard cannot be found for a
+ * while, or the walk takes far longer than it should.
+ */
+class FollowGuardTask(private val guardId: Int, private val hides: List<Tile>) : BaseTask() {
+    override val description = "Follow the guard, hiding at ${hides.size} places"
+    private var index = 0
+    private var ticks = 0
+    private var unseen = 0
+    private var announced = false
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        val me = game.playerTile ?: return TaskResult.Running
+        if (++ticks > MAX_TICKS) return TaskResult.Failed("following the guard took over $MAX_TICKS ticks")
+        val guard = game.nearestNpc(listOf(guardId))
+        if (guard == null) {
+            // Out of sight behind a wall counts for the later stops: he has walked on.
+            if (++unseen >= LOST_TICKS) return TaskResult.Failed("lost sight of the guard at stop ${index + 1} of ${hides.size}")
+            return if (index >= hides.size) TaskResult.Done else TaskResult.Running
+        }
+        unseen = 0
+        if (!announced) {
+            announced = true
+            ctx.log("Following the guard (id $guardId) at ${guard.tile}, stops ${hides.joinToString()}")
+        }
+        if (index >= hides.size) return TaskResult.Done
+
+        val hide = hides[index]
+        if (me.distanceTo(hide) > 0) {
+            if (game.isMoving) return TaskResult.Running
+            return attempt(ctx.actions.walkTo(hide), "walk to hiding place $hide")
+        }
+        // Hidden: wait for the guard to move on. He has when he is clear of this place and nearer the
+        // next one, or so far ahead that waiting longer would lose him.
+        val next = hides.getOrNull(index + 1)
+        val clear = guard.tile.distanceTo(hide) >= CLEAR_OF_HIDE
+        val ahead = next == null || guard.tile.distanceTo(next) < hide.distanceTo(next)
+        val losing = guard.tile.distanceTo(me) >= TOO_FAR
+        if ((clear && ahead) || losing) {
+            index++
+            ctx.log("Guard at ${guard.tile}, moving on to stop ${index + 1} of ${hides.size}")
+        }
+        return TaskResult.Running
+    }
+
+    companion object {
+        const val MAX_TICKS = 600
+        const val LOST_TICKS = 40
+        const val CLEAR_OF_HIDE = 5
+        const val TOO_FAR = 12
+    }
+}

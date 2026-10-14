@@ -184,6 +184,12 @@ class MicrobotGameState : GameState {
 
     private val objectIds = HashMap<String, Int?>()
 
+    override fun npcIdNamed(constant: String): Int? = synchronized(npcIds) {
+        npcIds.getOrPut(constant) { runCatching { Class.forName(NPC_IDS).getField(constant).getInt(null) }.getOrNull() }
+    }
+
+    private val npcIds = HashMap<String, Int?>()
+
     override fun nearestObject(ids: Collection<Int>, names: Collection<String>, near: Tile?): SceneEntity? = onClient {
         val query = Microbot.getRs2TileObjectCache().query()
         val found = if (ids.isNotEmpty()) query.withIds(*ids.toIntArray()) else query.withNames(*names.toTypedArray())
@@ -222,6 +228,7 @@ class MicrobotGameState : GameState {
     companion object {
         private const val HISTORY = 50
         private const val OBJECT_IDS = "net.runelite.api.gameval.ObjectID"
+        private const val NPC_IDS = "net.runelite.api.gameval.NpcID"
         private const val NPC_LOCATIONS = "/npc/npcs_locations.json"
 
         /** How far to look for an NPC, object or item. The loaded scene is about this big. */

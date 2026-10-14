@@ -83,6 +83,9 @@ interface GameState {
     /** The object id RuneLite names [constant] (its gameval ObjectID), for guide data that gives only the name. */
     fun objectIdNamed(constant: String): Int? = null
 
+    /** The NPC id RuneLite names [constant] (its gameval NpcID), for quest NPCs the guide data gives no id for. */
+    fun npcIdNamed(constant: String): Int? = null
+
     /** Nearest item lying on the ground (or on a table) with one of these ids. */
     fun nearestGroundItem(ids: Collection<Int>): SceneEntity?
 

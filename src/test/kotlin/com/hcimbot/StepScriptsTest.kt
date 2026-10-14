@@ -137,6 +137,24 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `following the guard moves to the next hiding place only once he has walked on`() {
+        val hides = listOf(Tile(3233, 3427, 0), Tile(3240, 3417, 0))
+        val game = FakeGame().apply {
+            playerTile = Tile(3233, 3427, 0)
+            npcs += SceneEntity(555, "Guard", Tile(3234, 3427, 0))
+        }
+        val ctx = TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.FollowGuardTask(555, hides)
+        task.tick(ctx)
+        assertTrue(game.calls.none { it.startsWith("walk") }, "stays hidden while the guard is close: ${game.calls}")
+        game.npcs.clear()
+        game.npcs += SceneEntity(555, "Guard", Tile(3239, 3420, 0))
+        task.tick(ctx)
+        task.tick(ctx)
+        assertTrue(game.calls.any { it.startsWith("walk (3240, 3417, 0)") }, game.calls.toString())
+    }
+
+    @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
         val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()
