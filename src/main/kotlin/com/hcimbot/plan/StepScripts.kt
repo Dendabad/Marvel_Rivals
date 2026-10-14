@@ -486,6 +486,7 @@ class StepScripts(private val guide: Guide) {
                     LeavePenTask(),
                     MakePlanksTask(planks = 10, waxwood = 3),
                 ),
+                trustTasks = true,
                 ignoreStartSignal = true,
             )
         },
