@@ -141,3 +141,11 @@ If the Windows environment variable `HCIM_REPORT_TOKEN` is set, the bot uploads 
 this repo (`reports/latest.txt`) each time it pauses. Use a fine grained GitHub token for this one repo with only
 Contents read and write. The token is read from the environment, never stored by the bot. The report holds position, bag,
 nearby objects and chat text, so keep the repo private. Without the variable nothing is sent.
+
+## AI help for stuck steps
+
+If the environment variable `HCIM_AI_KEY` is set to an Anthropic API key, the bot asks a Claude model what to do whenever it
+pauses, then does what it says and retries the step. The model can only choose from a fixed list of actions (walk, click an
+NPC, object or item with a menu option, take an item, pick a chat option, continue, wait). Attacks, drops, destroying items and
+the Wilderness are refused. It asks at most twice per step and 25 times per session. The key is read from the environment and
+never stored. The report sent holds position, bag, nearby things and chat text. Without the variable nothing is sent.

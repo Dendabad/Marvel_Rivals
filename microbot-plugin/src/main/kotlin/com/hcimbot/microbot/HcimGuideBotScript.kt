@@ -37,6 +37,11 @@ class HcimGuideBotScript(private val bankPin: () -> String? = { null }) : Script
     /** Set by the Pause button, hotkey or setting. Read directly, so pausing never waits on a setting being re read. */
     @Volatile private var paused = false
     private val skipRequested = AtomicBoolean(false)
+    /** The AI's plan for a stuck step, running a tick at a time, and how often each step has been tried. */
+    @Volatile private var aiPlan: com.hcimbot.ai.AiExecutor? = null
+    @Volatile private var aiAsking = false
+    private val aiTries = HashMap<String, Int>()
+    private var aiAsked = 0
     private val retryRequested = AtomicBoolean(false)
     @Volatile private var statusNow: BotStatus = BotStatus.NOT_STARTED
 
@@ -193,6 +198,7 @@ class HcimGuideBotScript(private val bankPin: () -> String? = { null }) : Script
             game.refresh()
             walkerOverrides.apply(NO_SHIPS + current.walkerOverrides)
             if (answerBankPin()) return
+            if (runAiPlan(current)) return
             current.onGameTick()
             // A step that just ended takes its walker overrides with it, before the next one walks.
             walkerOverrides.apply(NO_SHIPS + current.walkerOverrides)
@@ -243,6 +249,50 @@ class HcimGuideBotScript(private val bankPin: () -> String? = { null }) : Script
             runner?.resumeWhereLeft()
         }
         return false
+    }
+
+    /**
+     * Runs the AI's plan for a stuck step, a tick at a time. True while it is running (the runner waits), and when it is
+     * done the step is tried again from where the player now is.
+     */
+    private fun runAiPlan(runner: GuideRunner): Boolean {
+        val plan = aiPlan ?: return false
+        return when (plan.tick(game, actions)) {
+            com.hcimbot.ai.AiExecutor.State.Running -> true
+            else -> {
+                aiPlan = null
+                note("AI plan finished, trying the step again")
+                runner.replan()
+                runner.resume()
+                true
+            }
+        }
+    }
+
+    /** Asks the AI what to do about a step that just paused, in the background, at most twice per step. */
+    private fun askAi(runner: GuideRunner, state: GuideRunner.State.Paused) {
+        if (!AiAdvisor.enabled() || aiAsking || aiPlan != null || aiAsked >= AI_SESSION_LIMIT) return
+        val step = stepLine(runner)
+        val tries = aiTries.merge(step, 1, Int::plus) ?: 1
+        if (tries > AI_TRIES_PER_STEP) return
+        val text = runCatching { report() }.getOrNull() ?: return
+        aiAsking = true
+        aiAsked++
+        note("Asking the AI about this pause (try $tries)")
+        Thread {
+            try {
+                val reply = AiAdvisor.advise(step, state.reason, text)
+                val suggested = reply?.let { com.hcimbot.ai.AiAction.parse(it) }.orEmpty()
+                if (suggested.isEmpty()) {
+                    note("The AI had no actions to suggest")
+                } else {
+                    note("AI plan: ${suggested.joinToString("; ")}")
+                    aiPlan = com.hcimbot.ai.AiExecutor(suggested, ::note)
+                }
+            } finally {
+                aiAsking = false
+            }
+        }.apply { isDaemon = true; start() }
     }
 
     /**
@@ -318,6 +368,7 @@ class HcimGuideBotScript(private val bankPin: () -> String? = { null }) : Script
             // The timed message does not block, which matters when the watchdog thread reports.
             Microbot.showMessage("HCIM Guide Bot paused at ${stepLine(runner)}\n\n$why\n\nDo it yourself and the bot carries on once the game shows it is done. If it does not notice, press Skip in the bot's sidebar (the green H) to mark it done, or Retry to have the bot try again.", MESSAGE_MS)
         }
+        if (state != shownState && state is GuideRunner.State.Paused) askAi(runner, state)
         if (state != shownState && state is GuideRunner.State.Paused && ReportUploader.enabled()) {
             // Off the game's threads: the upload is a network call. The report is read here, then sent.
             val text = runCatching { report() }.getOrNull()
@@ -511,6 +562,8 @@ class HcimGuideBotScript(private val bankPin: () -> String? = { null }) : Script
         private const val WATCHDOG_MS = 300L
 
         /** A drink takes a game tick or two to show in the hitpoints, so do not drink twice for one hit. */
+        private const val AI_TRIES_PER_STEP = 2
+        private const val AI_SESSION_LIMIT = 25
         private const val DRINK_GAP_MS = 1_800L
         private const val WARNING_GAP_MS = 1_500L
 
