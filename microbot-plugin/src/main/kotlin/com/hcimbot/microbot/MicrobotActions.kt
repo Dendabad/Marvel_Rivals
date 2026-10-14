@@ -131,7 +131,6 @@ class MicrobotActions : GameActions {
         }
         // Not found: not the Space key, which makes whichever item was made last.
         return false
-    }.getOrDefault(false)
     }
 
     /**
