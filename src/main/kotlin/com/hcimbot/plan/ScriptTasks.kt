@@ -26,12 +26,12 @@ class ItemActionTask(
     private val itemId: Int,
     private val action: String,
     private val dialogue: DialoguePlan = DialoguePlan.None,
-    /** For "Read" on a book: it stays open on screen, and clicks go to it, so press Escape when done. */
+    /** For "Read" on a book: it stays open on screen, and clicks go to it, so close it when done. */
     private val closeAfter: Boolean = false,
 ) : BaseTask() {
     private var used = false
     private var settled = 0
-    private var closed = false
+    private var closes = 0
     override val description = "$action item $itemId"
 
     override fun tick(ctx: TaskContext): TaskResult {
@@ -48,8 +48,12 @@ class ItemActionTask(
         if (game.isBusy) return TaskResult.Running
         if (used) {
             if (++settled < SETTLE) return TaskResult.Running
-            if (closeAfter && !closed) {
-                closed = ctx.actions.pressEscape()
+            if (closeAfter && closes < 2) {
+                // Twice, a few ticks apart, in case the first click missed. Closing a closed window does nothing.
+                if (settled % 3 == 0) {
+                    ctx.actions.closeWindow()
+                    closes++
+                }
                 return TaskResult.Running
             }
             return TaskResult.Done

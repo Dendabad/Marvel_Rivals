@@ -278,6 +278,19 @@ class MicrobotGameState : GameState {
             return Microbot.getClient().widgetRoots?.firstNotNullOfOrNull { visit(it) }
         }
 
+        /** The first visible widget with a [action] option, like a window's Close button. Client thread. */
+        fun widgetWithAction(action: String): net.runelite.api.widgets.Widget? {
+            fun visit(w: net.runelite.api.widgets.Widget?): net.runelite.api.widgets.Widget? {
+                if (w == null || w.isHidden) return null
+                if (w.actions?.any { it != null && Text.removeTags(it).trim().equals(action, ignoreCase = true) } == true && w.bounds.width > 0) return w
+                for (group in listOf(w.dynamicChildren, w.staticChildren, w.nestedChildren)) {
+                    group?.forEach { child -> visit(child)?.let { return it } }
+                }
+                return null
+            }
+            return Microbot.getClient().widgetRoots?.firstNotNullOfOrNull { visit(it) }
+        }
+
         fun <T> onClient(block: () -> T?): T? =
             Microbot.getClientThread().runOnClientThreadOptional(Callable { block() }).orElse(null)
     }

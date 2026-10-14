@@ -113,12 +113,22 @@ class MicrobotActions : GameActions {
         return true
     }
 
-    /** Found by name: Microbot's keyboard helper, which the stub used to build does not have. */
-    override fun pressEscape(): Boolean = runCatching {
-        Class.forName("net.runelite.client.plugins.microbot.util.keyboard.Rs2Keyboard")
-            .getMethod("keyPress", Int::class.javaPrimitiveType).invoke(null, java.awt.event.KeyEvent.VK_ESCAPE)
-        true
-    }.getOrDefault(false)
+    /**
+     * Clicks the Close button of the open window (a book, say), found as a visible widget whose action is
+     * "Close". Falls back to Escape, by name since Microbot's keyboard helper is not in the stub used to build.
+     */
+    override fun closeWindow(): Boolean {
+        val bounds = onClient { MicrobotGameState.widgetWithAction("Close")?.bounds }
+        if (bounds != null) {
+            Microbot.getMouse().click(bounds)
+            return true
+        }
+        return runCatching {
+            Class.forName("net.runelite.client.plugins.microbot.util.keyboard.Rs2Keyboard")
+                .getMethod("keyPress", Int::class.javaPrimitiveType).invoke(null, java.awt.event.KeyEvent.VK_ESCAPE)
+            true
+        }.getOrDefault(false)
+    }
 
     override fun castSpell(spellName: String, widgetId: Int): Boolean {
         val spell = spellFor(spellName) ?: return false
