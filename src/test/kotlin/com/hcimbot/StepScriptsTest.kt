@@ -109,8 +109,8 @@ class StepScriptsTest {
     @Test
     fun `Dr Harlow's beer question is answered by agreeing, not by refusing`() {
         val plan = com.hcimbot.plan.DialoguePlan.Texts(com.hcimbot.plan.QuestFills.extraDialogue("vampyreslayer"))
-        val choice = plan.choose(listOf("No, you've had enough.", "Ok, I'll get you a beer.", "Never mind."))
-        assertEquals(com.hcimbot.plan.DialoguePlan.Choice.ByText("Ok, I'll get you a beer."), choice)
+        val choice = plan.choose(listOf("Yes, here you go.", "No. I think you've had enough."))
+        assertEquals(com.hcimbot.plan.DialoguePlan.Choice.ByText("Yes, here you go."), choice)
     }
 
     @Test

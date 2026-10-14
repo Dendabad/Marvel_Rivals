@@ -27,7 +27,7 @@ object QuestFills {
         "vampyreslayer" to listOf(
             "I need your help dealing with a vampyre",
             // Dr Harlow asking for a beer: the agreeing answer, never "No, you've had enough".
-            "get you a beer", "buy you a beer", "got you a beer", "have a beer", "here's a beer", "here is a beer",
+            "Yes, here you go", "get you a beer", "buy you a beer", "got you a beer", "have a beer", "here's a beer", "here is a beer",
         ),
     )
 
