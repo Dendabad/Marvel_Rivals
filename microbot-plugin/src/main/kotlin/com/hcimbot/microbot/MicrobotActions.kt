@@ -34,6 +34,8 @@ class MicrobotActions : GameActions {
         private set
 
     override fun walkTo(tile: Tile): Boolean {
+        // In an instance the walker's map does not apply, and the places are close: click along the canvas.
+        if (Instances.inInstance()) return Rs2Walker.walkFastCanvas(tile.toWorldPoint())
         walking = true
         try {
             return when (Rs2Walker.walkWithState(WorldPoint(tile.x, tile.y, tile.plane), ARRIVE_WITHIN)) {
@@ -136,7 +138,7 @@ class MicrobotActions : GameActions {
         return found.click("")
     }
 
-    override fun stepOnto(tile: Tile): Boolean = Rs2Walker.walkFastCanvas(WorldPoint(tile.x, tile.y, tile.plane))
+    override fun stepOnto(tile: Tile): Boolean = Rs2Walker.walkFastCanvas(tile.toWorldPoint())
 
     override fun itemAction(itemId: Int, action: String): Boolean =
         if (Rs2Inventory.get(itemId) != null) Rs2Inventory.interact(itemId, action) else Rs2Equipment.interact(itemId, action)
@@ -226,6 +228,6 @@ class MicrobotActions : GameActions {
         fun spellFor(spellName: String): MagicAction? =
             runCatching { MagicAction.valueOf(RENAMED[spellName] ?: spellName) }.getOrNull()
 
-        private fun Tile.toWorldPoint() = WorldPoint(x, y, plane)
+        private fun Tile.toWorldPoint() = Instances.toInstance(WorldPoint(x, y, plane))
     }
 }

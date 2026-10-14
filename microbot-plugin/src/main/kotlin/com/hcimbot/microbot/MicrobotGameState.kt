@@ -57,7 +57,7 @@ class MicrobotGameState : GameState {
         snapshot = if (!Microbot.isLoggedIn()) null else onClient {
             val client = Microbot.getClient()
             val player = client.localPlayer ?: return@onClient null
-            val at = player.worldLocation
+            val at = player.worldLocation?.let(Instances::toTemplate)
             Snapshot(
                 name = player.name,
                 tile = at?.let { Tile(it.x, it.y, it.plane) },
@@ -156,7 +156,7 @@ class MicrobotGameState : GameState {
 
     /** A breadth first search over the scene's collision map, in which a shut door is a wall. */
     override fun canReach(tile: Tile): Boolean? =
-        runCatching { Rs2Tile.isTileReachable(WorldPoint(tile.x, tile.y, tile.plane)) }.getOrNull()
+        runCatching { Rs2Tile.isTileReachable(Instances.toInstance(WorldPoint(tile.x, tile.y, tile.plane))) }.getOrNull()
 
     /** Found again by its index. Gone, dead or at 0 health all count as killed. */
     override fun npcAlive(npc: SceneEntity): Boolean? {
@@ -220,10 +220,10 @@ class MicrobotGameState : GameState {
     override fun isInterfaceOpen(packedWidgetId: Int): Boolean =
         onClient { Microbot.getClient().getWidget(packedWidgetId)?.let { !it.isHidden } } ?: false
 
-    private fun Tile.toWorldPoint() = WorldPoint(x, y, plane)
+    private fun Tile.toWorldPoint() = Instances.toInstance(WorldPoint(x, y, plane))
 
     private fun entity(id: Int, name: String?, at: WorldPoint?): SceneEntity? =
-        at?.let { SceneEntity(id, name?.let(Text::removeTags).orEmpty(), Tile(it.x, it.y, it.plane)) }
+        at?.let(Instances::toTemplate)?.let { SceneEntity(id, name?.let(Text::removeTags).orEmpty(), Tile(it.x, it.y, it.plane)) }
 
     companion object {
         private const val HISTORY = 50
