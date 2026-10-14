@@ -653,6 +653,15 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
                 return TaskResult.Running
             }
         }
+        // A door has been opened for it: walk right up to the item, through the doorway, before clicking it, or the
+        // click is made from outside, through the wall.
+        if (doorTries > 0 && at.distanceTo(ground.tile) > CLOSE) {
+            val inside = inside?.takeIf { it.tile == ground.tile } ?: WalkTask(ground.tile, radius = 1).also { inside = it }
+            return when (val walked = inside.tick(ctx)) {
+                TaskResult.Done -> { this.inside = null; TaskResult.Running }
+                else -> walked
+            }
+        }
         clicks++
         return attempt(ctx.actions.takeGroundItem(ground), "take ${next.name}")
     }
@@ -660,10 +669,12 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
     private var doorTries = 0
     private var clicks = 0
     private var lastHeld = -1L
+    private var inside: WalkTask? = null
 
     companion object {
         const val MAX_APPROACHES = 3
         const val CLICKS_BEFORE_DOOR = 3
+        const val CLOSE = 2
         const val MAX_DOOR_TRIES = 3
         const val DOOR_RANGE = 8
         const val REACH = 15
