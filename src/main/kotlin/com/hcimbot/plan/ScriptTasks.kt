@@ -1171,7 +1171,8 @@ class ClimbOtherLadderTask(private val option: String = "Climb-up", private val 
 class LootAndHopTask(private val itemId: Int, private val count: Int, private val reach: Int = 12) : BaseTask() {
     override val description = "Loot $count of item $itemId, hopping after each"
     private var lastHeld = -1L
-    private var hopWait = 0
+    private var loadingFrom: Int? = null
+    private var loadTicks = 0
     private var settling = 0
     private var noItem = 0
     private var idle = 0
@@ -1183,7 +1184,14 @@ class LootAndHopTask(private val itemId: Int, private val count: Int, private va
         val game = ctx.game
         val held = ctx.conditions.count(listOf(itemId))
         if (held >= count) return TaskResult.Done
-        if (hopWait > 0) { hopWait--; return TaskResult.Running }
+        // After a hop, wait for the new world itself rather than for a set time: it is here once the world number has
+        // changed and the player is back, and the item is gone for at once from then on.
+        if (loadingFrom != null) {
+            val arrived = game.isLoggedIn && game.playerTile != null && game.world > 0 && game.world != loadingFrom
+            if (!arrived && ++loadTicks < MAX_LOAD_TICKS) return TaskResult.Running
+            loadingFrom = null
+            noItem = 0
+        }
         if (settling > 0) { settling--; return TaskResult.Running }
         // Not while the world is still loading: no player, no tile, nothing to do yet.
         if (!game.isLoggedIn || game.playerTile == null) return TaskResult.Running
@@ -1216,14 +1224,16 @@ class LootAndHopTask(private val itemId: Int, private val count: Int, private va
         val avoid = visited.filter { now - it.value < AVOID_MS }.keys
         ctx.log("Hopping worlds ($why, hop $hops, not back to ${avoid.sorted()})")
         ctx.actions.hopWorldAvoiding(avoid)
-        hopWait = HOP_TICKS
+        loadingFrom = if (here > 0) here else -2
+        loadTicks = 0
         noItem = 0
         return TaskResult.Running
     }
 
     private companion object {
         // Short: the world takes its time to load on its own, and the item is looked for every tick from then on.
-        const val HOP_TICKS = 3
+        /** Give up waiting for the world number to change after this many ticks, and look anyway. */
+        const val MAX_LOAD_TICKS = 40
         /** A world just left is not gone back to for this long, whatever the bot finds there. */
         const val AVOID_MS = 60_000L
         // How long after a hop with nothing in sight before concluding it is not there and hopping again.
