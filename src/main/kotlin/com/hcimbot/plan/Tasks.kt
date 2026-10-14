@@ -261,10 +261,12 @@ class InteractTask(
         Kind.OBJECT -> game.nearestObject(ids, names, near)
     }
 
-    private companion object {
-        const val MAX_APPROACHES = 3
-        const val MAX_DOOR_TRIES = 3
-        const val DOOR_RANGE = 6
+    companion object {
+        private const val MAX_APPROACHES = 3
+        private const val MAX_DOOR_TRIES = 3
+        private const val DOOR_RANGE = 6
+
+        /** Objects that are a shut way through, tried when a target is out of reach. */
         val DOORS = listOf("Door", "Large door", "Gate")
     }
 }
@@ -635,11 +637,25 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
             ctx.actions.walkTo(ground.tile)
             return TaskResult.Running
         }
+        // The walker did not get through: open the shut door nearest the item ourselves, a few times.
+        if (doorTries < MAX_DOOR_TRIES && ctx.game.canReachBeside(ground.tile) == false) {
+            val door = ctx.game.nearestObject(emptyList(), InteractTask.DOORS, ground.tile)?.takeIf { it.tile.distanceTo(ground.tile) <= DOOR_RANGE }
+            if (door != null) {
+                doorTries++
+                ctx.log("Still cannot reach the ${next.name}, opening the door at ${door.tile}")
+                ctx.actions.interactObject(door, "Open")
+                return TaskResult.Running
+            }
+        }
         return attempt(ctx.actions.takeGroundItem(ground), "take ${next.name}")
     }
 
+    private var doorTries = 0
+
     companion object {
         const val MAX_APPROACHES = 3
+        const val MAX_DOOR_TRIES = 3
+        const val DOOR_RANGE = 8
         const val REACH = 15
 
         /** About as far as the game shows ground items: anything it shows is a short walk. */
