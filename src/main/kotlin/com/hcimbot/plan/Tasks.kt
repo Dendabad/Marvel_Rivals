@@ -302,6 +302,13 @@ class BankTask(
         // Take out everything the bank has before dealing with what it lacks.
         val next = missing.firstOrNull { item -> item.ids.any { game.bankCount(it) > 0 } }
         if (next == null) {
+            // Items the guide only hands over later (the Research Package) are not worth stopping for.
+            val optional = missing.filter { item -> item.ids.all(ItemSources.LATER::contains) }
+            if (optional.isNotEmpty()) {
+                skipped += optional.flatMap { it.ids }
+                ctx.log("The bank has no ${optional.joinToString { it.name }}, which the guide gives later. Carrying on")
+                return TaskResult.Running
+            }
             val lacking = missing.first()
             val source = ItemSources.whenNotYetGiven(lacking.ids, ctx)
             return if (source != null) {
@@ -322,8 +329,10 @@ class BankTask(
         return attempt(started, "withdraw ${next.name}")
     }
 
+    private val skipped = mutableSetOf<Int>()
+
     private fun missing(ctx: TaskContext): List<ItemRef> =
-        withdraw.filter { ctx.conditions.count(it.ids) < (it.count ?: 1) }
+        withdraw.filter { item -> ctx.conditions.count(item.ids) < (item.count ?: 1) && !item.ids.all(skipped::contains) }
 
     companion object {
         /** All of a stackable item, one of anything else. See [GameActions.withdraw]. */

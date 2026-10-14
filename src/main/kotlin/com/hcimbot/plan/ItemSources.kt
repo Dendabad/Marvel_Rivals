@@ -19,14 +19,14 @@ object ItemSources {
         val belowValue: Int = 1,
     )
 
+    /** Items a withdraw step lists that the guide gives later (the Research Package), so a bank without them is no reason to stop. */
+    val LATER = setOf(290)
+
     private val given = listOf(
         // 7. "Head East & Start X Marks the Spot on Veos": Veos hands over the scroll.
         Given(setOf(23067, 23068, 23069, 23070, 23071), "varbit", 8063, "e2deed373e", "Veos gives it when X Marks the Spot starts (step 7)"),
         // 9. "Go upstairs and Talk to Duke Horacio": the Duke hands over the talisman.
         Given(setOf(1438), "varplayer", 63, "d51fed8c25", "Duke Horacio gives it when Rune Mysteries starts (step 9)"),
-        // 26. "Talk to Sedridor to continue Rune Mysteries (1,2,1)": Sedridor hands over the Research Package,
-        // which step 94 withdraws from the bank. Rune Mysteries is at 3 once it has been given.
-        Given(setOf(290), "varplayer", 63, "666fe06edc", "Sedridor gives it in step 26, which is not done yet", belowValue = 3),
     )
 
     /**
