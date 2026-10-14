@@ -303,6 +303,10 @@ class BankTask(
         val next = missing.firstOrNull { item -> item.ids.any { game.bankCount(it) > 0 } }
         if (next == null) {
             // Items the guide only hands over later (the Research Package) are not worth stopping for.
+            // But if the quest that hands it over has not got that far, go back for it first.
+            missing.firstNotNullOfOrNull { item -> ItemSources.whenNotYetGiven(item.ids, ctx)?.let { item to it } }?.let { (item, source) ->
+                return TaskResult.NeedsStep(source.stepId, "the bank has no ${item.name}: ${source.why}")
+            }
             val optional = missing.filter { item -> item.ids.all(ItemSources.LATER::contains) }
             if (optional.isNotEmpty()) {
                 skipped += optional.flatMap { it.ids }

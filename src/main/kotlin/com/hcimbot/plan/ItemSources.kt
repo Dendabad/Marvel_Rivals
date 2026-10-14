@@ -27,6 +27,9 @@ object ItemSources {
         Given(setOf(23067, 23068, 23069, 23070, 23071), "varbit", 8063, "e2deed373e", "Veos gives it when X Marks the Spot starts (step 7)"),
         // 9. "Go upstairs and Talk to Duke Horacio": the Duke hands over the talisman.
         Given(setOf(1438), "varplayer", 63, "d51fed8c25", "Duke Horacio gives it when Rune Mysteries starts (step 9)"),
+        // 26. "Talk to Sedridor to continue Rune Mysteries (1,2,1)": Sedridor hands over the Research Package
+        // (Rune Mysteries is at 3 once he has), and step 30 banks it for step 94.
+        Given(setOf(290), "varplayer", 63, "666fe06edc", "Sedridor gives it in step 26, which was not done", belowValue = 3),
     )
 
     /**
