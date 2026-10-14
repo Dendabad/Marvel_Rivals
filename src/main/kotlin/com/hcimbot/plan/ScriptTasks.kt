@@ -971,18 +971,23 @@ class MakePlanksTask(private val planks: Int = 10, private val waxwood: Int = 3)
     private var clicks = 0
     private var lastProgress = -1
     private var announced = false
+    private var startLogs = -1
 
     override fun tick(ctx: TaskContext): TaskResult {
         val game = ctx.game
         val plain = ctx.conditions.count(listOf(PLANK)).toInt()
         val wax = ctx.conditions.count(listOf(WAXWOOD_PLANK)).toInt()
         val window = game.showsChoice(WINDOW)
+        val logsNow = game.inventory()[LOGS] ?: 0
+        if (startLogs < 0) startLogs = logsNow
+        // Ten logs used up means the ten planks were made, whatever the count of planks reads.
+        val plainDone = plain >= planks || startLogs - logsNow >= planks
         if (!announced) {
             announced = true
             ctx.log("Making planks: holding $plain of $planks planks and $wax of $waxwood waxwood planks, " +
                 "${game.inventory()[LOGS] ?: 0} logs, ${game.inventory()[WAXWOOD_LOG] ?: 0} waxwood logs")
         }
-        if (plain >= planks && wax >= waxwood) {
+        if (plainDone && wax >= waxwood) {
             return if (window) attempt(ctx.actions.closeWindow(), "close the plank window") else TaskResult.Done
         }
         if (settling > 0) { settling--; return TaskResult.Running }
@@ -997,12 +1002,12 @@ class MakePlanksTask(private val planks: Int = 10, private val waxwood: Int = 3)
                 else -> result
             }
         }
-        val progress = plain * 1000 + wax
+        val progress = plain * 1000 + wax + (startLogs - logsNow) * 100000
         if (progress != lastProgress) { lastProgress = progress; clicks = 0 }
         if (++clicks > MAX_CLICKS) return TaskResult.Failed("clicked in the plank window $MAX_CLICKS times and no more planks were made")
         val inventory = game.inventory()
         when {
-            plain < planks -> {
+            !plainDone -> {
                 if ((inventory[LOGS] ?: 0) == 0) return TaskResult.Failed("no logs to make the planks from")
                 ctx.actions.makePick("10", 1)
             }
