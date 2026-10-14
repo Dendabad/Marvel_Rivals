@@ -300,7 +300,7 @@ class MicrobotGameState : GameState {
         /**
          * A button of the make window ("All", or "Space" for its first item), found among visible widgets with that
          * text. The chat's own "All" tab has the same text, so a match must sit with the quantity buttons: within three
-         * levels above it there is a widget showing "X" and "10". Returns the button itself, its parent when that is
+         * levels above it there is a widget showing "X" and "All" (the 5 and 10 are left out when too few items are held). Returns the button itself, its parent when that is
          * the clickable area. Client thread.
          */
         fun makeWindowButton(label: String, useParent: Boolean): net.runelite.api.widgets.Widget? {
@@ -319,7 +319,7 @@ class MicrobotGameState : GameState {
                     val inside = mutableListOf<net.runelite.api.widgets.Widget>()
                     descendants(up, inside)
                     val texts = inside.map(::textOf)
-                    if (texts.any { it == "X" } && texts.any { it == "10" }) {
+                    if (texts.any { it == "X" } && texts.any { it == "All" }) {
                         val target = if (useParent) candidate.parent ?: candidate else candidate
                         return if (target.bounds.width > 0) target else candidate
                     }
