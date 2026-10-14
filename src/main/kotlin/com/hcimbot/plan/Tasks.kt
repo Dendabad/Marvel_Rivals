@@ -663,9 +663,22 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
         // for some doors): open the door nearest the item ourselves, a few times. Clicks on the item that have not
         // brought it in count as the sign that something is in the way.
         val held = ctx.conditions.count(next.ids)
-        if (held != lastHeld) { lastHeld = held; clicks = 0 }
+        if (held != lastHeld) { lastHeld = held; clicks = 0; walkedIn = false; walkFailed = false; doorTries = 0 }
         val blocked = ctx.game.canReachBeside(ground.tile) == false || clicks >= CLICKS_BEFORE_DOOR
-        if (doorTries < MAX_DOOR_TRIES && blocked) {
+        // First let the walker find the way in to the item: it goes round to a real entrance when the near side is shut,
+        // which short hops and door clicks of ours would only interrupt. Only if it cannot is a door tried by hand.
+        if (blocked && !walkFailed && !walkedIn) {
+            val walker = walkItem ?: WalkTask(ground.tile, radius = 1).also {
+                walkItem = it
+                ctx.log("Cannot get the ${next.name}, walking to it the way the walker finds")
+            }
+            when (val result = walker.tick(ctx)) {
+                TaskResult.Done -> { walkItem = null; walkedIn = true; return TaskResult.Running }
+                is TaskResult.Failed -> { walkItem = null; walkFailed = true; ctx.log("The walker found no way in to the ${next.name}: ${result.reason}") }
+                else -> return result
+            }
+        }
+        if (doorTries < MAX_DOOR_TRIES && blocked && walkFailed) {
             val door = ctx.game.nearestObject(emptyList(), InteractTask.DOORS, ground.tile)?.takeIf { it.tile.distanceTo(ground.tile) <= DOOR_RANGE }
             if (door != null) {
                 doorTries++
@@ -693,6 +706,9 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
     private var lastHeld = -1L
     private var inside: WalkTask? = null
     private var walkTicks = 0
+    private var walkItem: WalkTask? = null
+    private var walkedIn = false
+    private var walkFailed = false
     private val through = ArrayDeque<Tile>()
     private var throughTicks = 0
 
