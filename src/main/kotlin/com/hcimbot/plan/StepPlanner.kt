@@ -30,6 +30,11 @@ sealed interface StepPlan {
         /** Training that takes many minutes: allowed far longer before "taking too long". */
         val patient: Boolean = false,
         /**
+         * The game's sign that the step is done is met before the step starts ("Collect 11 Logs" when 11 are already
+         * held), so it is ignored until every task has run.
+         */
+        val ignoreStartSignal: Boolean = false,
+        /**
          * Item ids to drink the moment the player takes any damage, for places where one more
          * hit could be the last (the Stronghold's spiders and Catablepons at 10 Hitpoints).
          */

@@ -461,6 +461,7 @@ class StepScripts(private val guide: Guide) {
                 listOf(FletchShaftsTask()),
                 trustTasks = true,
                 patient = true,
+                ignoreStartSignal = true,
             )
         },
 
@@ -468,13 +469,19 @@ class StepScripts(private val guide: Guide) {
         // (step 103 left the player outside it, by the dying tree), then the logs lying in the yard. Making the planks
         // is the sawmill operator's Buy-plank window. The bot climbs back out of the pen first, ready for step 106.
         "5cfa279c9b" to { _ ->
-            auto(
-                OnlyIf({ ctx: TaskContext -> ctx.game.canReach(SAWMILL) == false },
-                    obj(emptyList(), listOf("Broken fence"), SAWMILL, "Climb-over")),
-                WalkTask(SAWMILL, radius = 8),
-                TakeYardLogsTask(11),
-                LeavePenTask(),
-                MakePlanksTask(planks = 10, waxwood = 3),
+            // "Collect 11 Logs" is met by logs already held (from step 104), so the game's done signal is ignored until
+            // the planks have been made, or the step would be passed over at once.
+            StepPlan.Auto(
+                listOf(
+                    // Only go into the pen for the logs when there are fewer than 11 in the bag.
+                    OnlyIf({ ctx: TaskContext -> (ctx.game.inventory()[LOGS] ?: 0) < 11 && ctx.game.canReach(SAWMILL) == false },
+                        obj(emptyList(), listOf("Broken fence"), SAWMILL, "Climb-over")),
+                    OnlyIf({ ctx: TaskContext -> (ctx.game.inventory()[LOGS] ?: 0) < 11 }, WalkTask(SAWMILL, radius = 8)),
+                    TakeYardLogsTask(11),
+                    LeavePenTask(),
+                    MakePlanksTask(planks = 10, waxwood = 3),
+                ),
+                ignoreStartSignal = true,
             )
         },
 

@@ -207,7 +207,8 @@ class GuideRunner(
             is SafetyMonitor.Verdict.Stop -> return halt(verdict.reason)
         }
 
-        if (completion.check(step, current.baseline) == StepCompletion.Verdict.Done && !midway(current)) {
+        val ignoreSignal = (current.plan as? StepPlan.Auto)?.ignoreStartSignal == true
+        if (!ignoreSignal && completion.check(step, current.baseline) == StepCompletion.Verdict.Done && !midway(current)) {
             if (endChat(current)) return
             // Never walk off with a bank or shop still open.
             if (game.isBankOpen || game.isShopOpen) {
