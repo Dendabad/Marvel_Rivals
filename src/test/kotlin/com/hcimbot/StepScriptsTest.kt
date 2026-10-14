@@ -332,6 +332,18 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `ashes are waited for until they appear, then taken`() {
+        val house = Tile(3239, 3396, 0)
+        val game = FakeGame().apply { playerTile = Tile(3240, 3396, 0) }
+        val ctx = TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.WaitAndTakeTask(592, house, maxTicks = 50)
+        repeat(5) { assertEquals(com.hcimbot.plan.TaskResult.Running, task.tick(ctx)) }
+        game.groundItems += SceneEntity(592, "Ashes", Tile(3241, 3396, 0))
+        task.tick(ctx)
+        assertTrue(game.calls.contains("take Ashes"), game.calls.toString())
+    }
+
+    @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
         val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()

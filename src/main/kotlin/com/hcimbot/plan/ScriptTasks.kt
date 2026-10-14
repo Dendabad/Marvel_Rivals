@@ -1034,3 +1034,42 @@ class MakePlanksTask(private val planks: Int = 10, private val waxwood: Int = 3)
         const val MAX_CLICKS = 6
     }
 }
+
+
+/**
+ * Takes an item that has not appeared yet: waits near [around] for it to show up on the ground, then takes it. For the
+ * ashes a fire leaves once its log has burnt away, which takes a while. Pauses after [maxTicks] with none.
+ */
+class WaitAndTakeTask(
+    private val itemId: Int,
+    private val around: Tile,
+    private val maxTicks: Int = 300,
+    private val radius: Int = 10,
+) : BaseTask() {
+    override val description = "Wait for item $itemId and take it"
+    private var waited = 0
+    private var settling = 0
+    private var walk: WalkTask? = null
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        if (itemId in game.inventory()) return TaskResult.Done
+        if (settling > 0) { settling--; return TaskResult.Running }
+        if (game.isBusy) return TaskResult.Running
+        val at = game.playerTile ?: return TaskResult.Running
+        val item = game.groundItemsNear(listOf(itemId), around, radius).minByOrNull { it.tile.distanceTo(at) }
+        if (item != null) {
+            settling = 2
+            return attempt(ctx.actions.takeGroundItem(item), "take item $itemId at ${item.tile}")
+        }
+        if (at.plane != around.plane || at.distanceTo(around) > radius) {
+            val going = walk ?: WalkTask(around, radius = 3).also { walk = it }
+            return when (val walked = going.tick(ctx)) {
+                TaskResult.Done -> { walk = null; TaskResult.Running }
+                else -> walked
+            }
+        }
+        if (waited == 0) ctx.log("Waiting for item $itemId to appear")
+        return if (++waited >= maxTicks) TaskResult.Failed("item $itemId did not appear within $maxTicks ticks") else TaskResult.Running
+    }
+}

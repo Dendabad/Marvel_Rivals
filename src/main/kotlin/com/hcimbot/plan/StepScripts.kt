@@ -513,6 +513,10 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 109. "Collect Ashes": the ashes the log lit at step 108 leaves, once it has burnt away. They are not there
+        // yet when this step starts, so wait for them in Old Man Yarlo's house.
+        "08f1329ea4" to { _ -> auto(WaitAndTakeTask(ASHES, YARLOS_HOUSE), trust = true) },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
