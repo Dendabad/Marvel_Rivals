@@ -211,6 +211,21 @@ class PartsTest {
     }
 
     @Test
+    fun `step 19 looks for rats behind Lumbridge castle first`() {
+        val game = FakeGame()
+        game.playerTile = Tile(3230, 3209, 0)
+        game.spawns["giant rat"] = listOf(Tile(3229, 3188, 0)) // nearer, but in the swamp
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.KillTask(
+            emptyList(), listOf("Giant rat"), listOf(com.hcimbot.guide.ItemRef("Bones", listOf(526))),
+            lookFirst = Tile(3195, 3205, 0),
+        )
+        task.tick(ctx)
+        task.tick(ctx)
+        assertEquals(listOf("walk (3195, 3205, 0)"), game.calls)
+    }
+
+    @Test
     fun `hunting gives up rather than going far or into the Wilderness`() {
         val game = FakeGame()
         game.spawns["giant rat"] = listOf(Tile(3040, 3700, 0), Tile(3292, 3377, 0))

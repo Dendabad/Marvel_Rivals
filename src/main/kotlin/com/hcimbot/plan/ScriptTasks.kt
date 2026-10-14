@@ -85,7 +85,7 @@ class DigTask(val tile: Tile) : BaseTask() {
  * spawns, waits a little, then tries the next nearest. Only spots close by and
  * outside the Wilderness count, so it never wanders off across the map.
  */
-class Hunt(private val names: List<String>) {
+class Hunt(private val names: List<String>, private val lookFirst: List<Tile> = emptyList()) {
     private val tried = mutableListOf<Tile>()
     private var walk: WalkTask? = null
     private var looking = 0
@@ -108,10 +108,12 @@ class Hunt(private val names: List<String>) {
             looking = 0
         }
         if (tried.size >= MAX_SPOTS) return TaskResult.Failed("looked at ${tried.size} spots where $what spawns and found none")
-        val spot = names.flatMap { ctx.game.npcSpawns(it) }
-            .filter { it.plane == at.plane && !it.inWilderness && it.distanceTo(at) <= RANGE }
-            .filter { spot -> tried.none { it.distanceTo(spot) <= SAME_SPOT } }
-            .minByOrNull { it.distanceTo(at) }
+        val untried = { spot: Tile -> tried.none { it.distanceTo(spot) <= SAME_SPOT } }
+        val spot = lookFirst.firstOrNull { !it.inWilderness && untried(it) }
+            ?: names.flatMap { ctx.game.npcSpawns(it) }
+                .filter { it.plane == at.plane && !it.inWilderness && it.distanceTo(at) <= RANGE }
+                .filter(untried)
+                .minByOrNull { it.distanceTo(at) }
             ?: return TaskResult.Failed(
                 if (tried.isEmpty()) "no $what nearby, and no known spawn spot within $RANGE tiles"
                 else "looked at ${tried.size} spots where $what spawns and found none",
@@ -242,11 +244,13 @@ class KillTask(
     private val loot: List<ItemRef>,
     private val spell: String? = null,
     private val maxKills: Int = 5,
+    /** Where to look first when none is in sight, before the spawn data's nearest spots. */
+    lookFirst: Tile? = null,
 ) : BaseTask() {
     private var kills = 0
     private var fighting = false
     private var take: TakeItemTask? = null
-    private val hunt = Hunt(npcNames)
+    private val hunt = Hunt(npcNames, listOfNotNull(lookFirst))
     override val description = "Kill ${npcNames.firstOrNull() ?: npcIds} for ${loot.joinToString { it.name }}"
 
     override fun tick(ctx: TaskContext): TaskResult {

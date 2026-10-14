@@ -150,7 +150,10 @@ class StepScripts(private val guide: Guide, private val routes: RouteStore? = nu
 
         // 19. "Kill a giant rat with Wind Strike and collect the Bones + Raw Rat Meat"
         "9b78ddbf34" to { settings ->
-            combat(settings, KillTask(emptyList(), listOf("Giant rat"), listOf(item("Bones", 526), item("Raw rat meat", 2134)), spell = "WIND_STRIKE"))
+            combat(settings, KillTask(
+                emptyList(), listOf("Giant rat"), listOf(item("Bones", 526), item("Raw rat meat", 2134)),
+                spell = "WIND_STRIKE", lookFirst = BEHIND_LUMBRIDGE_CASTLE,
+            ))
         },
 
         // 20. "Head West towards Draynor hugging the fence to avoid the Jail Guards"
@@ -316,6 +319,8 @@ class StepScripts(private val guide: Guide, private val routes: RouteStore? = nu
         private val LUMBRIDGE_TOP_FLOOR = Tile(3208, 3220, 2)
         private val SOUTH_OF_GERTRUDE = Tile(3152, 3405, 0)
         private val ABOVE_SWORD_SHOP = Tile(3205, 3396, 1)
+        /** Giant rats spawn just west of the castle, by the second X Marks the Spot dig. */
+        private val BEHIND_LUMBRIDGE_CASTLE = Tile(3195, 3205, 0)
         private val LUMBRIDGE_GENERAL_STORE = Tile(3212, 3246, 0)
         private val MAGIC_TUTOR = Tile(3218, 3238, 0)
         private val VARROCK_KITCHEN_STAIRS = Tile(3219, 3497, 0)
