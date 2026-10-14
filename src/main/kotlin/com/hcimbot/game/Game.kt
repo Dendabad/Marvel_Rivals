@@ -106,7 +106,8 @@ interface GameState {
     fun helperProblem(): String? = null
 
     /** Nearest item lying on the ground (or on a table) with one of these ids. */
-    fun nearestGroundItem(ids: Collection<Int>): SceneEntity?
+    /** The ground item with one of [ids] nearest to [near] (the player when null) and within [within] tiles of it. */
+    fun nearestGroundItem(ids: Collection<Int>, near: Tile? = null, within: Int? = null): SceneEntity?
 
     /** Chat options currently on screen, top to bottom. Empty when none are shown. */
     fun dialogOptions(): List<String>

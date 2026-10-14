@@ -201,10 +201,11 @@ class MicrobotGameState : GameState {
         nearest?.let { entity(it.id, it.name, it.worldLocation) }
     }
 
-    override fun nearestGroundItem(ids: Collection<Int>): SceneEntity? = onClient {
+    override fun nearestGroundItem(ids: Collection<Int>, near: Tile?, within: Int?): SceneEntity? = onClient {
         if (ids.isEmpty()) return@onClient null
-        Microbot.getRs2TileItemCache().query().withIds(*ids.toIntArray())
-            .nearest(SEARCH_RADIUS)?.let { entity(it.id, it.name, it.worldLocation) }
+        val found = Microbot.getRs2TileItemCache().query().withIds(*ids.toIntArray())
+        val nearest = if (near != null) found.nearest(near.toWorldPoint(), within ?: SEARCH_RADIUS) else found.nearest(SEARCH_RADIUS)
+        nearest?.let { entity(it.id, it.name, it.worldLocation) }
     }
 
     override fun dialogOptions(): List<String> = options
