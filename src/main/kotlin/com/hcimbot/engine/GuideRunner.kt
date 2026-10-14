@@ -55,6 +55,9 @@ class GuideRunner(
 
     val stepCount: Int get() = guide.steps.size
 
+    /** Walker settings the current step changes for itself. Applied by the Microbot side each tick. */
+    val walkerOverrides: Map<String, Any> get() = (active?.plan as? StepPlan.Auto)?.walkerOverrides.orEmpty()
+
     /** Warning answers the current step may click. Read by the watchdog, which also runs mid-walk. */
     val acceptWarnings: List<String> get() = (active?.plan as? StepPlan.Auto)?.acceptWarnings.orEmpty()
 

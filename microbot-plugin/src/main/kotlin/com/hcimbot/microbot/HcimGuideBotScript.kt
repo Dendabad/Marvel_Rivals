@@ -38,7 +38,9 @@ class HcimGuideBotScript : Script() {
     private val retryRequested = AtomicBoolean(false)
     @Volatile private var statusNow: BotStatus = BotStatus.NOT_STARTED
 
+    private val walkerOverrides = WalkerOverrides()
     @Volatile private var lastDrink = 0L
+    @Volatile private var freshDoors = false
     @Volatile private var lastWarning = 0L
     private val recent = ArrayDeque<String>()
     private val clock = java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss")
@@ -99,7 +101,14 @@ class HcimGuideBotScript : Script() {
                 current.resume()
             }
             game.refresh()
+            if (freshDoors) {
+                freshDoors = false
+                WalkerDoors.forget()
+            }
+            walkerOverrides.apply(current.walkerOverrides)
             current.onGameTick()
+            // A step that just ended takes its walker overrides with it, before the next one walks.
+            walkerOverrides.apply(current.walkerOverrides)
             report(current)
         } catch (e: Exception) {
             if (interrupted(e)) return
@@ -262,6 +271,7 @@ class HcimGuideBotScript : Script() {
                         lastDrink = time
                         Rs2Inventory.interact(drink, "Drink")
                         note("Took damage ($now/$max), drinking")
+                        restartWalkAfterEating()
                     }
                     return
                 }
@@ -272,12 +282,26 @@ class HcimGuideBotScript : Script() {
                 current.halt("hitpoints are at $now/$max. Stopped to keep the account safe.")
                 report(current)
             } else if (actions.walking && percent <= settings.eatAtPercent) {
-                settings.foodIds.firstOrNull { Rs2Inventory.get(it) != null }?.let { Rs2Inventory.interact(it, "Eat") }
+                settings.foodIds.firstOrNull { Rs2Inventory.get(it) != null }?.let {
+                    Rs2Inventory.interact(it, "Eat")
+                    restartWalkAfterEating()
+                }
             }
         } catch (e: Exception) {
             if (interrupted(e)) return
             log.error("HCIM guide bot watchdog failed", e)
         }
+    }
+
+    /**
+     * Eating or drinking mid-walk cuts short whatever the walker was doing, often a door, which it
+     * then counts as failed and avoids for minutes. Stop the walk; the main loop forgets the door
+     * attempts and walks again at once, so the door is clicked again straight away.
+     */
+    private fun restartWalkAfterEating() {
+        if (!actions.walking) return
+        freshDoors = true
+        Rs2Walker.setTarget(null, "HCIM guide bot ate mid-walk, walking on")
     }
 
     /**
@@ -298,6 +322,7 @@ class HcimGuideBotScript : Script() {
     }
 
     override fun shutdown() {
+        walkerOverrides.clear()
         super.shutdown()
         runner?.stop()
         runner = null

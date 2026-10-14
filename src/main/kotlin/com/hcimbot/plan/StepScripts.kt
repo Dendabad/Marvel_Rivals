@@ -211,6 +211,7 @@ class StepScripts(private val guide: Guide) {
                 patient = true,
                 drinkOnDamage = listOf(JUG_WINE),
                 acceptWarnings = STRONGHOLD_WARNINGS,
+                walkerOverrides = NO_PORTALS,
             )
         },
 
@@ -220,6 +221,7 @@ class StepScripts(private val guide: Guide) {
             StepPlan.Auto(
                 listOf(WalkTask(STRONGHOLD_ENTRANCE, radius = 4)),
                 combat = true, patient = true, drinkOnDamage = listOf(JUG_WINE), acceptWarnings = STRONGHOLD_WARNINGS,
+                walkerOverrides = NO_PORTALS,
             )
         },
 
@@ -417,6 +419,13 @@ class StepScripts(private val guide: Guide) {
 
         /** "Are you sure you want to climb down?" at each ladder down to a lower floor. */
         private val STRONGHOLD_WARNINGS = listOf("Yes - I know that it may be")
+
+        /**
+         * The Stronghold's shortcut portals only work once their floor is done, but Microbot's
+         * teleportation_portals.tsv has floor 2's (2040,5240) and some of floor 3's with no
+         * requirement, so the walker tries them and loops ("not of sufficient experience").
+         */
+        private val NO_PORTALS: Map<String, Any> = mapOf("useTeleportationPortals" to false)
         private const val DOOGLE_LEAVES = 1573
         private const val LIT_CANDLE = 33
         private const val CANDLE = 36

@@ -26,6 +26,8 @@ class StepScriptsTest {
             assertTrue(auto.combat, id)
             // Only the ladders' own "Yes - I know that it may be dangerous down there", never a bare yes.
             assertEquals(listOf("Yes - I know that it may be"), auto.acceptWarnings, id)
+            // Its portals are listed without their "floor done" requirement, so the walker must not use them.
+            assertEquals(mapOf<String, Any>("useTeleportationPortals" to false), auto.walkerOverrides, id)
         }
         // Each floor's reward, claimed in order.
         val floors = assertIs<StepPlan.Auto>(plan("5405a57b1e")).tasks.filterIsInstance<WalkTask>().map { it.tile }

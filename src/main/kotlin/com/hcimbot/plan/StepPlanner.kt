@@ -40,6 +40,12 @@ sealed interface StepPlan {
          * Never a general "yes", so a Wilderness warning is never accepted by accident.
          */
         val acceptWarnings: List<String> = emptyList(),
+        /**
+         * Microbot walker settings to change for this step only, by its config key, e.g.
+         * "useTeleportationPortals" to false in the Stronghold, whose portals its data lists without
+         * the "floor done" requirement. Put back as soon as the step ends.
+         */
+        val walkerOverrides: Map<String, Any> = emptyMap(),
     ) : StepPlan
 
     /** The bot cannot do this step. It pauses and shows [reason] until the step is ticked. */
