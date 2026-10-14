@@ -366,6 +366,7 @@ class ShopTask(
     private var open: InteractTask? = null
     private var waitingForShop = 0
     private val requested = mutableMapOf<Int, Int>()
+    private val heldWhenBought = mutableMapOf<Int, Long>()
     override val description = "Buy ${items.joinToString { it.name }}"
 
     override fun tick(ctx: TaskContext): TaskResult {
@@ -388,14 +389,27 @@ class ShopTask(
         val next = missing.first()
         val id = next.ids.first()
         val waited = requested[id]
-        if (waited != null) {
+        val have = ctx.conditions.count(next.ids)
+        if (waited != null && have > (heldWhenBought[id] ?: 0)) {
+            // Some arrived but not enough yet, e.g. a shop that sells one per click: buy again.
+            requested.remove(id)
+        } else if (waited != null) {
             if (waited >= ARRIVAL_TICKS) return TaskResult.Failed("bought ${next.name} but it did not arrive. The shop may be out of stock.")
             requested[id] = waited + 1
             return TaskResult.Running
         }
-        val started = ctx.actions.buy(id, next.count ?: 1)
-        if (started) requested[id] = 0
-        return attempt(started, "buy ${next.name}")
+        val started = ctx.actions.buy(id, ((next.count ?: 1) - have).toInt().coerceAtLeast(1))
+        if (started) {
+            requested[id] = 0
+            heldWhenBought[id] = have
+        }
+        val result = attempt(started, "buy ${next.name}")
+        // Say what the shop offered, so a shop window the bot does not understand can be fixed.
+        return if (result is TaskResult.Failed) {
+            TaskResult.Failed(result.reason + (ctx.game.shopOffers(id)?.let { ". The shop shows: $it" } ?: ""))
+        } else {
+            result
+        }
     }
 
     /** The guide brings the player near the right shop first, so the nearest seller is the one meant. */

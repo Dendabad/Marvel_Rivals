@@ -91,6 +91,7 @@ class MicrobotActions : GameActions {
     override fun closeInterface(): Boolean {
         if (Rs2Bank.isOpen()) return Rs2Bank.closeBank()
         if (Rs2Shop.isOpen()) Rs2Shop.closeShop()
+        if (Omnishop.isOpen()) return Omnishop.close()
         return true
     }
 
@@ -110,6 +111,8 @@ class MicrobotActions : GameActions {
 
     /** Shops sell in lots of 1, 5, 10 and 50, so a larger or odd amount is made of several clicks. */
     override fun buy(itemId: Int, quantity: Int): Boolean {
+        // The newer shop window sells one per click. The shop task asks again until it has enough.
+        if (Omnishop.isOpen()) return Omnishop.buy(itemId)
         var left = quantity
         var bought = false
         for (lot in SHOP_LOTS) {

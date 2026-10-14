@@ -119,7 +119,9 @@ class MicrobotGameState : GameState {
     override fun equipment(): Map<Int, Int> = worn
     override fun bankCount(itemId: Int): Int = Rs2Bank.count(itemId)
     override val isBankOpen: Boolean get() = Rs2Bank.isOpen()
-    override val isShopOpen: Boolean get() = Rs2Shop.isOpen()
+    override val isShopOpen: Boolean get() = Rs2Shop.isOpen() || Omnishop.isOpen()
+
+    override fun shopOffers(itemId: Int): String? = if (Omnishop.isOpen()) Omnishop.describe(itemId) else null
 
     override fun nearestNpc(ids: Collection<Int>, names: Collection<String>, near: Tile?): SceneEntity? = onClient {
         val query = Microbot.getRs2NpcCache().query()

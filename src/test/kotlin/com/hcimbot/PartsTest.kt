@@ -340,6 +340,18 @@ class PartsTest {
     }
 
     @Test
+    fun `a shop that sells one per click is asked again until there are enough`() {
+        val game = FakeGame()
+        game.isShopOpen = true
+        game.buyCap = { 1 }
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.ShopTask(emptyList(), listOf(com.hcimbot.guide.ItemRef("Feather", listOf(314), 3)))
+        repeat(12) { task.tick(ctx) }
+        assertEquals(3, game.inv[314])
+        assertEquals(listOf("buy 314 x3", "buy 314 x2", "buy 314 x1"), game.calls.filter { it.startsWith("buy") })
+    }
+
+    @Test
     fun `step 19 looks for rats behind Lumbridge castle first`() {
         val game = FakeGame()
         game.playerTile = Tile(3230, 3209, 0)

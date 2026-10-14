@@ -61,6 +61,9 @@ interface GameState {
     /** True while [npc] (the very same one) is still alive. Null when the game cannot say. */
     fun npcAlive(npc: SceneEntity): Boolean? = null
 
+    /** What the open shop offers for [itemId], to explain a buy that did not work. Null when unknown. */
+    fun shopOffers(itemId: Int): String? = null
+
     /** Where NPCs called [name] spawn, from Microbot's NPC location data. Empty when unknown. */
     fun npcSpawns(name: String): List<Tile> = emptyList()
 
