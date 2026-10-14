@@ -272,7 +272,7 @@ class StepScripts(private val guide: Guide) {
         // 78. "Talk to Shilop to continue Gertrudes Cat (2,2)": only the talk. Following Quest Helper here
         // sent the bot off for the doogle leaves and sardine, which the guide fetches at step 201.
         "f374255214" to { _ ->
-            auto(talk(listOf(3501), "Shilop", Tile(3220, 3435, 0), DialoguePlan.Numbered(listOf(2, 2))))
+            auto(talk(listOf(3501), "Shilop", Tile(3220, 3435, 0), DialoguePlan.Numbered(listOf(2, 2))), trust = true)
         },
 
         // 21. "Talk to Father Urhney in the lumbridge swamp for Ghost Speak Amulet. (2,1) Wield this."
