@@ -10,6 +10,10 @@ This folder is the Microbot plugin that runs the guide bot. Setup takes about 15
 2. **The Microbot release jar,** `client-<version>-shaded.jar`, from the official releases page only: <https://github.com/chsami/microbot/releases>. Fake "Microbot" downloads are a common way accounts get stolen.
 3. **This repository,** on branch `claude/osrs-script-creation-w5mkvb`.
 
+## Easiest: the one-click updater
+
+Download **`update-bot.bat`** once from the GitHub page (open the file, then the download button) and keep it on your desktop. Double click it whenever there is an update: it downloads the latest version into a clean folder (`.runelite\hcim-guide-bot\source`), builds it and installs it, so there is no ZIP to unzip and no old files can be left behind. Microbot can stay open.
+
 ## Quick way on Windows: double click
 
 Double click **`build-and-install.bat`** in the project folder. It finds your Microbot jar, builds the bot, installs both of its files (see step 2), and lists the jars in `microbot-plugins` so you can spot a stray old copy. That does steps 1 and 2 below for you. If it says BUILD FAILED, send the first red lines that start with `e:`.
