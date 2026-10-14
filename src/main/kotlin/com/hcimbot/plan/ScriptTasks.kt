@@ -617,7 +617,11 @@ class MarkGuardsTask(
         }
         if (attempts.merge(id, 1, Int::plus)!! > MAX_ATTEMPTS) return TaskResult.Failed("clicking $action on guard $id did not work")
         ctx.log("$action guard $id")
-        ctx.actions.interactNpc(guard, action)
+        // A click that did not happen (the guard is off screen behind a building) is answered by walking up to him.
+        if (!ctx.actions.interactNpc(guard, action)) {
+            ctx.log("Could not click $action on guard $id, walking closer")
+            ctx.actions.walkTo(guard.tile)
+        }
         settling = SETTLE
         return TaskResult.Running
     }
@@ -630,7 +634,7 @@ class MarkGuardsTask(
         val MARKED_WRONGLY = emptyList<Int>()
         const val MAX_TICKS = 300
         const val MAX_ATTEMPTS = 4
-        const val CLICK_RANGE = 8
+        const val CLICK_RANGE = 4
         const val SETTLE = 4
     }
 }
