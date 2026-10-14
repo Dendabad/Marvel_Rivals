@@ -11,6 +11,7 @@ import net.runelite.client.plugins.microbot.util.dialogues.Rs2Dialogue
 import net.runelite.client.plugins.microbot.util.equipment.Rs2Equipment
 import net.runelite.client.plugins.microbot.util.inventory.Rs2Inventory
 import net.runelite.client.plugins.microbot.util.magic.Rs2Magic
+import net.runelite.client.plugins.microbot.util.npc.Rs2NpcModel as LegacyNpcModel
 import net.runelite.client.plugins.microbot.util.player.Rs2Player
 import net.runelite.client.plugins.microbot.util.security.LoginManager
 import net.runelite.client.plugins.microbot.util.settings.Rs2Settings
@@ -132,7 +133,8 @@ class MicrobotActions : GameActions {
         val found = onClient {
             Microbot.getRs2NpcCache().query().withId(npc.id).nearest(npc.tile.toWorldPoint(), RELOCATE)
         } ?: return false
-        return Rs2Inventory.useItemOnNpc(itemId, found)
+        // Rs2Inventory takes the older util.npc model, which wraps the same NPC.
+        return Rs2Inventory.useItemOnNpc(itemId, LegacyNpcModel(found.npc))
     }
 
     override fun castOnNpc(spellName: String, npc: SceneEntity): Boolean {
