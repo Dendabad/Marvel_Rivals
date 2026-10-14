@@ -57,6 +57,29 @@ class ItemActionTask(
 }
 
 /** Opens a shop and sells each of [itemIds] until none are left in the inventory. */
+/** Walks onto [tile] and digs there with a spade, for a clue or quest dig. */
+class DigTask(val tile: Tile) : BaseTask() {
+    private var dig: ItemActionTask? = null
+    override val description = "Dig at $tile"
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        dig?.let { return it.tick(ctx) }
+        if (SPADE !in ctx.game.inventory()) return TaskResult.Failed("a spade is needed to dig at $tile")
+        val at = ctx.game.playerTile ?: return TaskResult.Running
+        if (ctx.game.isBusy) return TaskResult.Running
+        return when (at.distanceTo(tile)) {
+            0 -> ItemActionTask(SPADE, "Dig").also { dig = it }.tick(ctx)
+            in 1..CLOSE -> attempt(ctx.actions.stepOnto(tile), "step onto $tile")
+            else -> attempt(ctx.actions.walkTo(tile), "walk to $tile")
+        }
+    }
+
+    companion object {
+        const val SPADE = 952
+        private const val CLOSE = 6
+    }
+}
+
 class SellTask(
     private val shopkeeperIds: List<Int>,
     private val shopkeeperNames: List<String>,

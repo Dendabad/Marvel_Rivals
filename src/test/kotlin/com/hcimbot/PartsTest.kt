@@ -111,6 +111,45 @@ class PartsTest {
     }
 
     @Test
+    fun `X Marks the Spot digs come from Quest Helper's own source`() {
+        val game = FakeGame()
+        game.playerTile = Tile(3222, 3218, 0)
+        game.inv[com.hcimbot.plan.DigTask.SPADE] = 1
+        game.varbits[8063] = 2
+        val talk = com.hcimbot.guide.Instruction(kind = "npc", text = "Talk to Veos.", ids = listOf(8484), dialogue = listOf("Yes."))
+        val helper = com.hcimbot.guide.QuestHelper(
+            com.hcimbot.guide.QuestVar("varbit", 8063),
+            lastValue = 7,
+            steps = mapOf("0" to talk, "1" to talk, "6" to talk, "7" to talk),
+        )
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.QuestTask("xmarksthespot", helper, allowCombat = false)
+
+        repeat(4) { task.tick(ctx) }
+        assertEquals(listOf("walk (3230, 3209, 0)", "item 952 Dig"), game.calls)
+    }
+
+    @Test
+    fun `quest objects with only a RuneLite name are looked up`() {
+        val game = FakeGame()
+        game.objectNames["PORCINE_NOTICEBOARD"] = 40307
+        game.objects += com.hcimbot.game.SceneEntity(40307, "Notice board", Tile(3222, 3218, 0))
+        val helper = com.hcimbot.guide.QuestHelper(
+            com.hcimbot.guide.QuestVar("varp", 1),
+            lastValue = 35,
+            steps = mapOf(
+                "0" to com.hcimbot.guide.Instruction(
+                    kind = "object", point = listOf(3222, 3218, 0), text = "Read the notice board in Draynor Village.",
+                    constant = "PORCINE_NOTICEBOARD",
+                ),
+            ),
+        )
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        com.hcimbot.plan.QuestTask("aporcineofinterest", helper, allowCombat = false, boundedTo = emptySet()).tick(ctx)
+        assertEquals(listOf("object Notice board Read"), game.calls)
+    }
+
+    @Test
     fun `menu verbs come from the step text`() {
         assertEquals("Pickpocket", StepPlanner.verb(Step(text = "Pickpocket a man/woman [Lumbridge Easy Diary]")))
         assertEquals("Talk-to", StepPlanner.verb(Step(text = "Go upstairs and Talk to Duke Horacio (1,1)")))

@@ -286,6 +286,7 @@ class StepPlanner(
             "pray at" to "Pray-at",
             "trade" to "Trade",
             "take" to "Take",
+            "read" to "Read",
         )
 
         /** Words that start an action. Two of them in one step means it asks for several things. */

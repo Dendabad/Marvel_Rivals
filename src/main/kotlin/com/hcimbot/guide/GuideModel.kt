@@ -233,6 +233,8 @@ class Instruction(
     val point: List<Int>? = null,
     val text: String = "",
     val ids: List<Int> = emptyList(),
+    /** RuneLite's name for the NPC or object, e.g. PORCINE_NOTICEBOARD. Some steps have only this. */
+    val constant: String? = null,
     /** Chat options to pick, by their text. */
     val dialogue: List<String> = emptyList(),
     val items: List<Need> = emptyList(),

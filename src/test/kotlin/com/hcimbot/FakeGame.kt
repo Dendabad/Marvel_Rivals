@@ -77,6 +77,15 @@ class FakeGame : GameState, GameActions {
         return true
     }
 
+    val objectNames = mutableMapOf<String, Int>()
+    override fun objectIdNamed(constant: String): Int? = objectNames[constant]
+
+    override fun stepOnto(tile: Tile): Boolean {
+        calls += "step $tile"
+        playerTile = tile
+        return true
+    }
+
     override fun interactNpc(npc: SceneEntity, action: String?): Boolean {
         calls += "npc ${npc.name} $action"
         onNpcInteract(npc, action)

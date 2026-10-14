@@ -127,6 +127,13 @@ class MicrobotGameState : GameState {
         nearest?.let { entity(it.id, it.name, it.worldLocation) }
     }
 
+    /** Read from RuneLite's gameval ObjectID by name, and remembered. */
+    override fun objectIdNamed(constant: String): Int? = synchronized(objectIds) {
+        objectIds.getOrPut(constant) { runCatching { Class.forName(OBJECT_IDS).getField(constant).getInt(null) }.getOrNull() }
+    }
+
+    private val objectIds = HashMap<String, Int?>()
+
     override fun nearestObject(ids: Collection<Int>, names: Collection<String>, near: Tile?): SceneEntity? = onClient {
         val query = Microbot.getRs2TileObjectCache().query()
         val found = if (ids.isNotEmpty()) query.withIds(*ids.toIntArray()) else query.withNames(*names.toTypedArray())
@@ -164,6 +171,7 @@ class MicrobotGameState : GameState {
 
     companion object {
         private const val HISTORY = 50
+        private const val OBJECT_IDS = "net.runelite.api.gameval.ObjectID"
 
         /** How far to look for an NPC, object or item. The loaded scene is about this big. */
         private const val SEARCH_RADIUS = 50

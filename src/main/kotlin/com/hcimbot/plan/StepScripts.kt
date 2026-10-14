@@ -120,6 +120,17 @@ class StepScripts(private val guide: Guide, private val routes: RouteStore? = nu
         // 13. Bank layout, placeholders and bank PIN: tidying the player does not need.
         "a90bd856f8" to { _ -> skip("bank tidying the bot does not need") },
 
+        // 65. "Collect a Doogle Leaf south of Gertrude": the leaves lie on the ground just south of her house.
+        "5227d55cd4" to { _ ->
+            auto(WalkTask(SOUTH_OF_GERTRUDE, radius = 3), TakeItemTask(listOf(item("Doogle leaves", DOOGLE_LEAVES))))
+        },
+
+        // 73. "Head South to the Sword Shop and go up the ladder. Loot the lit candle."
+        // Microbot's walker knows the shop's ladder, so walking upstairs climbs it.
+        "81e3343b7f" to { _ ->
+            auto(WalkTask(ABOVE_SWORD_SHOP, radius = 2), TakeItemTask(listOf(ItemRef("Lit candle", listOf(LIT_CANDLE, CANDLE)))))
+        },
+
         // 15. "Go down south staircase twice (Right-Click 'Bottom-floor')"
         "39fa224085" to { _ ->
             auto(
@@ -303,6 +314,8 @@ class StepScripts(private val guide: Guide, private val routes: RouteStore? = nu
         private val LUMBRIDGE_SOUTH_STAIRS = Tile(3206, 3208, 0)
         private val LUMBRIDGE_KITCHEN = Tile(3210, 3214, 0)
         private val LUMBRIDGE_TOP_FLOOR = Tile(3208, 3220, 2)
+        private val SOUTH_OF_GERTRUDE = Tile(3152, 3405, 0)
+        private val ABOVE_SWORD_SHOP = Tile(3205, 3396, 1)
         private val LUMBRIDGE_GENERAL_STORE = Tile(3212, 3246, 0)
         private val MAGIC_TUTOR = Tile(3218, 3238, 0)
         private val VARROCK_KITCHEN_STAIRS = Tile(3219, 3497, 0)
@@ -331,6 +344,9 @@ class StepScripts(private val guide: Guide, private val routes: RouteStore? = nu
         private const val BUCKET_WATER = 1929
         private const val GHOSTSPEAK = 552
         private const val LOGS = 1511
+        private const val DOOGLE_LEAVES = 1573
+        private const val LIT_CANDLE = 33
+        private const val CANDLE = 36
         private const val CHEESE = 1985
         private const val GARLIC = 1550
         private const val JUG_WINE = 1993

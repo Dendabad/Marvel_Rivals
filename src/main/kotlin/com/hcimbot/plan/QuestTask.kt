@@ -41,8 +41,9 @@ class QuestTask(
         val value = ctx.conditions.readVar(progress.kind, progress.id)
         val start = startValue ?: value.also { startValue = it }
         if (stopAtValue != null && value >= stopAtValue) return TaskResult.Done
-        val instruction = helper.at(value) ?: return TaskResult.Done
-        if (helper.hasGapAt(value)) {
+        val fill = QuestFills.at(questKey, value)
+        val instruction = fill ?: helper.at(value) ?: return TaskResult.Done
+        if (fill == null && helper.hasGapAt(value)) {
             return TaskResult.Failed("the guide data has no Quest Helper instructions for this part of $questKey")
         }
 
@@ -56,7 +57,8 @@ class QuestTask(
             val ours = chosen.ids.any { it in boundedTo } ||
                 (chosen === instruction && stairBranch(instruction)?.ids?.any { it in boundedTo } == true)
             if (value > start && (boundedTo.isEmpty() || !ours)) return TaskResult.Done
-            if (value == start && boundedTo.isNotEmpty() && !ours && current == null) {
+            // A filled in step, like a dig, has to be done on the way to the step's part.
+            if (value == start && boundedTo.isNotEmpty() && !ours && current == null && fill == null) {
                 return TaskResult.Failed("the guide step is about ids $boundedTo but the quest is at \"${chosen.text}\"")
             }
         }
@@ -80,7 +82,7 @@ class QuestTask(
         if (chosen.text.contains("wilderness", ignoreCase = true)) {
             return TaskResult.Failed("quest step goes into the Wilderness: ${chosen.text}")
         }
-        val task = currentTask ?: when (val made = taskFor(chosen)) {
+        val task = currentTask ?: when (val made = taskFor(chosen, ctx)) {
             is Made.Ready -> made.task.also { currentTask = it }
             is Made.Refused -> return TaskResult.Failed("${made.why}: ${chosen.text}")
         }
@@ -106,29 +108,31 @@ class QuestTask(
         class Refused(val why: String) : Made
     }
 
-    private fun taskFor(step: Instruction): Made {
+    private fun taskFor(step: Instruction, ctx: TaskContext): Made {
         val tile = step.tile
         val dialogue = if (step.dialogue.isEmpty()) DialoguePlan.None else DialoguePlan.Texts(step.dialogue)
         return when (step.kind) {
+            "dig" -> tile?.let { Made.Ready(DigTask(it)) } ?: Made.Refused("no location for this dig")
             "walk" -> tile?.let { Made.Ready(WalkTask(it, radius = 1)) } ?: Made.Refused("no location for this walk")
             "npc" -> {
                 if (step.ids.isEmpty()) return Made.Refused("no NPC id for this step")
                 // A left click on a monster attacks it, so the option has to be known.
-                val action = StepPlanner.verb(step.text) ?: if (step.dialogue.isNotEmpty()) "Talk-to" else null
+                val action = StepPlanner.verb(step.text)
+                    ?: if (step.dialogue.isNotEmpty() || HANDING_IN.containsMatchIn(step.text)) "Talk-to" else null
                     ?: return Made.Refused("unclear what to click")
                 if (action == "Attack" && !allowCombat) return Made.Refused("combat is turned off for safety")
                 Made.Ready(InteractTask(InteractTask.Kind.NPC, step.ids, emptyList(), listOfNotNull(tile), action, dialogue))
             }
             "object" -> {
-                if (step.ids.isEmpty()) {
-                    // Quest Helper often says "use these stairs" without the stair's id. Its
-                    // branches say where they lead, so walk there: the walker climbs the stairs.
-                    val leadsTo = stairBranch(step)?.tile ?: return Made.Refused("no object id for this step")
-                    return Made.Ready(WalkTask(leadsTo, radius = 3))
-                }
+                // Quest Helper often says "use these stairs" without the stair's id. Its
+                // branches say where they lead, so walk there: the walker climbs the stairs.
+                stairBranch(step)?.tile?.let { return Made.Ready(WalkTask(it, radius = 3)) }
+                // guide.json leaves some ids out but keeps RuneLite's name for the object.
+                val ids = step.ids.ifEmpty { listOfNotNull(step.constant?.let(ctx.game::objectIdNamed)) }
+                if (ids.isEmpty()) return Made.Refused("no object id for this step")
                 // Quest Helper highlights objects for a left click, so that is the fallback here.
                 val action = StepPlanner.verb(step.text)
-                Made.Ready(InteractTask(InteractTask.Kind.OBJECT, step.ids, emptyList(), listOfNotNull(tile), action, dialogue))
+                Made.Ready(InteractTask(InteractTask.Kind.OBJECT, ids, emptyList(), listOfNotNull(tile), action, dialogue))
             }
             else -> Made.Refused("unknown quest step kind ${step.kind}")
         }
@@ -143,6 +147,9 @@ class QuestTask(
 
     companion object {
         const val MAX_REPEATS = 3
+
+        /** "Return to Gertrude", "Bring the notes to Sedridor", "Report back to Tobyn": all talks. */
+        private val HANDING_IN = Regex("^(return|go back|bring|report back|give)\\b", RegexOption.IGNORE_CASE)
 
         /** Ticks to let the quest var catch up before doing an instruction again. */
         const val SETTLE_TICKS = 3

@@ -98,6 +98,8 @@ class MicrobotActions : GameActions {
         return Rs2Magic.cast(spell)
     }
 
+    override fun stepOnto(tile: Tile): Boolean = Rs2Walker.walkFastCanvas(WorldPoint(tile.x, tile.y, tile.plane))
+
     override fun itemAction(itemId: Int, action: String): Boolean =
         if (Rs2Inventory.get(itemId) != null) Rs2Inventory.interact(itemId, action) else Rs2Equipment.interact(itemId, action)
 

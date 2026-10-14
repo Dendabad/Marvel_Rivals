@@ -46,6 +46,9 @@ interface GameState {
     fun nearestNpc(ids: Collection<Int>, names: Collection<String> = emptyList(), near: Tile? = null): SceneEntity?
     fun nearestObject(ids: Collection<Int>, names: Collection<String> = emptyList(), near: Tile? = null): SceneEntity?
 
+    /** The object id RuneLite names [constant] (its gameval ObjectID), for guide data that gives only the name. */
+    fun objectIdNamed(constant: String): Int? = null
+
     /** Nearest item lying on the ground (or on a table) with one of these ids. */
     fun nearestGroundItem(ids: Collection<Int>): SceneEntity?
 
@@ -77,6 +80,9 @@ interface GameState {
 interface GameActions {
     /** Walk towards [tile], one leg at a time. Called again each tick until arrival. */
     fun walkTo(tile: Tile): Boolean
+
+    /** Click onto [tile] itself, which must be close by. For spots where the exact tile matters, like a dig. */
+    fun stepOnto(tile: Tile): Boolean
 
     /** [action] is the menu option, e.g. "Talk-to" or "Pickpocket". Null uses the default left click. */
     fun interactNpc(npc: SceneEntity, action: String?): Boolean

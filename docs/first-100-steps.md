@@ -25,7 +25,7 @@ With **Allow combat** on: 88 run, 6 skip, 6 pause, once the `draynor-fence` rout
 | 15 | Go down south staircase twice (Right-Click 'Bottom-floor') | Runs | Climbs down the south staircase until it reaches the ground floor. |
 | 16 | Collect the Empty Jug, Bowl & Knife in Lumbridge kitchen | Runs | Take Empty Jug, Bowl, Knife in Lumbridge kitchen. |
 | 17 | Fill the jug & bowl on the sink in the kitchen [Monk's Friend] | Runs | Use item 1935 on Sink, then Use item 1923 on Sink. |
-| 18 | Complete 2nd Step of X Marks The Spot | Runs | Follows Quest Helper for xmarksthespot. Quest Helper has no data for the digs, so this pauses for you to dig. It moves on as soon as the dig counts. |
+| 18 | Complete 2nd Step of X Marks The Spot | Runs | Follows Quest Helper for xmarksthespot. guide.json leaves the digs out, so the bot uses the dig spots from Quest Helper's own source: it walks onto the spot and digs with the spade. |
 | 19 | Kill a giant rat with Wind Strike and collect the Bones + Raw Rat Meat [Druidic Ritual] | Runs | Runs only with Allow combat on. Casts Wind Strike on a giant rat and picks up the bones and meat. |
 | 20 | Head West towards Draynor hugging the fence to avoid the Jail Guards | Runs | Follows the route you recorded as `draynor-fence`, so it hugs the fence exactly as you did. Until that route is recorded, it pauses and says how. |
 | 21 | Talk to Father Urhney in the lumbridge swamp for Ghost Speak Amulet. (2,1) Wield this. | Runs | Talk-to Father Urhney, then Equip Ghostspeak amulet. |
@@ -47,9 +47,9 @@ With **Allow combat** on: 88 run, 6 skip, 6 pause, once the `draynor-fence` rout
 | 37 | Train Draynor Agility to 5 Agility [Lumbridge Easy Diary] | Pauses | Still pauses: training on an agility course needs a course script, which is not written yet. |
 | 38 | Bank at Draynor and deposit the Garlic & Cheese | Runs | Deposit [1550, 1985]. |
 | 39 | Talk to Fortunato & buy 5 Jugs of wine. Hop worlds and buy 10 in total. | Runs | Buys 5, hops to another world, and buys 5 more. |
-| 40 | Check the Notice board next to Fortunato to Start A Porcine of Interest | Runs | Follows Quest Helper for aporcineofinterest. |
+| 40 | Check the Notice board next to Fortunato to Start A Porcine of Interest | Runs | Follows Quest Helper for aporcineofinterest. guide.json has no id for the notice board, so the bot looks it up by its RuneLite name and reads it. |
 | 41 | Complete 4th Step of X Marks the Spot | Runs | Follows Quest Helper for xmarksthespot. Same as #18. |
-| 42 | Head West to Port Sarim and talk to Veos to complete X Marks The Spot. | Runs | Follows Quest Helper for xmarksthespot. |
+| 42 | Head West to Port Sarim and talk to Veos to complete X Marks The Spot. | Runs | Follows Quest Helper for xmarksthespot. Digs in the pig pen first if that dig is not done yet. |
 | 43 | Destroy the lamp. You can collect this later as you can't bank it. | Runs | Destroys the X Marks the Spot lamp and confirms. |
 | 44 | Travel to Port Piscarilius via Veos | Runs | Uses Veos's Travel option and picks Port Piscarilius. |
 | 45 | Talk to Veos (4,1) [Client of Kourend] | Runs | Follows Quest Helper for clientofkourend. |
@@ -72,7 +72,7 @@ With **Allow combat** on: 88 run, 6 skip, 6 pause, once the `draynor-fence` rout
 | 62 | Collect 3x Beer inside the Longhall | Runs | Take Beer. |
 | 63 | Collect a Cooked Meat [Mournings End Pt 2] | Runs | Take Cooked Meat. |
 | 64 | Head east and Talk to Gertude (1) [Gertrudes Cat] | Runs | Follows Quest Helper for gertrudescat. |
-| 65 | Collect a Doogle Leaf south of Gertrude | Runs | Take Doogle Leaf south of Gertrude. Doogle leaves are picked from a bush, so this pauses. |
+| 65 | Collect a Doogle Leaf south of Gertrude | Runs | Walks just south of Gertrude's house and picks up the Doogle leaves lying there. |
 | 66 | Bank at Varrock West Bank and deposit all | Runs | Walk to (3185, 3440, 0), then Bank, deposit all. |
 | 67 | Withdraw: Coins, Bones, Beer (3 Inventory Spaces) | Runs | Bank, withdraw Coins, Bones, Beer. |
 | 68 | RIGHT CLICK Use the bones on the Stray Dog whenever you find him | Runs | Uses bones on the Stray Dog if he is nearby, and moves on if he is not. |
@@ -80,14 +80,14 @@ With **Allow combat** on: 88 run, 6 skip, 6 pause, once the `draynor-fence` rout
 | 70 | Head South & Talk to Aris and start Demon Slayer (1,2,3,4). | Runs | Follows Quest Helper for demonslayer. |
 | 71 | Head South & Trade Thessalia [Varrock Easy Diary] | Runs | Trade Thessalia. Opens the shop until the diary task ticks, then closes it. |
 | 72 | Buy Pink Skirt, Brown Apron & Silk. Wear Brown Apron & Pink Skirt in honour of Faux | Runs | Buys all three, then wears the apron and skirt. |
-| 73 | Head South to the Sword Shop and go up the ladder. Loot the lit candle. | Runs | Take lit candle. The candle is up a ladder the bot does not climb, so this pauses unless you are already up there. |
+| 73 | Head South to the Sword Shop and go up the ladder. Loot the lit candle. | Runs | Walks up to the room above the Sword Shop (Microbot's walker climbs the ladder) and takes the lit candle. |
 | 74 | Head East and talk to Dr Harlow (1,2 talk again)[Vampyre Slayer] | Runs | Follows Quest Helper for vampyreslayer. Talks to Dr Harlow only, then stops before the Count Draynor fight. |
 | 75 | Head North | Runs | Walk to (3211, 3425, 0). |
 | 76 | Talk to Romeo (3,1) [Romeo & Juliet] | Runs | Follows Quest Helper for romeojuliet. |
 | 77 | Buy a Newspaper from Benny(1,1) | Runs | Talk-to Benny. |
 | 78 | Talk to Shilop to continue Gertrudes Cat (2,2) | Runs | Follows Quest Helper for gertrudescat. |
 | 79 | Talk to Noah (1,3) [Children of the Sun] | Runs | Talk-to Noah. Quest Helper starts this quest with Alina, but the guide says Noah, so the bot follows the guide. |
-| 80 | Complete Children of the Sun | Runs | Follows Quest Helper for childrenofthesun. Follows Quest Helper to the end of the quest, pausing on anything it cannot do. |
+| 80 | Complete Children of the Sun | Runs | Follows Quest Helper for childrenofthesun to the end of the quest. Talks and the door run on their own, but it pauses for you to follow the guard without being seen and to mark the guards, since both are puzzles. |
 | 81 | Go down North West 2x Stairs and talk to Sir Prysin in the SW room (3,1,2,2,1,1) [Demon Slayer] | Runs | Follows Quest Helper for demonslayer. |
 | 82 | Head North and go up 2x Stairs and talk to Captain Rovin (3,1,2,2,3,1) [Demon Slayer] | Runs | Follows Quest Helper for demonslayer. |
 | 83 | Return down the stairs and talk to Reldo and start Shield of Arrav (1,1). | Runs | Follows Quest Helper for shieldofarravphoenixgang. |
