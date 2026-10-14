@@ -113,6 +113,13 @@ class MicrobotActions : GameActions {
         return true
     }
 
+    /** Found by name: Microbot's keyboard helper, which the stub used to build does not have. */
+    override fun pressEscape(): Boolean = runCatching {
+        Class.forName("net.runelite.client.plugins.microbot.util.keyboard.Rs2Keyboard")
+            .getMethod("keyPress", Int::class.javaPrimitiveType).invoke(null, java.awt.event.KeyEvent.VK_ESCAPE)
+        true
+    }.getOrDefault(false)
+
     override fun castSpell(spellName: String, widgetId: Int): Boolean {
         val spell = spellFor(spellName) ?: return false
         return Rs2Magic.cast(spell)

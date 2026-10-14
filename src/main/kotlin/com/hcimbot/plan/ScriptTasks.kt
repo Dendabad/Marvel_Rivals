@@ -26,9 +26,12 @@ class ItemActionTask(
     private val itemId: Int,
     private val action: String,
     private val dialogue: DialoguePlan = DialoguePlan.None,
+    /** For "Read" on a book: it stays open on screen, and clicks go to it, so press Escape when done. */
+    private val closeAfter: Boolean = false,
 ) : BaseTask() {
     private var used = false
     private var settled = 0
+    private var closed = false
     override val description = "$action item $itemId"
 
     override fun tick(ctx: TaskContext): TaskResult {
@@ -43,7 +46,14 @@ class ItemActionTask(
             }
         }
         if (game.isBusy) return TaskResult.Running
-        if (used) return if (++settled >= SETTLE) TaskResult.Done else TaskResult.Running
+        if (used) {
+            if (++settled < SETTLE) return TaskResult.Running
+            if (closeAfter && !closed) {
+                closed = ctx.actions.pressEscape()
+                return TaskResult.Running
+            }
+            return TaskResult.Done
+        }
         if (itemId !in game.inventory() && itemId !in game.equipment()) return TaskResult.Failed("item $itemId is not held")
         used = ctx.actions.itemAction(itemId, action)
         return attempt(used, "$action item $itemId")

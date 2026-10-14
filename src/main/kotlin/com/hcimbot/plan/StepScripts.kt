@@ -394,7 +394,7 @@ class StepScripts(private val guide: Guide) {
                 RepeatUntil("Search the bookcase for the book", has(ARRAV_BOOK), {
                     obj(listOf(2402), listOf("Bookcase"), Tile(3212, 3493, 0), "Search")
                 }, maxRounds = 4),
-                ItemActionTask(ARRAV_BOOK, "Read"),
+                ItemActionTask(ARRAV_BOOK, "Read", closeAfter = true),
                 quest("shieldofarravphoenixgang", stopAt = 3, allowCombat = settings.allowCombat),
                 trust = true,
             )
