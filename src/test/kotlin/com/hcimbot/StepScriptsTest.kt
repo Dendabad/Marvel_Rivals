@@ -344,6 +344,24 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `looting hops worlds after each item picked up and finishes at the count`() {
+        val game = FakeGame().apply {
+            playerTile = Tile(1553, 3033, 2)
+            groundItems += SceneEntity(29415, "Eclipse red", Tile(1554, 3033, 2))
+        }
+        val ctx = TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.LootAndHopTask(29415, 2)
+        task.tick(ctx)
+        assertTrue(game.calls.contains("take Eclipse red"), game.calls.toString())
+        task.tick(ctx)
+        task.tick(ctx)
+        assertTrue(game.calls.contains("hop"), game.calls.toString())
+        game.inv[29415] = 2
+        repeat(15) { task.tick(ctx) }
+        assertEquals(com.hcimbot.plan.TaskResult.Done, task.tick(ctx))
+    }
+
+    @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
         val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()

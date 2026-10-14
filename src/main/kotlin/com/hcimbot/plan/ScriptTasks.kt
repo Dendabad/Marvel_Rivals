@@ -1161,3 +1161,62 @@ class ClimbOtherLadderTask(private val option: String = "Climb-up", private val 
         const val MAX_CLICKS = 5
     }
 }
+
+
+/**
+ * Collects [count] of an item that spawns where the player stands (the Eclipse red bottles upstairs in the Hunter Guild),
+ * hopping to another world after each one picked up, since the spawn is gone from this world once taken and is back on the
+ * next. With none in sight it hops too, after a short wait. Pauses if it gets nowhere for a long time.
+ */
+class LootAndHopTask(private val itemId: Int, private val count: Int, private val reach: Int = 12) : BaseTask() {
+    override val description = "Loot $count of item $itemId, hopping after each"
+    private var lastHeld = -1L
+    private var hopWait = 0
+    private var settling = 0
+    private var noItem = 0
+    private var idle = 0
+    private var hops = 0
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        val held = ctx.conditions.count(listOf(itemId))
+        if (held >= count) return TaskResult.Done
+        if (hopWait > 0) { hopWait--; return TaskResult.Running }
+        if (settling > 0) { settling--; return TaskResult.Running }
+        if (game.isBusy || game.isBankOpen || game.isShopOpen) return TaskResult.Running
+        if (lastHeld < 0) lastHeld = held
+        // One more than before: it was just picked up, so go to another world for the next.
+        if (held > lastHeld) {
+            lastHeld = held
+            idle = 0
+            return hop(ctx, "picked up $held of $count")
+        }
+        if (++idle > MAX_IDLE_TICKS) return TaskResult.Failed("no progress after $MAX_IDLE_TICKS ticks, holding $held of $count")
+        val at = game.playerTile ?: return TaskResult.Running
+        val item = game.nearestGroundItem(listOf(itemId))?.takeIf { it.tile.plane == at.plane && it.tile.distanceTo(at) <= reach }
+        if (item != null) {
+            noItem = 0
+            settling = 1
+            return attempt(ctx.actions.takeGroundItem(item), "take item $itemId at ${item.tile}")
+        }
+        // Nothing here: a moment for one that is about to show, then another world.
+        if (++noItem < NO_ITEM_TICKS) return TaskResult.Running
+        noItem = 0
+        return hop(ctx, "none in sight")
+    }
+
+    private fun hop(ctx: TaskContext, why: String): TaskResult {
+        hops++
+        ctx.log("Hopping worlds ($why, hop $hops)")
+        ctx.actions.hopWorld()
+        hopWait = HOP_TICKS
+        noItem = 0
+        return TaskResult.Running
+    }
+
+    private companion object {
+        const val HOP_TICKS = 12
+        const val NO_ITEM_TICKS = 4
+        const val MAX_IDLE_TICKS = 400
+    }
+}

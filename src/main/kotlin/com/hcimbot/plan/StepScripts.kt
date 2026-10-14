@@ -596,6 +596,12 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 125. "Loot 28 Eclipse Reds (hop worlds)": the bottles upstairs in the Hunter Guild building (item 29415). The spawn is
+        // taken on this world, so the bot hops after each one picked up, and again if none is in sight.
+        "34ff59db82" to { _ ->
+            StepPlan.Auto(listOf(LootAndHopTask(29415, 28)), trustTasks = true, patient = true, ignoreStartSignal = true)
+        },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
