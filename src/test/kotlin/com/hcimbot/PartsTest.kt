@@ -111,6 +111,37 @@ class PartsTest {
     }
 
     @Test
+    fun `a quest step climbs down to the NPC it is about`() {
+        // Rune Mysteries at 1: "climb down the Wizards' Tower ladder", and once in the
+        // basement, "talk to Sedridor". Step 26 is about Sedridor, so it takes the ladder.
+        val game = FakeGame()
+        game.playerTile = Tile(3108, 3164, 0)
+        game.varps[63] = 1
+        game.inv[1438] = 1
+        game.objects += com.hcimbot.game.SceneEntity(2147, "Ladder", Tile(3104, 3162, 0))
+        val basement = Requirement(zone = listOf(listOf(3094, 9553, 0, 3125, 9582, 0)))
+        val sedridor = com.hcimbot.guide.Instruction(
+            kind = "npc", point = listOf(3104, 9571, 0), text = "Bring the Air Talisman to Sedridor in the Wizard Tower's basement.",
+            ids = listOf(11432), dialogue = listOf("I'm looking for the head wizard."), condition = basement,
+        )
+        val helper = com.hcimbot.guide.QuestHelper(
+            com.hcimbot.guide.QuestVar("varplayer", 63),
+            lastValue = 5,
+            steps = mapOf(
+                "1" to com.hcimbot.guide.Instruction(
+                    kind = "object", point = listOf(3104, 3162, 0), ids = listOf(2147),
+                    text = "Bring the Air Talisman to Sedridor in the Wizard Tower's basement.", whenIn = listOf(sedridor),
+                ),
+            ),
+        )
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.QuestTask("runemysteries", helper, allowCombat = false, boundedTo = setOf(11432, 11433, 11450))
+        val result = task.tick(ctx)
+        assertTrue(result !is com.hcimbot.plan.TaskResult.Failed, result.toString())
+        assertEquals(listOf("object Ladder null"), game.calls)
+    }
+
+    @Test
     fun `X Marks the Spot digs come from Quest Helper's own source`() {
         val game = FakeGame()
         game.playerTile = Tile(3222, 3218, 0)

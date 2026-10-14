@@ -59,9 +59,10 @@ class QuestTask(
 
         if (boundedTo != null) {
             // With no ids to go on, the step's part is over as soon as the quest advances.
-            // Heading up to the step's NPC through a stair with no id counts as our part too.
-            val ours = chosen.ids.any { it in boundedTo } ||
-                (chosen === instruction && stairBranch(instruction)?.ids?.any { it in boundedTo } == true)
+            // Quest Helper often says "get there first" (climb down the ladder) with the step's
+            // own NPC as a branch for once you are there (talk to Sedridor in the basement).
+            // When any part of an instruction is about the step's NPC, all of it is the way there.
+            val ours = (listOf(instruction) + instruction.whenIn).any { part -> part.ids.any { it in boundedTo } }
             if (value > start && (boundedTo.isEmpty() || !ours)) return TaskResult.Done
             if (fill != null && !ours && !finishesQuest) {
                 // A dig or similar belongs to a later guide step, so this step's part is behind us.
