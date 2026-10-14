@@ -215,6 +215,14 @@ class MicrobotActions : GameActions {
     override fun itemAction(itemId: Int, action: String): Boolean =
         if (Rs2Inventory.get(itemId) != null) Rs2Inventory.interact(itemId, action) else Rs2Equipment.interact(itemId, action)
 
+    /** The item's name is read by name, since the Rs2ItemModel in the stub used to build has no getName. */
+    override fun itemActionByName(part: String, action: String): Boolean {
+        val id = Rs2Inventory.items().collect(java.util.stream.Collectors.toList()).firstOrNull { item ->
+            runCatching { (item.javaClass.getMethod("getName").invoke(item) as? String)?.contains(part, ignoreCase = true) }.getOrNull() == true
+        }?.id ?: return false
+        return Rs2Inventory.interact(id, action)
+    }
+
     override fun useItemOnItem(itemId: Int, targetItemId: Int): Boolean = Rs2Inventory.combine(itemId, targetItemId)
 
     override fun useItemOnObject(itemId: Int, obj: SceneEntity): Boolean = Rs2Inventory.useItemOnObject(itemId, obj.id)

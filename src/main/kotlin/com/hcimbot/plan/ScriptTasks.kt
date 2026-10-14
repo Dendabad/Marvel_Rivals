@@ -1073,3 +1073,24 @@ class WaitAndTakeTask(
         return if (++waited >= maxTicks) TaskResult.Failed("item $itemId did not appear within $maxTicks ticks") else TaskResult.Running
     }
 }
+
+
+/** Uses [action] on an inventory item known only by part of its name ("crate"). Pauses if there is none. */
+class ItemByNameTask(private val part: String, private val action: String) : BaseTask() {
+    override val description = "$action the $part"
+    private var used = false
+    private var settling = 0
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        if (game.canContinueDialog) return attempt(ctx.actions.continueDialog(), "continue the dialogue")
+        if (game.isBusy) return TaskResult.Running
+        if (used) return if (++settling >= SETTLE) TaskResult.Done else TaskResult.Running
+        used = ctx.actions.itemActionByName(part, action)
+        return if (used) TaskResult.Running else TaskResult.Failed("no $part in the bag to $action")
+    }
+
+    private companion object {
+        const val SETTLE = 3
+    }
+}

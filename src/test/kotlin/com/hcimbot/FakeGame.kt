@@ -254,6 +254,11 @@ class FakeGame : GameState, GameActions {
         return true
     }
 
+    override fun itemActionByName(part: String, action: String): Boolean {
+        calls += "item named $part $action"
+        return true
+    }
+
     override fun pickFurniture(): Boolean {
         calls += "pick furniture"
         return true

@@ -517,6 +517,10 @@ class StepScripts(private val guide: Guide) {
         // yet when this step starts, so wait for them in Old Man Yarlo's house.
         "08f1329ea4" to { _ -> auto(WaitAndTakeTask(ASHES, YARLOS_HOUSE), trust = true) },
 
+        // 112. "Open the crate": the crate of supplies Marlo rewards at the end of Daddy's Home. Its item id is not in the
+        // guide, so it is found by name.
+        "e07bea62a5" to { _ -> auto(ItemByNameTask("crate", "Open"), trust = true) },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 

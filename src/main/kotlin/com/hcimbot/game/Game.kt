@@ -183,6 +183,9 @@ interface GameActions {
 
     /** Click a menu option on an inventory or worn item, e.g. "Teleport" on a Chronicle. */
     fun itemAction(itemId: Int, action: String): Boolean
+
+    /** [action] on the first inventory item whose name contains [part] ("crate"), for items whose id is not known. */
+    fun itemActionByName(part: String, action: String): Boolean = false
     fun useItemOnItem(itemId: Int, targetItemId: Int): Boolean
     fun useItemOnObject(itemId: Int, obj: SceneEntity): Boolean
 
