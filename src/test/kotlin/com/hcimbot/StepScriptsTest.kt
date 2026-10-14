@@ -6,7 +6,6 @@ import com.hcimbot.game.SceneEntity
 import com.hcimbot.guide.Guide
 import com.hcimbot.guide.Step
 import com.hcimbot.guide.Tile
-import com.hcimbot.plan.WalkTask
 import com.hcimbot.plan.StepPlan
 import com.hcimbot.plan.StepScripts
 import com.hcimbot.plan.TaskContext
@@ -29,9 +28,20 @@ class StepScriptsTest {
             // Its portals are listed without their "floor done" requirement, so the walker must not use them.
             assertEquals(mapOf<String, Any>("useTeleportationPortals" to false), auto.walkerOverrides, id)
         }
-        // Each floor's reward, claimed in order.
-        val floors = assertIs<StepPlan.Auto>(plan("5405a57b1e")).tasks.filterIsInstance<WalkTask>().map { it.tile }
-        assertEquals(listOf(Tile(1907, 5222, 0), Tile(2022, 5216, 0), Tile(2144, 5280, 0)), floors)
+    }
+
+    @Test
+    fun `restarted on floor 3, the Stronghold step goes on to the Box of Health and not back up`() {
+        val game = FakeGame()
+        val ctx = TaskContext(game, game, Conditions(game))
+        game.playerTile = Tile(2123, 5252, 0) // floor 3's start
+        assertEquals(3, StepScripts.strongholdFloor(ctx))
+        val tasks = assertIs<StepPlan.Auto>(plan("5405a57b1e")).tasks
+        // The floor 1 and 2 parts are skipped from here.
+        assertEquals(TaskResult.Done, tasks[0].tick(ctx))
+        assertEquals(TaskResult.Done, tasks[2].tick(ctx))
+        game.playerTile = Tile(3081, 3421, 0) // outside: floor 1 first
+        assertEquals(0, StepScripts.strongholdFloor(ctx))
     }
 
     @Test

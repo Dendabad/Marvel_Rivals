@@ -199,10 +199,11 @@ class StepScripts(private val guide: Guide) {
         "5405a57b1e" to { _ ->
             StepPlan.Auto(
                 listOf(
-                    WalkTask(GIFT_OF_PEACE, radius = 2),
-                    InteractTask(InteractTask.Kind.OBJECT, listOf(SOS_WAR_CHEST), listOf("Gift of Peace"), listOf(GIFT_OF_PEACE), null, DialoguePlan.Continue),
-                    WalkTask(GRAIN_OF_PLENTY, radius = 2),
-                    InteractTask(InteractTask.Kind.OBJECT, listOf(SOS_FAM_SACK), listOf("Grain of Plenty"), listOf(GRAIN_OF_PLENTY), null, DialoguePlan.Continue),
+                    // Each floor only while not already past it, so a restart deep inside never goes back up.
+                    OnlyIf({ strongholdFloor(it) <= 1 }, WalkTask(GIFT_OF_PEACE, radius = 2)),
+                    OnlyIf({ strongholdFloor(it) <= 1 }, InteractTask(InteractTask.Kind.OBJECT, listOf(SOS_WAR_CHEST), listOf("Gift of Peace"), listOf(GIFT_OF_PEACE), null, DialoguePlan.Continue)),
+                    OnlyIf({ strongholdFloor(it) <= 2 }, WalkTask(GRAIN_OF_PLENTY, radius = 2)),
+                    OnlyIf({ strongholdFloor(it) <= 2 }, InteractTask(InteractTask.Kind.OBJECT, listOf(SOS_FAM_SACK), listOf("Grain of Plenty"), listOf(GRAIN_OF_PLENTY), null, DialoguePlan.Continue)),
                     WalkTask(BOX_OF_HEALTH, radius = 2),
                     InteractTask(InteractTask.Kind.OBJECT, listOf(SOS_PEST_CHEST), listOf("Box of Health"), listOf(BOX_OF_HEALTH), null, DialoguePlan.Continue),
                 ),
@@ -426,6 +427,22 @@ class StepScripts(private val guide: Guide) {
          * requirement, so the walker tries them and loops ("not of sufficient experience").
          */
         private val NO_PORTALS: Map<String, Any> = mapOf("useTeleportationPortals" to false)
+
+        /**
+         * Which Stronghold of Security floor the player is on: 1 to 4, or 0 when outside it.
+         * Each floor is its own block of the map, west to east (start tiles 1859, 2042, 2123, 2358).
+         */
+        fun strongholdFloor(ctx: TaskContext): Int {
+            val at = ctx.game.playerTile ?: return 0
+            if (at.plane != 0 || at.y !in 5150..5320) return 0
+            return when (at.x) {
+                in 1850..1950 -> 1
+                in 1980..2070 -> 2
+                in 2100..2200 -> 3
+                in 2300..2400 -> 4
+                else -> 0
+            }
+        }
         private const val DOOGLE_LEAVES = 1573
         private const val LIT_CANDLE = 33
         private const val CANDLE = 36

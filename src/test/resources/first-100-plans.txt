@@ -55,7 +55,7 @@
 055 aaa3cbda2a AUTO ShopTask
 056 64c83f7e13 AUTO+trust Optional>QuestTask
 057 1d611d72f2 AUTO InteractTask
-058 5405a57b1e AUTO WalkTask>InteractTask>WalkTask>InteractTask>WalkTask>InteractTask
+058 5405a57b1e AUTO OnlyIf>OnlyIf>OnlyIf>OnlyIf>WalkTask>InteractTask
 059 3c394b81d3 SKIP
 060 0d2ffd5660 SKIP
 061 b2738b149e AUTO WalkTask

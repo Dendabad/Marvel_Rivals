@@ -149,7 +149,7 @@ class HcimGuideBotScript : Script() {
         }
         if (wasPaused) {
             wasPaused = false
-            runner?.replan()
+            runner?.resumeWhereLeft()
         }
         return false
     }

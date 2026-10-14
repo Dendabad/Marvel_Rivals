@@ -179,6 +179,29 @@ class GuideRunnerTest {
     }
 
     @Test
+    fun `resuming after a pause carries on from the same action, not the step's first`() {
+        // Step 58, the Stronghold: walk to floor 1's reward, claim it, then on to floor 2.
+        val one = GuideLoader().load(
+            """{"schemaVersion": 1, "sections": [{"steps": [{"id": "5405a57b1e", "kind": "step", "text": "Complete 3 Floors of Stronghold of Security."}]}]}""".byteInputStream(),
+        )
+        game.playerTile = Tile(3081, 3421, 0)
+        game.objects += SceneEntity(20656, "Gift of Peace", Tile(1907, 5222, 0))
+        val runner = GuideRunner(one, game, game, InMemoryProgressStore(), BotSettings(), log::add).also { it.start() }
+        // Floor 1's reward walked to and claimed, then on the way to floor 2's.
+        repeat(10) { if (game.calls.none { it == "walk (2022, 5216, 0)" }) runner.ticks(1) }
+        assertTrue("object Gift of Peace null" in game.calls, game.calls.toString())
+        assertTrue("walk (2022, 5216, 0)" in game.calls, game.calls.toString())
+        assertIs<GuideRunner.State.Running>(runner.state)
+        val claimed = game.calls.count { it == "object Gift of Peace null" }
+        // Paused mid-way to floor 2's ladder, still on floor 1, then resumed.
+        game.playerTile = Tile(1900, 5230, 0)
+        runner.resumeWhereLeft()
+        runner.ticks(3)
+        assertEquals(claimed, game.calls.count { it == "object Gift of Peace null" }, game.calls.toString())
+        assertEquals(1, game.calls.count { it == "walk (1907, 5222, 0)" }, "it must not walk back to floor 1: ${game.calls}")
+    }
+
+    @Test
     fun `a paused step the player then does is ticked and the bot carries on`() {
         // The bank has neither item, so the bot pauses. The player gets them some other way.
         val runner = runner(done = allBefore("bank"))

@@ -107,9 +107,22 @@ class GuideRunner(
         }
     }
 
-    /** Drops the current step's half done actions so they are planned again, e.g. after the player paused the bot. */
+    /** Drops the current step's half done actions so they are planned again from the start (Retry). */
     fun replan() {
         active = null
+    }
+
+    /**
+     * After the player paused: the current action starts afresh, since the player may have moved,
+     * but the actions already done stay done. Starting the step over would, in the Stronghold,
+     * walk all the way back to floor 1's reward.
+     */
+    fun resumeWhereLeft() {
+        val old = active ?: return
+        active = Active(old.step, planner.plan(old.step), old.baseline).also {
+            it.taskIndex = old.taskIndex
+            it.ticks = old.ticks
+        }
     }
 
     /** Treat the paused step as done and move on. */
