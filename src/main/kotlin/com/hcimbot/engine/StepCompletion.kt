@@ -47,7 +47,7 @@ class StepCompletion(
         }
         if ((step.acquires || step.collects || step.withdraw) && step.items.isNotEmpty()) {
             // Quest items that turn into the next one count as the same item, as the bank step does.
-            val wanted = step.items.filter { it.ids.isNotEmpty() }.map(com.hcimbot.plan.ItemSources::widen)
+            val wanted = step.items.filter { it.ids.isNotEmpty() && !it.ids.all(com.hcimbot.plan.ItemSources.LATER::contains) }.map(com.hcimbot.plan.ItemSources::widen)
             if (wanted.isNotEmpty()) {
                 return verdict(wanted.all { conditions.count(it.ids) >= (it.count ?: 1) })
             }
