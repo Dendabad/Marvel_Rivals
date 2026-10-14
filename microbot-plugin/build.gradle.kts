@@ -8,6 +8,10 @@ plugins {
 // `./gradlew :client:assemble` (runelite-client/build/libs/client-<version>-shaded.jar).
 val microbotJar: String? = (findProperty("microbotJar") as String?) ?: System.getenv("MICROBOT_JAR")
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     implementation(rootProject)
     // RuneLite ships Gson at runtime, and the core's loader takes one.
