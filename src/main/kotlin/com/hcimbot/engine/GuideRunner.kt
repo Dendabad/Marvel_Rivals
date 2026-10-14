@@ -188,7 +188,8 @@ class GuideRunner(
             }
             return markDone(step, "the game shows it is done")
         }
-        if (++current.ticks > settings.stepTimeoutTicks) return pause(step, "this step is taking too long")
+        val limit = settings.stepTimeoutTicks * if ((current.plan as? StepPlan.Auto)?.patient == true) PATIENT_FACTOR else 1
+        if (++current.ticks > limit) return pause(step, "this step is taking too long")
 
         when (val plan = current.plan) {
             is StepPlan.Manual -> pause(step, plan.reason)
@@ -266,5 +267,8 @@ class GuideRunner(
     companion object {
         /** Ticks to wait for the game to catch up after the last action of a step. */
         const val SETTLE_TICKS = 10
+
+        /** How many times longer a training step may run, e.g. agility laps for a level. */
+        const val PATIENT_FACTOR = 8
     }
 }

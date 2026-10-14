@@ -34,7 +34,7 @@
 034 8c0968bd1e AUTO+trust QuestTask
 035 1d0e75f508 AUTO OnlyIf>Optional>RepeatUntil
 036 1d41a5add4 SKIP
-037 0f6d8ccd8b PAUSE
+037 0f6d8ccd8b AUTO AgilityCourseTask
 038 9db23d849e AUTO DepositItemsTask
 039 e3eead8e86 AUTO ShopTask>HopTask>ShopTask
 040 6c98804f8c AUTO+trust QuestTask

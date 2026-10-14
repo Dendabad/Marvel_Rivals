@@ -386,6 +386,28 @@ class PartsTest {
     }
 
     @Test
+    fun `the Draynor rooftop course is run obstacle by obstacle, lap after lap`() {
+        val course = com.hcimbot.plan.AgilityCourse.DRAYNOR
+        val game = FakeGame()
+        game.playerTile = Tile(3104, 3277, 0)
+        course.obstacles.forEach { game.objects += com.hcimbot.game.SceneEntity(it.objectId, it.name, it.tile) }
+        // Each obstacle lands the player in the next one's area, and the crate back on the ground.
+        val landings = mapOf(
+            11404 to Tile(3099, 3279, 3), 11405 to Tile(3090, 3275, 3), 11406 to Tile(3091, 3266, 3),
+            11430 to Tile(3088, 3258, 3), 11630 to Tile(3090, 3254, 3), 11631 to Tile(3098, 3258, 3), 11632 to Tile(3103, 3261, 0),
+        )
+        game.onObjectInteract = { obj, _ -> game.playerTile = landings.getValue(obj.id) }
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game), log::add)
+        val task = com.hcimbot.plan.AgilityCourseTask(course)
+        repeat(60) { assertTrue(task.tick(ctx) !is com.hcimbot.plan.TaskResult.Failed) }
+        val used = game.calls.filter { it.startsWith("object") }
+        assertEquals(listOf("Rough wall", "Tightrope", "Tightrope", "Narrow wall", "Wall", "Gap", "Crate"), used.take(7).map { it.removePrefix("object ").removeSuffix(" null") })
+        assertTrue(log.any { "Finished lap 1" in it }, log.toString())
+    }
+
+    private val log = mutableListOf<String>()
+
+    @Test
     fun `step 19 looks for rats behind Lumbridge castle first`() {
         val game = FakeGame()
         game.playerTile = Tile(3230, 3209, 0)

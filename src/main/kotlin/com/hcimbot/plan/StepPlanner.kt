@@ -27,6 +27,8 @@ sealed interface StepPlan {
         val trustTasks: Boolean = false,
         val confirm: Boolean = false,
         val combat: Boolean = false,
+        /** Training that takes many minutes: allowed far longer before "taking too long". */
+        val patient: Boolean = false,
     ) : StepPlan
 
     /** The bot cannot do this step. It pauses and shows [reason] until the step is ticked. */

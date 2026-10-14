@@ -177,6 +177,10 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 37. "Train Draynor Agility to 5 Agility [Lumbridge Easy Diary]"
+        // Laps of the rooftop course until both the level and the diary task are done.
+        "0f6d8ccd8b" to { _ -> StepPlan.Auto(listOf(AgilityCourseTask(AgilityCourse.DRAYNOR)), patient = true) },
+
         // 21. "Talk to Father Urhney in the lumbridge swamp for Ghost Speak Amulet. (2,1) Wield this."
         "ce4913f789" to { _ ->
             auto(

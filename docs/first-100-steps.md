@@ -4,7 +4,7 @@ What the bot does at each of the first 100 steps of the B0aty HCIM Guide V3. Eve
 
 **Runs** means the bot does the step on its own. **Skips** means there is nothing to do in the game (a heading or a reminder). **Pauses** means it stops and waits for you to do the step and tick it in the plugin.
 
-With **Allow combat** on: 86 run, 8 skip, 6 pause. With it off, the two fights (#19 and #27) pause too.
+With **Allow combat** on: 87 run, 8 skip, 5 pause. With it off, the two fights (#19 and #27) pause too.
 
 | # | Step | Bot | What happens |
 | --- | --- | --- | --- |
@@ -44,7 +44,7 @@ With **Allow combat** on: 86 run, 8 skip, 6 pause. With it off, the two fights (
 | 34 | Talk to Morgan and start Vampyre Slayer (1) | Runs | Follows Quest Helper for vampyreslayer. |
 | 35 | Go up the stairs and collect 4x Garlic from the cupboard | Runs | Climbs to Morgan's upper floor, opens the cupboard and searches it until there are 4 garlic. |
 | 36 | You can get multiple Garlic by spamclicking the cupboard [Fishing Contest] | Skips | Tip covered by the garlic step. |
-| 37 | Train Draynor Agility to 5 Agility [Lumbridge Easy Diary] | Pauses | Still pauses: training on an agility course needs a course script, which is not written yet. |
+| 37 | Train Draynor Agility to 5 Agility [Lumbridge Easy Diary] | Runs | Runs laps of the Draynor rooftop course (obstacles from Quest Helper's guide) until Agility is 5 and the diary task is done, picking up marks of grace and walking back to the start after a fall. |
 | 38 | Bank at Draynor and deposit the Garlic & Cheese | Runs | Deposit [1550, 1985]. |
 | 39 | Talk to Fortunato & buy 5 Jugs of wine. Hop worlds and buy 10 in total. | Runs | Buys 5, hops to another world, and buys 5 more. |
 | 40 | Check the Notice board next to Fortunato to Start A Porcine of Interest | Runs | Follows Quest Helper for aporcineofinterest. guide.json has no id for the notice board, so the bot looks it up by its RuneLite name and reads it. |
