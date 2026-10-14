@@ -76,6 +76,7 @@ class HcimGuideBotScript : Script() {
     fun run(config: HcimGuideBotConfig): Boolean {
         settings = settingsFrom(config)
         paused = config.paused()
+        note("Started version ${BotModuleImpl.VERSION}")
         mainScheduledFuture = scheduledExecutorService.scheduleWithFixedDelay({ tick(config) }, 0, TICK_MS, TimeUnit.MILLISECONDS)
         scheduledFuture = scheduledExecutorService.scheduleWithFixedDelay({ watchdog() }, WATCHDOG_MS, WATCHDOG_MS, TimeUnit.MILLISECONDS)
         return true

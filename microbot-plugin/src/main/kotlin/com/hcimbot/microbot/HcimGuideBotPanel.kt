@@ -40,7 +40,9 @@ class HcimGuideBotPanel(
         val body = JPanel().apply {
             layout = BoxLayout(this, BoxLayout.Y_AXIS)
             border = BorderFactory.createEmptyBorder(8, 8, 8, 8)
-            add(JLabel("HCIM Guide Bot ${BotModuleImpl.VERSION}").apply { font = font.deriveFont(Font.BOLD, 16f) })
+            add(JLabel("HCIM Guide Bot").apply { font = font.deriveFont(Font.BOLD, 16f) })
+            // On its own line: next to the title it is cut off in the narrow sidebar.
+            add(JLabel("Version ${BotModuleImpl.VERSION}").apply { foreground = Color.GRAY })
             add(state.apply { font = font.deriveFont(Font.BOLD, 14f) })
             add(section("Step", step))
             add(section("Doing", doing))
