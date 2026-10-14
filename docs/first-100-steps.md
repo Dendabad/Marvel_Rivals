@@ -4,7 +4,7 @@ What the bot does at each of the first 100 steps of the B0aty HCIM Guide V3. Eve
 
 **Runs** means the bot does the step on its own. **Skips** means there is nothing to do in the game (a heading or a reminder). **Pauses** means it stops and waits for you to do the step and tick it in the plugin.
 
-With **Allow combat** on: 89 run, 8 skip, 3 pause. With it off, the two fights (#19 and #27) pause too.
+With **Allow combat** on: 91 run, 9 skip, 0 pause (step 80 still pauses for its two puzzles). With it off, the two fights (#19 and #27) pause too.
 
 | # | Step | Bot | What happens |
 | --- | --- | --- | --- |
@@ -98,12 +98,12 @@ With **Allow combat** on: 89 run, 8 skip, 3 pause. With it off, the two fights (
 | 88 | Head to King Roald and start Priest in Peril (1,1,3) | Runs | Follows Quest Helper for priestinperil. |
 | 89 | Talk to Marlo and start Daddy's Home (in a house the east of the castle) (2,3,3) | Runs | Follows Quest Helper for daddyshome. |
 | 90 | Pick up the Saw | Runs | Take Saw. |
-| 91 | Enter Varrock Sewer and take the North-West path to collect the Demon Slayer Key - Giant rat is aggressive, max hit is 1. | Pauses | Still pauses: the sewer route and the key's spot are not in the guide data yet. |
-| 92 | Enter Varrock Museum and head downstairs and talk to Orlando Smith (1) and complete the Natural History Quiz for 9 slayer and hunter and 28 kudos. | Pauses | Still pauses: the museum quiz needs its answers scripted. |
+| 91 | Enter Varrock Sewer and take the North-West path to collect the Demon Slayer Key - Giant rat is aggressive, max hit is 1. | Runs | Walks to the Rusty Key in the Varrock Sewer (the walker climbs down the manhole) and takes it. Giant rats hit for 1 at most, so being attacked does not stop it. |
+| 92 | Enter Varrock Museum and head downstairs and talk to Orlando Smith (1) and complete the Natural History Quiz for 9 slayer and hunter and 28 kudos. | Skips | The Natural History Quiz needs an answer table the bot does not have, and only gives 9 Slayer and Hunter XP and kudos, so it is left out. |
 | 93 | Bank at Varrock East bank and Deposit all | Runs | Walk to (3254, 3420, 0), then Bank, deposit all. |
 | 94 | Withdraw: Coins, Saw, Hammer, Knife, Bronze Axe, Research Package, Tinderbox (7 Inventory Slots) | Runs | Bank, withdraw Coins, Saw, Hammer, Knife, Bronze Axe, Research Package, Tinderbox. |
 | 95 | Talk to Aubury to continue Rune Mysteries (1,2) | Runs | Follows Quest Helper for runemysteries. |
-| 96 | Light both logs in the house right next to the rune shop. | Pauses | Still pauses: it is not clear from the data which logs to light. |
+| 96 | Light both logs in the house right next to the rune shop. | Runs | Walks into Old Man Yarlo's house and lights both logs with the tinderbox, waiting for each to burn. |
 | 97 | Talk to Old Man Yarlo, then destroy all the furniture in the house (can't destroy furniture until you speak to him) | Runs | Talks to Yarlo, then removes each piece of broken furniture until none is left. |
 | 98 | Talk to Old Man Yarlo to continue Daddy's Home (2) | Runs | Follows Quest Helper for daddyshome. |
 | 99 | Take 2x Logs & 2x ashes after cutscene | Runs | Take Logs, Ashes. |

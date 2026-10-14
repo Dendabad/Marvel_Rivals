@@ -107,6 +107,16 @@ class FakeGame : GameState, GameActions {
     val objectNames = mutableMapOf<String, Int>()
     override fun objectIdNamed(constant: String): Int? = objectNames[constant]
 
+    /** Ground items an item was used on, e.g. logs lit with a tinderbox, which then burn away. */
+    val litGround = mutableListOf<SceneEntity>()
+
+    override fun useItemOnGroundItem(itemId: Int, item: SceneEntity): Boolean {
+        calls += "use $itemId on ground ${item.name}"
+        groundItems.remove(item)
+        litGround += item
+        return true
+    }
+
     override fun stepOnto(tile: Tile): Boolean {
         calls += "step $tile"
         playerTile = tile

@@ -244,6 +244,31 @@ class StepScripts(private val guide: Guide) {
             }
         },
 
+        // 96. "Light both logs in the house right next to the rune shop": Old Man Yarlo's house, east of
+        // the castle (the next step talks to him there). The tinderbox was withdrawn at step 94.
+        "08e4afe002" to { _ ->
+            auto(LightLogsTask(listOf(LOGS), TINDERBOX, count = 2, around = YARLOS_HOUSE), trust = true)
+        },
+
+        // 91. "Enter Varrock Sewer and take the North-West path to collect the Demon Slayer Key"
+        // The key is Quest Helper's QIP_DS_SEWER_KEY at (3225, 9897), the third key, dropped there when
+        // the bucket of water went down the drain at step 86. The walker climbs down the manhole. The giant
+        // rats in the way hit for 1 at most, so a fight is not a reason to stop.
+        "578b1fb44c" to { _ ->
+            StepPlan.Auto(
+                listOf(
+                    WalkTask(SEWER_KEY, radius = 2),
+                    InteractTask(InteractTask.Kind.OBJECT, listOf(SEWER_KEY_OBJECT), listOf("Rusty key"), listOf(SEWER_KEY), null),
+                ),
+                trustTasks = true, combat = true,
+            )
+        },
+
+        // 92. "Enter Varrock Museum ... complete the Natural History Quiz": the quiz asks questions
+        // that need an answer table the bot does not have, and it only gives 9 Slayer and Hunter XP and
+        // kudos, so it is left out rather than guessed at.
+        "b721b17da2" to { _ -> skip("the Natural History Quiz needs an answer table the bot does not have, and only gives a little Slayer and Hunter XP") },
+
         // 21. "Talk to Father Urhney in the lumbridge swamp for Ghost Speak Amulet. (2,1) Wield this."
         "ce4913f789" to { _ ->
             auto(
@@ -404,6 +429,8 @@ class StepScripts(private val guide: Guide) {
         /** The Wizards' Tower ground floor, south of its door. */
         private val INSIDE_WIZARDS_TOWER = Tile(3108, 3164, 0)
         private val VEOS_PORT_SARIM = Tile(3054, 3245, 0)
+        private val YARLOS_HOUSE = Tile(3239, 3396, 0)
+        private val SEWER_KEY = Tile(3225, 9897, 0)
 
         /** Where Varrock's Stray Dog is seen: the square, both banks, the north and south streets. */
         private val VARROCK_ROUND = listOf(
@@ -446,6 +473,8 @@ class StepScripts(private val guide: Guide) {
         private const val LOGS = 1511
         private const val LEATHER_BOOTS = 1061
         private const val BONES = 526
+        private const val TINDERBOX = 590
+        private const val SEWER_KEY_OBJECT = 17431
         /** Dr Harlow: Quest Helper has 3480, but an update added 16276 and 16277 for the Vampyre Slayer rework. */
         private val HARLOW = setOf(3480, 16276, 16277)
         /** The Stronghold's rewards, from Quest Helper's Varrock diary and RuneLite's gameval ObjectID. */

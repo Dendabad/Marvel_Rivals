@@ -88,12 +88,12 @@
 088 705e842c2a AUTO+trust QuestTask
 089 fe77c4b035 AUTO+trust QuestTask
 090 b83e92bdd8 AUTO TakeItemTask
-091 578b1fb44c PAUSE
-092 b721b17da2 PAUSE
+091 578b1fb44c AUTO+trust WalkTask>InteractTask
+092 b721b17da2 SKIP
 093 539a109a39 AUTO WalkTask>BankTask
 094 2947c7d807 AUTO BankTask
 095 c0297c1e56 AUTO+trust QuestTask
-096 08e4afe002 PAUSE
+096 08e4afe002 AUTO+trust LightLogsTask
 097 711ae4d841 AUTO+trust QuestTask>RepeatUntil
 098 8023aa5c89 AUTO+trust QuestTask
 099 86ad75cbe2 AUTO TakeItemTask

@@ -110,6 +110,58 @@ class FindAndUseTask(
     }
 }
 
+/**
+ * Lights logs lying on the ground by using a tinderbox on each, up to [count], waiting for each one to
+ * burn away before the next. Done when [count] are lit, or none are left in sight after some were.
+ */
+class LightLogsTask(
+    private val logIds: List<Int>,
+    private val tinderboxId: Int,
+    private val count: Int,
+    private val around: Tile,
+) : BaseTask() {
+    private var lit = 0
+    private var waiting = 0
+    private var current: SceneEntity? = null
+    private var walk: WalkTask? = null
+    override val description = "Light $count logs"
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        val at = game.playerTile ?: return TaskResult.Running
+        if (at.plane != around.plane || at.distanceTo(around) > ROOM) {
+            val going = walk ?: WalkTask(around, radius = 3).also { walk = it }
+            return when (val walked = going.tick(ctx)) {
+                TaskResult.Done -> { walk = null; TaskResult.Running }
+                else -> walked
+            }
+        }
+        if (game.isBusy) return TaskResult.Running
+        // The one just lit: wait for it to burn away, or for the lighting to fail.
+        current?.let { lighting ->
+            val stillThere = game.nearestGroundItem(logIds)?.takeIf { it.tile == lighting.tile } != null
+            if (stillThere && ++waiting < BURN_TICKS) return TaskResult.Running
+            current = null
+            waiting = 0
+        }
+        if (lit >= count) return TaskResult.Done
+        if (tinderboxId !in game.inventory()) return TaskResult.Failed("a tinderbox is needed to light the logs")
+        val logs = game.nearestGroundItem(logIds)?.takeIf { it.tile.distanceTo(around) <= ROOM }
+        if (logs == null) {
+            return if (lit > 0) TaskResult.Done else TaskResult.Failed("no logs to light in sight")
+        }
+        current = logs
+        lit++
+        ctx.log("Lighting the logs at ${logs.tile} ($lit of $count)")
+        return attempt(ctx.actions.useItemOnGroundItem(tinderboxId, logs), "light the logs")
+    }
+
+    private companion object {
+        const val ROOM = 10
+        const val BURN_TICKS = 12
+    }
+}
+
 /** Walks onto [tile] and digs there with a spade, for a clue or quest dig. */
 class DigTask(val tile: Tile) : BaseTask() {
     private var dig: ItemActionTask? = null

@@ -67,6 +67,29 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `both logs in Yarlo's house are lit with the tinderbox`() {
+        val game = FakeGame().apply {
+            inv[590] = 1
+            playerTile = Tile(3239, 3396, 0)
+            groundItems += SceneEntity(1511, "Logs", Tile(3238, 3394, 0))
+            groundItems += SceneEntity(1511, "Logs", Tile(3241, 3398, 0))
+        }
+        assertEquals(TaskResult.Done, run(plan("08e4afe002"), game))
+        assertEquals(2, game.calls.count { it == "use 590 on ground Logs" }, game.calls.toString())
+    }
+
+    @Test
+    fun `the sewer key is walked to and taken`() {
+        val game = FakeGame().apply {
+            playerTile = Tile(3237, 3458, 0)
+            objects += SceneEntity(17431, "Rusty key", Tile(3225, 9897, 0))
+        }
+        assertEquals(TaskResult.Done, run(plan("578b1fb44c"), game))
+        assertEquals("walk (3225, 9897, 0)", game.calls.first())
+        assertTrue(game.calls.any { it.startsWith("object Rusty key") }, game.calls.toString())
+    }
+
+    @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
         val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()

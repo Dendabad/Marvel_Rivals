@@ -159,6 +159,9 @@ interface GameActions {
     /** Hop to another world of the same membership. */
     fun hopWorld(): Boolean
 
+    /** Uses an inventory item on something lying on the ground, e.g. a tinderbox on logs. */
+    fun useItemOnGroundItem(itemId: Int, item: SceneEntity): Boolean = false
+
     fun useItemOnNpc(itemId: Int, npc: SceneEntity): Boolean
 
     /** Cast a combat spell on an NPC, e.g. "WIND_STRIKE". */

@@ -122,6 +122,20 @@ class MicrobotActions : GameActions {
         return true
     }
 
+    /** Selects the item, then clicks the ground item: Microbot turns that click into "use on". */
+    override fun useItemOnGroundItem(itemId: Int, item: SceneEntity): Boolean {
+        val found = onClient {
+            Microbot.getRs2TileItemCache().query().withId(item.id).nearest(item.tile.toWorldPoint(), RELOCATE)
+        } ?: return false
+        if (!Rs2Inventory.use(itemId)) return false
+        val deadline = System.currentTimeMillis() + SELECT_MS
+        while (onClient { Microbot.getClient().isWidgetSelected } != true) {
+            if (System.currentTimeMillis() > deadline) return false
+            Thread.sleep(POLL_MS)
+        }
+        return found.click("")
+    }
+
     override fun stepOnto(tile: Tile): Boolean = Rs2Walker.walkFastCanvas(WorldPoint(tile.x, tile.y, tile.plane))
 
     override fun itemAction(itemId: Int, action: String): Boolean =
