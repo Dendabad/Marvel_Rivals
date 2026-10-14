@@ -169,6 +169,37 @@ class GuideRunnerTest {
     }
 
     @Test
+    fun `a paused step the player then does is ticked and the bot carries on`() {
+        // The bank has neither item, so the bot pauses. The player gets them some other way.
+        val runner = runner(done = allBefore("bank"))
+        runner.ticks(10)
+        assertIs<GuideRunner.State.Paused>(runner.state)
+        game.inv[995] = 100
+        game.inv[952] = 1
+        runner.ticks(2)
+        assertEquals("walk", runner.currentStep?.id)
+        assertTrue(log.any { "you did it while the bot waited" in it }, log.toString())
+    }
+
+    @Test
+    fun `the bot's ticks are copied to the plugin and taken back on restart, the player's are not`() {
+        val ticked = mutableListOf<String>()
+        var pluginSave = "player-step"
+        var bot: String? = null
+        val progress = com.hcimbot.progress.SharedProgressStore({ pluginSave }, { bot }, { bot = it }) { id, done ->
+            ticked += "$id $done"
+        }
+        progress.markComplete("a")
+        pluginSave = "player-step,a" // the plugin saved the bot's tick
+        progress.forget(listOf("a", "player-step"))
+        assertEquals(listOf("a true", "a false"), ticked)
+        // Before the plugin saves the untick, "a" already counts as not done.
+        assertEquals(setOf("player-step"), progress.completedIds())
+        pluginSave = "player-step"
+        assertEquals(setOf("player-step"), progress.completedIds())
+    }
+
+    @Test
     fun `restarting leaves the player's own ticks and reports them`() {
         // A store where the plugin ticked everything: the bot cannot forget those.
         val plugin = guide.steps.joinToString(",") { it.id }

@@ -200,10 +200,12 @@ class HcimGuideBotScript : Script() {
             return null
         }
         val configManager = Microbot.getConfigManager()
+        val ticker = B0atyGuideTicker({ config.tickB0atyGuide() })
         val progress = SharedProgressStore(
             readPlugin = { configManager.getRSProfileConfiguration(SharedProgressStore.PLUGIN_GROUP, SharedProgressStore.PLUGIN_KEY) },
             readBot = { configManager.getRSProfileConfiguration(SharedProgressStore.BOT_GROUP, SharedProgressStore.BOT_KEY) },
             writeBot = { configManager.setRSProfileConfiguration(SharedProgressStore.BOT_GROUP, SharedProgressStore.BOT_KEY, it) },
+            tickInPlugin = { id, done -> ticker.set(id, done) },
         )
         return GuideRunner(guide, game, actions, progress, settings, ::note, routes)
             .also { it.start(); runner = it }
@@ -232,7 +234,7 @@ class HcimGuideBotScript : Script() {
                 BotStatus("Running", BotStatus.RUNNING, step = stepLine(runner), doing = runner.currentTaskDescription)
             is GuideRunner.State.Paused -> BotStatus(
                 "PAUSED", BotStatus.PAUSED, step = stepLine(runner),
-                detail = "${state.reason}. Do it yourself and tick it in the B0aty guide, or press Skip or Retry.",
+                detail = "${state.reason}. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.",
             )
             is GuideRunner.State.Halted -> BotStatus("STOPPED", BotStatus.STOPPED, step = stepLine(runner), detail = state.reason)
             GuideRunner.State.Finished -> BotStatus("Guide finished", BotStatus.RUNNING)
@@ -241,7 +243,7 @@ class HcimGuideBotScript : Script() {
         if (state != shownState && (state is GuideRunner.State.Paused || state is GuideRunner.State.Halted)) {
             val why = (state as? GuideRunner.State.Paused)?.reason ?: (state as GuideRunner.State.Halted).reason
             // The timed message does not block, which matters when the watchdog thread reports.
-            Microbot.showMessage("HCIM Guide Bot paused at ${stepLine(runner)}\n\n$why\n\nDo it yourself and tick it in the B0aty guide, or use Skip or Retry in the bot's sidebar.", MESSAGE_MS)
+            Microbot.showMessage("HCIM Guide Bot paused at ${stepLine(runner)}\n\n$why\n\nDo it yourself and the bot carries on once the game shows it is done. If it does not notice, press Skip in the bot's sidebar (the green H) to mark it done, or Retry to have the bot try again.", MESSAGE_MS)
         }
         shownState = state
     }

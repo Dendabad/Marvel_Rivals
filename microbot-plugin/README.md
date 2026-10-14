@@ -62,6 +62,7 @@ Find **HCIM Guide Bot** in Microbot's plugin list and open its settings:
 | Setting | Default | What it does |
 | --- | --- | --- |
 | Pause | off | Tick to pause the bot at once, untick to carry on. |
+| Tick steps in B0aty guide | on | Ticks each step the bot finishes in the B0aty sidebar too. |
 | Pause hotkey | none | A key that pauses and unpauses, e.g. F12. Click the box, then press the key. |
 | Allow combat | off | Leave it off at first. Fighting steps pause for you. |
 | Pause on tips | on | Stops at the guide's tips and warnings. |
@@ -88,7 +89,9 @@ Log in, then switch the plugin on. It starts at the first step not yet ticked in
 
 You can also pause with the **Pause** checkbox in the settings, or with your **pause hotkey**. All of them do the same thing.
 
-When the bot pauses by itself, a message explains why. Do the step yourself and tick it in the B0aty guide's sidebar, or use **Skip** or **Retry**.
+When the bot pauses by itself, a message explains why. Do the step yourself: the bot carries on as soon as the game shows it is done. If it cannot tell (a step with nothing to check), press **Skip** to mark it done, or **Retry** to have the bot try again.
+
+Every step the bot finishes is ticked in the B0aty guide's sidebar too, as if you had clicked it, so the two always agree. Turn off **Tick steps in B0aty guide** in the settings to stop that.
 
 It stops for good below the hitpoint limit. A watchdog checks hitpoints three times a second, even in the middle of a long walk, and can stop the walk or eat.
 
@@ -97,7 +100,7 @@ It stops for good below the hitpoint limit. A watchdog checks hitpoints three ti
 The on screen box and the sidebar show the step's number, like `Step 5 of 2925: Head North-West...`. The same numbers are used in [docs/first-100-steps.md](../docs/first-100-steps.md).
 
 1. In the bot's settings, type the number into **Start at step** and press **Enter**.
-2. The bot forgets its own ticks from that step on and starts there. The setting goes back to 0 by itself.
+2. The bot takes back its own ticks from that step on, in the B0aty guide too, and starts there. The setting goes back to 0 by itself.
 3. The step you start at always runs, even if it is ticked in the B0aty guide. If later steps are ticked there, a message lists them. Untick them in the B0aty sidebar if you want those redone too, since the bot only clears its own ticks.
 
 Some steps finish themselves as soon as the game shows they are done, for example a diary task already completed, a quest already past that point, or items already in your inventory. Those cannot be repeated on the same account. Retest them on a fresh account, or drop or bank the items first.

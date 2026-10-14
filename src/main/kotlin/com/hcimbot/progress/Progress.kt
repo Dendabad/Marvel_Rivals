@@ -34,17 +34,33 @@ class SharedProgressStore(
     private val readPlugin: () -> String?,
     private val readBot: () -> String?,
     private val writeBot: (String) -> Unit,
+    /** Ticks or unticks a step in the plugin's own sidebar too, when that is wanted and possible. */
+    private val tickInPlugin: (stepId: String, done: Boolean) -> Unit = { _, _ -> },
 ) : ProgressStore {
     private val bot: MutableSet<String> by lazy { ProgressFormat.decode(readBot()).toMutableSet() }
 
-    override fun completedIds(): Set<String> = ProgressFormat.decode(readPlugin()) + bot
+    /** Steps unticked in the plugin that its save may not show yet. Cleared as the save catches up. */
+    private val unticking = mutableSetOf<String>()
+
+    override fun completedIds(): Set<String> {
+        val plugin = ProgressFormat.decode(readPlugin())
+        unticking.retainAll(plugin)
+        return plugin - unticking + bot
+    }
 
     override fun markComplete(stepId: String) {
         if (bot.add(stepId)) writeBot(ProgressFormat.encode(bot))
+        tickInPlugin(stepId, true)
     }
 
     override fun forget(stepIds: Collection<String>) {
-        if (bot.removeAll(stepIds.toSet())) writeBot(ProgressFormat.encode(bot))
+        // Only the bot's own ticks are taken back, in the plugin too. The player's stay.
+        val ours = stepIds.filter { it in bot }
+        if (ours.isEmpty()) return
+        bot.removeAll(ours.toSet())
+        writeBot(ProgressFormat.encode(bot))
+        unticking += ours
+        ours.forEach { tickInPlugin(it, false) }
     }
 
     companion object {

@@ -154,8 +154,16 @@ class GuideRunner(
         if (!game.isLoggedIn) return
         val paused = state as? State.Paused
         if (paused != null) {
-            // Ticked in the plugin while we waited: carry on.
-            if (paused.step.id in completedIds()) state = State.Running else return
+            // Ticked in the plugin while we waited, or done by the player and the game shows it: carry on.
+            val waiting = active?.takeIf { it.step.id == paused.step.id }
+            when {
+                paused.step.id in completedIds() -> state = State.Running
+                waiting != null && completion.check(paused.step, waiting.baseline) == StepCompletion.Verdict.Done -> {
+                    markDone(paused.step, "you did it while the bot waited")
+                    state = State.Running
+                }
+                else -> return
+            }
         }
         if (state != State.Running) return
 
@@ -208,7 +216,7 @@ class GuideRunner(
         when (completion.check(step, current.baseline)) {
             StepCompletion.Verdict.Done -> markDone(step, "the game shows it is done")
             StepCompletion.Verdict.NoSignal ->
-                if (plan.confirm) pause(step, "Check this was fully done, then tick it in the guide: ${step.text}")
+                if (plan.confirm) pause(step, "Check this was fully done, then press Skip to mark it done: ${step.text}")
                 else markDone(step, "all actions finished")
             StepCompletion.Verdict.NotYet ->
                 when {

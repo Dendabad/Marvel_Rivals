@@ -122,6 +122,17 @@ public interface HcimGuideBotConfig extends Config
 		return "draynor-fence";
 	}
 
+	@ConfigItem(
+		keyName = "tickB0atyGuide",
+		name = "Tick steps in B0aty guide",
+		description = "Tick each step the bot finishes in the B0aty guide's own sidebar, as if you had clicked it.",
+		position = 10
+	)
+	default boolean tickB0atyGuide()
+	{
+		return true;
+	}
+
 	String START_AT_STEP = "startAtStep";
 
 	@ConfigItem(
