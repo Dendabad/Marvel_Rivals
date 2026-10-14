@@ -124,6 +124,19 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `a quest step that needs items the bank holds fetches them instead of pausing`() {
+        val need = com.hcimbot.guide.Need("Doogle Leaves", 1, listOf(1573))
+        val pick = com.hcimbot.guide.Instruction(kind = "npc", point = listOf(3222, 3399, 0), text = "Pickup some Doogle Leaves.", ids = listOf(3480), items = listOf(need))
+        val helper = com.hcimbot.guide.QuestHelper(com.hcimbot.guide.QuestVar("varbit", 2561), lastValue = 3, steps = mapOf("1" to pick))
+        val game = FakeGame().apply { varbits[2561] = 1; bank[1573] = 1 }
+        val ctx = TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.QuestTask("gertrudescat", helper, allowCombat = false)
+        val results = (1..2).map { task.tick(ctx) }
+        assertTrue(results.none { it is com.hcimbot.plan.TaskResult.Failed }, results.toString())
+        assertTrue(game.calls.any { it.contains("withdraw") }, game.calls.toString())
+    }
+
+    @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
         val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()

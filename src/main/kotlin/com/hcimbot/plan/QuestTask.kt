@@ -1,6 +1,7 @@
 package com.hcimbot.plan
 
 import com.hcimbot.guide.Instruction
+import com.hcimbot.guide.ItemRef
 import com.hcimbot.guide.QuestHelper
 
 /**
@@ -41,6 +42,7 @@ class QuestTask(
     private var current: Instruction? = null
     private var currentTask: Task? = null
     private var repeats = 0
+    private var bankTask: Task? = null
     private var settling = 0
     override val description = "Quest: $questKey"
 
@@ -78,7 +80,17 @@ class QuestTask(
         }
 
         val missing = chosen.items.filterNot { ctx.conditions.has(it) }
-        if (missing.isNotEmpty()) {
+        if (missing.isEmpty()) {
+            bankTask = null
+        } else if (missing.all { it.ids.isNotEmpty() }) {
+            // Items an earlier guide step banked (Gertrude's doogle leaves and sardine): fetch them first.
+            // The bank task itself says what is missing if the bank has none either.
+            val bank = bankTask ?: BankTask(false, missing.map { ItemRef(it.name, it.ids, it.count) }).also { bankTask = it }
+            return when (val result = bank.tick(ctx)) {
+                TaskResult.Done -> TaskResult.Running
+                else -> result
+            }
+        } else {
             return TaskResult.Failed("${chosen.text} needs ${missing.joinToString { "${it.count}x ${it.name}" }}")
         }
 
