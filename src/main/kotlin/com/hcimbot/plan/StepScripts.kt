@@ -157,8 +157,10 @@ class StepScripts(private val guide: Guide) {
 
 
         // 20. "Head West towards Draynor hugging the fence to avoid the Jail Guards"
-        // Microbot's walker takes its own path there.
-        "6af6abb1f6" to { _ -> auto(WalkTask(DRAYNOR_VILLAGE)) },
+        // Only a direction to set off in: the next step is Father Urhney in Lumbridge
+        // Swamp, and step 21 walks straight to him. guide.json's point is the middle of
+        // Draynor Village, which the route never goes to.
+        "6af6abb1f6" to { _ -> skip("only directions, step 21 walks to Father Urhney") },
 
         // 21. "Talk to Father Urhney in the lumbridge swamp for Ghost Speak Amulet. (2,1) Wield this."
         "ce4913f789" to { _ ->
@@ -319,7 +321,6 @@ class StepScripts(private val guide: Guide) {
         private val LUMBRIDGE_TOP_FLOOR = Tile(3208, 3220, 2)
         private val SOUTH_OF_GERTRUDE = Tile(3152, 3405, 0)
         private val ABOVE_SWORD_SHOP = Tile(3205, 3396, 1)
-        private val DRAYNOR_VILLAGE = Tile(3103, 3265, 0)
         /** Giant rats spawn just west of the castle, by the second X Marks the Spot dig. */
         private val BEHIND_LUMBRIDGE_CASTLE = Tile(3195, 3205, 0)
         private val LUMBRIDGE_GENERAL_STORE = Tile(3212, 3246, 0)
