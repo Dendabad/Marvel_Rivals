@@ -31,6 +31,7 @@ class HcimGuideBotPanel(
     private val step = text()
     private val doing = text()
     private val detail = text()
+    private val recent = text()
     private val pause = JButton("Pause")
     private val refresh = Timer(REFRESH_MS) { update() }
 
@@ -59,6 +60,8 @@ class HcimGuideBotPanel(
         }
         add(body, BorderLayout.NORTH)
         add(buttons, BorderLayout.CENTER)
+        // Below the buttons, so a long history never pushes them out of sight.
+        add(section("Recent", recent).apply { border = BorderFactory.createEmptyBorder(0, 8, 8, 8) }, BorderLayout.SOUTH)
         update()
     }
 
@@ -75,6 +78,7 @@ class HcimGuideBotPanel(
         step.text = now.step ?: "-"
         doing.text = now.doing ?: "-"
         detail.text = now.detail ?: "-"
+        recent.text = now.recent.joinToString("\n").ifEmpty { "-" }
         pause.text = if (isPaused()) "Resume" else "Pause"
     }
 

@@ -55,9 +55,20 @@ class HcimGuideBotPlugin : Plugin() {
         configManager.getConfig(HcimGuideBotConfig::class.java)
 
     override fun startUp() {
+        // Microbot loads every jar in microbot-plugins, so an old copy of the bot left
+        // there runs alongside this one, and pausing this one does not pause it.
+        if (jarName(this) != JAR && otherCopies().any { jarName(it) == JAR }) {
+            Microbot.showMessage(
+                "Two copies of HCIM Guide Bot are in your microbot-plugins folder. This one, ${jarName(this)}, " +
+                    "will not run. Close Microbot and delete every jar there except $JAR.",
+                MESSAGE_MS,
+            )
+            return
+        }
         val configManager = Microbot.getConfigManager()
         val config = configManager.getConfig(HcimGuideBotConfig::class.java)
         val bot = HcimGuideBotScript().also { script = it }
+        bot.everyFewTicks = ::stopOtherCopies
         bot.run(config)
 
         overlay = HcimGuideBotOverlay(bot::status).also { overlayManager.add(it) }
@@ -80,6 +91,24 @@ class HcimGuideBotPlugin : Plugin() {
         pauseKey = object : HotkeyListener({ config.pauseHotkey() }) {
             override fun hotkeyPressed() = setPaused(!bot.isPaused())
         }.also { keyManager.registerKeyListener(it) }
+    }
+
+    private fun otherCopies(): List<Plugin> =
+        Microbot.getPluginManager().plugins.filter { it !== this && it.javaClass.name == javaClass.name }
+
+    /** Stops any other copy of the bot that is running, and says which jar it came from. */
+    private fun stopOtherCopies() {
+        val manager = Microbot.getPluginManager()
+        for (other in otherCopies().filter { manager.isPluginActive(it) }) {
+            val name = jarName(other) ?: "another jar"
+            script?.warn("Stopped a second copy of the bot from $name")
+            Microbot.showMessage(
+                "HCIM Guide Bot found a second copy of itself running, from $name, and stopped it. " +
+                    "It would keep playing while this one is paused. Close Microbot and delete $name from microbot-plugins.",
+                MESSAGE_MS,
+            )
+            SwingUtilities.invokeLater { runCatching { manager.stopPlugin(other) } }
+        }
     }
 
     /** Pauses or resumes the bot at once, and keeps the Pause checkbox in step with it. */
@@ -110,7 +139,14 @@ class HcimGuideBotPlugin : Plugin() {
     }
 
     companion object {
-        const val VERSION = "0.2.2"
+        const val VERSION = "0.2.3"
+
+        /** The jar name Microbot needs for this plugin. Any other name is a stray copy. */
+        private const val JAR = "HcimGuideBotPlugin.jar"
+        private const val MESSAGE_MS = 120_000
+
+        private fun jarName(plugin: Any): String? =
+            runCatching { java.io.File(plugin.javaClass.protectionDomain.codeSource.location.toURI()).name }.getOrNull()
         private const val SIDEBAR_PRIORITY = 8
     }
 }

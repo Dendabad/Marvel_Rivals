@@ -37,6 +37,16 @@ class DisplayTest {
     }
 
     @Test
+    fun `sidebar lists what the bot did lately`() {
+        val status = BotStatus(
+            "Running", BotStatus.RUNNING,
+            recent = listOf("12:00:05  Done (the game shows it is done): Collect 4x logs", "12:00:01  Paused by you"),
+        )
+        val panel = HcimGuideBotPanel({ status }, { false }, {}, {}, {})
+        assertTrue(panel.all().filterIsInstance<JTextArea>().any { "Done (the game shows it is done)" in it.text && "Paused by you" in it.text })
+    }
+
+    @Test
     fun `long lines wrap for the on screen box`() {
         val lines = HcimGuideBotOverlay.wrap("Head North-West to Magic combat tutor & drop Air & Mind Runes and claim more.", 38)
         assertTrue(lines.size > 1)

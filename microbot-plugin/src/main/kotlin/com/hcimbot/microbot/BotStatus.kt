@@ -13,6 +13,8 @@ data class BotStatus(
     val doing: String? = null,
     /** Why it paused or stopped, or what to do next. */
     val detail: String? = null,
+    /** What the bot did lately, newest first: steps started, done and why, pauses. */
+    val recent: List<String> = emptyList(),
 ) {
     companion object {
         val RUNNING: Color = Color(0x4C, 0xAF, 0x50)

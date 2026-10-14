@@ -40,8 +40,24 @@ class HcimGuideBotScript : Script() {
     private val retryRequested = AtomicBoolean(false)
     @Volatile private var statusNow: BotStatus = BotStatus.NOT_STARTED
 
+    private val recent = ArrayDeque<String>()
+    private val clock = java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss")
+
+    /** Called now and then from the bot's thread, to stop any other copy of the bot that is running. */
+    @Volatile var everyFewTicks: () -> Unit = {}
+    private var ticks = 0
+
     /** What the on screen box and the sidebar show. */
-    fun status(): BotStatus = statusNow
+    fun status(): BotStatus = statusNow.copy(recent = synchronized(recent) { recent.toList() })
+
+    /** Keeps the runner's log for the sidebar's Recent list, and the client log. */
+    private fun note(line: String) {
+        log.info(line)
+        synchronized(recent) {
+            recent.addFirst("${java.time.LocalTime.now().format(clock)}  $line")
+            while (recent.size > RECENT_LINES) recent.removeLast()
+        }
+    }
 
     fun isPaused(): Boolean = paused
 
@@ -49,12 +65,22 @@ class HcimGuideBotScript : Script() {
         paused = value
         // Stop a walk in progress straight away, rather than at the end of it.
         if (value) Rs2Walker.setTarget(null, "HCIM guide bot paused")
+        note(if (value) "Paused by you" else "Resumed by you")
     }
 
     /** The Skip and Retry buttons. Carried out on the bot's own thread at its next tick. */
-    fun requestSkip() = skipRequested.set(true)
+    fun requestSkip() {
+        skipRequested.set(true)
+        note("Skip pressed")
+    }
 
-    fun requestRetry() = retryRequested.set(true)
+    fun requestRetry() {
+        retryRequested.set(true)
+        note("Retry pressed")
+    }
+
+    /** For warnings from the plugin, like another copy of the bot being stopped. */
+    fun warn(line: String) = note(line)
 
     fun run(config: HcimGuideBotConfig): Boolean {
         settings = settingsFrom(config)
@@ -69,6 +95,7 @@ class HcimGuideBotScript : Script() {
     private fun tick(config: HcimGuideBotConfig) {
         try {
             if (!gate() || !Microbot.isLoggedIn()) return
+            if (ticks++ % CHECK_COPIES_TICKS == 0) everyFewTicks()
             if (record(config)) return
             if (pausedByPlayer()) return
             val current = runner ?: start(config) ?: return
@@ -178,7 +205,7 @@ class HcimGuideBotScript : Script() {
             readBot = { configManager.getRSProfileConfiguration(SharedProgressStore.BOT_GROUP, SharedProgressStore.BOT_KEY) },
             writeBot = { configManager.setRSProfileConfiguration(SharedProgressStore.BOT_GROUP, SharedProgressStore.BOT_KEY, it) },
         )
-        return GuideRunner(guide, game, actions, progress, settings, { log.info(it) }, routes)
+        return GuideRunner(guide, game, actions, progress, settings, ::note, routes)
             .also { it.start(); runner = it }
     }
 
@@ -266,6 +293,8 @@ class HcimGuideBotScript : Script() {
 
     companion object {
         private const val TICK_MS = 600L
+        private const val RECENT_LINES = 12
+        private const val CHECK_COPIES_TICKS = 10
         private const val WATCHDOG_MS = 300L
         private const val MESSAGE_MS = 60_000
         private const val B0ATY_PLUGIN = "com.b0atyguide.B0atyGuidePlugin"
