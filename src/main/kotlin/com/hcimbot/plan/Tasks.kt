@@ -3,6 +3,7 @@ package com.hcimbot.plan
 import com.hcimbot.engine.Conditions
 import com.hcimbot.game.GameActions
 import com.hcimbot.game.GameState
+import com.hcimbot.game.canReachBeside
 import com.hcimbot.game.SceneEntity
 import com.hcimbot.guide.ItemRef
 import com.hcimbot.guide.Tile
@@ -483,6 +484,7 @@ class TravelTask(
  */
 class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
     private var waiting = 0
+    private var approaches = 0
     override val description = "Take ${items.joinToString { it.name }}"
 
     override fun tick(ctx: TaskContext): TaskResult {
@@ -499,10 +501,18 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
             return TaskResult.Failed("cannot see ${next.name} nearby")
         }
         waiting = 0
+        // Behind a shut door, the click does nothing. Walk over first: the walker opens doors.
+        if (approaches < MAX_APPROACHES && ctx.game.canReachBeside(ground.tile) == false) {
+            approaches++
+            ctx.log("Cannot reach the ${next.name} from here, walking over (the walker opens doors)")
+            ctx.actions.walkTo(ground.tile)
+            return TaskResult.Running
+        }
         return attempt(ctx.actions.takeGroundItem(ground), "take ${next.name}")
     }
 
     companion object {
+        const val MAX_APPROACHES = 3
         const val REACH = 15
         const val RESPAWN_TICKS = 100
     }

@@ -275,6 +275,24 @@ class PartsTest {
     }
 
     @Test
+    fun `an item on a table behind a shut door is walked to before being taken`() {
+        val table = Tile(3103, 3165, 0)
+        val game = FakeGame()
+        game.playerTile = Tile(3108, 3164, 0)
+        game.groundItems += com.hcimbot.game.SceneEntity(1061, "Leather boots", table)
+        // The table can never be stood on, and the room around it is shut.
+        game.unreachable += listOf(table, Tile(3102, 3165, 0), Tile(3104, 3165, 0), Tile(3103, 3164, 0), Tile(3103, 3166, 0))
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.TakeItemTask(listOf(com.hcimbot.guide.ItemRef("Leather boots", listOf(1061))))
+        task.tick(ctx)
+        assertEquals(listOf("walk (3103, 3165, 0)"), game.calls)
+        // Door open: the tile beside the table can be reached now, so it takes them.
+        game.unreachable.remove(Tile(3104, 3165, 0))
+        task.tick(ctx)
+        assertTrue(game.calls.last().startsWith("take"), game.calls.toString())
+    }
+
+    @Test
     fun `someone behind a counter is clicked anyway after a few tries`() {
         val shopAt = Tile(3212, 3247, 0)
         val game = FakeGame()

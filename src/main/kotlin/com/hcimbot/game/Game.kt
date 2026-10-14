@@ -152,3 +152,16 @@ interface GameActions {
         const val DISABLE_LEVEL_UP = "disable-level-up"
     }
 }
+
+/**
+ * Whether the player can get next to [tile]: the tile itself, or one beside
+ * it, since an item on a table lies on a tile nobody can stand on. Null when
+ * the game cannot say.
+ */
+fun GameState.canReachBeside(tile: Tile): Boolean? {
+    val here = canReach(tile) ?: return null
+    if (here) return true
+    return listOf(-1 to 0, 1 to 0, 0 to -1, 0 to 1).any { (dx, dy) ->
+        canReach(Tile(tile.x + dx, tile.y + dy, tile.plane)) == true
+    }
+}
