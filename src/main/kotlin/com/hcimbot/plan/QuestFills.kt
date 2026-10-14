@@ -19,5 +19,15 @@ object QuestFills {
 
     fun at(quest: String, value: Int): Instruction? = fills[quest]?.get(value)
 
+    /**
+     * Chat options a quest now has that Quest Helper's data does not list, added to what each of its
+     * instructions says to pick. Dr Harlow's first question was reworded, from "Morgan needs your help!".
+     */
+    private val extraDialogue: Map<String, List<String>> = mapOf(
+        "vampyreslayer" to listOf("I need your help dealing with a vampyre"),
+    )
+
+    fun extraDialogue(quest: String): List<String> = extraDialogue[quest].orEmpty()
+
     private fun dig(x: Int, y: Int, text: String) = Instruction(kind = "dig", point = listOf(x, y, 0), text = text)
 }

@@ -123,7 +123,8 @@ class QuestTask(
         // Also stops "climb down into the hole ... fight Sourhog (level 37)" before the fight.
         tooStrong(step.text, ctx)?.let { return Made.Refused(it) }
         val tile = step.tile
-        val dialogue = if (step.dialogue.isEmpty()) DialoguePlan.None else DialoguePlan.Texts(step.dialogue)
+        val extra = QuestFills.extraDialogue(questKey)
+        val dialogue = if (step.dialogue.isEmpty() && extra.isEmpty()) DialoguePlan.None else DialoguePlan.Texts(step.dialogue + extra)
         return when (step.kind) {
             "dig" -> tile?.let { Made.Ready(DigTask(it)) } ?: Made.Refused("no location for this dig")
             "walk" -> tile?.let { Made.Ready(WalkTask(it, radius = 1)) } ?: Made.Refused("no location for this walk")

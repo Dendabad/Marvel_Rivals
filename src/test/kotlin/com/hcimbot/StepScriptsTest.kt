@@ -90,6 +90,23 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `Dr Harlow's reworded first question is answered`() {
+        val harlow = com.hcimbot.guide.Instruction(kind = "npc", point = listOf(3222, 3399, 0), text = "Talk to Dr. Harlow.", ids = listOf(3480), dialogue = listOf("Morgan needs your help!"))
+        val helper = com.hcimbot.guide.QuestHelper(com.hcimbot.guide.QuestVar("varbit", 2561), lastValue = 2, steps = mapOf("1" to harlow))
+        val game = FakeGame().apply {
+            playerTile = Tile(3222, 3399, 0)
+            varbits[2561] = 1
+            inv[1550] = 1
+            npcs += SceneEntity(16277, "Dr Harlow", Tile(3223, 3399, 0))
+            onNpcInteract = { _, _ -> options = listOf("I need your help dealing with a vampyre.", "I think you've had enough.") }
+        }
+        val ctx = TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.QuestTask("vampyreslayer", helper, allowCombat = false, boundedTo = setOf(3480, 16276, 16277))
+        repeat(5) { task.tick(ctx) }
+        assertTrue("option I need your help dealing with a vampyre." in game.calls, game.calls.toString())
+    }
+
+    @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
         val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()
