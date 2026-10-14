@@ -535,6 +535,10 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 116. "Open the Minimap and Head South out of the City": Civitas illa Fortis, to Outer Fortis, where the next step's
+        // items lie (the vial of water at (1668, 3068)).
+        "904a520a61" to { _ -> auto(WalkTask(Tile(1668, 3074, 0), radius = 5)) },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
