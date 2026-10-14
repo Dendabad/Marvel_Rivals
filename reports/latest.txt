@@ -1,53 +1,50 @@
-HCIM Guide Bot 0.15.1, PAUSED
+HCIM Guide Bot 0.15.2, PAUSED
 == Step
 Step 119 of 2925: Collect 1 Sweetcorn [Recipe for Disaster]
-Detail: Walk to (1574, 3139, 1): could not walk to (1574, 3139, 1). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Detail: Take Sweetcorn: cannot see Sweetcorn nearby. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-10:12:13  Paused: Walk to (1574, 3139, 1): could not walk to (1574, 3139, 1)
-10:12:07  Walking from (1631, 3056, 0) to (1574, 3139, 1)
-10:12:07  Step: Collect 1 Sweetcorn [Recipe for Disaster]
-10:12:06  Started version 0.15.1
+10:14:28  Paused: Take Sweetcorn: cannot see Sweetcorn nearby
+10:13:15  Walking from (1631, 3056, 0) to (1574, 3139, 0)
+10:13:15  Step: Collect 1 Sweetcorn [Recipe for Disaster]
+10:13:14  Started version 0.15.2
 == Player
-world WorldPoint(x=1631, y=3056, plane=0), in instance false, as guide coordinates WorldPoint(x=1631, y=3056, plane=0)
+world WorldPoint(x=1574, y=3139, plane=0), in instance false, as guide coordinates WorldPoint(x=1574, y=3139, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
 4241x1, 1511x1, 1511x1, 1511x1, 954x1, 233x1, 227x1, 4241x1
 == NPCs within 12 tiles (id name at tile: options)
-13168 Citizen at WorldPoint(x=1627, y=3044, plane=0): [Talk-to, Pickpocket]
-13170 Citizen at WorldPoint(x=1622, y=3062, plane=0): [Talk-to, Pickpocket]
-13233 Farmer at WorldPoint(x=1623, y=3067, plane=0): [Talk-to, Pickpocket]
-12982 Jerboa at WorldPoint(x=1632, y=3055, plane=0): []
-13237 Master Farmer at WorldPoint(x=1634, y=3050, plane=0): [Talk-to, Pickpocket]
-12982 Jerboa at WorldPoint(x=1635, y=3050, plane=0): []
-2855 Rat at WorldPoint(x=1641, y=3053, plane=0): [Attack]
+5007 Imp at WorldPoint(x=1564, y=3137, plane=0): [Attack]
+13238 Master Farmer at WorldPoint(x=1582, y=3131, plane=0): [Talk-to, Pickpocket]
+13964 Chiribaya at WorldPoint(x=1583, y=3131, plane=0): [Pet, Shoo-away]
 == Objects within 8 tiles (id name at tile)
-51805 null at WorldPoint(x=1623, y=3049, plane=0)
-51805 null at WorldPoint(x=1623, y=3050, plane=0)
-51827 null at WorldPoint(x=1623, y=3052, plane=0)
-18895 Rockslide at WorldPoint(x=1623, y=3053, plane=0)
-51826 null at WorldPoint(x=1623, y=3053, plane=0)
-51827 null at WorldPoint(x=1623, y=3054, plane=0)
-51827 null at WorldPoint(x=1623, y=3056, plane=0)
-52828 null at WorldPoint(x=1623, y=3058, plane=0)
-51827 null at WorldPoint(x=1623, y=3060, plane=0)
-51804 null at WorldPoint(x=1623, y=3061, plane=0)
-3949 null at WorldPoint(x=1623, y=3063, plane=0)
-1181 Nettles at WorldPoint(x=1623, y=3064, plane=0)
-51827 null at WorldPoint(x=1624, y=3048, plane=0)
-51805 null at WorldPoint(x=1624, y=3050, plane=0)
-51827 null at WorldPoint(x=1624, y=3051, plane=0)
-51814 null at WorldPoint(x=1624, y=3052, plane=0)
-51827 null at WorldPoint(x=1624, y=3053, plane=0)
-51805 null at WorldPoint(x=1624, y=3054, plane=0)
-51805 null at WorldPoint(x=1624, y=3055, plane=0)
-51804 null at WorldPoint(x=1624, y=3056, plane=0)
-51804 null at WorldPoint(x=1624, y=3058, plane=0)
-1393 Plant at WorldPoint(x=1624, y=3061, plane=0)
-51809 null at WorldPoint(x=1624, y=3063, plane=0)
-51838 Onion at WorldPoint(x=1624, y=3064, plane=0)
-51809 null at WorldPoint(x=1624, y=3064, plane=0)
+52017 null at WorldPoint(x=1566, y=3137, plane=0)
+51810 null at WorldPoint(x=1567, y=3135, plane=0)
+52017 null at WorldPoint(x=1567, y=3137, plane=0)
+52054 null at WorldPoint(x=1567, y=3144, plane=0)
+52743 null at WorldPoint(x=1567, y=3145, plane=0)
+52743 null at WorldPoint(x=1567, y=3146, plane=0)
+52743 null at WorldPoint(x=1567, y=3147, plane=0)
+51810 null at WorldPoint(x=1568, y=3135, plane=0)
+1393 Plant at WorldPoint(x=1568, y=3137, plane=0)
+52017 null at WorldPoint(x=1568, y=3137, plane=0)
+52107 null at WorldPoint(x=1568, y=3141, plane=0)
+52109 null at WorldPoint(x=1568, y=3142, plane=0)
+51807 null at WorldPoint(x=1568, y=3145, plane=0)
+52017 null at WorldPoint(x=1568, y=3145, plane=0)
+51805 null at WorldPoint(x=1568, y=3146, plane=0)
+51808 null at WorldPoint(x=1568, y=3147, plane=0)
+16273 null at WorldPoint(x=1569, y=3134, plane=0)
+51804 null at WorldPoint(x=1569, y=3137, plane=0)
+52014 null at WorldPoint(x=1569, y=3137, plane=0)
+52017 null at WorldPoint(x=1569, y=3138, plane=0)
+51805 null at WorldPoint(x=1569, y=3139, plane=0)
+52017 null at WorldPoint(x=1569, y=3139, plane=0)
+1393 Plant at WorldPoint(x=1569, y=3140, plane=0)
+51807 null at WorldPoint(x=1569, y=3140, plane=0)
+52017 null at WorldPoint(x=1569, y=3140, plane=0)
 == Text in open windows and chat
 10
+73
 100
 All
 Game
@@ -58,7 +55,7 @@ Friends
 Channel
 Clan
 Trade
-00:13:07
+00:15:21
 Boatyguidev3: *
 You pick a handful of nettles.
 Did you know? You can hide the Help button in the Bank interface via the Bank settings.
