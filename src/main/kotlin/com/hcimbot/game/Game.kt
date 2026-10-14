@@ -17,6 +17,8 @@ data class HelperStep(val text: String, val npcIds: List<Int>, val tile: Tile? =
     val choices: List<String> = emptyList(),
     /** The object ids Quest Helper highlights, for an object step. */
     val objectIds: List<Int> = emptyList(),
+    /** The kind of step Quest Helper has, for working out what it exposes. */
+    val kind: String = "",
 )
 
 /**

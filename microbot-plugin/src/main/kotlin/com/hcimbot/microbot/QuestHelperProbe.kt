@@ -40,7 +40,7 @@ object QuestHelperProbe {
             (field(step, "objectID") as? Number)?.toInt()?.takeIf { it > 0 }?.let(::add)
             (field(step, "alternateObjectIDs") as? Collection<*>)?.forEach { (it as? Number)?.toInt()?.let(::add) }
         }
-        com.hcimbot.game.HelperStep(text, ids, tile, choices(step), objects)
+        com.hcimbot.game.HelperStep(text, ids, tile, choices(step), objects, step.javaClass.simpleName)
     }.getOrNull()
 
     /** The chat options Quest Helper wants picked: its DialogChoiceSteps hold a list of steps with a `choice` text. */
