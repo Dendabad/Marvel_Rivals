@@ -40,7 +40,7 @@ class HcimGuideBotScript : Script() {
 
     private val walkerOverrides = WalkerOverrides()
     @Volatile private var lastDrink = 0L
-    @Volatile private var freshDoors = false
+    @Volatile private var forgetDoorsAt = 0L
     @Volatile private var lastWarning = 0L
     private val recent = ArrayDeque<String>()
     private val clock = java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss")
@@ -101,10 +101,6 @@ class HcimGuideBotScript : Script() {
                 current.resume()
             }
             game.refresh()
-            if (freshDoors) {
-                freshDoors = false
-                WalkerDoors.forget()
-            }
             walkerOverrides.apply(current.walkerOverrides)
             current.onGameTick()
             // A step that just ended takes its walker overrides with it, before the next one walks.
@@ -259,6 +255,10 @@ class HcimGuideBotScript : Script() {
                 client.getBoostedSkillLevel(Skill.HITPOINTS) to client.getRealSkillLevel(Skill.HITPOINTS)
             } ?: return
             if (max <= 0) return
+            if (forgetDoorsAt != 0L && System.currentTimeMillis() >= forgetDoorsAt) {
+                forgetDoorsAt = 0L
+                WalkerDoors.forget()
+            }
             answerWarning(current.acceptWarnings)
             // Where one more hit could be the last, the step says to drink on any damage. That comes
             // before stopping: standing still among monsters is worse than drinking and walking on.
@@ -295,13 +295,15 @@ class HcimGuideBotScript : Script() {
 
     /**
      * Eating or drinking mid-walk cuts short whatever the walker was doing, often a door, which it
-     * then counts as failed and avoids for minutes. Stop the walk; the main loop forgets the door
-     * attempts and walks again at once, so the door is clicked again straight away.
+     * then counts as failed and backs off from for minutes. The walk is left running (stopping it
+     * would make the walker plan the route again every hit): the walker's door memory is cleared
+     * now, and again a moment later once it has noted the cut-short crossing, so it simply clicks
+     * the door again.
      */
     private fun restartWalkAfterEating() {
         if (!actions.walking) return
-        freshDoors = true
-        Rs2Walker.setTarget(null, "HCIM guide bot ate mid-walk, walking on")
+        WalkerDoors.forget()
+        forgetDoorsAt = System.currentTimeMillis() + FORGET_AGAIN_MS
     }
 
     /**
@@ -337,6 +339,9 @@ class HcimGuideBotScript : Script() {
         /** A drink takes a game tick or two to show in the hitpoints, so do not drink twice for one hit. */
         private const val DRINK_GAP_MS = 1_800L
         private const val WARNING_GAP_MS = 1_500L
+
+        /** Long enough for the walker to have noted a door crossing the drink cut short. */
+        private const val FORGET_AGAIN_MS = 1_200L
         private const val MESSAGE_MS = 60_000
         private const val B0ATY_PLUGIN = "com.b0atyguide.B0atyGuidePlugin"
 
