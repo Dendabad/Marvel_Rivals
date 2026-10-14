@@ -510,6 +510,7 @@ class FollowGuardTask(private val guardIds: List<Int>, private val hides: List<T
     private var announced = false
     private var walks = 0
     private var inCutscene = false
+    private var waited = 0
 
     override fun tick(ctx: TaskContext): TaskResult {
         val game = ctx.game
@@ -553,8 +554,10 @@ class FollowGuardTask(private val guardIds: List<Int>, private val hides: List<T
         val clear = guard.tile.distanceTo(hide) >= CLEAR_OF_HIDE
         val ahead = next == null || guard.tile.distanceTo(next) < hide.distanceTo(next)
         val losing = guard.tile.distanceTo(me) >= TOO_FAR
-        if ((clear && ahead) || losing) {
+        waited++
+        if ((clear && ahead) || losing || waited >= MAX_WAIT) {
             index++
+            waited = 0
             ctx.log("Guard at ${guard.tile}, moving on to stop ${index + 1} of ${hides.size}")
         }
         return TaskResult.Running
@@ -565,7 +568,9 @@ class FollowGuardTask(private val guardIds: List<Int>, private val hides: List<T
         /** VarbitID.CUTSCENE_STATUS: non zero while the game has taken control of the camera and player. */
         const val CUTSCENE_VARBIT = 542
         const val LOST_TICKS = 40
-        const val CLEAR_OF_HIDE = 5
+        const val CLEAR_OF_HIDE = 2
+        /** Ticks to wait hidden before moving on regardless: the guard may be waiting for the player to come on. */
+        const val MAX_WAIT = 12
         const val TOO_FAR = 12
     }
 }
