@@ -11,6 +11,7 @@ import net.runelite.client.plugins.microbot.util.dialogues.Rs2Dialogue
 import net.runelite.client.plugins.microbot.util.equipment.Rs2Equipment
 import net.runelite.client.plugins.microbot.util.inventory.Rs2Inventory
 import net.runelite.client.plugins.microbot.util.magic.Rs2Magic
+import net.runelite.client.plugins.microbot.util.npc.Rs2Npc
 import net.runelite.client.plugins.microbot.util.npc.Rs2NpcModel as LegacyNpcModel
 import net.runelite.client.plugins.microbot.util.player.Rs2Player
 import net.runelite.client.plugins.microbot.util.security.LoginManager
@@ -144,7 +145,16 @@ class MicrobotActions : GameActions {
         val found = onClient {
             Microbot.getRs2NpcCache().query().withId(npc.id).nearest(npc.tile.toWorldPoint(), RELOCATE)
         } ?: return false
-        return Rs2Magic.castOn(spell, found.npc)
+        // Rs2Magic.castOn only clicks the target when handed Microbot's NPC wrapper, and
+        // otherwise leaves the spell selected and does nothing. So do its steps here.
+        if (!Rs2Magic.cast(spell)) return false
+        val deadline = System.currentTimeMillis() + SELECT_MS
+        while (onClient { Microbot.getClient().isWidgetSelected } != true) {
+            if (System.currentTimeMillis() > deadline) return false
+            Thread.sleep(POLL_MS)
+        }
+        // With a spell selected, the NPC's first option is "Cast <spell> -> <npc>".
+        return Rs2Npc.interact(LegacyNpcModel(found.npc))
     }
 
     override fun applySetting(setting: String): Boolean = when (setting) {
@@ -154,6 +164,8 @@ class MicrobotActions : GameActions {
 
     companion object {
         private const val ARRIVE_WITHIN = 2
+        private const val SELECT_MS = 1_500L
+        private const val POLL_MS = 50L
 
         /** How far an entity may have moved from where the bot saw it a moment ago. */
         private const val RELOCATE = 8
