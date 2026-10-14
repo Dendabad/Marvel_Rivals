@@ -97,11 +97,29 @@ sealed interface DialoguePlan {
         data class Stuck(val reason: String) : Choice
     }
 
+    companion object {
+        /**
+         * Options that end a conversation, most certain first. A step that did not
+         * expect chat (often a conversation the last step left open, like Morgan's
+         * questions after Vampyre Slayer starts) picks one of these. Never "yes".
+         */
+        private val ENDINGS = listOf(
+            "^(no,? )?(thanks|thank you)", "good ?bye|^bye", "nothing", "never ?mind", "i'll see about", "i'll be on my way",
+            "i (have|need|must|should|'d better) (to )?go", "not (right )?now", "maybe later", "^no\\b", "^alright", "^ok(ay)?\\b", "^i see",
+        ).map { Regex(it, RegexOption.IGNORE_CASE) }
+
+        fun endingOption(options: List<String>): String? =
+            ENDINGS.firstNotNullOfOrNull { ending -> options.firstOrNull { ending.containsMatchIn(it.trim()) } }
+
+        /** Ends the conversation if an option does, otherwise stuck for [reason]. */
+        fun endOr(options: List<String>, reason: String): Choice = endingOption(options)?.let { Choice.ByText(it) } ?: Choice.Stuck(reason)
+    }
+
     /** The numbers from the guide text, "(3,1)". Used in order, one per options screen. */
     class Numbered(private val sequence: List<Int>) : DialoguePlan {
         private var next = 0
         override fun choose(options: List<String>): Choice {
-            if (next >= sequence.size) return Choice.Stuck("the guide gives no more chat options, but options are showing: $options")
+            if (next >= sequence.size) return endOr(options, "the guide gives no more chat options, but options are showing: $options")
             val index = sequence[next++]
             if (index !in 1..options.size) return Choice.Stuck("chat option $index does not exist in $options")
             return Choice.ByIndex(index)
@@ -117,17 +135,17 @@ sealed interface DialoguePlan {
             for (want in wanted) {
                 options.firstOrNull { it.contains(want, ignoreCase = true) }?.let { return Choice.ByText(it) }
             }
-            return Choice.Stuck("none of the expected chat options $wanted are in $options")
+            return endOr(options, "none of the expected chat options $wanted are in $options")
         }
     }
 
     object None : DialoguePlan {
-        override fun choose(options: List<String>) = Choice.Stuck("unexpected chat options $options")
+        override fun choose(options: List<String>) = endOr(options, "unexpected chat options $options")
     }
 
     /** Clicks through "continue" lines, and treats any choice of options as a reason to stop. */
     object Continue : DialoguePlan {
-        override fun choose(options: List<String>) = Choice.Stuck("asked to choose from $options")
+        override fun choose(options: List<String>) = endOr(options, "asked to choose from $options")
     }
 }
 

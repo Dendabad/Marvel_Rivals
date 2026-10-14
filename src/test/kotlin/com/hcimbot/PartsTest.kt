@@ -373,6 +373,19 @@ class PartsTest {
     }
 
     @Test
+    fun `a conversation left open by the last step is ended, not paused on`() {
+        val plan = com.hcimbot.plan.DialoguePlan.None
+        val morgan = listOf("What else can you tell me about this vampyre?", "Alright, I'll see about paying him a visit.")
+        assertEquals(com.hcimbot.plan.DialoguePlan.Choice.ByText(morgan[1]), plan.choose(morgan))
+        assertEquals(
+            com.hcimbot.plan.DialoguePlan.Choice.ByText("No thanks."),
+            plan.choose(listOf("Yes please.", "No thanks.")),
+        )
+        // Nothing that ends it, so still a pause rather than a guess.
+        assertTrue(plan.choose(listOf("Yes.", "Tell me more.")) is com.hcimbot.plan.DialoguePlan.Choice.Stuck)
+    }
+
+    @Test
     fun `step 19 looks for rats behind Lumbridge castle first`() {
         val game = FakeGame()
         game.playerTile = Tile(3230, 3209, 0)
