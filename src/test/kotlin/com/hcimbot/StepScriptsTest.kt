@@ -303,6 +303,23 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `planks are made from the plank window, plain first and then waxwood`() {
+        val game = FakeGame().apply {
+            playerTile = Tile(3302, 3494, 0)
+            inv[1511] = 11
+            inv[24938] = 3
+            windowChoices += "How many do you wish to make?"
+        }
+        val ctx = TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.MakePlanksTask()
+        task.tick(ctx)
+        assertEquals(listOf("make 10 item 1"), game.calls.filter { it.startsWith("make") })
+        game.inv[960] = 10
+        repeat(5) { task.tick(ctx) }
+        assertTrue(game.calls.contains("make All item 8"), game.calls.toString())
+    }
+
+    @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
         val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()

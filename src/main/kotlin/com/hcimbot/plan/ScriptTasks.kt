@@ -956,3 +956,70 @@ object PenCheck {
 
     private const val RADIUS = 30
 }
+
+
+/**
+ * Makes planks at the sawmill operator: [planks] planks from logs, and [waxwood] waxwood planks from waxwood logs.
+ * "Buy-plank" on the operator opens a window of plank types, the plain plank first and the waxwood plank last, and
+ * what each costs is taken from the coins. Done once the planks are held.
+ */
+class MakePlanksTask(private val planks: Int = 10, private val waxwood: Int = 3) : BaseTask() {
+    override val description = "Make $planks planks and $waxwood waxwood planks"
+    private var opener: InteractTask? = null
+    private var opens = 0
+    private var settling = 0
+    private var clicks = 0
+    private var lastProgress = -1
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        val plain = ctx.conditions.count(listOf(PLANK)).toInt()
+        val wax = ctx.conditions.count(listOf(WAXWOOD_PLANK)).toInt()
+        val window = game.showsChoice(WINDOW)
+        if (plain >= planks && wax >= waxwood) {
+            return if (window) attempt(ctx.actions.closeWindow(), "close the plank window") else TaskResult.Done
+        }
+        if (settling > 0) { settling--; return TaskResult.Running }
+        if (game.isBusy) return TaskResult.Running
+        if (!window) {
+            val talk = opener ?: InteractTask(InteractTask.Kind.NPC, listOf(OPERATOR), listOf("Sawmill operator"), listOf(SAWMILL), "Buy-plank").also { opener = it }
+            return when (val result = talk.tick(ctx)) {
+                TaskResult.Done -> {
+                    opener = null
+                    if (++opens > MAX_OPENS) TaskResult.Failed("Buy-plank did not open the plank window") else TaskResult.Running
+                }
+                else -> result
+            }
+        }
+        val progress = plain * 1000 + wax
+        if (progress != lastProgress) { lastProgress = progress; clicks = 0 }
+        if (++clicks > MAX_CLICKS) return TaskResult.Failed("clicked in the plank window $MAX_CLICKS times and no more planks were made")
+        val inventory = game.inventory()
+        when {
+            plain < planks -> {
+                if ((inventory[LOGS] ?: 0) == 0) return TaskResult.Failed("no logs to make the planks from")
+                ctx.actions.makePick("10", 1)
+            }
+            else -> {
+                if ((inventory[WAXWOOD_LOG] ?: 0) == 0) return TaskResult.Failed("no waxwood logs to make the waxwood planks from")
+                ctx.actions.makePick("All", WAXWOOD_ITEM)
+            }
+        }
+        settling = 4
+        return TaskResult.Running
+    }
+
+    companion object {
+        const val WINDOW = "How many do you wish to make?"
+        const val OPERATOR = 3101
+        val SAWMILL = Tile(3302, 3492, 0)
+        const val LOGS = 1511
+        const val PLANK = 960
+        const val WAXWOOD_LOG = 24938
+        const val WAXWOOD_PLANK = 24939
+        /** The waxwood plank is the last of the window's eight. */
+        const val WAXWOOD_ITEM = 8
+        const val MAX_OPENS = 4
+        const val MAX_CLICKS = 6
+    }
+}

@@ -166,6 +166,9 @@ interface GameActions {
     fun withdraw(itemId: Int, quantity: Int): Boolean
     fun closeInterface(): Boolean
 
+    /** In a make window (planks, shafts): picks the [quantity] button ("1", "5", "10", "X", "All"), then item number [item] from the left, 1 based. */
+    fun makePick(quantity: String, item: Int): Boolean = false
+
     /** In a "What would you like to make?" window: picks the All quantity, then the first item (Space). */
     fun makeAll(): Boolean = false
 

@@ -135,6 +135,18 @@ class MicrobotActions : GameActions {
         return false
     }
 
+    /** The quantity button, then the [item]th item from the left, both by clicking. */
+    override fun makePick(quantity: String, item: Int): Boolean {
+        val quantityButton = onClient { MicrobotGameState.makeWindowButton(quantity, useParent = false)?.bounds }
+        if (quantityButton != null) {
+            Microbot.getMouse().click(quantityButton)
+            Thread.sleep(MAKE_PAUSE_MS)
+        }
+        val chosen = onClient { MicrobotGameState.nthMakeItem(item)?.bounds } ?: return false
+        Microbot.getMouse().click(chosen)
+        return true
+    }
+
     /** A key press through Microbot's keyboard helper, found by name since the stub used to build does not have it. */
     private fun pressKey(key: Char): Boolean = runCatching {
         val keyboard = Class.forName("net.runelite.client.plugins.microbot.util.keyboard.Rs2Keyboard")

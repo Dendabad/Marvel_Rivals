@@ -333,7 +333,10 @@ class MicrobotGameState : GameState {
          * made last, so the items' labels cannot be used by name: take the leftmost of the number or Space labels
          * that sit below the quantity buttons. Client thread.
          */
-        fun firstMakeItem(): net.runelite.api.widgets.Widget? {
+        fun firstMakeItem(): net.runelite.api.widgets.Widget? = nthMakeItem(1)
+
+        /** The [n]th item (1 based, from the left) of the make window. Client thread. */
+        fun nthMakeItem(n: Int): net.runelite.api.widgets.Widget? {
             fun textOf(w: net.runelite.api.widgets.Widget?) = Text.removeTags(w?.text.orEmpty()).trim()
             fun descendants(w: net.runelite.api.widgets.Widget?, out: MutableList<net.runelite.api.widgets.Widget>) {
                 if (w == null || w.isHidden) return
@@ -346,10 +349,11 @@ class MicrobotGameState : GameState {
             val below = quantity.bounds.y + quantity.bounds.height
             return all
                 .filter { textOf(it) in ITEM_LABELS && it.bounds.width > 0 && it.bounds.y >= below }
-                .minByOrNull { it.bounds.x }
+                .sortedBy { it.bounds.x }
+                .getOrNull(n - 1)
         }
 
-        private val ITEM_LABELS = setOf("1", "2", "3", "4", "5", "Space")
+        private val ITEM_LABELS = setOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "Space")
 
         /** The first visible widget with a [action] option, like a window's Close button. Client thread. */
         fun widgetWithAction(action: String): net.runelite.api.widgets.Widget? {
