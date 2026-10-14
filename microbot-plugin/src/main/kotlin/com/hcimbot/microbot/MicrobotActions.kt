@@ -114,7 +114,7 @@ class MicrobotActions : GameActions {
     }
 
     /**
-     * In the make window: clicks the All quantity, then the first item (labelled Space), by clicking them. Pressing
+     * In the make window: clicks the All quantity, then the first item (the leftmost), by clicking them. Pressing
      * Space did nothing here, and the chat's own All tab has the same text, so the buttons are found beside the
      * quantity buttons.
      */
@@ -124,19 +124,14 @@ class MicrobotActions : GameActions {
             Microbot.getMouse().click(all)
             Thread.sleep(MAKE_PAUSE_MS)
         }
-        val first = onClient { MicrobotGameState.makeWindowButton("Space", useParent = false)?.bounds }
+        val first = onClient { MicrobotGameState.firstMakeItem()?.bounds }
         if (first != null) {
             Microbot.getMouse().click(first)
             return true
         }
-        // The button was not found: the keyboard, through Microbot's helper found by name.
-        return runCatching {
-            val keyboard = Class.forName("net.runelite.client.plugins.microbot.util.keyboard.Rs2Keyboard")
-            val press = keyboard.methods.firstOrNull { it.name == "keyPress" && it.parameterTypes.singleOrNull() == Char::class.javaPrimitiveType }
-            if (press != null) press.invoke(null, ' ')
-            else keyboard.getMethod("keyPress", Int::class.javaPrimitiveType).invoke(null, java.awt.event.KeyEvent.VK_SPACE)
-            true
-        }.getOrDefault(false)
+        // Not found: not the Space key, which makes whichever item was made last.
+        return false
+    }.getOrDefault(false)
     }
 
     /**
