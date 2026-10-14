@@ -127,10 +127,20 @@ class MicrobotGameState : GameState {
     override fun shopOffers(itemId: Int): String? = if (Omnishop.isOpen()) Omnishop.describe(itemId) else null
 
     override fun nearestNpc(ids: Collection<Int>, names: Collection<String>, near: Tile?): SceneEntity? = onClient {
-        val query = Microbot.getRs2NpcCache().query()
-        val found = if (ids.isNotEmpty()) query.withIds(*ids.toIntArray()) else query.withNames(*names.toTypedArray())
-        val nearest = if (near != null) found.nearest(near.toWorldPoint(), SEARCH_RADIUS) else found.nearest(SEARCH_RADIUS)
-        nearest?.let { entity(it.id, it.name, it.worldLocation)?.copy(index = it.index) }
+        fun search(byIds: Collection<Int>, byNames: Collection<String>): SceneEntity? {
+            val query = Microbot.getRs2NpcCache().query()
+            val found = if (byIds.isNotEmpty()) query.withIds(*byIds.toIntArray()) else query.withNames(*byNames.toTypedArray())
+            val nearest = if (near != null) found.nearest(near.toWorldPoint(), SEARCH_RADIUS) else found.nearest(SEARCH_RADIUS)
+            return nearest?.let { entity(it.id, it.name, it.worldLocation)?.copy(index = it.index) }
+        }
+        search(ids, names) ?: run {
+            // Updates give NPCs new ids (Morgan, Dr Harlow) while the guide and Quest Helper keep the old
+            // ones. With none of the listed ids in sight, look for the same name instead.
+            val client = Microbot.getClient()
+            val byName = names.ifEmpty { ids.mapNotNull { client.getNpcDefinition(it)?.name } }
+                .map { Text.removeTags(it).trim() }.filter { it.isNotEmpty() && !it.equals("null", true) }.distinct()
+            if (ids.isEmpty() || byName.isEmpty()) null else search(emptyList(), byName)
+        }
     }
 
     /**

@@ -237,7 +237,7 @@ class StepScripts(private val guide: Guide) {
             } else {
                 auto(
                     Optional(OnlyIf({ GARLIC !in it.game.inventory() }, BankTask(false, listOf(item("Garlic", GARLIC, 1))))),
-                    QuestTask("vampyreslayer", helper, settings.allowCombat, boundedTo = setOf(HARLOW), finishesQuest = true),
+                    QuestTask("vampyreslayer", helper, settings.allowCombat, boundedTo = HARLOW, finishesQuest = true),
                     trust = true,
                     combat = settings.allowCombat,
                 )
@@ -446,7 +446,8 @@ class StepScripts(private val guide: Guide) {
         private const val LOGS = 1511
         private const val LEATHER_BOOTS = 1061
         private const val BONES = 526
-        private const val HARLOW = 3480
+        /** Dr Harlow: Quest Helper has 3480, but an update added 16276 and 16277 for the Vampyre Slayer rework. */
+        private val HARLOW = setOf(3480, 16276, 16277)
         /** The Stronghold's rewards, from Quest Helper's Varrock diary and RuneLite's gameval ObjectID. */
         private const val SOS_WAR_CHEST = 20656
         private const val SOS_FAM_SACK = 19000

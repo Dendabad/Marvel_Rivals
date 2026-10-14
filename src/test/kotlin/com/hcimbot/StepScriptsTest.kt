@@ -57,7 +57,7 @@ class StepScriptsTest {
             bank[1550] = 4
             playerTile = Tile(3185, 3436, 0)
             varbits[2561] = 1
-            npcs += SceneEntity(3480, "Dr Harlow", Tile(3188, 3438, 0))
+            npcs += SceneEntity(16277, "Dr Harlow", Tile(3188, 3438, 0)) // his id since the update, not 3480
         }
         val plan = own.planFor(Step(id = "8c44826480"), BotSettings())
         run(plan, game, ticks = 40)
