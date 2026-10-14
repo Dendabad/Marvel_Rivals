@@ -110,6 +110,15 @@ class HcimGuideBotScript(private val bankPin: () -> String? = { null }) : Script
                     }
             }.orEmpty()
         }
+        section("Items on the ground within 20 tiles, nearest first (id name at tile)") {
+            MicrobotGameState.onClient {
+                val me = Microbot.getClient().localPlayer?.worldLocation ?: return@onClient emptyList<String>()
+                Microbot.getRs2TileItemCache().query().where { it.worldLocation.distanceTo(me) <= 20 }
+                    .toList().sortedBy { it.worldLocation.distanceTo(me) }.take(30).map {
+                        "${it.id} ${it.name} at ${Instances.toTemplate(it.worldLocation)}"
+                    }
+            }.orEmpty()
+        }
         section("Objects without a name within 6 tiles, nearest first (id at tile)") {
             MicrobotGameState.onClient {
                 val me = Microbot.getClient().localPlayer?.worldLocation ?: return@onClient emptyList<String>()
