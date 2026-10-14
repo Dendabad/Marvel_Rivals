@@ -15,6 +15,8 @@ object ItemSources {
         val varId: Int,
         val stepId: String,
         val why: String,
+        /** Not yet given while the quest's variable is below this. 1 means the quest has not started. */
+        val belowValue: Int = 1,
     )
 
     private val given = listOf(
@@ -22,6 +24,9 @@ object ItemSources {
         Given(setOf(23067, 23068, 23069, 23070, 23071), "varbit", 8063, "e2deed373e", "Veos gives it when X Marks the Spot starts (step 7)"),
         // 9. "Go upstairs and Talk to Duke Horacio": the Duke hands over the talisman.
         Given(setOf(1438), "varplayer", 63, "d51fed8c25", "Duke Horacio gives it when Rune Mysteries starts (step 9)"),
+        // 26. "Talk to Sedridor to continue Rune Mysteries (1,2,1)": Sedridor hands over the Research Package,
+        // which step 94 withdraws from the bank. Rune Mysteries is at 3 once it has been given.
+        Given(setOf(290), "varplayer", 63, "666fe06edc", "Sedridor gives it in step 26, which is not done yet", belowValue = 3),
     )
 
     /**
@@ -43,7 +48,7 @@ object ItemSources {
     /** The step to go back to, when [itemIds] come from a quest that has not started yet. */
     fun whenNotYetGiven(itemIds: Collection<Int>, ctx: TaskContext): Source? {
         val source = given.firstOrNull { it.itemIds.any(itemIds::contains) } ?: return null
-        if (ctx.conditions.readVar(source.varKind, source.varId) != 0) return null
+        if (ctx.conditions.readVar(source.varKind, source.varId) >= source.belowValue) return null
         return Source(source.stepId, source.why)
     }
 }
