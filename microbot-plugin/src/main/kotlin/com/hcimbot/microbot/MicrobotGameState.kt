@@ -36,6 +36,7 @@ class MicrobotGameState : GameState {
 
     @Volatile private var snapshot: Snapshot? = null
     @Volatile private var busy = false
+    @Volatile private var moving = false
     @Volatile private var attacked = false
     @Volatile private var inventory: Map<Int, Int> = emptyMap()
     @Volatile private var worn: Map<Int, Int> = emptyMap()
@@ -66,7 +67,8 @@ class MicrobotGameState : GameState {
         }
         if (snapshot == null) return
 
-        busy = Rs2Player.isMoving() || Rs2Player.isAnimating()
+        moving = Rs2Player.isMoving()
+        busy = moving || Rs2Player.isAnimating()
         inventory = Rs2Inventory.items().collect(Collectors.toList()).groupingBy { it.id }.fold(0) { sum, item -> sum + item.quantity }
         worn = Rs2Equipment.items().associate { it.id to it.quantity }
         attacked = onClient { underAttack() } ?: false
@@ -103,6 +105,7 @@ class MicrobotGameState : GameState {
     override val playerName: String? get() = snapshot?.name
     override val playerTile: Tile? get() = snapshot?.tile
     override val isBusy: Boolean get() = busy
+    override val isMoving: Boolean get() = moving
     override val isInCombat: Boolean get() = attacked
     override val hitpoints: Int get() = snapshot?.hitpoints ?: 0
     override val maxHitpoints: Int get() = snapshot?.maxHitpoints ?: 0

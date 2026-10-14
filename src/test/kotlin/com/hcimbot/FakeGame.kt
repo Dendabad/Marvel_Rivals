@@ -15,6 +15,10 @@ class FakeGame : GameState, GameActions {
     override var playerName: String? = "Tester"
     override var playerTile: Tile? = Tile(3222, 3218, 0)
     override var isBusy = false
+
+    /** Set to make the fake player animating (say, hit) but not walking. Unset, moving follows busy. */
+    var movingOverride: Boolean? = null
+    override val isMoving: Boolean get() = movingOverride ?: isBusy
     override var isInCombat = false
     override var hitpoints = 10
     override var maxHitpoints = 10

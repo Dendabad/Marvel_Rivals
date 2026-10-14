@@ -552,6 +552,23 @@ class PartsTest {
     }
 
     @Test
+    fun `a fight's block animation does not hold back the next walking order`() {
+        val game = FakeGame()
+        game.playerTile = Tile(2156, 5288, 0)
+        game.isBusy = true // hit, so animating...
+        game.movingOverride = false // ...but standing still
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.WalkTask(Tile(2144, 5280, 0), radius = 2)
+        task.tick(ctx)
+        assertEquals(listOf("walk (2144, 5280, 0)"), game.calls)
+        // Still walking: do not give another order on top of it.
+        game.movingOverride = true
+        game.playerTile = Tile(2150, 5284, 0)
+        task.tick(ctx)
+        assertEquals(1, game.calls.size)
+    }
+
+    @Test
     fun `step 19 looks for rats behind Lumbridge castle first`() {
         val game = FakeGame()
         game.playerTile = Tile(3230, 3209, 0)

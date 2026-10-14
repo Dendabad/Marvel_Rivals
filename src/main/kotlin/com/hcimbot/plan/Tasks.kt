@@ -88,7 +88,8 @@ class WalkTask(val tile: Tile, private val radius: Int = 3, private val anyFloor
         val at = ctx.game.playerTile ?: return TaskResult.Running
         val near = if (anyFloor) at.copy(plane = tile.plane) else at
         if (near.distanceTo(tile) <= radius) return TaskResult.Done
-        if (ctx.game.isBusy) return TaskResult.Running
+        // Only a walk in progress holds this back, not an animation: in a fight every hit plays one.
+        if (ctx.game.isMoving) return TaskResult.Running
         return attempt(ctx.actions.walkTo(tile), "walk to $tile")
     }
 }

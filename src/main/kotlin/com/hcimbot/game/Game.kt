@@ -23,6 +23,13 @@ interface GameState {
     val playerTile: Tile?
 
     /** True while walking, animating or otherwise busy with the last action. */
+    /**
+     * Whether the player is walking right now. Walking only waits on this: a fight plays a block
+     * animation on nearly every tick, which would otherwise hold the next walking order back for
+     * seconds at a time. Defaults to [isBusy] for games that cannot tell the two apart.
+     */
+    val isMoving: Boolean get() = isBusy
+
     val isBusy: Boolean
     val isInCombat: Boolean
 
