@@ -47,6 +47,7 @@ class QuestTask(
     private var current: Instruction? = null
     private var currentTask: Task? = null
     private var repeats = 0
+    private var lastSignature = ""
     private var valueWhenChosen = 0
     private var settling = 0
     override val description = "Quest: $questKey"
@@ -135,6 +136,13 @@ class QuestTask(
             TaskResult.Done -> {
                 // The instruction is done but the quest has not moved on yet. Run it
                 // again, which covers multi-part talks and repeated searches.
+                // The quest's own variable may not move while a part has several pieces (Yarlo's furniture: five builds
+                // for one step). What Quest Helper shows, or what the bag holds, changing counts as moving on.
+                val signature = ctx.game.helperStep(questKey)?.text.orEmpty() + "|" + ctx.game.inventory().entries.sumOf { it.key.toLong() * it.value }
+                if (signature != lastSignature) {
+                    lastSignature = signature
+                    repeats = 0
+                }
                 if (++repeats >= MAX_REPEATS) {
                     TaskResult.Failed("did \"${chosen.text}\" $MAX_REPEATS times and the quest did not advance")
                 } else {
