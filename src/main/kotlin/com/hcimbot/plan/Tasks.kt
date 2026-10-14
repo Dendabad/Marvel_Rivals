@@ -637,6 +637,16 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
             ctx.actions.walkTo(ground.tile)
             return TaskResult.Running
         }
+        // Through the doorway, one tile at a time: the game's own path from outside goes along the wall to a side
+        // instead of straight in. First onto the door's tile, then two tiles beyond it, then on to the item.
+        if (through.isNotEmpty() && throughTicks < THROUGH_TICKS) {
+            throughTicks++
+            if (at == through.first()) through.removeFirst()
+            if (through.isNotEmpty()) {
+                if (!ctx.game.isMoving) ctx.actions.stepOnto(through.first())
+                return TaskResult.Running
+            }
+        }
         // A door has been opened for it: walk right up to the item, through the doorway, before clicking it, or the click
         // is made from outside, through the wall. Opening it again straight away would shut it, so walking comes first,
         // for a while, before another door is tried.
@@ -662,6 +672,15 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
                 clicks = 0
                 ctx.log("Cannot get the ${next.name}, opening the door at ${door.tile}")
                 ctx.actions.interactObject(door, "Open")
+                // Which way in is from where the player stands to the door.
+                val dx = Integer.signum(door.tile.x - at.x)
+                val dy = Integer.signum(door.tile.y - at.y)
+                if (dx != 0 || dy != 0) {
+                    through.clear()
+                    through += door.tile
+                    through += Tile(door.tile.x + 2 * dx, door.tile.y + 2 * dy, door.tile.plane)
+                    throughTicks = 0
+                }
                 return TaskResult.Running
             }
         }
@@ -674,12 +693,15 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
     private var lastHeld = -1L
     private var inside: WalkTask? = null
     private var walkTicks = 0
+    private val through = ArrayDeque<Tile>()
+    private var throughTicks = 0
 
     companion object {
         const val MAX_APPROACHES = 3
         const val CLICKS_BEFORE_DOOR = 3
         const val CLOSE = 2
         const val WALK_TICKS = 25
+        const val THROUGH_TICKS = 20
         const val MAX_DOOR_TRIES = 3
         const val DOOR_RANGE = 8
         const val REACH = 15
