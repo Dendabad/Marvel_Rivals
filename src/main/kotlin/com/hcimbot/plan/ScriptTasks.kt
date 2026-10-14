@@ -1094,3 +1094,34 @@ class ItemByNameTask(private val part: String, private val action: String) : Bas
         const val SETTLE = 3
     }
 }
+
+
+/** Clicks the first window entry whose text is one of [texts] (a destination list), waiting up to [waitTicks] for it. */
+class ClickChoiceTask(private val texts: List<String>, private val waitTicks: Int = 20) : BaseTask() {
+    override val description = "Choose ${texts.first()}"
+    private var waited = 0
+    private var clicked = false
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        if (clicked) return TaskResult.Done
+        if (game.isBusy) return TaskResult.Running
+        val text = texts.firstOrNull { game.showsChoice(it) }
+        if (text != null) {
+            clicked = ctx.actions.clickChoice(text)
+            return attempt(clicked, "click $text")
+        }
+        return if (++waited >= waitTicks) TaskResult.Failed("none of ${texts} is showing to choose") else TaskResult.Running
+    }
+}
+
+/** Waits until [reached] holds, up to [maxTicks], for something that takes a while like a journey. */
+class WaitUntilTask(private val label: String, private val maxTicks: Int, private val reached: (TaskContext) -> Boolean) : BaseTask() {
+    override val description = label
+    private var waited = 0
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        if (reached(ctx)) return TaskResult.Done
+        return if (++waited >= maxTicks) TaskResult.Failed("$label: not there after $maxTicks ticks") else TaskResult.Running
+    }
+}

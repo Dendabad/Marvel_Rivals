@@ -521,6 +521,17 @@ class StepScripts(private val guide: Guide) {
         // guide, so it is found by name.
         "e07bea62a5" to { _ -> auto(ItemByNameTask("crate", "Open"), trust = true) },
 
+        // 115. "Travel east to Regulus Cento & travel to Varlamore": the quetzal master east of Varrock. Travel on him
+        // opens a list of destinations, where Varlamore's Civitas illa Fortis is the one wanted.
+        "15227aad5e" to { _ ->
+            auto(
+                InteractTask(InteractTask.Kind.NPC, listOf(12884, 12885), listOf("Regulus Cento"), listOf(Tile(3281, 3413, 0)), "Travel"),
+                ClickChoiceTask(listOf("Civitas illa Fortis", "Varlamore")),
+                WaitUntilTask("Arrive in Varlamore", maxTicks = 60) { (it.game.playerTile?.x ?: 9999) < 2500 },
+                trust = true,
+            )
+        },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
