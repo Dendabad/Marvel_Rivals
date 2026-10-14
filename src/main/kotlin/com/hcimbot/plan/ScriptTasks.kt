@@ -623,11 +623,11 @@ class MarkGuardsTask(
     }
 
     companion object {
-        /** Unmarked ids: outside Aris's tent, by Benny's stand, by Lowe's Archery Emporium, the mace guard. */
-        val TO_MARK = listOf(12668, 12695, 12686, 12674)
+        /** Unmarked ids of the four guards the quest wants marked. */
+        val TO_MARK = listOf(12668, 12671, 12677, 12674)
 
-        /** The guard Quest Helper has marked by mistake (its marked id), to unmark. */
-        val MARKED_WRONGLY = listOf(12671)
+        /** The guard marked by mistake (its marked id), to unmark. Not known yet, so the bot leaves it to the player. */
+        val MARKED_WRONGLY = emptyList<Int>()
         const val MAX_TICKS = 300
         const val MAX_ATTEMPTS = 4
         const val CLICK_RANGE = 8

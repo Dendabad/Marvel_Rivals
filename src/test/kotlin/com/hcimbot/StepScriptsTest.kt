@@ -156,11 +156,11 @@ class StepScriptsTest {
     }
 
     @Test
-    fun `marking guards clicks only the exact guard ids, then unmarks the wrong one`() {
+    fun `marking guards clicks only the exact guard ids, `() {
         val game = FakeGame().apply {
             playerTile = Tile(3211, 3430, 0)
             npcs += SceneEntity(12668, "Guard", Tile(3212, 3430, 0))
-            npcs += SceneEntity(12670, "Guard", Tile(3213, 3430, 0))
+            npcs += SceneEntity(12680, "Guard", Tile(3213, 3430, 0))
             npcs += SceneEntity(12696, "Guard", Tile(3214, 3430, 0))
             npcs += SceneEntity(12687, "Guard", Tile(3215, 3430, 0))
             npcs += SceneEntity(12675, "Guard", Tile(3216, 3430, 0))
