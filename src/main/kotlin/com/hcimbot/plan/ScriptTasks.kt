@@ -551,7 +551,7 @@ class FollowGuardTask(private val guardIds: List<Int>, private val hides: List<T
         // Hidden: wait for the guard to move on. He has when he is clear of this place and nearer the
         // next one, or so far ahead that waiting longer would lose him.
         val next = hides.getOrNull(index + 1)
-        val clear = guard.tile.distanceTo(hide) >= CLEAR_OF_HIDE
+        val clear = guard.tile.distanceTo(me) >= CLEAR_OF_HIDE
         val ahead = next == null || guard.tile.distanceTo(next) < hide.distanceTo(next)
         val losing = guard.tile.distanceTo(me) >= TOO_FAR
         waited++
@@ -568,9 +568,9 @@ class FollowGuardTask(private val guardIds: List<Int>, private val hides: List<T
         /** VarbitID.CUTSCENE_STATUS: non zero while the game has taken control of the camera and player. */
         const val CUTSCENE_VARBIT = 542
         const val LOST_TICKS = 40
-        const val CLEAR_OF_HIDE = 2
+        const val CLEAR_OF_HIDE = 6
         /** Ticks to wait hidden before moving on regardless: the guard may be waiting for the player to come on. */
-        const val MAX_WAIT = 12
+        const val MAX_WAIT = 30
         const val TOO_FAR = 12
     }
 }
