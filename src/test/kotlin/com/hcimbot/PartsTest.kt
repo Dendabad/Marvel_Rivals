@@ -507,6 +507,22 @@ class PartsTest {
     }
 
     @Test
+    fun `the minecart's destination menu is answered by clicking the place`() {
+        val cartAt = Tile(1761, 3709, 0)
+        val game = FakeGame()
+        game.playerTile = Tile(1760, 3710, 0)
+        game.objects += com.hcimbot.game.SceneEntity(28835, "Minecart", cartAt)
+        game.onObjectInteract = { _, _ -> game.windowChoices = listOf("1: Arceuus", "A: Port Piscarilius", "B: Shayzien East", "D: (Cancel)") }
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.TravelTask(
+            "Shayzien East", listOf(com.hcimbot.plan.TravelTask.Departure(cartAt, 28835, "Travel Minecart")), Tile(1590, 3620, 0),
+        )
+        task.tick(ctx)
+        task.tick(ctx)
+        assertEquals(listOf("object Minecart Travel", "choose Shayzien East"), game.calls)
+    }
+
+    @Test
     fun `step 19 looks for rats behind Lumbridge castle first`() {
         val game = FakeGame()
         game.playerTile = Tile(3230, 3209, 0)

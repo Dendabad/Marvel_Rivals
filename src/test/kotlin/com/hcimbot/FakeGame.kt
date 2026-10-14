@@ -85,6 +85,15 @@ class FakeGame : GameState, GameActions {
     var alive: ((SceneEntity) -> Boolean?)? = null
     override fun npcAlive(npc: SceneEntity): Boolean? = alive?.invoke(npc)
 
+    /** Entries of an open window menu, like the minecart's destinations. */
+    var windowChoices = listOf<String>()
+    override fun showsChoice(text: String) = windowChoices.any { it.equals(text, true) || it.endsWith(": $text", true) }
+    override fun clickChoice(text: String): Boolean {
+        calls += "choose $text"
+        windowChoices = emptyList()
+        return true
+    }
+
     val npcMenus = mutableMapOf<Int, List<String>>()
     override fun npcActions(npc: SceneEntity): List<String>? = npcMenus[npc.id]
 

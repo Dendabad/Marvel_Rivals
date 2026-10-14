@@ -139,6 +139,8 @@ class MicrobotGameState : GameState {
         Microbot.getClient().getNpcDefinition(npc.id)?.actions?.filterNotNull()?.map(Text::removeTags)?.filter { it.isNotBlank() }
     }
 
+    override fun showsChoice(text: String): Boolean = onClient { choiceWidget(text) != null } == true
+
     /** A breadth first search over the scene's collision map, in which a shut door is a wall. */
     override fun canReach(tile: Tile): Boolean? =
         runCatching { Rs2Tile.isTileReachable(WorldPoint(tile.x, tile.y, tile.plane)) }.getOrNull()
@@ -228,6 +230,24 @@ class MicrobotGameState : GameState {
                     }.orEmpty()
                 }
             }
+        }
+
+        /**
+         * A visible game window entry whose text is [text] or ends in ": [text]", like the
+         * minecart menu's "B: Shayzien East". Call on the client thread.
+         */
+        fun choiceWidget(text: String): net.runelite.api.widgets.Widget? {
+            val wanted = text.trim().lowercase()
+            fun visit(w: net.runelite.api.widgets.Widget?): net.runelite.api.widgets.Widget? {
+                if (w == null || w.isHidden) return null
+                val shown = Text.removeTags(w.text.orEmpty()).trim().lowercase()
+                if (shown == wanted || shown.endsWith(": $wanted")) return w
+                for (group in listOf(w.dynamicChildren, w.staticChildren, w.nestedChildren)) {
+                    group?.forEach { child -> visit(child)?.let { return it } }
+                }
+                return null
+            }
+            return Microbot.getClient().widgetRoots?.firstNotNullOfOrNull { visit(it) }
         }
 
         fun <T> onClient(block: () -> T?): T? =

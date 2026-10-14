@@ -100,6 +100,12 @@ class MicrobotActions : GameActions {
         return Rs2Magic.cast(spell)
     }
 
+    override fun clickChoice(text: String): Boolean {
+        val bounds = onClient { MicrobotGameState.choiceWidget(text)?.bounds } ?: return false
+        Microbot.getMouse().click(bounds)
+        return true
+    }
+
     override fun stepOnto(tile: Tile): Boolean = Rs2Walker.walkFastCanvas(WorldPoint(tile.x, tile.y, tile.plane))
 
     override fun itemAction(itemId: Int, action: String): Boolean =

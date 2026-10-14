@@ -486,6 +486,13 @@ class TravelTask(
                 ?: return TaskResult.Failed("travel shows $options and none of them is $place")
             return attempt(ctx.actions.chooseDialogOption(pick), "pick $pick")
         }
+        // A destination menu that is a window rather than chat, like the Lovakengj minecarts'.
+        // Also when it is already open, say after a reload: the place's name is only shown when travelling.
+        if (game.showsChoice(place)) {
+            ctx.log("Choosing $place")
+            used = true
+            return attempt(ctx.actions.clickChoice(place), "choose $place")
+        }
         if (game.isBusy) return TaskResult.Running
         if (used) {
             if (destination == null) return TaskResult.Done

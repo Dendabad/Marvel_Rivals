@@ -64,6 +64,9 @@ interface GameState {
     /** The right click options [npc] has now, e.g. Veos has no "Travel" until the first trip. Null when unknown. */
     fun npcActions(npc: SceneEntity): List<String>? = null
 
+    /** Whether a game window shows an entry ending in [text], e.g. "B: Shayzien East" in the minecart menu. */
+    fun showsChoice(text: String): Boolean = false
+
     /** What the open shop offers for [itemId], to explain a buy that did not work. Null when unknown. */
     fun shopOffers(itemId: Int): String? = null
 
@@ -104,6 +107,9 @@ interface GameState {
 interface GameActions {
     /** Walk towards [tile], one leg at a time. Called again each tick until arrival. */
     fun walkTo(tile: Tile): Boolean
+
+    /** Clicks the window entry [showsChoice] found for [text]. */
+    fun clickChoice(text: String): Boolean = false
 
     /** Click onto [tile] itself, which must be close by. For spots where the exact tile matters, like a dig. */
     fun stepOnto(tile: Tile): Boolean
