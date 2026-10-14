@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit
 import net.runelite.api.Skill
 import net.runelite.client.plugins.microbot.Microbot
 import net.runelite.client.plugins.microbot.Script
+import net.runelite.client.plugins.microbot.util.dialogues.Rs2Dialogue
 import net.runelite.client.plugins.microbot.util.inventory.Rs2Inventory
 import net.runelite.client.plugins.microbot.util.player.Rs2Player
 import net.runelite.client.plugins.microbot.util.walker.Rs2Walker
@@ -41,6 +42,8 @@ class HcimGuideBotScript : Script() {
     private val walkerOverrides = WalkerOverrides()
     @Volatile private var lastDrink = 0L
     @Volatile private var forgetDoorsAt = 0L
+    private var lastSeenAt: net.runelite.api.coords.WorldPoint? = null
+    private var stillSince = 0L
     @Volatile private var lastWarning = 0L
     private val recent = ArrayDeque<String>()
     private val clock = java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss")
@@ -255,6 +258,7 @@ class HcimGuideBotScript : Script() {
                 client.getBoostedSkillLevel(Skill.HITPOINTS) to client.getRealSkillLevel(Skill.HITPOINTS)
             } ?: return
             if (max <= 0) return
+            logStalls(current.acceptWarnings.isNotEmpty())
             if (forgetDoorsAt != 0L && System.currentTimeMillis() >= forgetDoorsAt) {
                 forgetDoorsAt = 0L
                 WalkerDoors.forget()
@@ -290,6 +294,29 @@ class HcimGuideBotScript : Script() {
         } catch (e: Exception) {
             if (interrupted(e)) return
             log.error("HCIM guide bot watchdog failed", e)
+        }
+    }
+
+    /**
+     * Times how long the player stands still during a walk, so a slow stretch (a gate, a question, the
+     * walker working out its next move) shows in the Recent list with what was on screen. Only logged
+     * when it is long enough to notice, and only for steps that opt in.
+     */
+    private fun logStalls(wanted: Boolean) {
+        if (!wanted || !actions.walking) {
+            stillSince = 0L
+            return
+        }
+        val at = MicrobotGameState.onClient { Microbot.getClient().localPlayer?.worldLocation } ?: return
+        val time = System.currentTimeMillis()
+        if (at != lastSeenAt) {
+            val stood = if (stillSince == 0L) 0L else time - stillSince
+            if (stood >= STALL_LOG_MS) {
+                val chat = MicrobotGameState.onClient { Rs2Dialogue.isInDialogue() } == true
+                note("Stood still ${"%.1f".format(stood / 1000.0)}s at (${lastSeenAt?.x}, ${lastSeenAt?.y}), chat open: $chat")
+            }
+            lastSeenAt = at
+            stillSince = time
         }
     }
 
@@ -342,6 +369,7 @@ class HcimGuideBotScript : Script() {
 
         /** Long enough for the walker to have noted a door crossing the drink cut short. */
         private const val FORGET_AGAIN_MS = 1_200L
+        private const val STALL_LOG_MS = 1_500L
         private const val MESSAGE_MS = 60_000
         private const val B0ATY_PLUGIN = "com.b0atyguide.B0atyGuidePlugin"
 
