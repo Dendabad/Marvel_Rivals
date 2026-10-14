@@ -122,8 +122,16 @@ class StepPlanner(
         }
         // "Talk to Noah" where Quest Helper says to start with Alina: trust the guide.
         if (ids.isNotEmpty() && !mentioned) return null
+        // "Check the Notice board ... to Start A Porcine of Interest": with no NPC to bound it,
+        // the step's part is only the start. Its data may still say done at the quest's end.
+        val startOnly = ids.isEmpty() && (step.questStartOnly || START.containsMatchIn(step.text))
         return StepPlan.Auto(
-            listOf(QuestTask(key, helper, settings.allowCombat, boundedTo = ids, finishesQuest = step.questCompletes)),
+            listOf(
+                QuestTask(
+                    key, helper, settings.allowCombat, boundedTo = ids, finishesQuest = step.questCompletes,
+                    stopAtValue = if (startOnly) 1 else null,
+                ),
+            ),
             trustTasks = true,
             combat = settings.allowCombat,
         )
@@ -332,6 +340,9 @@ class StepPlanner(
          * place name in "Teleport to Essence Mine" does not give Mine.
          */
         fun verb(step: Step): String? = verb(step.text)
+
+        /** "Start", as in "... to Start A Porcine of Interest". */
+        private val START = Regex("\\bstart\\b", RegexOption.IGNORE_CASE)
 
         fun verb(text: String): String? {
             for (clause in clauses(text)) {

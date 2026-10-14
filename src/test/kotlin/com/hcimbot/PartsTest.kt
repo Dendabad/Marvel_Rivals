@@ -448,6 +448,27 @@ class PartsTest {
     }
 
     @Test
+    fun `a quest fight far above the player is refused`() {
+        val game = FakeGame()
+        game.levels["HITPOINTS"] = 10
+        game.varps[1] = 25
+        val helper = com.hcimbot.guide.QuestHelper(
+            com.hcimbot.guide.QuestVar("varp", 1),
+            lastValue = 35,
+            steps = mapOf(
+                "25" to com.hcimbot.guide.Instruction(
+                    kind = "object", point = listOf(3151, 3348, 0), ids = listOf(40341),
+                    text = "Climb down into the Strange Hole east of Draynor Manor. Be prepared to fight Sourhog (level 37)",
+                ),
+            ),
+        )
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val result = com.hcimbot.plan.QuestTask("aporcineofinterest", helper, allowCombat = true).tick(ctx)
+        assertTrue(result is com.hcimbot.plan.TaskResult.Failed && "level 37" in result.reason, result.toString())
+        assertTrue(game.calls.isEmpty())
+    }
+
+    @Test
     fun `step 19 looks for rats behind Lumbridge castle first`() {
         val game = FakeGame()
         game.playerTile = Tile(3230, 3209, 0)

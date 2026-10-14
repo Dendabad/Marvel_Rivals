@@ -120,6 +120,8 @@ class QuestTask(
     }
 
     private fun taskFor(step: Instruction, ctx: TaskContext): Made {
+        // Also stops "climb down into the hole ... fight Sourhog (level 37)" before the fight.
+        tooStrong(step.text, ctx)?.let { return Made.Refused(it) }
         val tile = step.tile
         val dialogue = if (step.dialogue.isEmpty()) DialoguePlan.None else DialoguePlan.Texts(step.dialogue)
         return when (step.kind) {
@@ -152,6 +154,18 @@ class QuestTask(
         }
     }
 
+    /**
+     * A hardcore account must not pick fights it may lose. Quest Helper names a
+     * boss's level ("Be prepared to fight Sourhog (level 37)"): anything well above
+     * the player's Hitpoints level is left to the player.
+     */
+    private fun tooStrong(text: String, ctx: TaskContext): String? {
+        val level = LEVEL.find(text)?.groupValues?.get(1)?.toIntOrNull() ?: return null
+        val hitpoints = ctx.game.skillLevel("HITPOINTS")
+        if (level <= hitpoints * 3 / 2 + LEVEL_MARGIN) return null
+        return "a level $level fight is too risky to leave to the bot at $hitpoints Hitpoints"
+    }
+
     /** The branch an id-less stair or ladder step leads to: the first one with a place on another floor. */
     private fun stairBranch(step: Instruction): Instruction? {
         if (step.kind != "object" || step.ids.isNotEmpty()) return null
@@ -161,6 +175,8 @@ class QuestTask(
 
     companion object {
         const val MAX_REPEATS = 3
+        private val LEVEL = Regex("\\(level[- ](\\d+)\\)", RegexOption.IGNORE_CASE)
+        private const val LEVEL_MARGIN = 5
 
         /** "Return to Gertrude", "Bring the notes to Sedridor", "Report back to Tobyn": all talks. */
         private val HANDING_IN = Regex("^(return|go back|bring|report back|give)\\b", RegexOption.IGNORE_CASE)

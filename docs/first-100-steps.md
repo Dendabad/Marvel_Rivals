@@ -47,7 +47,7 @@ With **Allow combat** on: 87 run, 8 skip, 5 pause. With it off, the two fights (
 | 37 | Train Draynor Agility to 5 Agility [Lumbridge Easy Diary] | Runs | Runs laps of the Draynor rooftop course (obstacles from Quest Helper's guide) until Agility is 5 and the diary task is done, picking up marks of grace and walking back to the start after a fall. |
 | 38 | Bank at Draynor and deposit the Garlic & Cheese | Runs | Deposit [1550, 1985]. |
 | 39 | Talk to Fortunato & buy 5 Jugs of wine. Hop worlds and buy 10 in total. | Runs | Buys 5, hops to another world, and buys 5 more. |
-| 40 | Check the Notice board next to Fortunato to Start A Porcine of Interest | Runs | Follows Quest Helper for aporcineofinterest. guide.json has no id for the notice board, so the bot looks it up by its RuneLite name and reads it. |
+| 40 | Check the Notice board next to Fortunato to Start A Porcine of Interest | Runs | Follows Quest Helper for aporcineofinterest. guide.json has no id for the notice board, so the bot looks it up by its RuneLite name and reads it. The step is done once the quest has started: the rest of the quest (including Sourhog, level 37) is not the bot's to do here. |
 | 41 | Complete 4th Step of X Marks the Spot | Runs | Follows Quest Helper for xmarksthespot. Same as #18. |
 | 42 | Head West to Port Sarim and talk to Veos to complete X Marks The Spot. | Runs | Follows Quest Helper for xmarksthespot. Digs in the pig pen first if that dig is not done yet. |
 | 43 | Destroy the lamp. You can collect this later as you can't bank it. | Runs | Destroys the X Marks the Spot lamp and confirms. |

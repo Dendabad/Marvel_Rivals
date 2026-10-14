@@ -171,4 +171,14 @@ class PlannerTest {
         assertIs<TaskResult.Failed>(result)
         assertTrue(game.calls.isEmpty())
     }
+
+    @Test
+    fun `a step that only starts a quest stops once the quest has started`() {
+        // "Check the Notice board ... to Start A Porcine of Interest", whose data says done at the quest's end.
+        val step = Step(text = "Check the Notice board next to Fortunato to Start A Porcine of Interest", questHelper = "q", questStep = true, questDoneAt = 3)
+        val auto = assertIs<StepPlan.Auto>(plan(step))
+        val game = FakeGame().apply { varps[1] = 1 } // already read: the quest is on to Harlow
+        assertEquals(TaskResult.Done, auto.tasks.single().tick(TaskContext(game, game, Conditions(game))))
+        assertTrue(game.calls.isEmpty(), "it must not carry on with the quest")
+    }
 }
