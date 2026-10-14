@@ -555,6 +555,15 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 119. "Collect 1 Sweetcorn [Recipe for Disaster]": the guide's spawn points are at Ortus Farm, (1574, 3139) on the
+        // first floor, and Cam Torum. Go to the farm, then take the sweetcorn lying there.
+        "1383b1d521" to { _ ->
+            auto(
+                WalkTask(Tile(1574, 3139, 1), radius = 4),
+                TakeItemTask(listOf(item("Sweetcorn", 5986, 1))),
+            )
+        },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
