@@ -509,11 +509,19 @@ class FollowGuardTask(private val guardId: Int, private val hides: List<Tile>) :
     private var unseen = 0
     private var announced = false
     private var walks = 0
+    private var inCutscene = false
 
     override fun tick(ctx: TaskContext): TaskResult {
         val game = ctx.game
         val me = game.playerTile ?: return TaskResult.Running
         if (++ticks > MAX_TICKS) return TaskResult.Failed("following the guard took over $MAX_TICKS ticks")
+        // Clicks do nothing in a cutscene, so wait it out and carry on when the player has control again.
+        val cutscene = game.varbit(CUTSCENE_VARBIT) != 0
+        if (cutscene != inCutscene) {
+            inCutscene = cutscene
+            ctx.log(if (cutscene) "A cutscene is playing, waiting" else "The cutscene has ended, following the guard")
+        }
+        if (cutscene) { ticks--; return TaskResult.Running }
         val guard = game.nearestNpc(listOf(guardId))
         if (guard == null) {
             // Out of sight behind a wall counts for the later stops: he has walked on.
@@ -554,6 +562,8 @@ class FollowGuardTask(private val guardId: Int, private val hides: List<Tile>) :
 
     companion object {
         const val MAX_TICKS = 600
+        /** VarbitID.CUTSCENE_STATUS: non zero while the game has taken control of the camera and player. */
+        const val CUTSCENE_VARBIT = 542
         const val LOST_TICKS = 40
         const val CLEAR_OF_HIDE = 5
         const val TOO_FAR = 12
