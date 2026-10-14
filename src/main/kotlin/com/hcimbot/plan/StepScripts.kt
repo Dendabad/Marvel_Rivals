@@ -70,7 +70,8 @@ class StepScripts(private val guide: Guide, private val routes: RouteStore? = nu
             auto(
                 WalkTask(MAGIC_TUTOR),
                 DropTask(listOf(AIR_RUNE, MIND_RUNE)),
-                talk(listOf(3218), "Magic combat tutor", MAGIC_TUTOR, DialoguePlan.Texts(listOf("rune"))),
+                // Not just "rune": "How do I make runes?" is also on the menu, above the one that hands them out.
+                talk(listOf(3218), "Magic combat tutor", MAGIC_TUTOR, DialoguePlan.Texts(listOf("air and mind", "claim"))),
                 PickUpTask(listOf(AIR_RUNE, MIND_RUNE)),
             )
         },
