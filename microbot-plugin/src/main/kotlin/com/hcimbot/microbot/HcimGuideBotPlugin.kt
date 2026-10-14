@@ -2,16 +2,25 @@ package com.hcimbot.microbot
 
 import com.google.inject.Provides
 import javax.inject.Inject
+import javax.swing.SwingUtilities
 import net.runelite.client.config.ConfigManager
+import net.runelite.client.eventbus.Subscribe
+import net.runelite.client.events.ConfigChanged
 import net.runelite.client.input.KeyManager
 import net.runelite.client.plugins.Plugin
 import net.runelite.client.plugins.PluginDescriptor
 import net.runelite.client.plugins.microbot.Microbot
+import net.runelite.client.ui.ClientToolbar
+import net.runelite.client.ui.NavigationButton
+import net.runelite.client.ui.overlay.OverlayManager
 import net.runelite.client.util.HotkeyListener
 
 /**
  * The plugin Microbot loads. Turning it on starts the bot from the first step
  * not yet ticked in the B0aty guide. Turning it off stops it.
+ *
+ * It shows what the bot is doing in a box on the game screen and in a sidebar
+ * panel (the green H), which also has Pause, Skip and Retry buttons.
  *
  * Microbot names a sideloaded plugin after its jar, so the jar must be called
  * HcimGuideBotPlugin.jar to match this class.
@@ -28,8 +37,17 @@ class HcimGuideBotPlugin : Plugin() {
     @field:Inject
     private lateinit var keyManager: KeyManager
 
+    @field:Inject
+    private lateinit var overlayManager: OverlayManager
+
+    @field:Inject
+    private lateinit var clientToolbar: ClientToolbar
+
     private var script: HcimGuideBotScript? = null
     private var pauseKey: HotkeyListener? = null
+    private var overlay: HcimGuideBotOverlay? = null
+    private var panel: HcimGuideBotPanel? = null
+    private var sidebarButton: NavigationButton? = null
 
     /** RuneLite finds a plugin's settings through a @Provides method like this one. */
     @Provides
@@ -39,23 +57,60 @@ class HcimGuideBotPlugin : Plugin() {
     override fun startUp() {
         val configManager = Microbot.getConfigManager()
         val config = configManager.getConfig(HcimGuideBotConfig::class.java)
-        script = HcimGuideBotScript().also { it.run(config) }
-        // The hotkey flips the Pause setting, so the checkbox always shows the real state.
+        val bot = HcimGuideBotScript().also { script = it }
+        bot.run(config)
+
+        overlay = HcimGuideBotOverlay(bot::status).also { overlayManager.add(it) }
+
+        val sidePanel = HcimGuideBotPanel(
+            status = bot::status,
+            isPaused = bot::isPaused,
+            setPaused = ::setPaused,
+            skip = bot::requestSkip,
+            retry = bot::requestRetry,
+        ).also { panel = it }
+        sidebarButton = NavigationButton.builder()
+            .tooltip("HCIM Guide Bot")
+            .icon(HcimGuideBotPanel.icon())
+            .priority(SIDEBAR_PRIORITY)
+            .panel(sidePanel)
+            .build()
+            .also { clientToolbar.addNavigation(it) }
+
         pauseKey = object : HotkeyListener({ config.pauseHotkey() }) {
-            override fun hotkeyPressed() {
-                configManager.setConfiguration(HcimGuideBotConfig.GROUP, HcimGuideBotConfig.PAUSED, !config.paused())
-            }
+            override fun hotkeyPressed() = setPaused(!bot.isPaused())
         }.also { keyManager.registerKeyListener(it) }
+    }
+
+    /** Pauses or resumes the bot at once, and keeps the Pause checkbox in step with it. */
+    private fun setPaused(value: Boolean) {
+        script?.setPaused(value)
+        Microbot.getConfigManager().setConfiguration(HcimGuideBotConfig.GROUP, HcimGuideBotConfig.PAUSED, value)
+    }
+
+    /** The Pause checkbox in the settings. */
+    @Subscribe
+    fun onConfigChanged(event: ConfigChanged) {
+        if (event.group == HcimGuideBotConfig.GROUP && event.key == HcimGuideBotConfig.PAUSED) {
+            script?.setPaused(event.newValue == "true")
+        }
     }
 
     override fun shutDown() {
         pauseKey?.let { keyManager.unregisterKeyListener(it) }
+        overlay?.let { overlayManager.remove(it) }
+        panel?.stop()
+        sidebarButton?.let { button -> SwingUtilities.invokeLater { clientToolbar.removeNavigation(button) } }
         pauseKey = null
+        overlay = null
+        panel = null
+        sidebarButton = null
         script?.shutdown()
         script = null
     }
 
     companion object {
-        const val VERSION = "0.1.0"
+        const val VERSION = "0.2.0"
+        private const val SIDEBAR_PRIORITY = 8
     }
 }

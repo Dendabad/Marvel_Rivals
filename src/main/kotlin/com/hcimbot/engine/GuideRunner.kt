@@ -45,6 +45,16 @@ class GuideRunner(
 
     val currentStep: Step? get() = active?.step
 
+    /** What the bot is doing within the current step, e.g. "Walk to (3218, 3238, 0)", for the on screen display. */
+    val currentTaskDescription: String?
+        get() {
+            val current = active ?: return null
+            val plan = current.plan as? StepPlan.Auto ?: return null
+            return plan.tasks.getOrNull(current.taskIndex)?.description
+        }
+
+    val stepCount: Int get() = guide.steps.size
+
     /** The current step's 1 based place in the guide, matching docs/first-100-steps.md. */
     val currentStepNumber: Int? get() = active?.step?.let { step -> guide.steps.indexOf(step) + 1 }
 
@@ -64,6 +74,8 @@ class GuideRunner(
         val combat: Boolean get() = (plan as? StepPlan.Auto)?.combat == true
     }
 
+    /** Volatile because the on screen display reads it from the UI thread. */
+    @Volatile
     private var active: Active? = null
 
     fun start() {
@@ -88,6 +100,13 @@ class GuideRunner(
         val step = (state as? State.Paused)?.step ?: return
         markDone(step, "skipped by the player")
         state = State.Running
+    }
+
+    /** The player's Skip button: tick the current step, paused or not, and move on. */
+    fun skipStep() {
+        val step = (state as? State.Paused)?.step ?: active?.step ?: nextStep() ?: return
+        markDone(step, "skipped by the player")
+        if (state is State.Paused) state = State.Running
     }
 
     fun stop() {

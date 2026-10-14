@@ -180,6 +180,17 @@ class GuideRunnerTest {
     }
 
     @Test
+    fun `skip ticks the current step even while it runs, and the display shows what it is doing`() {
+        val runner = runner(done = allBefore("walk"))
+        runner.ticks(1)
+        assertEquals("walk", runner.currentStep?.id)
+        assertEquals("Walk to (3103, 3265, 0)", runner.currentTaskDescription)
+        runner.skipStep()
+        runner.ticks(1)
+        assertEquals("tip", runner.currentStep?.id)
+    }
+
+    @Test
     fun `low hitpoints halt the bot`() {
         game.hitpoints = 3
         val runner = runner()

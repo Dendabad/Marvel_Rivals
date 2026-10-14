@@ -25,7 +25,17 @@ dependencies {
     implementation(rootProject)
     // RuneLite ships Gson at runtime, and the core's loader takes one.
     compileOnly("com.google.code.gson:gson:2.10.1")
-    if (microbotJar != null) compileOnly(files(microbotJar))
+    if (microbotJar != null) {
+        compileOnly(files(microbotJar))
+        testImplementation(files(microbotJar))
+    }
+    testImplementation(kotlin("test"))
+}
+
+tasks.test {
+    useJUnitPlatform()
+    // The panel test builds Swing components, which needs no screen.
+    systemProperty("java.awt.headless", "true")
 }
 
 java {

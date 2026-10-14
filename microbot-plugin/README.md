@@ -76,16 +76,23 @@ Log in, then switch the plugin on. It starts at the first step not yet ticked in
 
 ## While it runs
 
-- Microbot's status line shows the current step, or why the bot paused.
-- **When it pauses,** a message explains why. Do the step yourself, then **tick it in the B0aty guide's sidebar.** The bot carries on from the next step by itself.
-- **To pause yourself,** tick **Pause** or press your pause hotkey. The bot stops at once, even in the middle of a walk. Untick it or press the hotkey again to carry on, and it plans the current step afresh from wherever you are.
-- To retry the paused step from scratch, switch the plugin off and on again.
-- To stop, switch the plugin off.
-- It stops for good below the hitpoint limit. A watchdog checks hitpoints three times a second, even in the middle of a long walk, and can stop the walk or eat.
+**On the game screen**, a box in the top left corner shows what the bot is doing: whether it is running or paused, the step it is on, the action in progress (like `Doing: Walk to (3218, 3238, 0)`), and why it paused, if it has.
+
+**In the sidebar**, click the green **H** icon for the bot's panel. It shows the same information, with three buttons:
+
+- **Pause / Resume** stops the bot at once, even in the middle of a walk, and starts it again. When you resume, it plans the current step afresh from wherever you are.
+- **Skip this step** ticks the current step as done and moves on.
+- **Retry this step** starts the current step's actions again, for example after you have fixed whatever made it pause.
+
+You can also pause with the **Pause** checkbox in the settings, or with your **pause hotkey**. All of them do the same thing.
+
+When the bot pauses by itself, a message explains why. Do the step yourself and tick it in the B0aty guide's sidebar, or use **Skip** or **Retry**.
+
+It stops for good below the hitpoint limit. A watchdog checks hitpoints three times a second, even in the middle of a long walk, and can stop the walk or eat.
 
 ## Retesting a step
 
-The status line shows the step's number, like `HCIM bot step 5: Head North-West...`. The same numbers are used in [docs/first-100-steps.md](../docs/first-100-steps.md).
+The on screen box and the sidebar show the step's number, like `Step 5 of 2925: Head North-West...`. The same numbers are used in [docs/first-100-steps.md](../docs/first-100-steps.md).
 
 1. In the bot's settings, type the number into **Start at step** and press **Enter**.
 2. The bot forgets its own ticks from that step on and starts there. The setting goes back to 0 by itself.
