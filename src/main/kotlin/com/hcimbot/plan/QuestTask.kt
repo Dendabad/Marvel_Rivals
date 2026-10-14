@@ -100,7 +100,7 @@ class QuestTask(
             repeats = 0
             settling = 0
             ctx.log("Quest step: ${chosen.text}")
-            ctx.game.helperStep()?.let { ctx.log("Quest Helper: ${it.kind} \"${it.text.take(40)}\" npc ${it.npcIds.take(3)} obj ${it.objectIds.take(3)}") }
+            ctx.game.helperStep(questKey)?.let { ctx.log("Quest Helper: ${it.kind} \"${it.text.take(40)}\" npc ${it.npcIds.take(3)} obj ${it.objectIds.take(3)}") }
         }
         if (settling > 0) {
             settling--
@@ -140,7 +140,7 @@ class QuestTask(
         tooStrong(step.text, ctx)?.let { return Made.Refused(it) }
         val tile = step.tile
         val extra = QuestFills.extraDialogue(questKey)
-        val dialogue = DialoguePlan.Texts(step.dialogue + extra) { ctx.game.helperStep()?.choices.orEmpty() }
+        val dialogue = DialoguePlan.Texts(step.dialogue + extra) { ctx.game.helperStep(questKey)?.choices.orEmpty() }
         return when (step.kind) {
             "dig" -> tile?.let { Made.Ready(DigTask(it)) } ?: Made.Refused("no location for this dig")
             "walk" -> tile?.let { Made.Ready(WalkTask(it, radius = 1)) } ?: Made.Refused("no location for this walk")
@@ -171,7 +171,7 @@ class QuestTask(
                 stairBranch(step)?.tile?.let { return Made.Ready(WalkTask(it, radius = 3)) }
                 // Quest Helper shows the object it wants clicked, and with what (Daddy's Home's furniture: the guide
                 // data's ids and a left click on a removed piece build it again): do what Quest Helper shows.
-                ctx.game.helperStep()?.takeIf { it.objectIds.isNotEmpty() }?.let { shown ->
+                ctx.game.helperStep(questKey)?.takeIf { it.objectIds.isNotEmpty() }?.let { shown ->
                     helperVerb(shown.text)?.let { verb ->
                         ctx.log("Following Quest Helper: ${shown.text.take(80)} (object ${shown.objectIds}, $verb)")
                         return Made.Ready(InteractTask(InteractTask.Kind.OBJECT, shown.objectIds, emptyList(), listOfNotNull(shown.tile), verb, dialogue))
@@ -201,7 +201,7 @@ class QuestTask(
      * talk to, or interact with, the NPC it points at. Only for plain talking and handing in, never a fight.
      */
     private fun fromHelper(ctx: TaskContext, dialogue: DialoguePlan): Made? {
-        val shown = ctx.game.helperStep() ?: return null
+        val shown = ctx.game.helperStep(questKey) ?: return null
         if (shown.npcIds.isEmpty()) return null
         val action = StepPlanner.verb(shown.text)?.takeIf { it != "Attack" }
             ?: if (HELPER_TALK.containsMatchIn(shown.text)) "Talk-to" else return null

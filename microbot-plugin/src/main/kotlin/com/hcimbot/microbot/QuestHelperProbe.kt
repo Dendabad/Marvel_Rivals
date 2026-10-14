@@ -24,9 +24,16 @@ object QuestHelperProbe {
     }
 
     /** The step Quest Helper shows, as the bot can use it: its text and the NPC ids it highlights. */
-    fun currentStep(): com.hcimbot.game.HelperStep? = runCatching {
+    fun currentStep(wanted: String? = null): com.hcimbot.game.HelperStep? = runCatching {
         val plugin = loadedPlugins().firstOrNull { it.javaClass.name.endsWith("QuestHelperPlugin") } ?: return null
-        val quest = call(plugin, "getSelectedQuest") ?: return null
+        val selected = call(plugin, "getSelectedQuest")
+        // Quest Helper follows one quest at a time. Its step for another quest is no use here, and acting on
+        // it would be wrong (the Demon Slayer step while doing Daddy's Home).
+        val quest = when {
+            wanted == null -> selected
+            selected != null && matches(selected.javaClass.simpleName, wanted) -> selected
+            else -> helperFor(plugin, wanted)
+        } ?: return null
         var step = call(quest, "getCurrentStep") ?: return null
         repeat(6) { call(step, "getActiveStep")?.takeIf { it !== step }?.let { step = it } }
         val text = (field(step, "text") as? Collection<*>)?.joinToString(" ") { it.toString() }.orEmpty()
@@ -49,6 +56,24 @@ object QuestHelperProbe {
         val list = (field(holder, "choices") as? Collection<*>) ?: (holder as? Collection<*>) ?: return emptyList()
         list.mapNotNull { item -> item?.let { field(it, "choice") as? String } }.filter { it.isNotBlank() }
     }.getOrDefault(emptyList())
+
+    private fun normal(name: String) = name.lowercase().filter { it.isLetterOrDigit() }
+
+    private fun matches(name: String, wanted: String): Boolean {
+        val have = normal(name)
+        return have.isNotEmpty() && (have == wanted || wanted.startsWith(have) || have.startsWith(wanted))
+    }
+
+    /** The helper for [wanted] from Quest Helper's list of quests, when it is not the one selected. */
+    private fun helperFor(plugin: Any, wanted: String): Any? {
+        val loader = plugin.javaClass.classLoader
+        for (name in listOf("com.questhelper.questinfo.QuestHelperQuest", "com.questhelper.QuestHelperQuest")) {
+            val type = runCatching { Class.forName(name, true, loader) }.getOrNull() ?: continue
+            val constant = type.enumConstants?.firstOrNull { matches((it as Enum<*>).name, wanted) } ?: continue
+            return call(constant, "getQuestHelper")
+        }
+        return null
+    }
 
     private fun field(target: Any, name: String): Any? {
         var type: Class<*>? = target.javaClass

@@ -96,8 +96,11 @@ interface GameState {
     /** The NPC id RuneLite names [constant] (its gameval NpcID), for quest NPCs the guide data gives no id for. */
     fun npcIdNamed(constant: String): Int? = null
 
-    /** The step the Quest Helper plugin shows now, or null when it is not running or has no quest selected. */
-    fun helperStep(): HelperStep? = null
+    /**
+     * The step the Quest Helper plugin shows now for [quest] (our key for it, like "daddyshome"), or null when it is
+     * not running or is showing another quest. It only follows one quest at a time.
+     */
+    fun helperStep(quest: String? = null): HelperStep? = null
 
     /** Nearest item lying on the ground (or on a table) with one of these ids. */
     fun nearestGroundItem(ids: Collection<Int>): SceneEntity?

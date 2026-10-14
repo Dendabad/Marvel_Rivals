@@ -235,7 +235,7 @@ class StepScriptsTest {
             helper = com.hcimbot.game.HelperStep("Demolish the broken stool.", emptyList(), Tile(3239, 3394, 0), emptyList(), listOf(40216))
         }
         val ctx = TaskContext(game, game, Conditions(game))
-        val task = com.hcimbot.plan.HelperObjectsTask(Regex("^(demolish|remove)", RegexOption.IGNORE_CASE))
+        val task = com.hcimbot.plan.HelperObjectsTask(Regex("^(demolish|remove)", RegexOption.IGNORE_CASE), "daddyshome")
         task.tick(ctx)
         assertTrue(game.calls.any { it == "object Broken stool Demolish" }, game.calls.toString())
         game.helper = com.hcimbot.game.HelperStep("Talk to Old Man Yarlo again.", listOf(10425))

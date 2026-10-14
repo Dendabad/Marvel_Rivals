@@ -425,7 +425,7 @@ class StepScripts(private val guide: Guide) {
                 quest("daddyshome", stopAt = 2, allowCombat = settings.allowCombat),
                 // Quest Helper points at each piece in turn. Clicking the old ids went on to rebuild the
                 // piece just removed, which leaves a build spot with the same object ids.
-                HelperObjectsTask(Regex("^(demolish|remove|right-click remove)", RegexOption.IGNORE_CASE)),
+                HelperObjectsTask(Regex("^(demolish|remove|right-click remove)", RegexOption.IGNORE_CASE), "daddyshome"),
                 trust = true,
             )
         },

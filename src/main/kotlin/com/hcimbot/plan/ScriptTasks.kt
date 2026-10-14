@@ -630,7 +630,7 @@ class MarkGuardsTask(
         val me = game.playerTile ?: return TaskResult.Running
 
         // Quest Helper points at the guard to mark, and later at the one to unmark: do what it shows.
-        val helper = game.helperStep()
+        val helper = game.helperStep("childrenofthesun")
         val next: Pair<com.hcimbot.game.SceneEntity, String>? = if (helper != null) {
             val action = when {
                 helper.text.contains("unmark", ignoreCase = true) -> "Unmark"
@@ -707,7 +707,7 @@ class MarkGuardsTask(
  * moves on to the next piece when one is done, so this never has to know which is left, or what a piece
  * turns into (a removed piece becomes somewhere to build, and a left click on that would build).
  */
-class HelperObjectsTask(private val wanted: Regex, private val maxActions: Int = 40) : BaseTask() {
+class HelperObjectsTask(private val wanted: Regex, private val quest: String, private val maxActions: Int = 40) : BaseTask() {
     override val description = "Do what Quest Helper shows"
     private var actions = 0
     private var settling = 0
@@ -718,7 +718,7 @@ class HelperObjectsTask(private val wanted: Regex, private val maxActions: Int =
         val game = ctx.game
         if (settling > 0) { settling--; return TaskResult.Running }
         if (game.isBusy) return TaskResult.Running
-        val shown = game.helperStep() ?: return TaskResult.Failed("Quest Helper is not showing a step")
+        val shown = game.helperStep(quest) ?: return TaskResult.Failed("Quest Helper is not showing a step for $quest. Select it in the Quest Helper panel")
         if (!wanted.containsMatchIn(shown.text)) return TaskResult.Done
         if (actions >= maxActions) return TaskResult.Failed("did $maxActions things for \"${shown.text.take(50)}\" and Quest Helper still shows it")
         val verb = if (shown.text.contains("demolish", ignoreCase = true)) "Demolish" else "Remove"
