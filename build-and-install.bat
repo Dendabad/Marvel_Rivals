@@ -17,7 +17,7 @@ for %%F in ("%USERPROFILE%\.microbot\microbot-*.jar") do set "MICROBOT_JAR=%%~fF
 if not defined MICROBOT_JAR (
     echo Could not find the Microbot jar in %USERPROFILE%\.microbot
     echo Run the Microbot Launcher once so it downloads Microbot, then try again.
-    pause
+    if not defined HCIM_NOPAUSE pause
     exit /b 1
 )
 echo Building against %MICROBOT_JAR%
@@ -27,7 +27,7 @@ call gradlew.bat :microbot-plugin:pluginJar -PmicrobotJar="%MICROBOT_JAR%"
 if errorlevel 1 (
     echo.
     echo BUILD FAILED. Send a screenshot of the first red lines that start with e:
-    pause
+    if not defined HCIM_NOPAUSE pause
     exit /b 1
 )
 
@@ -41,7 +41,7 @@ rem The bot itself. Copied under another name, then renamed, so it is never read
 copy /y "%LIBS%\hcim-guide-bot-core.jar" "%HOME_DIR%\hcim-guide-bot-core.jar.new" >nul
 if errorlevel 1 (
     echo Could not copy the bot to %HOME_DIR%
-    pause
+    if not defined HCIM_NOPAUSE pause
     exit /b 1
 )
 move /y "%HOME_DIR%\hcim-guide-bot-core.jar.new" "%HOME_DIR%\hcim-guide-bot-core.jar" >nul
@@ -58,7 +58,7 @@ if defined LOADER_CHANGED (
         echo.
         echo The loader plugin changed too, and Microbot has the old one open.
         echo Close Microbot, then run this again. This is only needed when the loader changes.
-        pause
+        if not defined HCIM_NOPAUSE pause
         exit /b 1
     )
     echo The loader plugin was updated. Start Microbot, or restart it if it was open.
@@ -74,4 +74,4 @@ echo.
 echo These are the jars in %PLUGINS%. Only HcimGuideBotPlugin.jar should be the bot:
 dir /b "%PLUGINS%\*.jar"
 echo.
-pause
+if not defined HCIM_NOPAUSE pause

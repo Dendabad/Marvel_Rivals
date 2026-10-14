@@ -13,7 +13,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command "$ProgressPreference = 'S
 if errorlevel 1 (
     echo.
     echo The download failed. Check your internet connection and try again.
-    pause
+    if not defined HCIM_NOPAUSE pause
     exit /b 1
 )
 
@@ -23,7 +23,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command "Expand-Archive -LiteralP
 if errorlevel 1 (
     echo.
     echo Could not unpack the download.
-    pause
+    if not defined HCIM_NOPAUSE pause
     exit /b 1
 )
 del "%ZIP%" >nul 2>&1
@@ -32,7 +32,7 @@ set "SRC="
 for /d %%D in ("%WORK%\*") do set "SRC=%%~fD"
 if not defined SRC (
     echo The download did not contain the project.
-    pause
+    if not defined HCIM_NOPAUSE pause
     exit /b 1
 )
 
