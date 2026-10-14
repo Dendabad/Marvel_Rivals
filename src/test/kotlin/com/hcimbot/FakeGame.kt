@@ -100,8 +100,12 @@ class FakeGame : GameState, GameActions {
         return true
     }
 
+    /** Lets a test make a click fail, as Microbot's does for an option it cannot find. */
+    var npcInteractWorks: (SceneEntity, String?) -> Boolean = { _, _ -> true }
+
     override fun interactNpc(npc: SceneEntity, action: String?): Boolean {
         calls += "npc ${npc.name} $action"
+        if (!npcInteractWorks(npc, action)) return false
         onNpcInteract(npc, action)
         return true
     }

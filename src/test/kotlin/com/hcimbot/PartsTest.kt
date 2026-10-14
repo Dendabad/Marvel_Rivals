@@ -492,6 +492,21 @@ class PartsTest {
     }
 
     @Test
+    fun `a Travel click that keeps failing falls back to talking`() {
+        val veosAt = Tile(3054, 3245, 0)
+        val game = FakeGame()
+        game.playerTile = Tile(3055, 3247, 0)
+        game.npcs += com.hcimbot.game.SceneEntity(8630, "Veos", veosAt)
+        game.npcInteractWorks = { _, action -> action == "Talk-to" }
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.TravelTask(
+            "Port Piscarilius", listOf(com.hcimbot.plan.TravelTask.Departure(veosAt, 8630, "Travel Veos")), Tile(1824, 3690, 0),
+        )
+        repeat(3) { task.tick(ctx) }
+        assertEquals(listOf("npc Veos Travel", "npc Veos Travel", "npc Veos Talk-to"), game.calls)
+    }
+
+    @Test
     fun `step 19 looks for rats behind Lumbridge castle first`() {
         val game = FakeGame()
         game.playerTile = Tile(3230, 3209, 0)

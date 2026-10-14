@@ -130,11 +130,13 @@ class MicrobotGameState : GameState {
         nearest?.let { entity(it.id, it.name, it.worldLocation)?.copy(index = it.index) }
     }
 
-    /** The NPC's current options, transformed for NPCs whose look depends on quest progress. */
+    /**
+     * The options Microbot can click on the NPC. Rs2Npc.interact reads the base definition,
+     * not the transformed one the player sees, so that is what counts here: Veos shows
+     * Travel when transformed, but Microbot only finds Talk-to and fails with "Action not found".
+     */
     override fun npcActions(npc: SceneEntity): List<String>? = onClient {
-        val client = Microbot.getClient()
-        val definition = client.getNpcDefinition(npc.id)?.let { it.transform() ?: it } ?: return@onClient null
-        definition.actions?.filterNotNull()?.map(Text::removeTags)?.filter { it.isNotBlank() }
+        Microbot.getClient().getNpcDefinition(npc.id)?.actions?.filterNotNull()?.map(Text::removeTags)?.filter { it.isNotBlank() }
     }
 
     /** A breadth first search over the scene's collision map, in which a shut door is a wall. */

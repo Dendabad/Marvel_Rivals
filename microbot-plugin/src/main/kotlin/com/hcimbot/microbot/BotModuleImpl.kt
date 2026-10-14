@@ -81,7 +81,7 @@ class BotModuleImpl : BotModule {
     }
 
     companion object {
-        const val VERSION = "0.5.7"
+        const val VERSION = "0.5.8"
         private const val SIDEBAR_PRIORITY = 8
     }
 }

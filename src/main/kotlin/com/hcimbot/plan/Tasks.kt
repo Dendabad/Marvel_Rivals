@@ -467,6 +467,7 @@ class TravelTask(
     private var leg: Task? = null
     private var used = false
     private var waited = 0
+    private var optionFailures = 0
     override val description = "Travel to $place"
 
     override fun tick(ctx: TaskContext): TaskResult {
@@ -504,20 +505,23 @@ class TravelTask(
         var option = menuOption(departure.menuEntry, entity.name)
         // A first trip has no Travel option yet (Veos, before Great Kourend is unlocked): ask instead.
         val actions = if (kind == InteractTask.Kind.NPC) game.npcActions(entity) else null
-        if (actions != null && actions.none { it.equals(option, ignoreCase = true) } && actions.any { it.equals("Talk-to", true) }) {
-            ctx.log("${entity.name} has no $option option yet, talking to them instead")
+        val missing = actions != null && actions.none { it.equals(option, ignoreCase = true) } && actions.any { it.equals("Talk-to", true) }
+        // Or the option is there but the click keeps failing: talk instead all the same.
+        if (kind == InteractTask.Kind.NPC && (missing || optionFailures >= OPTION_TRIES) && !option.equals("Talk-to", true)) {
+            if (optionFailures == OPTION_TRIES || missing) ctx.log("${entity.name}'s $option option does not work here, talking to them instead")
             option = "Talk-to"
         }
         val started = when (kind) {
             InteractTask.Kind.OBJECT -> ctx.actions.interactObject(entity, option)
             InteractTask.Kind.NPC -> ctx.actions.interactNpc(entity, option)
         }
-        if (started) used = true
+        if (started) used = true else optionFailures++
         return attempt(started, "use ${entity.name}")
     }
 
     companion object {
         const val ARRIVED_TILES = 15
+        private const val OPTION_TRIES = 2
 
         /** Answers that agree to be taken somewhere. Agreeing is the point of a travel step. */
         private val GOING = Regex("^(i'd love to|i would love to|yes|sure|take me|can you take me|let's go|travel|okay,? let's)", RegexOption.IGNORE_CASE)
