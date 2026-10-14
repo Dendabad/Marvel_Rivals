@@ -20,6 +20,12 @@ sealed interface TaskResult {
 
     /** The task cannot carry on. The bot pauses and shows [reason]. */
     data class Failed(val reason: String) : TaskResult
+
+    /**
+     * An earlier guide step was never really done (its quest has not started),
+     * so this one cannot be. The bot goes back and does [stepId], then returns.
+     */
+    data class NeedsStep(val stepId: String, val reason: String) : TaskResult
 }
 
 /**
@@ -191,8 +197,9 @@ class InteractTask(
 /** Opens the nearest bank, optionally deposits everything, then withdraws what the step lists. */
 class BankTask(
     private val depositAll: Boolean,
-    private val withdraw: List<ItemRef>,
+    withdraw: List<ItemRef>,
 ) : BaseTask() {
+    private val withdraw = withdraw.map(ItemSources::widen)
     private var deposited = !depositAll
 
     /** Item id to ticks spent waiting for a withdrawal to show up. */
@@ -216,11 +223,21 @@ class BankTask(
             deposited = ctx.actions.depositAll()
             return attempt(deposited, "deposit everything")
         }
-        val next = missing(ctx).firstOrNull()
-        if (next == null) return attempt(ctx.actions.closeInterface(), "close the bank")
+        val missing = missing(ctx)
+        if (missing.isEmpty()) return attempt(ctx.actions.closeInterface(), "close the bank")
 
-        val id = next.ids.firstOrNull { game.bankCount(it) > 0 }
-            ?: return TaskResult.Failed("the bank has no ${next.name}")
+        // Take out everything the bank has before dealing with what it lacks.
+        val next = missing.firstOrNull { item -> item.ids.any { game.bankCount(it) > 0 } }
+        if (next == null) {
+            val lacking = missing.first()
+            val source = ItemSources.whenNotYetGiven(lacking.ids, ctx)
+            return if (source != null) {
+                TaskResult.NeedsStep(source.stepId, "the bank has no ${lacking.name}: ${source.why}")
+            } else {
+                TaskResult.Failed("the bank has no ${missing.joinToString { it.name }}")
+            }
+        }
+        val id = next.ids.first { game.bankCount(it) > 0 }
         val waited = requested[id]
         if (waited != null) {
             if (waited >= ARRIVAL_TICKS) return TaskResult.Failed("withdrew ${next.name} but it did not arrive in the inventory")

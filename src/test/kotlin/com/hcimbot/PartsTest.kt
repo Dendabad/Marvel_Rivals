@@ -129,6 +129,66 @@ class PartsTest {
         assertEquals(listOf("walk (3230, 3209, 0)", "item 952 Dig"), game.calls)
     }
 
+    private fun xMarksHelper(): com.hcimbot.guide.QuestHelper {
+        val talk = com.hcimbot.guide.Instruction(kind = "npc", text = "Talk to Veos.", ids = listOf(8484), dialogue = listOf("Yes."))
+        return com.hcimbot.guide.QuestHelper(
+            com.hcimbot.guide.QuestVar("varbit", 8063),
+            lastValue = 7,
+            steps = mapOf("0" to talk, "1" to talk, "6" to talk, "7" to talk),
+        )
+    }
+
+    @Test
+    fun `starting X Marks the Spot does not run ahead to the first dig`() {
+        // Step 7 run again once the quest has started: its part is done, and the dig is step 18's.
+        val game = FakeGame()
+        game.inv[com.hcimbot.plan.DigTask.SPADE] = 1
+        game.varbits[8063] = 2
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.QuestTask("xmarksthespot", xMarksHelper(), allowCombat = false, boundedTo = setOf(8484))
+        assertEquals(com.hcimbot.plan.TaskResult.Done, task.tick(ctx))
+        assertTrue(game.calls.isEmpty(), game.calls.toString())
+    }
+
+    @Test
+    fun `finishing X Marks the Spot does the last dig first if it is owed`() {
+        val game = FakeGame()
+        game.inv[com.hcimbot.plan.DigTask.SPADE] = 1
+        game.varbits[8063] = 5
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.QuestTask(
+            "xmarksthespot", xMarksHelper(), allowCombat = false, boundedTo = setOf(8484), finishesQuest = true,
+        )
+        task.tick(ctx)
+        assertEquals(listOf("walk (3078, 3259, 0)"), game.calls)
+    }
+
+    @Test
+    fun `withdrawing the treasure scroll takes whichever clue item the quest is on`() {
+        val game = FakeGame()
+        game.varbits[8063] = 3
+        game.bank[23069] = 1 // the mysterious orb the first dig swapped the scroll for
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.BankTask(false, listOf(com.hcimbot.guide.ItemRef("Treasure Scroll", listOf(23067, 23068, 23070))))
+        repeat(6) { task.tick(ctx) }
+        assertEquals(1, game.inv[23069])
+    }
+
+    @Test
+    fun `a treasure scroll missing because the quest never started sends the bot back to step 7`() {
+        val game = FakeGame()
+        game.bank[995] = 100
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.BankTask(
+            false,
+            listOf(com.hcimbot.guide.ItemRef("Treasure Scroll", listOf(23067)), com.hcimbot.guide.ItemRef("Coins", listOf(995))),
+        )
+        var result: com.hcimbot.plan.TaskResult = com.hcimbot.plan.TaskResult.Running
+        repeat(8) { if (result == com.hcimbot.plan.TaskResult.Running) result = task.tick(ctx) }
+        assertEquals(100, game.inv[995], "takes out what the bank has first")
+        assertTrue(result is com.hcimbot.plan.TaskResult.NeedsStep && result.stepId == "e2deed373e", result.toString())
+    }
+
     @Test
     fun `quest objects with only a RuneLite name are looked up`() {
         val game = FakeGame()

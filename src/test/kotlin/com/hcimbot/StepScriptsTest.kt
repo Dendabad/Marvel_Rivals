@@ -32,7 +32,7 @@ class StepScriptsTest {
             val task = auto.tasks.getOrNull(index) ?: return TaskResult.Done
             when (val result = task.tick(ctx)) {
                 TaskResult.Done -> index++
-                is TaskResult.Failed -> return result
+                is TaskResult.Failed, is TaskResult.NeedsStep -> return result
                 TaskResult.Running -> Unit
             }
         }
@@ -183,7 +183,7 @@ class HansScriptTest {
             val task = auto.tasks.getOrNull(index) ?: return TaskResult.Done
             when (val result = task.tick(ctx)) {
                 TaskResult.Done -> index++
-                is TaskResult.Failed -> return result
+                is TaskResult.Failed, is TaskResult.NeedsStep -> return result
                 TaskResult.Running -> Unit
             }
         }

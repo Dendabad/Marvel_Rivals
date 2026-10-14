@@ -139,7 +139,7 @@ class HcimGuideBotPlugin : Plugin() {
     }
 
     companion object {
-        const val VERSION = "0.2.4"
+        const val VERSION = "0.2.5"
 
         /** The jar name Microbot needs for this plugin. Any other name is a stray copy. */
         private const val JAR = "HcimGuideBotPlugin.jar"

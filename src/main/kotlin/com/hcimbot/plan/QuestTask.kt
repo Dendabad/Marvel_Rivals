@@ -28,6 +28,12 @@ class QuestTask(
     private val boundedTo: Set<Int>? = null,
     /** Done once the quest's progress value reaches this, for a step script that covers a known stretch. */
     private val stopAtValue: Int? = null,
+    /**
+     * For the step that finishes a quest ("talk to Veos to complete X Marks the
+     * Spot"): do any filled in part still owed on the way, like the last dig.
+     * Any other bounded step leaves those to the steps the guide gives them.
+     */
+    private val finishesQuest: Boolean = false,
 ) : Task {
     private var startValue: Int? = null
     private var current: Instruction? = null
@@ -57,7 +63,11 @@ class QuestTask(
             val ours = chosen.ids.any { it in boundedTo } ||
                 (chosen === instruction && stairBranch(instruction)?.ids?.any { it in boundedTo } == true)
             if (value > start && (boundedTo.isEmpty() || !ours)) return TaskResult.Done
-            // A filled in step, like a dig, has to be done on the way to the step's part.
+            if (fill != null && !ours && !finishesQuest) {
+                // A dig or similar belongs to a later guide step, so this step's part is behind us.
+                // Doing it here would run ahead of the guide, e.g. dig away the scroll step 14 banks.
+                return TaskResult.Done
+            }
             if (value == start && boundedTo.isNotEmpty() && !ours && current == null && fill == null) {
                 return TaskResult.Failed("the guide step is about ids $boundedTo but the quest is at \"${chosen.text}\"")
             }

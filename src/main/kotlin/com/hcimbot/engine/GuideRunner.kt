@@ -61,6 +61,10 @@ class GuideRunner(
     /** Steps before this index count as done for this session, see [restartAt]. */
     private var floor = 0
 
+    /** Earlier steps found undone, run before carrying on. See [TaskResult.NeedsStep]. */
+    private val detours = ArrayDeque<Step>()
+    private val detoured = mutableSetOf<String>()
+
     /** The step [restartAt] began at. It runs even if it is ticked in the plugin, until the bot finishes it. */
     private var redo: String? = null
 
@@ -195,6 +199,7 @@ class GuideRunner(
                 TaskResult.Running -> Unit
                 TaskResult.Done -> current.taskIndex++
                 is TaskResult.Failed -> pause(step, "${task.description}: ${result.reason}")
+                is TaskResult.NeedsStep -> goBack(step, result)
             }
             return
         }
@@ -214,7 +219,19 @@ class GuideRunner(
         }
     }
 
+    /** Does an earlier step first, then this one again. Only once per earlier step, so it cannot loop. */
+    private fun goBack(step: Step, need: TaskResult.NeedsStep) {
+        val earlier = guide.steps.firstOrNull { it.id == need.stepId }
+        if (earlier == null || earlier.id == step.id || !detoured.add(earlier.id)) {
+            return pause(step, need.reason)
+        }
+        detours.addFirst(earlier)
+        active = null
+        log("Going back to step ${guide.steps.indexOf(earlier) + 1} first, since ${need.reason}")
+    }
+
     private fun nextStep(): Step? {
+        detours.firstOrNull()?.let { return it }
         val done = completedIds()
         return guide.steps.drop(floor).firstOrNull { it.id !in done }
     }
@@ -229,6 +246,7 @@ class GuideRunner(
 
     private fun markDone(step: Step, why: String) {
         if (step.id == redo) redo = null
+        detours.remove(step)
         progress.markComplete(step.id)
         active = null
         log("Done ($why): ${step.text}")

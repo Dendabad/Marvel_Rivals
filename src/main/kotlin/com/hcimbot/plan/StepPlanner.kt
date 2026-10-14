@@ -123,7 +123,7 @@ class StepPlanner(
         // "Talk to Noah" where Quest Helper says to start with Alina: trust the guide.
         if (ids.isNotEmpty() && !mentioned) return null
         return StepPlan.Auto(
-            listOf(QuestTask(key, helper, settings.allowCombat, boundedTo = ids)),
+            listOf(QuestTask(key, helper, settings.allowCombat, boundedTo = ids, finishesQuest = step.questCompletes)),
             trustTasks = true,
             combat = settings.allowCombat,
         )
