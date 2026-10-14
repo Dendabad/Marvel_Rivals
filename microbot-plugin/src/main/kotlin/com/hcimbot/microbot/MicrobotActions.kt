@@ -7,6 +7,7 @@ import com.hcimbot.microbot.MicrobotGameState.Companion.onClient
 import net.runelite.api.coords.WorldPoint
 import net.runelite.client.plugins.microbot.Microbot
 import net.runelite.client.plugins.microbot.util.bank.Rs2Bank
+import net.runelite.client.plugins.microbot.util.bank.enums.BankLocation
 import net.runelite.client.plugins.microbot.util.dialogues.Rs2Dialogue
 import net.runelite.client.plugins.microbot.util.equipment.Rs2Equipment
 import net.runelite.client.plugins.microbot.util.inventory.Rs2Inventory
@@ -76,7 +77,22 @@ class MicrobotActions : GameActions {
 
     override fun chooseDialogOption(text: String): Boolean = Rs2Dialogue.keyPressForDialogueOption(text, true)
 
-    override fun openNearestBank(): Boolean = Rs2Bank.openBank() || Rs2Bank.walkToBankAndUseBank()
+    /**
+     * Microbot's "nearest bank" is the end of the shortest route counting boats and teleports, so from
+     * Port Sarim it picked Land's End in Kourend by way of Veos's ship. Choose by distance on the map
+     * instead, among banks the player may use, and walk to that one.
+     */
+    override fun openNearestBank(): Boolean {
+        if (Rs2Bank.openBank()) return true
+        val chosen = onClient { Rs2Player.getWorldLocation()?.let { here -> closestBank(here) } }
+        return if (chosen != null) Rs2Bank.walkToBankAndUseBank(chosen) else Rs2Bank.walkToBankAndUseBank()
+    }
+
+    private fun closestBank(here: WorldPoint): BankLocation? =
+        BankLocation.values()
+            .filter { it.worldPoint.plane == here.plane && it.hasRequirements() }
+            .minByOrNull { it.worldPoint.distanceTo2D(here) }
+            ?.takeIf { it.worldPoint.distanceTo2D(here) <= MAX_BANK_DISTANCE }
 
     override fun depositAll(): Boolean = Rs2Bank.depositAll()
 
@@ -173,6 +189,9 @@ class MicrobotActions : GameActions {
 
     companion object {
         private const val ARRIVE_WITHIN = 2
+
+        /** A bank further than this is left to Microbot's own choice, which may use transport. */
+        private const val MAX_BANK_DISTANCE = 250
         private const val SELECT_MS = 1_500L
         private const val POLL_MS = 50L
 
