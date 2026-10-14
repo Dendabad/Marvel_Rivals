@@ -4,6 +4,8 @@ import com.hcimbot.game.GameActions
 import com.hcimbot.game.GameState
 import com.hcimbot.guide.Guide
 import com.hcimbot.guide.Step
+import com.hcimbot.plan.AgilityCourse
+import com.hcimbot.plan.AgilityCourseTask
 import com.hcimbot.plan.StepPlan
 import com.hcimbot.plan.StepPlanner
 import com.hcimbot.plan.Task
@@ -210,9 +212,36 @@ class GuideRunner(
         return stuckIn
     }
 
+    /** Set while getting the player down off an agility course before a step that is not about it. */
+    private var gettingDown: AgilityCourseTask? = null
+
+    /**
+     * On an agility course's rooftops, no other step can do anything: the walker
+     * cannot path down, and falls back on teleports. Finish the lap first. True
+     * while that is still going on.
+     */
+    private fun offRooftopsFirst(step: Step, task: Task?): Boolean {
+        val course = AgilityCourse.rooftopsAt(game.playerTile)
+        if (course == null || task is AgilityCourseTask) {
+            gettingDown = null
+            return false
+        }
+        val down = gettingDown ?: AgilityCourseTask(course).also {
+            gettingDown = it
+            log("On the ${course.name} rooftops, finishing the lap to get down first")
+        }
+        if (down.canStopHere(context)) return false
+        when (val result = down.tick(context)) {
+            is TaskResult.Failed -> pause(step, "getting down off the ${course.name}: ${result.reason}")
+            else -> Unit
+        }
+        return true
+    }
+
     private fun runTasks(current: Active, plan: StepPlan.Auto) {
         val step = current.step
         val task: Task? = plan.tasks.getOrNull(current.taskIndex)
+        if (offRooftopsFirst(step, task)) return
         if (task != null) {
             when (val result = task.tick(context)) {
                 TaskResult.Running -> Unit

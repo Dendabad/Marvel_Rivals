@@ -169,6 +169,16 @@ class GuideRunnerTest {
     }
 
     @Test
+    fun `stuck on the agility rooftops, the bot finishes the lap before the next step`() {
+        val runner = runner(done = allBefore("walk"))
+        game.playerTile = Tile(3090, 3275, 3) // on the Draynor course, before the second tightrope
+        game.objects += SceneEntity(11406, "Tightrope", Tile(3092, 3276, 3))
+        runner.ticks(1)
+        assertEquals(listOf("object Tightrope null"), game.calls)
+        assertTrue(log.any { "finishing the lap to get down first" in it }, log.toString())
+    }
+
+    @Test
     fun `a paused step the player then does is ticked and the bot carries on`() {
         // The bank has neither item, so the bot pauses. The player gets them some other way.
         val runner = runner(done = allBefore("bank"))

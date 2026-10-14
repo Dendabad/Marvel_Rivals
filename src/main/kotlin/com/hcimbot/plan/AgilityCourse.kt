@@ -25,7 +25,7 @@ class AgilityCourse(val name: String, val obstacles: List<Obstacle>) {
     val start: Obstacle get() = obstacles.first()
 
     /** Every rooftop area, with a few tiles to spare for the landing spots between them. */
-    private val rooftops: Area by lazy {
+    val rooftops: Area by lazy {
         val areas = obstacles.mapNotNull { it.from }
         Area(
             areas.minOf { it.minX } - MARGIN, areas.minOf { it.minY } - MARGIN,
@@ -46,6 +46,11 @@ class AgilityCourse(val name: String, val obstacles: List<Obstacle>) {
 
     companion object {
         private const val MARGIN = 3
+
+        /** The course whose rooftops the player is on, if any. Off the ground only. */
+        fun rooftopsAt(at: Tile?): AgilityCourse? = at?.takeIf { it.plane > 0 }?.let { tile -> ALL.firstOrNull { tile in it.rooftops } }
+
+        val ALL: List<AgilityCourse> by lazy { listOf(DRAYNOR) }
 
         /** Quest Helper's DraynorVillage: object ids from RuneLite's gameval ObjectID. */
         val DRAYNOR = AgilityCourse(
