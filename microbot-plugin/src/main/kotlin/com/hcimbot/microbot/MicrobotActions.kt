@@ -113,6 +113,22 @@ class MicrobotActions : GameActions {
         return true
     }
 
+    /** Picks All in the make window, then presses Space for the first item. Keys go through Microbot's keyboard helper, found by name. */
+    override fun makeAll(): Boolean {
+        val bounds = onClient { MicrobotGameState.widgetInWindow("What would you like to make", "All")?.bounds }
+        if (bounds != null) {
+            Microbot.getMouse().click(bounds)
+            Thread.sleep(MAKE_PAUSE_MS)
+        }
+        return runCatching {
+            val keyboard = Class.forName("net.runelite.client.plugins.microbot.util.keyboard.Rs2Keyboard")
+            val press = keyboard.methods.firstOrNull { it.name == "keyPress" && it.parameterTypes.singleOrNull() == Char::class.javaPrimitiveType }
+            if (press != null) press.invoke(null, ' ')
+            else keyboard.getMethod("keyPress", Int::class.javaPrimitiveType).invoke(null, java.awt.event.KeyEvent.VK_SPACE)
+            true
+        }.getOrDefault(false)
+    }
+
     /**
      * Clicks the Close button of the open window (a book, say), found as a visible widget whose action is
      * "Close". Falls back to Escape, by name since Microbot's keyboard helper is not in the stub used to build.
@@ -227,6 +243,7 @@ class MicrobotActions : GameActions {
         private const val MAX_BANK_DISTANCE = 250
         private const val SELECT_MS = 1_500L
         private const val POLL_MS = 50L
+        private const val MAKE_PAUSE_MS = 400L
 
         /** How far an entity may have moved from where the bot saw it a moment ago. */
         private const val RELOCATE = 8

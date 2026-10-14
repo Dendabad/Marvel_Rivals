@@ -159,6 +159,9 @@ interface GameActions {
     fun withdraw(itemId: Int, quantity: Int): Boolean
     fun closeInterface(): Boolean
 
+    /** In a "What would you like to make?" window: picks the All quantity, then the first item (Space). */
+    fun makeAll(): Boolean = false
+
     /** Closes an open book or other window: its Close button, or Escape. False when nothing could be done. */
     fun closeWindow(): Boolean = false
 

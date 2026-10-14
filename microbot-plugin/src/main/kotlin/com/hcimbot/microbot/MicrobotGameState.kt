@@ -280,6 +280,21 @@ class MicrobotGameState : GameState {
             return Microbot.getClient().widgetRoots?.firstNotNullOfOrNull { visit(it) }
         }
 
+        /** The visible widget whose text is [target], in the same window as the widget showing [anchor]. Client thread. */
+        fun widgetInWindow(anchor: String, target: String): net.runelite.api.widgets.Widget? {
+            var root = widgetWhere { it.contains(anchor, ignoreCase = true) } ?: return null
+            while (root.parent != null) root = root.parent
+            fun visit(w: net.runelite.api.widgets.Widget?): net.runelite.api.widgets.Widget? {
+                if (w == null || w.isHidden) return null
+                if (Text.removeTags(w.text.orEmpty()).trim().equals(target, ignoreCase = true)) return w
+                for (group in listOf(w.dynamicChildren, w.staticChildren, w.nestedChildren)) {
+                    group?.forEach { child -> visit(child)?.let { return it } }
+                }
+                return null
+            }
+            return visit(root)
+        }
+
         /** The first visible widget with a [action] option, like a window's Close button. Client thread. */
         fun widgetWithAction(action: String): net.runelite.api.widgets.Widget? {
             fun visit(w: net.runelite.api.widgets.Widget?): net.runelite.api.widgets.Widget? {

@@ -738,3 +738,76 @@ class HelperObjectsTask(private val wanted: Regex, private val quest: String, pr
         return TaskResult.Running
     }
 }
+
+
+/**
+ * Fletches [target] arrow shafts from logs picked up in the Lumber Yard: takes the logs lying about, uses the knife
+ * on them, and picks All and the first item in the make window. With no logs left in sight it hops worlds, where
+ * the piles are back. Pauses if it makes no progress for a long time.
+ */
+class FletchShaftsTask(
+    private val target: Int = 2100,
+    private val knife: Int = KNIFE,
+    private val logs: Int = LOGS,
+    private val shaft: Int = ARROW_SHAFT,
+) : BaseTask() {
+    override val description = "Fletch $target arrow shafts"
+    private var settling = 0
+    private var noLogs = 0
+    private var hopWait = 0
+    private var lastShafts = -1
+    private var stalled = 0
+    private var hops = 0
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        val made = ctx.conditions.count(listOf(shaft)).toInt()
+        if (made >= target) return TaskResult.Done
+        if (made != lastShafts) { lastShafts = made; stalled = 0 } else if (++stalled > STALL_TICKS) {
+            return TaskResult.Failed("made no arrow shafts for $STALL_TICKS ticks, stuck at $made of $target")
+        }
+        if (hopWait > 0) { hopWait--; return TaskResult.Running }
+        if (settling > 0) { settling--; return TaskResult.Running }
+        if (game.isBusy || game.isBankOpen || game.isShopOpen) return TaskResult.Running
+        if (game.showsChoice("What would you like to make?")) {
+            ctx.actions.makeAll()
+            settling = 3
+            return TaskResult.Running
+        }
+        if (knife !in game.inventory()) return TaskResult.Failed("no knife to fletch with")
+
+        val held = game.inventory()[logs] ?: 0
+        val at = game.playerTile ?: return TaskResult.Running
+        val ground = game.nearestGroundItem(listOf(logs))?.takeIf { !it.tile.inWilderness && it.tile.distanceTo(at) <= YARD_REACH }
+        // Fletch a full handful, or what there is once the piles are gone.
+        if (held >= HANDFUL || (held > 0 && ground == null)) {
+            noLogs = 0
+            ctx.actions.useItemOnItem(knife, logs)
+            settling = 3
+            return TaskResult.Running
+        }
+        if (ground != null) {
+            noLogs = 0
+            return attempt(ctx.actions.takeGroundItem(ground), "take logs")
+        }
+        // No logs lying in sight: a moment in case one is being picked up, then another world.
+        if (++noLogs < NO_LOGS_TICKS) return TaskResult.Running
+        noLogs = 0
+        hops++
+        ctx.log("No logs left here, hopping worlds ($made of $target shafts, hop $hops)")
+        ctx.actions.hopWorld()
+        hopWait = HOP_TICKS
+        return TaskResult.Running
+    }
+
+    companion object {
+        const val KNIFE = 946
+        const val LOGS = 1511
+        const val ARROW_SHAFT = 52
+        const val HANDFUL = 12
+        const val YARD_REACH = 30
+        const val NO_LOGS_TICKS = 6
+        const val HOP_TICKS = 12
+        const val STALL_TICKS = 400
+    }
+}

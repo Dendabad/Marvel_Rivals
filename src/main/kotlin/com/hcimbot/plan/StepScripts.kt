@@ -449,11 +449,17 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
-        // 104. "Collect the Logs & fletch 2,100 Arrowshafts (hop between 2 worlds)": 2,100 shafts is about 140 logs, picked
-        // up in the Lumber Yard and fletched with a knife, hopping worlds for more. Not automated yet, so it stops
-        // rather than being passed over as done.
+        // 104. "Collect the Logs & fletch 2,100 Arrowshafts (hop between 2 worlds)": 2,100 shafts is about 140 logs, from
+        // the piles in the Lumber Yard, fletched with the knife, hopping worlds when the piles are gone.
         "acc8776385" to { _ ->
-            StepPlan.Manual("fletching 2,100 arrow shafts (about 140 logs from the Lumber Yard, hopping between 2 worlds) is not automated yet. Do it, then press Skip")
+            StepPlan.Auto(
+                listOf(
+                    WalkTask(SAWMILL, radius = 10),
+                    FletchShaftsTask(),
+                ),
+                trustTasks = true,
+                patient = true,
+            )
         },
 
         // 105. "Collect 11 Logs & make 10 into Planks. Make the 3 Waxwood Planks.": back over the broken fence first

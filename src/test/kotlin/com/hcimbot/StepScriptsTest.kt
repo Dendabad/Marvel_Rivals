@@ -249,6 +249,28 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `fletching takes logs, uses the knife, then hops when none are left`() {
+        val game = FakeGame().apply {
+            playerTile = Tile(3302, 3495, 0)
+            inv[946] = 1
+            groundItems += SceneEntity(1511, "Logs", Tile(3303, 3495, 0))
+        }
+        val ctx = TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.FletchShaftsTask(target = 15)
+        task.tick(ctx)
+        assertTrue(game.calls.any { it.startsWith("take Logs") }, game.calls.toString())
+        game.groundItems.clear()
+        game.inv[1511] = 3
+        task.tick(ctx)
+        assertTrue(game.calls.any { it == "use 946 on 1511" }, game.calls.toString())
+        game.inv.remove(1511)
+        repeat(20) { task.tick(ctx) }
+        assertTrue(game.calls.contains("hop"), game.calls.toString())
+        game.inv[52] = 15
+        assertEquals(com.hcimbot.plan.TaskResult.Done, task.tick(ctx))
+    }
+
+    @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
         val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()
