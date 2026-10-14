@@ -3,7 +3,13 @@ package com.hcimbot.game
 import com.hcimbot.guide.Tile
 
 /** An NPC or object in the loaded scene. */
-data class SceneEntity(val id: Int, val name: String, val tile: Tile)
+data class SceneEntity(
+    val id: Int,
+    val name: String,
+    val tile: Tile,
+    /** The game's index for this one NPC, to tell it from others of its kind. -1 when not known. */
+    val index: Int = -1,
+)
 
 /**
  * Everything the bot reads from the game. Each member maps onto RuneLite's
@@ -45,6 +51,9 @@ interface GameState {
      */
     fun nearestNpc(ids: Collection<Int>, names: Collection<String> = emptyList(), near: Tile? = null): SceneEntity?
     fun nearestObject(ids: Collection<Int>, names: Collection<String> = emptyList(), near: Tile? = null): SceneEntity?
+
+    /** True while [npc] (the very same one) is still alive. Null when the game cannot say. */
+    fun npcAlive(npc: SceneEntity): Boolean? = null
 
     /** Where NPCs called [name] spawn, from Microbot's NPC location data. Empty when unknown. */
     fun npcSpawns(name: String): List<Tile> = emptyList()

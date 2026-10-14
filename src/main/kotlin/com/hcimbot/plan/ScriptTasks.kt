@@ -1,5 +1,6 @@
 package com.hcimbot.plan
 
+import com.hcimbot.game.SceneEntity
 import com.hcimbot.guide.ItemRef
 import com.hcimbot.guide.Tile
 import com.hcimbot.route.RouteRecorder
@@ -85,6 +86,9 @@ class DigTask(val tile: Tile) : BaseTask() {
  * spawns, waits a little, then tries the next nearest. Only spots close by and
  * outside the Wilderness count, so it never wanders off across the map.
  */
+private const val RECAST_TICKS = 5
+private const val MAX_CASTS = 20
+
 class Hunt(private val names: List<String>, private val lookFirst: List<Tile> = emptyList()) {
     private val tried = mutableListOf<Tile>()
     private var walk: WalkTask? = null
@@ -249,6 +253,9 @@ class KillTask(
 ) : BaseTask() {
     private var kills = 0
     private var fighting = false
+    private var target: SceneEntity? = null
+    private var sinceCast = 0
+    private var casts = 0
     private var take: TakeItemTask? = null
     private val hunt = Hunt(npcNames, listOfNotNull(lookFirst))
     override val description = "Kill ${npcNames.firstOrNull() ?: npcIds} for ${loot.joinToString { it.name }}"
@@ -265,8 +272,22 @@ class KillTask(
         }
         if (missing.isEmpty() && !fighting) return TaskResult.Done
         if (fighting) {
-            if (game.isInCombat || game.isBusy) return TaskResult.Running
+            if (game.isBusy) return TaskResult.Running
+            val fought = target
+            when (fought?.let(game::npcAlive)) {
+                true -> {
+                    // A melee fight carries on by itself, but without autocast every spell is a click.
+                    val spellName = spell ?: return TaskResult.Running
+                    if (++sinceCast < RECAST_TICKS) return TaskResult.Running
+                    if (++casts > MAX_CASTS) return TaskResult.Failed("cast $casts times and the ${fought.name} is still alive")
+                    sinceCast = 0
+                    return attempt(ctx.actions.castOnNpc(spellName, fought), "cast on ${fought.name}")
+                }
+                null -> if (game.isInCombat) return TaskResult.Running
+                false -> Unit
+            }
             fighting = false
+            target = null
             kills++
             take = TakeItemTask(missing)
             return TaskResult.Running
@@ -276,7 +297,12 @@ class KillTask(
         val target = game.nearestNpc(npcIds, npcNames) ?: return hunt.tick(ctx)
         hunt.found()
         val started = if (spell != null) ctx.actions.castOnNpc(spell, target) else ctx.actions.interactNpc(target, "Attack")
-        if (started) fighting = true
+        if (started) {
+            fighting = true
+            this.target = target
+            sinceCast = 0
+            casts = 1
+        }
         return attempt(started, "attack ${target.name}")
     }
 }

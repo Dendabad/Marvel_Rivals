@@ -211,6 +211,32 @@ class PartsTest {
     }
 
     @Test
+    fun `wind strike is cast again and again until the rat dies`() {
+        val ratAt = Tile(3223, 3218, 0)
+        val rat = com.hcimbot.game.SceneEntity(2510, "Giant rat", ratAt, index = 7)
+        val game = FakeGame()
+        game.npcs += rat
+        var casts = 0
+        game.onNpcInteract = { _, _ ->
+            // Three hits kill it, and it drops its bones.
+            if (++casts == 3) {
+                game.npcs.remove(rat)
+                game.groundItems += com.hcimbot.game.SceneEntity(526, "Bones", ratAt)
+            }
+        }
+        game.alive = { npc -> npc.index == 7 && rat in game.npcs }
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.KillTask(
+            emptyList(), listOf("Giant rat"), listOf(com.hcimbot.guide.ItemRef("Bones", listOf(526))), spell = "WIND_STRIKE",
+        )
+        var result: com.hcimbot.plan.TaskResult = com.hcimbot.plan.TaskResult.Running
+        repeat(60) { if (result == com.hcimbot.plan.TaskResult.Running) result = task.tick(ctx) }
+        assertEquals(com.hcimbot.plan.TaskResult.Done, result)
+        assertEquals(3, game.calls.count { it == "cast WIND_STRIKE on Giant rat" }, game.calls.toString())
+        assertEquals(1, game.inv[526])
+    }
+
+    @Test
     fun `step 19 looks for rats behind Lumbridge castle first`() {
         val game = FakeGame()
         game.playerTile = Tile(3230, 3209, 0)

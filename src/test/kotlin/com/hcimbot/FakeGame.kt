@@ -77,6 +77,10 @@ class FakeGame : GameState, GameActions {
         return true
     }
 
+    /** Lets a test say whether an NPC still lives. Unset, the game "cannot say", as some clients cannot. */
+    var alive: ((SceneEntity) -> Boolean?)? = null
+    override fun npcAlive(npc: SceneEntity): Boolean? = alive?.invoke(npc)
+
     val spawns = mutableMapOf<String, List<Tile>>()
     override fun npcSpawns(name: String): List<Tile> = spawns[name.lowercase()].orEmpty()
 

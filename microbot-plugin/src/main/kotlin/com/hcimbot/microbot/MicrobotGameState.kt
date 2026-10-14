@@ -124,7 +124,16 @@ class MicrobotGameState : GameState {
         val query = Microbot.getRs2NpcCache().query()
         val found = if (ids.isNotEmpty()) query.withIds(*ids.toIntArray()) else query.withNames(*names.toTypedArray())
         val nearest = if (near != null) found.nearest(near.toWorldPoint(), SEARCH_RADIUS) else found.nearest(SEARCH_RADIUS)
-        nearest?.let { entity(it.id, it.name, it.worldLocation) }
+        nearest?.let { entity(it.id, it.name, it.worldLocation)?.copy(index = it.index) }
+    }
+
+    /** Found again by its index. Gone, dead or at 0 health all count as killed. */
+    override fun npcAlive(npc: SceneEntity): Boolean? {
+        if (npc.index < 0) return null
+        return onClient {
+            val found = Microbot.getRs2NpcCache().query().where { it.index == npc.index }.first()
+            found != null && !found.npc.isDead && found.healthPercentage != 0.0
+        }
     }
 
     override fun npcSpawns(name: String): List<Tile> = spawns[name.lowercase()].orEmpty()
