@@ -637,6 +637,18 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
             ctx.actions.walkTo(ground.tile)
             return TaskResult.Running
         }
+        // A door has been opened for it: walk right up to the item, through the doorway, before clicking it, or the click
+        // is made from outside, through the wall. Opening it again straight away would shut it, so walking comes first,
+        // for a while, before another door is tried.
+        if (doorTries > 0 && at.distanceTo(ground.tile) > CLOSE && walkTicks < WALK_TICKS) {
+            walkTicks++
+            val inside = inside?.takeIf { it.tile == ground.tile } ?: WalkTask(ground.tile, radius = 1).also { inside = it }
+            return when (val walked = inside.tick(ctx)) {
+                TaskResult.Done -> { this.inside = null; TaskResult.Running }
+                else -> walked
+            }
+        }
+        walkTicks = 0
         // The walker did not get through, or the map says the item is reachable when a shut door is in the way (it does
         // for some doors): open the door nearest the item ourselves, a few times. Clicks on the item that have not
         // brought it in count as the sign that something is in the way.
@@ -653,15 +665,6 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
                 return TaskResult.Running
             }
         }
-        // A door has been opened for it: walk right up to the item, through the doorway, before clicking it, or the
-        // click is made from outside, through the wall.
-        if (doorTries > 0 && at.distanceTo(ground.tile) > CLOSE) {
-            val inside = inside?.takeIf { it.tile == ground.tile } ?: WalkTask(ground.tile, radius = 1).also { inside = it }
-            return when (val walked = inside.tick(ctx)) {
-                TaskResult.Done -> { this.inside = null; TaskResult.Running }
-                else -> walked
-            }
-        }
         clicks++
         return attempt(ctx.actions.takeGroundItem(ground), "take ${next.name}")
     }
@@ -670,11 +673,13 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
     private var clicks = 0
     private var lastHeld = -1L
     private var inside: WalkTask? = null
+    private var walkTicks = 0
 
     companion object {
         const val MAX_APPROACHES = 3
         const val CLICKS_BEFORE_DOOR = 3
         const val CLOSE = 2
+        const val WALK_TICKS = 25
         const val MAX_DOOR_TRIES = 3
         const val DOOR_RANGE = 8
         const val REACH = 15
