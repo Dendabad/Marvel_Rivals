@@ -408,6 +408,26 @@ class PartsTest {
     private val log = mutableListOf<String>()
 
     @Test
+    fun `each obstacle is clicked the moment the player lands, without waiting for the animation`() {
+        val course = com.hcimbot.plan.AgilityCourse.DRAYNOR
+        val game = FakeGame()
+        game.playerTile = Tile(3104, 3277, 0)
+        course.obstacles.forEach { game.objects += com.hcimbot.game.SceneEntity(it.objectId, it.name, it.tile) }
+        val landings = mapOf(
+            11404 to Tile(3099, 3279, 3), 11405 to Tile(3090, 3275, 3), 11406 to Tile(3091, 3266, 3),
+            11430 to Tile(3088, 3258, 3), 11630 to Tile(3090, 3254, 3), 11631 to Tile(3098, 3258, 3), 11632 to Tile(3103, 3261, 0),
+        )
+        game.onObjectInteract = { obj, _ ->
+            game.playerTile = landings.getValue(obj.id)
+            game.isBusy = true // still playing the landing animation
+        }
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.AgilityCourseTask(course)
+        repeat(7) { task.tick(ctx) }
+        assertEquals(7, game.calls.count { it.startsWith("object") }, game.calls.toString())
+    }
+
+    @Test
     fun `upstairs in a house next to the course, the bot walks to the start`() {
         val course = com.hcimbot.plan.AgilityCourse.DRAYNOR
         // Morgan's house, first floor, where step 35 ends.

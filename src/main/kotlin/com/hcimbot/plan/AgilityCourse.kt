@@ -74,25 +74,35 @@ class AgilityCourseTask(private val course: AgilityCourse, private val maxLaps: 
     private var waited = 0
     private var sinceClick = 0
     private var startTries = 0
+    private var clickedWhileBusy = false
+    private var sinceMark = MARK_TICKS
     private var walk: WalkTask? = null
     override val description = "Run laps of the ${course.name}"
 
     override fun tick(ctx: TaskContext): TaskResult {
         val game = ctx.game
         sinceClick++
-        if (game.isBusy) return TaskResult.Running
+        sinceMark++
         val at = game.playerTile ?: return TaskResult.Running
+        val next = course.next(at)
+        // Just landed by the next obstacle: click it now, as a player would. The game
+        // runs the click as soon as the landing animation ends, so there is no pause.
+        val landed = next != null && next !== lastObstacle
+        // A click made mid-animation can be dropped. Once idle on the same obstacle, click again.
+        val dropped = next != null && next === lastObstacle && clickedWhileBusy && !game.isBusy
+        if (game.isBusy && !landed) return TaskResult.Running
 
         // A mark of grace on the same roof is worth the few steps.
-        if (at.plane > 0) {
+        if (at.plane > 0 && sinceMark >= MARK_TICKS) {
             game.nearestGroundItem(listOf(MARK_OF_GRACE))?.takeIf { it.tile.plane == at.plane && it.tile.distanceTo(at) <= 6 }?.let {
                 ctx.log("Picking up a Mark of grace")
+                sinceMark = 0
+                lastObstacle = null
                 return attempt(ctx.actions.takeGroundItem(it), "pick up the Mark of grace")
             }
         }
 
         if (at.plane > 0) startTries = 0
-        val next = course.next(at)
         if (next == null) {
             // Landing from a jump: give it a moment before deciding where we are.
             if (++waited < SETTLE_TICKS) return TaskResult.Running
@@ -119,7 +129,7 @@ class AgilityCourseTask(private val course: AgilityCourse, private val maxLaps: 
         }
         walk = null
         // Still on the obstacle just clicked: the run up to it may not have started yet.
-        if (next === lastObstacle && sinceClick < RECLICK_TICKS) return TaskResult.Running
+        if (next === lastObstacle && sinceClick < RECLICK_TICKS && !dropped) return TaskResult.Running
         val obstacle = game.nearestObject(listOf(next.objectId), emptyList(), next.tile)
             ?: return TaskResult.Failed("cannot see the ${next.name} on the ${course.name}")
         if (next === course.start && ++startTries > START_TRIES) {
@@ -127,6 +137,7 @@ class AgilityCourseTask(private val course: AgilityCourse, private val maxLaps: 
         }
         lastObstacle = next
         sinceClick = 0
+        clickedWhileBusy = game.isBusy
         return attempt(ctx.actions.interactObject(obstacle, null), "use the ${next.name}")
     }
 
@@ -136,5 +147,6 @@ class AgilityCourseTask(private val course: AgilityCourse, private val maxLaps: 
         const val RECLICK_TICKS = 6
         const val START_TRIES = 4
         const val NEAR = 12
+        const val MARK_TICKS = 3
     }
 }
