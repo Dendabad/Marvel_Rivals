@@ -1,49 +1,78 @@
-HCIM Guide Bot 0.15.2, PAUSED
+HCIM Guide Bot 0.15.3, PAUSED
 == Step
 Step 119 of 2925: Collect 1 Sweetcorn [Recipe for Disaster]
-Detail: Take Sweetcorn: cannot see Sweetcorn nearby. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Detail: Pick sweetcorn: reached (1574, 3139, 0) but Sweetcorn is not there. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-10:15:57  Paused: Take Sweetcorn: cannot see Sweetcorn nearby
-10:15:49  Step: Collect 1 Sweetcorn [Recipe for Disaster]
-10:15:49  Started version 0.15.2
+10:17:00  Paused: Pick sweetcorn: reached (1574, 3139, 0) but Sweetcorn is not there
+10:16:59  Step: Collect 1 Sweetcorn [Recipe for Disaster]
+10:16:59  Started version 0.15.3
 == Player
 world WorldPoint(x=1574, y=3139, plane=0), in instance false, as guide coordinates WorldPoint(x=1574, y=3139, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
 4241x1, 1511x1, 1511x1, 1511x1, 954x1, 233x1, 227x1, 4241x1
 == NPCs within 12 tiles (id name at tile: options)
-5007 Imp at WorldPoint(x=1564, y=3137, plane=0): [Attack]
-13238 Master Farmer at WorldPoint(x=1582, y=3128, plane=0): [Talk-to, Pickpocket]
-13964 Chiribaya at WorldPoint(x=1582, y=3131, plane=0): [Pet, Shoo-away]
-== Objects within 8 tiles (id name at tile)
-52017 null at WorldPoint(x=1566, y=3137, plane=0)
-51810 null at WorldPoint(x=1567, y=3135, plane=0)
-52017 null at WorldPoint(x=1567, y=3137, plane=0)
-52054 null at WorldPoint(x=1567, y=3144, plane=0)
-52743 null at WorldPoint(x=1567, y=3145, plane=0)
-52743 null at WorldPoint(x=1567, y=3146, plane=0)
-52743 null at WorldPoint(x=1567, y=3147, plane=0)
-51810 null at WorldPoint(x=1568, y=3135, plane=0)
-1393 Plant at WorldPoint(x=1568, y=3137, plane=0)
-52017 null at WorldPoint(x=1568, y=3137, plane=0)
-52107 null at WorldPoint(x=1568, y=3141, plane=0)
-52109 null at WorldPoint(x=1568, y=3142, plane=0)
-51807 null at WorldPoint(x=1568, y=3145, plane=0)
-52017 null at WorldPoint(x=1568, y=3145, plane=0)
-51805 null at WorldPoint(x=1568, y=3146, plane=0)
-51808 null at WorldPoint(x=1568, y=3147, plane=0)
-16273 null at WorldPoint(x=1569, y=3134, plane=0)
-51804 null at WorldPoint(x=1569, y=3137, plane=0)
-52014 null at WorldPoint(x=1569, y=3137, plane=0)
-52017 null at WorldPoint(x=1569, y=3138, plane=0)
-51805 null at WorldPoint(x=1569, y=3139, plane=0)
-52017 null at WorldPoint(x=1569, y=3139, plane=0)
+5007 Imp at WorldPoint(x=1564, y=3136, plane=0): [Attack]
+13964 Chiribaya at WorldPoint(x=1583, y=3131, plane=0): [Pet, Shoo-away]
+== Named objects within 25 tiles, nearest first (id name at tile)
+40 Food trough at WorldPoint(x=1574, y=3140, plane=0)
+1393 Plant at WorldPoint(x=1572, y=3139, plane=0)
+1393 Plant at WorldPoint(x=1575, y=3137, plane=0)
+1391 Plant at WorldPoint(x=1571, y=3137, plane=0)
+52425 Barrel at WorldPoint(x=1571, y=3141, plane=0)
+52431 Crate at WorldPoint(x=1571, y=3142, plane=0)
+1394 Plant at WorldPoint(x=1573, y=3136, plane=0)
+52646 Water pump at WorldPoint(x=1577, y=3137, plane=0)
+52432 Crates at WorldPoint(x=1570, y=3141, plane=0)
+52425 Barrel at WorldPoint(x=1570, y=3142, plane=0)
+46310 Hay bale at WorldPoint(x=1573, y=3143, plane=0)
+46311 Hay bale at WorldPoint(x=1574, y=3143, plane=0)
+46311 Hay bale at WorldPoint(x=1575, y=3143, plane=0)
+16472 Lathe at WorldPoint(x=1576, y=3143, plane=0)
+6188 Blacksmith's tools at WorldPoint(x=1578, y=3143, plane=0)
 1393 Plant at WorldPoint(x=1569, y=3140, plane=0)
-51807 null at WorldPoint(x=1569, y=3140, plane=0)
-52017 null at WorldPoint(x=1569, y=3140, plane=0)
+52432 Crates at WorldPoint(x=1569, y=3141, plane=0)
+52432 Crates at WorldPoint(x=1569, y=3142, plane=0)
+1392 Plant at WorldPoint(x=1569, y=3143, plane=0)
+1391 Plant at WorldPoint(x=1574, y=3144, plane=0)
+40 Food trough at WorldPoint(x=1579, y=3138, plane=0)
+51724 Stool at WorldPoint(x=1579, y=3142, plane=0)
+1393 Plant at WorldPoint(x=1568, y=3137, plane=0)
+52431 Crate at WorldPoint(x=1580, y=3133, plane=0)
+52425 Barrel at WorldPoint(x=1580, y=3143, plane=0)
+1392 Plant at WorldPoint(x=1579, y=3146, plane=0)
+52596 Door at WorldPoint(x=1581, y=3134, plane=0)
+52635 Staircase at WorldPoint(x=1581, y=3140, plane=0)
+52432 Crates at WorldPoint(x=1581, y=3143, plane=0)
+52594 Door at WorldPoint(x=1580, y=3131, plane=0)
+1393 Plant at WorldPoint(x=1581, y=3147, plane=0)
+51730 Table at WorldPoint(x=1582, y=3133, plane=0)
+1393 Plant at WorldPoint(x=1582, y=3137, plane=0)
+52432 Crates at WorldPoint(x=1582, y=3141, plane=0)
+52425 Barrel at WorldPoint(x=1582, y=3142, plane=0)
+52432 Crates at WorldPoint(x=1582, y=3143, plane=0)
+52458 Table at WorldPoint(x=1582, y=3130, plane=0)
+1394 Plant at WorldPoint(x=1583, y=3136, plane=0)
+1393 Plant at WorldPoint(x=1583, y=3140, plane=0)
+52415 Bookshelf at WorldPoint(x=1583, y=3129, plane=0)
+== Objects without a name within 6 tiles, nearest first (id at tile)
+1263 at WorldPoint(x=1574, y=3139, plane=0)
+1263 at WorldPoint(x=1573, y=3138, plane=0)
+52375 at WorldPoint(x=1573, y=3138, plane=0)
+1262 at WorldPoint(x=1573, y=3139, plane=0)
+52375 at WorldPoint(x=1573, y=3139, plane=0)
+3948 at WorldPoint(x=1573, y=3140, plane=0)
+52375 at WorldPoint(x=1573, y=3140, plane=0)
+3949 at WorldPoint(x=1574, y=3138, plane=0)
+52375 at WorldPoint(x=1574, y=3138, plane=0)
+3949 at WorldPoint(x=1574, y=3140, plane=0)
+52100 at WorldPoint(x=1574, y=3140, plane=0)
+3949 at WorldPoint(x=1575, y=3138, plane=0)
+52375 at WorldPoint(x=1575, y=3138, plane=0)
+1263 at WorldPoint(x=1575, y=3139, plane=0)
+52375 at WorldPoint(x=1575, y=3139, plane=0)
 == Text in open windows and chat
 10
-95
 100
 All
 Game
@@ -54,7 +83,7 @@ Friends
 Channel
 Clan
 Trade
-00:16:50
+00:17:54
 Boatyguidev3: *
 You pick a handful of nettles.
 Did you know? You can hide the Help button in the Bank interface via the Bank settings.
