@@ -31,4 +31,5 @@ class BotHost(
     val keyManager: KeyManager,
     val overlayManager: OverlayManager,
     val clientToolbar: ClientToolbar,
+    val secrets: Secrets,
 )

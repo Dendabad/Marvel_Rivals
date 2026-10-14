@@ -57,6 +57,9 @@ class HcimGuideBotPlugin : Plugin() {
 
     private data class Stamp(val modified: Long, val size: Long)
 
+    /** Held here so the bank PIN survives the bot reloading. Wiped when the plugin is turned off. */
+    private val secrets = Secrets()
+
     @Volatile private var loaded: Loaded? = null
     private var watcher: ScheduledExecutorService? = null
     private var seen: Stamp? = null
@@ -89,6 +92,7 @@ class HcimGuideBotPlugin : Plugin() {
         watcher?.shutdownNow()
         watcher = null
         unload()
+        secrets.forgetBankPin()
     }
 
     @Subscribe
@@ -136,7 +140,7 @@ class HcimGuideBotPlugin : Plugin() {
             val loader = BotClassLoader(copy.toURI().toURL(), javaClass.classLoader)
             val module = loader.loadClass(MODULE).getDeclaredConstructor().newInstance() as BotModule
             val config = Microbot.getConfigManager().getConfig(HcimGuideBotConfig::class.java)
-            module.start(BotHost(this, config, keyManager, overlayManager, clientToolbar))
+            module.start(BotHost(this, config, keyManager, overlayManager, clientToolbar, secrets))
             loaded = Loaded(module, loader, copy, stamp)
             log.info("HCIM guide bot {} loaded", module.version)
             if (announce) Microbot.showMessage("HCIM Guide Bot updated to ${module.version}. It carries on from the current step.", NOTE_MS)

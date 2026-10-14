@@ -28,7 +28,8 @@ class BotModuleImpl : BotModule {
     override fun start(host: BotHost) {
         this.host = host
         val config = host.config
-        val bot = HcimGuideBotScript().also { script = it }
+        val bot = HcimGuideBotScript(host.secrets::bankPin).also { script = it }
+        bot.onPinRefused = { host.secrets.forgetBankPin() }
         bot.run(config)
 
         overlay = HcimGuideBotOverlay(bot::status).also { host.overlayManager.add(it) }
@@ -39,6 +40,8 @@ class BotModuleImpl : BotModule {
             setPaused = ::setPaused,
             skip = bot::requestSkip,
             retry = bot::requestRetry,
+            setBankPin = { pin -> host.secrets.setBankPin(pin).also { if (it) bot.pinChanged() } },
+            hasBankPin = host.secrets::hasBankPin,
         ).also { panel = it }
         sidebarButton = NavigationButton.builder()
             .tooltip("HCIM Guide Bot")
@@ -81,7 +84,7 @@ class BotModuleImpl : BotModule {
     }
 
     companion object {
-        const val VERSION = "0.6.9"
+        const val VERSION = "0.7.0"
         private const val SIDEBAR_PRIORITY = 8
     }
 }

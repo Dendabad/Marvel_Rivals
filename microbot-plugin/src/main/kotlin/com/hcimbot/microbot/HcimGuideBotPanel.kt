@@ -11,6 +11,7 @@ import javax.swing.BoxLayout
 import javax.swing.JButton
 import javax.swing.JLabel
 import javax.swing.JPanel
+import javax.swing.JPasswordField
 import javax.swing.JTextArea
 import javax.swing.Timer
 import net.runelite.client.ui.PluginPanel
@@ -26,6 +27,9 @@ class HcimGuideBotPanel(
     private val setPaused: (Boolean) -> Unit,
     private val skip: () -> Unit,
     private val retry: () -> Unit,
+    /** Hands the typed PIN on. False when it is not exactly 4 digits. Held in memory only, never saved. */
+    private val setBankPin: (CharArray?) -> Boolean = { true },
+    private val hasBankPin: () -> Boolean = { false },
 ) : PluginPanel() {
     private val state = JLabel("Starting")
     private val step = text()
@@ -33,6 +37,8 @@ class HcimGuideBotPanel(
     private val detail = text()
     private val recent = text()
     private val pause = JButton("Pause")
+    private val pinField = JPasswordField(4)
+    private val pinStatus = JLabel(" ")
     private val refresh = Timer(REFRESH_MS) { update() }
 
     init {
@@ -60,11 +66,43 @@ class HcimGuideBotPanel(
                 addActionListener { retry(); update() }
             })
         }
+        val pin = JPanel().apply {
+            layout = BoxLayout(this, BoxLayout.Y_AXIS)
+            border = BorderFactory.createEmptyBorder(0, 8, 8, 8)
+            add(JLabel("Bank PIN").apply { foreground = Color.GRAY })
+            add(JLabel("Kept in memory only, never saved.").apply { foreground = Color.GRAY; font = font.deriveFont(10f) })
+            add(JPanel(GridLayout(1, 2, 6, 0)).apply {
+                add(pinField)
+                add(JButton("Set").apply { addActionListener { savePin() } })
+            })
+            add(JButton("Forget PIN").apply { addActionListener { forgetPin() } })
+            add(pinStatus)
+        }
+        val lower = JPanel(BorderLayout()).apply {
+            add(buttons, BorderLayout.NORTH)
+            add(pin, BorderLayout.CENTER)
+            // Below the buttons, so a long history never pushes them out of sight.
+            add(section("Recent", recent).apply { border = BorderFactory.createEmptyBorder(0, 8, 8, 8) }, BorderLayout.SOUTH)
+        }
         add(body, BorderLayout.NORTH)
-        add(buttons, BorderLayout.CENTER)
-        // Below the buttons, so a long history never pushes them out of sight.
-        add(section("Recent", recent).apply { border = BorderFactory.createEmptyBorder(0, 8, 8, 8) }, BorderLayout.SOUTH)
+        add(lower, BorderLayout.CENTER)
         update()
+    }
+
+    private fun savePin() {
+        val typed = pinField.password
+        val ok = setBankPin(typed)
+        typed.fill('0')
+        pinField.text = ""
+        pinStatus.text = if (ok) "PIN set" else "Needs exactly 4 digits"
+        pinStatus.foreground = if (ok) BotStatus.RUNNING else BotStatus.STOPPED
+    }
+
+    private fun forgetPin() {
+        setBankPin(null)
+        pinField.text = ""
+        pinStatus.text = "PIN forgotten"
+        pinStatus.foreground = Color.GRAY
     }
 
     override fun onActivate() = refresh.start()
@@ -82,6 +120,11 @@ class HcimGuideBotPanel(
         detail.text = now.detail ?: "-"
         recent.text = now.recent.joinToString("\n").ifEmpty { "-" }
         pause.text = if (isPaused()) "Resume" else "Pause"
+        // The PIN was forgotten behind the panel's back, e.g. after a refusal.
+        if (!hasBankPin() && pinStatus.text == "PIN set") {
+            pinStatus.text = "PIN forgotten"
+            pinStatus.foreground = Color.GRAY
+        }
     }
 
     private fun text() = JTextArea().apply {

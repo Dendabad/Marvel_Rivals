@@ -88,6 +88,12 @@ Find **HCIM Guide Bot** in Microbot's plugin list and open its settings:
 
 Log in, then switch the plugin on. It starts at the first step not yet ticked in the B0aty guide.
 
+## Bank PIN
+
+If your account has a bank PIN, type it into the **Bank PIN** box in the bot's sidebar (the green H) and press **Set**. The bot then types it whenever the PIN screen shows. The PIN is held in memory only: it is never written to a file or to Microbot's settings, it is forgotten when you turn the plugin off or close the client, and **Forget PIN** removes it at once. It survives the bot reloading itself during an update.
+
+If the bank refuses the PIN, the bot forgets it, pauses and tells you, rather than trying again, since a few wrong tries lock the bank for a while. Do not use Microbot's own saved PIN for this: it is "encrypted" with a key that is the same for everyone.
+
 ## While it runs
 
 **On the game screen**, a box in the top left corner shows what the bot is doing: whether it is running or paused, the step it is on, the action in progress (like `Doing: Walk to (3218, 3238, 0)`), and why it paused, if it has.

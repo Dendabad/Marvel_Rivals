@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit
 import net.runelite.api.Skill
 import net.runelite.client.plugins.microbot.Microbot
 import net.runelite.client.plugins.microbot.Script
+import net.runelite.client.plugins.microbot.util.bank.Rs2Bank
 import net.runelite.client.plugins.microbot.util.dialogues.Rs2Dialogue
 import net.runelite.client.plugins.microbot.util.inventory.Rs2Inventory
 import net.runelite.client.plugins.microbot.util.player.Rs2Player
@@ -24,7 +25,7 @@ import org.slf4j.LoggerFactory
  * script thread for the whole walk, and on a hardcore account the hitpoint
  * checks cannot wait for it to finish.
  */
-class HcimGuideBotScript : Script() {
+class HcimGuideBotScript(private val bankPin: () -> String? = { null }) : Script() {
     private val log = LoggerFactory.getLogger(HcimGuideBotScript::class.java)
     private val game = MicrobotGameState()
     private val actions = MicrobotActions()
@@ -42,6 +43,8 @@ class HcimGuideBotScript : Script() {
     private val walkerOverrides = WalkerOverrides()
     @Volatile private var lastDrink = 0L
     @Volatile private var forgetDoorsAt = 0L
+    private var pinAttemptedAt = 0L
+    private var pinWarned = false
     private var lastSeenAt: net.runelite.api.coords.WorldPoint? = null
     private var stillSince = 0L
     @Volatile private var lastWarning = 0L
@@ -105,6 +108,7 @@ class HcimGuideBotScript : Script() {
             }
             game.refresh()
             walkerOverrides.apply(current.walkerOverrides)
+            if (answerBankPin()) return
             current.onGameTick()
             // A step that just ended takes its walker overrides with it, before the next one walks.
             walkerOverrides.apply(current.walkerOverrides)
@@ -297,6 +301,51 @@ class HcimGuideBotScript : Script() {
         }
     }
 
+    /** The PIN changed (set or cleared), so a fresh attempt is allowed. */
+    fun pinChanged() {
+        pinAttemptedAt = 0L
+        pinWarned = false
+    }
+
+    /**
+     * Types the bank PIN when the PIN screen shows, once per PIN. If the screen shows again soon after,
+     * the PIN was refused: the PIN is forgotten, the bot paused and the player told, since a few wrong
+     * tries lock the bank for a while. Returns true while the PIN screen needs attention, so the step
+     * does not run on top of it.
+     */
+    private fun answerBankPin(): Boolean {
+        val visible = MicrobotGameState.onClient { Rs2Bank.isBankPinWidgetVisible() } == true
+        if (!visible) return false
+        val pin = bankPin()
+        if (pin == null) {
+            if (!pinWarned) {
+                pinWarned = true
+                note("The bank is asking for its PIN: type it into the Bank PIN box in the sidebar")
+                Microbot.showMessage("HCIM Guide Bot: the bank wants its PIN. Type it into the Bank PIN box in the bot's sidebar (the green H). It is kept in memory only.", MESSAGE_MS)
+            }
+            return true
+        }
+        val time = System.currentTimeMillis()
+        if (pinAttemptedAt != 0L && time - pinAttemptedAt < PIN_RETRY_MS) {
+            // Shown again straight after typing it: refused. Do not try again.
+            pinAttemptedAt = 0L
+            setPaused(true)
+            note("The bank refused the PIN, so it was forgotten and the bot paused")
+            Microbot.showMessage("HCIM Guide Bot: the bank refused the PIN, so the bot paused and forgot it. Enter the right PIN in the sidebar, then resume. Wrong tries can lock the bank for a while, so check it first.", MESSAGE_MS)
+            pinRefused()
+            return true
+        }
+        pinAttemptedAt = time
+        note("Entering the bank PIN")
+        Rs2Bank.handleBankPin(pin)
+        return true
+    }
+
+    /** Called when the PIN is refused. The loader's copy is cleared by the owner of the secrets. */
+    var onPinRefused: () -> Unit = {}
+
+    private fun pinRefused() = onPinRefused()
+
     /**
      * Times how long the player stands still during a walk, so a slow stretch (a gate, a question, the
      * walker working out its next move) shows in the Recent list with what was on screen. Only logged
@@ -370,6 +419,9 @@ class HcimGuideBotScript : Script() {
         /** Long enough for the walker to have noted a door crossing the drink cut short. */
         private const val FORGET_AGAIN_MS = 1_200L
         private const val STALL_LOG_MS = 1_500L
+
+        /** A refused PIN shows the screen again within this long of typing it. */
+        private const val PIN_RETRY_MS = 15_000L
         private const val MESSAGE_MS = 60_000
         private const val B0ATY_PLUGIN = "com.b0atyguide.B0atyGuidePlugin"
 
