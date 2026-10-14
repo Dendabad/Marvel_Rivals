@@ -527,8 +527,9 @@ class StepScripts(private val guide: Guide) {
         "15227aad5e" to { _ ->
             auto(
                 InteractTask(
-                    InteractTask.Kind.NPC, listOf(12884, 12885), listOf("Regulus Cento"), listOf(Tile(3281, 3413, 0)), "Talk-to",
-                    DialoguePlan.Texts(listOf("Civitas illa Fortis", "Varlamore", "Travel")),
+                    InteractTask.Kind.NPC, listOf(12883, 12884, 12885), listOf("Regulus Cento"), listOf(Tile(3281, 3413, 0)), "Talk-to",
+                    // His chat offers "Let's do it!" or "There's something I need to do first.": the first goes.
+                    DialoguePlan.Texts(listOf("do it!", "Civitas illa Fortis", "Varlamore", "Travel")),
                 ),
                 ClickChoiceTask(listOf("Civitas illa Fortis", "Varlamore"), waitTicks = 8),
                 WaitUntilTask("Arrive in Varlamore", maxTicks = 60) { (it.game.playerTile?.x ?: 9999) < 2500 },
