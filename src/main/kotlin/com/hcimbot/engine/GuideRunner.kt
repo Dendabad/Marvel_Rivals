@@ -6,6 +6,7 @@ import com.hcimbot.guide.Guide
 import com.hcimbot.guide.Step
 import com.hcimbot.plan.AgilityCourse
 import com.hcimbot.plan.AgilityCourseTask
+import com.hcimbot.plan.DialoguePlan
 import com.hcimbot.plan.StepPlan
 import com.hcimbot.plan.StepPlanner
 import com.hcimbot.plan.Task
@@ -87,6 +88,7 @@ class GuideRunner(
         var taskIndex = 0
         var ticks = 0
         var waitingAfterTasks = 0
+        var chatTicks = 0
         var finishing = false
         val combat: Boolean get() = (plan as? StepPlan.Auto)?.combat == true
     }
@@ -206,6 +208,7 @@ class GuideRunner(
         }
 
         if (completion.check(step, current.baseline) == StepCompletion.Verdict.Done && !midway(current)) {
+            if (endChat(current)) return
             // Never walk off with a bank or shop still open.
             if (game.isBankOpen || game.isShopOpen) {
                 if (!game.isBusy) actions.closeInterface()
@@ -274,7 +277,9 @@ class GuideRunner(
             return
         }
 
-        // Every task finished.
+        // Every task finished. A chat the step left open (King Roald's after Priest in Peril starts) would
+        // make the next step's clicks and options go to the wrong person, so end it first.
+        if (endChat(current)) return
         when (completion.check(step, current.baseline)) {
             StepCompletion.Verdict.Done -> markDone(step, "the game shows it is done")
             StepCompletion.Verdict.NoSignal ->
@@ -287,6 +292,28 @@ class GuideRunner(
                         pause(step, "the actions finished but the game does not show the step as done")
                 }
         }
+    }
+
+    /**
+     * Ends a chat still open when a step is finished: clicks continue, or an option that ends the
+     * conversation and never one that agrees to something. True while it is still dealing with it.
+     */
+    private fun endChat(current: Active): Boolean {
+        if (current.chatTicks >= MAX_CHAT_TICKS) return false
+        val options = game.dialogOptions()
+        if (options.isNotEmpty()) {
+            val ending = DialoguePlan.endingOption(options) ?: return false
+            current.chatTicks++
+            log("Ending the chat the step left open: $ending")
+            actions.chooseDialogOption(ending)
+            return true
+        }
+        if (game.canContinueDialog) {
+            current.chatTicks++
+            actions.continueDialog()
+            return true
+        }
+        return false
     }
 
     /** Does an earlier step first, then this one again. Only once per earlier step, so it cannot loop. */
@@ -330,6 +357,7 @@ class GuideRunner(
     companion object {
         /** Ticks to wait for the game to catch up after the last action of a step. */
         const val SETTLE_TICKS = 10
+        const val MAX_CHAT_TICKS = 12
 
         /** How many times longer a training step may run, e.g. agility laps for a level. */
         const val PATIENT_FACTOR = 8
