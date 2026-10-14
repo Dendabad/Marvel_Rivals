@@ -124,6 +124,8 @@ class MicrobotActions : GameActions {
             Microbot.getMouse().click(all)
             Thread.sleep(MAKE_PAUSE_MS)
         }
+        // The 1 key picks the first item, whatever the Space key is on at the moment.
+        if (pressKey('1')) return true
         val first = onClient { MicrobotGameState.firstMakeItem()?.bounds }
         if (first != null) {
             Microbot.getMouse().click(first)
@@ -132,6 +134,15 @@ class MicrobotActions : GameActions {
         // Not found: not the Space key, which makes whichever item was made last.
         return false
     }
+
+    /** A key press through Microbot's keyboard helper, found by name since the stub used to build does not have it. */
+    private fun pressKey(key: Char): Boolean = runCatching {
+        val keyboard = Class.forName("net.runelite.client.plugins.microbot.util.keyboard.Rs2Keyboard")
+        val press = keyboard.methods.firstOrNull { it.name == "keyPress" && it.parameterTypes.singleOrNull() == Char::class.javaPrimitiveType }
+            ?: return false
+        press.invoke(null, key)
+        true
+    }.getOrDefault(false)
 
     /**
      * Clicks the Close button of the open window (a book, say), found as a visible widget whose action is
