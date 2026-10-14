@@ -1,10 +1,13 @@
 package com.hcimbot.microbot
 
 import com.google.inject.Provides
+import javax.inject.Inject
 import net.runelite.client.config.ConfigManager
+import net.runelite.client.input.KeyManager
 import net.runelite.client.plugins.Plugin
 import net.runelite.client.plugins.PluginDescriptor
 import net.runelite.client.plugins.microbot.Microbot
+import net.runelite.client.util.HotkeyListener
 
 /**
  * The plugin Microbot loads. Turning it on starts the bot from the first step
@@ -22,7 +25,11 @@ import net.runelite.client.plugins.microbot.Microbot
     version = HcimGuideBotPlugin.VERSION,
 )
 class HcimGuideBotPlugin : Plugin() {
+    @field:Inject
+    private lateinit var keyManager: KeyManager
+
     private var script: HcimGuideBotScript? = null
+    private var pauseKey: HotkeyListener? = null
 
     /** RuneLite finds a plugin's settings through a @Provides method like this one. */
     @Provides
@@ -30,11 +37,20 @@ class HcimGuideBotPlugin : Plugin() {
         configManager.getConfig(HcimGuideBotConfig::class.java)
 
     override fun startUp() {
-        val config = Microbot.getConfigManager().getConfig(HcimGuideBotConfig::class.java)
+        val configManager = Microbot.getConfigManager()
+        val config = configManager.getConfig(HcimGuideBotConfig::class.java)
         script = HcimGuideBotScript().also { it.run(config) }
+        // The hotkey flips the Pause setting, so the checkbox always shows the real state.
+        pauseKey = object : HotkeyListener({ config.pauseHotkey() }) {
+            override fun hotkeyPressed() {
+                configManager.setConfiguration(HcimGuideBotConfig.GROUP, HcimGuideBotConfig.PAUSED, !config.paused())
+            }
+        }.also { keyManager.registerKeyListener(it) }
     }
 
     override fun shutDown() {
+        pauseKey?.let { keyManager.unregisterKeyListener(it) }
+        pauseKey = null
         script?.shutdown()
         script = null
     }

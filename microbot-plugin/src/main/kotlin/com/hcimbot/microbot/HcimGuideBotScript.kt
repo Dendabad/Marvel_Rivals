@@ -30,8 +30,11 @@ class HcimGuideBotScript : Script() {
     @Volatile private var runner: GuideRunner? = null
     private var settings = BotSettings()
     private var shownState: GuideRunner.State? = null
+    @Volatile private var config: HcimGuideBotConfig? = null
+    private var wasPaused = false
 
     fun run(config: HcimGuideBotConfig): Boolean {
+        this.config = config
         settings = settingsFrom(config)
         mainScheduledFuture = scheduledExecutorService.scheduleWithFixedDelay({ tick(config) }, 0, TICK_MS, TimeUnit.MILLISECONDS)
         scheduledFuture = scheduledExecutorService.scheduleWithFixedDelay({ watchdog() }, WATCHDOG_MS, WATCHDOG_MS, TimeUnit.MILLISECONDS)
@@ -44,6 +47,7 @@ class HcimGuideBotScript : Script() {
         try {
             if (!gate() || !Microbot.isLoggedIn()) return
             if (record(config)) return
+            if (pausedByPlayer(config)) return
             val current = runner ?: start(config) ?: return
             restartIfAsked(config, current)
             game.refresh()
@@ -81,6 +85,27 @@ class HcimGuideBotScript : Script() {
         if (recorder.record(at)) routes.save(name, recorder.tiles())
         Microbot.status = "HCIM bot RECORDING route \"$name\": ${recorder.size} tiles. Turn off Record route to finish."
         return true
+    }
+
+    /**
+     * The Pause setting or hotkey. Pausing stops any walk at once (the
+     * watchdog does that mid-walk) and the bot does nothing until unpaused.
+     * Unpausing plans the current step afresh, since the player may have moved.
+     */
+    private fun pausedByPlayer(config: HcimGuideBotConfig): Boolean {
+        if (config.paused()) {
+            if (!wasPaused) {
+                Rs2Walker.setTarget(null, "HCIM guide bot paused")
+                wasPaused = true
+            }
+            Microbot.status = "HCIM bot PAUSED by you. Untick Pause or press the pause hotkey to carry on."
+            return true
+        }
+        if (wasPaused) {
+            wasPaused = false
+            runner?.replan()
+        }
+        return false
     }
 
     /**
@@ -163,6 +188,11 @@ class HcimGuideBotScript : Script() {
     private fun watchdog() {
         try {
             val current = runner ?: return
+            if (config?.paused() == true) {
+                // Pausing mid-walk: the main loop is stuck inside the walker, so stop it from here.
+                if (actions.walking) Rs2Walker.setTarget(null, "HCIM guide bot paused")
+                return
+            }
             if (current.state != GuideRunner.State.Running || !Microbot.isLoggedIn()) return
             val (now, max) = MicrobotGameState.onClient {
                 val client = Microbot.getClient()

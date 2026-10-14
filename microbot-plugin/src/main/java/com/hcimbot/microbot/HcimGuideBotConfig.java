@@ -3,12 +3,36 @@ package com.hcimbot.microbot;
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
+import net.runelite.client.config.Keybind;
 
 /** Settings shown in Microbot's plugin panel. Java, so RuneLite's config proxy sees plain default methods. */
 @ConfigGroup(HcimGuideBotConfig.GROUP)
 public interface HcimGuideBotConfig extends Config
 {
 	String GROUP = "hcimguidebotsettings";
+	String PAUSED = "paused";
+
+	@ConfigItem(
+		keyName = PAUSED,
+		name = "Pause",
+		description = "Tick to pause the bot at once, untick to carry on. The pause hotkey flips this too.",
+		position = -2
+	)
+	default boolean paused()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		keyName = "pauseHotkey",
+		name = "Pause hotkey",
+		description = "A key that pauses and unpauses the bot, e.g. F12. Click the box, then press the key.",
+		position = -1
+	)
+	default Keybind pauseHotkey()
+	{
+		return Keybind.NOT_SET;
+	}
 
 	@ConfigItem(
 		keyName = "allowCombat",

@@ -78,6 +78,11 @@ class GuideRunner(
         }
     }
 
+    /** Drops the current step's half done actions so they are planned again, e.g. after the player paused the bot. */
+    fun replan() {
+        active = null
+    }
+
     /** Treat the paused step as done and move on. */
     fun skipCurrent() {
         val step = (state as? State.Paused)?.step ?: return

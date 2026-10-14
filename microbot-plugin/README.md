@@ -59,6 +59,8 @@ Find **HCIM Guide Bot** in Microbot's plugin list and open its settings:
 
 | Setting | Default | What it does |
 | --- | --- | --- |
+| Pause | off | Tick to pause the bot at once, untick to carry on. |
+| Pause hotkey | none | A key that pauses and unpauses, e.g. F12. Click the box, then press the key. |
 | Allow combat | off | Leave it off at first. Fighting steps pause for you. |
 | Pause on tips | on | Stops at the guide's tips and warnings. |
 | Food item ids | empty | Item ids to eat, best first, e.g. `315` for shrimps. Empty means it never eats and only stops. |
@@ -76,6 +78,7 @@ Log in, then switch the plugin on. It starts at the first step not yet ticked in
 
 - Microbot's status line shows the current step, or why the bot paused.
 - **When it pauses,** a message explains why. Do the step yourself, then **tick it in the B0aty guide's sidebar.** The bot carries on from the next step by itself.
+- **To pause yourself,** tick **Pause** or press your pause hotkey. The bot stops at once, even in the middle of a walk. Untick it or press the hotkey again to carry on, and it plans the current step afresh from wherever you are.
 - To retry the paused step from scratch, switch the plugin off and on again.
 - To stop, switch the plugin off.
 - It stops for good below the hitpoint limit. A watchdog checks hitpoints three times a second, even in the middle of a long walk, and can stop the walk or eat.
