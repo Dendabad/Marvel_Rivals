@@ -988,7 +988,7 @@ class MakePlanksTask(private val planks: Int = 10, private val waxwood: Int = 3)
         if (settling > 0) { settling--; return TaskResult.Running }
         if (game.isBusy) return TaskResult.Running
         if (!window) {
-            val talk = opener ?: InteractTask(InteractTask.Kind.NPC, listOf(OPERATOR), listOf("Sawmill operator"), listOf(SAWMILL), "Buy-plank").also { opener = it }
+            val talk = opener ?: InteractTask(InteractTask.Kind.NPC, listOf(OPERATOR), listOf("Sawmill operator"), listOf(SAWMILL), "Buy-plank", ignoreReach = true).also { opener = it }
             return when (val result = talk.tick(ctx)) {
                 TaskResult.Done -> {
                     opener = null

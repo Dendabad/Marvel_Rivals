@@ -186,6 +186,8 @@ class InteractTask(
     private val repeat: Boolean = false,
     /** Prefer the match nearest this tile, e.g. the south one of two staircases. */
     private val near: Tile? = null,
+    /** Click without first walking up or opening doors: for someone served over a counter, who always reads as out of reach. */
+    private val ignoreReach: Boolean = false,
 ) : BaseTask() {
     enum class Kind { NPC, OBJECT }
 
@@ -226,7 +228,7 @@ class InteractTask(
         // the Restless Ghost's coffin, Father Urhney. Walk up first: the walker opens doors on the
         // way. An object's own tile is often solid (a coffin, a table), so a tile beside it counts.
         // Someone behind a counter also reads as out of reach, so after a few tries click anyway.
-        val outOfReach = when (kind) {
+        val outOfReach = if (ignoreReach) false else when (kind) {
             Kind.NPC -> game.canReach(entity.tile) == false
             Kind.OBJECT -> game.canReachBeside(entity.tile) == false
         }
