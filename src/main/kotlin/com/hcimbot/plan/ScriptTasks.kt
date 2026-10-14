@@ -1125,3 +1125,39 @@ class WaitUntilTask(private val label: String, private val maxTicks: Int, privat
         return if (++waited >= maxTicks) TaskResult.Failed("$label: not there after $maxTicks ticks") else TaskResult.Running
     }
 }
+
+
+/**
+ * Climbs a ladder on the current floor other than the one the player arrived by: the nearest "Ladder" is the one just
+ * climbed, and clicking it goes back down. Done once on a higher floor than it started on.
+ */
+class ClimbOtherLadderTask(private val option: String = "Climb-up", private val awayFrom: Int = 3) : BaseTask() {
+    override val description = "Climb the other ladder"
+    private var startPlane = -1
+    private var start: Tile? = null
+    private var settling = 0
+    private var clicks = 0
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        val at = game.playerTile ?: return TaskResult.Running
+        if (startPlane < 0) { startPlane = at.plane; start = at }
+        if (at.plane > startPlane) return TaskResult.Done
+        if (settling > 0) { settling--; return TaskResult.Running }
+        if (game.isBusy) return TaskResult.Running
+        val from = start ?: at
+        val ladder = game.objectsNear(listOf("Ladder"), from, 30)
+            .filter { it.tile.distanceTo(from) > awayFrom && it.tile.plane == at.plane }
+            .minByOrNull { it.tile.distanceTo(at) }
+            ?: return TaskResult.Failed("no second ladder on this floor, away from the one just climbed (${at})")
+        if (++clicks > MAX_CLICKS) return TaskResult.Failed("clicking the ladder at ${ladder.tile} did not take the player up")
+        ctx.log("Climbing the other ladder at ${ladder.tile}")
+        ctx.actions.interactObject(ladder, option)
+        settling = 4
+        return TaskResult.Running
+    }
+
+    private companion object {
+        const val MAX_CLICKS = 5
+    }
+}

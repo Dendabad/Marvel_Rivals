@@ -590,8 +590,8 @@ class StepScripts(private val guide: Guide) {
             auto(
                 OnlyIf({ ctx: TaskContext -> (ctx.game.playerTile?.plane ?: 0) == 0 },
                     obj(listOf(52614), listOf("Ladder"), Tile(1552, 3033, 0), "Climb-up")),
-                OnlyIf({ ctx: TaskContext -> (ctx.game.playerTile?.plane ?: 0) == 1 },
-                    obj(emptyList(), listOf("Ladder"), Tile(1552, 3033, 1), "Climb-up", near = null)),
+                // The ladder to climb on the first floor is not the one just come up by (the nearest, which goes back down).
+                OnlyIf({ ctx: TaskContext -> (ctx.game.playerTile?.plane ?: 0) == 1 }, ClimbOtherLadderTask()),
                 trust = true,
             )
         },
