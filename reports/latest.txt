@@ -1,20 +1,11 @@
-HCIM Guide Bot 0.15.8, PAUSED
+HCIM Guide Bot 0.16.0, PAUSED
 == Step
 Step 124 of 2925: Enter Guildmaster Apatura's building and go up both ladders
 Detail: Enter Guildmaster Apatura: could not Enter Guildmaster Apatura at (1554, 3033, 0). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-10:24:11  Paused: Enter Guildmaster Apatura: could not Enter Guildmaster Apatura at (1554, 3033, 0)
-10:24:07  Step: Enter Guildmaster Apatura's building and go up both ladders
-10:24:06  Done (all actions finished): Deposit all in the bank chest
-10:23:56  Step: Deposit all in the bank chest
-10:23:44  Walking from (1565, 3035, 0) to (1545, 3037, 0)
-10:23:44  Bucket of Water by the bank chest is 20 tiles away, walking over
-10:23:42  Step: Collect a Bucket of Water by the bank chest
-10:23:35  Step: Collect the needle
-10:22:49  Walking from (1581, 3139, 0) to (1559, 3048, 0)
-10:22:43  Step: Head West to the Hunter's Guild
-10:22:43  Resumed by you
-10:22:43  Resumed by you
+10:36:44  Paused: Enter Guildmaster Apatura: could not Enter Guildmaster Apatura at (1554, 3033, 0)
+10:36:40  Step: Enter Guildmaster Apatura's building and go up both ladders
+10:36:39  Started version 0.16.0
 == Player
 world WorldPoint(x=1542, y=3040, plane=0), in instance false, as guide coordinates WorldPoint(x=1542, y=3040, plane=0)
 hitpoints 10/10
@@ -23,7 +14,7 @@ hitpoints 10/10
 == NPCs within 12 tiles (id name at tile: options)
 13129 Banker at WorldPoint(x=1542, y=3041, plane=0): [Talk-to, Bank, Collect]
 13128 Bank buffalo at WorldPoint(x=1546, y=3038, plane=0): []
-12963 Capybara pup at WorldPoint(x=1546, y=3050, plane=0): []
+12961 Capybara at WorldPoint(x=1547, y=3048, plane=0): []
 13120 Guildmaster Apatura at WorldPoint(x=1554, y=3033, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
 51748 Food pot at WorldPoint(x=1541, y=3040, plane=0)
@@ -67,6 +58,7 @@ hitpoints 10/10
 51749 Empty pot at WorldPoint(x=1551, y=3035, plane=0)
 1197 Flower at WorldPoint(x=1551, y=3049, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
+1929 Bucket of water at WorldPoint(x=1545, y=3037, plane=0)
 863 Iron knife at WorldPoint(x=1545, y=3035, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
 52468 at WorldPoint(x=1542, y=3040, plane=0)
@@ -86,7 +78,6 @@ hitpoints 10/10
 51783 at WorldPoint(x=1540, y=3040, plane=0)
 == Text in open windows and chat
 10
-47
 100
 All
 Game
@@ -97,8 +88,13 @@ Friends
 Channel
 Clan
 Trade
-00:25:05
+00:37:38
 Boatyguidev3: *
+[10:36:44] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
+[10:36:43] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
+[10:36:42] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
+[10:36:41] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
+[10:36:40] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
 [10:24:11] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
 [10:24:10] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
 [10:24:09] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
