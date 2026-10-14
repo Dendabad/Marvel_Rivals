@@ -768,6 +768,7 @@ class FletchShaftsTask(
     private var stalled = 0
     private var hops = 0
     private var fenceTries = 0
+    private var checkInside = true
 
     override fun tick(ctx: TaskContext): TaskResult {
         val game = ctx.game
@@ -801,24 +802,29 @@ class FletchShaftsTask(
         // Step 103 left the player inside the pen, by the dying tree. The trees to chop are outside it. The dying
         // trees are only inside the pen, so one that can be walked up to means the bot is inside: climb back
         // over the broken fence then, and never when it is already outside.
-        val inside = game.objectsNear(DYING_TREE, at, TREE_RADIUS).any { game.canReachBeside(it.tile) == true }
-        if (inside && fenceTries < MAX_FENCE_TRIES) {
-            val fence = game.nearestObject(emptyList(), listOf("Broken fence"), at)
-            if (fence != null) {
-                fenceTries++
-                ctx.log("Inside the pen, climbing back over the broken fence")
-                ctx.actions.interactObject(fence, "Climb-over")
-                settling = 4
-                return TaskResult.Running
+        if (checkInside) {
+            checkInside = false
+            val inside = game.objectsNear(DYING_TREE, at, TREE_RADIUS).any { game.canReachBeside(it.tile) == true }
+            if (inside && fenceTries < MAX_FENCE_TRIES) {
+                val fence = game.nearestObject(emptyList(), listOf("Broken fence"), at)
+                if (fence != null) {
+                    fenceTries++
+                    ctx.log("Inside the pen, climbing back over the broken fence")
+                    ctx.actions.interactObject(fence, "Climb-over")
+                    settling = 4
+                    checkInside = true
+                    return TaskResult.Running
+                }
             }
         }
-        // The nearest tree that can be reached from where the bot stands: one inside the pen cannot.
+        // The nearest tree that can be reached from where the bot stands: one inside the pen cannot. Nearest first,
+        // and stop at the first that can: working out whether a tree can be reached is slow.
         val tree = game.objectsNear(TREES, at, TREE_RADIUS)
-            .filter { game.canReachBeside(it.tile) != false }
-            .minByOrNull { it.tile.distanceTo(at) }
+            .sortedBy { it.tile.distanceTo(at) }
+            .firstOrNull { game.canReachBeside(it.tile) != false }
         if (tree != null) {
             noTree = 0
-            return attempt(ctx.actions.interactObject(tree, "Chop down"), "chop down the tree at ${tree.tile}").also { settling = 2 }
+            return attempt(ctx.actions.interactObject(tree, "Chop down"), "chop down the tree at ${tree.tile}").also { settling = 1 }
         }
         // Nothing to chop in reach: use up what there is, else another world.
         if (held > 0) {
@@ -832,6 +838,7 @@ class FletchShaftsTask(
         ctx.log("No tree in reach here, hopping worlds ($made of $target shafts, hop $hops)")
         ctx.actions.hopWorld()
         hopWait = HOP_TICKS
+        checkInside = true
         return TaskResult.Running
     }
 
