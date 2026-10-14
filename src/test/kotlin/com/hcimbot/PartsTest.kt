@@ -381,6 +381,11 @@ class PartsTest {
             com.hcimbot.plan.DialoguePlan.Choice.ByText("No thanks."),
             plan.choose(listOf("Yes please.", "No thanks.")),
         )
+        // Veos after X Marks the Spot, offering a trip to Great Kourend.
+        assertEquals(
+            com.hcimbot.plan.DialoguePlan.Choice.ByText("I'm good thanks."),
+            plan.choose(listOf("I'd love to come!", "Tell me more about Great Kourend.", "I'm good thanks.")),
+        )
         // Nothing that ends it, so still a pause rather than a guess.
         assertTrue(plan.choose(listOf("Yes.", "Tell me more.")) is com.hcimbot.plan.DialoguePlan.Choice.Stuck)
     }

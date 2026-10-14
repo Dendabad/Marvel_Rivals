@@ -112,11 +112,17 @@ sealed interface DialoguePlan {
          */
         private val ENDINGS = listOf(
             "^(no,? )?(thanks|thank you)", "good ?bye|^bye", "nothing", "never ?mind", "i'll see about", "i'll be on my way",
-            "i (have|need|must|should|'d better) (to )?go", "not (right )?now", "maybe later", "^no\\b", "^alright", "^ok(ay)?\\b", "^i see",
+            "i (have|need|must|should|'d better) (to )?go", "not (right )?now", "maybe later", "not interested",
+            "^i'?m (good|fine|ok|okay|alright)", "^no\\b", "^alright", "^ok(ay)?\\b", "^i see",
         ).map { Regex(it, RegexOption.IGNORE_CASE) }
 
-        fun endingOption(options: List<String>): String? =
-            ENDINGS.firstNotNullOfOrNull { ending -> options.firstOrNull { ending.containsMatchIn(it.trim()) } }
+        /** Agreeing to something, which ending a conversation must never do: "I'd love to come!", "Yes". */
+        private val AGREEING = Regex("^(yes|yeah|sure|certainly|of course|i'd love|i would love|ok,? i'll|okay,? i'll)", RegexOption.IGNORE_CASE)
+
+        fun endingOption(options: List<String>): String? {
+            val safe = options.filterNot { AGREEING.containsMatchIn(it.trim()) }
+            return ENDINGS.firstNotNullOfOrNull { ending -> safe.firstOrNull { ending.containsMatchIn(it.trim()) } }
+        }
 
         /** Ends the conversation if an option does, otherwise stuck for [reason]. */
         fun endOr(options: List<String>, reason: String): Choice = endingOption(options)?.let { Choice.ByText(it) } ?: Choice.Stuck(reason)
