@@ -70,8 +70,12 @@ class StepScripts(private val guide: Guide, private val routes: RouteStore? = nu
             auto(
                 WalkTask(MAGIC_TUTOR),
                 DropTask(listOf(AIR_RUNE, MIND_RUNE)),
-                // Not just "rune": "How do I make runes?" is also on the menu, above the one that hands them out.
-                talk(listOf(3218), "Magic combat tutor", MAGIC_TUTOR, DialoguePlan.Texts(listOf("air and mind", "claim"))),
+                // The tutor's right click "Claim" hands the runes out without the chat menu.
+                InteractTask(
+                    InteractTask.Kind.NPC, listOf(3218), listOf("Magic combat tutor"), listOf(MAGIC_TUTOR), "Claim",
+                    // Should the claim open chat anyway, take the runes option, never "How do I make runes?".
+                    DialoguePlan.Texts(listOf("air and mind", "claim")),
+                ),
                 PickUpTask(listOf(AIR_RUNE, MIND_RUNE)),
             )
         },

@@ -54,11 +54,10 @@ class StepScriptsTest {
             npcs += SceneEntity(3218, "Magic combat tutor", tutorAt)
         }
         // Dropping leaves the stack on the ground; the tutor only gives runes to players without any.
-        // The real menu has two rune options, and "How do I make runes?" comes first.
-        game.onNpcInteract = { _, _ ->
-            game.options = listOf("Tell me about magic combat please.", "How do I make runes?", "I'd like some air and mind runes.", "Goodbye.")
+        // The tutor's right click Claim gives 30 of each, but only to a player who has none.
+        game.onNpcInteract = { _, action ->
+            if (action == "Claim" && 556 !in game.inv && 558 !in game.inv) { game.inv[556] = 30; game.inv[558] = 30 }
         }
-        game.onOption = { if ("air and mind" in it && 556 !in game.inv && 558 !in game.inv) { game.inv[556] = 30; game.inv[558] = 30 } }
         val drop = { id: Int, count: Int -> game.groundItems += SceneEntity(id, "Rune $id", tutorAt); dropped[id] = count }
         game.onItemAction = { id, action -> if (action == "Drop") drop(id, game.inv[id] ?: 0) }
         game.onTake = { item -> game.inv[item.id] = (game.inv[item.id] ?: 0) - 1 + (dropped.remove(item.id) ?: 1) }
@@ -69,8 +68,7 @@ class StepScriptsTest {
         assertTrue(game.groundItems.isEmpty())
         val drops = game.calls.filter { it.startsWith("item") }
         assertEquals(listOf("item 556 Drop", "item 558 Drop"), drops)
-        assertTrue("option I'd like some air and mind runes." in game.calls, "${game.calls}")
-        assertTrue("option How do I make runes?" !in game.calls)
+        assertTrue("npc Magic combat tutor Claim" in game.calls, "${game.calls}")
         // Dropped before talking, as the tutor requires.
         assertTrue(game.calls.indexOf("item 558 Drop") < game.calls.indexOfFirst { it.startsWith("npc") })
     }
