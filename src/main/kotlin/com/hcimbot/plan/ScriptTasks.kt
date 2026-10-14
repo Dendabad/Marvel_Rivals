@@ -596,6 +596,14 @@ class MarkGuardsTask(
     private var acted = false
     private var missing = 0
 
+    private var report: InteractTask? = null
+
+    private fun reportBack(helper: com.hcimbot.game.HelperStep, ctx: TaskContext): TaskResult {
+        if (helper.npcIds.isEmpty() || !REPORT.containsMatchIn(helper.text)) return TaskResult.Done
+        val talk = report ?: InteractTask(InteractTask.Kind.NPC, helper.npcIds, emptyList(), emptyList(), "Talk-to").also { report = it }
+        return talk.tick(ctx)
+    }
+
     private fun exact(game: com.hcimbot.game.GameState, id: Int) = game.nearestNpc(listOf(id))?.takeIf { it.id == id }
 
     override fun tick(ctx: TaskContext): TaskResult {
@@ -612,7 +620,8 @@ class MarkGuardsTask(
                 helper.text.contains("unmark", ignoreCase = true) -> "Unmark"
                 helper.text.startsWith("Mark", ignoreCase = true) -> "Mark"
                 // Nothing (more) to mark: Quest Helper has moved on, whether the bot or the player marked them.
-                else -> return TaskResult.Done
+                // The quest's own progress value stays put until the report, so do that here when it is next.
+                else -> return reportBack(helper, ctx)
             }
             helper.npcIds.firstNotNullOfOrNull { id -> exact(game, id)?.let { id to action } }
                 ?: return if (++missing >= LOST_TICKS) TaskResult.Failed("cannot see the guard Quest Helper points at: ${helper.npcIds}") else TaskResult.Running
@@ -651,6 +660,7 @@ class MarkGuardsTask(
         val MARKED_WRONGLY = emptyList<Int>()
         const val MAX_TICKS = 300
         const val LOST_TICKS = 40
+        private val REPORT = Regex("^(report back|talk to)", RegexOption.IGNORE_CASE)
         const val MAX_ATTEMPTS = 4
         const val CLICK_RANGE = 4
         const val SETTLE = 4

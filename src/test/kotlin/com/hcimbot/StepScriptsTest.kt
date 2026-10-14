@@ -183,19 +183,22 @@ class StepScriptsTest {
         val task = com.hcimbot.plan.MarkGuardsTask()
         task.tick(ctx)
         assertEquals(listOf("npc Guard Mark"), game.calls.filter { it.startsWith("npc") })
-        game.helper = com.hcimbot.game.HelperStep("Report back to Sergeant Tobyn.", listOf(12648))
+        game.helper = com.hcimbot.game.HelperStep("Look at the fountain.", listOf(12648))
         repeat(6) { task.tick(ctx) }
         assertEquals(com.hcimbot.plan.TaskResult.Done, task.tick(ctx))
     }
 
     @Test
-    fun `marking guards is done at once when Quest Helper is past the marking`() {
+    fun `marking guards reports back to Sergeant Tobyn when Quest Helper is past the marking`() {
         val game = FakeGame().apply {
             playerTile = Tile(3211, 3430, 0)
             helper = com.hcimbot.game.HelperStep("Report back to Sergeant Tobyn.", listOf(12648))
         }
         val ctx = TaskContext(game, game, Conditions(game))
-        assertEquals(com.hcimbot.plan.TaskResult.Done, com.hcimbot.plan.MarkGuardsTask().tick(ctx))
+        game.npcs += SceneEntity(12648, "Sergeant Tobyn", Tile(3212, 3430, 0))
+        val task = com.hcimbot.plan.MarkGuardsTask()
+        repeat(4) { task.tick(ctx) }
+        assertTrue(game.calls.any { it.startsWith("npc Sergeant Tobyn Talk-to") }, game.calls.toString())
     }
 
     @Test
