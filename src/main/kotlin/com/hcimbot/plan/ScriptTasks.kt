@@ -819,7 +819,7 @@ class FletchShaftsTask(
         const val HANDFUL = 18
         const val TREE_RADIUS = 28
         val YARD_CENTRE = Tile(3302, 3497, 0)
-        val TREES = listOf("Tree", "Dying tree")
+        val TREES = listOf("Tree")
         const val NO_TREE_TICKS = 6
         const val HOP_TICKS = 12
         const val STALL_TICKS = 400
