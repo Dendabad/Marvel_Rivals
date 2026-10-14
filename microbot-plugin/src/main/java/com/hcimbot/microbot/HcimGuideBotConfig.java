@@ -98,6 +98,20 @@ public interface HcimGuideBotConfig extends Config
 		return "draynor-fence";
 	}
 
+	String START_AT_STEP = "startAtStep";
+
+	@ConfigItem(
+		keyName = START_AT_STEP,
+		name = "Start at step",
+		description = "To retest a step, type its number (shown in the status line) and press Enter. "
+			+ "The bot forgets its own ticks from that step on and starts there, then this goes back to 0.",
+		position = 9
+	)
+	default int startAtStep()
+	{
+		return 0;
+	}
+
 	@ConfigItem(
 		keyName = "guideJsonPath",
 		name = "guide.json path",

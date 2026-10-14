@@ -45,6 +45,7 @@ class HcimGuideBotScript : Script() {
             if (!gate() || !Microbot.isLoggedIn()) return
             if (record(config)) return
             val current = runner ?: start(config) ?: return
+            restartIfAsked(config, current)
             game.refresh()
             current.onGameTick()
             report(current)
@@ -80,6 +81,23 @@ class HcimGuideBotScript : Script() {
         if (recorder.record(at)) routes.save(name, recorder.tiles())
         Microbot.status = "HCIM bot RECORDING route \"$name\": ${recorder.size} tiles. Turn off Record route to finish."
         return true
+    }
+
+    /**
+     * Start at step: restart there, then set the setting back to 0 so the next
+     * start of the plugin does not wipe the same ticks again.
+     */
+    private fun restartIfAsked(config: HcimGuideBotConfig, runner: GuideRunner) {
+        val number = config.startAtStep()
+        if (number <= 0) return
+        Microbot.getConfigManager().setConfiguration(HcimGuideBotConfig.GROUP, HcimGuideBotConfig.START_AT_STEP, 0)
+        val stillTicked = runner.restartAt(number)
+        val note = if (stillTicked.isEmpty()) "" else {
+            val shown = stillTicked.take(5).joinToString("\n") { "  ${it.text}" }
+            "\n\nThese are ticked in the B0aty guide, so untick them there if you want them redone too:\n$shown" +
+                if (stillTicked.size > 5) "\n  and ${stillTicked.size - 5} more" else ""
+        }
+        Microbot.showMessage("HCIM Guide Bot is starting again at step $number.$note", MESSAGE_MS)
     }
 
     /** Loads the guide on the first tick, since it needs the B0aty plugin to be running. */
@@ -121,8 +139,8 @@ class HcimGuideBotScript : Script() {
     private fun report(runner: GuideRunner) {
         val state = runner.state
         Microbot.status = when (state) {
-            GuideRunner.State.Running -> "HCIM bot: ${runner.currentStep?.text ?: "starting"}"
-            is GuideRunner.State.Paused -> "HCIM bot PAUSED: ${state.reason}"
+            GuideRunner.State.Running -> "HCIM bot ${number(runner)}${runner.currentStep?.text ?: "starting"}"
+            is GuideRunner.State.Paused -> "HCIM bot PAUSED at ${number(runner)}${state.reason}"
             is GuideRunner.State.Halted -> "HCIM bot STOPPED: ${state.reason}"
             GuideRunner.State.Finished -> "HCIM bot: guide finished"
             GuideRunner.State.Stopped -> "HCIM bot: stopped"
@@ -134,6 +152,8 @@ class HcimGuideBotScript : Script() {
         }
         shownState = state
     }
+
+    private fun number(runner: GuideRunner): String = runner.currentStepNumber?.let { "step $it: " } ?: ""
 
     /**
      * Hitpoints, checked every 300ms whatever the main loop is doing. At the

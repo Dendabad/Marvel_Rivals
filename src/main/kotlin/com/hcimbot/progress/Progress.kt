@@ -4,6 +4,9 @@ package com.hcimbot.progress
 interface ProgressStore {
     fun completedIds(): Set<String>
     fun markComplete(stepId: String)
+
+    /** Forgets the bot's own ticks for these steps. Ticks made in the plugin are the player's and stay. */
+    fun forget(stepIds: Collection<String>)
 }
 
 /** The B0aty plugin saves progress as step ids joined with commas. */
@@ -40,6 +43,10 @@ class SharedProgressStore(
         if (bot.add(stepId)) writeBot(ProgressFormat.encode(bot))
     }
 
+    override fun forget(stepIds: Collection<String>) {
+        if (bot.removeAll(stepIds.toSet())) writeBot(ProgressFormat.encode(bot))
+    }
+
     companion object {
         const val PLUGIN_GROUP = "b0atyguide"
         const val PLUGIN_KEY = "progress"
@@ -53,5 +60,9 @@ class InMemoryProgressStore(initial: Set<String> = emptySet()) : ProgressStore {
     override fun completedIds(): Set<String> = done.toSet()
     override fun markComplete(stepId: String) {
         done += stepId
+    }
+
+    override fun forget(stepIds: Collection<String>) {
+        done -= stepIds.toSet()
     }
 }

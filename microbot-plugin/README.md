@@ -67,6 +67,7 @@ Find **HCIM Guide Bot** in Microbot's plugin list and open its settings:
 | Pause when attacked | on | Pauses if a monster targets you during a step that is not a fight. |
 | Record route | off | Records a safe route you walk, see below. |
 | Route name | draynor-fence | The name to record under. |
+| Start at step | 0 | Type a step number to retest from there, see below. |
 | guide.json path | empty | Only if the B0aty plugin is not installed. |
 
 Log in, then switch the plugin on. It starts at the first step not yet ticked in the B0aty guide.
@@ -78,6 +79,16 @@ Log in, then switch the plugin on. It starts at the first step not yet ticked in
 - To retry the paused step from scratch, switch the plugin off and on again.
 - To stop, switch the plugin off.
 - It stops for good below the hitpoint limit. A watchdog checks hitpoints three times a second, even in the middle of a long walk, and can stop the walk or eat.
+
+## Retesting a step
+
+The status line shows the step's number, like `HCIM bot step 5: Head North-West...`. The same numbers are used in [docs/first-100-steps.md](../docs/first-100-steps.md).
+
+1. In the bot's settings, type the number into **Start at step** and press **Enter**.
+2. The bot forgets its own ticks from that step on and starts there. The setting goes back to 0 by itself.
+3. If the B0aty guide has any of those steps ticked, a message lists them. Untick them in the B0aty sidebar if you want those redone too, since the bot only clears its own ticks.
+
+Some steps finish themselves as soon as the game shows they are done, for example a diary task already completed, a quest already past that point, or items already in your inventory. Those cannot be repeated on the same account. Retest them on a fresh account, or drop or bank the items first.
 
 ## Recording a safe route
 

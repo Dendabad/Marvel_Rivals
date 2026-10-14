@@ -153,6 +153,33 @@ class GuideRunnerTest {
     }
 
     @Test
+    fun `restarting at a step forgets the bot's ticks from there and starts there`() {
+        val progress = InMemoryProgressStore(guide.steps.map { it.id }.toSet())
+        val runner = GuideRunner(guide, game, game, progress, BotSettings(), log::add).also { it.start() }
+        runner.ticks(1)
+        assertEquals(GuideRunner.State.Finished, runner.state)
+
+        // Step 4 is "walk": retest it.
+        val stillTicked = runner.restartAt(4)
+        assertTrue(stillTicked.isEmpty())
+        assertEquals(guide.steps.take(3).map { it.id }.toSet(), progress.completedIds())
+        runner.ticks(1)
+        assertEquals("walk", runner.currentStep?.id)
+        assertEquals(4, runner.currentStepNumber)
+    }
+
+    @Test
+    fun `restarting leaves the player's own ticks and reports them`() {
+        // A store where the plugin ticked everything: the bot cannot forget those.
+        val plugin = guide.steps.joinToString(",") { it.id }
+        var bot: String? = null
+        val progress = com.hcimbot.progress.SharedProgressStore({ plugin }, { bot }, { bot = it })
+        val runner = GuideRunner(guide, game, game, progress, BotSettings(), log::add).also { it.start() }
+        val stillTicked = runner.restartAt(6)
+        assertEquals(listOf("fight", "quest-rest"), stillTicked.map { it.id })
+    }
+
+    @Test
     fun `low hitpoints halt the bot`() {
         game.hitpoints = 3
         val runner = runner()

@@ -45,6 +45,12 @@ class GuideRunner(
 
     val currentStep: Step? get() = active?.step
 
+    /** The current step's 1 based place in the guide, matching docs/first-100-steps.md. */
+    val currentStepNumber: Int? get() = active?.step?.let { step -> guide.steps.indexOf(step) + 1 }
+
+    /** Steps before this index count as done for this session, see [restartAt]. */
+    private var floor = 0
+
     private val conditions = Conditions(game)
     private val completion = StepCompletion(guide, game, conditions)
     private val planner = StepPlanner(guide, settings, routes)
@@ -88,6 +94,24 @@ class GuideRunner(
     fun halt(reason: String) {
         state = State.Halted(reason)
         log("HALTED: $reason")
+    }
+
+    /**
+     * Starts again at step [number] (1 based), to retest it: the bot forgets its
+     * own ticks from that step on and treats earlier steps as done for now.
+     * Returns the steps from there on that are still ticked in the plugin,
+     * since those are the player's and only the player can untick them.
+     */
+    fun restartAt(number: Int): List<Step> {
+        val from = (number - 1).coerceIn(0, guide.steps.size)
+        val later = guide.steps.drop(from)
+        progress.forget(later.map { it.id })
+        floor = from
+        active = null
+        if (state is State.Paused || state is State.Finished) state = State.Running
+        log("Restarting at step $number")
+        val stillTicked = progress.completedIds()
+        return later.filter { it.id in stillTicked }
     }
 
     fun clearHalt() {
@@ -164,7 +188,7 @@ class GuideRunner(
 
     private fun nextStep(): Step? {
         val done = progress.completedIds()
-        return guide.steps.firstOrNull { it.id !in done }
+        return guide.steps.drop(floor).firstOrNull { it.id !in done }
     }
 
     private fun begin(step: Step): Active {
