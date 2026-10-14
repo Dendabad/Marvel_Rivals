@@ -222,6 +222,12 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `Marlo's closing options end the chat with I'll get going`() {
+        val options = listOf("Why do you care about Drezel anyway?", "Do I get a reward for this?", "I'll get going.")
+        assertEquals(com.hcimbot.plan.DialoguePlan.Choice.ByText("I'll get going."), com.hcimbot.plan.DialoguePlan.None.choose(options))
+    }
+
+    @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
         val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()

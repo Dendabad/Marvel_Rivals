@@ -119,7 +119,7 @@ sealed interface DialoguePlan {
         private val ENDINGS = listOf(
             "^(no,? )?(thanks|thank you)", "good ?bye|^bye", "nothing", "never ?mind", "i'll see about", "i'll be on my way",
             "i (have|need|must|should|'d better) (to )?go", "not (right )?now", "maybe later", "not interested",
-            "^i'?m (good|fine|ok|okay|alright)", "^no\\b", "^alright", "^ok(ay)?\\b", "^i see",
+            "^i'?m (good|fine|ok|okay|alright)", "^no\\b", "^alright", "^ok(ay)?\\b", "^i see", "^i'll get going",
         ).map { Regex(it, RegexOption.IGNORE_CASE) }
 
         /** Agreeing to something, which ending a conversation must never do: "I'd love to come!", "Yes". */
