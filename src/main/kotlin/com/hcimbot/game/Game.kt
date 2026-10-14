@@ -15,6 +15,8 @@ data class SceneEntity(
 data class HelperStep(val text: String, val npcIds: List<Int>, val tile: Tile? = null,
     /** The chat options Quest Helper lists for this step, when it has any. */
     val choices: List<String> = emptyList(),
+    /** The object ids Quest Helper highlights, for an object step. */
+    val objectIds: List<Int> = emptyList(),
 )
 
 /**

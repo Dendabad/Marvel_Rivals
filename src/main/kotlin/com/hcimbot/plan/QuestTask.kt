@@ -168,6 +168,16 @@ class QuestTask(
                 // Quest Helper often says "use these stairs" without the stair's id. Its
                 // branches say where they lead, so walk there: the walker climbs the stairs.
                 stairBranch(step)?.tile?.let { return Made.Ready(WalkTask(it, radius = 3)) }
+                // No verb to click, and Quest Helper is showing an object with one (Daddy's Home's furniture: a
+                // left click on a removed piece builds it again): do what Quest Helper shows.
+                if (StepPlanner.verb(step.text) == null) {
+                    ctx.game.helperStep()?.takeIf { it.objectIds.isNotEmpty() }?.let { shown ->
+                        helperVerb(shown.text)?.let { verb ->
+                            ctx.log("Following Quest Helper: ${shown.text.take(80)} (object ${shown.objectIds})")
+                            return Made.Ready(InteractTask(InteractTask.Kind.OBJECT, shown.objectIds, emptyList(), listOfNotNull(shown.tile), verb, dialogue))
+                        }
+                    }
+                }
                 // guide.json leaves some ids out but keeps RuneLite's name for the object.
                 val ids = step.ids.ifEmpty { listOfNotNull(step.constant?.let(ctx.game::objectIdNamed)) }
                 if (ids.isEmpty()) return Made.Refused("no object id for this step")
@@ -177,6 +187,14 @@ class QuestTask(
             }
             else -> Made.Refused("unknown quest step kind ${step.kind}")
         }
+    }
+
+    /** The click Quest Helper's text asks for: "Demolish the broken stool", "Right-click remove the carpet". */
+    private fun helperVerb(text: String): String? = StepPlanner.verb(text) ?: when {
+        text.startsWith("demolish", ignoreCase = true) -> "Demolish"
+        text.contains("remove", ignoreCase = true) && text.length < 60 -> "Remove"
+        text.startsWith("build", ignoreCase = true) -> "Build"
+        else -> null
     }
 
     /**

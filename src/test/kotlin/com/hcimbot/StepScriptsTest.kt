@@ -228,6 +228,22 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `furniture is removed the way Quest Helper shows, and the task ends when it moves on`() {
+        val game = FakeGame().apply {
+            playerTile = Tile(3240, 3396, 0)
+            objects += SceneEntity(40216, "Broken stool", Tile(3239, 3394, 0))
+            helper = com.hcimbot.game.HelperStep("Demolish the broken stool.", emptyList(), Tile(3239, 3394, 0), emptyList(), listOf(40216))
+        }
+        val ctx = TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.HelperObjectsTask(Regex("^(demolish|remove)", RegexOption.IGNORE_CASE))
+        task.tick(ctx)
+        assertTrue(game.calls.any { it == "object Broken stool Demolish" }, game.calls.toString())
+        game.helper = com.hcimbot.game.HelperStep("Talk to Old Man Yarlo again.", listOf(10425))
+        repeat(6) { task.tick(ctx) }
+        assertEquals(com.hcimbot.plan.TaskResult.Done, task.tick(ctx))
+    }
+
+    @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
         val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()

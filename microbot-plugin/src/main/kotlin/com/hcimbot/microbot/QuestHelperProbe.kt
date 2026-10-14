@@ -36,7 +36,11 @@ object QuestHelperProbe {
         }
         val point = field(step, "worldPoint") as? net.runelite.api.coords.WorldPoint
         val tile = point?.let { Instances.toTemplate(it) }?.let { com.hcimbot.guide.Tile(it.x, it.y, it.plane) }
-        com.hcimbot.game.HelperStep(text, ids, tile, choices(step))
+        val objects = buildList {
+            (field(step, "objectID") as? Number)?.toInt()?.takeIf { it > 0 }?.let(::add)
+            (field(step, "alternateObjectIDs") as? Collection<*>)?.forEach { (it as? Number)?.toInt()?.let(::add) }
+        }
+        com.hcimbot.game.HelperStep(text, ids, tile, choices(step), objects)
     }.getOrNull()
 
     /** The chat options Quest Helper wants picked: its DialogChoiceSteps hold a list of steps with a `choice` text. */

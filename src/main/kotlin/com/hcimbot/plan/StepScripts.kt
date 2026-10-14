@@ -423,9 +423,9 @@ class StepScripts(private val guide: Guide) {
         "711ae4d841" to { settings ->
             auto(
                 quest("daddyshome", stopAt = 2, allowCombat = settings.allowCombat),
-                RepeatUntil("Remove the broken furniture", { it.game.nearestObject(BROKEN_FURNITURE, near = YARLO_HOUSE) == null }, {
-                    obj(BROKEN_FURNITURE, emptyList(), YARLO_HOUSE, null)
-                }, maxRounds = 12),
+                // Quest Helper points at each piece in turn. Clicking the old ids went on to rebuild the
+                // piece just removed, which leaves a build spot with the same object ids.
+                HelperObjectsTask(Regex("^(demolish|remove|right-click remove)", RegexOption.IGNORE_CASE)),
                 trust = true,
             )
         },

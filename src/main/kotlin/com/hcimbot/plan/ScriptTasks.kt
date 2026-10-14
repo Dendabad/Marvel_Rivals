@@ -699,3 +699,42 @@ class MarkGuardsTask(
         const val SETTLE = 4
     }
 }
+
+
+/**
+ * Does what the Quest Helper plugin shows, one object at a time, for as long as its instruction matches
+ * [wanted] ("Demolish the broken stool", "Remove the campbed"). The verb comes from its text. Quest Helper
+ * moves on to the next piece when one is done, so this never has to know which is left, or what a piece
+ * turns into (a removed piece becomes somewhere to build, and a left click on that would build).
+ */
+class HelperObjectsTask(private val wanted: Regex, private val maxActions: Int = 40) : BaseTask() {
+    override val description = "Do what Quest Helper shows"
+    private var actions = 0
+    private var settling = 0
+    private var missing = 0
+    private val tries = mutableMapOf<Int, Int>()
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        if (settling > 0) { settling--; return TaskResult.Running }
+        if (game.isBusy) return TaskResult.Running
+        val shown = game.helperStep() ?: return TaskResult.Failed("Quest Helper is not showing a step")
+        if (!wanted.containsMatchIn(shown.text)) return TaskResult.Done
+        if (actions >= maxActions) return TaskResult.Failed("did $maxActions things for \"${shown.text.take(50)}\" and Quest Helper still shows it")
+        val verb = if (shown.text.contains("demolish", ignoreCase = true)) "Demolish" else "Remove"
+        val at = game.playerTile ?: return TaskResult.Running
+        val target = shown.objectIds.takeIf { it.isNotEmpty() }?.let { game.nearestObject(it, near = shown.tile) }
+        if (target == null) {
+            val place = shown.tile
+            if (place != null && at.distanceTo(place) > 3 && !game.isMoving) return attempt(ctx.actions.walkTo(place), "walk to $place")
+            return if (++missing >= 20) TaskResult.Failed("cannot see the object Quest Helper points at: ${shown.objectIds}") else TaskResult.Running
+        }
+        missing = 0
+        if (tries.merge(target.id, 1, Int::plus)!! > 6) return TaskResult.Failed("$verb on object ${target.id} did not work")
+        ctx.log("$verb object ${target.id}: ${shown.text.take(60)}")
+        actions++
+        ctx.actions.interactObject(target, verb)
+        settling = 4
+        return TaskResult.Running
+    }
+}
