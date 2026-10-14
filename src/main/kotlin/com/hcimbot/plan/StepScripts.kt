@@ -568,7 +568,9 @@ class StepScripts(private val guide: Guide) {
                 // path to a first floor tile from outside). Climb it, then take the sweetcorn there.
                 OnlyIf({ ctx: TaskContext -> ctx.game.playerTile?.plane == 0 },
                     obj(emptyList(), listOf("Staircase"), Tile(1581, 3140, 0), "Climb-up")),
-                TakeItemTask(listOf(item("Sweetcorn", 5986, 1))),
+                TakeItemTask(listOf(item("Sweetcorn", 7088, 1))),
+                // The guide data has another id for it (5986), so its own done check would never be met.
+                trust = true,
             )
         },
 
