@@ -559,7 +559,9 @@ class StepScripts(private val guide: Guide) {
         // first floor, and Cam Torum. Go to the farm, then take the sweetcorn lying there.
         "1383b1d521" to { _ ->
             auto(
-                WalkTask(Tile(1574, 3139, 1), radius = 4),
+                // The walker cannot path to the first floor tile from outside (it said so), so go to the farm's ground
+                // floor below it, and let the item task climb or walk to the sweetcorn once it can see it.
+                WalkTask(Tile(1574, 3139, 0), radius = 6, anyFloor = true),
                 TakeItemTask(listOf(item("Sweetcorn", 5986, 1))),
             )
         },
