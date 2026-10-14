@@ -905,3 +905,35 @@ class TakeYardLogsTask(private val count: Int, private val logs: Int = 1511) : B
         const val WAIT_TICKS = 8
     }
 }
+
+
+/**
+ * Climbs out of the Lumber Yard's pen over the broken fence, when inside it. The dying trees are only inside the
+ * pen, so one that can be walked up to means the bot is inside. Done at once when outside.
+ */
+class LeavePenTask(private val maxTries: Int = 3) : BaseTask() {
+    override val description = "Climb out of the pen"
+    private var tries = 0
+    private var settling = 0
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        if (settling > 0) { settling--; return TaskResult.Running }
+        if (game.isBusy) return TaskResult.Running
+        val at = game.playerTile ?: return TaskResult.Running
+        val inside = game.objectsNear(listOf("Dying tree"), at, RADIUS).any { game.canReachBeside(it.tile) == true }
+        if (!inside) return TaskResult.Done
+        if (tries >= maxTries) return TaskResult.Failed("still inside the pen after $maxTries tries to climb the broken fence")
+        val fence = game.nearestObject(emptyList(), listOf("Broken fence"), at)
+            ?: return TaskResult.Failed("inside the pen but no broken fence in sight to climb")
+        tries++
+        ctx.log("Climbing out of the pen over the broken fence")
+        ctx.actions.interactObject(fence, "Climb-over")
+        settling = 4
+        return TaskResult.Running
+    }
+
+    private companion object {
+        const val RADIUS = 25
+    }
+}
