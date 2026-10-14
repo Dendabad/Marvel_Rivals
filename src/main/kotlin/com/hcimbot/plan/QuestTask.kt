@@ -53,6 +53,11 @@ class QuestTask(
 
     override fun tick(ctx: TaskContext): TaskResult {
         val progress = helper.progressVar ?: return TaskResult.Failed("$questKey has no progress variable in guide.json")
+        // Building in a house opens a menu of what can be built, which needs its piece picked (Yarlo's furniture).
+        if (ctx.game.showsChoice(FURNITURE_MENU)) {
+            ctx.actions.pickFurniture()
+            return TaskResult.Running
+        }
         val value = ctx.conditions.readVar(progress.kind, progress.id)
         val start = startValue ?: value.also { startValue = it }
         if (stopAtValue != null && value >= stopAtValue) return TaskResult.Done
@@ -244,6 +249,7 @@ class QuestTask(
 
     companion object {
         const val MAX_REPEATS = 3
+        const val FURNITURE_MENU = "Furniture Creation Menu"
         private val HELPER_TALK = Regex("^(talk|speak|report|return|go back|bring|give|ask)\\b", RegexOption.IGNORE_CASE)
         private val LEVEL = Regex("\\(level[- ](\\d+)\\)", RegexOption.IGNORE_CASE)
         private const val LEVEL_MARGIN = 5

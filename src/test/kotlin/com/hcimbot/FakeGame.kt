@@ -254,6 +254,11 @@ class FakeGame : GameState, GameActions {
         return true
     }
 
+    override fun pickFurniture(): Boolean {
+        calls += "pick furniture"
+        return true
+    }
+
     override fun makePick(quantity: String, item: Int): Boolean {
         calls += "make $quantity item $item"
         return true

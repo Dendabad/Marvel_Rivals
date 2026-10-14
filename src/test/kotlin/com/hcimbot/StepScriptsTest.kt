@@ -320,6 +320,18 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `a quest step picks the piece in the furniture menu when it opens`() {
+        val helper = com.hcimbot.guide.QuestHelper(com.hcimbot.guide.QuestVar("varbit", 10570), lastValue = 12, steps = emptyMap())
+        val game = FakeGame().apply {
+            playerTile = Tile(3240, 3396, 0)
+            windowChoices += "Furniture Creation Menu"
+        }
+        val ctx = TaskContext(game, game, Conditions(game))
+        com.hcimbot.plan.QuestTask("daddyshome", helper, allowCombat = false).tick(ctx)
+        assertTrue(game.calls.contains("pick furniture"), game.calls.toString())
+    }
+
+    @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
         val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()

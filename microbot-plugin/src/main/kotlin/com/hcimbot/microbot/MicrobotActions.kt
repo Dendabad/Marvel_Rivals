@@ -135,6 +135,18 @@ class MicrobotActions : GameActions {
         return false
     }
 
+    /** The Furniture Creation Menu's first piece: its cost line, which sits in its row, else the 1 key. */
+    override fun pickFurniture(): Boolean {
+        val row = onClient {
+            MicrobotGameState.widgetWhere { it.startsWith("Plank:") || it.startsWith("Nails:") || it.startsWith("Bolt") || it.startsWith("Level") }?.bounds
+        }
+        if (row != null) {
+            Microbot.getMouse().click(row)
+            return true
+        }
+        return pressKey('1')
+    }
+
     /** The quantity button, then the [item]th item from the left, both by clicking. */
     override fun makePick(quantity: String, item: Int): Boolean {
         val quantityButton = onClient { MicrobotGameState.makeWindowButton(quantity, useParent = false)?.bounds }
