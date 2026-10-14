@@ -268,18 +268,15 @@ class StepScriptsTest {
     }
 
     @Test
-    fun `fletching climbs the fence only when inside the pen, where a dying tree can be reached`() {
+    fun `fletching climbs the fence only when inside the pen, on the dying tree's side of it`() {
         fun run(inside: Boolean): List<String> {
-            val tree = Tile(3300, 3500, 0)
             val game = FakeGame().apply {
-                playerTile = Tile(3299, 3500, 0)
+                // The fence is at x 3298 and the dying tree at 3300: inside the pen is the tree's side of the fence.
+                playerTile = if (inside) Tile(3299, 3500, 0) else Tile(3290, 3500, 0)
                 inv[946] = 1
-                objects += SceneEntity(10041, "Dying tree", tree)
+                objects += SceneEntity(10041, "Dying tree", Tile(3300, 3500, 0))
                 objects += SceneEntity(2, "Broken fence", Tile(3298, 3500, 0))
                 objects += SceneEntity(1276, "Tree", Tile(3290, 3500, 0))
-                unreachable += Tile(0, 0, 0) // makes the fake answer reachability at all
-                // Outside the pen the dying tree and the tiles beside it cannot be walked to.
-                if (!inside) listOf(tree, Tile(3299, 3500, 0), Tile(3301, 3500, 0), Tile(3300, 3499, 0), Tile(3300, 3501, 0)).forEach { unreachable += it }
             }
             com.hcimbot.plan.FletchShaftsTask(target = 15).tick(TaskContext(game, game, Conditions(game)))
             return game.calls

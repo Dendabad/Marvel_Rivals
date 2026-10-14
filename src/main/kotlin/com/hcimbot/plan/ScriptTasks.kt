@@ -804,7 +804,7 @@ class FletchShaftsTask(
         // over the broken fence then, and never when it is already outside.
         if (checkInside) {
             checkInside = false
-            val inside = game.objectsNear(DYING_TREE, at, TREE_RADIUS).any { game.canReachBeside(it.tile) == true }
+            val inside = PenCheck.inside(game, at)
             if (inside && fenceTries < MAX_FENCE_TRIES) {
                 val fence = game.nearestObject(emptyList(), listOf("Broken fence"), at)
                 if (fence != null) {
@@ -911,7 +911,7 @@ class TakeYardLogsTask(private val count: Int, private val logs: Int = 1511) : B
  * Climbs out of the Lumber Yard's pen over the broken fence, when inside it. The dying trees are only inside the
  * pen, so one that can be walked up to means the bot is inside. Done at once when outside.
  */
-class LeavePenTask(private val maxTries: Int = 3) : BaseTask() {
+class LeavePenTask(private val maxTries: Int = 2) : BaseTask() {
     override val description = "Climb out of the pen"
     private var tries = 0
     private var settling = 0
@@ -921,19 +921,38 @@ class LeavePenTask(private val maxTries: Int = 3) : BaseTask() {
         if (settling > 0) { settling--; return TaskResult.Running }
         if (game.isBusy) return TaskResult.Running
         val at = game.playerTile ?: return TaskResult.Running
-        val inside = game.objectsNear(listOf("Dying tree"), at, RADIUS).any { game.canReachBeside(it.tile) == true }
-        if (!inside) return TaskResult.Done
-        if (tries >= maxTries) return TaskResult.Failed("still inside the pen after $maxTries tries to climb the broken fence")
-        val fence = game.nearestObject(emptyList(), listOf("Broken fence"), at)
-            ?: return TaskResult.Failed("inside the pen but no broken fence in sight to climb")
+        if (!PenCheck.inside(game, at)) return TaskResult.Done
+        if (tries >= maxTries) {
+            ctx.log("Still looks to be inside the pen after $maxTries climbs, carrying on")
+            return TaskResult.Done
+        }
+        val fence = game.nearestObject(emptyList(), listOf("Broken fence"), at) ?: return TaskResult.Done
         tries++
         ctx.log("Climbing out of the pen over the broken fence")
         ctx.actions.interactObject(fence, "Climb-over")
         settling = 4
         return TaskResult.Running
     }
+}
 
-    private companion object {
-        const val RADIUS = 25
+
+/**
+ * Whether the player is inside the Lumber Yard's pen, by position. Walking maps say the dying tree can be reached
+ * from both sides (the broken fence is a gap in them), so that cannot tell. The dying trees are only inside the pen,
+ * and the broken fence is its way out: inside means closer to the dying tree than the fence is.
+ */
+object PenCheck {
+    fun inside(game: com.hcimbot.game.GameState, at: Tile): Boolean {
+        val tree = game.objectsNear(listOf("Dying tree"), at, RADIUS).minByOrNull { it.tile.distanceTo(at) } ?: return false
+        val fence = game.nearestObject(emptyList(), listOf("Broken fence"), tree.tile) ?: return false
+        return squared(at, tree.tile) < squared(fence.tile, tree.tile)
     }
+
+    private fun squared(a: Tile, b: Tile): Int {
+        val dx = a.x - b.x
+        val dy = a.y - b.y
+        return dx * dx + dy * dy
+    }
+
+    private const val RADIUS = 30
 }
