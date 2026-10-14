@@ -107,6 +107,13 @@ class StepScriptsTest {
     }
 
     @Test
+    fun `Dr Harlow's beer question is answered by agreeing, not by refusing`() {
+        val plan = com.hcimbot.plan.DialoguePlan.Texts(com.hcimbot.plan.QuestFills.extraDialogue("vampyreslayer"))
+        val choice = plan.choose(listOf("No, you've had enough.", "Ok, I'll get you a beer.", "Never mind."))
+        assertEquals(com.hcimbot.plan.DialoguePlan.Choice.ByText("Ok, I'll get you a beer."), choice)
+    }
+
+    @Test
     fun `no step has two scripts, where the later would silently replace the earlier`() {
         val source = java.io.File("src/main/kotlin/com/hcimbot/plan/StepScripts.kt").readText()
         val ids = Regex("\"([0-9a-f]{10})\" to \\{").findAll(source).map { it.groupValues[1] }.toList()

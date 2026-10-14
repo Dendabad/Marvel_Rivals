@@ -24,7 +24,11 @@ object QuestFills {
      * instructions says to pick. Dr Harlow's first question was reworded, from "Morgan needs your help!".
      */
     private val extraDialogue: Map<String, List<String>> = mapOf(
-        "vampyreslayer" to listOf("I need your help dealing with a vampyre"),
+        "vampyreslayer" to listOf(
+            "I need your help dealing with a vampyre",
+            // Dr Harlow asking for a beer: the agreeing answer, never "No, you've had enough".
+            "get you a beer", "buy you a beer", "got you a beer", "have a beer", "here's a beer", "here is a beer",
+        ),
     )
 
     fun extraDialogue(quest: String): List<String> = extraDialogue[quest].orEmpty()
