@@ -300,7 +300,6 @@ class DepositItemsTask(private val itemIds: List<Int>) : BaseTask() {
 class HopTask : BaseTask() {
     private var hopped = false
     private var waited = 0
-    private var clearTicks = 0
     override val description = "Hop worlds"
 
     override fun tick(ctx: TaskContext): TaskResult {
@@ -511,6 +510,7 @@ class FollowGuardTask(private val guardIds: List<Int>, private val hides: List<T
     private var announced = false
     private var walks = 0
     private var inCutscene = false
+    private var clearTicks = 0
     private var waited = 0
 
     override fun tick(ctx: TaskContext): TaskResult {
