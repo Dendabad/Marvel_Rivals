@@ -1,5 +1,5 @@
 @echo off
-rem HCIM Guide Bot watcher. Keep this window open while you play. Every minute it checks GitHub for a new version of the
+rem HCIM Guide Bot watcher. Keep this window open while you play. Every few seconds it checks GitHub for a new version of the
 rem bot, and when there is one it updates by itself. To be asked first (press Y) start it as:
 rem     watch-bot.bat ask
 rem The update is the same as update-bot.bat: it downloads, builds, and only on a good build replaces the installed bot,
@@ -14,13 +14,17 @@ set "HERE=%~dp0"
 set "MODE=auto"
 if /i "%~1"=="ask" set "MODE=ask"
 set "HCIM_NOPAUSE=1"
+rem GitHub allows 60 checks an hour without a login and 5000 with one, so with the report token set it checks every 10
+rem seconds, and without it every 60.
+set "WAIT=60"
+if defined HCIM_REPORT_TOKEN set "WAIT=10"
 
-echo Watching %BRANCH% for new versions. Mode: %MODE%. Close this window to stop.
+echo Watching %BRANCH% for new versions. Mode: %MODE%, checking every %WAIT% seconds. Close this window to stop.
 echo.
 
 :loop
 set "LATEST="
-for /f "usebackq delims=" %%S in (`powershell -NoProfile -ExecutionPolicy Bypass -Command "try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (Invoke-RestMethod -UseBasicParsing -Uri '%API%' -Headers @{ 'User-Agent' = 'hcim-bot-watcher' }).sha } catch { '' }"`) do set "LATEST=%%S"
+for /f "usebackq delims=" %%S in (`powershell -NoProfile -ExecutionPolicy Bypass -Command "try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (Invoke-RestMethod -UseBasicParsing -Uri '%API%' -Headers $(if ($env:HCIM_REPORT_TOKEN) { @{ 'User-Agent' = 'hcim-bot-watcher'; 'Authorization' = ('Bearer ' + $env:HCIM_REPORT_TOKEN) } } else { @{ 'User-Agent' = 'hcim-bot-watcher' } })).sha } catch { '' }"`) do set "LATEST=%%S"
 if not defined LATEST goto wait
 
 set "INSTALLED="
@@ -54,5 +58,5 @@ if errorlevel 1 (
 echo.
 
 :wait
-timeout /t 60 /nobreak >nul
+timeout /t %WAIT% /nobreak >nul
 goto loop
