@@ -110,7 +110,7 @@ class HcimGuideBotPlugin : Plugin() {
     }
 
     companion object {
-        const val VERSION = "0.2.0"
+        const val VERSION = "0.2.1"
         private const val SIDEBAR_PRIORITY = 8
     }
 }

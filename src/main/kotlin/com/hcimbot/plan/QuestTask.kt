@@ -52,7 +52,9 @@ class QuestTask(
 
         if (boundedTo != null) {
             // With no ids to go on, the step's part is over as soon as the quest advances.
-            val ours = chosen.ids.any { it in boundedTo }
+            // Heading up to the step's NPC through a stair with no id counts as our part too.
+            val ours = chosen.ids.any { it in boundedTo } ||
+                (chosen === instruction && stairBranch(instruction)?.ids?.any { it in boundedTo } == true)
             if (value > start && (boundedTo.isEmpty() || !ours)) return TaskResult.Done
             if (value == start && boundedTo.isNotEmpty() && !ours && current == null) {
                 return TaskResult.Failed("the guide step is about ids $boundedTo but the quest is at \"${chosen.text}\"")
@@ -118,13 +120,25 @@ class QuestTask(
                 Made.Ready(InteractTask(InteractTask.Kind.NPC, step.ids, emptyList(), listOfNotNull(tile), action, dialogue))
             }
             "object" -> {
-                if (step.ids.isEmpty()) return Made.Refused("no object id for this step")
+                if (step.ids.isEmpty()) {
+                    // Quest Helper often says "use these stairs" without the stair's id. Its
+                    // branches say where they lead, so walk there: the walker climbs the stairs.
+                    val leadsTo = stairBranch(step)?.tile ?: return Made.Refused("no object id for this step")
+                    return Made.Ready(WalkTask(leadsTo, radius = 3))
+                }
                 // Quest Helper highlights objects for a left click, so that is the fallback here.
                 val action = StepPlanner.verb(step.text)
                 Made.Ready(InteractTask(InteractTask.Kind.OBJECT, step.ids, emptyList(), listOfNotNull(tile), action, dialogue))
             }
             else -> Made.Refused("unknown quest step kind ${step.kind}")
         }
+    }
+
+    /** The branch an id-less stair or ladder step leads to: the first one with a place on another floor. */
+    private fun stairBranch(step: Instruction): Instruction? {
+        if (step.kind != "object" || step.ids.isNotEmpty()) return null
+        val from = step.tile
+        return step.whenIn.firstOrNull { branch -> branch.tile?.let { from == null || it.plane != from.plane } == true }
     }
 
     companion object {

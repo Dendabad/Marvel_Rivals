@@ -7,7 +7,7 @@
 007 e2deed373e AUTO+trust QuestTask
 008 d3c4ea0a99 AUTO Optional>OnlyIf
 009 d51fed8c25 AUTO+trust QuestTask
-010 7589a86b77 AUTO TakeItemTask
+010 7589a86b77 AUTO WalkTask>TakeItemTask
 011 0cced66418 AUTO WalkTask>BankTask
 012 caa42731e5 SKIP
 013 a90bd856f8 SKIP

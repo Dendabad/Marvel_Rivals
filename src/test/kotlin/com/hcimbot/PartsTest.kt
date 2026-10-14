@@ -79,6 +79,38 @@ class PartsTest {
     }
 
     @Test
+    fun `quest stairs with no id are climbed by walking to the floor above`() {
+        // Rune Mysteries at the start: "use the south staircase", with no staircase id,
+        // and a branch for once you are upstairs with the Duke.
+        val game = FakeGame()
+        game.playerTile = Tile(3222, 3218, 0)
+        val upstairs = Requirement(zone = listOf(listOf(3203, 3206, 1, 3218, 3231, 1)))
+        val duke = com.hcimbot.guide.Instruction(
+            kind = "npc", point = listOf(3209, 3222, 1), text = "Talk to Duke Horacio on the first floor of Lumbridge castle.",
+            ids = listOf(815), dialogue = listOf("Have you any quests for me?", "Yes."), condition = upstairs,
+        )
+        val helper = com.hcimbot.guide.QuestHelper(
+            com.hcimbot.guide.QuestVar("varp", 63),
+            lastValue = 1,
+            steps = mapOf(
+                "0" to com.hcimbot.guide.Instruction(
+                    kind = "object", point = listOf(3205, 3208, 0), text = duke.text, whenIn = listOf(duke),
+                ),
+            ),
+        )
+        game.npcs += com.hcimbot.game.SceneEntity(815, "Duke Horacio", Tile(3209, 3222, 1))
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.QuestTask("runemysteries", helper, allowCombat = false, boundedTo = setOf(815, 5327))
+
+        val first = task.tick(ctx)
+        assertTrue(first !is com.hcimbot.plan.TaskResult.Failed, first.toString())
+        assertEquals(listOf("walk (3209, 3222, 1)"), game.calls)
+
+        repeat(5) { task.tick(ctx) }
+        assertTrue(game.calls.any { it.startsWith("npc Duke Horacio") }, game.calls.toString())
+    }
+
+    @Test
     fun `menu verbs come from the step text`() {
         assertEquals("Pickpocket", StepPlanner.verb(Step(text = "Pickpocket a man/woman [Lumbridge Easy Diary]")))
         assertEquals("Talk-to", StepPlanner.verb(Step(text = "Go upstairs and Talk to Duke Horacio (1,1)")))

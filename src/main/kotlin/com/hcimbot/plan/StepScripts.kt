@@ -104,6 +104,16 @@ class StepScripts(private val guide: Guide, private val routes: RouteStore? = nu
             )
         },
 
+        // 10. "Go upstairs again and Collect 4x logs on the top floor"
+        // The guide has no place for the logs, so go up to the top floor first. They
+        // lie in the room by the bank, well within reach of the top of the stairs.
+        "7589a86b77" to { _ ->
+            auto(
+                WalkTask(LUMBRIDGE_TOP_FLOOR, radius = 3),
+                TakeItemTask(listOf(item("Logs", LOGS, 4))),
+            )
+        },
+
         // 12. "Keep the Shrimps in your bank for later": nothing to do now.
         "caa42731e5" to { _ -> skip("a reminder to keep an item, nothing to do") },
 
@@ -292,6 +302,7 @@ class StepScripts(private val guide: Guide, private val routes: RouteStore? = nu
         // Places used by several scripts.
         private val LUMBRIDGE_SOUTH_STAIRS = Tile(3206, 3208, 0)
         private val LUMBRIDGE_KITCHEN = Tile(3210, 3214, 0)
+        private val LUMBRIDGE_TOP_FLOOR = Tile(3208, 3220, 2)
         private val LUMBRIDGE_GENERAL_STORE = Tile(3212, 3246, 0)
         private val MAGIC_TUTOR = Tile(3218, 3238, 0)
         private val VARROCK_KITCHEN_STAIRS = Tile(3219, 3497, 0)
@@ -319,6 +330,7 @@ class StepScripts(private val guide: Guide, private val routes: RouteStore? = nu
         private const val BUCKET_EMPTY = 1925
         private const val BUCKET_WATER = 1929
         private const val GHOSTSPEAK = 552
+        private const val LOGS = 1511
         private const val CHEESE = 1985
         private const val GARLIC = 1550
         private const val JUG_WINE = 1993
