@@ -431,6 +431,10 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 101. "Bank the ashes": the ashes from step 99, into the nearest bank. Left to the planner this was a bank step
+        // with nothing to deposit, which finished at once without going to a bank.
+        "758b5743b7" to { _ -> auto(DepositItemsTask(listOf(ASHES))) },
+
         // 102. "Head North-East to the Lumberyard": the sawmill, where the next steps are. The guide's own point for
         // "Lumberyard" is a spot north of it, past the fence step 103 climbs.
         "c5b29450c6" to { _ -> auto(WalkTask(SAWMILL, radius = 5)) },
@@ -583,6 +587,7 @@ class StepScripts(private val guide: Guide) {
         private const val CHEESE = 1985
         private const val GARLIC = 1550
         private const val STAKE = 1549
+        private const val ASHES = 592
         private const val ROVINS_KEY = 2400
         private const val JUG_WINE = 1993
         private const val XMARKS_LAMP = 23072
