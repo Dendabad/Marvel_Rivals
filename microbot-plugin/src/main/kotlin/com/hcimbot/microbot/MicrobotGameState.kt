@@ -297,19 +297,35 @@ class MicrobotGameState : GameState {
             return Microbot.getClient().widgetRoots?.firstNotNullOfOrNull { visit(it) }
         }
 
-        /** The visible widget whose text is [target], in the same window as the widget showing [anchor]. Client thread. */
-        fun widgetInWindow(anchor: String, target: String): net.runelite.api.widgets.Widget? {
-            var root = widgetWhere { it.contains(anchor, ignoreCase = true) } ?: return null
-            while (root.parent != null) root = root.parent
-            fun visit(w: net.runelite.api.widgets.Widget?): net.runelite.api.widgets.Widget? {
-                if (w == null || w.isHidden) return null
-                if (Text.removeTags(w.text.orEmpty()).trim().equals(target, ignoreCase = true)) return w
-                for (group in listOf(w.dynamicChildren, w.staticChildren, w.nestedChildren)) {
-                    group?.forEach { child -> visit(child)?.let { return it } }
-                }
-                return null
+        /**
+         * A button of the make window ("All", or "Space" for its first item), found among visible widgets with that
+         * text. The chat's own "All" tab has the same text, so a match must sit with the quantity buttons: within three
+         * levels above it there is a widget showing "X" and "10". Returns the button itself, its parent when that is
+         * the clickable area. Client thread.
+         */
+        fun makeWindowButton(label: String, useParent: Boolean): net.runelite.api.widgets.Widget? {
+            fun textOf(w: net.runelite.api.widgets.Widget?) = Text.removeTags(w?.text.orEmpty()).trim()
+            fun descendants(w: net.runelite.api.widgets.Widget?, out: MutableList<net.runelite.api.widgets.Widget>) {
+                if (w == null || w.isHidden) return
+                out += w
+                for (group in listOf(w.dynamicChildren, w.staticChildren, w.nestedChildren)) group?.forEach { descendants(it, out) }
             }
-            return visit(root)
+            val all = mutableListOf<net.runelite.api.widgets.Widget>()
+            Microbot.getClient().widgetRoots?.forEach { descendants(it, all) }
+            for (candidate in all.filter { textOf(it).equals(label, ignoreCase = true) }) {
+                var up: net.runelite.api.widgets.Widget? = candidate
+                repeat(3) {
+                    up = up?.parent
+                    val inside = mutableListOf<net.runelite.api.widgets.Widget>()
+                    descendants(up, inside)
+                    val texts = inside.map(::textOf)
+                    if (texts.any { it == "X" } && texts.any { it == "10" }) {
+                        val target = if (useParent) candidate.parent ?: candidate else candidate
+                        return if (target.bounds.width > 0) target else candidate
+                    }
+                }
+            }
+            return null
         }
 
         /** The first visible widget with a [action] option, like a window's Close button. Client thread. */

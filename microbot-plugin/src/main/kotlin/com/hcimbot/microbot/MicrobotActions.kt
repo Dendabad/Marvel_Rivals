@@ -113,13 +113,23 @@ class MicrobotActions : GameActions {
         return true
     }
 
-    /** Picks All in the make window, then presses Space for the first item. Keys go through Microbot's keyboard helper, found by name. */
+    /**
+     * In the make window: clicks the All quantity, then the first item (labelled Space), by clicking them. Pressing
+     * Space did nothing here, and the chat's own All tab has the same text, so the buttons are found beside the
+     * quantity buttons.
+     */
     override fun makeAll(): Boolean {
-        val bounds = onClient { MicrobotGameState.widgetInWindow("What would you like to make", "All")?.bounds }
-        if (bounds != null) {
-            Microbot.getMouse().click(bounds)
+        val all = onClient { MicrobotGameState.makeWindowButton("All", useParent = false)?.bounds }
+        if (all != null) {
+            Microbot.getMouse().click(all)
             Thread.sleep(MAKE_PAUSE_MS)
         }
+        val first = onClient { MicrobotGameState.makeWindowButton("Space", useParent = true)?.bounds }
+        if (first != null) {
+            Microbot.getMouse().click(first)
+            return true
+        }
+        // The button was not found: the keyboard, through Microbot's helper found by name.
         return runCatching {
             val keyboard = Class.forName("net.runelite.client.plugins.microbot.util.keyboard.Rs2Keyboard")
             val press = keyboard.methods.firstOrNull { it.name == "keyPress" && it.parameterTypes.singleOrNull() == Char::class.javaPrimitiveType }
