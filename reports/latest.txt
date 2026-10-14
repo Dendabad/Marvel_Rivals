@@ -3,91 +3,90 @@ HCIM Guide Bot 0.16.0, PAUSED
 Step 124 of 2925: Enter Guildmaster Apatura's building and go up both ladders
 Detail: Enter Guildmaster Apatura: could not Enter Guildmaster Apatura at (1554, 3033, 0). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
+10:43:33  Paused: Enter Guildmaster Apatura: could not Enter Guildmaster Apatura at (1554, 3033, 0)
+10:43:23  Walking from (1553, 3033, 1) to (1555, 3035, 0)
+10:43:23  Step: Enter Guildmaster Apatura's building and go up both ladders
+10:43:22  AI plan finished, trying the step again
+10:43:18  AI: object 52614 Climb-up
+10:43:17  AI plan: Obj(id=52614, option=Climb-up); Wait(ticks=4)
+10:43:17  report uploaded to bot-reports
 10:43:15  Asking the AI about this pause (try 2)
 10:43:15  Paused: Enter Guildmaster Apatura: could not Enter Guildmaster Apatura at (1554, 3033, 0)
 10:43:10  Step: Enter Guildmaster Apatura's building and go up both ladders
 10:43:09  AI plan finished, trying the step again
 10:42:50  AI: walk to (1554, 3033, 0)
-10:42:49  AI plan: Walk(tile=(1554, 3033, 0)); Wait(ticks=3)
-10:42:46  report uploaded to bot-reports
-10:42:44  Asking the AI about this pause (try 1)
-10:42:44  Paused: Enter Guildmaster Apatura: could not Enter Guildmaster Apatura at (1554, 3033, 0)
-10:42:39  Step: Enter Guildmaster Apatura's building and go up both ladders
-10:42:28  Started version 0.16.0
 == Player
-world WorldPoint(x=1554, y=3033, plane=0), in instance false, as guide coordinates WorldPoint(x=1554, y=3033, plane=0)
+world WorldPoint(x=1555, y=3035, plane=0), in instance false, as guide coordinates WorldPoint(x=1555, y=3035, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
 
 == NPCs within 12 tiles (id name at tile: options)
-13129 Banker at WorldPoint(x=1542, y=3041, plane=0): [Talk-to, Bank, Collect]
 13128 Bank buffalo at WorldPoint(x=1546, y=3038, plane=0): []
 13120 Guildmaster Apatura at WorldPoint(x=1554, y=3033, plane=0): [Talk-to]
 13130 Pellem at WorldPoint(x=1565, y=3034, plane=0): [Talk-to, Trade, Fur-clothing]
 == Named objects within 25 tiles, nearest first (id name at tile)
-51752 Food pot at WorldPoint(x=1554, y=3032, plane=0)
-51730 Table at WorldPoint(x=1555, y=3032, plane=0)
-52614 Ladder at WorldPoint(x=1552, y=3033, plane=0)
-51755 Empty basket at WorldPoint(x=1552, y=3035, plane=0)
+52430 Barrel at WorldPoint(x=1553, y=3037, plane=0)
 51727 Stool at WorldPoint(x=1556, y=3033, plane=0)
-52430 Barrel at WorldPoint(x=1551, y=3032, plane=0)
-52430 Barrel at WorldPoint(x=1551, y=3033, plane=0)
-51749 Empty pot at WorldPoint(x=1551, y=3035, plane=0)
-51752 Food pot at WorldPoint(x=1552, y=3036, plane=0)
 51752 Food pot at WorldPoint(x=1557, y=3035, plane=0)
 51754 Food basket at WorldPoint(x=1557, y=3036, plane=0)
+52614 Ladder at WorldPoint(x=1552, y=3033, plane=0)
+51755 Empty basket at WorldPoint(x=1552, y=3035, plane=0)
+51752 Food pot at WorldPoint(x=1552, y=3036, plane=0)
 52430 Barrel at WorldPoint(x=1552, y=3037, plane=0)
-52430 Barrel at WorldPoint(x=1553, y=3037, plane=0)
+51752 Food pot at WorldPoint(x=1554, y=3032, plane=0)
+51730 Table at WorldPoint(x=1555, y=3032, plane=0)
 52430 Barrel at WorldPoint(x=1558, y=3032, plane=0)
 52647 Oven at WorldPoint(x=1558, y=3033, plane=0)
 51753 Empty pot at WorldPoint(x=1558, y=3035, plane=0)
+52430 Barrel at WorldPoint(x=1551, y=3032, plane=0)
+52430 Barrel at WorldPoint(x=1551, y=3033, plane=0)
+51749 Empty pot at WorldPoint(x=1551, y=3035, plane=0)
+51724 Stool at WorldPoint(x=1548, y=3042, plane=0)
+52430 Barrel at WorldPoint(x=1562, y=3034, plane=0)
 46805 Well at WorldPoint(x=1547, y=3036, plane=0)
+53188 Tree at WorldPoint(x=1550, y=3043, plane=0)
+52430 Barrel at WorldPoint(x=1563, y=3033, plane=0)
+51727 Stool at WorldPoint(x=1563, y=3035, plane=0)
+51728 Fire at WorldPoint(x=1546, y=3042, plane=0)
+51727 Stool at WorldPoint(x=1546, y=3044, plane=0)
 18894 Rockslide at WorldPoint(x=1558, y=3026, plane=0)
 18893 Rockslide at WorldPoint(x=1560, y=3026, plane=0)
-18894 Rockslide at WorldPoint(x=1556, y=3025, plane=0)
 18894 Rockslide at WorldPoint(x=1562, y=3026, plane=0)
-52430 Barrel at WorldPoint(x=1562, y=3034, plane=0)
+18894 Rockslide at WorldPoint(x=1563, y=3026, plane=0)
+1030 Mangle at WorldPoint(x=1564, y=3033, plane=0)
 18894 Rockslide at WorldPoint(x=1545, y=3026, plane=0)
 52430 Barrel at WorldPoint(x=1545, y=3035, plane=0)
 3644 Trough at WorldPoint(x=1545, y=3038, plane=0)
-18894 Rockslide at WorldPoint(x=1546, y=3024, plane=0)
-51728 Fire at WorldPoint(x=1546, y=3042, plane=0)
-18893 Rockslide at WorldPoint(x=1548, y=3024, plane=0)
-51724 Stool at WorldPoint(x=1548, y=3042, plane=0)
-18894 Rockslide at WorldPoint(x=1552, y=3024, plane=0)
-18893 Rockslide at WorldPoint(x=1554, y=3024, plane=0)
-18894 Rockslide at WorldPoint(x=1560, y=3024, plane=0)
-18894 Rockslide at WorldPoint(x=1563, y=3026, plane=0)
-52430 Barrel at WorldPoint(x=1563, y=3033, plane=0)
-51727 Stool at WorldPoint(x=1563, y=3035, plane=0)
+1197 Flower at WorldPoint(x=1545, y=3045, plane=0)
+18894 Rockslide at WorldPoint(x=1556, y=3025, plane=0)
+52430 Barrel at WorldPoint(x=1556, y=3045, plane=0)
+51643 Rope at WorldPoint(x=1559, y=3045, plane=0)
+18894 Rockslide at WorldPoint(x=1565, y=3025, plane=0)
+18893 Rockslide at WorldPoint(x=1565, y=3027, plane=0)
+1031 Mangle at WorldPoint(x=1565, y=3033, plane=0)
 18893 Rockslide at WorldPoint(x=1544, y=3028, plane=0)
-52432 Crates at WorldPoint(x=1544, y=3036, plane=0)
-52430 Barrel at WorldPoint(x=1544, y=3037, plane=0)
-18894 Rockslide at WorldPoint(x=1550, y=3023, plane=0)
-53188 Tree at WorldPoint(x=1550, y=3043, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
 863 Iron knife at WorldPoint(x=1545, y=3035, plane=0)
 1929 Bucket of water at WorldPoint(x=1545, y=3037, plane=0)
 1733 Needle at WorldPoint(x=1566, y=3035, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-50883 at WorldPoint(x=1554, y=3033, plane=0)
-51663 at WorldPoint(x=1553, y=3032, plane=0)
-3949 at WorldPoint(x=1553, y=3034, plane=0)
-3949 at WorldPoint(x=1554, y=3032, plane=0)
-51672 at WorldPoint(x=1554, y=3032, plane=0)
+951 at WorldPoint(x=1555, y=3035, plane=0)
 952 at WorldPoint(x=1554, y=3034, plane=0)
-3948 at WorldPoint(x=1555, y=3032, plane=0)
-51672 at WorldPoint(x=1555, y=3032, plane=0)
+950 at WorldPoint(x=1554, y=3035, plane=0)
 953 at WorldPoint(x=1555, y=3034, plane=0)
-51776 at WorldPoint(x=1552, y=3031, plane=0)
-51672 at WorldPoint(x=1552, y=3032, plane=0)
-3949 at WorldPoint(x=1552, y=3033, plane=0)
-3949 at WorldPoint(x=1552, y=3035, plane=0)
-51672 at WorldPoint(x=1552, y=3035, plane=0)
-51776 at WorldPoint(x=1553, y=3031, plane=0)
+3949 at WorldPoint(x=1553, y=3034, plane=0)
+3949 at WorldPoint(x=1553, y=3037, plane=0)
+51663 at WorldPoint(x=1553, y=3037, plane=0)
+50883 at WorldPoint(x=1554, y=3033, plane=0)
+949 at WorldPoint(x=1554, y=3037, plane=0)
+51672 at WorldPoint(x=1554, y=3037, plane=0)
+947 at WorldPoint(x=1555, y=3037, plane=0)
+51672 at WorldPoint(x=1555, y=3037, plane=0)
+3949 at WorldPoint(x=1556, y=3033, plane=0)
+3949 at WorldPoint(x=1556, y=3037, plane=0)
+51663 at WorldPoint(x=1556, y=3037, plane=0)
 == Text in open windows and chat
 10
-98
 100
 All
 Game
@@ -98,8 +97,13 @@ Friends
 Channel
 Clan
 Trade
-00:00:36
+00:00:55
 Boatyguidev3: *
+[10:43:33] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
+[10:43:32] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
+[10:43:31] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
+[10:43:30] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
+[10:43:29] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
 [10:43:15] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
 [10:43:14] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
 [10:43:12] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
