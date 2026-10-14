@@ -574,6 +574,16 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 120. "Head West to the Hunter's Guild": from Ortus Farm's first floor, where step 119 ends. The walker finds no path from
+        // upstairs to a ground floor tile and teleports home instead, so come down the staircase first.
+        "342c3bbd0f" to { _ ->
+            auto(
+                OnlyIf({ ctx: TaskContext -> (ctx.game.playerTile?.plane ?: 0) > 0 },
+                    obj(emptyList(), listOf("Staircase"), Tile(1581, 3140, 1), "Climb-down")),
+                WalkTask(Tile(1559, 3048, 0), radius = 5),
+            )
+        },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
