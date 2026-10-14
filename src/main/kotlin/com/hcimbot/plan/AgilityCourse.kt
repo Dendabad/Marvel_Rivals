@@ -79,6 +79,9 @@ class AgilityCourseTask(private val course: AgilityCourse, private val maxLaps: 
     private var walk: WalkTask? = null
     override val description = "Run laps of the ${course.name}"
 
+    /** Only on the ground: a lap is finished first, never left on a rooftop. */
+    override fun canStopHere(ctx: TaskContext): Boolean = ctx.game.playerTile?.plane?.let { it == 0 } ?: true
+
     override fun tick(ctx: TaskContext): TaskResult {
         val game = ctx.game
         sinceClick++

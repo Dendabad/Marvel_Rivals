@@ -36,6 +36,13 @@ sealed interface TaskResult {
 interface Task {
     val description: String
     fun tick(ctx: TaskContext): TaskResult
+
+    /**
+     * Whether the step may end now, once the game shows it done. A task midway
+     * through something that cannot be left (a lap of an agility course) says no,
+     * and keeps being ticked until it can be.
+     */
+    fun canStopHere(ctx: TaskContext): Boolean = true
 }
 
 /** Shared retry bookkeeping: an action that keeps failing to start ends the task. */

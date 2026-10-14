@@ -76,6 +76,7 @@ class GuideRunner(
         var taskIndex = 0
         var ticks = 0
         var waitingAfterTasks = 0
+        var finishing = false
         val combat: Boolean get() = (plan as? StepPlan.Auto)?.combat == true
     }
 
@@ -180,7 +181,7 @@ class GuideRunner(
             is SafetyMonitor.Verdict.Stop -> return halt(verdict.reason)
         }
 
-        if (completion.check(step, current.baseline) == StepCompletion.Verdict.Done) {
+        if (completion.check(step, current.baseline) == StepCompletion.Verdict.Done && !midway(current)) {
             // Never walk off with a bank or shop still open.
             if (game.isBankOpen || game.isShopOpen) {
                 if (!game.isBusy) actions.closeInterface()
@@ -196,6 +197,17 @@ class GuideRunner(
             is StepPlan.Skip -> markDone(step, plan.reason)
             is StepPlan.Auto -> runTasks(current, plan)
         }
+    }
+
+    /** The goal is met, but a task cannot be left yet (on an agility course's rooftops). */
+    private fun midway(current: Active): Boolean {
+        val task = (current.plan as? StepPlan.Auto)?.tasks?.getOrNull(current.taskIndex) ?: return false
+        val stuckIn = !task.canStopHere(context)
+        if (stuckIn && !current.finishing) {
+            current.finishing = true
+            log("Step goal reached. Finishing first: ${task.description}")
+        }
+        return stuckIn
     }
 
     private fun runTasks(current: Active, plan: StepPlan.Auto) {

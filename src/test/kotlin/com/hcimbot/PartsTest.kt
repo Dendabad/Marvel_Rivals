@@ -408,6 +408,17 @@ class PartsTest {
     private val log = mutableListOf<String>()
 
     @Test
+    fun `a lap is finished before the step can end`() {
+        val game = FakeGame()
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.AgilityCourseTask(com.hcimbot.plan.AgilityCourse.DRAYNOR)
+        game.playerTile = Tile(3090, 3275, 3) // on a rooftop
+        assertFalse(task.canStopHere(ctx))
+        game.playerTile = Tile(3103, 3261, 0) // down off the crate
+        assertTrue(task.canStopHere(ctx))
+    }
+
+    @Test
     fun `each obstacle is clicked the moment the player lands, without waiting for the animation`() {
         val course = com.hcimbot.plan.AgilityCourse.DRAYNOR
         val game = FakeGame()
