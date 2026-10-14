@@ -523,6 +523,18 @@ class PartsTest {
     }
 
     @Test
+    fun `an item the game shows further off is walked to and taken`() {
+        val beerAt = Tile(1520, 3610, 0)
+        val game = FakeGame()
+        game.playerTile = Tile(1520, 3592, 0) // 18 tiles away
+        game.groundItems += com.hcimbot.game.SceneEntity(1917, "Beer", beerAt)
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.TakeItemTask(listOf(com.hcimbot.guide.ItemRef("Beer", listOf(1917))))
+        repeat(4) { task.tick(ctx) }
+        assertEquals(listOf("walk (1520, 3610, 0)", "take Beer"), game.calls)
+    }
+
+    @Test
     fun `step 19 looks for rats behind Lumbridge castle first`() {
         val game = FakeGame()
         game.playerTile = Tile(3230, 3209, 0)

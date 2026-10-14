@@ -547,14 +547,16 @@ class TravelTask(
 }
 
 /**
- * Picks up items lying nearby ("Take the Beer", "Collect 3x Logs"). Only items
- * within [REACH] tiles count: the guide puts the player next to them, and
- * guide.json's spawn lists cover the whole game, so walking to one could send
- * the player across the map. Items that respawn are waited for.
+ * Picks up items lying nearby ("Take the Beer", "Collect 3x Logs"). Items the
+ * game shows, within [SCENE_REACH] tiles on the same floor and outside the
+ * Wilderness, are walked to. guide.json's spawn lists cover the whole game, so
+ * they are not used: walking to one could send the player across the map.
+ * Items that respawn are waited for.
  */
 class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
     private var waiting = 0
     private var approaches = 0
+    private var far: WalkTask? = null
     override val description = "Take ${items.joinToString { it.name }}"
 
     override fun tick(ctx: TaskContext): TaskResult {
@@ -563,7 +565,20 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
         if (ctx.game.isBusy) return TaskResult.Running
 
         val at = ctx.game.playerTile ?: return TaskResult.Running
-        val ground = ctx.game.nearestGroundItem(next.ids)?.takeIf { it.tile.distanceTo(at) <= REACH }
+        val seen = ctx.game.nearestGroundItem(next.ids)?.takeIf { !it.tile.inWilderness && it.tile.distanceTo(at) <= SCENE_REACH }
+        // Further than a few steps but in sight of the game: walk over to it ("Take the Beer" in Shayzien).
+        if (seen != null && seen.tile.distanceTo(at) > REACH) {
+            val going = far?.takeIf { it.tile == seen.tile } ?: WalkTask(seen.tile, radius = 2).also {
+                far = it
+                ctx.log("${next.name} is ${seen.tile.distanceTo(at)} tiles away, walking over")
+            }
+            return when (val walked = going.tick(ctx)) {
+                TaskResult.Done -> { far = null; TaskResult.Running }
+                else -> walked
+            }
+        }
+        far = null
+        val ground = seen
         if (ground == null) {
             // Some already taken means this is a spawn to wait for. None at all means it is not here.
             val started = ctx.conditions.count(next.ids) > 0
@@ -584,6 +599,9 @@ class TakeItemTask(private val items: List<ItemRef>) : BaseTask() {
     companion object {
         const val MAX_APPROACHES = 3
         const val REACH = 15
+
+        /** About as far as the game shows ground items: anything it shows is a short walk. */
+        const val SCENE_REACH = 45
         const val RESPAWN_TICKS = 100
     }
 }
