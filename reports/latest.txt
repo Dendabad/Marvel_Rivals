@@ -1,62 +1,91 @@
-HCIM Guide Bot 0.16.2, PAUSED
+HCIM Guide Bot 0.16.6, PAUSED
 == Step
-Step 125 of 2925: Loot 28 Eclipse Reds (hop worlds)
-Detail: Loot 28 Eclipse Reds (hop worlds) (asks for several things). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 129 of 2925: Head South-West to Sunset Coast. Be careful of the aggressive NPC's along the way as they can kill you if you do not pay attention.
+Detail: Head South-West to Sunset Coast. Be careful of the aggressive NPC's along the way as they can kill you if you do not pay attention. (the guide warns about something here). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-10:48:51  Asking the AI about this pause (try 1)
-10:48:50  Paused: Loot 28 Eclipse Reds (hop worlds) (asks for several things)
-10:48:50  Step: Loot 28 Eclipse Reds (hop worlds)
-10:48:49  Done (all actions finished): Enter Guildmaster Apatura's building and go up both ladders
-10:48:44  Climbing the other ladder at (1557, 3034, 1)
-10:48:41  Step: Enter Guildmaster Apatura's building and go up both ladders
-10:48:41  Restarting at step 124
-10:48:40  Started version 0.16.2
+10:59:42  Asking the AI about this pause (try 1)
+10:59:42  Paused: Head South-West to Sunset Coast. Be careful of the aggressive NPC's along the way as they can kill you if you do not pay attention. (the guide warns about something here)
+10:59:42  Step: Head South-West to Sunset Coast. Be careful of the aggressive NPC's along the way as they can kill you if you do not pay attention.
+10:59:38  Step: Collect a Bucket of Water by the bank chest
+10:59:34  Step: Withdraw: Coins.
+10:59:33  Done (all actions finished): Deposit all.
+10:59:03  Step: Deposit all.
+10:59:03  Done (the game shows it is done): Loot 28 Eclipse Reds (hop worlds)
+10:58:50  Hopping worlds (picked up 27 of 28, hop 15, not back to [322, 342, 376, 404, 479, 574])
+10:58:41  Hopping worlds (picked up 26 of 28, hop 14, not back to [322, 342, 376, 404, 479, 487])
+10:58:30  Hopping worlds (picked up 25 of 28, hop 13, not back to [342, 376, 404, 479, 487, 574])
+10:58:20  Hopping worlds (picked up 24 of 28, hop 12, not back to [342, 376, 479, 487, 566, 574])
 == Player
-world WorldPoint(x=1556, y=3034, plane=2), in instance false, as guide coordinates WorldPoint(x=1556, y=3034, plane=2)
+world WorldPoint(x=1545, y=3037, plane=0), in instance false, as guide coordinates WorldPoint(x=1545, y=3037, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-
+995x648, 1929x1
 == NPCs within 12 tiles (id name at tile: options)
-13134 Quetzal at WorldPoint(x=1556, y=3042, plane=2): []
+13129 Banker at WorldPoint(x=1542, y=3041, plane=0): [Talk-to, Bank, Collect]
+13128 Bank buffalo at WorldPoint(x=1546, y=3038, plane=0): []
+13120 Guildmaster Apatura at WorldPoint(x=1554, y=3033, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
-52620 Ladder at WorldPoint(x=1557, y=3034, plane=2)
-46813 Incense burner at WorldPoint(x=1554, y=3033, plane=2)
-52436 Pillow at WorldPoint(x=1554, y=3034, plane=2)
-52511 Potted fan at WorldPoint(x=1554, y=3035, plane=2)
-52512 Potted fan at WorldPoint(x=1552, y=3033, plane=2)
-51662 Sack at WorldPoint(x=1559, y=3043, plane=2)
-52815 Landing Site at WorldPoint(x=1561, y=3046, plane=2)
-51759 Torch at WorldPoint(x=1563, y=3046, plane=2)
-51757 Quetzal Nest at WorldPoint(x=1553, y=3047, plane=2)
-51644 Rope at WorldPoint(x=1556, y=3047, plane=2)
-51759 Torch at WorldPoint(x=1563, y=3047, plane=2)
-23690 Food pot at WorldPoint(x=1560, y=3048, plane=2)
-51753 Empty pot at WorldPoint(x=1561, y=3048, plane=2)
-52430 Barrel at WorldPoint(x=1558, y=3049, plane=2)
-52430 Barrel at WorldPoint(x=1556, y=3050, plane=2)
+52432 Crates at WorldPoint(x=1544, y=3036, plane=0)
+52430 Barrel at WorldPoint(x=1544, y=3037, plane=0)
+3644 Trough at WorldPoint(x=1545, y=3038, plane=0)
+52432 Crates at WorldPoint(x=1543, y=3039, plane=0)
+52430 Barrel at WorldPoint(x=1545, y=3035, plane=0)
+46805 Well at WorldPoint(x=1547, y=3036, plane=0)
+53015 Bank chest at WorldPoint(x=1542, y=3039, plane=0)
+51748 Food pot at WorldPoint(x=1541, y=3040, plane=0)
+51752 Food pot at WorldPoint(x=1541, y=3041, plane=0)
+18894 Rockslide at WorldPoint(x=1541, y=3032, plane=0)
+51754 Food basket at WorldPoint(x=1541, y=3042, plane=0)
+52436 Pillow at WorldPoint(x=1542, y=3042, plane=0)
+51728 Fire at WorldPoint(x=1546, y=3042, plane=0)
+51724 Stool at WorldPoint(x=1548, y=3042, plane=0)
+18893 Rockslide at WorldPoint(x=1539, y=3032, plane=0)
+18894 Rockslide at WorldPoint(x=1539, y=3034, plane=0)
+52430 Barrel at WorldPoint(x=1542, y=3043, plane=0)
+26813 Poll booth at WorldPoint(x=1543, y=3043, plane=0)
+53188 Tree at WorldPoint(x=1550, y=3043, plane=0)
+52430 Barrel at WorldPoint(x=1551, y=3032, plane=0)
+52430 Barrel at WorldPoint(x=1551, y=3033, plane=0)
+51749 Empty pot at WorldPoint(x=1551, y=3035, plane=0)
+18894 Rockslide at WorldPoint(x=1539, y=3030, plane=0)
+18894 Rockslide at WorldPoint(x=1543, y=3030, plane=0)
+51727 Stool at WorldPoint(x=1546, y=3044, plane=0)
+52614 Ladder at WorldPoint(x=1552, y=3033, plane=0)
+51755 Empty basket at WorldPoint(x=1552, y=3035, plane=0)
+51752 Food pot at WorldPoint(x=1552, y=3036, plane=0)
+52430 Barrel at WorldPoint(x=1552, y=3037, plane=0)
+18894 Rockslide at WorldPoint(x=1537, y=3031, plane=0)
+1197 Flower at WorldPoint(x=1545, y=3045, plane=0)
+52430 Barrel at WorldPoint(x=1553, y=3037, plane=0)
+18894 Rockslide at WorldPoint(x=1536, y=3046, plane=0)
+18894 Rockslide at WorldPoint(x=1542, y=3028, plane=0)
+18893 Rockslide at WorldPoint(x=1544, y=3028, plane=0)
+53188 Tree at WorldPoint(x=1544, y=3046, plane=0)
+1198 Flowers at WorldPoint(x=1545, y=3046, plane=0)
+51752 Food pot at WorldPoint(x=1554, y=3032, plane=0)
+42400 Plant at WorldPoint(x=1535, y=3027, plane=0)
+51819 Spikey bush at WorldPoint(x=1535, y=3028, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
-29415 Eclipse red at WorldPoint(x=1555, y=3035, plane=2)
-1947 Grain at WorldPoint(x=1561, y=3045, plane=2)
-1947 Grain at WorldPoint(x=1560, y=3047, plane=2)
+863 Iron knife at WorldPoint(x=1545, y=3035, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-796 at WorldPoint(x=1556, y=3034, plane=2)
-3949 at WorldPoint(x=1555, y=3033, plane=2)
-51668 at WorldPoint(x=1555, y=3033, plane=2)
-796 at WorldPoint(x=1555, y=3034, plane=2)
-51668 at WorldPoint(x=1555, y=3035, plane=2)
-3949 at WorldPoint(x=1556, y=3033, plane=2)
-51668 at WorldPoint(x=1556, y=3033, plane=2)
-3949 at WorldPoint(x=1556, y=3035, plane=2)
-51668 at WorldPoint(x=1556, y=3035, plane=2)
-51668 at WorldPoint(x=1557, y=3033, plane=2)
-51668 at WorldPoint(x=1557, y=3034, plane=2)
-51668 at WorldPoint(x=1557, y=3035, plane=2)
-51668 at WorldPoint(x=1554, y=3033, plane=2)
-796 at WorldPoint(x=1554, y=3034, plane=2)
-3949 at WorldPoint(x=1554, y=3035, plane=2)
+51805 at WorldPoint(x=1544, y=3036, plane=0)
+51777 at WorldPoint(x=1544, y=3038, plane=0)
+51805 at WorldPoint(x=1545, y=3036, plane=0)
+51804 at WorldPoint(x=1545, y=3038, plane=0)
+51827 at WorldPoint(x=1546, y=3036, plane=0)
+51804 at WorldPoint(x=1543, y=3036, plane=0)
+51777 at WorldPoint(x=1543, y=3037, plane=0)
+51783 at WorldPoint(x=1543, y=3038, plane=0)
+51672 at WorldPoint(x=1543, y=3038, plane=0)
+3948 at WorldPoint(x=1543, y=3039, plane=0)
+51672 at WorldPoint(x=1543, y=3039, plane=0)
+51805 at WorldPoint(x=1544, y=3035, plane=0)
+51777 at WorldPoint(x=1544, y=3039, plane=0)
+51805 at WorldPoint(x=1545, y=3035, plane=0)
+51827 at WorldPoint(x=1547, y=3035, plane=0)
 == Text in open windows and chat
 10
-98
+90
 100
 All
 Game
@@ -67,24 +96,53 @@ Friends
 Channel
 Clan
 Trade
-00:06:12
+00:00:45
 Boatyguidev3: *
-[10:43:33] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
-[10:43:32] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
-[10:43:31] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
-[10:43:30] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
-[10:43:29] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
-[10:43:15] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
-[10:43:14] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
-[10:43:12] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
-[10:43:11] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
-[10:43:10] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
-[10:42:44] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
-[10:42:43] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
-[10:42:42] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
-[10:42:41] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
-[10:42:39] Error interacting with NPC 'Guildmaster Apatura' for action 'Enter': Action not found. Actions=[Talk-to]
 Did you know? There is a setting to allow you to get Strength XP when pushing through the wheat in Puro-Puro.
 Welcome to Old School RuneScape.
+Current world - 305
+301
+1176
+Trade - Free
+302
+1618
+Trade - Mem...
+303
+354
+304
+355
+Trouble Bre...
+305
+932
+Falador Part...
+306
+613
+Barbarian A...
+307
+825
+Wintertodt
+308
+766
+Wilderness ...
+309
+383
+310
+253
+311
+260
+312
+211
+Group Skilling
+313
+553
+314
+699
+Brimhaven ...
+315
+434
+Fishing Traw...
+316
+188
+317
 == Quest Helper
 no step: null
