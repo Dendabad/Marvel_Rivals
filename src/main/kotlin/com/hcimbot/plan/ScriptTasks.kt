@@ -600,7 +600,8 @@ class MarkGuardsTask(
 
     private fun reportBack(helper: com.hcimbot.game.HelperStep, ctx: TaskContext): TaskResult {
         if (helper.npcIds.isEmpty() || !REPORT.containsMatchIn(helper.text)) return TaskResult.Done
-        val talk = report ?: InteractTask(InteractTask.Kind.NPC, helper.npcIds, emptyList(), emptyList(), "Talk-to").also { report = it }
+        if (report == null) ctx.log("Quest Helper says: ${helper.text.take(80)} (npc ${helper.npcIds}, at ${helper.tile})")
+        val talk = report ?: InteractTask(InteractTask.Kind.NPC, helper.npcIds, emptyList(), listOfNotNull(helper.tile), "Talk-to").also { report = it }
         return talk.tick(ctx)
     }
 

@@ -34,7 +34,9 @@ object QuestHelperProbe {
             (field(step, "npcID") as? Number)?.toInt()?.takeIf { it > 0 }?.let(::add)
             (field(step, "alternateNpcIDs") as? Collection<*>)?.forEach { (it as? Number)?.toInt()?.let(::add) }
         }
-        com.hcimbot.game.HelperStep(text, ids)
+        val point = field(step, "worldPoint") as? net.runelite.api.coords.WorldPoint
+        val tile = point?.let { Instances.toTemplate(it) }?.let { com.hcimbot.guide.Tile(it.x, it.y, it.plane) }
+        com.hcimbot.game.HelperStep(text, ids, tile)
     }.getOrNull()
 
     private fun field(target: Any, name: String): Any? {
