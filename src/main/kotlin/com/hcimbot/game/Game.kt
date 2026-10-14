@@ -52,6 +52,12 @@ interface GameState {
     fun nearestNpc(ids: Collection<Int>, names: Collection<String> = emptyList(), near: Tile? = null): SceneEntity?
     fun nearestObject(ids: Collection<Int>, names: Collection<String> = emptyList(), near: Tile? = null): SceneEntity?
 
+    /**
+     * Whether the player can walk to [tile] from here, counting shut doors as
+     * walls. Null when the game cannot say.
+     */
+    fun canReach(tile: Tile): Boolean? = null
+
     /** True while [npc] (the very same one) is still alive. Null when the game cannot say. */
     fun npcAlive(npc: SceneEntity): Boolean? = null
 

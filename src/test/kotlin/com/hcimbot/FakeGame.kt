@@ -77,6 +77,10 @@ class FakeGame : GameState, GameActions {
         return true
     }
 
+    /** Lets a test shut doors: tiles listed here cannot be reached until removed. Empty, the game "cannot say". */
+    val unreachable = mutableSetOf<Tile>()
+    override fun canReach(tile: Tile): Boolean? = if (unreachable.isEmpty()) null else tile !in unreachable
+
     /** Lets a test say whether an NPC still lives. Unset, the game "cannot say", as some clients cannot. */
     var alive: ((SceneEntity) -> Boolean?)? = null
     override fun npcAlive(npc: SceneEntity): Boolean? = alive?.invoke(npc)

@@ -151,6 +151,7 @@ class InteractTask(
 
     private var interacted = false
     private var walk: WalkTask? = null
+    private var approaches = 0
 
     override val description: String =
         "${action ?: "Interact with"} ${names.firstOrNull() ?: ids.toString()}"
@@ -180,6 +181,15 @@ class InteractTask(
                 else -> walked
             }
         }
+        // Clicking someone behind a shut door does nothing ("I can't reach that!"). Walk up to
+        // them first: the walker opens doors on the way. Someone behind a counter also reads
+        // as out of reach, so after a few tries click anyway, which works over a counter.
+        if (kind == Kind.NPC && approaches < MAX_APPROACHES && game.canReach(entity.tile) == false) {
+            approaches++
+            ctx.log("Cannot reach ${entity.name} from here, walking over (the walker opens doors)")
+            ctx.actions.walkTo(entity.tile)
+            return TaskResult.Running
+        }
         val started = when (kind) {
             Kind.NPC -> ctx.actions.interactNpc(entity, action)
             Kind.OBJECT -> ctx.actions.interactObject(entity, action)
@@ -191,6 +201,10 @@ class InteractTask(
     private fun find(game: GameState): SceneEntity? = when (kind) {
         Kind.NPC -> game.nearestNpc(ids, names, near)
         Kind.OBJECT -> game.nearestObject(ids, names, near)
+    }
+
+    private companion object {
+        const val MAX_APPROACHES = 3
     }
 }
 

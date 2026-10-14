@@ -255,6 +255,42 @@ class PartsTest {
     }
 
     @Test
+    fun `an NPC behind a shut door is walked to before being clicked`() {
+        // Father Urhney's house: the walker opens the door on the way in.
+        val urhneyAt = Tile(3147, 3175, 0)
+        val game = FakeGame()
+        game.playerTile = Tile(3150, 3170, 0)
+        game.npcs += com.hcimbot.game.SceneEntity(923, "Father Urhney", urhneyAt)
+        game.unreachable += urhneyAt
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.InteractTask(
+            com.hcimbot.plan.InteractTask.Kind.NPC, listOf(923), listOf("Father Urhney"), listOf(urhneyAt), "Talk-to",
+        )
+        task.tick(ctx)
+        assertEquals(listOf("walk (3147, 3175, 0)"), game.calls)
+        game.unreachable.remove(urhneyAt)
+        game.unreachable += Tile(0, 0, 0) // still able to answer, and his tile is open now
+        task.tick(ctx)
+        assertEquals("npc Father Urhney Talk-to", game.calls.last())
+    }
+
+    @Test
+    fun `someone behind a counter is clicked anyway after a few tries`() {
+        val shopAt = Tile(3212, 3247, 0)
+        val game = FakeGame()
+        game.playerTile = Tile(3212, 3245, 0)
+        game.npcs += com.hcimbot.game.SceneEntity(506, "Shop keeper", shopAt)
+        game.unreachable += shopAt
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val task = com.hcimbot.plan.InteractTask(
+            com.hcimbot.plan.InteractTask.Kind.NPC, listOf(506), listOf("Shop keeper"), listOf(shopAt), "Trade",
+        )
+        repeat(4) { task.tick(ctx) }
+        assertEquals(3, game.calls.count { it.startsWith("walk") }, game.calls.toString())
+        assertEquals("npc Shop keeper Trade", game.calls.last(), game.calls.toString())
+    }
+
+    @Test
     fun `step 19 looks for rats behind Lumbridge castle first`() {
         val game = FakeGame()
         game.playerTile = Tile(3230, 3209, 0)

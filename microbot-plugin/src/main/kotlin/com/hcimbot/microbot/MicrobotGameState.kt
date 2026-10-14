@@ -14,6 +14,7 @@ import net.runelite.client.plugins.microbot.util.equipment.Rs2Equipment
 import net.runelite.client.plugins.microbot.util.inventory.Rs2Inventory
 import net.runelite.client.plugins.microbot.util.player.Rs2Player
 import net.runelite.client.plugins.microbot.util.shop.Rs2Shop
+import net.runelite.client.plugins.microbot.util.tile.Rs2Tile
 import net.runelite.client.util.Text
 
 /**
@@ -126,6 +127,10 @@ class MicrobotGameState : GameState {
         val nearest = if (near != null) found.nearest(near.toWorldPoint(), SEARCH_RADIUS) else found.nearest(SEARCH_RADIUS)
         nearest?.let { entity(it.id, it.name, it.worldLocation)?.copy(index = it.index) }
     }
+
+    /** A breadth first search over the scene's collision map, in which a shut door is a wall. */
+    override fun canReach(tile: Tile): Boolean? =
+        runCatching { Rs2Tile.isTileReachable(WorldPoint(tile.x, tile.y, tile.plane)) }.getOrNull()
 
     /** Found again by its index. Gone, dead or at 0 health all count as killed. */
     override fun npcAlive(npc: SceneEntity): Boolean? {
