@@ -1027,6 +1027,10 @@ class StepScripts(private val guide: Guide) {
             StepPlan.Auto(
                 listOfNotNull(
                     OnlyIf({ ctx -> !has(2146)(ctx) }, CookTask(2132, 2142, 2146, listOf("Cooking range", "Range"), listOf(Tile(3017, 3237, 0), Tile(2970, 3210, 0)))),
+                    // Hetty is talked to first, which stops at the rat's tail it needs.
+                    helper?.let { Optional(QuestTask("witchspotion", it, true)) },
+                    // The rat's tail (300) is dropped by a rat (2855) in the house west of Hetty's, around (2955, 3203).
+                    OnlyIf({ ctx -> !has(300)(ctx) }, KillTask(listOf(2855), listOf("Rat"), listOf(item("Rat's tail", 300, 1)), maxKills = 12, lookFirst = Tile(2955, 3203, 0))),
                     helper?.let { QuestTask("witchspotion", it, true) },
                 ),
                 combat = true,
