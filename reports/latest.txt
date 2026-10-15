@@ -1,29 +1,23 @@
-HCIM Guide Bot 0.16.80, PAUSED
+HCIM Guide Bot 0.16.81, PAUSED
 == Step
-Step 188 of 2925: Buy 6x Woad Leaves from Wyson the Gardener (1,4)
-Detail: the actions finished but the game does not show the step as done. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 189 of 2925: Head North of Falador and kill a Black Bear (safespot on trees as it is a 2x2). Collect the Raw Bear Meat, Bones & fur.
+Detail: Head North of Falador and kill a Black Bear (safespot on trees as it is a 2x2). Collect the Raw Bear Meat, Bones & fur. (asks for several things). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-14:12:54  Asking the AI about this pause (try 2)
-14:12:54  Paused: the actions finished but the game does not show the step as done
-14:12:31  Step: Buy 6x Woad Leaves from Wyson the Gardener (1,4)
-14:12:30  AI plan finished, trying the step again
-14:12:30  AI plan stopped: could not do com.hcimbot.ai.AiAction$Continue@52767900
-14:12:30  AI: continue
-14:12:27  AI: continue
-14:12:23  AI: NPC 5422 Talk-to
-14:12:23  AI plan: Npc(id=5422, option=Talk-to); Wait(ticks=3); com.hcimbot.ai.AiAction$Continue@52767900; Wait(ticks=2); com.hcimbot.ai.AiAction$Continue@52767900; Wait(ticks=2); Choose(text=Woad leaves)
-14:12:19  report uploaded to bot-reports
-14:12:18  Asking the AI about this pause (try 1)
-14:12:17  Paused: the actions finished but the game does not show the step as done
+14:14:20  Asking the AI about this pause (try 1)
+14:14:20  Paused: Head North of Falador and kill a Black Bear (safespot on trees as it is a 2x2). Collect the Raw Bear Meat, Bones & fur. (asks for several things)
+14:14:20  Step: Head North of Falador and kill a Black Bear (safespot on trees as it is a 2x2). Collect the Raw Bear Meat, Bones & fur.
+14:14:10  Step: Buy 6x Woad Leaves from Wyson the Gardener (1,4)
+14:14:10  Started version 0.16.81
 == Player
 world WorldPoint(x=3026, y=3379, plane=0), in instance false, as guide coordinates WorldPoint(x=3026, y=3379, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x11838, 558x197, 2134x1, 2138x1, 2132x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1929x1, 432x1, 1985x1, 1793x4
+995x11818, 558x197, 2134x1, 2138x1, 2132x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1929x1, 432x1, 1985x1, 1793x6
 == NPCs within 12 tiles (id name at tile: options)
-3102 Garden supplier at WorldPoint(x=3016, y=3374, plane=0): [Talk-to, Trade]
-3275 Gardener at WorldPoint(x=3021, y=3371, plane=0): [Talk-to, Attack]
+3102 Garden supplier at WorldPoint(x=3022, y=3371, plane=0): [Talk-to, Trade]
+3275 Gardener at WorldPoint(x=3015, y=3369, plane=0): [Talk-to, Attack]
 5422 Wyson the gardener at WorldPoint(x=3026, y=3378, plane=0): [Talk-to]
+3291 Postie Pete at WorldPoint(x=3037, y=3372, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
 24051 Door at WorldPoint(x=3027, y=3379, plane=0)
 1156 Potted flower at WorldPoint(x=3025, y=3376, plane=0)
@@ -83,7 +77,8 @@ hitpoints 10/10
 24093 at WorldPoint(x=3028, y=3381, plane=0)
 24232 at WorldPoint(x=3025, y=3376, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
-995 Coins x11838
+1793  x400
+995 Coins x11818
 558 Mind rune x197
 2134 Raw rat meat x1
 2138 Raw chicken x1
@@ -92,10 +87,10 @@ hitpoints 10/10
 1929 Bucket of water x1
 432 Chest key x1
 1985 Cheese x1
-1793 Woad leaf x4
+1793 Woad leaf x6
 == Text in open windows and chat
 10
-69
+91
 100
 All
 Game
@@ -106,44 +101,8 @@ Friends
 Channel
 Clan
 Trade
-00:58:59
-Boatyguidev3: *
-Well done! You have completed an easy task in the Falador area. Your Achievement Diary has been updated.
-You've started a new quest: @q_mes@The Knight's Sword
-You fill the bucket.
-You get a fresh, new haircut!
-You have unlocked a new music track: @mes_hl_red@Workshop
-You have unlocked a new music track: @mes_hl_red@Arrival
-You have unlocked a new music track: @mes_hl_red@Fanfare
-You get some wool.
-You'll need an empty bucket to collect the milk.
-You milk the cow.
-Check the skill guide for more information about Magic.
-Level 5 Magic: Water Strike
-Level 4 Magic: Opal-tipped crossbow bolts
-Level 3 Magic: Confuse
-Congratulations, you've just advanced your Combat level. You are now level 5.
-Congratulations, you've just advanced your Magic level. You are now level 5.
-Congratulations, you've completed a quest: @q_mes@Witch's Potion
-You've started a new quest: @q_mes@Witch's Potion
-You have unlocked a new music track: @mes_hl_red@Attention
-You have unlocked a new music track: @mes_hl_red@Emperor
-You accidentally burn the meat.
-I can't reach that!
-[13:30:15] Error during overlay renderingjava.lang.NullPointerException: null
-[13:30:15] following log message logged 1000 times!
-[13:29:58] Error during overlay renderingjava.lang.NullPointerException: null
-[13:29:58] following log message logged 1000 times!
-[13:29:42] Error during overlay renderingjava.lang.NullPointerException: null
-[13:25:15] [WebWalk] sp | post-handleObject landing unresolved (timeout=5000ms) dest=2962,9650,p0 at=3019,3233,p0
-[13:25:05] [WebWalk] sp | post-handleObject landing unresolved (timeout=5000ms) dest=2962,9650,p0 at=3018,3231,p0
-You can't sell this item to this shop.
-You don't have enough inventory space.
-You find your bottle of rum in amongst the bananas.
-There are a lot of bananas in the crate.
-There are a lot of potatoes in the crate.
-There are a lot of cabbages in the crate.
-[13:13:55] Error during overlay renderingjava.lang.NullPointerException: Cannot read the array length because "" is null
-Welcome to Old School RuneScape.
+01:00:24
+Click here to continue
+You buy a pair of woad leaves from Wyson.
 == Quest Helper
 ObjectStep: "Climb up the stairs in The Blue Moon Inn in Varrock." npcs [] objects [11796] at null choices []
