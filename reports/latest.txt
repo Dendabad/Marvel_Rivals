@@ -1,89 +1,93 @@
-HCIM Guide Bot 0.16.77, PAUSED
+HCIM Guide Bot 0.16.78, PAUSED
 == Step
-Step 184 of 2925: Fill Bucket on Pump [Falador Easy Diary]
-Detail: Fill Bucket on Pump [Falador Easy Diary] (unclear what to click). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 186 of 2925: Get a Mahogany Home Beginner Contract from Amy (try and do these whenever passing if viable (aka if Hosidius and you're nearby, detour and complete it. If not they're done later but may be inefficient) - Mahogany homes plugin or notepad to remember your tasks.
+Detail: Get a Mahogany Home Beginner Contract from Amy (try and do these whenever passing if viable (aka if Hosidius and you're nearby, detour and complete it. If not they're done later but may be inefficient) - Mahogany homes plugin or notepad to remember your tasks. (depends on a condition or repeats). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-14:06:00  Asking the AI about this pause (try 1)
-14:06:00  Paused: Fill Bucket on Pump [Falador Easy Diary] (unclear what to click)
-14:06:00  Step: Fill Bucket on Pump [Falador Easy Diary]
-14:05:54  Step: Get a haircut North [Falador Easy Diary]
-14:05:54  Started version 0.16.77
+14:07:51  Asking the AI about this pause (try 1)
+14:07:51  Paused: Get a Mahogany Home Beginner Contract from Amy (try and do these whenever passing if viable (aka if Hosidius and you're nearby, detour and complete it. If not they're done later but may be inefficient) - Mahogany homes plugin or notepad to remember your tasks. (depends on a condition or repeats)
+14:07:51  Step: Get a Mahogany Home Beginner Contract from Amy (try and do these whenever passing if viable (aka if Hosidius and you're nearby, detour and complete it. If not they're done later but may be inefficient) - Mahogany homes plugin or notepad to remember your tasks.
+14:07:14  Walking from (2949, 3382, 0) to (2978, 3341, 0)
+14:07:13  Quest Helper: Quest Helper has PiratesTreasure open, not theknightssword. Select theknightssword in the Quest Helper panel
+14:07:13  Quest step: Talk to the Squire in Falador Castle's courtyard.
+14:07:13  Step: Head South and talk to the Squire and start Knight's Sword (1,2,1,1)
+14:07:08  Step: Fill Bucket on Pump [Falador Easy Diary]
+14:07:08  Started version 0.16.78
 == Player
-world WorldPoint(x=2946, y=3379, plane=0), in instance false, as guide coordinates WorldPoint(x=2946, y=3379, plane=0)
+world WorldPoint(x=2978, y=3339, plane=0), in instance false, as guide coordinates WorldPoint(x=2978, y=3339, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x11878, 558x199, 2134x1, 2138x1, 2132x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1925x1, 432x1, 1985x1
+995x11878, 558x199, 2134x1, 2138x1, 2132x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1929x1, 432x1, 1985x1
 == NPCs within 12 tiles (id name at tile: options)
-3270 Guard at WorldPoint(x=2942, y=3376, plane=0): [Attack, Pickpocket]
-14167 Archibald at WorldPoint(x=2947, y=3378, plane=0): [Pet]
-1305 Hairdresser at WorldPoint(x=2947, y=3380, plane=0): [Talk-to, Haircut, Shave]
-11947 Guard at WorldPoint(x=2949, y=3379, plane=0): [Attack, Pickpocket]
-5896 Flynn at WorldPoint(x=2952, y=3390, plane=0): [Talk-to, Trade]
-278 Town Crier at WorldPoint(x=2950, y=3382, plane=0): [Talk-to]
-1315 Emily at WorldPoint(x=2954, y=3370, plane=0): [Talk-to]
-2820 Shop assistant at WorldPoint(x=2954, y=3390, plane=0): [Talk-to, Trade]
-10659 Burntof at WorldPoint(x=2956, y=3367, plane=0): [Talk-to]
-3271 Guard at WorldPoint(x=2952, y=3383, plane=0): [Attack, Pickpocket]
-1316 Kaylee at WorldPoint(x=2956, y=3371, plane=0): [Talk-to]
-2819 Shop keeper at WorldPoint(x=2955, y=3388, plane=0): [Talk-to, Trade]
+1798 White Knight at WorldPoint(x=2975, y=3347, plane=0): [Attack]
+5007 Imp at WorldPoint(x=2981, y=3339, plane=0): [Attack]
+11949 White Knight at WorldPoint(x=2972, y=3348, plane=0): [Attack]
+11949 White Knight at WorldPoint(x=2981, y=3341, plane=0): [Attack]
+4737 Squire at WorldPoint(x=2978, y=3338, plane=0): [Talk-to]
+5524 Sir Rebral at WorldPoint(x=2977, y=3346, plane=0): [Talk-to]
+11948 White Knight at WorldPoint(x=2976, y=3346, plane=0): [Attack]
+11948 White Knight at WorldPoint(x=2979, y=3328, plane=0): [Attack]
+11948 White Knight at WorldPoint(x=2985, y=3336, plane=0): [Attack]
+1798 White Knight at WorldPoint(x=2984, y=3345, plane=0): [Attack]
+1798 White Knight at WorldPoint(x=2986, y=3335, plane=0): [Attack]
+6800  at WorldPoint(x=2990, y=3345, plane=0): []
 == Named objects within 25 tiles, nearest first (id name at tile)
-24082 Ladder at WorldPoint(x=2946, y=3378, plane=0)
-1158 Potted plant at WorldPoint(x=2944, y=3377, plane=0)
-24153 Mirror at WorldPoint(x=2946, y=3381, plane=0)
-1158 Potted plant at WorldPoint(x=2947, y=3377, plane=0)
-24151 Chair at WorldPoint(x=2947, y=3381, plane=0)
-24051 Door at WorldPoint(x=2948, y=3379, plane=0)
-24020 Treadmill at WorldPoint(x=2948, y=3380, plane=0)
-24004 Waterpump at WorldPoint(x=2947, y=3382, plane=0)
-24021 Spinning pole at WorldPoint(x=2949, y=3380, plane=0)
-1158 Potted plant at WorldPoint(x=2942, y=3379, plane=0)
-24152 Chair at WorldPoint(x=2942, y=3381, plane=0)
-24152 Chair at WorldPoint(x=2942, y=3383, plane=0)
-24151 Chair at WorldPoint(x=2945, y=3383, plane=0)
-24152 Chair at WorldPoint(x=2942, y=3385, plane=0)
-8720 Poll booth at WorldPoint(x=2944, y=3373, plane=0)
-24055 Door at WorldPoint(x=2950, y=3385, plane=0)
-24002 Barrel at WorldPoint(x=2952, y=3385, plane=0)
-591 Bank table at WorldPoint(x=2947, y=3372, plane=0)
-24000 Rack at WorldPoint(x=2952, y=3386, plane=0)
-1011 Shelves at WorldPoint(x=2953, y=3372, plane=0)
-1012 Shelves at WorldPoint(x=2953, y=3373, plane=0)
-1011 Shelves at WorldPoint(x=2953, y=3374, plane=0)
-24151 Chair at WorldPoint(x=2945, y=3387, plane=0)
-24099 Notice board at WorldPoint(x=2947, y=3371, plane=0)
-1010 Shelves at WorldPoint(x=2953, y=3371, plane=0)
-24018 Banner at WorldPoint(x=2954, y=3374, plane=0)
-863 Standard at WorldPoint(x=2954, y=3387, plane=0)
-27272 Stool at WorldPoint(x=2947, y=3370, plane=0)
-24001 Shelves at WorldPoint(x=2949, y=3388, plane=0)
-1012 Shelves at WorldPoint(x=2953, y=3370, plane=0)
-24105 Bar pumps at WorldPoint(x=2955, y=3370, plane=0)
-24106 Bar at WorldPoint(x=2955, y=3371, plane=0)
-24105 Bar pumps at WorldPoint(x=2955, y=3372, plane=0)
-24106 Bar at WorldPoint(x=2955, y=3373, plane=0)
-24105 Bar pumps at WorldPoint(x=2955, y=3374, plane=0)
-7331 Table at WorldPoint(x=2955, y=3377, plane=0)
-1073 Sign at WorldPoint(x=2955, y=3379, plane=0)
-590 Bank table at WorldPoint(x=2948, y=3369, plane=0)
-961 Bank notice board at WorldPoint(x=2949, y=3369, plane=0)
-24003 Table at WorldPoint(x=2950, y=3389, plane=0)
+10779 Stool at WorldPoint(x=2977, y=3338, plane=0)
+1016 Shelves at WorldPoint(x=2975, y=3336, plane=0)
+1017 Shelves at WorldPoint(x=2976, y=3336, plane=0)
+24090 Bed at WorldPoint(x=2977, y=3336, plane=0)
+24064 Castle door at WorldPoint(x=2981, y=3340, plane=0)
+24059 Castle door at WorldPoint(x=2981, y=3341, plane=0)
+1018 Shelves at WorldPoint(x=2974, y=3336, plane=0)
+24089 Stool at WorldPoint(x=2978, y=3335, plane=0)
+24025 Table at WorldPoint(x=2973, y=3335, plane=0)
+1017 Shelves at WorldPoint(x=2973, y=3336, plane=0)
+24090 Bed at WorldPoint(x=2977, y=3334, plane=0)
+10587 Stool at WorldPoint(x=2979, y=3344, plane=0)
+24058 Door at WorldPoint(x=2972, y=3334, plane=0)
+24025 Table at WorldPoint(x=2973, y=3333, plane=0)
+24089 Stool at WorldPoint(x=2978, y=3333, plane=0)
+24089 Stool at WorldPoint(x=2971, y=3332, plane=0)
+24059 Castle door at WorldPoint(x=2971, y=3337, plane=0)
+24090 Bed at WorldPoint(x=2973, y=3332, plane=0)
+24090 Bed at WorldPoint(x=2977, y=3332, plane=0)
+24057 Door at WorldPoint(x=2978, y=3346, plane=0)
+24096 Suit of Armour at WorldPoint(x=2985, y=3339, plane=0)
+24057 Door at WorldPoint(x=2985, y=3341, plane=0)
+24096 Suit of Armour at WorldPoint(x=2985, y=3343, plane=0)
+24081 Large table at WorldPoint(x=2970, y=3331, plane=0)
+24089 Stool at WorldPoint(x=2970, y=3332, plane=0)
+24064 Castle door at WorldPoint(x=2970, y=3337, plane=0)
+24089 Stool at WorldPoint(x=2973, y=3331, plane=0)
+29717 Stool at WorldPoint(x=2976, y=3347, plane=0)
+24089 Stool at WorldPoint(x=2978, y=3331, plane=0)
+24103 Chair at WorldPoint(x=2986, y=3339, plane=0)
+24103 Chair at WorldPoint(x=2986, y=3340, plane=0)
+24089 Stool at WorldPoint(x=2969, y=3331, plane=0)
+24081 Large table at WorldPoint(x=2970, y=3330, plane=0)
+24090 Bed at WorldPoint(x=2973, y=3330, plane=0)
+24057 Door at WorldPoint(x=2973, y=3348, plane=0)
+24058 Door at WorldPoint(x=2978, y=3330, plane=0)
+24057 Door at WorldPoint(x=2983, y=3348, plane=0)
+24096 Suit of Armour at WorldPoint(x=2987, y=3335, plane=0)
+24103 Chair at WorldPoint(x=2987, y=3338, plane=0)
+53268 Table at WorldPoint(x=2987, y=3339, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-5119 at WorldPoint(x=2945, y=3380, plane=0)
-24154 at WorldPoint(x=2945, y=3377, plane=0)
-24173 at WorldPoint(x=2946, y=3377, plane=0)
-24158 at WorldPoint(x=2946, y=3381, plane=0)
-23994 at WorldPoint(x=2948, y=3377, plane=0)
-24173 at WorldPoint(x=2948, y=3378, plane=0)
-23994 at WorldPoint(x=2948, y=3381, plane=0)
-5533 at WorldPoint(x=2943, y=3376, plane=0)
-23994 at WorldPoint(x=2943, y=3376, plane=0)
-24173 at WorldPoint(x=2943, y=3377, plane=0)
-23994 at WorldPoint(x=2944, y=3376, plane=0)
-23994 at WorldPoint(x=2945, y=3376, plane=0)
-23994 at WorldPoint(x=2946, y=3376, plane=0)
-5535 at WorldPoint(x=2946, y=3382, plane=0)
-23994 at WorldPoint(x=2946, y=3382, plane=0)
+4736 at WorldPoint(x=2978, y=3339, plane=0)
+4737 at WorldPoint(x=2977, y=3338, plane=0)
+4735 at WorldPoint(x=2977, y=3339, plane=0)
+24023 at WorldPoint(x=2977, y=3340, plane=0)
+4736 at WorldPoint(x=2978, y=3338, plane=0)
+24024 at WorldPoint(x=2978, y=3340, plane=0)
+4736 at WorldPoint(x=2979, y=3338, plane=0)
+4737 at WorldPoint(x=2979, y=3339, plane=0)
+24176 at WorldPoint(x=2979, y=3339, plane=0)
+24023 at WorldPoint(x=2979, y=3340, plane=0)
+4739 at WorldPoint(x=2976, y=3337, plane=0)
+24175 at WorldPoint(x=2976, y=3337, plane=0)
+4736 at WorldPoint(x=2976, y=3338, plane=0)
+4735 at WorldPoint(x=2976, y=3339, plane=0)
+24023 at WorldPoint(x=2976, y=3340, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
 995 Coins x11878
 558 Mind rune x199
@@ -91,69 +95,25 @@ hitpoints 10/10
 2138 Raw chicken x1
 2132 Raw beef x1
 1993 Jug of wine x1
-1925 Bucket x1
+1929 Bucket of water x1
 432 Chest key x1
 1985 Cheese x1
 == Text in open windows and chat
-Makeover
-Bald
-Dreadlocks
-Long
-Medium
-Tonsure
-Short
-Cropped
-Wild spikes
-Spikes
-Mohawk
-Wind braids
-Quiff
-Samurai
-Princely
-Curtains
-Long curtains
-Front split
-Tousled
-Side wedge
-Front wedge
-Front spikes
-Frohawk
-Rear skirt
-Queue
-Bun
-Pigtails
-Earmuffs
-Side pony
-Curls
-Ponytail
-Braids
-Bunches
-Bob
-Layered
-Straight
-Straight Braids
-Two-back
-Mullet
-Undercut
-Low Bun
-Messy Bun
-Pompadour
-Afro
-Short locs
-Spiky Mohawk
-Slicked Mohawk
-Long Quiff
-Short Choppy
-Side Afro
-Punk
-Half-shaved
-Fremennik
-Elven
-Medium Coils
-High ponytail
-Plaits
-High Bunches
-Apply
-Confirm
+10
+81
+100
+All
+Game
+On
+Public
+Private
+Friends
+Channel
+Clan
+Trade
+00:53:55
+Boatyguidev3
+Click here to continue
+Ok, I'll give it a go.
 == Quest Helper
 ObjectStep: "Climb up the stairs in The Blue Moon Inn in Varrock." npcs [] objects [11796] at null choices []
