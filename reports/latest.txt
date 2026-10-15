@@ -3,6 +3,13 @@ HCIM Guide Bot 0.16.19, PAUSED
 Step 139 of 2925: Head north-east to the Gem Store & buy 9x Uncut Sapphire, 10x Uncut Emerald, and as many Uncut Rubies as possible. (If the shop is out of stock, try to get a few or skip this step and mine a star after unlocking teleports to buy a Bag full of gems with stardust)
 Detail: Buy Uncut sapphire, Uncut emerald: could not buy Uncut sapphire. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
+11:25:34  Asking the AI about this pause (try 2)
+11:25:34  Paused: Buy Uncut sapphire, Uncut emerald: could not buy Uncut sapphire
+11:25:30  Step: Head north-east to the Gem Store & buy 9x Uncut Sapphire, 10x Uncut Emerald, and as many Uncut Rubies as possible. (If the shop is out of stock, try to get a few or skip this step and mine a star after unlocking teleports to buy a Bag full of gems with stardust)
+11:25:29  AI plan finished, trying the step again
+11:25:26  AI: NPC 13915 Trade
+11:25:23  AI plan: Wait(ticks=2); Npc(id=13915, option=Trade); Wait(ticks=3)
+11:25:21  report uploaded to bot-reports
 11:25:19  Asking the AI about this pause (try 1)
 11:25:19  Paused: Buy Uncut sapphire, Uncut emerald: could not buy Uncut sapphire
 11:24:46  Walking from (1387, 2916, 0) to (1428, 2974, 0)
@@ -14,27 +21,27 @@ hitpoints 10/10
 == Bag (item id x count)
 995x19576, 29409x1, 29409x1, 29409x1
 == NPCs within 12 tiles (id name at tile: options)
-13988 Guard at WorldPoint(x=1419, y=2964, plane=0): [Attack, Pickpocket]
-13992 Guard at WorldPoint(x=1418, y=2972, plane=0): [Attack, Pickpocket]
-13887 Citizen at WorldPoint(x=1421, y=2968, plane=0): [Talk-to, Pickpocket]
+13988 Guard at WorldPoint(x=1419, y=2965, plane=0): [Attack, Pickpocket]
+13992 Guard at WorldPoint(x=1420, y=2974, plane=0): [Attack, Pickpocket]
 13961 Chiribaya at WorldPoint(x=1426, y=2975, plane=0): [Pet, Shoo-away]
-13914 Faustus at WorldPoint(x=1422, y=2979, plane=0): [Talk-to, Trade]
-10541 Bird at WorldPoint(x=1422, y=2986, plane=0): [Attack]
-13902 Child at WorldPoint(x=1424, y=2966, plane=0): [Talk-to]
-13880 Cleaner at WorldPoint(x=1418, y=2973, plane=0): []
-13208 Tourist at WorldPoint(x=1428, y=2972, plane=0): [Talk-to, Pickpocket]
-13890 Citizen at WorldPoint(x=1419, y=2974, plane=0): [Talk-to, Pickpocket]
-13989 Guard at WorldPoint(x=1422, y=2970, plane=0): [Attack, Pickpocket]
-13903 Child at WorldPoint(x=1428, y=2970, plane=0): [Talk-to]
-13889 Citizen at WorldPoint(x=1426, y=2982, plane=0): [Talk-to, Pickpocket]
+13914 Faustus at WorldPoint(x=1420, y=2982, plane=0): [Talk-to, Trade]
+13902 Child at WorldPoint(x=1424, y=2964, plane=0): [Talk-to]
+13880 Cleaner at WorldPoint(x=1430, y=2978, plane=0): []
+13208 Tourist at WorldPoint(x=1427, y=2972, plane=0): [Talk-to, Pickpocket]
+13890 Citizen at WorldPoint(x=1421, y=2971, plane=0): [Talk-to, Pickpocket]
+13989 Guard at WorldPoint(x=1424, y=2973, plane=0): [Attack, Pickpocket]
+12856 Squirrel at WorldPoint(x=1424, y=2984, plane=0): []
+13903 Child at WorldPoint(x=1427, y=2965, plane=0): [Talk-to]
+13889 Citizen at WorldPoint(x=1425, y=2984, plane=0): [Talk-to, Pickpocket]
 13915 Toci at WorldPoint(x=1430, y=2975, plane=0): [Talk-to, Trade]
 13986 Guard at WorldPoint(x=1427, y=2968, plane=0): [Attack, Pickpocket]
-13895 Citizen at WorldPoint(x=1425, y=2965, plane=0): [Talk-to, Pickpocket]
-13995 Guard at WorldPoint(x=1432, y=2970, plane=0): [Attack, Pickpocket]
-14047 Gull at WorldPoint(x=1439, y=2987, plane=0): []
+13895 Citizen at WorldPoint(x=1429, y=2966, plane=0): [Talk-to, Pickpocket]
+13995 Guard at WorldPoint(x=1434, y=2967, plane=0): [Attack, Pickpocket]
+14047 Gull at WorldPoint(x=1434, y=2986, plane=0): []
 1338 Seagull at WorldPoint(x=1436, y=2966, plane=0): [Attack]
-13209 Tourist at WorldPoint(x=1439, y=2967, plane=0): [Talk-to, Pickpocket]
-13248 Sailor at WorldPoint(x=1441, y=2969, plane=0): [Talk-to]
+13209 Tourist at WorldPoint(x=1441, y=2973, plane=0): [Talk-to, Pickpocket]
+1338 Seagull at WorldPoint(x=1441, y=2974, plane=0): [Attack]
+1338 Seagull at WorldPoint(x=1440, y=2968, plane=0): [Attack]
 == Named objects within 25 tiles, nearest first (id name at tile)
 55079 Table at WorldPoint(x=1428, y=2976, plane=0)
 55049 Crates at WorldPoint(x=1430, y=2974, plane=0)
@@ -101,7 +108,7 @@ Value check:
 Quantity:
 10
 50
-77
+81
 100
 All
 Game
@@ -112,7 +119,7 @@ Friends
 Channel
 Clan
 Trade
-00:20:29
+00:20:44
 Boatyguidev3: *
 I can't reach that!
 You have unlocked a new music track: @mes_hl_red@Peace and Prosperity
