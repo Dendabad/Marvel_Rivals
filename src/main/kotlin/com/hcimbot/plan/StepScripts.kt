@@ -826,6 +826,36 @@ class StepScripts(private val guide: Guide) {
             auto(ItemTeleportTask("Chronicle", listOf(13660), "Champions' Guild"), trust = true)
         },
 
+        // 158. "Take Ship to Karamja": the Customs officer (14980) at Port Sarim's dock, Travel. Musa Point, on Karamja, is south of
+        // y 3200 and west of x 3000, where Port Sarim is north of it.
+        "75f2484b3d" to { _ ->
+            val onKaramja: (TaskContext) -> Boolean = { ctx -> ctx.game.playerTile?.let { it.x < 3000 && it.y < 3200 } == true }
+            val agree = DialoguePlan.Texts(listOf("Yes", "Okay", "Ok"))
+            StepPlan.Auto(
+                listOf(
+                    OnlyIf({ ctx -> !onKaramja(ctx) }, WalkTask(Tile(3027, 3222, 0), radius = 3)),
+                    OnlyIf({ ctx -> !onKaramja(ctx) }, InteractTask(InteractTask.Kind.NPC, listOf(14980), listOf("Customs officer"), listOf(Tile(3027, 3218, 0)), "Travel", agree)),
+                    WaitUntilTask("arrive on Karamja", 60, agree, onKaramja),
+                ),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
+        // 165. "Take boat back to Port Sarim": the Customs officer (14984) at Musa Point, at (2953, 3146).
+        "0550c457c4" to { _ ->
+            val onKaramja: (TaskContext) -> Boolean = { ctx -> ctx.game.playerTile?.let { it.x < 3000 && it.y < 3200 } == true }
+            val agree = DialoguePlan.Texts(listOf("Yes", "Okay", "Ok"))
+            StepPlan.Auto(
+                listOf(
+                    OnlyIf(onKaramja, InteractTask(InteractTask.Kind.NPC, listOf(14984), listOf("Customs officer"), listOf(Tile(2953, 3146, 0)), "Travel", agree)),
+                    WaitUntilTask("arrive at Port Sarim", 60, agree) { ctx -> !onKaramja(ctx) },
+                ),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
