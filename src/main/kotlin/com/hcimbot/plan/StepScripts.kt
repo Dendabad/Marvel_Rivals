@@ -968,7 +968,7 @@ class StepScripts(private val guide: Guide) {
         },
 
         // 167. "Continue Pirate's Treasure by talking to Wydin to get employed, and collect the rum from the crate.": Wydin (2890) at
-        // (3012, 3205). The white apron (1005) on the wall of his store is worn, and the crate in the back room searched. Quest Helper
+        // (3012, 3205). The apron taken in step 156 (1757) is worn if it is still in the bag, and the crate in the back room searched. Quest Helper
         // asks for the quest journal to be opened first, so it is not used here.
         "1f9257ad78" to { _ ->
             val chat = DialoguePlan.Texts(listOf("job", "employment", "work", "Yes"))
@@ -978,8 +978,7 @@ class StepScripts(private val guide: Guide) {
                 listOf(
                     OnlyIf({ ctx -> !has(rum)(ctx) }, talk(listOf(2890), "Wydin", Tile(3012, 3205, 0), chat)),
                     OnlyIf({ ctx -> !has(rum)(ctx) }, WaitUntilTask("finish talking to Wydin", 40, chat, chatClosed)),
-                    OnlyIf({ ctx -> !has(rum)(ctx) }, PickUpTask(listOf(1005), 10)),
-                    OnlyIf({ ctx -> !has(rum)(ctx) && has(1005)(ctx) }, EquipTask(listOf(item("White apron", 1005)))),
+                    OnlyIf({ ctx -> !has(rum)(ctx) && has(1757)(ctx) }, EquipTask(listOf(item("Apron", 1757)))),
                     OnlyIf(
                         { ctx -> !has(rum)(ctx) },
                         InteractTask(InteractTask.Kind.OBJECT, emptyList(), listOf("Crate"), listOf(Tile(3012, 3207, 0)), "Search", near = Tile(3012, 3207, 0)),
