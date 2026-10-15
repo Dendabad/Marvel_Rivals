@@ -1,26 +1,23 @@
-HCIM Guide Bot 0.16.85, PAUSED
+HCIM Guide Bot 0.16.86, PAUSED
 == Step
 Step 192 of 2925: Complete Witches House quest - Safespot guide for the spider: https://youtu.be/bDB351j-qZI?t=178
-Detail: Quest: witchshouse: did "Use the cheese on the mouse hole in the south room, then use the magnet on the mouse which emerges." 3 times and the quest did not advance. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Detail: Quest: witchshouse: Use the cheese on the mouse hole in the south room, then use the magnet on the mouse which emerges. needs 1x Cheese (multiple if you mess up). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-14:26:03  Asking the AI about this pause (try 1)
-14:26:02  Paused: Quest: witchshouse: did "Use the cheese on the mouse hole in the south room, then use the magnet on the mouse which emerges." 3 times and the quest did not advance
-14:25:39  Cannot reach Mouse hole from here, walking over (the walker opens doors)
-14:25:39  Quest Helper: ObjectStep "Use the cheese on the mouse hole in the " npc [] obj [2870]
-14:25:39  Quest step: Use the cheese on the mouse hole in the south room, then use the magnet on the mouse which emerges.
-14:25:26  Cannot reach Ladder from here, walking over (the walker opens doors)
-14:25:25  Quest Helper: ObjectStep "Climb back up the ladder." npc [] obj [24717]
-14:25:25  Quest step: Climb back up the ladder.
-14:25:24  Quest Helper: ObjectStep "Climb back up the ladder." npc [] obj [24717]
-14:25:24  Quest step: Open the cupboard and get a magnet from it
-14:25:20  Quest Helper: ObjectStep "Go through the gate whilst wearing glove" npc [] obj [2866]
-14:25:20  Quest step: Open the cupboard and get a magnet from it
+14:27:36  Asking the AI about this pause (try 1)
+14:27:35  Paused: Quest: witchshouse: Use the cheese on the mouse hole in the south room, then use the magnet on the mouse which emerges. needs 1x Cheese (multiple if you mess up)
+14:27:29  Skipped optional Quest: witchshouse: did "Use the cheese on the mouse hole in the south room, then use the magnet on the mouse which emerges." 3 times and the quest did not advance
+14:27:17  Quest Helper: ObjectStep "Use the cheese on the mouse hole in the " npc [] obj [2870]
+14:27:17  Quest step: Use the cheese on the mouse hole in the south room, then use the magnet on the mouse which emerges.
+14:27:17  Step: Complete Witches House quest - Safespot guide for the spider: https://youtu.be/bDB351j-qZI?t=178
+14:27:16  Started version 0.16.86
 == Player
 world WorldPoint(x=2902, y=3466, plane=0), in instance false, as guide coordinates WorldPoint(x=2902, y=3466, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x11818, 558x183, 2134x1, 2138x1, 2132x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1929x1, 432x1, 1985x1, 1793x6, 2136x1, 526x1, 948x1, 2409x1, 2410x1
+995x11818, 558x183, 2134x1, 2138x1, 2132x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1929x1, 432x1, 1793x6, 2136x1, 526x1, 948x1, 2409x1, 2410x1
 == NPCs within 12 tiles (id name at tile: options)
+4000 Mouse at WorldPoint(x=2903, y=3466, plane=0): []
+5118 Sylas at WorldPoint(x=2890, y=3455, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
 2862 Door at WorldPoint(x=2901, y=3465, plane=0)
 1117 Hedge at WorldPoint(x=2902, y=3465, plane=0)
@@ -89,7 +86,6 @@ hitpoints 10/10
 1993 Jug of wine x1
 1929 Bucket of water x1
 432 Chest key x1
-1985 Cheese x1
 1793 Woad leaf x6
 2136 Raw bear meat x1
 526 Bones x1
@@ -98,7 +94,7 @@ hitpoints 10/10
 2410 Magnet x1
 == Text in open windows and chat
 10
-24
+47
 100
 All
 Game
@@ -109,51 +105,8 @@ Friends
 Channel
 Clan
 Trade
-01:12:07
-Boatyguidev3: *
-You have unlocked a new music track: @mes_hl_red@Courage
-You've started a new quest: @q_mes@Druidic Ritual
-You've started a new quest: @q_mes@Witch's House
-You have unlocked a new music track: @mes_hl_red@Splendour
-You have unlocked a new music track: @mes_hl_red@Horizon
-Check the skill guide for more information about Magic.
-Level 6 Magic: Arceuus Library Teleport
-Congratulations, you've just advanced your Magic level. You are now level 6.
-Well done! You have completed an easy task in the Falador area. Your Achievement Diary has been updated.
-You've started a new quest: @q_mes@The Knight's Sword
-You fill the bucket.
-You get a fresh, new haircut!
-You have unlocked a new music track: @mes_hl_red@Workshop
-You have unlocked a new music track: @mes_hl_red@Arrival
-You have unlocked a new music track: @mes_hl_red@Fanfare
-You get some wool.
-You'll need an empty bucket to collect the milk.
-You milk the cow.
-Level 5 Magic: Water Strike
-Level 4 Magic: Opal-tipped crossbow bolts
-Level 3 Magic: Confuse
-Congratulations, you've just advanced your Combat level. You are now level 5.
-Congratulations, you've just advanced your Magic level. You are now level 5.
-Congratulations, you've completed a quest: @q_mes@Witch's Potion
-You've started a new quest: @q_mes@Witch's Potion
-You have unlocked a new music track: @mes_hl_red@Attention
-You have unlocked a new music track: @mes_hl_red@Emperor
-You accidentally burn the meat.
-I can't reach that!
-[13:30:15] Error during overlay renderingjava.lang.NullPointerException: null
-[13:30:15] following log message logged 1000 times!
-[13:29:58] Error during overlay renderingjava.lang.NullPointerException: null
-[13:29:58] following log message logged 1000 times!
-[13:29:42] Error during overlay renderingjava.lang.NullPointerException: null
-[13:25:15] [WebWalk] sp | post-handleObject landing unresolved (timeout=5000ms) dest=2962,9650,p0 at=3019,3233,p0
-[13:25:05] [WebWalk] sp | post-handleObject landing unresolved (timeout=5000ms) dest=2962,9650,p0 at=3018,3231,p0
-You can't sell this item to this shop.
-You don't have enough inventory space.
-You find your bottle of rum in amongst the bananas.
-There are a lot of bananas in the crate.
-There are a lot of potatoes in the crate.
-There are a lot of cabbages in the crate.
-[13:13:55] Error during overlay renderingjava.lang.NullPointerException: Cannot read the array length because "" is null
-Welcome to Old School RuneScape.
+01:13:40
+A mouse runs out of the hole.
+Click here to continue
 == Quest Helper
 ObjectStep: "Use the cheese on the mouse hole in the south room, then use the magnet on the mouse which emerges." npcs [] objects [2870] at null choices []
