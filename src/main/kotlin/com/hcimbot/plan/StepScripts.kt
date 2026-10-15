@@ -1260,8 +1260,16 @@ class StepScripts(private val guide: Guide) {
             // Quest Helper stops at the mouse hole: the cheese (1985) goes on the hole (2870) at (2903, 3466) in the south room, and the
             // magnet (2410) on the mouse that comes out. The helper's own attempt is allowed to fail so that this can do it.
             val needsMouse: (TaskContext) -> Boolean = { ctx -> has(2410)(ctx) && has(1985)(ctx) }
+            val needsCheese: (TaskContext) -> Boolean = { ctx ->
+                has(2410)(ctx) && !has(1985)(ctx) && !has(2411)(ctx) && ctx.game.nearestNpc(emptyList(), listOf("Mouse")) == null
+            }
             StepPlan.Auto(
                 listOfNotNull(
+                    // Out of cheese with the mouse gone and the shed key (2411) not yet got: more cheese lies in Aggie's house in Draynor at
+                    // (3083, 3260) ("multiple if you mess up"), and it is brought back to the mouse hole.
+                    OnlyIf(needsCheese, WalkTask(Tile(3084, 3259, 0), radius = 3)),
+                    OnlyIf(needsCheese, PickUpTask(listOf(1985), 12)),
+                    OnlyIf({ ctx -> has(1985)(ctx) && has(2410)(ctx) && !has(2411)(ctx) }, WalkTask(Tile(2902, 3466, 0), radius = 1)),
                     helper?.let { Optional(QuestTask("witchshouse", it, false)) },
                     OnlyIf(needsMouse, UseItemTask(1985, null, listOf(2870), listOf("Mouse hole"), Tile(2903, 3466, 0))),
                     // The mouse may be out already, with the cheese gone: only the magnet is needed then. With no mouse it moves on.
