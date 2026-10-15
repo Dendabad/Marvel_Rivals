@@ -912,6 +912,32 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 162. "Buy Karamja Rum": Zembo (13655) at Musa Point sells it, at (2928, 3145).
+        "e5a078c259" to { _ ->
+            val zembo = listOf(ShopTask.Seller("Zembo", listOf(13655), listOf(Tile(2928, 3145, 0))))
+            auto(ShopTask(zembo, listOf(item("Karamja rum", 431, 1))), trust = true)
+        },
+
+        // 163. "Fill Crate with bananas and use Karamja rum on the crate": the crate (2072) in Luthas's hut at (2939, 3149). Each
+        // banana is used on it in turn, then the rum goes in last.
+        "cc8071e8c7" to { _ ->
+            val crate = Tile(2939, 3149, 0)
+            val bananas = 1963
+            StepPlan.Auto(
+                listOf(
+                    RepeatUntil(
+                        "fill the crate with bananas",
+                        { ctx -> (ctx.game.inventory()[bananas] ?: 0) == 0 },
+                        { UseItemTask(bananas, null, listOf(2072), listOf("Crate"), crate) },
+                        maxRounds = 14,
+                    ),
+                    UseItemTask(431, null, listOf(2072), listOf("Crate"), crate),
+                ),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
