@@ -1,95 +1,133 @@
 HCIM Guide Bot 0.16.46, PAUSED
 == Step
-Step 164 of 2925: Make sure to speak to Luthas again before heading to the boat
-Detail: finish talking to Luthas: none of the expected chat options [Yes, ok] are in [Could you offer me employment on your plantation?, That customs officer is annoying isn't she?]. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 166 of 2925: Trade Wydin and buy Raw Chicken, 2x Raw Beef, 3x Flour & 2x redberries
+Detail: Buy Raw Chicken, Raw Beef, Flour, redberries: could not buy Raw Beef. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-13:11:30  Asking the AI about this pause (try 1)
-13:11:30  Paused: finish talking to Luthas: none of the expected chat options [Yes, ok] are in [Could you offer me employment on your plantation?, That customs officer is annoying isn't she?]
-13:11:24  Step: Make sure to speak to Luthas again before heading to the boat
-13:11:24  Started version 0.16.46
+13:12:24  Asking the AI about this pause (try 1)
+13:12:24  Paused: Buy Raw Chicken, Raw Beef, Flour, redberries: could not buy Raw Beef
+13:12:05  Step: Trade Wydin and buy Raw Chicken, 2x Raw Beef, 3x Flour & 2x redberries
+13:12:04  Done (all actions finished): Take boat back to Port Sarim [Karamja Easy Diary]
+13:11:48  Walking from (2939, 3154, 0) to (2953, 3146, 0)
+13:11:48  Step: Take boat back to Port Sarim [Karamja Easy Diary]
+13:11:47  Done (all actions finished): Make sure to speak to Luthas again before heading to the boat
+13:11:39  Step: Make sure to speak to Luthas again before heading to the boat
+13:11:38  AI plan finished, trying the step again
+13:11:38  AI: continue
+13:11:37  AI: continue
+13:11:36  AI: continue
 == Player
-world WorldPoint(x=2939, y=3154, plane=0), in instance false, as guide coordinates WorldPoint(x=2939, y=3154, plane=0)
+world WorldPoint(x=3015, y=3204, plane=0), in instance false, as guide coordinates WorldPoint(x=3015, y=3204, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x12714, 558x38, 303x1, 1957x1, 1269x1, 1993x1, 1993x1, 311x1, 313x50, 314x1246, 1757x1, 53x454
+995x12682, 558x38, 303x1, 1957x1, 1269x1, 2138x1, 1993x1, 1993x1, 311x1, 313x50, 314x1246, 2132x1, 1757x1, 53x454
 == NPCs within 12 tiles (id name at tile: options)
-13655 Zembo at WorldPoint(x=2928, y=3143, plane=0): [Talk-to, Trade]
-3647 Luthas at WorldPoint(x=2939, y=3155, plane=0): [Talk-to]
-3652 Man at WorldPoint(x=2945, y=3148, plane=0): [Talk-to, Attack, Pickpocket]
-15364 Shipwright Sally at WorldPoint(x=2946, y=3148, plane=0): [Talk-to, Buy-boat, Customise-boat, Recover-boat]
+1338 Seagull at WorldPoint(x=3022, y=3207, plane=0): [Attack]
+15363 Shipwright Sam at WorldPoint(x=3024, y=3204, plane=0): [Talk-to, Buy-boat, Customise-boat, Recover-boat]
+14959 Will at WorldPoint(x=3024, y=3208, plane=0): [Talk-to]
+14964 Anne at WorldPoint(x=3025, y=3209, plane=0): [Talk-to]
+14982 Seaman Thresnor at WorldPoint(x=3027, y=3216, plane=0): [Talk-to, Travel]
+14978 Captain Tobias at WorldPoint(x=3027, y=3213, plane=0): [Talk-to, Travel]
+2854 Rat at WorldPoint(x=3010, y=3198, plane=0): [Attack]
+5444 Cap'n Hand at WorldPoint(x=3013, y=3192, plane=0): [Talk-to]
+2854 Rat at WorldPoint(x=3013, y=3196, plane=0): [Attack]
+1448 Thief at WorldPoint(x=3014, y=3194, plane=0): [Attack]
+3032 Goblin at WorldPoint(x=3010, y=3200, plane=0): [Attack]
+3036 Goblin at WorldPoint(x=3008, y=3214, plane=0): [Attack]
+2890 Wydin at WorldPoint(x=3012, y=3205, plane=0): [Talk-to, Trade]
+3035 Goblin at WorldPoint(x=3012, y=3206, plane=0): [Attack]
+3053 Goblin at WorldPoint(x=3017, y=3205, plane=0): [Attack]
 == Named objects within 25 tiles, nearest first (id name at tile)
-724 Standing torch at WorldPoint(x=2937, y=3154, plane=0)
-9519 Barrel at WorldPoint(x=2940, y=3152, plane=0)
-9536 Boxes at WorldPoint(x=2940, y=3156, plane=0)
-9519 Barrel at WorldPoint(x=2941, y=3152, plane=0)
-620 Table at WorldPoint(x=2941, y=3155, plane=0)
-9536 Boxes at WorldPoint(x=2941, y=3156, plane=0)
-419 Bed at WorldPoint(x=2936, y=3155, plane=0)
-724 Standing torch at WorldPoint(x=2937, y=3151, plane=0)
-724 Standing torch at WorldPoint(x=2939, y=3151, plane=0)
-1184 Creeping plant at WorldPoint(x=2935, y=3150, plane=0)
-365 Sacks at WorldPoint(x=2935, y=3152, plane=0)
-9533 Crate at WorldPoint(x=2935, y=3156, plane=0)
-1276 Tree at WorldPoint(x=2943, y=3153, plane=0)
-1390 Plant at WorldPoint(x=2934, y=3151, plane=0)
-2072 Crate at WorldPoint(x=2939, y=3149, plane=0)
-59723 Shipwrights' Workbench at WorldPoint(x=2944, y=3149, plane=0)
-9534 Crate at WorldPoint(x=2943, y=3148, plane=0)
-1276 Tree at WorldPoint(x=2945, y=3151, plane=0)
-1184 Creeping plant at WorldPoint(x=2932, y=3157, plane=0)
-1184 Creeping plant at WorldPoint(x=2932, y=3159, plane=0)
-1302 Leafy tree at WorldPoint(x=2932, y=3160, plane=0)
-1184 Creeping plant at WorldPoint(x=2936, y=3161, plane=0)
-1304 Tree at WorldPoint(x=2940, y=3147, plane=0)
-9535 Crates at WorldPoint(x=2946, y=3149, plane=0)
-1173 Small fern at WorldPoint(x=2931, y=3146, plane=0)
-1184 Creeping plant at WorldPoint(x=2931, y=3147, plane=0)
-1184 Creeping plant at WorldPoint(x=2932, y=3146, plane=0)
-1184 Creeping plant at WorldPoint(x=2930, y=3148, plane=0)
-1390 Plant at WorldPoint(x=2930, y=3149, plane=0)
-1184 Creeping plant at WorldPoint(x=2930, y=3150, plane=0)
-1303 Tree at WorldPoint(x=2930, y=3153, plane=0)
-1303 Tree at WorldPoint(x=2930, y=3154, plane=0)
-2074 Banana tree at WorldPoint(x=2930, y=3155, plane=0)
-2074 Banana tree at WorldPoint(x=2930, y=3158, plane=0)
-2074 Banana tree at WorldPoint(x=2930, y=3161, plane=0)
-1390 Plant at WorldPoint(x=2930, y=3163, plane=0)
-1298 Fern at WorldPoint(x=2931, y=3145, plane=0)
-1184 Creeping plant at WorldPoint(x=2934, y=3163, plane=0)
-1162 Bullrushes at WorldPoint(x=2935, y=3163, plane=0)
-15039 Stool at WorldPoint(x=2929, y=3146, plane=0)
+9534 Crate at WorldPoint(x=3015, y=3203, plane=0)
+9535 Crates at WorldPoint(x=3016, y=3203, plane=0)
+602 Table at WorldPoint(x=3016, y=3205, plane=0)
+16683 Ladder at WorldPoint(x=3013, y=3203, plane=0)
+612 Counter at WorldPoint(x=3013, y=3205, plane=0)
+1536 Door at WorldPoint(x=3017, y=3206, plane=0)
+2069 Door at WorldPoint(x=3012, y=3204, plane=0)
+1158 Potted plant at WorldPoint(x=3012, y=3207, plane=0)
+375 Closed chest at WorldPoint(x=3016, y=3207, plane=0)
+15030 Crate at WorldPoint(x=3011, y=3203, plane=0)
+888 Painting at WorldPoint(x=3012, y=3208, plane=0)
+1158 Potted plant at WorldPoint(x=3015, y=3208, plane=0)
+15031 Crate at WorldPoint(x=3010, y=3203, plane=0)
+1158 Potted plant at WorldPoint(x=3012, y=3209, plane=0)
+1158 Potted plant at WorldPoint(x=3014, y=3209, plane=0)
+9536 Boxes at WorldPoint(x=3019, y=3209, plane=0)
+9534 Crate at WorldPoint(x=3020, y=3202, plane=0)
+9525 Cart at WorldPoint(x=3020, y=3208, plane=0)
+9535 Crates at WorldPoint(x=3009, y=3203, plane=0)
+9533 Crate at WorldPoint(x=3009, y=3204, plane=0)
+365 Sacks at WorldPoint(x=3009, y=3205, plane=0)
+2071 Crate at WorldPoint(x=3009, y=3207, plane=0)
+15032 Crates at WorldPoint(x=3009, y=3209, plane=0)
+9519 Barrel at WorldPoint(x=3010, y=3210, plane=0)
+9519 Barrel at WorldPoint(x=3011, y=3210, plane=0)
+683 Grandfather Clock at WorldPoint(x=3013, y=3210, plane=0)
+9536 Boxes at WorldPoint(x=3019, y=3210, plane=0)
+9536 Boxes at WorldPoint(x=3020, y=3210, plane=0)
+5605 Rock at WorldPoint(x=3021, y=3200, plane=0)
+9535 Crates at WorldPoint(x=3021, y=3202, plane=0)
+9534 Crate at WorldPoint(x=3021, y=3203, plane=0)
+9522 Anchor at WorldPoint(x=3021, y=3210, plane=0)
+1535 Door at WorldPoint(x=3011, y=3197, plane=0)
+9535 Crates at WorldPoint(x=3022, y=3202, plane=0)
+9533 Crate at WorldPoint(x=3022, y=3203, plane=0)
+9534 Crate at WorldPoint(x=3022, y=3210, plane=0)
+9568 Bucket at WorldPoint(x=3014, y=3196, plane=0)
+10786 Rock at WorldPoint(x=3022, y=3212, plane=0)
+9534 Crate at WorldPoint(x=3023, y=3209, plane=0)
+9535 Crates at WorldPoint(x=3023, y=3210, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
-556 Air rune at WorldPoint(x=2938, y=3158, plane=0)
+1005 White apron at WorldPoint(x=3009, y=3204, plane=0)
+1963 Banana at WorldPoint(x=3009, y=3207, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-15033 at WorldPoint(x=2938, y=3153, plane=0)
-15033 at WorldPoint(x=2938, y=3154, plane=0)
-15033 at WorldPoint(x=2938, y=3155, plane=0)
-15033 at WorldPoint(x=2937, y=3153, plane=0)
-15033 at WorldPoint(x=2938, y=3156, plane=0)
-1618 at WorldPoint(x=2939, y=3156, plane=0)
-1855 at WorldPoint(x=2936, y=3151, plane=0)
-339 at WorldPoint(x=2936, y=3152, plane=0)
-339 at WorldPoint(x=2936, y=3153, plane=0)
-15034 at WorldPoint(x=2936, y=3153, plane=0)
-340 at WorldPoint(x=2936, y=3157, plane=0)
-1616 at WorldPoint(x=2936, y=3157, plane=0)
-176 at WorldPoint(x=2937, y=3151, plane=0)
-1616 at WorldPoint(x=2937, y=3151, plane=0)
-339 at WorldPoint(x=2937, y=3157, plane=0)
+1832 at WorldPoint(x=3014, y=3203, plane=0)
+2769 at WorldPoint(x=3014, y=3205, plane=0)
+9473 at WorldPoint(x=3016, y=3203, plane=0)
+9473 at WorldPoint(x=3016, y=3204, plane=0)
+1832 at WorldPoint(x=3016, y=3204, plane=0)
+9473 at WorldPoint(x=3016, y=3205, plane=0)
+5533 at WorldPoint(x=3013, y=3202, plane=0)
+9473 at WorldPoint(x=3013, y=3202, plane=0)
+943 at WorldPoint(x=3013, y=3206, plane=0)
+5536 at WorldPoint(x=3014, y=3202, plane=0)
+9473 at WorldPoint(x=3014, y=3202, plane=0)
+1828 at WorldPoint(x=3014, y=3202, plane=0)
+943 at WorldPoint(x=3014, y=3206, plane=0)
+5536 at WorldPoint(x=3015, y=3202, plane=0)
+9473 at WorldPoint(x=3015, y=3202, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
-995 Coins x12714
+1933 Pot of flour x3
+2132 Raw beef x0
+2138 Raw chicken x0
+1965 Cabbage x3
+1963 Banana x3
+1951 Redberries x1
+2309 Bread x0
+1973 Chocolate bar x1
+1985 Cheese x3
+1982 Tomato x3
+1942 Potato x1
+995 Coins x12682
 558 Mind rune x38
 303 Small fishing net x1
 1957 Onion x1
 1269 Steel pickaxe x1
+2138 Raw chicken x1
 1993 Jug of wine x1
 311 Harpoon x1
 313 Fishing bait x50
 314 Feather x1246
+2132 Raw beef x1
 1757 Brown apron x1
 53 Headless arrow x454
 == Text in open windows and chat
+Food Store
+Value check:
+Quantity:
 10
+50
+88
 100
 All
 Game
@@ -100,9 +138,47 @@ Friends
 Channel
 Clan
 Trade
-01:08:17
-Select an option
-Could you offer me employment on your plantation?
-That customs officer is annoying isn't she?
+01:09:11
+Boatyguidev3: *
+That item is currently out of stock.
+You board the ship and sail to Port Sarim.
+Well done! You have completed an easy task in the Karamja area. Your Achievement Diary has been updated.
+You pay the boarding charge of 30 coins.
+Luthas hands you 30 coins.
+You pick a banana.
+Well done! A Karamja task has been updated.
+You catch some raw shrimps.
+You cast out your net...
+You have unlocked a new music track: @mes_hl_red@Jungle Island
+You have unlocked a new music track: @mes_hl_red@Sea Shanty
+You board the ship and sail to Musa Point.
+You attach feathers to 4 arrow shafts.
+Check the skill guide for more information about Fletching.
+Level 10 Fletching: Bronze darts
+Level 10 Fletching: Longbows
+You attach feathers to 15 arrow shafts.
+Congratulations, you've just advanced your Fletching level. You are now level 10.
+Congratulations, you've just advanced your Fletching level. You are now level 9.
+Level 9 Fletching: Bronze/wooden crossbows
+Level 9 Fletching: Bronze bolts
+Congratulations, you've just advanced your Fletching level. You are now level 8.
+You take an apron. It feels freshly starched and smells of laundry.
+You've started a new quest: @q_mes@Pirate's Treasure
+You add 10 charges to your book. It now has 10 charges.
+You step through the portal...
+You have unlocked a new music track: @mes_hl_red@Rune Essence
+Well done! You have completed an easy task in the Lumbridge & Draynor area. Your Achievement Diary has been updated.
+Congratulations, you've completed a quest: @q_mes@Rune Mysteries
+The skeleton in the corner suddenly comes to life!
+You pay the guards and pass through the gate.
+You have unlocked a new music track: @mes_hl_red@Arabian 2
+You have unlocked a new music track: @mes_hl_red@Arabian
+You have unlocked a new music track: @mes_hl_red@Al Kharid
+You need to wait another 24 minutes to cast this spell.
+[12:26:27] [WebWalk] sp | Al Kharid toll gate crossing unresolved confirmed=false dest=3268,3227,p0 at=3253,3226,p0
+You don't have enough coins.
+You have correctly entered your PIN.
+You have unlocked a new music track: @mes_hl_red@Mistrock
+Welcome to Old School RuneScape.
 == Quest Helper
 DetailedQuestStep: "Please open Pirate Treasure's Quest Journal to sync the current quest state." npcs [] objects [] at null choices []
