@@ -1010,8 +1010,9 @@ class StepScripts(private val guide: Guide) {
             val chatClosed: (TaskContext) -> Boolean = { ctx -> !ctx.game.canContinueDialog && ctx.game.dialogOptions().isEmpty() }
             StepPlan.Auto(
                 listOf(
-                    talk(listOf(3643), "Redbeard Frank", Tile(3052, 3254, 0), chat),
-                    WaitUntilTask("finish talking to Redbeard Frank", 40, chat, chatClosed),
+                    // He hands over the Chest key (432) for the rum, so with the key held the rum has been given already.
+                    OnlyIf({ ctx -> !has(432)(ctx) }, talk(listOf(3643), "Redbeard Frank", Tile(3052, 3254, 0), chat)),
+                    OnlyIf({ ctx -> !has(432)(ctx) }, WaitUntilTask("finish talking to Redbeard Frank", 40, chat, chatClosed)),
                 ),
                 trustTasks = true,
                 ignoreStartSignal = true,
