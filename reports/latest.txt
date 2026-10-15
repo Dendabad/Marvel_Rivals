@@ -1,103 +1,110 @@
-HCIM Guide Bot 0.16.64, PAUSED
+HCIM Guide Bot 0.16.66, PAUSED
 == Step
-Step 172 of 2925: Head South-West and complete Witches Potion (Beef twice on range to burn)
-Detail: Quest: witchspotion: Kill a rat in the house to the west for a rat tail. needs 1x Rat's tail. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 174 of 2925: Buy moulds: Ring, Amulet, 2x Necklace, Bracelet, Sickle, Tiara, 3x Needle & 50 Thread (from Rommik in Rimmington)
+Detail: Buy moulds: Ring, Amulet, 2x Necklace, Bracelet, Sickle, Tiara, 3x Needle & 50 Thread (from Rommik in Rimmington) (cannot identify what to buy). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-13:43:53  Asking the AI about this pause (try 1)
-13:43:53  Paused: Quest: witchspotion: Kill a rat in the house to the west for a rat tail. needs 1x Rat's tail
-13:43:04  Walking from (3018, 3237, 0) to (2968, 3205, 0)
-13:43:04  Quest Helper: Quest Helper has PiratesTreasure open, not witchspotion. Select witchspotion in the Quest Helper panel
-13:43:04  Quest step: Talk to Hetty in Rimmington.
-13:43:03  Step: Head South-West and complete Witches Potion (Beef twice on range to burn)
-13:43:03  Started version 0.16.64
+13:46:30  Asking the AI about this pause (try 1)
+13:46:29  Paused: Buy moulds: Ring, Amulet, 2x Necklace, Bracelet, Sickle, Tiara, 3x Needle & 50 Thread (from Rommik in Rimmington) (cannot identify what to buy)
+13:46:29  Step: Buy moulds: Ring, Amulet, 2x Necklace, Bracelet, Sickle, Tiara, 3x Needle & 50 Thread (from Rommik in Rimmington)
+13:46:20  Step: Take 2x Logs when getting the rat tail
+13:46:16  Quest Helper: Quest Helper has PiratesTreasure open, not witchspotion. Select witchspotion in the Quest Helper panel
+13:46:16  Quest step: Drink from the cauldron to finish off the quest.
+13:45:59  Quest Helper: Quest Helper has PiratesTreasure open, not witchspotion. Select witchspotion in the Quest Helper panel
+13:45:59  Quest step: Bring the ingredients to Hetty.
+13:45:53  Rat is dead after 1 attacks
+13:45:43  Attacking Rat
+13:45:42  Skipped optional Quest: witchspotion: Kill a rat in the house to the west for a rat tail. needs 1x Rat's tail
+13:45:41  Step: Head South-West and complete Witches Potion (Beef twice on range to burn)
 == Player
-world WorldPoint(x=2966, y=3208, plane=0), in instance false, as guide coordinates WorldPoint(x=2966, y=3208, plane=0)
+world WorldPoint(x=2959, y=3205, plane=0), in instance false, as guide coordinates WorldPoint(x=2959, y=3205, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x12073, 558x200, 432x1, 1957x1, 1269x1, 221x1, 1993x1, 1993x1, 221x1, 2146x1
+995x12073, 558x200, 432x1, 1511x1, 1269x1, 1511x1, 1993x1, 1993x1, 221x1
 == NPCs within 12 tiles (id name at tile: options)
-2855 Rat at WorldPoint(x=2954, y=3204, plane=0): [Attack]
-2855 Rat at WorldPoint(x=2955, y=3203, plane=0): [Attack]
-8694 Brian at WorldPoint(x=2958, y=3203, plane=0): [Talk-to, Trade]
+6530 Rommik at WorldPoint(x=2947, y=3206, plane=0): [Talk-to, Trade]
+2823 Shop keeper at WorldPoint(x=2947, y=3217, plane=0): [Talk-to, Trade]
+2824 Shop assistant at WorldPoint(x=2948, y=3217, plane=0): [Talk-to, Trade]
+1614 Phials at WorldPoint(x=2950, y=3212, plane=0): [Talk-to]
 2855 Rat at WorldPoint(x=2958, y=3202, plane=0): [Attack]
-2855 Rat at WorldPoint(x=2957, y=3204, plane=0): [Attack]
-3306 Henja at WorldPoint(x=2963, y=3210, plane=0): [Talk-to]
-3369 Angel at WorldPoint(x=2964, y=3212, plane=0): [Talk-to]
-4619 Hetty at WorldPoint(x=2965, y=3208, plane=0): [Talk-to]
+2855 Rat at WorldPoint(x=2955, y=3203, plane=0): [Attack]
+8694 Brian at WorldPoint(x=2956, y=3203, plane=0): [Talk-to, Trade]
+2855 Rat at WorldPoint(x=2959, y=3202, plane=0): [Attack]
+2855 Rat at WorldPoint(x=2956, y=3204, plane=0): [Attack]
+3306 Henja at WorldPoint(x=2964, y=3212, plane=0): [Talk-to]
+3369 Angel at WorldPoint(x=2963, y=3210, plane=0): [Talk-to]
+4619 Hetty at WorldPoint(x=2967, y=3208, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
-388 Wardrobe at WorldPoint(x=2965, y=3207, plane=0)
-9684 Sink at WorldPoint(x=2966, y=3209, plane=0)
-9615 Table at WorldPoint(x=2967, y=3207, plane=0)
-1020 Shelf at WorldPoint(x=2967, y=3208, plane=0)
-375 Closed chest at WorldPoint(x=2964, y=3209, plane=0)
-1536 Door at WorldPoint(x=2965, y=3206, plane=0)
-9621 Chair at WorldPoint(x=2968, y=3207, plane=0)
-1019 Shelf at WorldPoint(x=2968, y=3208, plane=0)
+9621 Chair at WorldPoint(x=2958, y=3204, plane=0)
+9536 Boxes at WorldPoint(x=2960, y=3204, plane=0)
+9614 Table at WorldPoint(x=2957, y=3205, plane=0)
+5615 Bench at WorldPoint(x=2958, y=3207, plane=0)
+9534 Crate at WorldPoint(x=2960, y=3203, plane=0)
+9618 Warehouse shelves at WorldPoint(x=2956, y=3202, plane=0)
+1536 Door at WorldPoint(x=2956, y=3205, plane=0)
+9619 Warehouse shelves at WorldPoint(x=2957, y=3202, plane=0)
+9535 Crates at WorldPoint(x=2960, y=3202, plane=0)
 9661 Tree stump at WorldPoint(x=2963, y=3207, plane=0)
 374 Hat stand at WorldPoint(x=2963, y=3209, plane=0)
+9620 Warehouse shelves at WorldPoint(x=2954, y=3202, plane=0)
+365 Sacks at WorldPoint(x=2954, y=3205, plane=0)
 907 Charms at WorldPoint(x=2964, y=3205, plane=0)
-1019 Shelf at WorldPoint(x=2965, y=3205, plane=0)
-9622 Chair at WorldPoint(x=2966, y=3211, plane=0)
-2024 Cauldron at WorldPoint(x=2967, y=3205, plane=0)
-9622 Chair at WorldPoint(x=2967, y=3211, plane=0)
-1021 Shelf at WorldPoint(x=2969, y=3208, plane=0)
-9615 Table at WorldPoint(x=2965, y=3204, plane=0)
-9613 Table at WorldPoint(x=2966, y=3212, plane=0)
-682 Piano stool at WorldPoint(x=2969, y=3212, plane=0)
-616 Table at WorldPoint(x=2970, y=3204, plane=0)
-693 Broom at WorldPoint(x=2970, y=3205, plane=0)
-1096 Rocking chair at WorldPoint(x=2970, y=3206, plane=0)
-388 Wardrobe at WorldPoint(x=2970, y=3207, plane=0)
-9682 Range at WorldPoint(x=2970, y=3209, plane=0)
-681 Piano at WorldPoint(x=2970, y=3212, plane=0)
-1541 Door at WorldPoint(x=2963, y=3213, plane=0)
+375 Closed chest at WorldPoint(x=2964, y=3209, plane=0)
+365 Sacks at WorldPoint(x=2953, y=3202, plane=0)
+9519 Barrel at WorldPoint(x=2953, y=3203, plane=0)
+6213 Barrel at WorldPoint(x=2953, y=3205, plane=0)
 388 Wardrobe at WorldPoint(x=2965, y=3203, plane=0)
+9615 Table at WorldPoint(x=2965, y=3204, plane=0)
+1019 Shelf at WorldPoint(x=2965, y=3205, plane=0)
+1536 Door at WorldPoint(x=2965, y=3206, plane=0)
+388 Wardrobe at WorldPoint(x=2965, y=3207, plane=0)
+5615 Bench at WorldPoint(x=2952, y=3211, plane=0)
+884 Well at WorldPoint(x=2956, y=3212, plane=0)
+10819 Willow tree at WorldPoint(x=2966, y=3199, plane=0)
+9684 Sink at WorldPoint(x=2966, y=3209, plane=0)
+9622 Chair at WorldPoint(x=2966, y=3211, plane=0)
+9613 Table at WorldPoint(x=2966, y=3212, plane=0)
+9687 Clothes model at WorldPoint(x=2951, y=3202, plane=0)
+9689 Clothes model at WorldPoint(x=2951, y=3203, plane=0)
+9688 Clothes model at WorldPoint(x=2951, y=3204, plane=0)
+9690 Clothes model at WorldPoint(x=2951, y=3205, plane=0)
+1299 Fern at WorldPoint(x=2952, y=3197, plane=0)
+10831 Willow tree at WorldPoint(x=2961, y=3197, plane=0)
+1541 Door at WorldPoint(x=2963, y=3213, plane=0)
+1276 Tree at WorldPoint(x=2965, y=3197, plane=0)
 9622 Chair at WorldPoint(x=2966, y=3213, plane=0)
 24969 Fireplace at WorldPoint(x=2967, y=3203, plane=0)
-9622 Chair at WorldPoint(x=2967, y=3213, plane=0)
-1020 Shelf at WorldPoint(x=2968, y=3203, plane=0)
-5497 Bed at WorldPoint(x=2969, y=3203, plane=0)
-9683 Range chimney at WorldPoint(x=2971, y=3209, plane=0)
-9535 Crates at WorldPoint(x=2960, y=3202, plane=0)
-9534 Crate at WorldPoint(x=2960, y=3203, plane=0)
-9536 Boxes at WorldPoint(x=2960, y=3204, plane=0)
-604 Table at WorldPoint(x=2970, y=3214, plane=0)
-1392 Plant at WorldPoint(x=2972, y=3212, plane=0)
-1158 Potted plant at WorldPoint(x=2963, y=3215, plane=0)
-18991 Staircase at WorldPoint(x=2965, y=3215, plane=0)
+2024 Cauldron at WorldPoint(x=2967, y=3205, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
-1511 Logs at WorldPoint(x=2959, y=3205, plane=0)
-1511 Logs at WorldPoint(x=2958, y=3205, plane=0)
-1265 Bronze pickaxe at WorldPoint(x=2963, y=3216, plane=0)
 882 Bronze arrow at WorldPoint(x=2957, y=3205, plane=0)
+1265 Bronze pickaxe at WorldPoint(x=2963, y=3216, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-4340 at WorldPoint(x=2966, y=3208, plane=0)
-9627 at WorldPoint(x=2966, y=3208, plane=0)
-706 at WorldPoint(x=2966, y=3208, plane=0)
-4340 at WorldPoint(x=2965, y=3207, plane=0)
-4341 at WorldPoint(x=2965, y=3208, plane=0)
-9627 at WorldPoint(x=2965, y=3208, plane=0)
-917 at WorldPoint(x=2965, y=3209, plane=0)
-918 at WorldPoint(x=2966, y=3209, plane=0)
-2771 at WorldPoint(x=2967, y=3208, plane=0)
-9627 at WorldPoint(x=2967, y=3208, plane=0)
-918 at WorldPoint(x=2967, y=3209, plane=0)
-315 at WorldPoint(x=2964, y=3206, plane=0)
-315 at WorldPoint(x=2964, y=3207, plane=0)
-20002 at WorldPoint(x=2964, y=3207, plane=0)
-9626 at WorldPoint(x=2964, y=3208, plane=0)
+4340 at WorldPoint(x=2959, y=3205, plane=0)
+4340 at WorldPoint(x=2958, y=3205, plane=0)
+20003 at WorldPoint(x=2958, y=3206, plane=0)
+4340 at WorldPoint(x=2959, y=3204, plane=0)
+315 at WorldPoint(x=2959, y=3206, plane=0)
+9626 at WorldPoint(x=2959, y=3206, plane=0)
+706 at WorldPoint(x=2960, y=3204, plane=0)
+4339 at WorldPoint(x=2960, y=3205, plane=0)
+316 at WorldPoint(x=2960, y=3206, plane=0)
+9626 at WorldPoint(x=2960, y=3206, plane=0)
+4340 at WorldPoint(x=2957, y=3205, plane=0)
+9626 at WorldPoint(x=2957, y=3206, plane=0)
+4340 at WorldPoint(x=2959, y=3203, plane=0)
+315 at WorldPoint(x=2960, y=3207, plane=0)
+5534 at WorldPoint(x=2961, y=3203, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
 995 Coins x12073
 558 Mind rune x200
 432 Chest key x1
-1957 Onion x1
+1511 Logs x1
 1269 Steel pickaxe x1
-221 Eye of newt x1
 1993 Jug of wine x1
-2146 Burnt meat x1
+221 Eye of newt x1
 == Text in open windows and chat
+391
 10
-79
+94
 100
 All
 Game
@@ -108,9 +115,34 @@ Friends
 Channel
 Clan
 Trade
-00:29:58
-Hetty
-Click here to continue
-You need an eye of newt, a rat's tail, an onion... Oh and a piece of burnt meat.
+00:32:34
+Boatyguidev3: *
+Check the skill guide for more information about Magic.
+Level 5 Magic: Water Strike
+Level 4 Magic: Opal-tipped crossbow bolts
+Level 3 Magic: Confuse
+Congratulations, you've just advanced your Combat level. You are now level 5.
+Congratulations, you've just advanced your Magic level. You are now level 5.
+Congratulations, you've completed a quest: @q_mes@Witch's Potion
+You've started a new quest: @q_mes@Witch's Potion
+You have unlocked a new music track: @mes_hl_red@Attention
+You have unlocked a new music track: @mes_hl_red@Emperor
+You accidentally burn the meat.
+I can't reach that!
+[13:30:15] Error during overlay renderingjava.lang.NullPointerException: null
+[13:30:15] following log message logged 1000 times!
+[13:29:58] Error during overlay renderingjava.lang.NullPointerException: null
+[13:29:58] following log message logged 1000 times!
+[13:29:42] Error during overlay renderingjava.lang.NullPointerException: null
+[13:25:15] [WebWalk] sp | post-handleObject landing unresolved (timeout=5000ms) dest=2962,9650,p0 at=3019,3233,p0
+[13:25:05] [WebWalk] sp | post-handleObject landing unresolved (timeout=5000ms) dest=2962,9650,p0 at=3018,3231,p0
+You can't sell this item to this shop.
+You don't have enough inventory space.
+You find your bottle of rum in amongst the bananas.
+There are a lot of bananas in the crate.
+There are a lot of potatoes in the crate.
+There are a lot of cabbages in the crate.
+[13:13:55] Error during overlay renderingjava.lang.NullPointerException: Cannot read the array length because "" is null
+Welcome to Old School RuneScape.
 == Quest Helper
 ObjectStep: "Climb up the stairs in The Blue Moon Inn in Varrock." npcs [] objects [11796] at null choices []
