@@ -1,98 +1,102 @@
-HCIM Guide Bot 0.16.7, PAUSED
+HCIM Guide Bot 0.16.8, PAUSED
 == Step
-Step 130 of 2925: Loot Fly Fishing Rod, Lobster Pot, 3x Iron Bar (hop worlds), Big Fishing Net & Feather
-Detail: Loot Fly Fishing Rod, Lobster Pot, 3x Iron Bar (hop worlds), Big Fishing Net & Feather (asks for several things). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 131 of 2925: Travel with Antonia to Aldarin
+Detail: Travel with Antonia to Aldarin (unclear what to click). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-11:01:43  Asking the AI about this pause (try 1)
-11:01:43  Paused: Loot Fly Fishing Rod, Lobster Pot, 3x Iron Bar (hop worlds), Big Fishing Net & Feather (asks for several things)
-11:01:43  Step: Loot Fly Fishing Rod, Lobster Pot, 3x Iron Bar (hop worlds), Big Fishing Net & Feather
-11:01:42  Done (all actions finished): Head South-West to Sunset Coast. Be careful of the aggressive NPC's along the way as they can kill you if you do not pay attention.
-11:00:59  Walking from (1545, 3037, 0) to (1530, 2979, 0)
-11:00:59  Step: Head South-West to Sunset Coast. Be careful of the aggressive NPC's along the way as they can kill you if you do not pay attention.
-11:00:59  Started version 0.16.7
+11:04:56  Asking the AI about this pause (try 1)
+11:04:55  Paused: Travel with Antonia to Aldarin (unclear what to click)
+11:04:55  Step: Travel with Antonia to Aldarin
+11:04:54  Done (the game shows it is done): Loot Fly Fishing Rod, Lobster Pot, 3x Iron Bar (hop worlds), Big Fishing Net & Feather
+11:04:44  Hopping worlds (still need 2351x3, hop 2, not back to [305, 457])
+11:04:23  Hopping worlds (still need 2351x3, hop 1, not back to [305])
+11:03:55  Step: Loot Fly Fishing Rod, Lobster Pot, 3x Iron Bar (hop worlds), Big Fishing Net & Feather
+11:03:55  Started version 0.16.8
 == Player
-world WorldPoint(x=1529, y=2984, plane=0), in instance false, as guide coordinates WorldPoint(x=1529, y=2984, plane=0)
+world WorldPoint(x=1513, y=2994, plane=0), in instance false, as guide coordinates WorldPoint(x=1513, y=2994, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x648, 1929x1
+995x648, 1929x1, 309x1, 301x1, 2351x1, 305x1, 314x5, 2351x1, 2351x1
 == NPCs within 12 tiles (id name at tile: options)
-12993 Molossus at WorldPoint(x=1520, y=2977, plane=0): [Pet, Shoo-away]
-13248 Sailor at WorldPoint(x=1519, y=2978, plane=0): [Talk-to]
-13206 Tourist at WorldPoint(x=1520, y=2978, plane=0): [Talk-to, Pickpocket]
-13251 Sailor at WorldPoint(x=1519, y=2989, plane=0): [Talk-to]
-1339 Seagull at WorldPoint(x=1522, y=2976, plane=0): [Attack]
-13161 Reinn at WorldPoint(x=1521, y=2982, plane=0): [Talk-to]
-13253 Fisher at WorldPoint(x=1525, y=2981, plane=0): [Talk-to]
-13155 Worker at WorldPoint(x=1527, y=2982, plane=0): [Talk-to]
-1553 Crab at WorldPoint(x=1533, y=2976, plane=0): []
-13187 Citizen at WorldPoint(x=1536, y=2986, plane=0): [Talk-to, Pickpocket]
+13251 Sailor at WorldPoint(x=1518, y=2990, plane=0): [Talk-to]
+13253 Fisher at WorldPoint(x=1522, y=2983, plane=0): [Talk-to]
+1553 Crab at WorldPoint(x=1501, y=2982, plane=0): []
+5007 Imp at WorldPoint(x=1505, y=2989, plane=0): [Attack]
+13186 Citizen at WorldPoint(x=1508, y=2986, plane=0): [Talk-to, Pickpocket]
+1338 Seagull at WorldPoint(x=1507, y=2995, plane=0): [Attack]
+13254 Fisher at WorldPoint(x=1510, y=2995, plane=0): [Talk-to]
+13255 Fisher at WorldPoint(x=1514, y=2983, plane=0): [Talk-to]
+13160 Thurid at WorldPoint(x=1513, y=2993, plane=0): [Talk-to, Trade]
+13179 Citizen at WorldPoint(x=1513, y=2991, plane=0): [Talk-to, Pickpocket]
+13159 Shopkeeper at WorldPoint(x=1515, y=2983, plane=0): [Talk-to, Trade]
 == Named objects within 25 tiles, nearest first (id name at tile)
-52431 Crate at WorldPoint(x=1528, y=2986, plane=0)
-27769 Broken lobster trap at WorldPoint(x=1526, y=2981, plane=0)
-11914 Bush at WorldPoint(x=1526, y=2987, plane=0)
-27768 Broken barrel at WorldPoint(x=1530, y=2981, plane=0)
-11912 Bush at WorldPoint(x=1532, y=2982, plane=0)
-18894 Rockslide at WorldPoint(x=1533, y=2982, plane=0)
-11113 Bush at WorldPoint(x=1524, y=2982, plane=0)
-11113 Bush at WorldPoint(x=1524, y=2987, plane=0)
-52458 Table at WorldPoint(x=1530, y=2979, plane=0)
-18894 Rockslide at WorldPoint(x=1533, y=2979, plane=0)
-52431 Crate at WorldPoint(x=1523, y=2978, plane=0)
-52432 Crates at WorldPoint(x=1523, y=2979, plane=0)
-52432 Crates at WorldPoint(x=1523, y=2987, plane=0)
-52431 Crate at WorldPoint(x=1523, y=2990, plane=0)
-11912 Bush at WorldPoint(x=1524, y=2990, plane=0)
-41316 Fire at WorldPoint(x=1526, y=2990, plane=0)
-52458 Table at WorldPoint(x=1528, y=2978, plane=0)
-18894 Rockslide at WorldPoint(x=1535, y=2981, plane=0)
-52431 Crate at WorldPoint(x=1522, y=2977, plane=0)
-52432 Crates at WorldPoint(x=1522, y=2990, plane=0)
-18894 Rockslide at WorldPoint(x=1534, y=2977, plane=0)
-18893 Rockslide at WorldPoint(x=1536, y=2979, plane=0)
-18893 Rockslide at WorldPoint(x=1536, y=2991, plane=0)
-18894 Rockslide at WorldPoint(x=1529, y=2992, plane=0)
-18894 Rockslide at WorldPoint(x=1531, y=2992, plane=0)
-52431 Crate at WorldPoint(x=1520, y=2982, plane=0)
+51724 Stool at WorldPoint(x=1512, y=2995, plane=0)
+52458 Table at WorldPoint(x=1513, y=2995, plane=0)
+2097 Anvil at WorldPoint(x=1515, y=2995, plane=0)
+11912 Bush at WorldPoint(x=1510, y=2996, plane=0)
+52431 Crate at WorldPoint(x=1516, y=2991, plane=0)
+52432 Crates at WorldPoint(x=1516, y=2992, plane=0)
+11914 Bush at WorldPoint(x=1509, y=2991, plane=0)
+11113 Bush at WorldPoint(x=1510, y=2990, plane=0)
+52431 Crate at WorldPoint(x=1512, y=2990, plane=0)
+52431 Crate at WorldPoint(x=1517, y=2992, plane=0)
+2097 Anvil at WorldPoint(x=1517, y=2995, plane=0)
+52431 Crate at WorldPoint(x=1508, y=2989, plane=0)
+52432 Crates at WorldPoint(x=1508, y=2995, plane=0)
+11913 Bush at WorldPoint(x=1508, y=2996, plane=0)
+52431 Crate at WorldPoint(x=1518, y=2993, plane=0)
+18894 Rockslide at WorldPoint(x=1507, y=2999, plane=0)
+11113 Bush at WorldPoint(x=1509, y=2988, plane=0)
+18892 Rockslide at WorldPoint(x=1509, y=3000, plane=0)
+52418 Bookshelf at WorldPoint(x=1515, y=2988, plane=0)
+52417 Bookshelf at WorldPoint(x=1518, y=2988, plane=0)
+15675 Barrel at WorldPoint(x=1506, y=2987, plane=0)
+52432 Crates at WorldPoint(x=1506, y=2991, plane=0)
+52431 Crate at WorldPoint(x=1506, y=2994, plane=0)
+52432 Crates at WorldPoint(x=1506, y=2995, plane=0)
+52431 Crate at WorldPoint(x=1508, y=2987, plane=0)
+18894 Rockslide at WorldPoint(x=1512, y=3001, plane=0)
+52415 Bookshelf at WorldPoint(x=1514, y=2987, plane=0)
+28553 Bank papers at WorldPoint(x=1517, y=2987, plane=0)
+50733 Sand pit at WorldPoint(x=1519, y=3001, plane=0)
 52432 Crates at WorldPoint(x=1520, y=2988, plane=0)
-15675 Barrel at WorldPoint(x=1523, y=2975, plane=0)
-18893 Rockslide at WorldPoint(x=1534, y=2975, plane=0)
-18893 Rockslide at WorldPoint(x=1538, y=2977, plane=0)
-18893 Rockslide at WorldPoint(x=1538, y=2985, plane=0)
-18894 Rockslide at WorldPoint(x=1538, y=2993, plane=0)
-52415 Bookshelf at WorldPoint(x=1519, y=2983, plane=0)
+52431 Crate at WorldPoint(x=1505, y=2986, plane=0)
+11912 Bush at WorldPoint(x=1505, y=2988, plane=0)
+11914 Bush at WorldPoint(x=1505, y=2991, plane=0)
+52417 Bookshelf at WorldPoint(x=1514, y=2986, plane=0)
+52465 Shelves at WorldPoint(x=1516, y=2986, plane=0)
 52458 Table at WorldPoint(x=1519, y=2986, plane=0)
-18893 Rockslide at WorldPoint(x=1539, y=2976, plane=0)
-18892 Rockslide at WorldPoint(x=1539, y=2987, plane=0)
-18894 Rockslide at WorldPoint(x=1539, y=2991, plane=0)
-60463 Salvaging station at WorldPoint(x=1518, y=2977, plane=0)
-28553 Bank papers at WorldPoint(x=1518, y=2982, plane=0)
-52416 Bookshelf at WorldPoint(x=1518, y=2982, plane=0)
+11911 Bush at WorldPoint(x=1504, y=2992, plane=0)
+21302 Clay oven at WorldPoint(x=1517, y=2985, plane=0)
+18894 Rockslide at WorldPoint(x=1517, y=3003, plane=0)
+52432 Crates at WorldPoint(x=1522, y=2990, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
-309 Fly fishing rod at WorldPoint(x=1530, y=2979, plane=0)
+2347 Hammer at WorldPoint(x=1513, y=2996, plane=0)
+314 Feather at WorldPoint(x=1506, y=2984, plane=0)
+305 Big fishing net at WorldPoint(x=1507, y=2984, plane=0)
 31073 Letter at WorldPoint(x=1528, y=2978, plane=0)
 301 Lobster pot at WorldPoint(x=1529, y=2978, plane=0)
+309 Fly fishing rod at WorldPoint(x=1530, y=2979, plane=0)
 303 Small fishing net at WorldPoint(x=1523, y=2976, plane=0)
-2351 Iron bar at WorldPoint(x=1513, y=2995, plane=0)
-2347 Hammer at WorldPoint(x=1513, y=2996, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-52377 at WorldPoint(x=1529, y=2984, plane=0)
-52098 at WorldPoint(x=1529, y=2984, plane=0)
-52377 at WorldPoint(x=1528, y=2983, plane=0)
-52377 at WorldPoint(x=1528, y=2984, plane=0)
-52377 at WorldPoint(x=1528, y=2985, plane=0)
-52377 at WorldPoint(x=1529, y=2983, plane=0)
-52098 at WorldPoint(x=1529, y=2983, plane=0)
-50886 at WorldPoint(x=1529, y=2983, plane=0)
-52377 at WorldPoint(x=1529, y=2985, plane=0)
-52375 at WorldPoint(x=1530, y=2983, plane=0)
-52377 at WorldPoint(x=1530, y=2984, plane=0)
-52098 at WorldPoint(x=1530, y=2984, plane=0)
-52377 at WorldPoint(x=1530, y=2985, plane=0)
-52377 at WorldPoint(x=1527, y=2982, plane=0)
-52375 at WorldPoint(x=1527, y=2982, plane=0)
+52377 at WorldPoint(x=1513, y=2994, plane=0)
+2140 at WorldPoint(x=1512, y=2993, plane=0)
+52377 at WorldPoint(x=1512, y=2993, plane=0)
+52375 at WorldPoint(x=1512, y=2993, plane=0)
+52377 at WorldPoint(x=1512, y=2994, plane=0)
+52377 at WorldPoint(x=1512, y=2995, plane=0)
+52375 at WorldPoint(x=1512, y=2995, plane=0)
+52377 at WorldPoint(x=1513, y=2993, plane=0)
+52377 at WorldPoint(x=1513, y=2995, plane=0)
+52377 at WorldPoint(x=1514, y=2993, plane=0)
+52380 at WorldPoint(x=1514, y=2994, plane=0)
+52377 at WorldPoint(x=1514, y=2995, plane=0)
+52377 at WorldPoint(x=1511, y=2992, plane=0)
+52098 at WorldPoint(x=1511, y=2992, plane=0)
+52375 at WorldPoint(x=1511, y=2993, plane=0)
 == Text in open windows and chat
+7,288
 10
-62
+85
 100
 All
 Game
@@ -103,53 +107,52 @@ Friends
 Channel
 Clan
 Trade
-00:02:46
+00:00:05
 Boatyguidev3: *
-You have unlocked a new music track: @mes_hl_red@Varlamore's Sunset
-Did you know? There is a setting to allow you to get Strength XP when pushing through the wheat in Puro-Puro.
+Did you know? Wearing a charged Amulet of Glory while mining will increase the rate at which you find gems.
 Welcome to Old School RuneScape.
-Current world - 305
+Current world - 362
 301
-1176
+1181
 Trade - Free
 302
-1618
+1627
 Trade - Mem...
 303
-354
-304
 355
+304
+345
 Trouble Bre...
 305
-932
+918
 Falador Part...
 306
-613
+593
 Barbarian A...
 307
-825
+851
 Wintertodt
 308
-766
+776
 Wilderness ...
 309
-383
+360
 310
-253
+237
 311
-260
+250
 312
-211
+212
 Group Skilling
 313
 553
 314
-699
+718
 Brimhaven ...
 315
-434
+431
 Fishing Traw...
 316
-188
+190
 == Quest Helper
 no step: null
