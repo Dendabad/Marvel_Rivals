@@ -625,7 +625,7 @@ class StepScripts(private val guide: Guide) {
                     InteractTask.Kind.NPC, listOf(13984, 13985), listOf("Antonia"), listOf(Tile(1495, 2985, 0)), "Talk-to",
                     DialoguePlan.Texts(listOf("Aldarin", "Yes", "Okay", "Let's go")),
                 ),
-                WaitUntilTask("Arrive in Aldarin", maxTicks = 100) { (it.game.playerTile?.x ?: 9999) < 1470 },
+                WaitUntilTask("Arrive in Aldarin", maxTicks = 100, dialogue = DialoguePlan.Texts(listOf("Aldarin", "Yes", "Okay", "Let's go"))) { (it.game.playerTile?.x ?: 9999) < 1470 },
                 trust = true,
             )
         },

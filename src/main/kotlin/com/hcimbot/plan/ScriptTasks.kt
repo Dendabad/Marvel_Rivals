@@ -1116,12 +1116,35 @@ class ClickChoiceTask(private val texts: List<String>, private val waitTicks: In
 }
 
 /** Waits until [reached] holds, up to [maxTicks], for something that takes a while like a journey. */
-class WaitUntilTask(private val label: String, private val maxTicks: Int, private val reached: (TaskContext) -> Boolean) : BaseTask() {
+/**
+ * Waits until [reached] holds, up to [maxTicks], for something that takes a while like a journey. Any chat that opens in the
+ * meantime is dealt with by [dialogue] (the talk that starts a journey can still be open when this begins).
+ */
+class WaitUntilTask(
+    private val label: String,
+    private val maxTicks: Int,
+    private val dialogue: DialoguePlan = DialoguePlan.None,
+    private val reached: (TaskContext) -> Boolean,
+) : BaseTask() {
     override val description = label
     private var waited = 0
 
     override fun tick(ctx: TaskContext): TaskResult {
         if (reached(ctx)) return TaskResult.Done
+        val game = ctx.game
+        if (game.canContinueDialog) {
+            waited = 0
+            return attempt(ctx.actions.continueDialog(), "continue the dialogue")
+        }
+        val options = game.dialogOptions()
+        if (options.isNotEmpty()) {
+            waited = 0
+            return when (val choice = dialogue.choose(options)) {
+                is DialoguePlan.Choice.ByIndex -> attempt(ctx.actions.chooseDialogOption(choice.index), "pick option ${choice.index}")
+                is DialoguePlan.Choice.ByText -> attempt(ctx.actions.chooseDialogOption(choice.text), "pick \"${choice.text}\"")
+                is DialoguePlan.Choice.Stuck -> TaskResult.Failed(choice.reason)
+            }
+        }
         return if (++waited >= maxTicks) TaskResult.Failed("$label: not there after $maxTicks ticks") else TaskResult.Running
     }
 }
