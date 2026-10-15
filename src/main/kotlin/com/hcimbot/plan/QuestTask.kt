@@ -49,7 +49,6 @@ class QuestTask(
 ) : Task {
     private var startValue: Int? = null
     private var closes = 0
-    private var waitedForNpc = 0
     private var current: Instruction? = null
     private var currentTask: Task? = null
     private var repeats = 0
@@ -58,30 +57,19 @@ class QuestTask(
     private var settling = 0
     override val description = "Quest: $questKey"
 
-    override fun tick(ctx: TaskContext): TaskResult {
+    override fun tick(ctx0: TaskContext): TaskResult {
+        // With a witch to keep clear of, every move the quest makes goes through short hops that stay out of her sight.
+        val ctx = if (avoidNpc != null) TaskContext(ctx0.game, SneakActions(ctx0.actions, ctx0.game, avoidNpc), ctx0.conditions, ctx0.log) else ctx0
         val progress = helper.progressVar ?: return TaskResult.Failed("$questKey has no progress variable in guide.json")
         // A book read for a step (the Witch's diary) stays open over the screen, and clicks go to it: closed once it has been read.
         if (avoidNpc != null) {
-            val at = ctx.game.playerTile
-            val witch = ctx.game.nearestNpc(emptyList(), listOf(avoidNpc))
-            if (at != null && witch != null && witch.tile.plane == at.plane) {
-                val seen = ctx.game.hasLineOfSight(witch.tile, at) == true && witch.tile.distanceTo(at) <= SIGHT
-                // Seen: step out of her sight at once, to the nearest tile she cannot see. Out of sight but she is close: wait for her to
-                // go. Only with her far or her sight blocked does the quest's own next move go ahead.
-                if (seen) {
-                    val hide = hiddenTile(ctx, witch.tile, at)
-                    if (hide != null && !ctx.game.isMoving) {
-                        ctx.log("${witch.name} can see this tile, stepping out of her sight to $hide")
-                        ctx.actions.walkTo(hide)
-                    }
-                    return TaskResult.Running
-                }
-                if (witch.tile.distanceTo(at) <= avoidWithin) {
-                    if (++waitedForNpc % 10 == 1) ctx.log("${witch.name} is ${witch.tile.distanceTo(at)} tiles away, waiting for her to move off")
-                    return TaskResult.Running
-                }
+            // Not seen yet is not enough: the witch moves, so what counts is every tile she could be on in the next moment. If this one is
+            // in view of any of them, step to the nearest that is not, before the next move.
+            val sneak = ctx.actions as SneakActions
+            if (!sneak.hereIsSafe()) {
+                sneak.hide(ctx.log)
+                return TaskResult.Running
             }
-            waitedForNpc = 0
         }
         val windowOpen = !ctx.game.isBankOpen && !ctx.game.isShopOpen && ctx.game.showsCloseableWindow
         if (windowOpen && closes < MAX_CLOSES) {
@@ -295,21 +283,7 @@ class QuestTask(
         return step.whenIn.firstOrNull { branch -> branch.tile?.let { from == null || it.plane != from.plane } == true }
     }
 
-    /** The nearest tile within a few steps that [from] cannot see and that can be walked to, or null. */
-    private fun hiddenTile(ctx: TaskContext, from: Tile, at: Tile): Tile? {
-        var best: Tile? = null
-        for (dx in -HIDE_RANGE..HIDE_RANGE) for (dy in -HIDE_RANGE..HIDE_RANGE) {
-            val tile = Tile(at.x + dx, at.y + dy, at.plane)
-            if (tile == at || ctx.game.canReach(tile) == false) continue
-            if (ctx.game.hasLineOfSight(from, tile) != false) continue
-            if (best == null || tile.distanceTo(at) < best.distanceTo(at)) best = tile
-        }
-        return best
-    }
-
     companion object {
-        private const val SIGHT = 14
-        private const val HIDE_RANGE = 6
         private const val MAX_CLOSES = 4
 
         const val MAX_REPEATS = 3
