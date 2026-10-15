@@ -1,119 +1,97 @@
-HCIM Guide Bot 0.16.73, PAUSED
+HCIM Guide Bot 0.16.74, PAUSED
 == Step
-Step 180 of 2925: Take Falador Crumbling wall Shortcut [Falador Easy Diary]
-Detail: Take Falador Crumbling wall Shortcut [Falador Easy Diary] (cannot identify what to pick up). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 182 of 2925: Withdraw: Coins, Mind Runes, Raw Rat/Chicken/Beef, 10x Wines, Empty Bucket, Chest Key, Cheese (18 Inventory Slots)
+Detail: Withdraw: Coins, Mind Runes, Raw Rat/Chicken/Beef, 10x Wines, Empty Bucket, Chest Key, Cheese (18 Inventory Slots) (cannot identify Chest Key). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-13:59:41  Asking the AI about this pause (try 1)
-13:59:41  Paused: Take Falador Crumbling wall Shortcut [Falador Easy Diary] (cannot identify what to pick up)
-13:59:41  Step: Take Falador Crumbling wall Shortcut [Falador Easy Diary]
-13:59:40  Done (all actions finished): Shear a sheep by the Makeover Mage
-13:59:22  Walking from (2923, 3283, 0) to (2926, 3318, 0)
-13:59:22  Step: Shear a sheep by the Makeover Mage
-13:59:21  Started version 0.16.73
+14:01:49  Asking the AI about this pause (try 1)
+14:01:49  Paused: Withdraw: Coins, Mind Runes, Raw Rat/Chicken/Beef, 10x Wines, Empty Bucket, Chest Key, Cheese (18 Inventory Slots) (cannot identify Chest Key)
+14:01:49  Step: Withdraw: Coins, Mind Runes, Raw Rat/Chicken/Beef, 10x Wines, Empty Bucket, Chest Key, Cheese (18 Inventory Slots)
+14:01:48  Done (all actions finished): Bank at Falador West Bank and deposit all
+14:01:30  Step: Bank at Falador West Bank and deposit all
+14:00:50  Walking from (2923, 3321, 0) to (2936, 3353, 0)
+14:00:50  Step: Take Falador Crumbling wall Shortcut [Falador Easy Diary]
+14:00:49  Started version 0.16.74
 == Player
-world WorldPoint(x=2923, y=3321, plane=0), in instance false, as guide coordinates WorldPoint(x=2923, y=3321, plane=0)
+world WorldPoint(x=2945, y=3368, plane=0), in instance false, as guide coordinates WorldPoint(x=2945, y=3368, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x11878, 558x199, 432x1, 1511x1, 1269x1, 1511x1, 1993x1, 1993x1, 221x1, 1592x1, 1595x1, 1597x1, 1597x1, 11065x1, 2976x1, 5523x1, 1733x3, 1734x50, 1927x1, 1927x1, 1927x1, 1735x1, 231x1, 1739x1, 2132x1, 526x1, 1737x1
+
 == NPCs within 12 tiles (id name at tile: options)
-5007 Imp at WorldPoint(x=2932, y=3327, plane=0): [Attack]
-1306 Makeover Mage at WorldPoint(x=2920, y=3324, plane=0): [Talk-to, Makeover]
-3290 Frog at WorldPoint(x=2918, y=3320, plane=0): []
-2787 Sheep at WorldPoint(x=2920, y=3315, plane=0): [Shear]
-2699 Sheep at WorldPoint(x=2919, y=3319, plane=0): [Shear]
-1178 Sheep at WorldPoint(x=2923, y=3322, plane=0): []
-2699 Sheep at WorldPoint(x=2922, y=3321, plane=0): [Shear]
-2693 Sheep at WorldPoint(x=2922, y=3327, plane=0): [Shear]
-1262 Ram at WorldPoint(x=2924, y=3320, plane=0): [Attack]
-1262 Ram at WorldPoint(x=2927, y=3321, plane=0): [Attack]
-2787 Sheep at WorldPoint(x=2924, y=3325, plane=0): [Shear]
-2693 Sheep at WorldPoint(x=2928, y=3317, plane=0): [Shear]
-1176 Li'l lamb at WorldPoint(x=2930, y=3318, plane=0): []
-2056 Dark wizard at WorldPoint(x=2913, y=3328, plane=0): [Attack]
+3270 Guard at WorldPoint(x=2943, y=3374, plane=0): [Attack, Pickpocket]
+1618 Banker at WorldPoint(x=2945, y=3366, plane=0): [Talk-to, Bank, Collect]
+14167 Archibald at WorldPoint(x=2945, y=3380, plane=0): [Pet]
+1618 Banker at WorldPoint(x=2946, y=3366, plane=0): [Talk-to, Bank, Collect]
+1305 Hairdresser at WorldPoint(x=2946, y=3379, plane=0): [Talk-to, Haircut, Shave]
+1618 Banker at WorldPoint(x=2947, y=3366, plane=0): [Talk-to, Bank, Collect]
+1618 Banker at WorldPoint(x=2948, y=3366, plane=0): [Talk-to, Bank, Collect]
+1613 Banker at WorldPoint(x=2949, y=3366, plane=0): [Talk-to, Bank, Collect]
+11947 Guard at WorldPoint(x=2952, y=3375, plane=0): [Attack, Pickpocket]
+278 Town Crier at WorldPoint(x=2953, y=3380, plane=0): [Talk-to]
+1315 Emily at WorldPoint(x=2954, y=3373, plane=0): [Talk-to]
+10659 Burntof at WorldPoint(x=2956, y=3367, plane=0): [Talk-to]
+3271 Guard at WorldPoint(x=2956, y=3379, plane=0): [Attack, Pickpocket]
 == Named objects within 25 tiles, nearest first (id name at tile)
-9696 Sign at WorldPoint(x=2922, y=3322, plane=0)
-9621 Chair at WorldPoint(x=2921, y=3322, plane=0)
-1535 Door at WorldPoint(x=2922, y=3323, plane=0)
-374 Hat stand at WorldPoint(x=2921, y=3324, plane=0)
-1189 Daisies at WorldPoint(x=2926, y=3320, plane=0)
-9614 Table at WorldPoint(x=2919, y=3322, plane=0)
-9694 Noticeboard at WorldPoint(x=2919, y=3324, plane=0)
-1189 Daisies at WorldPoint(x=2925, y=3317, plane=0)
-1189 Daisies at WorldPoint(x=2927, y=3319, plane=0)
-11695 Dairy churn at WorldPoint(x=2918, y=3324, plane=0)
-1278 Tree at WorldPoint(x=2920, y=3316, plane=0)
-1278 Tree at WorldPoint(x=2922, y=3316, plane=0)
-43158 Pharmakos bush at WorldPoint(x=2922, y=3326, plane=0)
-43158 Pharmakos bush at WorldPoint(x=2927, y=3326, plane=0)
-26181 Range at WorldPoint(x=2917, y=3318, plane=0)
-43158 Pharmakos bush at WorldPoint(x=2925, y=3327, plane=0)
-9604 Plant at WorldPoint(x=2929, y=3316, plane=0)
-1394 Plant at WorldPoint(x=2929, y=3321, plane=0)
-1013 Cooking shelves at WorldPoint(x=2916, y=3320, plane=0)
-692 Cauldron at WorldPoint(x=2916, y=3322, plane=0)
-1289 Dead tree at WorldPoint(x=2918, y=3328, plane=0)
-1278 Tree at WorldPoint(x=2921, y=3314, plane=0)
-1289 Dead tree at WorldPoint(x=2924, y=3328, plane=0)
-1394 Plant at WorldPoint(x=2930, y=3316, plane=0)
-9558 Ladder at WorldPoint(x=2915, y=3323, plane=0)
-1282 Dead tree at WorldPoint(x=2915, y=3329, plane=0)
-1391 Plant at WorldPoint(x=2927, y=3313, plane=0)
-1393 Plant at WorldPoint(x=2930, y=3313, plane=0)
-9604 Plant at WorldPoint(x=2931, y=3315, plane=0)
-1278 Tree at WorldPoint(x=2914, y=3312, plane=0)
-350 Drawers at WorldPoint(x=2914, y=3321, plane=0)
-1282 Dead tree at WorldPoint(x=2914, y=3329, plane=0)
-11895 Thorns at WorldPoint(x=2915, y=3330, plane=0)
-11896 Thorns at WorldPoint(x=2916, y=3330, plane=0)
-1278 Tree at WorldPoint(x=2917, y=3312, plane=0)
-1282 Dead tree at WorldPoint(x=2917, y=3330, plane=0)
-1289 Dead tree at WorldPoint(x=2921, y=3330, plane=0)
-1278 Tree at WorldPoint(x=2924, y=3312, plane=0)
-1276 Tree at WorldPoint(x=2926, y=3330, plane=0)
-9605 Plant at WorldPoint(x=2932, y=3313, plane=0)
+24101 Bank booth at WorldPoint(x=2945, y=3367, plane=0)
+24101 Bank booth at WorldPoint(x=2946, y=3367, plane=0)
+10529 Bank Deposit Box at WorldPoint(x=2943, y=3368, plane=0)
+1126 Rosebush at WorldPoint(x=2944, y=3366, plane=0)
+24101 Bank booth at WorldPoint(x=2947, y=3367, plane=0)
+27272 Stool at WorldPoint(x=2947, y=3370, plane=0)
+26729 Bush at WorldPoint(x=2945, y=3365, plane=0)
+24099 Notice board at WorldPoint(x=2947, y=3371, plane=0)
+24101 Bank booth at WorldPoint(x=2948, y=3367, plane=0)
+590 Bank table at WorldPoint(x=2948, y=3369, plane=0)
+26729 Bush at WorldPoint(x=2945, y=3364, plane=0)
+591 Bank table at WorldPoint(x=2947, y=3372, plane=0)
+590 Bank table at WorldPoint(x=2948, y=3364, plane=0)
+27253 Bank booth at WorldPoint(x=2949, y=3367, plane=0)
+961 Bank notice board at WorldPoint(x=2949, y=3369, plane=0)
+8720 Poll booth at WorldPoint(x=2944, y=3373, plane=0)
+26729 Bush at WorldPoint(x=2945, y=3363, plane=0)
+24082 Ladder at WorldPoint(x=2946, y=3363, plane=0)
+26729 Bush at WorldPoint(x=2945, y=3362, plane=0)
+591 Bank table at WorldPoint(x=2948, y=3361, plane=0)
+1276 Tree at WorldPoint(x=2953, y=3363, plane=0)
+24103 Chair at WorldPoint(x=2953, y=3367, plane=0)
+1012 Shelves at WorldPoint(x=2953, y=3370, plane=0)
+1010 Shelves at WorldPoint(x=2953, y=3371, plane=0)
+1011 Shelves at WorldPoint(x=2953, y=3372, plane=0)
+1012 Shelves at WorldPoint(x=2953, y=3373, plane=0)
+1011 Shelves at WorldPoint(x=2953, y=3374, plane=0)
+1158 Potted plant at WorldPoint(x=2944, y=3377, plane=0)
+590 Bank table at WorldPoint(x=2945, y=3359, plane=0)
+590 Bank table at WorldPoint(x=2947, y=3359, plane=0)
+1158 Potted plant at WorldPoint(x=2947, y=3377, plane=0)
+24025 Table at WorldPoint(x=2954, y=3367, plane=0)
+24081 Large table at WorldPoint(x=2954, y=3369, plane=0)
+24018 Banner at WorldPoint(x=2954, y=3374, plane=0)
+1173 Small fern at WorldPoint(x=2935, y=3367, plane=0)
+24082 Ladder at WorldPoint(x=2946, y=3378, plane=0)
+24105 Bar pumps at WorldPoint(x=2955, y=3370, plane=0)
+24106 Bar at WorldPoint(x=2955, y=3371, plane=0)
+24105 Bar pumps at WorldPoint(x=2955, y=3372, plane=0)
+24106 Bar at WorldPoint(x=2955, y=3373, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-4736 at WorldPoint(x=2923, y=3321, plane=0)
-4737 at WorldPoint(x=2922, y=3321, plane=0)
-1902 at WorldPoint(x=2922, y=3321, plane=0)
-5536 at WorldPoint(x=2922, y=3322, plane=0)
-1902 at WorldPoint(x=2922, y=3322, plane=0)
-4736 at WorldPoint(x=2923, y=3320, plane=0)
-4736 at WorldPoint(x=2924, y=3320, plane=0)
-4736 at WorldPoint(x=2924, y=3321, plane=0)
-320 at WorldPoint(x=2924, y=3322, plane=0)
-4736 at WorldPoint(x=2921, y=3319, plane=0)
-4736 at WorldPoint(x=2921, y=3320, plane=0)
-5533 at WorldPoint(x=2921, y=3321, plane=0)
-1902 at WorldPoint(x=2921, y=3321, plane=0)
-916 at WorldPoint(x=2921, y=3323, plane=0)
-4737 at WorldPoint(x=2922, y=3319, plane=0)
+5535 at WorldPoint(x=2944, y=3367, plane=0)
+23994 at WorldPoint(x=2944, y=3367, plane=0)
+4738 at WorldPoint(x=2943, y=3366, plane=0)
+5533 at WorldPoint(x=2943, y=3367, plane=0)
+23994 at WorldPoint(x=2943, y=3367, plane=0)
+5534 at WorldPoint(x=2944, y=3366, plane=0)
+23994 at WorldPoint(x=2944, y=3366, plane=0)
+2738 at WorldPoint(x=2947, y=3368, plane=0)
+24173 at WorldPoint(x=2947, y=3370, plane=0)
+4738 at WorldPoint(x=2942, y=3365, plane=0)
+4738 at WorldPoint(x=2942, y=3366, plane=0)
+4738 at WorldPoint(x=2942, y=3367, plane=0)
+23994 at WorldPoint(x=2942, y=3367, plane=0)
+5534 at WorldPoint(x=2942, y=3368, plane=0)
+23994 at WorldPoint(x=2942, y=3368, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
-995 Coins x11878
-558 Mind rune x199
-432 Chest key x1
-1511 Logs x1
-1269 Steel pickaxe x1
-1993 Jug of wine x1
-221 Eye of newt x1
-1592 Ring mould x1
-1595 Amulet mould x1
-1597 Necklace mould x1
-11065 Bracelet mould x1
-2976 Sickle mould x1
-5523 Tiara mould x1
-1733 Needle x3
-1734 Thread x50
-1927 Bucket of milk x1
-1735 Shears x1
-231 Snape grass x1
-1739 Cowhide x1
-2132 Raw beef x1
-526 Bones x1
-1737 Wool x1
 == Text in open windows and chat
 10
-85
+75
 100
 All
 Game
@@ -124,8 +102,12 @@ Friends
 Channel
 Clan
 Trade
-00:45:45
+00:47:53
 Boatyguidev3: *
+You have unlocked a new music track: @mes_hl_red@Workshop
+You have unlocked a new music track: @mes_hl_red@Arrival
+You have unlocked a new music track: @mes_hl_red@Fanfare
+Well done! You have completed an easy task in the Falador area. Your Achievement Diary has been updated.
 You get some wool.
 You'll need an empty bucket to collect the milk.
 You milk the cow.
