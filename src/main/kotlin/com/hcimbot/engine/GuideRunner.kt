@@ -303,8 +303,14 @@ class GuideRunner(
         if (current.chatTicks >= MAX_CHAT_TICKS) return false
         val options = game.dialogOptions()
         if (options.isNotEmpty()) {
-            val ending = DialoguePlan.endingOption(options) ?: return false
             current.chatTicks++
+            val ending = DialoguePlan.endingOption(options)
+            if (ending == null) {
+                // Nothing that ends it, and nothing that may be agreed to: close the options instead of leaving them for the next step.
+                log("Closing the options the step left open: $options")
+                actions.closeWindow()
+                return true
+            }
             log("Ending the chat the step left open: $ending")
             actions.chooseDialogOption(ending)
             return true
