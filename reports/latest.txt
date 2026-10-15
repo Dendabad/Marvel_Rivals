@@ -3,93 +3,95 @@ HCIM Guide Bot 0.16.42, PAUSED
 Step 160 of 2925: Fish Raw Shrimps [Karamja Easy Diary] Drop Shrimps
 Detail: Small Net Fishing spot: could not Small Net Fishing spot at (2923, 3179, 0). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
+13:04:50  Asking the AI about this pause (try 2)
+13:04:50  Paused: Small Net Fishing spot: could not Small Net Fishing spot at (2923, 3179, 0)
+13:04:44  Cannot reach Fishing spot from here, walking over (the walker opens doors)
+13:04:43  Cannot reach Fishing spot from here, walking over (the walker opens doors)
+13:04:42  Cannot reach Fishing spot from here, walking over (the walker opens doors)
+13:03:29  Step: Fish Raw Shrimps [Karamja Easy Diary] Drop Shrimps
+13:03:28  AI plan finished, trying the step again
+13:03:18  AI: NPC 1521 Small Net
+13:03:18  AI plan: Npc(id=1521, option=Small Net); Wait(ticks=10)
+13:03:16  report uploaded to bot-reports
 13:03:13  Asking the AI about this pause (try 1)
 13:03:13  Paused: Small Net Fishing spot: could not Small Net Fishing spot at (2923, 3179, 0)
-13:03:08  Cannot reach Fishing spot from here, walking over (the walker opens doors)
-13:03:07  Cannot reach Fishing spot from here, walking over (the walker opens doors)
-13:03:02  Cannot reach Fishing spot from here, walking over (the walker opens doors)
-13:02:37  Walking from (2938, 3152, 0) to (2924, 3176, 0)
-13:02:37  Step: Fish Raw Shrimps [Karamja Easy Diary] Drop Shrimps
-13:02:36  Done (all actions finished): Talk to Luthas and ask for employment (1)
-13:02:26  Step: Talk to Luthas and ask for employment (1)
-13:02:25  Started version 0.16.42
 == Player
-world WorldPoint(x=2924, y=3177, plane=0), in instance false, as guide coordinates WorldPoint(x=2924, y=3177, plane=0)
+world WorldPoint(x=2924, y=3180, plane=0), in instance false, as guide coordinates WorldPoint(x=2924, y=3180, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x12714, 558x38, 303x1, 1957x1, 1269x1, 1993x1, 1993x1, 311x1, 313x50, 314x1246, 1757x1, 53x454
+995x12714, 558x38, 303x1, 1957x1, 1269x1, 317x1, 1993x1, 1993x1, 311x1, 313x50, 314x1246, 317x1, 1757x1, 53x454
 == NPCs within 12 tiles (id name at tile: options)
-1521 Fishing spot at WorldPoint(x=2923, y=3180, plane=0): [Small Net, Bait]
+1521 Fishing spot at WorldPoint(x=2926, y=3179, plane=0): [Small Net, Bait]
 1522 Fishing spot at WorldPoint(x=2923, y=3179, plane=0): [Cage, Harpoon]
 1521 Fishing spot at WorldPoint(x=2921, y=3178, plane=0): [Small Net, Bait]
 1522 Fishing spot at WorldPoint(x=2926, y=3176, plane=0): [Cage, Harpoon]
-1522 Fishing spot at WorldPoint(x=2924, y=3181, plane=0): [Cage, Harpoon]
+1522 Fishing spot at WorldPoint(x=2925, y=3181, plane=0): [Cage, Harpoon]
 1521 Fishing spot at WorldPoint(x=2926, y=3180, plane=0): [Small Net, Bait]
 == Named objects within 25 tiles, nearest first (id name at tile)
-1390 Plant at WorldPoint(x=2922, y=3175, plane=0)
+1184 Creeping plant at WorldPoint(x=2920, y=3177, plane=0)
 1184 Creeping plant at WorldPoint(x=2922, y=3176, plane=0)
+1184 Creeping plant at WorldPoint(x=2919, y=3178, plane=0)
+1390 Plant at WorldPoint(x=2922, y=3175, plane=0)
 1390 Plant at WorldPoint(x=2923, y=3175, plane=0)
+1390 Plant at WorldPoint(x=2920, y=3174, plane=0)
 1184 Creeping plant at WorldPoint(x=2921, y=3174, plane=0)
 1390 Plant at WorldPoint(x=2922, y=3174, plane=0)
 1390 Plant at WorldPoint(x=2926, y=3174, plane=0)
 1184 Creeping plant at WorldPoint(x=2927, y=3174, plane=0)
+1390 Plant at WorldPoint(x=2917, y=3173, plane=0)
+1184 Creeping plant at WorldPoint(x=2917, y=3174, plane=0)
+1390 Plant at WorldPoint(x=2918, y=3173, plane=0)
+1390 Plant at WorldPoint(x=2919, y=3173, plane=0)
 1390 Plant at WorldPoint(x=2920, y=3173, plane=0)
-1390 Plant at WorldPoint(x=2920, y=3174, plane=0)
-1184 Creeping plant at WorldPoint(x=2920, y=3177, plane=0)
 1390 Plant at WorldPoint(x=2921, y=3173, plane=0)
 1184 Creeping plant at WorldPoint(x=2922, y=3173, plane=0)
 1390 Plant at WorldPoint(x=2926, y=3173, plane=0)
 1162 Bullrushes at WorldPoint(x=2927, y=3173, plane=0)
-1390 Plant at WorldPoint(x=2919, y=3173, plane=0)
-1184 Creeping plant at WorldPoint(x=2919, y=3178, plane=0)
+1390 Plant at WorldPoint(x=2916, y=3172, plane=0)
+1390 Plant at WorldPoint(x=2916, y=3173, plane=0)
+1184 Creeping plant at WorldPoint(x=2917, y=3172, plane=0)
+1390 Plant at WorldPoint(x=2918, y=3172, plane=0)
 1184 Creeping plant at WorldPoint(x=2920, y=3172, plane=0)
 1184 Creeping plant at WorldPoint(x=2921, y=3172, plane=0)
 1184 Creeping plant at WorldPoint(x=2922, y=3172, plane=0)
 1184 Creeping plant at WorldPoint(x=2925, y=3172, plane=0)
 1390 Plant at WorldPoint(x=2926, y=3172, plane=0)
 1184 Creeping plant at WorldPoint(x=2927, y=3172, plane=0)
+1390 Plant at WorldPoint(x=2915, y=3172, plane=0)
+1184 Creeping plant at WorldPoint(x=2915, y=3173, plane=0)
+1390 Plant at WorldPoint(x=2915, y=3174, plane=0)
+1390 Plant at WorldPoint(x=2917, y=3171, plane=0)
 1390 Plant at WorldPoint(x=2918, y=3171, plane=0)
-1390 Plant at WorldPoint(x=2918, y=3172, plane=0)
-1390 Plant at WorldPoint(x=2918, y=3173, plane=0)
 1390 Plant at WorldPoint(x=2919, y=3171, plane=0)
 1390 Plant at WorldPoint(x=2920, y=3171, plane=0)
 1390 Plant at WorldPoint(x=2921, y=3171, plane=0)
 1390 Plant at WorldPoint(x=2922, y=3171, plane=0)
 1184 Creeping plant at WorldPoint(x=2923, y=3171, plane=0)
 1184 Creeping plant at WorldPoint(x=2925, y=3171, plane=0)
-1390 Plant at WorldPoint(x=2926, y=3171, plane=0)
-1390 Plant at WorldPoint(x=2927, y=3171, plane=0)
-1184 Creeping plant at WorldPoint(x=2928, y=3171, plane=0)
-1390 Plant at WorldPoint(x=2917, y=3171, plane=0)
-1184 Creeping plant at WorldPoint(x=2917, y=3172, plane=0)
-1390 Plant at WorldPoint(x=2917, y=3173, plane=0)
-1184 Creeping plant at WorldPoint(x=2917, y=3174, plane=0)
-2073 Banana tree at WorldPoint(x=2918, y=3170, plane=0)
-2073 Banana tree at WorldPoint(x=2921, y=3170, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
-556 Air rune at WorldPoint(x=2938, y=3158, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
+796 at WorldPoint(x=2924, y=3180, plane=0)
+814 at WorldPoint(x=2924, y=3180, plane=0)
+802 at WorldPoint(x=2924, y=3179, plane=0)
+994 at WorldPoint(x=2924, y=3181, plane=0)
+796 at WorldPoint(x=2925, y=3179, plane=0)
+800 at WorldPoint(x=2925, y=3180, plane=0)
+814 at WorldPoint(x=2925, y=3180, plane=0)
+994 at WorldPoint(x=2925, y=3181, plane=0)
+796 at WorldPoint(x=2924, y=3178, plane=0)
+801 at WorldPoint(x=2925, y=3178, plane=0)
+2759 at WorldPoint(x=2926, y=3179, plane=0)
 803 at WorldPoint(x=2924, y=3177, plane=0)
 814 at WorldPoint(x=2924, y=3177, plane=0)
-799 at WorldPoint(x=2924, y=3176, plane=0)
-814 at WorldPoint(x=2924, y=3176, plane=0)
-796 at WorldPoint(x=2924, y=3178, plane=0)
-799 at WorldPoint(x=2925, y=3176, plane=0)
 800 at WorldPoint(x=2925, y=3177, plane=0)
-801 at WorldPoint(x=2925, y=3178, plane=0)
-799 at WorldPoint(x=2924, y=3175, plane=0)
-814 at WorldPoint(x=2924, y=3175, plane=0)
-802 at WorldPoint(x=2924, y=3179, plane=0)
-799 at WorldPoint(x=2925, y=3175, plane=0)
-814 at WorldPoint(x=2925, y=3175, plane=0)
-796 at WorldPoint(x=2925, y=3179, plane=0)
-2759 at WorldPoint(x=2926, y=3179, plane=0)
+799 at WorldPoint(x=2924, y=3176, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
 995 Coins x12714
 558 Mind rune x38
 303 Small fishing net x1
 1957 Onion x1
 1269 Steel pickaxe x1
+317 Raw shrimps x1
 1993 Jug of wine x1
 311 Harpoon x1
 313 Fishing bait x50
@@ -98,7 +100,6 @@ hitpoints 10/10
 53 Headless arrow x454
 == Text in open windows and chat
 10
-86
 100
 All
 Game
@@ -109,6 +110,42 @@ Friends
 Channel
 Clan
 Trade
-01:00:00
+01:01:37
+Boatyguidev3: *
+You catch some raw shrimps.
+Well done! You have completed an easy task in the Karamja area. Your Achievement Diary has been updated.
+You cast out your net...
+You have unlocked a new music track: @mes_hl_red@Jungle Island
+You have unlocked a new music track: @mes_hl_red@Sea Shanty
+You board the ship and sail to Musa Point.
+You pay the boarding charge of 30 coins.
+You attach feathers to 4 arrow shafts.
+Check the skill guide for more information about Fletching.
+Level 10 Fletching: Bronze darts
+Level 10 Fletching: Longbows
+You attach feathers to 15 arrow shafts.
+Congratulations, you've just advanced your Fletching level. You are now level 10.
+Congratulations, you've just advanced your Fletching level. You are now level 9.
+Level 9 Fletching: Bronze/wooden crossbows
+Level 9 Fletching: Bronze bolts
+Congratulations, you've just advanced your Fletching level. You are now level 8.
+You take an apron. It feels freshly starched and smells of laundry.
+You've started a new quest: @q_mes@Pirate's Treasure
+You add 10 charges to your book. It now has 10 charges.
+You step through the portal...
+You have unlocked a new music track: @mes_hl_red@Rune Essence
+Well done! You have completed an easy task in the Lumbridge & Draynor area. Your Achievement Diary has been updated.
+Congratulations, you've completed a quest: @q_mes@Rune Mysteries
+The skeleton in the corner suddenly comes to life!
+You pay the guards and pass through the gate.
+You have unlocked a new music track: @mes_hl_red@Arabian 2
+You have unlocked a new music track: @mes_hl_red@Arabian
+You have unlocked a new music track: @mes_hl_red@Al Kharid
+You need to wait another 24 minutes to cast this spell.
+[12:26:27] [WebWalk] sp | Al Kharid toll gate crossing unresolved confirmed=false dest=3268,3227,p0 at=3253,3226,p0
+You don't have enough coins.
+You have correctly entered your PIN.
+You have unlocked a new music track: @mes_hl_red@Mistrock
+Welcome to Old School RuneScape.
 == Quest Helper
 DetailedQuestStep: "Please open Pirate Treasure's Quest Journal to sync the current quest state." npcs [] objects [] at null choices []
