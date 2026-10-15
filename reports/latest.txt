@@ -3,27 +3,19 @@ HCIM Guide Bot 0.16.86, PAUSED
 Step 192 of 2925: Complete Witches House quest - Safespot guide for the spider: https://youtu.be/bDB351j-qZI?t=178
 Detail: Quest: witchshouse: Use the cheese on the mouse hole in the south room, then use the magnet on the mouse which emerges. needs 1x Cheese (multiple if you mess up). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-14:27:45  Asking the AI about this pause (try 2)
-14:27:45  Paused: Quest: witchshouse: Use the cheese on the mouse hole in the south room, then use the magnet on the mouse which emerges. needs 1x Cheese (multiple if you mess up)
-14:27:42  Skipped optional Quest: witchshouse: Use the cheese on the mouse hole in the south room, then use the magnet on the mouse which emerges. needs 1x Cheese (multiple if you mess up)
-14:27:42  Step: Complete Witches House quest - Safespot guide for the spider: https://youtu.be/bDB351j-qZI?t=178
-14:27:41  AI plan finished, trying the step again
-14:27:40  AI: continue
-14:27:40  AI plan: com.hcimbot.ai.AiAction$Continue@1cf1dfcf
-14:27:37  report uploaded to bot-reports
-14:27:36  Asking the AI about this pause (try 1)
-14:27:35  Paused: Quest: witchshouse: Use the cheese on the mouse hole in the south room, then use the magnet on the mouse which emerges. needs 1x Cheese (multiple if you mess up)
-14:27:29  Skipped optional Quest: witchshouse: did "Use the cheese on the mouse hole in the south room, then use the magnet on the mouse which emerges." 3 times and the quest did not advance
-14:27:17  Quest Helper: ObjectStep "Use the cheese on the mouse hole in the " npc [] obj [2870]
+14:27:56  Asking the AI about this pause (try 1)
+14:27:56  Paused: Quest: witchshouse: Use the cheese on the mouse hole in the south room, then use the magnet on the mouse which emerges. needs 1x Cheese (multiple if you mess up)
+14:27:53  Skipped optional Quest: witchshouse: Use the cheese on the mouse hole in the south room, then use the magnet on the mouse which emerges. needs 1x Cheese (multiple if you mess up)
+14:27:53  Step: Complete Witches House quest - Safespot guide for the spider: https://youtu.be/bDB351j-qZI?t=178
+14:27:52  Started version 0.16.86
 == Player
 world WorldPoint(x=2902, y=3466, plane=0), in instance false, as guide coordinates WorldPoint(x=2902, y=3466, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
 995x11818, 558x183, 2134x1, 2138x1, 2132x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1929x1, 432x1, 1793x6, 2136x1, 526x1, 948x1, 2409x1, 2410x1
 == NPCs within 12 tiles (id name at tile: options)
-3995 Nora T. Hagg at WorldPoint(x=2911, y=3463, plane=0): []
 4000 Mouse at WorldPoint(x=2903, y=3466, plane=0): []
-5118 Sylas at WorldPoint(x=2890, y=3455, plane=0): [Talk-to]
+5118 Sylas at WorldPoint(x=2891, y=3454, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
 2862 Door at WorldPoint(x=2901, y=3465, plane=0)
 1117 Hedge at WorldPoint(x=2902, y=3465, plane=0)
@@ -100,7 +92,7 @@ hitpoints 10/10
 2410 Magnet x1
 == Text in open windows and chat
 10
-49
+52
 100
 All
 Game
@@ -111,7 +103,7 @@ Friends
 Channel
 Clan
 Trade
-01:13:49
+01:14:00
 Boatyguidev3: *
 You have unlocked a new music track: @mes_hl_red@Courage
 You've started a new quest: @q_mes@Druidic Ritual
