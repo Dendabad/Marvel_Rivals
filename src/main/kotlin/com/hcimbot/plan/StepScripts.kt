@@ -1038,6 +1038,25 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 174. "Buy moulds: Ring, Amulet, 2x Necklace, Bracelet, Sickle, Tiara, 3x Needle & 50 Thread (from Rommik in Rimmington)": Rommik
+        // (6530) at (2947, 3206). The guide gives no ids for the moulds, so they are the game's own: ring 1592, amulet 1595, necklace
+        // 1597, bracelet 11065, sickle 2976, tiara 5523.
+        "2bb623aec6" to { _ ->
+            val rommik = listOf(ShopTask.Seller("Rommik", listOf(6530), listOf(Tile(2947, 3206, 0))))
+            auto(
+                ShopTask(
+                    rommik,
+                    listOf(
+                        item("Ring mould", 1592, 1), item("Amulet mould", 1595, 1), item("Necklace mould", 1597, 2),
+                        item("Bracelet mould", 11065, 1), item("Sickle mould", 2976, 1), item("Tiara mould", 5523, 1),
+                        item("Needle", 1733, 3), item("Thread", 1734, 50),
+                    ),
+                    hopWhenOut = true,
+                ),
+                trust = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
