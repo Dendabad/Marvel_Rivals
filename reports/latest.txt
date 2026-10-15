@@ -3,61 +3,62 @@ HCIM Guide Bot 0.16.47, PAUSED
 Step 167 of 2925: Continue Pirate's Treasure by talking to Wydin to get employed, and collect the rum from the crate.
 Detail: Quest: piratestreasure: reached (3027, 3222, 0) but the target is not there. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
+13:14:45  Asking the AI about this pause (try 2)
+13:14:45  Paused: Quest: piratestreasure: reached (3027, 3222, 0) but the target is not there
+13:14:33  Walking from (3014, 3204, 0) to (3027, 3222, 0)
+13:14:33  Quest Helper: DetailedQuestStep "Please open Pirate Treasure's Quest Jour" npc [] obj []
+13:14:33  Quest step: Please open Pirate Treasure's Quest Journal to sync the current quest state.
+13:14:33  Step: Continue Pirate's Treasure by talking to Wydin to get employed, and collect the rum from the crate.
+13:14:32  AI plan finished, trying the step again
+13:14:19  AI: walk to (3015, 3204, 0)
+13:14:18  AI plan: Walk(tile=(3015, 3204, 0))
+13:14:15  report uploaded to bot-reports
 13:14:14  Asking the AI about this pause (try 1)
 13:14:13  Paused: Quest: piratestreasure: reached (3027, 3222, 0) but the target is not there
-13:14:01  Walking from (3015, 3204, 0) to (3027, 3222, 0)
-13:14:01  Quest Helper: DetailedQuestStep "Please open Pirate Treasure's Quest Jour" npc [] obj []
-13:14:01  Quest step: Please open Pirate Treasure's Quest Journal to sync the current quest state.
-13:14:00  Step: Continue Pirate's Treasure by talking to Wydin to get employed, and collect the rum from the crate.
-13:13:47  Shop out of stock, hopping worlds (hop 1, not back to [334])
-13:13:36  Step: Trade Wydin and buy Raw Chicken, 2x Raw Beef, 3x Flour & 2x redberries
-13:13:36  Started version 0.16.47
 == Player
-world WorldPoint(x=3027, y=3222, plane=0), in instance false, as guide coordinates WorldPoint(x=3027, y=3222, plane=0)
+world WorldPoint(x=3027, y=3223, plane=0), in instance false, as guide coordinates WorldPoint(x=3027, y=3223, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
 995x12645, 558x38, 303x1, 1957x1, 1269x1, 2138x1, 1993x1, 1993x1, 311x1, 313x50, 314x1246, 2132x1, 2132x1, 1933x1, 1933x1, 1933x1, 1951x1, 1951x1, 1757x1, 53x454
 == NPCs within 12 tiles (id name at tile: options)
-4573 Bellemorde at WorldPoint(x=3017, y=3234, plane=0): [Talk-to]
-1338 Seagull at WorldPoint(x=3017, y=3212, plane=0): [Attack]
-14982 Seaman Thresnor at WorldPoint(x=3027, y=3220, plane=0): [Talk-to, Travel]
-14978 Captain Tobias at WorldPoint(x=3029, y=3213, plane=0): [Talk-to, Travel]
+4573 Bellemorde at WorldPoint(x=3020, y=3231, plane=0): [Talk-to]
+14982 Seaman Thresnor at WorldPoint(x=3025, y=3217, plane=0): [Talk-to, Travel]
+14978 Captain Tobias at WorldPoint(x=3026, y=3217, plane=0): [Talk-to, Travel]
 14980 Seaman Lorris at WorldPoint(x=3028, y=3220, plane=0): [Talk-to, Travel]
-1338 Seagull at WorldPoint(x=3026, y=3234, plane=0): [Attack]
-3252 Thief at WorldPoint(x=3015, y=3233, plane=0): [Attack]
-3253 Thief at WorldPoint(x=3017, y=3232, plane=0): [Attack]
-4590 The Face at WorldPoint(x=3021, y=3231, plane=0): [Talk-to]
+1338 Seagull at WorldPoint(x=3027, y=3232, plane=0): [Attack]
+2891 Gerrant at WorldPoint(x=3016, y=3226, plane=0): [Talk-to, Trade]
+3253 Thief at WorldPoint(x=3017, y=3233, plane=0): [Attack]
+4590 The Face at WorldPoint(x=3019, y=3229, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
-9531 Bench at WorldPoint(x=3026, y=3221, plane=0)
 9519 Barrel at WorldPoint(x=3026, y=3223, plane=0)
+9531 Bench at WorldPoint(x=3026, y=3221, plane=0)
 9531 Bench at WorldPoint(x=3029, y=3221, plane=0)
+9531 Bench at WorldPoint(x=3026, y=3226, plane=0)
+9531 Bench at WorldPoint(x=3023, y=3219, plane=0)
 9519 Barrel at WorldPoint(x=3025, y=3219, plane=0)
 9520 Barrel at WorldPoint(x=3028, y=3219, plane=0)
 9534 Crate at WorldPoint(x=3029, y=3219, plane=0)
-9531 Bench at WorldPoint(x=3023, y=3219, plane=0)
-9531 Bench at WorldPoint(x=3026, y=3226, plane=0)
-9535 Crates at WorldPoint(x=3029, y=3218, plane=0)
+9524 Chain at WorldPoint(x=3029, y=3227, plane=0)
 9519 Barrel at WorldPoint(x=3022, y=3219, plane=0)
 1124 Bush at WorldPoint(x=3022, y=3224, plane=0)
-9524 Chain at WorldPoint(x=3029, y=3227, plane=0)
+9535 Crates at WorldPoint(x=3029, y=3218, plane=0)
+9522 Anchor at WorldPoint(x=3029, y=3228, plane=0)
 2083 Gangplank at WorldPoint(x=3030, y=3217, plane=0)
+9531 Bench at WorldPoint(x=3020, y=3216, plane=0)
+9531 Bench at WorldPoint(x=3020, y=3219, plane=0)
 9519 Barrel at WorldPoint(x=3022, y=3216, plane=0)
 9531 Bench at WorldPoint(x=3023, y=3216, plane=0)
 9519 Barrel at WorldPoint(x=3025, y=3216, plane=0)
-9522 Anchor at WorldPoint(x=3029, y=3228, plane=0)
-9531 Bench at WorldPoint(x=3020, y=3216, plane=0)
-9531 Bench at WorldPoint(x=3020, y=3219, plane=0)
-9519 Barrel at WorldPoint(x=3029, y=3215, plane=0)
+9521 Barrel at WorldPoint(x=3026, y=3230, plane=0)
 272 Ship's ladder at WorldPoint(x=3034, y=3218, plane=0)
 272 Ship's ladder at WorldPoint(x=3034, y=3222, plane=0)
 1278 Tree at WorldPoint(x=3019, y=3221, plane=0)
-9521 Barrel at WorldPoint(x=3026, y=3230, plane=0)
-9519 Barrel at WorldPoint(x=3029, y=3214, plane=0)
-392 Full fishing net at WorldPoint(x=3018, y=3229, plane=0)
 5604 Rock at WorldPoint(x=3024, y=3231, plane=0)
-10787 Rock at WorldPoint(x=3025, y=3213, plane=0)
-9531 Bench at WorldPoint(x=3026, y=3213, plane=0)
 9531 Bench at WorldPoint(x=3026, y=3231, plane=0)
+9519 Barrel at WorldPoint(x=3029, y=3215, plane=0)
+392 Full fishing net at WorldPoint(x=3018, y=3229, plane=0)
+10321 Manhole at WorldPoint(x=3018, y=3232, plane=0)
+9519 Barrel at WorldPoint(x=3029, y=3214, plane=0)
 1301 Tree at WorldPoint(x=3017, y=3213, plane=0)
 9519 Barrel at WorldPoint(x=3017, y=3224, plane=0)
 969 Fishing net at WorldPoint(x=3017, y=3224, plane=0)
@@ -66,32 +67,48 @@ hitpoints 10/10
 595 Table at WorldPoint(x=3017, y=3226, plane=0)
 9520 Barrel at WorldPoint(x=3017, y=3228, plane=0)
 1017 Shelves at WorldPoint(x=3017, y=3229, plane=0)
-10321 Manhole at WorldPoint(x=3018, y=3232, plane=0)
-10786 Rock at WorldPoint(x=3022, y=3212, plane=0)
+10787 Rock at WorldPoint(x=3025, y=3213, plane=0)
+9531 Bench at WorldPoint(x=3026, y=3213, plane=0)
+9533 Crate at WorldPoint(x=3029, y=3233, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
 7957 White apron at WorldPoint(x=3016, y=3229, plane=0)
-1005 White apron at WorldPoint(x=3009, y=3204, plane=0)
 1963 Banana at WorldPoint(x=3009, y=3207, plane=0)
+1005 White apron at WorldPoint(x=3009, y=3204, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-9541 at WorldPoint(x=3027, y=3222, plane=0)
-9541 at WorldPoint(x=3026, y=3221, plane=0)
-9539 at WorldPoint(x=3026, y=3221, plane=0)
+9541 at WorldPoint(x=3027, y=3223, plane=0)
 9541 at WorldPoint(x=3026, y=3222, plane=0)
 9539 at WorldPoint(x=3026, y=3222, plane=0)
 9541 at WorldPoint(x=3026, y=3223, plane=0)
 9539 at WorldPoint(x=3026, y=3223, plane=0)
-9541 at WorldPoint(x=3027, y=3221, plane=0)
-9541 at WorldPoint(x=3027, y=3223, plane=0)
-9541 at WorldPoint(x=3028, y=3221, plane=0)
+9541 at WorldPoint(x=3026, y=3224, plane=0)
+9539 at WorldPoint(x=3026, y=3224, plane=0)
+9541 at WorldPoint(x=3027, y=3222, plane=0)
+9541 at WorldPoint(x=3027, y=3224, plane=0)
 9541 at WorldPoint(x=3028, y=3222, plane=0)
 9541 at WorldPoint(x=3028, y=3223, plane=0)
-9541 at WorldPoint(x=3026, y=3220, plane=0)
-9539 at WorldPoint(x=3026, y=3220, plane=0)
-9541 at WorldPoint(x=3026, y=3224, plane=0)
+9541 at WorldPoint(x=3028, y=3224, plane=0)
+9541 at WorldPoint(x=3026, y=3221, plane=0)
+9539 at WorldPoint(x=3026, y=3221, plane=0)
+9541 at WorldPoint(x=3026, y=3225, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
+995 Coins x12645
+558 Mind rune x38
+303 Small fishing net x1
+1957 Onion x1
+1269 Steel pickaxe x1
+2138 Raw chicken x1
+1993 Jug of wine x1
+311 Harpoon x1
+313 Fishing bait x50
+314 Feather x1246
+2132 Raw beef x1
+1933 Pot of flour x1
+1951 Redberries x1
+1757 Brown apron x1
+53 Headless arrow x454
 == Text in open windows and chat
 10
-89
+71
 100
 All
 Game
@@ -102,53 +119,9 @@ Friends
 Channel
 Clan
 Trade
-00:00:18
+00:00:49
 Boatyguidev3: *
 [13:13:55] Error during overlay renderingjava.lang.NullPointerException: Cannot read the array length because "" is null
 Welcome to Old School RuneScape.
-Current world - 662
-301
-1259
-Trade - Free
-302
-1606
-Trade - Mem...
-303
-290
-304
-Trouble Bre...
-305
-937
-Falador Part...
-306
-679
-Barbarian A...
-307
-883
-Wintertodt
-308
-795
-Wilderness ...
-309
-286
-310
-191
-311
-208
-312
-173
-Group Skilling
-313
-694
-314
-947
-Brimhaven ...
-315
-515
-Fishing Traw...
-316
-201
-317
-183
 == Quest Helper
 DetailedQuestStep: "Please open Pirate Treasure's Quest Journal to sync the current quest state." npcs [] objects [] at null choices []
