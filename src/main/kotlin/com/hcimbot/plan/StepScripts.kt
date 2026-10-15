@@ -1181,6 +1181,19 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 184. "Fill Bucket on Pump [Falador Easy Diary]": the waterpump (24004) at (2947, 3382), by the hairdresser, with the bucket (1925).
+        "2cc047791a" to { _ ->
+            val water = 1929
+            StepPlan.Auto(
+                listOf(
+                    OnlyIf({ ctx -> !has(water)(ctx) }, UseItemTask(1925, null, listOf(24004), listOf("Waterpump", "Water pump"), Tile(2947, 3382, 0))),
+                    WaitUntilTask("fill the bucket", 12, reached = has(water)),
+                ),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
