@@ -1,126 +1,109 @@
-HCIM Guide Bot 0.16.23, PAUSED
+HCIM Guide Bot 0.16.24, PAUSED
 == Step
-Step 141 of 2925: Buy Steel Pickaxe, 150 Wines, 20 mindbombs & 20 Stews (They are infinite stock so super fast to collect here)
-Detail: Buy Steel Pickaxe, Wines, mindbombs, Stews: bought Steel Pickaxe but it did not arrive. The shop may be out of stock.. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 143 of 2925: Withdraw: Coins, Research Notes (2 inventory Slots) / Bronze pickaxe not needed
+Detail: Withdraw: Coins, Research Notes (2 inventory Slots) / Bronze pickaxe not needed (cannot identify Research Notes   / Bronze pickaxe not needed). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-12:04:59  Asking the AI about this pause (try 1)
-12:04:59  Paused: Buy Steel Pickaxe, Wines, mindbombs, Stews: bought Steel Pickaxe but it did not arrive. The shop may be out of stock.
-12:04:35  Walking from (1383, 2866, 0) to (1399, 2867, 0)
-12:04:35  Step: Buy Steel Pickaxe, 150 Wines, 20 mindbombs & 20 Stews (They are infinite stock so super fast to collect here)
-12:04:34  Done (all actions finished): Head South to Mistrock & deposit all there
-12:04:28  Entering the bank PIN
-12:04:20  The bank is asking for its PIN: type it into the Bank PIN box in the sidebar
-12:03:27  Walking from (1429, 2975, 0) to (1387, 2862, 0)
-12:03:27  Step: Head South to Mistrock & deposit all there
-12:03:26  Done (all actions finished): Head north-east to the Gem Store & buy 9x Uncut Sapphire, 10x Uncut Emerald, and as many Uncut Rubies as possible. (If the shop is out of stock, try to get a few or skip this step and mine a star after unlocking teleports to buy a Bag full of gems with stardust)
-12:03:25  Skipped optional Buy Uncut ruby: could not buy Uncut ruby
-12:03:06  Shop out of stock, hopping worlds (hop 56, not back to [327, 389, 422, 534, 700])
+12:08:23  Asking the AI about this pause (try 1)
+12:08:23  Paused: Withdraw: Coins, Research Notes (2 inventory Slots) / Bronze pickaxe not needed (cannot identify Research Notes   / Bronze pickaxe not needed)
+12:08:23  Step: Withdraw: Coins, Research Notes (2 inventory Slots) / Bronze pickaxe not needed
+12:08:22  Done (all actions finished): Bank at Mistrock and deposit all.
+12:08:06  Step: Bank at Mistrock and deposit all.
+12:08:05  Done (its part of the quest is done): Buy Steel Pickaxe, 150 Wines, 20 mindbombs & 20 Stews (They are infinite stock so super fast to collect here)
+12:07:48  Walking from (1383, 2866, 0) to (1399, 2867, 0)
+12:07:33  Step: Buy Steel Pickaxe, 150 Wines, 20 mindbombs & 20 Stews (They are infinite stock so super fast to collect here)
+12:07:33  Started version 0.16.24
 == Player
-world WorldPoint(x=1399, y=2866, plane=0), in instance false, as guide coordinates WorldPoint(x=1399, y=2866, plane=0)
+world WorldPoint(x=1383, y=2866, plane=0), in instance false, as guide coordinates WorldPoint(x=1383, y=2866, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
 
 == NPCs within 12 tiles (id name at tile: options)
-13944 Child at WorldPoint(x=1387, y=2861, plane=0): [Talk-to]
+13933 Guard at WorldPoint(x=1373, y=2862, plane=0): [Talk-to]
+13937 Citizen at WorldPoint(x=1376, y=2867, plane=0): [Talk-to]
+13935 Guard at WorldPoint(x=1375, y=2873, plane=0): [Talk-to]
+13942 Citizen at WorldPoint(x=1377, y=2858, plane=0): [Talk-to]
+13939 Citizen at WorldPoint(x=1379, y=2868, plane=0): [Talk-to]
+13931 Banker at WorldPoint(x=1380, y=2864, plane=0): [Talk-to, Bank, Collect]
+13932 Banker at WorldPoint(x=1383, y=2864, plane=0): [Talk-to, Bank, Collect]
+13934 Guard at WorldPoint(x=1385, y=2861, plane=0): [Talk-to]
+13944 Child at WorldPoint(x=1384, y=2860, plane=0): [Talk-to]
+13947 Child at WorldPoint(x=1385, y=2862, plane=0): [Talk-to]
+13934 Guard at WorldPoint(x=1385, y=2875, plane=0): [Talk-to]
 13929 Ichta at WorldPoint(x=1387, y=2868, plane=0): [Talk-to, Trade]
-13956 Overseer Khougo at WorldPoint(x=1387, y=2857, plane=0): [Talk-to]
-13928 Bartender at WorldPoint(x=1390, y=2860, plane=0): [Talk-to, Trade]
-13933 Guard at WorldPoint(x=1393, y=2869, plane=0): [Talk-to]
-13940 Citizen at WorldPoint(x=1391, y=2859, plane=0): [Talk-to]
-13941 Citizen at WorldPoint(x=1393, y=2868, plane=0): [Talk-to]
-238 Butterfly at WorldPoint(x=1388, y=2872, plane=0): []
-13930 Necto at WorldPoint(x=1402, y=2868, plane=0): [Talk-to, Trade]
-12856 Squirrel at WorldPoint(x=1397, y=2854, plane=0): []
-238 Butterfly at WorldPoint(x=1402, y=2859, plane=0): []
+13956 Overseer Khougo at WorldPoint(x=1389, y=2860, plane=0): [Talk-to]
+13928 Bartender at WorldPoint(x=1391, y=2858, plane=0): [Talk-to, Trade]
+13933 Guard at WorldPoint(x=1392, y=2869, plane=0): [Talk-to]
+13940 Citizen at WorldPoint(x=1389, y=2861, plane=0): [Talk-to]
+13941 Citizen at WorldPoint(x=1394, y=2870, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
-52612 Door at WorldPoint(x=1398, y=2867, plane=0)
-51550 Crates at WorldPoint(x=1399, y=2868, plane=0)
-51549 Crate at WorldPoint(x=1400, y=2868, plane=0)
-52458 Table at WorldPoint(x=1401, y=2866, plane=0)
-51563 Barrel at WorldPoint(x=1401, y=2868, plane=0)
-51501 Anvil at WorldPoint(x=1401, y=2863, plane=0)
-51548 Crate at WorldPoint(x=1401, y=2869, plane=0)
-1278 Tree at WorldPoint(x=1395, y=2865, plane=0)
-10832 Maple tree at WorldPoint(x=1395, y=2869, plane=0)
-3366 Onion at WorldPoint(x=1402, y=2870, plane=0)
-42084 Wooden cart at WorldPoint(x=1403, y=2865, plane=0)
-1276 Tree at WorldPoint(x=1394, y=2862, plane=0)
-47371 Plant at WorldPoint(x=1395, y=2871, plane=0)
-1276 Tree at WorldPoint(x=1398, y=2871, plane=0)
-1278 Tree at WorldPoint(x=1404, y=2861, plane=0)
-52646 Water pump at WorldPoint(x=1393, y=2870, plane=0)
-1278 Tree at WorldPoint(x=1393, y=2871, plane=0)
-1278 Tree at WorldPoint(x=1404, y=2872, plane=0)
-52461 Table at WorldPoint(x=1392, y=2860, plane=0)
-42403 Plant at WorldPoint(x=1392, y=2862, plane=0)
-51724 Stool at WorldPoint(x=1393, y=2859, plane=0)
-10832 Maple tree at WorldPoint(x=1394, y=2873, plane=0)
-10832 Maple tree at WorldPoint(x=1400, y=2859, plane=0)
-51724 Stool at WorldPoint(x=1391, y=2860, plane=0)
-47371 Plant at WorldPoint(x=1401, y=2858, plane=0)
-1289 Dead tree at WorldPoint(x=1402, y=2858, plane=0)
-1289 Dead tree at WorldPoint(x=1407, y=2860, plane=0)
-1276 Tree at WorldPoint(x=1407, y=2866, plane=0)
-51720 Beer taps at WorldPoint(x=1390, y=2857, plane=0)
-52612 Door at WorldPoint(x=1390, y=2861, plane=0)
-51720 Beer taps at WorldPoint(x=1391, y=2857, plane=0)
-51720 Beer taps at WorldPoint(x=1392, y=2857, plane=0)
-51720 Beer taps at WorldPoint(x=1393, y=2857, plane=0)
-10832 Maple tree at WorldPoint(x=1396, y=2857, plane=0)
-42405 Plant at WorldPoint(x=1407, y=2857, plane=0)
+51515 Bank table at WorldPoint(x=1382, y=2865, plane=0)
+51530 Chair at WorldPoint(x=1384, y=2864, plane=0)
+51548 Crate at WorldPoint(x=1385, y=2864, plane=0)
+51530 Chair at WorldPoint(x=1385, y=2866, plane=0)
+51530 Chair at WorldPoint(x=1385, y=2867, plane=0)
+54977 Potted fan at WorldPoint(x=1385, y=2868, plane=0)
+51517 Gold at WorldPoint(x=1381, y=2863, plane=0)
+52612 Door at WorldPoint(x=1381, y=2869, plane=0)
+51517 Gold at WorldPoint(x=1382, y=2863, plane=0)
+50902 Bank Deposit Box at WorldPoint(x=1383, y=2869, plane=0)
+52458 Table at WorldPoint(x=1386, y=2867, plane=0)
+51550 Crates at WorldPoint(x=1379, y=2863, plane=0)
+51516 Bank table at WorldPoint(x=1379, y=2865, plane=0)
+51544 Shelves at WorldPoint(x=1382, y=2862, plane=0)
+3024 Stepladder at WorldPoint(x=1385, y=2870, plane=0)
+42406 Hollow log at WorldPoint(x=1378, y=2861, plane=0)
+51548 Crate at WorldPoint(x=1378, y=2864, plane=0)
+26813 Poll booth at WorldPoint(x=1378, y=2867, plane=0)
+54977 Potted fan at WorldPoint(x=1378, y=2868, plane=0)
+51540 Stove at WorldPoint(x=1380, y=2861, plane=0)
+52635 Staircase at WorldPoint(x=1384, y=2871, plane=0)
+2279 Workbench at WorldPoint(x=1388, y=2866, plane=0)
+51550 Crates at WorldPoint(x=1388, y=2870, plane=0)
+54977 Potted fan at WorldPoint(x=1377, y=2861, plane=0)
+51541 Cabinet at WorldPoint(x=1377, y=2866, plane=0)
+55035 Table at WorldPoint(x=1377, y=2867, plane=0)
+5085 Painting at WorldPoint(x=1378, y=2860, plane=0)
+10832 Maple tree at WorldPoint(x=1378, y=2872, plane=0)
+51530 Chair at WorldPoint(x=1379, y=2860, plane=0)
+52415 Bookshelf at WorldPoint(x=1380, y=2860, plane=0)
+10832 Maple tree at WorldPoint(x=1381, y=2872, plane=0)
+52594 Door at WorldPoint(x=1383, y=2860, plane=0)
+51724 Stool at WorldPoint(x=1388, y=2860, plane=0)
 52594 Door at WorldPoint(x=1389, y=2868, plane=0)
-10832 Maple tree at WorldPoint(x=1399, y=2876, plane=0)
-1276 Tree at WorldPoint(x=1400, y=2856, plane=0)
-1278 Tree at WorldPoint(x=1406, y=2876, plane=0)
-55130 Rockslide at WorldPoint(x=1409, y=2871, plane=0)
+51527 Chair at WorldPoint(x=1376, y=2859, plane=0)
+52594 Door at WorldPoint(x=1376, y=2861, plane=0)
+51548 Crate at WorldPoint(x=1376, y=2865, plane=0)
+51534 Table at WorldPoint(x=1378, y=2859, plane=0)
+51754 Food basket at WorldPoint(x=1380, y=2859, plane=0)
+55035 Table at WorldPoint(x=1382, y=2859, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
-2347 Hammer at WorldPoint(x=1401, y=2866, plane=0)
-1919 Beer glass at WorldPoint(x=1392, y=2860, plane=0)
-29412 Steamforge brew at WorldPoint(x=1389, y=2857, plane=0)
-1917 Beer at WorldPoint(x=1388, y=2859, plane=0)
-526 Bones at WorldPoint(x=1411, y=2858, plane=0)
-526 Bones at WorldPoint(x=1413, y=2855, plane=0)
-1925 Bucket at WorldPoint(x=1388, y=2851, plane=0)
 954 Rope at WorldPoint(x=1383, y=2862, plane=0)
-526 Bones at WorldPoint(x=1418, y=2861, plane=0)
+1957 Onion at WorldPoint(x=1376, y=2865, plane=0)
+1917 Beer at WorldPoint(x=1388, y=2859, plane=0)
+29412 Steamforge brew at WorldPoint(x=1389, y=2857, plane=0)
+1919 Beer glass at WorldPoint(x=1392, y=2860, plane=0)
+1925 Bucket at WorldPoint(x=1388, y=2851, plane=0)
+2347 Hammer at WorldPoint(x=1401, y=2866, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-12931 at WorldPoint(x=1398, y=2865, plane=0)
-54854 at WorldPoint(x=1398, y=2865, plane=0)
-54854 at WorldPoint(x=1398, y=2866, plane=0)
-12931 at WorldPoint(x=1399, y=2865, plane=0)
-54854 at WorldPoint(x=1399, y=2865, plane=0)
-54854 at WorldPoint(x=1400, y=2865, plane=0)
-2776 at WorldPoint(x=1400, y=2867, plane=0)
-21363 at WorldPoint(x=1397, y=2865, plane=0)
-21363 at WorldPoint(x=1397, y=2866, plane=0)
-54857 at WorldPoint(x=1397, y=2866, plane=0)
-17324 at WorldPoint(x=1397, y=2866, plane=0)
-54856 at WorldPoint(x=1397, y=2868, plane=0)
-17324 at WorldPoint(x=1397, y=2868, plane=0)
-21363 at WorldPoint(x=1398, y=2864, plane=0)
-54854 at WorldPoint(x=1398, y=2868, plane=0)
+52468 at WorldPoint(x=1383, y=2866, plane=0)
+2738 at WorldPoint(x=1382, y=2865, plane=0)
+52470 at WorldPoint(x=1382, y=2866, plane=0)
+41722 at WorldPoint(x=1382, y=2866, plane=0)
+52483 at WorldPoint(x=1382, y=2867, plane=0)
+52469 at WorldPoint(x=1383, y=2867, plane=0)
+41722 at WorldPoint(x=1384, y=2865, plane=0)
+41722 at WorldPoint(x=1384, y=2866, plane=0)
+52470 at WorldPoint(x=1381, y=2866, plane=0)
+41722 at WorldPoint(x=1381, y=2866, plane=0)
+52483 at WorldPoint(x=1381, y=2867, plane=0)
+52470 at WorldPoint(x=1381, y=2868, plane=0)
+52470 at WorldPoint(x=1382, y=2868, plane=0)
+54855 at WorldPoint(x=1382, y=2868, plane=0)
+52467 at WorldPoint(x=1383, y=2868, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
-2347 Hammer x6
-1755 Chisel x6
-1265 Bronze pickaxe x6
-1267 Iron pickaxe x5
-1269 Steel pickaxe x4
-436 Copper ore x0
-438 Tin ore x0
-440 Iron ore x0
-447 Mithril ore x0
-449 Adamantite ore x0
-451 Runite ore x0
-453 Coal x0
-442 Silver ore x0
-444 Gold ore x0
 == Text in open windows and chat
-Mistrock Mining Supplies
-Value check:
-Quantity:
 10
-50
-55
+78
 100
 All
 Game
@@ -131,7 +114,7 @@ Friends
 Channel
 Clan
 Trade
-00:01:46
+00:05:09
 Boatyguidev3: *
 You don't have enough coins.
 You have correctly entered your PIN.
