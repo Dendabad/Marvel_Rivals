@@ -1194,6 +1194,19 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 186. "Get a Mahogany Home Beginner Contract from Amy (try and do these whenever passing if viable ...)": the guide itself makes
+        // it optional ("they're done later but may be inefficient"), and a contract is a detour of its own, so it is left.
+        "208a36b884" to { _ -> skip("the Mahogany Homes contract is optional in the guide, and done later") },
+
+        // 187. "Kill a duck in Falador Park [Falador Easy Diary]": the ducks (1838, 1839) around (2989, 3379).
+        "725dc319ea" to { _ ->
+            StepPlan.Auto(
+                listOf(KillTask(listOf(1838, 1839), listOf("Duck"), emptyList(), maxKills = 1, lookFirst = Tile(2989, 3379, 0))),
+                combat = true,
+                trustTasks = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
