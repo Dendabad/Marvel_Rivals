@@ -1,120 +1,99 @@
-HCIM Guide Bot 0.16.54, PAUSED
+HCIM Guide Bot 0.16.55, PAUSED
 == Step
 Step 170 of 2925: Return to Redbeard Frank
-Detail: Return to Redbeard Frank (unclear what to click). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Detail: Talk-to Redbeard Frank: none of the expected chat options [rum, I have, Yes, Okay] are in [Arr!, Do you have anything for trade?]. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-13:30:17  Asking the AI about this pause (try 1)
-13:30:17  Paused: Return to Redbeard Frank (unclear what to click)
-13:30:17  Step: Return to Redbeard Frank
-13:30:16  Done (all actions finished): Use the Deposit box by Entrana and deposit everything except: Mind Runes, Coins, 1x Raw Beef, Karamja Rum, Onion, Pickaxe & 2x wines (8 Inventory Slots)
-13:29:36  Step: Use the Deposit box by Entrana and deposit everything except: Mind Runes, Coins, 1x Raw Beef, Karamja Rum, Onion, Pickaxe & 2x wines (8 Inventory Slots)
-13:29:36  Resumed by you
-13:29:36  Resumed by you
-13:29:32  Started version 0.16.54
+13:32:25  Asking the AI about this pause (try 1)
+13:32:25  Paused: Talk-to Redbeard Frank: none of the expected chat options [rum, I have, Yes, Okay] are in [Arr!, Do you have anything for trade?]
+13:32:11  Step: Return to Redbeard Frank
+13:32:10  Started version 0.16.55
 == Player
-world WorldPoint(x=3045, y=3235, plane=0), in instance false, as guide coordinates WorldPoint(x=3045, y=3235, plane=0)
+world WorldPoint(x=3052, y=3253, plane=0), in instance false, as guide coordinates WorldPoint(x=3052, y=3253, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x12565, 558x38, 1957x1, 1269x1, 1993x1, 1993x1, 2132x1, 431x1
+995x12565, 558x38, 432x1, 1957x1, 1269x1, 1993x1, 1993x1, 2132x1
 == NPCs within 12 tiles (id name at tile: options)
-1165 Monk of Entrana at WorldPoint(x=3043, y=3234, plane=0): [Talk-to, Take-boat]
-1166 Monk of Entrana at WorldPoint(x=3042, y=3235, plane=0): [Talk-to, Take-boat]
-1167 Monk of Entrana at WorldPoint(x=3046, y=3237, plane=0): [Talk-to, Take-boat]
+1313 Bartender at WorldPoint(x=3045, y=3258, plane=0): [Talk-to]
+1335 Jack Seagull at WorldPoint(x=3046, y=3255, plane=0): [Talk-to]
+1336 Longbow Ben at WorldPoint(x=3045, y=3257, plane=0): [Talk-to]
+1337 Ahab at WorldPoint(x=3049, y=3256, plane=0): [Talk-to]
+15253 Jobless Jim at WorldPoint(x=3052, y=3255, plane=0): [Talk-to]
+3643 Redbeard Frank at WorldPoint(x=3052, y=3254, plane=0): [Talk-to]
+2684 Frizzy Skernip at WorldPoint(x=3061, y=3253, plane=0): [Talk-to, Pay, Trade]
+0 Tool Leprechaun at WorldPoint(x=3060, y=3263, plane=0): [Talk-to, Exchange, Deposit-all]
 10724 Veos at WorldPoint(x=3054, y=3245, plane=0): [Talk-to, Port Piscarilius, Land's End]
+5007 Imp at WorldPoint(x=3052, y=3251, plane=0): [Attack]
 == Named objects within 25 tiles, nearest first (id name at tile)
-9536 Boxes at WorldPoint(x=3044, y=3234, plane=0)
-26254 Bank deposit box at WorldPoint(x=3045, y=3234, plane=0)
-9520 Barrel at WorldPoint(x=3044, y=3237, plane=0)
-392 Full fishing net at WorldPoint(x=3045, y=3237, plane=0)
-9534 Crate at WorldPoint(x=3042, y=3234, plane=0)
-9537 Crane at WorldPoint(x=3043, y=3238, plane=0)
-2412 Gangplank at WorldPoint(x=3048, y=3233, plane=0)
-9535 Crates at WorldPoint(x=3041, y=3234, plane=0)
-9533 Crate at WorldPoint(x=3041, y=3235, plane=0)
-9534 Crate at WorldPoint(x=3040, y=3234, plane=0)
-9536 Boxes at WorldPoint(x=3040, y=3235, plane=0)
-9531 Bench at WorldPoint(x=3040, y=3238, plane=0)
-9534 Crate at WorldPoint(x=3042, y=3230, plane=0)
-9520 Barrel at WorldPoint(x=3043, y=3240, plane=0)
-9538 Row boat at WorldPoint(x=3044, y=3240, plane=0)
-9519 Barrel at WorldPoint(x=3045, y=3230, plane=0)
-9521 Barrel at WorldPoint(x=3047, y=3230, plane=0)
-28964 Inconspicuous crate (easy) at WorldPoint(x=3050, y=3237, plane=0)
-9535 Crates at WorldPoint(x=3039, y=3234, plane=0)
-9534 Crate at WorldPoint(x=3039, y=3235, plane=0)
-392 Full fishing net at WorldPoint(x=3043, y=3241, plane=0)
-9535 Crates at WorldPoint(x=3044, y=3229, plane=0)
-9534 Crate at WorldPoint(x=3045, y=3229, plane=0)
-392 Full fishing net at WorldPoint(x=3051, y=3234, plane=0)
-9537 Crane at WorldPoint(x=3051, y=3235, plane=0)
-9534 Crate at WorldPoint(x=3038, y=3234, plane=0)
-9531 Bench at WorldPoint(x=3040, y=3242, plane=0)
-9519 Barrel at WorldPoint(x=3042, y=3228, plane=0)
-9519 Barrel at WorldPoint(x=3043, y=3228, plane=0)
-392 Full fishing net at WorldPoint(x=3043, y=3242, plane=0)
-9534 Crate at WorldPoint(x=3044, y=3228, plane=0)
-9519 Barrel at WorldPoint(x=3045, y=3228, plane=0)
-272 Ship's ladder at WorldPoint(x=3052, y=3229, plane=0)
-392 Full fishing net at WorldPoint(x=3052, y=3234, plane=0)
-392 Full fishing net at WorldPoint(x=3052, y=3237, plane=0)
-9536 Boxes at WorldPoint(x=3037, y=3234, plane=0)
-9537 Crane at WorldPoint(x=3043, y=3243, plane=0)
-9522 Anchor at WorldPoint(x=3036, y=3234, plane=0)
-5604 Rock at WorldPoint(x=3036, y=3242, plane=0)
-9519 Barrel at WorldPoint(x=3054, y=3230, plane=0)
+1070 Sign at WorldPoint(x=3052, y=3254, plane=0)
+967 Hanging wheel at WorldPoint(x=3052, y=3255, plane=0)
+1536 Door at WorldPoint(x=3053, y=3255, plane=0)
+9522 Anchor at WorldPoint(x=3049, y=3254, plane=0)
+5605 Rock at WorldPoint(x=3050, y=3250, plane=0)
+1102 Stool at WorldPoint(x=3050, y=3256, plane=0)
+1102 Stool at WorldPoint(x=3055, y=3256, plane=0)
+594 Table at WorldPoint(x=3049, y=3257, plane=0)
+9520 Barrel at WorldPoint(x=3050, y=3249, plane=0)
+594 Table at WorldPoint(x=3050, y=3257, plane=0)
+9520 Barrel at WorldPoint(x=3051, y=3249, plane=0)
+1102 Stool at WorldPoint(x=3051, y=3257, plane=0)
+9522 Anchor at WorldPoint(x=3052, y=3249, plane=0)
+392 Full fishing net at WorldPoint(x=3055, y=3249, plane=0)
+602 Table at WorldPoint(x=3055, y=3257, plane=0)
+969 Fishing net at WorldPoint(x=3055, y=3257, plane=0)
+9519 Barrel at WorldPoint(x=3047, y=3248, plane=0)
+392 Full fishing net at WorldPoint(x=3047, y=3249, plane=0)
+9520 Barrel at WorldPoint(x=3047, y=3254, plane=0)
+1102 Stool at WorldPoint(x=3051, y=3258, plane=0)
+1102 Stool at WorldPoint(x=3055, y=3258, plane=0)
+10819 Willow tree at WorldPoint(x=3057, y=3251, plane=0)
+10819 Willow tree at WorldPoint(x=3057, y=3254, plane=0)
+9519 Barrel at WorldPoint(x=3046, y=3249, plane=0)
+9520 Barrel at WorldPoint(x=3046, y=3254, plane=0)
+967 Hanging wheel at WorldPoint(x=3046, y=3255, plane=0)
+885 Bar pumps at WorldPoint(x=3046, y=3256, plane=0)
+885 Bar pumps at WorldPoint(x=3046, y=3257, plane=0)
+885 Bar pumps at WorldPoint(x=3046, y=3258, plane=0)
+967 Hanging wheel at WorldPoint(x=3046, y=3259, plane=0)
+965 Stuffed swordfish at WorldPoint(x=3048, y=3259, plane=0)
+9532 Picnic bench at WorldPoint(x=3049, y=3247, plane=0)
+1102 Stool at WorldPoint(x=3049, y=3259, plane=0)
+964 Stuffed swordfish at WorldPoint(x=3049, y=3259, plane=0)
+967 Hanging wheel at WorldPoint(x=3052, y=3259, plane=0)
+1536 Door at WorldPoint(x=3053, y=3259, plane=0)
+969 Fishing net at WorldPoint(x=3054, y=3259, plane=0)
+9532 Picnic bench at WorldPoint(x=3045, y=3247, plane=0)
+9519 Barrel at WorldPoint(x=3045, y=3249, plane=0)
+9521 Barrel at WorldPoint(x=3045, y=3259, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
+6561 Ahab's beer at WorldPoint(x=3049, y=3257, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-9541 at WorldPoint(x=3045, y=3235, plane=0)
-9541 at WorldPoint(x=3044, y=3234, plane=0)
-9539 at WorldPoint(x=3044, y=3234, plane=0)
-9541 at WorldPoint(x=3044, y=3235, plane=0)
-9541 at WorldPoint(x=3044, y=3236, plane=0)
-9541 at WorldPoint(x=3045, y=3234, plane=0)
-9539 at WorldPoint(x=3045, y=3234, plane=0)
-9541 at WorldPoint(x=3045, y=3236, plane=0)
-9541 at WorldPoint(x=3046, y=3234, plane=0)
-9539 at WorldPoint(x=3046, y=3234, plane=0)
-9541 at WorldPoint(x=3046, y=3235, plane=0)
-9541 at WorldPoint(x=3046, y=3236, plane=0)
-9541 at WorldPoint(x=3043, y=3234, plane=0)
-9539 at WorldPoint(x=3043, y=3234, plane=0)
-9541 at WorldPoint(x=3043, y=3235, plane=0)
+336 at WorldPoint(x=3052, y=3253, plane=0)
+9539 at WorldPoint(x=3051, y=3252, plane=0)
+1602 at WorldPoint(x=3051, y=3254, plane=0)
+9539 at WorldPoint(x=3052, y=3252, plane=0)
+42746 at WorldPoint(x=3052, y=3252, plane=0)
+1602 at WorldPoint(x=3052, y=3254, plane=0)
+336 at WorldPoint(x=3053, y=3252, plane=0)
+814 at WorldPoint(x=3053, y=3252, plane=0)
+335 at WorldPoint(x=3053, y=3253, plane=0)
+336 at WorldPoint(x=3053, y=3254, plane=0)
+316 at WorldPoint(x=3050, y=3251, plane=0)
+315 at WorldPoint(x=3050, y=3252, plane=0)
+9539 at WorldPoint(x=3050, y=3252, plane=0)
+1602 at WorldPoint(x=3050, y=3254, plane=0)
+1826 at WorldPoint(x=3050, y=3254, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
-552  x1
-1381  x1
-1005  x1
-13660  x1
-1013  x1
-1059  x1
 995 Coins x12565
 558 Mind rune x38
-6512 Small fishing net x1
+432 Chest key x1
 1957 Onion x1
 1269 Steel pickaxe x1
-6512 Raw chicken x1
 1993 Jug of wine x1
-6512 Harpoon x1
-6512 Fishing bait x1
-6512 Feather x1
-6512 Raw beef x1
 2132 Raw beef x1
-6512 Pot of flour x1
-6512 Redberries x1
-431 Karamjan rum x1
-6512 Headless arrow x1
-6512 Raw sardine x1
-995  x12565
-558  x38
-1957  x1
-1269  x1
-1993  x1
-2132  x1
-431  x1
 == Text in open windows and chat
-The Bank of Gielinor - Item Deposits
 10
-All
 100
+All
 Game
 On
 Public
@@ -123,23 +102,9 @@ Friends
 Channel
 Clan
 Trade
-00:16:21
-Boatyguidev3: *
-[13:30:15] Error during overlay renderingjava.lang.NullPointerException: null
-[13:30:15] following log message logged 1000 times!
-[13:29:58] Error during overlay renderingjava.lang.NullPointerException: null
-[13:29:58] following log message logged 1000 times!
-[13:29:42] Error during overlay renderingjava.lang.NullPointerException: null
-[13:25:15] [WebWalk] sp | post-handleObject landing unresolved (timeout=5000ms) dest=2962,9650,p0 at=3019,3233,p0
-[13:25:05] [WebWalk] sp | post-handleObject landing unresolved (timeout=5000ms) dest=2962,9650,p0 at=3018,3231,p0
-You can't sell this item to this shop.
-You don't have enough inventory space.
-I can't reach that!
-You find your bottle of rum in amongst the bananas.
-There are a lot of bananas in the crate.
-There are a lot of potatoes in the crate.
-There are a lot of cabbages in the crate.
-[13:13:55] Error during overlay renderingjava.lang.NullPointerException: Cannot read the array length because "" is null
-Welcome to Old School RuneScape.
+00:18:29
+Select an option
+Arr!
+Do you have anything for trade?
 == Quest Helper
-NpcStep: "Bring the Karamjan rum to Redbeard Frank in Port Sarim." npcs [3643] objects [] at null choices []
+ObjectStep: "Climb up the stairs in The Blue Moon Inn in Varrock." npcs [] objects [11796] at null choices []
