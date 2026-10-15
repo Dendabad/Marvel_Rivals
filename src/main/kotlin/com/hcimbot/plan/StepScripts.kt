@@ -870,6 +870,9 @@ class StepScripts(private val guide: Guide) {
                     ),
                     OnlyIf({ ctx -> !has(shrimp)(ctx) }, WaitUntilTask("catch the shrimps", 120, reached = has(shrimp))),
                     DropTask(listOf(shrimp)),
+                    // Walking off ends the fishing, which would otherwise go on filling the bag. The banana trees are next (step 161).
+                    WalkTask(Tile(2931, 3152, 0), radius = 2),
+                    DropTask(listOf(shrimp)),
                 ),
                 trustTasks = true,
                 ignoreStartSignal = true,
