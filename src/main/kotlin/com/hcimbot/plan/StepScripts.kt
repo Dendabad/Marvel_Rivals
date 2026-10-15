@@ -1135,6 +1135,18 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 180. "Take Falador Crumbling wall Shortcut [Falador Easy Diary]": the crumbling wall west of Falador at (2936, 3355), climbed over.
+        // The diary task ticks on the climb, which is what the step is checked against.
+        "e960febc98" to { _ ->
+            StepPlan.Auto(
+                listOf(
+                    WalkTask(Tile(2936, 3353, 0), radius = 2),
+                    InteractTask(InteractTask.Kind.OBJECT, emptyList(), listOf("Crumbling wall"), listOf(Tile(2936, 3355, 0)), "Climb-over", near = Tile(2936, 3355, 0)),
+                ),
+                trustTasks = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
