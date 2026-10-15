@@ -1,90 +1,89 @@
-HCIM Guide Bot 0.16.76, PAUSED
+HCIM Guide Bot 0.16.77, PAUSED
 == Step
-Step 183 of 2925: Get a haircut North [Falador Easy Diary]
-Detail: Get a haircut North [Falador Easy Diary] (unclear what to click). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 184 of 2925: Fill Bucket on Pump [Falador Easy Diary]
+Detail: Fill Bucket on Pump [Falador Easy Diary] (unclear what to click). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-14:04:36  Asking the AI about this pause (try 1)
-14:04:36  Paused: Get a haircut North [Falador Easy Diary] (unclear what to click)
-14:04:36  Step: Get a haircut North [Falador Easy Diary]
-14:04:35  Done (the game shows it is done): Withdraw: Coins, Mind Runes, Raw Rat/Chicken/Beef, 10x Wines, Empty Bucket, Chest Key, Cheese (18 Inventory Slots)
-14:04:14  Step: Withdraw: Coins, Mind Runes, Raw Rat/Chicken/Beef, 10x Wines, Empty Bucket, Chest Key, Cheese (18 Inventory Slots)
-14:04:14  Started version 0.16.76
+14:06:00  Asking the AI about this pause (try 1)
+14:06:00  Paused: Fill Bucket on Pump [Falador Easy Diary] (unclear what to click)
+14:06:00  Step: Fill Bucket on Pump [Falador Easy Diary]
+14:05:54  Step: Get a haircut North [Falador Easy Diary]
+14:05:54  Started version 0.16.77
 == Player
-world WorldPoint(x=2945, y=3368, plane=0), in instance false, as guide coordinates WorldPoint(x=2945, y=3368, plane=0)
+world WorldPoint(x=2946, y=3379, plane=0), in instance false, as guide coordinates WorldPoint(x=2946, y=3379, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
 995x11878, 558x199, 2134x1, 2138x1, 2132x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1925x1, 432x1, 1985x1
 == NPCs within 12 tiles (id name at tile: options)
-3270 Guard at WorldPoint(x=2946, y=3375, plane=0): [Attack, Pickpocket]
-1618 Banker at WorldPoint(x=2945, y=3366, plane=0): [Talk-to, Bank, Collect]
-14167 Archibald at WorldPoint(x=2945, y=3377, plane=0): [Pet]
-1618 Banker at WorldPoint(x=2946, y=3366, plane=0): [Talk-to, Bank, Collect]
-1305 Hairdresser at WorldPoint(x=2945, y=3378, plane=0): [Talk-to, Haircut, Shave]
-1618 Banker at WorldPoint(x=2947, y=3366, plane=0): [Talk-to, Bank, Collect]
-1618 Banker at WorldPoint(x=2948, y=3366, plane=0): [Talk-to, Bank, Collect]
-1613 Banker at WorldPoint(x=2949, y=3366, plane=0): [Talk-to, Bank, Collect]
-11947 Guard at WorldPoint(x=2950, y=3379, plane=0): [Attack, Pickpocket]
+3270 Guard at WorldPoint(x=2942, y=3376, plane=0): [Attack, Pickpocket]
+14167 Archibald at WorldPoint(x=2947, y=3378, plane=0): [Pet]
+1305 Hairdresser at WorldPoint(x=2947, y=3380, plane=0): [Talk-to, Haircut, Shave]
+11947 Guard at WorldPoint(x=2949, y=3379, plane=0): [Attack, Pickpocket]
+5896 Flynn at WorldPoint(x=2952, y=3390, plane=0): [Talk-to, Trade]
+278 Town Crier at WorldPoint(x=2950, y=3382, plane=0): [Talk-to]
 1315 Emily at WorldPoint(x=2954, y=3370, plane=0): [Talk-to]
+2820 Shop assistant at WorldPoint(x=2954, y=3390, plane=0): [Talk-to, Trade]
 10659 Burntof at WorldPoint(x=2956, y=3367, plane=0): [Talk-to]
-1316 Kaylee at WorldPoint(x=2956, y=3372, plane=0): [Talk-to]
+3271 Guard at WorldPoint(x=2952, y=3383, plane=0): [Attack, Pickpocket]
+1316 Kaylee at WorldPoint(x=2956, y=3371, plane=0): [Talk-to]
+2819 Shop keeper at WorldPoint(x=2955, y=3388, plane=0): [Talk-to, Trade]
 == Named objects within 25 tiles, nearest first (id name at tile)
-24101 Bank booth at WorldPoint(x=2945, y=3367, plane=0)
-24101 Bank booth at WorldPoint(x=2946, y=3367, plane=0)
-10529 Bank Deposit Box at WorldPoint(x=2943, y=3368, plane=0)
-1126 Rosebush at WorldPoint(x=2944, y=3366, plane=0)
-24101 Bank booth at WorldPoint(x=2947, y=3367, plane=0)
-27272 Stool at WorldPoint(x=2947, y=3370, plane=0)
-26729 Bush at WorldPoint(x=2945, y=3365, plane=0)
-24099 Notice board at WorldPoint(x=2947, y=3371, plane=0)
-24101 Bank booth at WorldPoint(x=2948, y=3367, plane=0)
-590 Bank table at WorldPoint(x=2948, y=3369, plane=0)
-26729 Bush at WorldPoint(x=2945, y=3364, plane=0)
-591 Bank table at WorldPoint(x=2947, y=3372, plane=0)
-590 Bank table at WorldPoint(x=2948, y=3364, plane=0)
-27253 Bank booth at WorldPoint(x=2949, y=3367, plane=0)
-961 Bank notice board at WorldPoint(x=2949, y=3369, plane=0)
+24082 Ladder at WorldPoint(x=2946, y=3378, plane=0)
+1158 Potted plant at WorldPoint(x=2944, y=3377, plane=0)
+24153 Mirror at WorldPoint(x=2946, y=3381, plane=0)
+1158 Potted plant at WorldPoint(x=2947, y=3377, plane=0)
+24151 Chair at WorldPoint(x=2947, y=3381, plane=0)
+24051 Door at WorldPoint(x=2948, y=3379, plane=0)
+24020 Treadmill at WorldPoint(x=2948, y=3380, plane=0)
+24004 Waterpump at WorldPoint(x=2947, y=3382, plane=0)
+24021 Spinning pole at WorldPoint(x=2949, y=3380, plane=0)
+1158 Potted plant at WorldPoint(x=2942, y=3379, plane=0)
+24152 Chair at WorldPoint(x=2942, y=3381, plane=0)
+24152 Chair at WorldPoint(x=2942, y=3383, plane=0)
+24151 Chair at WorldPoint(x=2945, y=3383, plane=0)
+24152 Chair at WorldPoint(x=2942, y=3385, plane=0)
 8720 Poll booth at WorldPoint(x=2944, y=3373, plane=0)
-26729 Bush at WorldPoint(x=2945, y=3363, plane=0)
-24082 Ladder at WorldPoint(x=2946, y=3363, plane=0)
-26729 Bush at WorldPoint(x=2945, y=3362, plane=0)
-591 Bank table at WorldPoint(x=2948, y=3361, plane=0)
-1276 Tree at WorldPoint(x=2953, y=3363, plane=0)
-24103 Chair at WorldPoint(x=2953, y=3367, plane=0)
-1012 Shelves at WorldPoint(x=2953, y=3370, plane=0)
-1010 Shelves at WorldPoint(x=2953, y=3371, plane=0)
+24055 Door at WorldPoint(x=2950, y=3385, plane=0)
+24002 Barrel at WorldPoint(x=2952, y=3385, plane=0)
+591 Bank table at WorldPoint(x=2947, y=3372, plane=0)
+24000 Rack at WorldPoint(x=2952, y=3386, plane=0)
 1011 Shelves at WorldPoint(x=2953, y=3372, plane=0)
 1012 Shelves at WorldPoint(x=2953, y=3373, plane=0)
 1011 Shelves at WorldPoint(x=2953, y=3374, plane=0)
-1158 Potted plant at WorldPoint(x=2944, y=3377, plane=0)
-590 Bank table at WorldPoint(x=2945, y=3359, plane=0)
-590 Bank table at WorldPoint(x=2947, y=3359, plane=0)
-1158 Potted plant at WorldPoint(x=2947, y=3377, plane=0)
-24025 Table at WorldPoint(x=2954, y=3367, plane=0)
-24081 Large table at WorldPoint(x=2954, y=3369, plane=0)
+24151 Chair at WorldPoint(x=2945, y=3387, plane=0)
+24099 Notice board at WorldPoint(x=2947, y=3371, plane=0)
+1010 Shelves at WorldPoint(x=2953, y=3371, plane=0)
 24018 Banner at WorldPoint(x=2954, y=3374, plane=0)
-1173 Small fern at WorldPoint(x=2935, y=3367, plane=0)
-24082 Ladder at WorldPoint(x=2946, y=3378, plane=0)
+863 Standard at WorldPoint(x=2954, y=3387, plane=0)
+27272 Stool at WorldPoint(x=2947, y=3370, plane=0)
+24001 Shelves at WorldPoint(x=2949, y=3388, plane=0)
+1012 Shelves at WorldPoint(x=2953, y=3370, plane=0)
 24105 Bar pumps at WorldPoint(x=2955, y=3370, plane=0)
 24106 Bar at WorldPoint(x=2955, y=3371, plane=0)
 24105 Bar pumps at WorldPoint(x=2955, y=3372, plane=0)
 24106 Bar at WorldPoint(x=2955, y=3373, plane=0)
+24105 Bar pumps at WorldPoint(x=2955, y=3374, plane=0)
+7331 Table at WorldPoint(x=2955, y=3377, plane=0)
+1073 Sign at WorldPoint(x=2955, y=3379, plane=0)
+590 Bank table at WorldPoint(x=2948, y=3369, plane=0)
+961 Bank notice board at WorldPoint(x=2949, y=3369, plane=0)
+24003 Table at WorldPoint(x=2950, y=3389, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-5535 at WorldPoint(x=2944, y=3367, plane=0)
-23994 at WorldPoint(x=2944, y=3367, plane=0)
-4738 at WorldPoint(x=2943, y=3366, plane=0)
-5533 at WorldPoint(x=2943, y=3367, plane=0)
-23994 at WorldPoint(x=2943, y=3367, plane=0)
-5534 at WorldPoint(x=2944, y=3366, plane=0)
-23994 at WorldPoint(x=2944, y=3366, plane=0)
-2738 at WorldPoint(x=2947, y=3368, plane=0)
-24173 at WorldPoint(x=2947, y=3370, plane=0)
-4738 at WorldPoint(x=2942, y=3365, plane=0)
-4738 at WorldPoint(x=2942, y=3366, plane=0)
-4738 at WorldPoint(x=2942, y=3367, plane=0)
-23994 at WorldPoint(x=2942, y=3367, plane=0)
-5534 at WorldPoint(x=2942, y=3368, plane=0)
-23994 at WorldPoint(x=2942, y=3368, plane=0)
+5119 at WorldPoint(x=2945, y=3380, plane=0)
+24154 at WorldPoint(x=2945, y=3377, plane=0)
+24173 at WorldPoint(x=2946, y=3377, plane=0)
+24158 at WorldPoint(x=2946, y=3381, plane=0)
+23994 at WorldPoint(x=2948, y=3377, plane=0)
+24173 at WorldPoint(x=2948, y=3378, plane=0)
+23994 at WorldPoint(x=2948, y=3381, plane=0)
+5533 at WorldPoint(x=2943, y=3376, plane=0)
+23994 at WorldPoint(x=2943, y=3376, plane=0)
+24173 at WorldPoint(x=2943, y=3377, plane=0)
+23994 at WorldPoint(x=2944, y=3376, plane=0)
+23994 at WorldPoint(x=2945, y=3376, plane=0)
+23994 at WorldPoint(x=2946, y=3376, plane=0)
+5535 at WorldPoint(x=2946, y=3382, plane=0)
+23994 at WorldPoint(x=2946, y=3382, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
 995 Coins x11878
 558 Mind rune x199
@@ -96,52 +95,65 @@ hitpoints 10/10
 432 Chest key x1
 1985 Cheese x1
 == Text in open windows and chat
-10
-100
-All
-Game
-On
-Public
-Private
-Friends
-Channel
-Clan
-Trade
-00:50:40
-Boatyguidev3: *
-You have unlocked a new music track: @mes_hl_red@Workshop
-You have unlocked a new music track: @mes_hl_red@Arrival
-You have unlocked a new music track: @mes_hl_red@Fanfare
-Well done! You have completed an easy task in the Falador area. Your Achievement Diary has been updated.
-You get some wool.
-You'll need an empty bucket to collect the milk.
-You milk the cow.
-Check the skill guide for more information about Magic.
-Level 5 Magic: Water Strike
-Level 4 Magic: Opal-tipped crossbow bolts
-Level 3 Magic: Confuse
-Congratulations, you've just advanced your Combat level. You are now level 5.
-Congratulations, you've just advanced your Magic level. You are now level 5.
-Congratulations, you've completed a quest: @q_mes@Witch's Potion
-You've started a new quest: @q_mes@Witch's Potion
-You have unlocked a new music track: @mes_hl_red@Attention
-You have unlocked a new music track: @mes_hl_red@Emperor
-You accidentally burn the meat.
-I can't reach that!
-[13:30:15] Error during overlay renderingjava.lang.NullPointerException: null
-[13:30:15] following log message logged 1000 times!
-[13:29:58] Error during overlay renderingjava.lang.NullPointerException: null
-[13:29:58] following log message logged 1000 times!
-[13:29:42] Error during overlay renderingjava.lang.NullPointerException: null
-[13:25:15] [WebWalk] sp | post-handleObject landing unresolved (timeout=5000ms) dest=2962,9650,p0 at=3019,3233,p0
-[13:25:05] [WebWalk] sp | post-handleObject landing unresolved (timeout=5000ms) dest=2962,9650,p0 at=3018,3231,p0
-You can't sell this item to this shop.
-You don't have enough inventory space.
-You find your bottle of rum in amongst the bananas.
-There are a lot of bananas in the crate.
-There are a lot of potatoes in the crate.
-There are a lot of cabbages in the crate.
-[13:13:55] Error during overlay renderingjava.lang.NullPointerException: Cannot read the array length because "" is null
-Welcome to Old School RuneScape.
+Makeover
+Bald
+Dreadlocks
+Long
+Medium
+Tonsure
+Short
+Cropped
+Wild spikes
+Spikes
+Mohawk
+Wind braids
+Quiff
+Samurai
+Princely
+Curtains
+Long curtains
+Front split
+Tousled
+Side wedge
+Front wedge
+Front spikes
+Frohawk
+Rear skirt
+Queue
+Bun
+Pigtails
+Earmuffs
+Side pony
+Curls
+Ponytail
+Braids
+Bunches
+Bob
+Layered
+Straight
+Straight Braids
+Two-back
+Mullet
+Undercut
+Low Bun
+Messy Bun
+Pompadour
+Afro
+Short locs
+Spiky Mohawk
+Slicked Mohawk
+Long Quiff
+Short Choppy
+Side Afro
+Punk
+Half-shaved
+Fremennik
+Elven
+Medium Coils
+High ponytail
+Plaits
+High Bunches
+Apply
+Confirm
 == Quest Helper
 ObjectStep: "Climb up the stairs in The Blue Moon Inn in Varrock." npcs [] objects [11796] at null choices []
