@@ -1520,6 +1520,7 @@ class CookTask(
     private var idle = 0
     private var walk: WalkTask? = null
     private var place = 0
+    private val opened = HashSet<Tile>()
 
     override fun tick(ctx: TaskContext): TaskResult {
         val game = ctx.game
@@ -1547,6 +1548,19 @@ class CookTask(
             if (result is TaskResult.Done) { place++; walk = null; return TaskResult.Running }
             return if (result is TaskResult.Failed) { place++; walk = null; TaskResult.Running } else result
         }
+        // A range inside a building with the doors shut: the nearest shut door round it is opened, each only once.
+        if (game.canReachBeside(range.tile) == false && opened.size < MAX_DOORS) {
+            val door = game.objectsNear(listOf("Door", "Large door", "Gate"), range.tile, DOOR_RANGE)
+                .filter { it.tile !in opened }
+                .minByOrNull { it.tile.distanceTo(at ?: range.tile) }
+            if (door != null) {
+                opened += door.tile
+                ctx.log("The range cannot be reached, opening the door at ${door.tile}")
+                ctx.actions.interactObject(door, "Open")
+                settling = 4
+                return TaskResult.Running
+            }
+        }
         idle = 0
         settling = 3
         return attempt(ctx.actions.useItemOnObject(item, range), "use item $item on the range")
@@ -1554,5 +1568,7 @@ class CookTask(
 
     private companion object {
         const val NEAR = 12
+        const val DOOR_RANGE = 8
+        const val MAX_DOORS = 4
     }
 }
