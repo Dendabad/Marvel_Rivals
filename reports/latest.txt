@@ -1,96 +1,88 @@
-HCIM Guide Bot 0.16.78, PAUSED
+HCIM Guide Bot 0.16.80, PAUSED
 == Step
-Step 186 of 2925: Get a Mahogany Home Beginner Contract from Amy (try and do these whenever passing if viable (aka if Hosidius and you're nearby, detour and complete it. If not they're done later but may be inefficient) - Mahogany homes plugin or notepad to remember your tasks.
-Detail: Get a Mahogany Home Beginner Contract from Amy (try and do these whenever passing if viable (aka if Hosidius and you're nearby, detour and complete it. If not they're done later but may be inefficient) - Mahogany homes plugin or notepad to remember your tasks. (depends on a condition or repeats). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 188 of 2925: Buy 6x Woad Leaves from Wyson the Gardener (1,4)
+Detail: the actions finished but the game does not show the step as done. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-14:07:51  Asking the AI about this pause (try 1)
-14:07:51  Paused: Get a Mahogany Home Beginner Contract from Amy (try and do these whenever passing if viable (aka if Hosidius and you're nearby, detour and complete it. If not they're done later but may be inefficient) - Mahogany homes plugin or notepad to remember your tasks. (depends on a condition or repeats)
-14:07:51  Step: Get a Mahogany Home Beginner Contract from Amy (try and do these whenever passing if viable (aka if Hosidius and you're nearby, detour and complete it. If not they're done later but may be inefficient) - Mahogany homes plugin or notepad to remember your tasks.
-14:07:14  Walking from (2949, 3382, 0) to (2978, 3341, 0)
-14:07:13  Quest Helper: Quest Helper has PiratesTreasure open, not theknightssword. Select theknightssword in the Quest Helper panel
-14:07:13  Quest step: Talk to the Squire in Falador Castle's courtyard.
-14:07:13  Step: Head South and talk to the Squire and start Knight's Sword (1,2,1,1)
-14:07:08  Step: Fill Bucket on Pump [Falador Easy Diary]
-14:07:08  Started version 0.16.78
+14:12:18  Asking the AI about this pause (try 1)
+14:12:17  Paused: the actions finished but the game does not show the step as done
+14:11:38  Walking from (2998, 3380, 0) to (3027, 3379, 0)
+14:11:38  Step: Buy 6x Woad Leaves from Wyson the Gardener (1,4)
+14:11:37  Duck is dead after 1 attacks
+14:11:31  Attacking Duck
+14:11:31  Step: Kill a duck in Falador Park [Falador Easy Diary]
+14:11:30  Done (the Mahogany Homes contract is optional in the guide, and done later): Get a Mahogany Home Beginner Contract from Amy (try and do these whenever passing if viable (aka if Hosidius and you're nearby, detour and complete it. If not they're done later but may be inefficient) - Mahogany homes plugin or notepad to remember your tasks.
+14:11:30  Step: Get a Mahogany Home Beginner Contract from Amy (try and do these whenever passing if viable (aka if Hosidius and you're nearby, detour and complete it. If not they're done later but may be inefficient) - Mahogany homes plugin or notepad to remember your tasks.
+14:11:30  Started version 0.16.80
 == Player
-world WorldPoint(x=2978, y=3339, plane=0), in instance false, as guide coordinates WorldPoint(x=2978, y=3339, plane=0)
+world WorldPoint(x=3026, y=3379, plane=0), in instance false, as guide coordinates WorldPoint(x=3026, y=3379, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x11878, 558x199, 2134x1, 2138x1, 2132x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1929x1, 432x1, 1985x1
+995x11858, 558x197, 2134x1, 2138x1, 2132x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1929x1, 432x1, 1985x1, 1793x2
 == NPCs within 12 tiles (id name at tile: options)
-1798 White Knight at WorldPoint(x=2975, y=3347, plane=0): [Attack]
-5007 Imp at WorldPoint(x=2981, y=3339, plane=0): [Attack]
-11949 White Knight at WorldPoint(x=2972, y=3348, plane=0): [Attack]
-11949 White Knight at WorldPoint(x=2981, y=3341, plane=0): [Attack]
-4737 Squire at WorldPoint(x=2978, y=3338, plane=0): [Talk-to]
-5524 Sir Rebral at WorldPoint(x=2977, y=3346, plane=0): [Talk-to]
-11948 White Knight at WorldPoint(x=2976, y=3346, plane=0): [Attack]
-11948 White Knight at WorldPoint(x=2979, y=3328, plane=0): [Attack]
-11948 White Knight at WorldPoint(x=2985, y=3336, plane=0): [Attack]
-1798 White Knight at WorldPoint(x=2984, y=3345, plane=0): [Attack]
-1798 White Knight at WorldPoint(x=2986, y=3335, plane=0): [Attack]
-6800  at WorldPoint(x=2990, y=3345, plane=0): []
+3102 Garden supplier at WorldPoint(x=3020, y=3372, plane=0): [Talk-to, Trade]
+3275 Gardener at WorldPoint(x=3020, y=3369, plane=0): [Talk-to, Attack]
+5422 Wyson the gardener at WorldPoint(x=3026, y=3378, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
-10779 Stool at WorldPoint(x=2977, y=3338, plane=0)
-1016 Shelves at WorldPoint(x=2975, y=3336, plane=0)
-1017 Shelves at WorldPoint(x=2976, y=3336, plane=0)
-24090 Bed at WorldPoint(x=2977, y=3336, plane=0)
-24064 Castle door at WorldPoint(x=2981, y=3340, plane=0)
-24059 Castle door at WorldPoint(x=2981, y=3341, plane=0)
-1018 Shelves at WorldPoint(x=2974, y=3336, plane=0)
-24089 Stool at WorldPoint(x=2978, y=3335, plane=0)
-24025 Table at WorldPoint(x=2973, y=3335, plane=0)
-1017 Shelves at WorldPoint(x=2973, y=3336, plane=0)
-24090 Bed at WorldPoint(x=2977, y=3334, plane=0)
-10587 Stool at WorldPoint(x=2979, y=3344, plane=0)
-24058 Door at WorldPoint(x=2972, y=3334, plane=0)
-24025 Table at WorldPoint(x=2973, y=3333, plane=0)
-24089 Stool at WorldPoint(x=2978, y=3333, plane=0)
-24089 Stool at WorldPoint(x=2971, y=3332, plane=0)
-24059 Castle door at WorldPoint(x=2971, y=3337, plane=0)
-24090 Bed at WorldPoint(x=2973, y=3332, plane=0)
-24090 Bed at WorldPoint(x=2977, y=3332, plane=0)
-24057 Door at WorldPoint(x=2978, y=3346, plane=0)
-24096 Suit of Armour at WorldPoint(x=2985, y=3339, plane=0)
-24057 Door at WorldPoint(x=2985, y=3341, plane=0)
-24096 Suit of Armour at WorldPoint(x=2985, y=3343, plane=0)
-24081 Large table at WorldPoint(x=2970, y=3331, plane=0)
-24089 Stool at WorldPoint(x=2970, y=3332, plane=0)
-24064 Castle door at WorldPoint(x=2970, y=3337, plane=0)
-24089 Stool at WorldPoint(x=2973, y=3331, plane=0)
-29717 Stool at WorldPoint(x=2976, y=3347, plane=0)
-24089 Stool at WorldPoint(x=2978, y=3331, plane=0)
-24103 Chair at WorldPoint(x=2986, y=3339, plane=0)
-24103 Chair at WorldPoint(x=2986, y=3340, plane=0)
-24089 Stool at WorldPoint(x=2969, y=3331, plane=0)
-24081 Large table at WorldPoint(x=2970, y=3330, plane=0)
-24090 Bed at WorldPoint(x=2973, y=3330, plane=0)
-24057 Door at WorldPoint(x=2973, y=3348, plane=0)
-24058 Door at WorldPoint(x=2978, y=3330, plane=0)
-24057 Door at WorldPoint(x=2983, y=3348, plane=0)
-24096 Suit of Armour at WorldPoint(x=2987, y=3335, plane=0)
-24103 Chair at WorldPoint(x=2987, y=3338, plane=0)
-53268 Table at WorldPoint(x=2987, y=3339, plane=0)
+24051 Door at WorldPoint(x=3027, y=3379, plane=0)
+1156 Potted flower at WorldPoint(x=3025, y=3376, plane=0)
+1157 Potted flower at WorldPoint(x=3025, y=3382, plane=0)
+374 Hat stand at WorldPoint(x=3026, y=3376, plane=0)
+24081 Large table at WorldPoint(x=3029, y=3376, plane=0)
+1158 Potted plant at WorldPoint(x=3029, y=3378, plane=0)
+1158 Potted plant at WorldPoint(x=3029, y=3380, plane=0)
+24081 Large table at WorldPoint(x=3029, y=3382, plane=0)
+54072 Broken statue at WorldPoint(x=3022, y=3380, plane=0)
+24103 Chair at WorldPoint(x=3029, y=3383, plane=0)
+24103 Chair at WorldPoint(x=3030, y=3377, plane=0)
+1300 Fern at WorldPoint(x=3021, y=3376, plane=0)
+1162 Bullrushes at WorldPoint(x=3021, y=3378, plane=0)
+1162 Bullrushes at WorldPoint(x=3021, y=3381, plane=0)
+1299 Fern at WorldPoint(x=3021, y=3383, plane=0)
+24103 Chair at WorldPoint(x=3031, y=3376, plane=0)
+24103 Chair at WorldPoint(x=3031, y=3377, plane=0)
+54068 Broken statue at WorldPoint(x=3020, y=3376, plane=0)
+1177 Waterlily at WorldPoint(x=3020, y=3380, plane=0)
+1162 Bullrushes at WorldPoint(x=3020, y=3382, plane=0)
+54070 Broken statue at WorldPoint(x=3020, y=3384, plane=0)
+24107 Picnic table at WorldPoint(x=3021, y=3373, plane=0)
+1300 Fern at WorldPoint(x=3023, y=3385, plane=0)
+1162 Bullrushes at WorldPoint(x=3019, y=3377, plane=0)
+1177 Waterlily at WorldPoint(x=3019, y=3382, plane=0)
+1162 Bullrushes at WorldPoint(x=3019, y=3383, plane=0)
+24107 Picnic table at WorldPoint(x=3018, y=3371, plane=0)
+1162 Bullrushes at WorldPoint(x=3018, y=3376, plane=0)
+1175 Waterlily at WorldPoint(x=3018, y=3377, plane=0)
+1175 Waterlily at WorldPoint(x=3018, y=3379, plane=0)
+1175 Waterlily at WorldPoint(x=3018, y=3381, plane=0)
+1300 Fern at WorldPoint(x=3019, y=3387, plane=0)
+1162 Bullrushes at WorldPoint(x=3017, y=3376, plane=0)
+1162 Bullrushes at WorldPoint(x=3017, y=3384, plane=0)
+10820 Oak tree at WorldPoint(x=3028, y=3370, plane=0)
+62419 Rough wall at WorldPoint(x=3032, y=3388, plane=0)
+54071 Broken statue at WorldPoint(x=3016, y=3376, plane=0)
+1176 Waterlily at WorldPoint(x=3016, y=3379, plane=0)
+1162 Bullrushes at WorldPoint(x=3016, y=3382, plane=0)
+1299 Fern at WorldPoint(x=3016, y=3383, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-4736 at WorldPoint(x=2978, y=3339, plane=0)
-4737 at WorldPoint(x=2977, y=3338, plane=0)
-4735 at WorldPoint(x=2977, y=3339, plane=0)
-24023 at WorldPoint(x=2977, y=3340, plane=0)
-4736 at WorldPoint(x=2978, y=3338, plane=0)
-24024 at WorldPoint(x=2978, y=3340, plane=0)
-4736 at WorldPoint(x=2979, y=3338, plane=0)
-4737 at WorldPoint(x=2979, y=3339, plane=0)
-24176 at WorldPoint(x=2979, y=3339, plane=0)
-24023 at WorldPoint(x=2979, y=3340, plane=0)
-4739 at WorldPoint(x=2976, y=3337, plane=0)
-24175 at WorldPoint(x=2976, y=3337, plane=0)
-4736 at WorldPoint(x=2976, y=3338, plane=0)
-4735 at WorldPoint(x=2976, y=3339, plane=0)
-24023 at WorldPoint(x=2976, y=3340, plane=0)
+4736 at WorldPoint(x=3025, y=3378, plane=0)
+4736 at WorldPoint(x=3025, y=3380, plane=0)
+5533 at WorldPoint(x=3026, y=3378, plane=0)
+23994 at WorldPoint(x=3026, y=3378, plane=0)
+5533 at WorldPoint(x=3026, y=3380, plane=0)
+23994 at WorldPoint(x=3026, y=3380, plane=0)
+4736 at WorldPoint(x=3025, y=3377, plane=0)
+24232 at WorldPoint(x=3025, y=3377, plane=0)
+4736 at WorldPoint(x=3025, y=3381, plane=0)
+24232 at WorldPoint(x=3025, y=3381, plane=0)
+24232 at WorldPoint(x=3026, y=3377, plane=0)
+24232 at WorldPoint(x=3026, y=3381, plane=0)
+24093 at WorldPoint(x=3028, y=3377, plane=0)
+24093 at WorldPoint(x=3028, y=3381, plane=0)
+24232 at WorldPoint(x=3025, y=3376, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
-995 Coins x11878
-558 Mind rune x199
+995 Coins x11858
+558 Mind rune x197
 2134 Raw rat meat x1
 2138 Raw chicken x1
 2132 Raw beef x1
@@ -98,9 +90,10 @@ hitpoints 10/10
 1929 Bucket of water x1
 432 Chest key x1
 1985 Cheese x1
+1793 Woad leaf x2
 == Text in open windows and chat
 10
-81
+60
 100
 All
 Game
@@ -111,9 +104,44 @@ Friends
 Channel
 Clan
 Trade
-00:53:55
-Boatyguidev3
-Click here to continue
-Ok, I'll give it a go.
+00:58:22
+Boatyguidev3: *
+Well done! You have completed an easy task in the Falador area. Your Achievement Diary has been updated.
+You've started a new quest: @q_mes@The Knight's Sword
+You fill the bucket.
+You get a fresh, new haircut!
+You have unlocked a new music track: @mes_hl_red@Workshop
+You have unlocked a new music track: @mes_hl_red@Arrival
+You have unlocked a new music track: @mes_hl_red@Fanfare
+You get some wool.
+You'll need an empty bucket to collect the milk.
+You milk the cow.
+Check the skill guide for more information about Magic.
+Level 5 Magic: Water Strike
+Level 4 Magic: Opal-tipped crossbow bolts
+Level 3 Magic: Confuse
+Congratulations, you've just advanced your Combat level. You are now level 5.
+Congratulations, you've just advanced your Magic level. You are now level 5.
+Congratulations, you've completed a quest: @q_mes@Witch's Potion
+You've started a new quest: @q_mes@Witch's Potion
+You have unlocked a new music track: @mes_hl_red@Attention
+You have unlocked a new music track: @mes_hl_red@Emperor
+You accidentally burn the meat.
+I can't reach that!
+[13:30:15] Error during overlay renderingjava.lang.NullPointerException: null
+[13:30:15] following log message logged 1000 times!
+[13:29:58] Error during overlay renderingjava.lang.NullPointerException: null
+[13:29:58] following log message logged 1000 times!
+[13:29:42] Error during overlay renderingjava.lang.NullPointerException: null
+[13:25:15] [WebWalk] sp | post-handleObject landing unresolved (timeout=5000ms) dest=2962,9650,p0 at=3019,3233,p0
+[13:25:05] [WebWalk] sp | post-handleObject landing unresolved (timeout=5000ms) dest=2962,9650,p0 at=3018,3231,p0
+You can't sell this item to this shop.
+You don't have enough inventory space.
+You find your bottle of rum in amongst the bananas.
+There are a lot of bananas in the crate.
+There are a lot of potatoes in the crate.
+There are a lot of cabbages in the crate.
+[13:13:55] Error during overlay renderingjava.lang.NullPointerException: Cannot read the array length because "" is null
+Welcome to Old School RuneScape.
 == Quest Helper
 ObjectStep: "Climb up the stairs in The Blue Moon Inn in Varrock." npcs [] objects [11796] at null choices []
