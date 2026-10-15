@@ -1,83 +1,153 @@
 HCIM Guide Bot 0.16.34, PAUSED
 == Step
-Step 151 of 2925: Head North to Draynor and Deposit all
-Detail: Walk to (3103, 3265, 0): could not walk to (3103, 3265, 0). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 154 of 2925: Use Pages on Chronicle and wield
+Detail: Use item 4573 on 13660: item 4573 is not in the inventory. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-12:47:05  Asking the AI about this pause (try 1)
-12:47:05  Paused: Walk to (3103, 3265, 0): could not walk to (3103, 3265, 0)
-12:46:57  Walking from (2922, 4811, 0) to (3103, 3265, 0)
-12:46:57  Step: Head North to Draynor and Deposit all
-12:46:56  AI plan finished, trying the step again
-12:46:51  AI: continue
-12:46:47  AI: choose "Can you teleport me to the Rune Essence Mine?"
-12:46:47  AI plan: Choose(text=Can you teleport me to the Rune Essence Mine?); Wait(ticks=3); com.hcimbot.ai.AiAction$Continue@1592a3f8; Wait(ticks=5)
-12:46:45  report uploaded to bot-reports
-12:46:43  Asking the AI about this pause (try 1)
-12:46:43  Paused: Use Portal: unexpected chat options [Can you teleport me to the Rune Essence Mine?, Who else knows the teleport to the Rune Essence Mine?, Could you tell me about the old Wizards' Tower?, I'd better get going.]
-12:46:41  Step: Teleport to Rune Essence Mine [Lumbridge Easy Diary]
+12:48:51  Asking the AI about this pause (try 1)
+12:48:51  Paused: Use item 4573 on 13660: item 4573 is not in the inventory
+12:48:51  Step: Use Pages on Chronicle and wield
+12:48:41  Step: Buy Chronicle & 10 Teleport cards from Diango
+12:48:25  Step: Withdraw: Coins, Mind Runes, Small Fishing Net, Onion, Pickaxe, 454 Arrowshafts, 2x Wines (8 Inventory Slots)
+12:48:24  Done (all actions finished): Head North to Draynor and Deposit all
+12:47:18  Walking from (3106, 9572, 0) to (3103, 3265, 0)
+12:47:18  Step: Head North to Draynor and Deposit all
+12:47:17  AI plan finished, trying the step again
+12:47:09  AI: object 34825 Use
+12:47:08  AI plan: Obj(id=34825, option=Use); Wait(ticks=8)
+12:47:07  report uploaded to bot-reports
 == Player
-world WorldPoint(x=13629, y=10072, plane=0), in instance true, as guide coordinates WorldPoint(x=2925, y=4808, plane=0)
+world WorldPoint(x=3082, y=3246, plane=0), in instance false, as guide coordinates WorldPoint(x=3082, y=3246, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x18331, 1438x1, 1511x1, 1511x1, 1511x1, 553x1
+995x16441, 558x38, 303x1, 1957x1, 1269x1, 52x454, 1993x1, 1993x1, 13660x1, 13658x1, 13658x1, 13658x1, 13658x1, 13658x1, 13658x1, 13658x1, 13658x1, 13658x1, 13658x1
 == NPCs within 12 tiles (id name at tile: options)
+277 Town Crier at WorldPoint(x=3080, y=3248, plane=0): [Talk-to]
+2800 Piglet at WorldPoint(x=3078, y=3258, plane=0): []
+5730 Master Farmer at WorldPoint(x=3081, y=3254, plane=0): [Pickpocket]
+8693 Diango at WorldPoint(x=3079, y=3245, plane=0): [Talk-to, Trade, Holiday-items, Redeem-code]
+5732 Market Guard at WorldPoint(x=3085, y=3242, plane=0): [Attack]
+5732 Market Guard at WorldPoint(x=3086, y=3255, plane=0): [Attack]
+512 Dark wizard at WorldPoint(x=3085, y=3234, plane=0): [Attack]
+512 Dark wizard at WorldPoint(x=3085, y=3241, plane=0): [Attack]
+1260 Fortunato at WorldPoint(x=3087, y=3250, plane=0): [Talk-to, Trade]
+1613 Banker at WorldPoint(x=3088, y=3242, plane=0): [Talk-to, Bank, Collect]
+2123 Bank guard at WorldPoint(x=3088, y=3247, plane=0): [Talk-to]
+2108 Wise Old Man at WorldPoint(x=3088, y=3255, plane=0): [Talk-to]
+1618 Banker at WorldPoint(x=3090, y=3242, plane=0): [Talk-to, Bank, Collect]
+1618 Banker at WorldPoint(x=3090, y=3243, plane=0): [Talk-to, Bank, Collect]
+1613 Banker at WorldPoint(x=3090, y=3245, plane=0): [Talk-to, Bank, Collect]
+2796 Pig at WorldPoint(x=3080, y=3257, plane=0): []
+500 Olivia at WorldPoint(x=3080, y=3251, plane=0): [Talk-to, Trade]
 == Named objects within 25 tiles, nearest first (id name at tile)
-11433 Rockslide at WorldPoint(x=2926, y=4808, plane=0)
-11434 Rockslide at WorldPoint(x=2926, y=4810, plane=0)
-743 Ladder at WorldPoint(x=2928, y=4811, plane=0)
-11434 Rockslide at WorldPoint(x=2925, y=4812, plane=0)
-11924 Rocks at WorldPoint(x=2924, y=4814, plane=0)
-34773 Rune Essence at WorldPoint(x=2927, y=4814, plane=0)
-744 Scaffold at WorldPoint(x=2922, y=4815, plane=0)
-11432 Rockslide at WorldPoint(x=2924, y=4815, plane=0)
-34825 Portal at WorldPoint(x=2933, y=4815, plane=0)
-744 Scaffold at WorldPoint(x=2935, y=4816, plane=0)
-11433 Rockslide at WorldPoint(x=2926, y=4820, plane=0)
-11434 Rockslide at WorldPoint(x=2928, y=4820, plane=0)
-1291 Dead tree at WorldPoint(x=2934, y=4820, plane=0)
-11922 Rockslide at WorldPoint(x=2927, y=4822, plane=0)
-1291 Dead tree at WorldPoint(x=2933, y=4822, plane=0)
-1291 Dead tree at WorldPoint(x=2910, y=4823, plane=0)
-1291 Dead tree at WorldPoint(x=2909, y=4825, plane=0)
-1291 Dead tree at WorldPoint(x=2913, y=4825, plane=0)
-1291 Dead tree at WorldPoint(x=2907, y=4827, plane=0)
-743 Ladder at WorldPoint(x=2911, y=4827, plane=0)
-744 Scaffold at WorldPoint(x=2916, y=4827, plane=0)
-11922 Rockslide at WorldPoint(x=2905, y=4828, plane=0)
-11921 Rockslide at WorldPoint(x=2912, y=4828, plane=0)
-11921 Rockslide at WorldPoint(x=2907, y=4829, plane=0)
-11920 Rockslide at WorldPoint(x=2905, y=4830, plane=0)
-11921 Rockslide at WorldPoint(x=2916, y=4830, plane=0)
-11920 Rockslide at WorldPoint(x=2907, y=4831, plane=0)
-1291 Dead tree at WorldPoint(x=2904, y=4832, plane=0)
-11920 Rockslide at WorldPoint(x=2905, y=4832, plane=0)
-11920 Rockslide at WorldPoint(x=2913, y=4832, plane=0)
-11921 Rockslide at WorldPoint(x=2907, y=4833, plane=0)
+5615 Bench at WorldPoint(x=3084, y=3246, plane=0)
+5595 Toy Stall at WorldPoint(x=3079, y=3246, plane=0)
+10041 Tree at WorldPoint(x=3085, y=3243, plane=0)
+1278 Tree at WorldPoint(x=3083, y=3242, plane=0)
+1298 Fern at WorldPoint(x=3077, y=3242, plane=0)
+14011 Market stall at WorldPoint(x=3083, y=3251, plane=0)
+40307 Notice board at WorldPoint(x=3086, y=3251, plane=0)
+14908 Saradomin staff at WorldPoint(x=3087, y=3251, plane=0)
+7068 Old Bookshelf at WorldPoint(x=3087, y=3252, plane=0)
+9152 Patched Wall at WorldPoint(x=3088, y=3246, plane=0)
+1535 Door at WorldPoint(x=3088, y=3251, plane=0)
+7053 Seed Stall at WorldPoint(x=3075, y=3249, plane=0)
+7053 Seed Stall at WorldPoint(x=3079, y=3253, plane=0)
+7066 Old Bookshelf at WorldPoint(x=3087, y=3253, plane=0)
+591 Bank table at WorldPoint(x=3089, y=3241, plane=0)
+590 Bank table at WorldPoint(x=3089, y=3244, plane=0)
+968 Pirate map at WorldPoint(x=3089, y=3251, plane=0)
+9147 Old Bookshelf at WorldPoint(x=3089, y=3253, plane=0)
+1394 Plant at WorldPoint(x=3074, y=3242, plane=0)
+28960 Inconspicuous hole (easy) at WorldPoint(x=3083, y=3254, plane=0)
+5615 Bench at WorldPoint(x=3084, y=3254, plane=0)
+7065 Old Bookshelf at WorldPoint(x=3087, y=3254, plane=0)
+16670 Staircase at WorldPoint(x=3090, y=3251, plane=0)
+9146 Old Bookshelf at WorldPoint(x=3090, y=3253, plane=0)
+1298 Fern at WorldPoint(x=3073, y=3253, plane=0)
+10833 Willow tree at WorldPoint(x=3083, y=3237, plane=0)
+9155 Globe of Gielinor at WorldPoint(x=3087, y=3255, plane=0)
+7077 Old Bookshelf at WorldPoint(x=3089, y=3255, plane=0)
+7089 Old Bookshelf at WorldPoint(x=3090, y=3255, plane=0)
+10527 Bank booth at WorldPoint(x=3091, y=3241, plane=0)
+10355 Bank booth at WorldPoint(x=3091, y=3242, plane=0)
+10355 Bank booth at WorldPoint(x=3091, y=3243, plane=0)
+10528 Closed bank booth at WorldPoint(x=3091, y=3244, plane=0)
+10355 Bank booth at WorldPoint(x=3091, y=3245, plane=0)
+7096 Chart at WorldPoint(x=3091, y=3252, plane=0)
+7058 Old Bookshelf at WorldPoint(x=3091, y=3253, plane=0)
+7079 Old Bookshelf at WorldPoint(x=3091, y=3255, plane=0)
+1021 Shelf at WorldPoint(x=3083, y=3256, plane=0)
+5622 Wardrobe at WorldPoint(x=3084, y=3256, plane=0)
+1020 Shelf at WorldPoint(x=3086, y=3256, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
+1985 Cheese at WorldPoint(x=3083, y=3260, plane=0)
+1982 Tomato at WorldPoint(x=3085, y=3261, plane=0)
+1511 Logs at WorldPoint(x=3089, y=3265, plane=0)
+1511 Logs at WorldPoint(x=3089, y=3266, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-559 at WorldPoint(x=2925, y=4808, plane=0)
-1440 at WorldPoint(x=2924, y=4807, plane=0)
-1440 at WorldPoint(x=2924, y=4808, plane=0)
-559 at WorldPoint(x=2924, y=4808, plane=0)
-559 at WorldPoint(x=2924, y=4809, plane=0)
-1440 at WorldPoint(x=2925, y=4807, plane=0)
-559 at WorldPoint(x=2925, y=4809, plane=0)
-1440 at WorldPoint(x=2926, y=4807, plane=0)
-559 at WorldPoint(x=2926, y=4808, plane=0)
-1441 at WorldPoint(x=2923, y=4806, plane=0)
-1441 at WorldPoint(x=2923, y=4807, plane=0)
-1440 at WorldPoint(x=2923, y=4808, plane=0)
-1440 at WorldPoint(x=2923, y=4809, plane=0)
-559 at WorldPoint(x=2923, y=4810, plane=0)
-1441 at WorldPoint(x=2924, y=4806, plane=0)
+336 at WorldPoint(x=3082, y=3246, plane=0)
+33166 at WorldPoint(x=3081, y=3246, plane=0)
+7055 at WorldPoint(x=3082, y=3245, plane=0)
+7055 at WorldPoint(x=3083, y=3245, plane=0)
+4735 at WorldPoint(x=3080, y=3244, plane=0)
+7055 at WorldPoint(x=3080, y=3244, plane=0)
+335 at WorldPoint(x=3080, y=3248, plane=0)
+7055 at WorldPoint(x=3081, y=3244, plane=0)
+336 at WorldPoint(x=3081, y=3248, plane=0)
+7055 at WorldPoint(x=3082, y=3244, plane=0)
+336 at WorldPoint(x=3083, y=3248, plane=0)
+4735 at WorldPoint(x=3084, y=3244, plane=0)
+336 at WorldPoint(x=3084, y=3247, plane=0)
+335 at WorldPoint(x=3084, y=3248, plane=0)
+4735 at WorldPoint(x=3079, y=3243, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
-995 Coins x18331
-1438 Air talisman x1
-1511 Logs x1
-553 Ghost's skull x1
+2520 Brown toy horsey x5
+2522 White toy horsey x5
+2524 Black toy horsey x5
+2526 Grey toy horsey x5
+4613 Spinning plate x250
+11705 Beach boxing gloves x5
+11706 Beach boxing gloves x5
+11707 Cursed goblin hammer x3
+11708 Cursed goblin bow x3
+11709 Cursed goblin staff x3
+12727 Goblin paint cannon x100
+13188 Diango's claws x5
+13328 Green banner x5
+13660 Chronicle x1
+13658 Teleport card x93
+13679 Cabbage cape x10
+13681 Cruciferous codex x15
+13215 Tiger toy x15
+13216 Lion toy x15
+13217 Snow leopard toy x15
+13218 Amur leopard toy x15
+21314 Rainbow scarf x5
+22355 Holy handegg x100
+22358 Peaceful handegg x100
+22361 Chaotic handegg x100
+19699 Hornwood helm x100
+21354 Hand fan x100
+13203 Mask of Balance x100
+12600 Druidic wreath x100
+981 Disk of Returning x7
+22364 Oculus orb x100
+995 Coins x16441
+558 Mind rune x38
+303 Small fishing net x1
+1957 Onion x1
+1269 Steel pickaxe x1
+52 Arrow shaft x454
+1993 Jug of wine x1
+13658 Teleport card x1
 == Text in open windows and chat
-4m
+2m
+Diango's Toy Store
+Value check:
+Quantity:
 10
+50
+53
 100
 All
 Game
@@ -88,8 +158,9 @@ Friends
 Channel
 Clan
 Trade
-00:43:52
+00:45:38
 Boatyguidev3: *
+You step through the portal...
 You have unlocked a new music track: @mes_hl_red@Rune Essence
 Well done! You have completed an easy task in the Lumbridge & Draynor area. Your Achievement Diary has been updated.
 Congratulations, you've completed a quest: @q_mes@Rune Mysteries
