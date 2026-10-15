@@ -1,91 +1,92 @@
-HCIM Guide Bot 0.16.94, PAUSED
+HCIM Guide Bot 0.16.95, PAUSED
 == Step
-Step 192 of 2925: Complete Witches House quest - Safespot guide for the spider: https://youtu.be/bDB351j-qZI?t=178
-Detail: Kill Witch's experiment for : could not attack Witch's experiment. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 193 of 2925: Keep the Door Key [Mournings End Pt 2]
+Detail: Keep the Door Key [Mournings End Pt 2]. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-14:52:50  Asking the AI about this pause (try 1)
-14:52:50  Paused: Kill Witch's experiment for : could not attack Witch's experiment
-14:52:50  could not attack Witch's experiment
-14:52:44  could not attack Witch's experiment
-14:52:42  could not attack Witch's experiment
-14:52:41  could not attack Witch's experiment
-14:52:35  Hitpoints 5, using item 1993
-14:52:34  could not attack Witch's experiment
-14:52:07  Walking from (2936, 3459, 0) to (2936, 3460, 0)
-14:52:05  Skipped optional Quest: witchshouse: combat is turned off for safety: Kill all four forms of the Witch's experiment (levels 19, 30, 42, and 53). You can safe spot the last two forms from the crate in the south of the room.
-14:52:05  Quest Helper: NpcStep "Kill all four forms of the Witch's exper" npc [3996, 3997, 3998] obj []
-14:52:05  Quest step: Kill all four forms of the Witch's experiment (levels 19, 30, 42, and 53). You can safe spot the last two forms from the crate in the south of the room.
+14:58:06  Asking the AI about this pause (try 1)
+14:58:06  Paused: Keep the Door Key [Mournings End Pt 2]
+14:58:06  Step: Keep the Door Key [Mournings End Pt 2]
+14:58:06  Paused by you
+14:58:06  Paused by you
+14:58:05  Resumed by you
+14:58:05  Resumed by you
+14:57:11  Paused by you
+14:57:11  Paused by you
+14:55:23  Walking from (2936, 3459, 0) to (2936, 3460, 0)
+14:55:21  Skipped optional Quest: witchshouse: combat is turned off for safety: Kill all four forms of the Witch's experiment (levels 19, 30, 42, and 53). You can safe spot the last two forms from the crate in the south of the room.
+14:55:21  Quest Helper: NpcStep "Kill all four forms of the Witch's exper" npc [3996, 3997, 3998] obj []
 == Player
-world WorldPoint(x=2936, y=3459, plane=0), in instance false, as guide coordinates WorldPoint(x=2936, y=3459, plane=0)
-hitpoints 6/10
+world WorldPoint(x=2926, y=3456, plane=0), in instance false, as guide coordinates WorldPoint(x=2926, y=3456, plane=0)
+hitpoints 24/24
 == Bag (item id x count)
-995x11818, 558x172, 2134x1, 2138x1, 2132x1, 1935x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1929x1, 432x1, 2408x1, 1793x6, 2136x1, 526x1, 948x1, 2409x1, 2411x1
+995x11818, 558x111, 2134x1, 2138x1, 2132x1, 1935x1, 1993x1, 1993x1, 1993x1, 1935x1, 1993x1, 1993x1, 1935x1, 1935x1, 1993x1, 1929x1, 432x1, 2408x1, 1793x6, 2136x1, 526x1, 948x1, 2409x1, 2411x1
 == NPCs within 12 tiles (id name at tile: options)
+3258 Druid at WorldPoint(x=2920, y=3449, plane=0): [Talk-to, Attack]
 3995 Nora T. Hagg at WorldPoint(x=2927, y=3463, plane=0): []
-3996 Witch's experiment at WorldPoint(x=2936, y=3460, plane=0): [Attack]
-3994 Boy at WorldPoint(x=2928, y=3455, plane=0): [Talk-to]
+3994 Boy at WorldPoint(x=2927, y=3456, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
-366 Crate at WorldPoint(x=2935, y=3460, plane=0)
-654 Bloodsplatter at WorldPoint(x=2936, y=3460, plane=0)
-365 Sacks at WorldPoint(x=2937, y=3459, plane=0)
-365 Sacks at WorldPoint(x=2937, y=3460, plane=0)
-365 Sacks at WorldPoint(x=2934, y=3460, plane=0)
-693 Broom at WorldPoint(x=2934, y=3461, plane=0)
-1116 Hedge at WorldPoint(x=2933, y=3459, plane=0)
-653 Bloodsplatter at WorldPoint(x=2936, y=3462, plane=0)
-2098 Blacksmith's tools at WorldPoint(x=2937, y=3462, plane=0)
+1116 Hedge at WorldPoint(x=2923, y=3459, plane=0)
+1116 Hedge at WorldPoint(x=2924, y=3459, plane=0)
+1116 Hedge at WorldPoint(x=2925, y=3459, plane=0)
+1116 Hedge at WorldPoint(x=2926, y=3459, plane=0)
+1116 Hedge at WorldPoint(x=2927, y=3459, plane=0)
+1116 Hedge at WorldPoint(x=2928, y=3459, plane=0)
+1116 Hedge at WorldPoint(x=2929, y=3459, plane=0)
+1116 Hedge at WorldPoint(x=2922, y=3459, plane=0)
+1116 Hedge at WorldPoint(x=2930, y=3459, plane=0)
+1116 Hedge at WorldPoint(x=2921, y=3459, plane=0)
+1116 Hedge at WorldPoint(x=2923, y=3461, plane=0)
+1116 Hedge at WorldPoint(x=2924, y=3461, plane=0)
+1116 Hedge at WorldPoint(x=2925, y=3461, plane=0)
+1116 Hedge at WorldPoint(x=2929, y=3461, plane=0)
+1116 Hedge at WorldPoint(x=2930, y=3461, plane=0)
+1116 Hedge at WorldPoint(x=2931, y=3459, plane=0)
+1116 Hedge at WorldPoint(x=2931, y=3461, plane=0)
+1116 Hedge at WorldPoint(x=2920, y=3459, plane=0)
 1116 Hedge at WorldPoint(x=2932, y=3459, plane=0)
 1117 Hedge at WorldPoint(x=2932, y=3461, plane=0)
 1116 Hedge at WorldPoint(x=2932, y=3462, plane=0)
-1116 Hedge at WorldPoint(x=2932, y=3463, plane=0)
-2863 Door at WorldPoint(x=2934, y=3463, plane=0)
-1116 Hedge at WorldPoint(x=2931, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2931, y=3461, plane=0)
+1116 Hedge at WorldPoint(x=2919, y=3459, plane=0)
 587 Statue of Zamorak at WorldPoint(x=2931, y=3463, plane=0)
+1116 Hedge at WorldPoint(x=2932, y=3463, plane=0)
+1116 Hedge at WorldPoint(x=2933, y=3459, plane=0)
+1116 Hedge at WorldPoint(x=2918, y=3459, plane=0)
 1116 Hedge at WorldPoint(x=2932, y=3464, plane=0)
-652 Bloodsplatter at WorldPoint(x=2935, y=3464, plane=0)
-1021 Shelf at WorldPoint(x=2937, y=3464, plane=0)
-1116 Hedge at WorldPoint(x=2930, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2930, y=3461, plane=0)
-1117 Hedge at WorldPoint(x=2932, y=3465, plane=0)
-907 Charms at WorldPoint(x=2934, y=3465, plane=0)
-1020 Shelf at WorldPoint(x=2937, y=3465, plane=0)
-1116 Hedge at WorldPoint(x=2929, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2929, y=3461, plane=0)
-365 Sacks at WorldPoint(x=2934, y=3466, plane=0)
-963 Clothes equipment at WorldPoint(x=2934, y=3466, plane=0)
-599 Table at WorldPoint(x=2935, y=3466, plane=0)
-1089 Smashed chair at WorldPoint(x=2936, y=3466, plane=0)
-1019 Shelf at WorldPoint(x=2937, y=3466, plane=0)
-1116 Hedge at WorldPoint(x=2928, y=3459, plane=0)
+365 Sacks at WorldPoint(x=2934, y=3460, plane=0)
+693 Broom at WorldPoint(x=2934, y=3461, plane=0)
+2863 Door at WorldPoint(x=2934, y=3463, plane=0)
+603 Table at WorldPoint(x=2917, y=3449, plane=0)
+1116 Hedge at WorldPoint(x=2917, y=3459, plane=0)
+1116 Hedge at WorldPoint(x=2917, y=3461, plane=0)
+1116 Hedge at WorldPoint(x=2919, y=3465, plane=0)
+1116 Hedge at WorldPoint(x=2920, y=3465, plane=0)
+1116 Hedge at WorldPoint(x=2921, y=3465, plane=0)
+1116 Hedge at WorldPoint(x=2926, y=3465, plane=0)
+1116 Hedge at WorldPoint(x=2927, y=3465, plane=0)
 1116 Hedge at WorldPoint(x=2928, y=3465, plane=0)
-1116 Hedge at WorldPoint(x=2928, y=3467, plane=0)
-1116 Hedge at WorldPoint(x=2929, y=3467, plane=0)
-1116 Hedge at WorldPoint(x=2930, y=3467, plane=0)
-1116 Hedge at WorldPoint(x=2931, y=3467, plane=0)
-1116 Hedge at WorldPoint(x=2932, y=3467, plane=0)
-1116 Hedge at WorldPoint(x=2933, y=3467, plane=0)
+1117 Hedge at WorldPoint(x=2932, y=3465, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
 2407 Ball at WorldPoint(x=2935, y=3460, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-1262 at WorldPoint(x=2936, y=3459, plane=0)
-1769 at WorldPoint(x=2936, y=3459, plane=0)
-1023 at WorldPoint(x=2936, y=3459, plane=0)
-1257 at WorldPoint(x=2935, y=3458, plane=0)
-174 at WorldPoint(x=2935, y=3459, plane=0)
-1769 at WorldPoint(x=2935, y=3459, plane=0)
-1023 at WorldPoint(x=2935, y=3459, plane=0)
-1258 at WorldPoint(x=2936, y=3458, plane=0)
-1257 at WorldPoint(x=2937, y=3458, plane=0)
-175 at WorldPoint(x=2937, y=3459, plane=0)
-1769 at WorldPoint(x=2937, y=3459, plane=0)
-175 at WorldPoint(x=2937, y=3460, plane=0)
-1769 at WorldPoint(x=2937, y=3460, plane=0)
-1023 at WorldPoint(x=2937, y=3460, plane=0)
-1258 at WorldPoint(x=2934, y=3457, plane=0)
+1258 at WorldPoint(x=2925, y=3455, plane=0)
+1258 at WorldPoint(x=2926, y=3455, plane=0)
+1259 at WorldPoint(x=2927, y=3455, plane=0)
+997 at WorldPoint(x=2924, y=3458, plane=0)
+997 at WorldPoint(x=2925, y=3458, plane=0)
+1258 at WorldPoint(x=2926, y=3454, plane=0)
+997 at WorldPoint(x=2926, y=3458, plane=0)
+1259 at WorldPoint(x=2927, y=3454, plane=0)
+997 at WorldPoint(x=2927, y=3458, plane=0)
+1258 at WorldPoint(x=2928, y=3454, plane=0)
+1258 at WorldPoint(x=2928, y=3455, plane=0)
+42797 at WorldPoint(x=2928, y=3456, plane=0)
+1258 at WorldPoint(x=2928, y=3458, plane=0)
+997 at WorldPoint(x=2928, y=3458, plane=0)
+1258 at WorldPoint(x=2923, y=3458, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
+2407  x400
 995 Coins x11818
-558 Mind rune x172
+558 Mind rune x111
 2134 Raw rat meat x1
 2138 Raw chicken x1
 2132 Raw beef x1
@@ -101,9 +102,15 @@ hitpoints 6/10
 2409 Door key x1
 2411 Key x1
 == Text in open windows and chat
-8m
-641
-65
+3m
+7,745
+Congratulations!
+You have completed Witch's House!
+Total Quest Points: 9
+You are awarded:
+4 Quest Points
+6,325 Hitpoints XP
+24
 100
 All
 Game
@@ -114,17 +121,36 @@ Friends
 Channel
 Clan
 Trade
-01:38:54
-Boatyguidev3: *
+01:44:11
+Boatyguidev3:              *
+Congratulations, you've completed a quest: @q_mes@Witch's House
+I can't reach that!
+You finally kill the shapeshifter once and for all.
+Congratulations, you've just advanced your Magic level. You are now level 10.
+Congratulations, you've just advanced your Combat level. You are now level 7.
+Congratulations, you've just advanced your Hitpoints level. You are now level 11.
+The shapeshifter turns into a wolf!
+The shapeshifters' body pulses!
+Check the skill guide for more information about Magic.
+Level 9 Magic: Earth Strike
+Congratulations, you've just advanced your Magic level. You are now level 9.
+The shapeshifter turns into a bear!
+The shapeshifters' body begins to twist!
+Congratulations, you've just advanced your Magic level. You are now level 8.
 It makes you feel a bit dizzy, but it heals some health.
 You drink the wine.
-I can't reach that!
+I'm already under attack.
+The shapeshifter turns into a spider!
+The shapeshifters' body begins to deform!
+Level 7 Magic: Sapphire-tipped crossbow bolts
+Level 7 Magic: Level 1 Enchant
+Congratulations, you've just advanced your Combat level. You are now level 6.
+Congratulations, you've just advanced your Magic level. You are now level 7.
 You have unlocked a new music track: @mes_hl_red@Courage
 You've started a new quest: @q_mes@Druidic Ritual
 You've started a new quest: @q_mes@Witch's House
 You have unlocked a new music track: @mes_hl_red@Splendour
 You have unlocked a new music track: @mes_hl_red@Horizon
-Check the skill guide for more information about Magic.
 Level 6 Magic: Arceuus Library Teleport
 Congratulations, you've just advanced your Magic level. You are now level 6.
 Well done! You have completed an easy task in the Falador area. Your Achievement Diary has been updated.
@@ -136,30 +162,5 @@ You have unlocked a new music track: @mes_hl_red@Arrival
 You have unlocked a new music track: @mes_hl_red@Fanfare
 You get some wool.
 You'll need an empty bucket to collect the milk.
-You milk the cow.
-Level 5 Magic: Water Strike
-Level 4 Magic: Opal-tipped crossbow bolts
-Level 3 Magic: Confuse
-Congratulations, you've just advanced your Combat level. You are now level 5.
-Congratulations, you've just advanced your Magic level. You are now level 5.
-Congratulations, you've completed a quest: @q_mes@Witch's Potion
-You've started a new quest: @q_mes@Witch's Potion
-You have unlocked a new music track: @mes_hl_red@Attention
-You have unlocked a new music track: @mes_hl_red@Emperor
-You accidentally burn the meat.
-[13:30:15] Error during overlay renderingjava.lang.NullPointerException: null
-[13:30:15] following log message logged 1000 times!
-[13:29:58] Error during overlay renderingjava.lang.NullPointerException: null
-[13:29:58] following log message logged 1000 times!
-[13:29:42] Error during overlay renderingjava.lang.NullPointerException: null
-[13:25:15] [WebWalk] sp | post-handleObject landing unresolved (timeout=5000ms) dest=2962,9650,p0 at=3019,3233,p0
-[13:25:05] [WebWalk] sp | post-handleObject landing unresolved (timeout=5000ms) dest=2962,9650,p0 at=3018,3231,p0
-You can't sell this item to this shop.
-You don't have enough inventory space.
-You find your bottle of rum in amongst the bananas.
-There are a lot of bananas in the crate.
-There are a lot of potatoes in the crate.
-There are a lot of cabbages in the crate.
-[13:13:55] Error during overlay renderingjava.lang.NullPointerException: Cannot read the array length because "" is null
 == Quest Helper
-NpcStep: "Kill all four forms of the Witch's experiment (levels 19, 30, 42, and 53). You can safe spot the last two forms from the crate in the south of the room." npcs [3996, 3997, 3998, 3999] objects [] at null choices []
+no step: null
