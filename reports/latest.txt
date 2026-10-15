@@ -3,96 +3,92 @@ HCIM Guide Bot 0.16.32, PAUSED
 Step 147 of 2925: Search the altar to collect the Ghost's skull. Run from the level 13 skeleton.
 Detail: Take Ghost's skull: cannot see Ghost's skull nearby. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
+12:39:25  Asking the AI about this pause (try 2)
+12:39:25  Paused: Take Ghost's skull: cannot see Ghost's skull nearby
+12:39:18  Step: Search the altar to collect the Ghost's skull. Run from the level 13 skeleton.
+12:39:17  AI plan finished, trying the step again
+12:39:13  AI: object 2147 Climb-down
+12:39:13  AI plan: Obj(id=2147, option=Climb-down); Wait(ticks=4)
+12:39:10  report uploaded to bot-reports
 12:39:08  Asking the AI about this pause (try 1)
 12:39:08  Paused: Take Ghost's skull: cannot see Ghost's skull nearby
 12:39:01  Step: Search the altar to collect the Ghost's skull. Run from the level 13 skeleton.
 12:38:34  Walking from (3114, 3181, 0) to (3106, 3160, 0)
 12:38:34  Logs is 21 tiles away, walking over
-12:38:32  Step: Take 3x Logs
-12:35:42  Walking from (3254, 3401, 0) to (3114, 3181, 0)
-12:34:08  Walking from (3231, 3231, 0) to (3253, 3400, 0)
-12:34:08  Step: Head to the Wizards Tower
-12:34:08  Resumed by you
-12:34:08  Resumed by you
-12:34:04  Started version 0.16.32
 == Player
-world WorldPoint(x=3106, y=3159, plane=0), in instance false, as guide coordinates WorldPoint(x=3106, y=3159, plane=0)
+world WorldPoint(x=3104, y=9576, plane=0), in instance false, as guide coordinates WorldPoint(x=3104, y=9576, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
 995x18331, 291x1, 1511x1, 1511x1, 1511x1
 == NPCs within 12 tiles (id name at tile: options)
-3257 Wizard at WorldPoint(x=3104, y=3157, plane=0): [Attack]
-3257 Wizard at WorldPoint(x=3111, y=3154, plane=0): [Attack]
-3257 Wizard at WorldPoint(x=3112, y=3169, plane=0): [Attack]
-3257 Wizard at WorldPoint(x=3112, y=3170, plane=0): [Attack]
-2560 Professor Onglewip at WorldPoint(x=3107, y=3164, plane=0): [Talk-to]
+11432 Archmage Sedridor at WorldPoint(x=3104, y=9570, plane=0): [Talk-to]
+1173 Chicken at WorldPoint(x=3109, y=9566, plane=0): [Attack]
 == Named objects within 25 tiles, nearest first (id name at tile)
-12540 Bookcase at WorldPoint(x=3104, y=3158, plane=0)
-12536 Staircase at WorldPoint(x=3103, y=3159, plane=0)
-2147 Ladder at WorldPoint(x=3104, y=3162, plane=0)
-23973 Door at WorldPoint(x=3108, y=3162, plane=0)
-12539 Bookcase at WorldPoint(x=3108, y=3155, plane=0)
-12539 Bookcase at WorldPoint(x=3109, y=3155, plane=0)
-1180 Heather at WorldPoint(x=3101, y=3157, plane=0)
-1180 Heather at WorldPoint(x=3101, y=3164, plane=0)
-12544 Table at WorldPoint(x=3102, y=3164, plane=0)
-203 Candles at WorldPoint(x=3106, y=3164, plane=0)
-1019 Shelf at WorldPoint(x=3111, y=3154, plane=0)
-12543 Large table at WorldPoint(x=3111, y=3155, plane=0)
-12543 Large table at WorldPoint(x=3111, y=3159, plane=0)
-23972 Door at WorldPoint(x=3111, y=3162, plane=0)
-11606 Standing torch at WorldPoint(x=3101, y=3153, plane=0)
-1179 Heather at WorldPoint(x=3099, y=3159, plane=0)
-11606 Standing torch at WorldPoint(x=3099, y=3163, plane=0)
-23973 Door at WorldPoint(x=3109, y=3166, plane=0)
-1300 Fern at WorldPoint(x=3113, y=3152, plane=0)
-12539 Bookcase at WorldPoint(x=3113, y=3158, plane=0)
-12539 Bookcase at WorldPoint(x=3113, y=3160, plane=0)
-910 Eye decoration at WorldPoint(x=3108, y=3167, plane=0)
-1299 Fern at WorldPoint(x=3110, y=3151, plane=0)
-12539 Bookcase at WorldPoint(x=3114, y=3158, plane=0)
-12539 Bookcase at WorldPoint(x=3114, y=3160, plane=0)
-11606 Standing torch at WorldPoint(x=3102, y=3168, plane=0)
-10820 Oak tree at WorldPoint(x=3104, y=3150, plane=0)
-29495 Fairy ring at WorldPoint(x=3108, y=3149, plane=0)
-11606 Standing torch at WorldPoint(x=3116, y=3153, plane=0)
-5615 Bench at WorldPoint(x=3116, y=3165, plane=0)
-879 Fountain at WorldPoint(x=3116, y=3167, plane=0)
-1179 Heather at WorldPoint(x=3102, y=3170, plane=0)
-11606 Standing torch at WorldPoint(x=3103, y=3148, plane=0)
-1278 Tree at WorldPoint(x=3105, y=3170, plane=0)
-1179 Heather at WorldPoint(x=3109, y=3170, plane=0)
-11606 Standing torch at WorldPoint(x=3112, y=3148, plane=0)
-11606 Standing torch at WorldPoint(x=3109, y=3171, plane=0)
-1300 Fern at WorldPoint(x=3118, y=3156, plane=0)
-1300 Fern at WorldPoint(x=3118, y=3162, plane=0)
-11606 Standing torch at WorldPoint(x=3105, y=3172, plane=0)
+2148 Ladder at WorldPoint(x=3103, y=9576, plane=0)
+575 Statue at WorldPoint(x=3102, y=9574, plane=0)
+43841 Stool at WorldPoint(x=3104, y=9574, plane=0)
+899 Hanging banner at WorldPoint(x=3105, y=9574, plane=0)
+901 Hanging banner at WorldPoint(x=3106, y=9574, plane=0)
+724 Standing torch at WorldPoint(x=3107, y=9572, plane=0)
+427 Bed at WorldPoint(x=3099, y=9572, plane=0)
+575 Statue at WorldPoint(x=3098, y=9574, plane=0)
+1535 Door at WorldPoint(x=3108, y=9570, plane=0)
+203 Candles at WorldPoint(x=3110, y=9571, plane=0)
+203 Candles at WorldPoint(x=3110, y=9576, plane=0)
+1102 Stool at WorldPoint(x=3104, y=9569, plane=0)
+1102 Stool at WorldPoint(x=3105, y=9569, plane=0)
+380 Bookcase at WorldPoint(x=3096, y=9571, plane=0)
+724 Standing torch at WorldPoint(x=3096, y=9574, plane=0)
+603 Table at WorldPoint(x=3103, y=9568, plane=0)
+1102 Stool at WorldPoint(x=3103, y=9567, plane=0)
+1102 Stool at WorldPoint(x=3104, y=9567, plane=0)
+381 Bookcase at WorldPoint(x=3096, y=9566, plane=0)
+381 Bookcase at WorldPoint(x=3098, y=9566, plane=0)
+1016 Shelves at WorldPoint(x=3104, y=9566, plane=0)
+1017 Shelves at WorldPoint(x=3105, y=9566, plane=0)
+203 Candles at WorldPoint(x=3110, y=9566, plane=0)
+595 Table at WorldPoint(x=3114, y=9567, plane=0)
+1088 Chair at WorldPoint(x=3114, y=9569, plane=0)
+1088 Chair at WorldPoint(x=3115, y=9569, plane=0)
+595 Table at WorldPoint(x=3117, y=9567, plane=0)
+1088 Chair at WorldPoint(x=3117, y=9569, plane=0)
+595 Table at WorldPoint(x=3106, y=9562, plane=0)
+350 Drawers at WorldPoint(x=3116, y=9562, plane=0)
+350 Drawers at WorldPoint(x=3118, y=9564, plane=0)
+1088 Chair at WorldPoint(x=3118, y=9569, plane=0)
+203 Candles at WorldPoint(x=3110, y=9561, plane=0)
+350 Drawers at WorldPoint(x=3118, y=9561, plane=0)
+350 Drawers at WorldPoint(x=3120, y=9564, plane=0)
+2146 Altar at WorldPoint(x=3120, y=9566, plane=0)
+15060 Skeleton at WorldPoint(x=3120, y=9569, plane=0)
+595 Table at WorldPoint(x=3106, y=9559, plane=0)
+1535 Door at WorldPoint(x=3111, y=9559, plane=0)
+1088 Chair at WorldPoint(x=3115, y=9559, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
-1061 Leather boots at WorldPoint(x=3111, y=3159, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-12695 at WorldPoint(x=3105, y=3158, plane=0)
-12695 at WorldPoint(x=3106, y=3158, plane=0)
-12695 at WorldPoint(x=3107, y=3158, plane=0)
-12695 at WorldPoint(x=3107, y=3159, plane=0)
-196 at WorldPoint(x=3107, y=3159, plane=0)
-1248 at WorldPoint(x=3104, y=3157, plane=0)
-12695 at WorldPoint(x=3104, y=3158, plane=0)
-1248 at WorldPoint(x=3104, y=3161, plane=0)
-12695 at WorldPoint(x=3107, y=3161, plane=0)
-1248 at WorldPoint(x=3108, y=3158, plane=0)
-12695 at WorldPoint(x=3108, y=3159, plane=0)
-12695 at WorldPoint(x=3108, y=3160, plane=0)
-12695 at WorldPoint(x=3108, y=3160, plane=0)
-12695 at WorldPoint(x=3108, y=3161, plane=0)
-196 at WorldPoint(x=3108, y=3161, plane=0)
+315 at WorldPoint(x=3104, y=9576, plane=0)
+315 at WorldPoint(x=3103, y=9575, plane=0)
+1631 at WorldPoint(x=3103, y=9575, plane=0)
+197 at WorldPoint(x=3103, y=9575, plane=0)
+314 at WorldPoint(x=3103, y=9576, plane=0)
+1872 at WorldPoint(x=3103, y=9576, plane=0)
+316 at WorldPoint(x=3103, y=9577, plane=0)
+1620 at WorldPoint(x=3103, y=9577, plane=0)
+1631 at WorldPoint(x=3104, y=9575, plane=0)
+1872 at WorldPoint(x=3104, y=9575, plane=0)
+314 at WorldPoint(x=3104, y=9577, plane=0)
+1873 at WorldPoint(x=3104, y=9577, plane=0)
+1631 at WorldPoint(x=3105, y=9575, plane=0)
+1872 at WorldPoint(x=3105, y=9577, plane=0)
+1659 at WorldPoint(x=3102, y=9575, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
 995 Coins x18331
 291 Research notes x1
 1511 Logs x1
 == Text in open windows and chat
-12m
+11m
 10
-13
+16
 100
 All
 Game
@@ -103,7 +99,7 @@ Friends
 Channel
 Clan
 Trade
-00:35:55
+00:36:12
 Boatyguidev3: *
 You pay the guards and pass through the gate.
 You have unlocked a new music track: @mes_hl_red@Arabian 2
