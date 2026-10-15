@@ -1242,6 +1242,7 @@ class StepScripts(private val guide: Guide) {
                         listOf("Black bear"),
                         listOf(item("Raw bear meat", 2136, 1), item("Bones", 526, 1), item("Bear fur", 948, 1)),
                         maxKills = 3,
+                        lookFirst = Tile(2935, 3405, 0),
                     ),
                 ),
                 combat = true,
