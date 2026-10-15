@@ -797,11 +797,13 @@ class StepScripts(private val guide: Guide) {
         },
 
         // 156. "Head South-West and buy a Harpoon, 50 Bait (non-packs) and 10 Feather packs": Gerrant's Fishy Business in Port Sarim.
-        // The apron on the wall is left for the person to wear when the bot asks, since where it hangs is not in the guide.
+        // The white apron (1005) is taken from the wall and worn.
         "2d2e048246" to { _ ->
             val gerrant = listOf(ShopTask.Seller("Gerrant", emptyList(), listOf(Tile(3014, 3224, 0))))
             auto(
                 ShopTask(gerrant, listOf(item("Harpoon", 311, 1), item("Fishing bait", 313, 50), item("Feather pack", 11881, 10))),
+                TakeItemTask(listOf(item("White apron", 1005, 1))),
+                EquipTask(listOf(item("White apron", 1005))),
                 trust = true,
             )
         },
