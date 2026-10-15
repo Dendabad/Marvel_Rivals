@@ -3,12 +3,18 @@ HCIM Guide Bot 0.16.25, PAUSED
 Step 143 of 2925: Withdraw: Coins, Research Notes (2 inventory Slots) / Bronze pickaxe not needed
 Detail: Withdraw: Coins, Research Notes (2 inventory Slots) / Bronze pickaxe not needed (cannot identify Research Notes   / Bronze pickaxe not needed). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-12:11:13  Asking the AI about this pause (try 1)
-12:11:13  Paused: Withdraw: Coins, Research Notes (2 inventory Slots) / Bronze pickaxe not needed (cannot identify Research Notes   / Bronze pickaxe not needed)
-12:11:13  Step: Withdraw: Coins, Research Notes (2 inventory Slots) / Bronze pickaxe not needed
-12:11:12  Done (all actions finished): Bank at Mistrock and deposit all.
-12:11:05  Step: Bank at Mistrock and deposit all.
-12:11:04  Started version 0.16.25
+12:19:20  Asking the AI about this pause (try 2)
+12:19:20  Paused: Withdraw: Coins, Research Notes (2 inventory Slots) / Bronze pickaxe not needed (cannot identify Research Notes   / Bronze pickaxe not needed)
+12:19:20  Step: Withdraw: Coins, Research Notes (2 inventory Slots) / Bronze pickaxe not needed
+12:19:19  Done (all actions finished): Bank at Mistrock and deposit all.
+12:19:12  Resumed by you
+12:19:12  Resumed by you
+12:18:30  Paused by you
+12:18:30  Paused by you
+12:18:21  Step: Bank at Mistrock and deposit all.
+12:18:20  Done (its part of the quest is done): Buy Steel Pickaxe, 150 Wines, 20 mindbombs & 20 Stews (They are infinite stock so super fast to collect here)
+12:17:35  Bag full, banking (trip 7)
+12:16:55  Bag full, banking (trip 6)
 == Player
 world WorldPoint(x=1383, y=2866, plane=0), in instance false, as guide coordinates WorldPoint(x=1383, y=2866, plane=0)
 hitpoints 10/10
@@ -16,22 +22,22 @@ hitpoints 10/10
 
 == NPCs within 12 tiles (id name at tile: options)
 13933 Guard at WorldPoint(x=1376, y=2862, plane=0): [Talk-to]
-13937 Citizen at WorldPoint(x=1375, y=2867, plane=0): [Talk-to]
-13935 Guard at WorldPoint(x=1375, y=2872, plane=0): [Talk-to]
-13942 Citizen at WorldPoint(x=1379, y=2856, plane=0): [Talk-to]
-13939 Citizen at WorldPoint(x=1377, y=2871, plane=0): [Talk-to]
+13937 Citizen at WorldPoint(x=1375, y=2866, plane=0): [Talk-to]
+13935 Guard at WorldPoint(x=1378, y=2870, plane=0): [Talk-to]
+13942 Citizen at WorldPoint(x=1377, y=2859, plane=0): [Talk-to]
+13939 Citizen at WorldPoint(x=1379, y=2868, plane=0): [Talk-to]
 13931 Banker at WorldPoint(x=1380, y=2864, plane=0): [Talk-to, Bank, Collect]
 13932 Banker at WorldPoint(x=1383, y=2864, plane=0): [Talk-to, Bank, Collect]
-13934 Guard at WorldPoint(x=1383, y=2857, plane=0): [Talk-to]
-13944 Child at WorldPoint(x=1386, y=2863, plane=0): [Talk-to]
-13947 Child at WorldPoint(x=1384, y=2862, plane=0): [Talk-to]
-13934 Guard at WorldPoint(x=1388, y=2875, plane=0): [Talk-to]
-13929 Ichta at WorldPoint(x=1387, y=2870, plane=0): [Talk-to, Trade]
-13956 Overseer Khougo at WorldPoint(x=1390, y=2859, plane=0): [Talk-to]
-13928 Bartender at WorldPoint(x=1390, y=2858, plane=0): [Talk-to, Trade]
-13933 Guard at WorldPoint(x=1394, y=2867, plane=0): [Talk-to]
-13940 Citizen at WorldPoint(x=1393, y=2860, plane=0): [Talk-to]
-13941 Citizen at WorldPoint(x=1394, y=2868, plane=0): [Talk-to]
+13934 Guard at WorldPoint(x=1384, y=2857, plane=0): [Talk-to]
+13944 Child at WorldPoint(x=1385, y=2859, plane=0): [Talk-to]
+13947 Child at WorldPoint(x=1388, y=2862, plane=0): [Talk-to]
+13934 Guard at WorldPoint(x=1384, y=2872, plane=0): [Talk-to]
+13929 Ichta at WorldPoint(x=1385, y=2869, plane=0): [Talk-to, Trade]
+13956 Overseer Khougo at WorldPoint(x=1391, y=2858, plane=0): [Talk-to]
+13928 Bartender at WorldPoint(x=1389, y=2860, plane=0): [Talk-to, Trade]
+13933 Guard at WorldPoint(x=1389, y=2864, plane=0): [Talk-to]
+13940 Citizen at WorldPoint(x=1393, y=2858, plane=0): [Talk-to]
+13941 Citizen at WorldPoint(x=1394, y=2869, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
 51515 Bank table at WorldPoint(x=1382, y=2865, plane=0)
 51530 Chair at WorldPoint(x=1384, y=2864, plane=0)
@@ -100,6 +106,7 @@ hitpoints 10/10
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
 == Text in open windows and chat
 10
+12
 100
 All
 Game
@@ -110,7 +117,7 @@ Friends
 Channel
 Clan
 Trade
-00:08:00
+00:16:07
 Boatyguidev3: *
 You don't have enough coins.
 You have correctly entered your PIN.
