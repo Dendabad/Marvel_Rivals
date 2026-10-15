@@ -1,84 +1,87 @@
-HCIM Guide Bot 0.16.93, PAUSED
+HCIM Guide Bot 0.16.94, PAUSED
 == Step
 Step 192 of 2925: Complete Witches House quest - Safespot guide for the spider: https://youtu.be/bDB351j-qZI?t=178
-Detail: Quest: witchshouse: combat is turned off for safety: Kill all four forms of the Witch's experiment (levels 19, 30, 42, and 53). You can safe spot the last two forms from the crate in the south of the room.. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Detail: Kill Witch's experiment for : could not attack Witch's experiment. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-14:49:08  Asking the AI about this pause (try 1)
-14:49:08  Paused: Quest: witchshouse: combat is turned off for safety: Kill all four forms of the Witch's experiment (levels 19, 30, 42, and 53). You can safe spot the last two forms from the crate in the south of the room.
-14:49:08  Quest Helper: NpcStep "Kill all four forms of the Witch's exper" npc [3996, 3997, 3998] obj []
-14:49:08  Quest step: Kill all four forms of the Witch's experiment (levels 19, 30, 42, and 53). You can safe spot the last two forms from the crate in the south of the room.
-14:48:53  Skipped optional Quest: witchshouse: combat is turned off for safety: Kill all four forms of the Witch's experiment (levels 19, 30, 42, and 53). You can safe spot the last two forms from the crate in the south of the room.
-14:48:53  Quest Helper: NpcStep "Kill all four forms of the Witch's exper" npc [3996, 3997, 3998] obj []
-14:48:53  Quest step: Kill all four forms of the Witch's experiment (levels 19, 30, 42, and 53). You can safe spot the last two forms from the crate in the south of the room.
-14:48:49  Step: Complete Witches House quest - Safespot guide for the spider: https://youtu.be/bDB351j-qZI?t=178
-14:48:49  Started version 0.16.93
+14:51:46  Asking the AI about this pause (try 1)
+14:51:46  Paused: Kill Witch's experiment for : could not attack Witch's experiment
+14:51:46  could not attack Witch's experiment
+14:51:45  could not attack Witch's experiment
+14:51:44  could not attack Witch's experiment
+14:51:42  could not attack Witch's experiment
+14:51:41  could not attack Witch's experiment
+14:51:37  Walking from (2934, 3463, 0) to (2936, 3460, 0)
+14:51:35  Skipped optional Quest: witchshouse: combat is turned off for safety: Kill all four forms of the Witch's experiment (levels 19, 30, 42, and 53). You can safe spot the last two forms from the crate in the south of the room.
+14:51:35  Quest Helper: NpcStep "Kill all four forms of the Witch's exper" npc [3996, 3997, 3998] obj []
+14:51:35  Quest step: Kill all four forms of the Witch's experiment (levels 19, 30, 42, and 53). You can safe spot the last two forms from the crate in the south of the room.
+14:51:32  Step: Complete Witches House quest - Safespot guide for the spider: https://youtu.be/bDB351j-qZI?t=178
 == Player
-world WorldPoint(x=2934, y=3463, plane=0), in instance false, as guide coordinates WorldPoint(x=2934, y=3463, plane=0)
+world WorldPoint(x=2936, y=3459, plane=0), in instance false, as guide coordinates WorldPoint(x=2936, y=3459, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
 995x11818, 558x183, 2134x1, 2138x1, 2132x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1929x1, 432x1, 2408x1, 1793x6, 2136x1, 526x1, 948x1, 2409x1, 2411x1
 == NPCs within 12 tiles (id name at tile: options)
-3996 Witch's experiment at WorldPoint(x=2934, y=3462, plane=0): [Attack]
-3994 Boy at WorldPoint(x=2927, y=3457, plane=0): [Talk-to]
+3996 Witch's experiment at WorldPoint(x=2937, y=3461, plane=0): [Attack]
+3994 Boy at WorldPoint(x=2929, y=3456, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
-2863 Door at WorldPoint(x=2934, y=3463, plane=0)
-652 Bloodsplatter at WorldPoint(x=2935, y=3464, plane=0)
+366 Crate at WorldPoint(x=2935, y=3460, plane=0)
+654 Bloodsplatter at WorldPoint(x=2936, y=3460, plane=0)
+365 Sacks at WorldPoint(x=2937, y=3459, plane=0)
+365 Sacks at WorldPoint(x=2937, y=3460, plane=0)
+365 Sacks at WorldPoint(x=2934, y=3460, plane=0)
+693 Broom at WorldPoint(x=2934, y=3461, plane=0)
+1116 Hedge at WorldPoint(x=2933, y=3459, plane=0)
+653 Bloodsplatter at WorldPoint(x=2936, y=3462, plane=0)
+2098 Blacksmith's tools at WorldPoint(x=2937, y=3462, plane=0)
+1116 Hedge at WorldPoint(x=2932, y=3459, plane=0)
 1117 Hedge at WorldPoint(x=2932, y=3461, plane=0)
 1116 Hedge at WorldPoint(x=2932, y=3462, plane=0)
 1116 Hedge at WorldPoint(x=2932, y=3463, plane=0)
-1116 Hedge at WorldPoint(x=2932, y=3464, plane=0)
-1117 Hedge at WorldPoint(x=2932, y=3465, plane=0)
-693 Broom at WorldPoint(x=2934, y=3461, plane=0)
-907 Charms at WorldPoint(x=2934, y=3465, plane=0)
-653 Bloodsplatter at WorldPoint(x=2936, y=3462, plane=0)
+2863 Door at WorldPoint(x=2934, y=3463, plane=0)
+1116 Hedge at WorldPoint(x=2931, y=3459, plane=0)
 1116 Hedge at WorldPoint(x=2931, y=3461, plane=0)
 587 Statue of Zamorak at WorldPoint(x=2931, y=3463, plane=0)
-365 Sacks at WorldPoint(x=2934, y=3460, plane=0)
-365 Sacks at WorldPoint(x=2934, y=3466, plane=0)
-963 Clothes equipment at WorldPoint(x=2934, y=3466, plane=0)
-366 Crate at WorldPoint(x=2935, y=3460, plane=0)
-599 Table at WorldPoint(x=2935, y=3466, plane=0)
-654 Bloodsplatter at WorldPoint(x=2936, y=3460, plane=0)
-1089 Smashed chair at WorldPoint(x=2936, y=3466, plane=0)
-365 Sacks at WorldPoint(x=2937, y=3460, plane=0)
-2098 Blacksmith's tools at WorldPoint(x=2937, y=3462, plane=0)
+1116 Hedge at WorldPoint(x=2932, y=3464, plane=0)
+652 Bloodsplatter at WorldPoint(x=2935, y=3464, plane=0)
 1021 Shelf at WorldPoint(x=2937, y=3464, plane=0)
-1020 Shelf at WorldPoint(x=2937, y=3465, plane=0)
-1019 Shelf at WorldPoint(x=2937, y=3466, plane=0)
 1116 Hedge at WorldPoint(x=2930, y=3459, plane=0)
 1116 Hedge at WorldPoint(x=2930, y=3461, plane=0)
-1116 Hedge at WorldPoint(x=2930, y=3467, plane=0)
-1116 Hedge at WorldPoint(x=2931, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2931, y=3467, plane=0)
-1116 Hedge at WorldPoint(x=2932, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2932, y=3467, plane=0)
-1116 Hedge at WorldPoint(x=2933, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2933, y=3467, plane=0)
-365 Sacks at WorldPoint(x=2934, y=3467, plane=0)
-301 Food trough at WorldPoint(x=2935, y=3467, plane=0)
-365 Sacks at WorldPoint(x=2937, y=3459, plane=0)
-365 Sacks at WorldPoint(x=2937, y=3467, plane=0)
+1117 Hedge at WorldPoint(x=2932, y=3465, plane=0)
+907 Charms at WorldPoint(x=2934, y=3465, plane=0)
+1020 Shelf at WorldPoint(x=2937, y=3465, plane=0)
 1116 Hedge at WorldPoint(x=2929, y=3459, plane=0)
 1116 Hedge at WorldPoint(x=2929, y=3461, plane=0)
+365 Sacks at WorldPoint(x=2934, y=3466, plane=0)
+963 Clothes equipment at WorldPoint(x=2934, y=3466, plane=0)
+599 Table at WorldPoint(x=2935, y=3466, plane=0)
+1089 Smashed chair at WorldPoint(x=2936, y=3466, plane=0)
+1019 Shelf at WorldPoint(x=2937, y=3466, plane=0)
+1116 Hedge at WorldPoint(x=2928, y=3459, plane=0)
+1116 Hedge at WorldPoint(x=2928, y=3465, plane=0)
+1116 Hedge at WorldPoint(x=2928, y=3467, plane=0)
 1116 Hedge at WorldPoint(x=2929, y=3467, plane=0)
+1116 Hedge at WorldPoint(x=2930, y=3467, plane=0)
+1116 Hedge at WorldPoint(x=2931, y=3467, plane=0)
+1116 Hedge at WorldPoint(x=2932, y=3467, plane=0)
+1116 Hedge at WorldPoint(x=2933, y=3467, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
 2407 Ball at WorldPoint(x=2935, y=3460, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-174 at WorldPoint(x=2934, y=3463, plane=0)
-1263 at WorldPoint(x=2934, y=3462, plane=0)
-1769 at WorldPoint(x=2934, y=3462, plane=0)
-205 at WorldPoint(x=2934, y=3462, plane=0)
-1262 at WorldPoint(x=2934, y=3464, plane=0)
-1769 at WorldPoint(x=2934, y=3464, plane=0)
-205 at WorldPoint(x=2934, y=3464, plane=0)
-1247 at WorldPoint(x=2935, y=3463, plane=0)
-1769 at WorldPoint(x=2934, y=3461, plane=0)
-1263 at WorldPoint(x=2934, y=3465, plane=0)
-1769 at WorldPoint(x=2934, y=3465, plane=0)
-1262 at WorldPoint(x=2935, y=3461, plane=0)
-1263 at WorldPoint(x=2935, y=3465, plane=0)
-1263 at WorldPoint(x=2936, y=3461, plane=0)
-1263 at WorldPoint(x=2936, y=3464, plane=0)
+1262 at WorldPoint(x=2936, y=3459, plane=0)
+1769 at WorldPoint(x=2936, y=3459, plane=0)
+1023 at WorldPoint(x=2936, y=3459, plane=0)
+1257 at WorldPoint(x=2935, y=3458, plane=0)
+174 at WorldPoint(x=2935, y=3459, plane=0)
+1769 at WorldPoint(x=2935, y=3459, plane=0)
+1023 at WorldPoint(x=2935, y=3459, plane=0)
+1258 at WorldPoint(x=2936, y=3458, plane=0)
+1257 at WorldPoint(x=2937, y=3458, plane=0)
+175 at WorldPoint(x=2937, y=3459, plane=0)
+1769 at WorldPoint(x=2937, y=3459, plane=0)
+175 at WorldPoint(x=2937, y=3460, plane=0)
+1769 at WorldPoint(x=2937, y=3460, plane=0)
+1023 at WorldPoint(x=2937, y=3460, plane=0)
+1258 at WorldPoint(x=2934, y=3457, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
 995 Coins x11818
 558 Mind rune x183
@@ -96,9 +99,9 @@ hitpoints 10/10
 2409 Door key x1
 2411 Key x1
 == Text in open windows and chat
-12m
+9m
 10
-18
+57
 100
 All
 Game
@@ -109,7 +112,7 @@ Friends
 Channel
 Clan
 Trade
-01:35:12
+01:37:50
 Boatyguidev3: *
 I can't reach that!
 You have unlocked a new music track: @mes_hl_red@Courage
