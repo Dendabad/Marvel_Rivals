@@ -630,6 +630,17 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 134. "Pick a Cabbage [Black Knight's Fortress]": one cabbage (1965) from a plant, picked wherever one can be seen from
+        // Aldarin's market. The guide gives no place, so if none is in view the step pauses and the AI looks at what is around.
+        "a1db8dedf1" to { _ ->
+            auto(
+                RepeatUntil("Pick a cabbage", has(1965), {
+                    obj(emptyList(), listOf("Cabbage"), Tile(1420, 2980, 0), "Pick", near = null)
+                }, maxRounds = 3),
+                trust = true,
+            )
+        },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
