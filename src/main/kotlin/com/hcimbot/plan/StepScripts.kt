@@ -723,13 +723,14 @@ class StepScripts(private val guide: Guide) {
         // step 148. Without them (the bank had none in step 143), Aubury in south east Varrock (3253, 3401) is visited first and
         // asked for them again, which is a Rune Mysteries step of its own and so not something the guide lists here.
         "b2118c6c31" to { _ ->
+            // Anywhere in the town counts: the castle is 16 tiles from where the teleport lands, and the spell is on a 30 minute cooldown.
             val lumbridge = Tile(3222, 3218, 0)
             val noNotes: (TaskContext) -> Boolean = { ctx -> !has(291)(ctx) }
             val askForNotes = DialoguePlan.Texts(listOf("notes", "lost", "research", "package"))
             StepPlan.Auto(
                 listOf(
-                    OnlyIf({ ctx -> ctx.game.playerTile?.let { it.distanceTo(lumbridge) > 10 } ?: true }, CastSpellTask("TELEPORT_HOME_STANDARD", 14286854)),
-                    WaitUntilTask("arrive in Lumbridge", 80) { ctx -> ctx.game.playerTile?.let { it.plane == 0 && it.distanceTo(lumbridge) <= 10 } == true },
+                    OnlyIf({ ctx -> ctx.game.playerTile?.let { it.distanceTo(lumbridge) > LUMBRIDGE_AREA } ?: true }, CastSpellTask("TELEPORT_HOME_STANDARD", 14286854)),
+                    WaitUntilTask("arrive in Lumbridge", 80) { ctx -> ctx.game.playerTile?.let { it.plane == 0 && it.distanceTo(lumbridge) <= LUMBRIDGE_AREA } == true },
                     // Each is decided as it starts, so once the notes are in the bag the rest are skipped.
                     OnlyIf(noNotes, WalkTask(Tile(3253, 3400, 0), radius = 3)),
                     OnlyIf(noNotes, InteractTask(InteractTask.Kind.NPC, listOf(11434, 2886, 11435, 10681), listOf("Aubury"), listOf(Tile(3253, 3401, 0)), "Talk-to", askForNotes)),
@@ -806,6 +807,8 @@ class StepScripts(private val guide: Guide) {
         private const val BUCKET_EMPTY = 1925
         private const val BUCKET_WATER = 1929
         private const val GHOSTSPEAK = 552
+        private const val LUMBRIDGE_AREA = 30
+
         private const val LOGS = 1511
         private const val PLANK = 960
         private const val LEATHER_BOOTS = 1061
