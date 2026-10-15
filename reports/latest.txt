@@ -1,107 +1,109 @@
-HCIM Guide Bot 0.16.28, PAUSED
+HCIM Guide Bot 0.16.29, PAUSED
 == Step
 Step 144 of 2925: Home Teleport to Lumbridge
 Detail: the actions finished but the game does not show the step as done. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-12:21:54  Asking the AI about this pause (try 1)
-12:21:54  Paused: the actions finished but the game does not show the step as done
-12:21:43  Step: Home Teleport to Lumbridge
-12:21:42  Done (the game shows it is done): Withdraw: Coins, Research Notes (2 inventory Slots) / Bronze pickaxe not needed
-12:21:37  Step: Withdraw: Coins, Research Notes (2 inventory Slots) / Bronze pickaxe not needed
-12:21:37  Started version 0.16.28
+12:27:36  Asking the AI about this pause (try 1)
+12:27:36  Paused: the actions finished but the game does not show the step as done
+12:27:24  Step: Home Teleport to Lumbridge
+12:27:23  Resumed by you
+12:27:23  Resumed by you
+12:27:19  Started version 0.16.29
 == Player
-world WorldPoint(x=1383, y=2866, plane=0), in instance false, as guide coordinates WorldPoint(x=1383, y=2866, plane=0)
+world WorldPoint(x=3206, y=3208, plane=0), in instance false, as guide coordinates WorldPoint(x=3206, y=3208, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
 995x18351
 == NPCs within 12 tiles (id name at tile: options)
-13933 Guard at WorldPoint(x=1372, y=2864, plane=0): [Talk-to]
-13937 Citizen at WorldPoint(x=1375, y=2867, plane=0): [Talk-to]
-13935 Guard at WorldPoint(x=1377, y=2872, plane=0): [Talk-to]
-13942 Citizen at WorldPoint(x=1375, y=2859, plane=0): [Talk-to]
-13939 Citizen at WorldPoint(x=1380, y=2870, plane=0): [Talk-to]
-13931 Banker at WorldPoint(x=1380, y=2864, plane=0): [Talk-to, Bank, Collect]
-13932 Banker at WorldPoint(x=1383, y=2864, plane=0): [Talk-to, Bank, Collect]
-13934 Guard at WorldPoint(x=1383, y=2857, plane=0): [Talk-to]
-13944 Child at WorldPoint(x=1384, y=2862, plane=0): [Talk-to]
-13947 Child at WorldPoint(x=1386, y=2863, plane=0): [Talk-to]
-13934 Guard at WorldPoint(x=1383, y=2873, plane=0): [Talk-to]
-13929 Ichta at WorldPoint(x=1387, y=2867, plane=0): [Talk-to, Trade]
-13956 Overseer Khougo at WorldPoint(x=1389, y=2858, plane=0): [Talk-to]
-13928 Bartender at WorldPoint(x=1388, y=2858, plane=0): [Talk-to, Trade]
-13933 Guard at WorldPoint(x=1390, y=2868, plane=0): [Talk-to]
-13940 Citizen at WorldPoint(x=1390, y=2858, plane=0): [Talk-to]
-13941 Citizen at WorldPoint(x=1392, y=2868, plane=0): [Talk-to]
+3106 Man at WorldPoint(x=3218, y=3215, plane=0): [Talk-to, Attack, Pickpocket]
+3111 Woman at WorldPoint(x=3217, y=3203, plane=0): [Talk-to, Attack, Pickpocket]
+5007 Imp at WorldPoint(x=3200, y=3209, plane=0): [Attack]
+2854 Rat at WorldPoint(x=3198, y=3199, plane=0): [Attack]
+2860 Giant rat at WorldPoint(x=3196, y=3211, plane=0): [Attack]
+2859 Giant rat at WorldPoint(x=3197, y=3203, plane=0): [Attack]
+2854 Rat at WorldPoint(x=3200, y=3208, plane=0): [Attack]
+8702 Frog at WorldPoint(x=3203, y=3197, plane=0): [Attack]
+2854 Rat at WorldPoint(x=3211, y=3208, plane=0): [Attack]
+2854 Rat at WorldPoint(x=3206, y=3199, plane=0): [Attack]
+2854 Rat at WorldPoint(x=3216, y=3209, plane=0): [Attack]
+2854 Rat at WorldPoint(x=3206, y=3212, plane=0): [Attack]
+2854 Rat at WorldPoint(x=3213, y=3206, plane=0): [Attack]
+2854 Rat at WorldPoint(x=3207, y=3200, plane=0): [Attack]
+2854 Rat at WorldPoint(x=3206, y=3205, plane=0): [Attack]
+2854 Rat at WorldPoint(x=3203, y=3207, plane=0): [Attack]
+3105 Hans at WorldPoint(x=3202, y=3206, plane=0): [Talk-to, Age]
+4626 Cook at WorldPoint(x=3207, y=3215, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
-51515 Bank table at WorldPoint(x=1382, y=2865, plane=0)
-51530 Chair at WorldPoint(x=1384, y=2864, plane=0)
-51548 Crate at WorldPoint(x=1385, y=2864, plane=0)
-51530 Chair at WorldPoint(x=1385, y=2866, plane=0)
-51530 Chair at WorldPoint(x=1385, y=2867, plane=0)
-54977 Potted fan at WorldPoint(x=1385, y=2868, plane=0)
-51517 Gold at WorldPoint(x=1381, y=2863, plane=0)
-52612 Door at WorldPoint(x=1381, y=2869, plane=0)
-51517 Gold at WorldPoint(x=1382, y=2863, plane=0)
-50902 Bank Deposit Box at WorldPoint(x=1383, y=2869, plane=0)
-52458 Table at WorldPoint(x=1386, y=2867, plane=0)
-51550 Crates at WorldPoint(x=1379, y=2863, plane=0)
-51516 Bank table at WorldPoint(x=1379, y=2865, plane=0)
-51544 Shelves at WorldPoint(x=1382, y=2862, plane=0)
-3024 Stepladder at WorldPoint(x=1385, y=2870, plane=0)
-42406 Hollow log at WorldPoint(x=1378, y=2861, plane=0)
-51548 Crate at WorldPoint(x=1378, y=2864, plane=0)
-26813 Poll booth at WorldPoint(x=1378, y=2867, plane=0)
-54977 Potted fan at WorldPoint(x=1378, y=2868, plane=0)
-51540 Stove at WorldPoint(x=1380, y=2861, plane=0)
-52635 Staircase at WorldPoint(x=1384, y=2871, plane=0)
-2279 Workbench at WorldPoint(x=1388, y=2866, plane=0)
-51550 Crates at WorldPoint(x=1388, y=2870, plane=0)
-54977 Potted fan at WorldPoint(x=1377, y=2861, plane=0)
-51541 Cabinet at WorldPoint(x=1377, y=2866, plane=0)
-55035 Table at WorldPoint(x=1377, y=2867, plane=0)
-5085 Painting at WorldPoint(x=1378, y=2860, plane=0)
-10832 Maple tree at WorldPoint(x=1378, y=2872, plane=0)
-51530 Chair at WorldPoint(x=1379, y=2860, plane=0)
-52415 Bookshelf at WorldPoint(x=1380, y=2860, plane=0)
-10832 Maple tree at WorldPoint(x=1381, y=2872, plane=0)
-52594 Door at WorldPoint(x=1383, y=2860, plane=0)
-51724 Stool at WorldPoint(x=1388, y=2860, plane=0)
-52594 Door at WorldPoint(x=1389, y=2868, plane=0)
-51527 Chair at WorldPoint(x=1376, y=2859, plane=0)
-52594 Door at WorldPoint(x=1376, y=2861, plane=0)
-51548 Crate at WorldPoint(x=1376, y=2865, plane=0)
-51534 Table at WorldPoint(x=1378, y=2859, plane=0)
-51754 Food basket at WorldPoint(x=1380, y=2859, plane=0)
-55035 Table at WorldPoint(x=1382, y=2859, plane=0)
+56230 Staircase at WorldPoint(x=3204, y=3207, plane=0)
+362 Barrel at WorldPoint(x=3205, y=3210, plane=0)
+362 Barrel at WorldPoint(x=3205, y=3211, plane=0)
+12961 Crate at WorldPoint(x=3205, y=3212, plane=0)
+14874 Hanging meat at WorldPoint(x=3209, y=3212, plane=0)
+5556 Hanging tapestry at WorldPoint(x=3210, y=3211, plane=0)
+14873 Hanging meat at WorldPoint(x=3210, y=3212, plane=0)
+12961 Crate at WorldPoint(x=3204, y=3213, plane=0)
+14869 Shelves at WorldPoint(x=3205, y=3213, plane=0)
+12962 Table at WorldPoint(x=3211, y=3212, plane=0)
+12962 Table at WorldPoint(x=3208, y=3214, plane=0)
+14872 Stool at WorldPoint(x=3210, y=3214, plane=0)
+5556 Hanging tapestry at WorldPoint(x=3212, y=3211, plane=0)
+962 Noticeboard at WorldPoint(x=3212, y=3212, plane=0)
+5609 Cooking Pots at WorldPoint(x=3212, y=3213, plane=0)
+5610 Cooking Pots at WorldPoint(x=3212, y=3214, plane=0)
+362 Barrel at WorldPoint(x=3204, y=3215, plane=0)
+1187 Flower at WorldPoint(x=3205, y=3201, plane=0)
+14868 Sink at WorldPoint(x=3205, y=3215, plane=0)
+14872 Stool at WorldPoint(x=3206, y=3215, plane=0)
+1187 Flower at WorldPoint(x=3209, y=3201, plane=0)
+114 Cooking range at WorldPoint(x=3212, y=3215, plane=0)
+891 Landscape at WorldPoint(x=3213, y=3213, plane=0)
+5628 Standard at WorldPoint(x=3198, y=3205, plane=0)
+5628 Standard at WorldPoint(x=3198, y=3213, plane=0)
+14880 Trapdoor at WorldPoint(x=3209, y=3216, plane=0)
+890 Portrait at WorldPoint(x=3213, y=3216, plane=0)
+1187 Flower at WorldPoint(x=3214, y=3203, plane=0)
+5556 Hanging tapestry at WorldPoint(x=3214, y=3211, plane=0)
+1276 Tree at WorldPoint(x=3197, y=3209, plane=0)
+365 Sacks at WorldPoint(x=3200, y=3217, plane=0)
+12348 Door at WorldPoint(x=3207, y=3217, plane=0)
+14873 Hanging meat at WorldPoint(x=3209, y=3217, plane=0)
+14866 Barrel at WorldPoint(x=3210, y=3217, plane=0)
+12961 Crate at WorldPoint(x=3211, y=3217, plane=0)
+14867 Barrels at WorldPoint(x=3212, y=3217, plane=0)
+1189 Daisies at WorldPoint(x=3196, y=3203, plane=0)
+1276 Tree at WorldPoint(x=3196, y=3214, plane=0)
+817 Suit of armour at WorldPoint(x=3205, y=3218, plane=0)
+202 Candles at WorldPoint(x=3212, y=3218, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
-954 Rope at WorldPoint(x=1383, y=2862, plane=0)
-1957 Onion at WorldPoint(x=1376, y=2865, plane=0)
-1917 Beer at WorldPoint(x=1388, y=2859, plane=0)
-29412 Steamforge brew at WorldPoint(x=1389, y=2857, plane=0)
-1919 Beer glass at WorldPoint(x=1392, y=2860, plane=0)
-1925 Bucket at WorldPoint(x=1388, y=2851, plane=0)
-2347 Hammer at WorldPoint(x=1401, y=2866, plane=0)
+558 Mind rune at WorldPoint(x=3206, y=3208, plane=0)
+946 Knife at WorldPoint(x=3205, y=3212, plane=0)
+1935 Jug at WorldPoint(x=3211, y=3212, plane=0)
+1923 Bowl at WorldPoint(x=3208, y=3214, plane=0)
+1931 Pot at WorldPoint(x=3209, y=3214, plane=0)
+1935 Jug at WorldPoint(x=3211, y=3217, plane=0)
+946 Knife at WorldPoint(x=3224, y=3202, plane=0)
+882 Bronze arrow at WorldPoint(x=3205, y=3227, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-52468 at WorldPoint(x=1383, y=2866, plane=0)
-2738 at WorldPoint(x=1382, y=2865, plane=0)
-52470 at WorldPoint(x=1382, y=2866, plane=0)
-41722 at WorldPoint(x=1382, y=2866, plane=0)
-52483 at WorldPoint(x=1382, y=2867, plane=0)
-52469 at WorldPoint(x=1383, y=2867, plane=0)
-41722 at WorldPoint(x=1384, y=2865, plane=0)
-41722 at WorldPoint(x=1384, y=2866, plane=0)
-52470 at WorldPoint(x=1381, y=2866, plane=0)
-41722 at WorldPoint(x=1381, y=2866, plane=0)
-52483 at WorldPoint(x=1381, y=2867, plane=0)
-52470 at WorldPoint(x=1381, y=2868, plane=0)
-52470 at WorldPoint(x=1382, y=2868, plane=0)
-54855 at WorldPoint(x=1382, y=2868, plane=0)
-52467 at WorldPoint(x=1383, y=2868, plane=0)
+1248 at WorldPoint(x=3205, y=3208, plane=0)
+1911 at WorldPoint(x=3206, y=3207, plane=0)
+4735 at WorldPoint(x=3207, y=3207, plane=0)
+1911 at WorldPoint(x=3207, y=3207, plane=0)
+4742 at WorldPoint(x=3207, y=3208, plane=0)
+1911 at WorldPoint(x=3207, y=3208, plane=0)
+4739 at WorldPoint(x=3204, y=3206, plane=0)
+1911 at WorldPoint(x=3204, y=3206, plane=0)
+1938 at WorldPoint(x=3204, y=3206, plane=0)
+1248 at WorldPoint(x=3204, y=3207, plane=0)
+1938 at WorldPoint(x=3204, y=3207, plane=0)
+1911 at WorldPoint(x=3204, y=3209, plane=0)
+4740 at WorldPoint(x=3204, y=3210, plane=0)
+1911 at WorldPoint(x=3204, y=3210, plane=0)
+4741 at WorldPoint(x=3205, y=3206, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
-995 Coins x18351
 == Text in open windows and chat
+24m
 10
-51
+70
 100
 All
 Game
@@ -112,12 +114,16 @@ Friends
 Channel
 Clan
 Trade
-00:18:41
+00:24:23
 Boatyguidev3: *
+You need to wait another 24 minutes to cast this spell.
+[12:26:27] [WebWalk] sp | Al Kharid toll gate crossing unresolved confirmed=false dest=3268,3227,p0 at=3253,3226,p0
 You don't have enough coins.
 You have correctly entered your PIN.
 You have unlocked a new music track: @mes_hl_red@Mistrock
 Did you know? There is a setting to allow you to get Strength XP when pushing through the wheat in Puro-Puro.
 Welcome to Old School RuneScape.
+Filters
+Lumbridge Home Teleport
 == Quest Helper
 no step: null
