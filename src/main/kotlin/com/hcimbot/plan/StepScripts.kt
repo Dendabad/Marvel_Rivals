@@ -666,6 +666,17 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 139. "Head north-east to the Gem Store & buy 9x Uncut Sapphire, 10x Uncut Emerald, and as many Uncut Rubies as possible": Toci's
+        // gem store in Aldarin (Toci, 13915, at (1428, 2974)). The rubies are whatever the shop has, so a lack of them does not stop the step.
+        "381733ed40" to { _ ->
+            val toci = listOf(ShopTask.Seller("Toci", listOf(13915), listOf(Tile(1428, 2974, 0))))
+            auto(
+                ShopTask(toci, listOf(item("Uncut sapphire", 1623, 9), item("Uncut emerald", 1621, 10))),
+                Optional(ShopTask(toci, listOf(item("Uncut ruby", 1619, 5)))),
+                trust = true,
+            )
+        },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
