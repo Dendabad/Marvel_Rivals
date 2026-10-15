@@ -1063,6 +1063,19 @@ class StepScripts(private val guide: Guide) {
             auto(ShopTask(store, listOf(item("Bucket", 1925, 3), item("Shears", 1735, 1)), hopWhenOut = true), trust = true)
         },
 
+        // 176. "Head North-West and collect a Snape Grass": the guide gives no spot, so the road north-west from Rimmington to the
+        // Crafting Guild is walked in stretches, picking up the grass (231) as soon as it is in sight.
+        "5fc0549ca9" to { _ ->
+            val missing: (TaskContext) -> Boolean = { ctx -> !has(231)(ctx) }
+            val stretches = listOf(Tile(2937, 3245, 0), Tile(2934, 3262, 0), Tile(2931, 3278, 0), Tile(2933, 3290, 0))
+            StepPlan.Auto(
+                stretches.flatMap { spot -> listOf(OnlyIf(missing, PickUpTask(listOf(231), 14)), OnlyIf(missing, WalkTask(spot, radius = 3))) } +
+                    listOf(OnlyIf(missing, PickUpTask(listOf(231), 14)), OnlyIf(missing, Fail("no Snape grass found on the road north-west to the Crafting Guild"))),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
