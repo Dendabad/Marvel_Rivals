@@ -131,6 +131,21 @@ class HcimGuideBotScript(private val bankPin: () -> String? = { null }) : Script
                     .toList().sortedBy { it.worldLocation.distanceTo(me) }.take(15).map { "${it.id} at ${Instances.toTemplate(it.worldLocation)}" }
             }.orEmpty()
         }
+        section("Items shown in open windows, such as a shop or bank (item id name x quantity)") {
+            MicrobotGameState.onClient {
+                val seen = LinkedHashSet<String>()
+                fun visit(w: net.runelite.api.widgets.Widget?) {
+                    if (w == null || w.isHidden || seen.size >= 80) return
+                    if (w.itemId > 0 && w.bounds.width > 0) {
+                        val name = net.runelite.client.util.Text.removeTags(w.name.orEmpty()).trim()
+                        seen += "${w.itemId} $name x${w.itemQuantity}"
+                    }
+                    for (group in listOf(w.dynamicChildren, w.staticChildren, w.nestedChildren)) group?.forEach(::visit)
+                }
+                Microbot.getClient().widgetRoots?.forEach(::visit)
+                seen.toList()
+            }.orEmpty()
+        }
         section("Text in open windows and chat") {
             MicrobotGameState.onClient {
                 val seen = LinkedHashSet<String>()
