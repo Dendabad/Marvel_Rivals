@@ -876,6 +876,21 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 159. "Talk to Luthas and ask for employment (1)": Luthas (3647) at (2939, 3154) runs the banana plantation. The chat is
+        // worked through to its end, since leaving it open left step 160 with his speech still showing.
+        "567db2fbe1" to { _ ->
+            val ask = DialoguePlan.Texts(listOf("employment", "job", "work", "Yes"))
+            val chatClosed: (TaskContext) -> Boolean = { ctx -> !ctx.game.canContinueDialog && ctx.game.dialogOptions().isEmpty() }
+            StepPlan.Auto(
+                listOf(
+                    talk(listOf(3647), "Luthas", Tile(2939, 3154, 0), ask),
+                    WaitUntilTask("finish talking to Luthas", 40, ask, chatClosed),
+                ),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
