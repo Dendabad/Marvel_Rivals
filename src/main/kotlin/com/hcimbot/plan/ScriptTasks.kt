@@ -1625,6 +1625,8 @@ class HpGuardTask(
     private val eatBelow: Int,
     private val fleeBelow: Int,
     private val fleeTo: Tile,
+    /** An NPC standing straight beside the player (not on a corner) can hit it: step to a tile on its diagonal, where it cannot. */
+    private val stepOffFrom: String? = null,
 ) : Task {
     private var sinceEat = EAT_GAP
     override val description get() = inner.description
@@ -1646,6 +1648,26 @@ class HpGuardTask(
             if (hp <= fleeBelow) {
                 ctx.actions.walkTo(fleeTo)
                 return TaskResult.Failed("hitpoints down to $hp with nothing to eat, walking out to $fleeTo")
+            }
+        }
+        if (stepOffFrom != null && !game.isMoving) {
+            val at = game.playerTile
+            val foe = game.nearestNpc(emptyList(), listOf(stepOffFrom))
+            if (at != null && foe != null && foe.tile.plane == at.plane) {
+                val dx = foe.tile.x - at.x
+                val dy = foe.tile.y - at.y
+                val straight = (dx == 0 && kotlin.math.abs(dy) == 1) || (dy == 0 && kotlin.math.abs(dx) == 1)
+                if (straight) {
+                    val away = (-1..1).flatMap { ox -> (-1..1).map { oy -> Tile(at.x + ox, at.y + oy, at.plane) } }
+                        .filter { it != at && game.canReach(it) != false }
+                        .filter { kotlin.math.abs(it.x - foe.tile.x) == 1 && kotlin.math.abs(it.y - foe.tile.y) == 1 }
+                        .firstOrNull()
+                    if (away != null) {
+                        ctx.log("$stepOffFrom is beside this tile, stepping to its diagonal at $away")
+                        ctx.actions.walkTo(away)
+                        return TaskResult.Running
+                    }
+                }
             }
         }
         return inner.tick(ctx)

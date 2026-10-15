@@ -1280,8 +1280,8 @@ class StepScripts(private val guide: Guide) {
                     OnlyIf(
                         experimentThere,
                         HpGuardTask(
-                            KillTask(listOf(3996, 3997, 3998), listOf("Witch's experiment"), emptyList(), spell = "Wind Strike", maxKills = 8, killsNeeded = 4),
-                            foodIds = listOf(1993), foodOption = "Drink", eatBelow = 5, fleeBelow = 3, fleeTo = Tile(2933, 3463, 0),
+                            KillTask(listOf(3996, 3997, 3998), listOf("Witch's experiment"), emptyList(), spell = "WIND_STRIKE", maxKills = 8, killsNeeded = 4),
+                            foodIds = listOf(1993), foodOption = "Drink", eatBelow = 5, fleeBelow = 3, fleeTo = Tile(2933, 3463, 0), stepOffFrom = "Witch's experiment",
                         ),
                     ),
                     OnlyIf(needsMouse, UseItemTask(1985, null, listOf(2870), listOf("Mouse hole"), Tile(2903, 3466, 0))),
