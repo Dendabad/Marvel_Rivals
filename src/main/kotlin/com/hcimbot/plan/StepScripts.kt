@@ -1298,6 +1298,15 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 193. "Keep the Door Key [Mournings End Pt 2]": a reminder to keep the key (2409), nothing to do.
+        "d68c81ca90" to { _ -> skip("a reminder to keep an item, nothing to do") },
+
+        // 194. "Head South and buy 1x Vial of Water Pack": Jatix's Herblore Shop in Taverley, by the druids, around (2899, 3428).
+        "dedaf854b4" to { _ ->
+            val jatix = listOf(ShopTask.Seller("Jatix", emptyList(), listOf(Tile(2899, 3428, 0))))
+            auto(ShopTask(jatix, listOf(item("Vial of water pack", 11879, 1)), hopWhenOut = true), trust = true)
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
