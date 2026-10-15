@@ -1,107 +1,105 @@
-HCIM Guide Bot 0.16.12, PAUSED
+HCIM Guide Bot 0.16.13, PAUSED
 == Step
-Step 137 of 2925: Head West and trade Antonius and sell all 28 at once.
-Detail: Head West and trade Antonius and sell all 28 at once. (asks for several things). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 138 of 2925: Head East after selling Eclipse reds and buy 3 Sunbeam ales from the Bartender in the pub. These give you a +1 agility boost to use the Taverley Dungeon shortcut later.
+Detail: Head East after selling Eclipse reds and buy 3 Sunbeam ales from the Bartender in the pub. These give you a +1 agility boost to use the Taverley Dungeon shortcut later.. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-11:10:58  Asking the AI about this pause (try 1)
-11:10:57  Paused: Head West and trade Antonius and sell all 28 at once. (asks for several things)
-11:10:57  Step: Head West and trade Antonius and sell all 28 at once.
-11:10:52  Step: Withdraw: 28x Red Eclipse
-11:10:51  Done (all actions finished): Bank South and Deposit all
-11:10:21  Step: Bank South and Deposit all
-11:10:20  Done (all actions finished): Pick a Cabbage [Black Knight's Fortress]
-11:10:16  Step: Pick a Cabbage [Black Knight's Fortress]
-11:10:15  Started version 0.16.12
+11:13:07  Asking the AI about this pause (try 1)
+11:13:07  Paused: Head East after selling Eclipse reds and buy 3 Sunbeam ales from the Bartender in the pub. These give you a +1 agility boost to use the Taverley Dungeon shortcut later.
+11:13:07  Step: Head East after selling Eclipse reds and buy 3 Sunbeam ales from the Bartender in the pub. These give you a +1 agility boost to use the Taverley Dungeon shortcut later.
+11:13:06  Done (all actions finished): Head West and trade Antonius and sell all 28 at once.
+11:12:24  Walking from (1388, 2931, 0) to (1356, 2926, 0)
+11:12:24  Step: Head West and trade Antonius and sell all 28 at once.
+11:12:23  Started version 0.16.13
 == Player
-world WorldPoint(x=1399, y=2928, plane=0), in instance false, as guide coordinates WorldPoint(x=1399, y=2928, plane=0)
+world WorldPoint(x=1362, y=2921, plane=0), in instance false, as guide coordinates WorldPoint(x=1362, y=2921, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1, 29415x1
+995x19600
 == NPCs within 12 tiles (id name at tile: options)
-13988 Guard at WorldPoint(x=1387, y=2923, plane=0): [Attack, Pickpocket]
-13990 Guard at WorldPoint(x=1390, y=2929, plane=0): [Attack, Pickpocket]
-13896 Citizen at WorldPoint(x=1388, y=2937, plane=0): [Talk-to, Pickpocket]
-13958 Techichi at WorldPoint(x=1390, y=2934, plane=0): [Pet, Shoo-away]
-13994 Guard at WorldPoint(x=1391, y=2923, plane=0): [Attack, Pickpocket]
-13923 Clanila at WorldPoint(x=1391, y=2917, plane=0): [Talk-to]
-13901 Citizen at WorldPoint(x=1387, y=2931, plane=0): [Talk-to, Pickpocket]
-10541 Bird at WorldPoint(x=1393, y=2938, plane=0): [Attack]
-238 Butterfly at WorldPoint(x=1397, y=2918, plane=0): []
-13224 Banker at WorldPoint(x=1401, y=2925, plane=0): [Talk-to, Bank, Collect]
-13225 Banker at WorldPoint(x=1401, y=2928, plane=0): [Talk-to, Bank, Collect]
-13235 Farmer at WorldPoint(x=1402, y=2939, plane=0): [Talk-to, Pickpocket]
-12856 Squirrel at WorldPoint(x=1409, y=2916, plane=0): []
-238 Butterfly at WorldPoint(x=1406, y=2935, plane=0): []
+12856 Squirrel at WorldPoint(x=1350, y=2914, plane=0): []
+13907 Vineyard worker at WorldPoint(x=1352, y=2931, plane=0): [Talk-to]
+12973 Green skink at WorldPoint(x=1361, y=2912, plane=0): []
+14029 Lucrezia at WorldPoint(x=1359, y=2922, plane=0): [Talk-to]
+13905 Vineyard worker at WorldPoint(x=1362, y=2912, plane=0): [Talk-to]
+13916 Antonius at WorldPoint(x=1363, y=2922, plane=0): [Talk-to, Trade]
+13905 Vineyard worker at WorldPoint(x=1364, y=2929, plane=0): [Talk-to]
+13957 Capybara at WorldPoint(x=1361, y=2919, plane=0): []
+13907 Vineyard worker at WorldPoint(x=1369, y=2915, plane=0): [Talk-to]
+13908 Vineyard foreman at WorldPoint(x=1370, y=2915, plane=0): [Talk-to]
+13893 Citizen at WorldPoint(x=1370, y=2928, plane=0): [Talk-to, Pickpocket]
+238 Butterfly at WorldPoint(x=1370, y=2914, plane=0): []
+12992 Molossus at WorldPoint(x=1374, y=2914, plane=0): [Pet, Shoo-away]
 == Named objects within 25 tiles, nearest first (id name at tile)
-52455 Chair at WorldPoint(x=1398, y=2929, plane=0)
-52396 Bank table at WorldPoint(x=1400, y=2928, plane=0)
-52457 Table at WorldPoint(x=1398, y=2930, plane=0)
-52457 Table at WorldPoint(x=1400, y=2926, plane=0)
-54978 Potted palm at WorldPoint(x=1401, y=2929, plane=0)
-54978 Potted palm at WorldPoint(x=1396, y=2929, plane=0)
-22822 Bank safe at WorldPoint(x=1402, y=2926, plane=0)
-22822 Bank safe at WorldPoint(x=1402, y=2927, plane=0)
-50902 Bank Deposit Box at WorldPoint(x=1395, y=2925, plane=0)
-52397 Bank table at WorldPoint(x=1400, y=2924, plane=0)
-54978 Potted palm at WorldPoint(x=1396, y=2923, plane=0)
-26814 Poll booth at WorldPoint(x=1398, y=2923, plane=0)
-1391 Plant at WorldPoint(x=1400, y=2933, plane=0)
-54978 Potted palm at WorldPoint(x=1401, y=2923, plane=0)
-52449 Cypress Tree at WorldPoint(x=1393, y=2929, plane=0)
-1391 Plant at WorldPoint(x=1396, y=2921, plane=0)
-1392 Plant at WorldPoint(x=1399, y=2921, plane=0)
-51792 Rockslide at WorldPoint(x=1406, y=2930, plane=0)
-11914 Bush at WorldPoint(x=1406, y=2933, plane=0)
-55050 Barrel at WorldPoint(x=1391, y=2920, plane=0)
-52449 Cypress Tree at WorldPoint(x=1391, y=2932, plane=0)
-52449 Cypress Tree at WorldPoint(x=1391, y=2935, plane=0)
-55050 Barrel at WorldPoint(x=1392, y=2920, plane=0)
-54782 Staircase at WorldPoint(x=1393, y=2920, plane=0)
-11113 Bush at WorldPoint(x=1404, y=2936, plane=0)
-54978 Potted palm at WorldPoint(x=1390, y=2920, plane=0)
-55032 Book at WorldPoint(x=1390, y=2921, plane=0)
-54992 Planter at WorldPoint(x=1390, y=2922, plane=0)
-54992 Planter at WorldPoint(x=1391, y=2919, plane=0)
-55054 Bookshelf at WorldPoint(x=1393, y=2919, plane=0)
-1391 Plant at WorldPoint(x=1394, y=2937, plane=0)
-1392 Plant at WorldPoint(x=1400, y=2937, plane=0)
-1393 Plant at WorldPoint(x=1402, y=2937, plane=0)
-47370 Plant at WorldPoint(x=1408, y=2919, plane=0)
-47371 Plant at WorldPoint(x=1408, y=2925, plane=0)
-42399 Plant at WorldPoint(x=1408, y=2926, plane=0)
-42401 Plant at WorldPoint(x=1408, y=2934, plane=0)
-47371 Plant at WorldPoint(x=1408, y=2936, plane=0)
-36661 Books at WorldPoint(x=1393, y=2918, plane=0)
-51792 Rockslide at WorldPoint(x=1399, y=2938, plane=0)
+52614 Ladder at WorldPoint(x=1361, y=2920, plane=0)
+55000 Grape barrel at WorldPoint(x=1362, y=2920, plane=0)
+55000 Grape barrel at WorldPoint(x=1363, y=2920, plane=0)
+55339 Valve at WorldPoint(x=1360, y=2923, plane=0)
+55050 Barrel at WorldPoint(x=1362, y=2919, plane=0)
+55050 Barrel at WorldPoint(x=1363, y=2919, plane=0)
+55000 Grape barrel at WorldPoint(x=1364, y=2920, plane=0)
+55051 Wine barrel at WorldPoint(x=1359, y=2919, plane=0)
+55340 Barrel at WorldPoint(x=1359, y=2923, plane=0)
+55338 Fermenting Vat at WorldPoint(x=1359, y=2924, plane=0)
+55050 Barrel at WorldPoint(x=1360, y=2918, plane=0)
+55000 Grape barrel at WorldPoint(x=1362, y=2924, plane=0)
+55050 Barrel at WorldPoint(x=1363, y=2918, plane=0)
+55000 Grape barrel at WorldPoint(x=1363, y=2924, plane=0)
+55050 Barrel at WorldPoint(x=1364, y=2918, plane=0)
+55000 Grape barrel at WorldPoint(x=1364, y=2924, plane=0)
+51752 Food pot at WorldPoint(x=1365, y=2924, plane=0)
+51762 Tree at WorldPoint(x=1366, y=2925, plane=0)
+20794 Tap at WorldPoint(x=1357, y=2923, plane=0)
+55050 Barrel at WorldPoint(x=1359, y=2926, plane=0)
+55050 Barrel at WorldPoint(x=1361, y=2926, plane=0)
+1393 Plant at WorldPoint(x=1362, y=2926, plane=0)
+1392 Plant at WorldPoint(x=1367, y=2918, plane=0)
+55036 Table at WorldPoint(x=1356, y=2918, plane=0)
+54948 Staircase at WorldPoint(x=1356, y=2919, plane=0)
+20791 Apple Press at WorldPoint(x=1356, y=2923, plane=0)
+55050 Barrel at WorldPoint(x=1356, y=2924, plane=0)
+55050 Barrel at WorldPoint(x=1356, y=2926, plane=0)
+51788 Roots at WorldPoint(x=1356, y=2927, plane=0)
+1393 Plant at WorldPoint(x=1361, y=2915, plane=0)
+1391 Plant at WorldPoint(x=1368, y=2927, plane=0)
+51789 Roots at WorldPoint(x=1364, y=2928, plane=0)
+55424 Grape storage at WorldPoint(x=1369, y=2917, plane=0)
+51764 Tree at WorldPoint(x=1369, y=2921, plane=0)
+1394 Plant at WorldPoint(x=1354, y=2924, plane=0)
+55005 Grapevine at WorldPoint(x=1354, y=2929, plane=0)
+55005 Grapevine at WorldPoint(x=1355, y=2929, plane=0)
+55005 Grapevine at WorldPoint(x=1356, y=2929, plane=0)
+55005 Grapevine at WorldPoint(x=1357, y=2929, plane=0)
+55005 Grapevine at WorldPoint(x=1358, y=2913, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
-952 Spade at WorldPoint(x=1405, y=2938, plane=0)
-229 Vial at WorldPoint(x=1393, y=2917, plane=0)
-1919 Beer glass at WorldPoint(x=1381, y=2925, plane=0)
+1925 Bucket at WorldPoint(x=1354, y=2914, plane=0)
+29409 Sunbeam ale at WorldPoint(x=1378, y=2934, plane=0)
 1919 Beer glass at WorldPoint(x=1380, y=2932, plane=0)
+1919 Beer glass at WorldPoint(x=1381, y=2925, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-52476 at WorldPoint(x=1399, y=2928, plane=0)
-52478 at WorldPoint(x=1398, y=2927, plane=0)
-52476 at WorldPoint(x=1398, y=2928, plane=0)
-52478 at WorldPoint(x=1399, y=2927, plane=0)
-52475 at WorldPoint(x=1400, y=2927, plane=0)
-52473 at WorldPoint(x=1400, y=2928, plane=0)
-52478 at WorldPoint(x=1397, y=2926, plane=0)
-52478 at WorldPoint(x=1397, y=2927, plane=0)
-52476 at WorldPoint(x=1397, y=2928, plane=0)
-54786 at WorldPoint(x=1397, y=2930, plane=0)
-52478 at WorldPoint(x=1398, y=2926, plane=0)
-54786 at WorldPoint(x=1398, y=2930, plane=0)
-52478 at WorldPoint(x=1399, y=2926, plane=0)
-54786 at WorldPoint(x=1399, y=2930, plane=0)
-52475 at WorldPoint(x=1400, y=2926, plane=0)
+51827 at WorldPoint(x=1361, y=2920, plane=0)
+54788 at WorldPoint(x=1361, y=2920, plane=0)
+33167 at WorldPoint(x=1361, y=2922, plane=0)
+54795 at WorldPoint(x=1362, y=2920, plane=0)
+54788 at WorldPoint(x=1363, y=2920, plane=0)
+51827 at WorldPoint(x=1363, y=2921, plane=0)
+51828 at WorldPoint(x=1360, y=2919, plane=0)
+54799 at WorldPoint(x=1360, y=2919, plane=0)
+54808 at WorldPoint(x=1360, y=2920, plane=0)
+51827 at WorldPoint(x=1360, y=2921, plane=0)
+54827 at WorldPoint(x=1361, y=2919, plane=0)
+54826 at WorldPoint(x=1362, y=2919, plane=0)
+54827 at WorldPoint(x=1363, y=2919, plane=0)
+54828 at WorldPoint(x=1364, y=2919, plane=0)
+51826 at WorldPoint(x=1364, y=2920, plane=0)
 == Text in open windows and chat
-The Bank of Gielinor (37.8K)
-81
-960
+Moonrise Wines
+Value check:
+Quantity:
 10
-All
-73
+50
+64
 100
+All
 Game
 On
 Public
@@ -110,7 +108,7 @@ Friends
 Channel
 Clan
 Trade
-00:06:07
+00:08:17
 Boatyguidev3: *
 You have unlocked a new music track: @mes_hl_red@Peace and Prosperity
 You have unlocked a new music track: @mes_hl_red@Isle of Serenity
