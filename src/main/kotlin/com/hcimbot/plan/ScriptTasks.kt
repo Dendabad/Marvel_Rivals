@@ -1596,3 +1596,20 @@ class TaskList(private vararg val tasks: Task) : Task {
         }
     }
 }
+
+/** Uses [itemId] on the nearest NPC called [name], for one whose id is not known ahead (the mouse in Witch's House). */
+class UseItemOnNamedNpcTask(private val itemId: Int, private val name: String, private val maxWait: Int = 20) : BaseTask() {
+    private var used = false
+    private var waited = 0
+    override val description = "Use item $itemId on the $name"
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        if (ctx.game.isBusy) return TaskResult.Running
+        if (used) return TaskResult.Done
+        if (itemId !in ctx.game.inventory()) return TaskResult.Failed("item $itemId is not in the inventory")
+        val npc = ctx.game.nearestNpc(emptyList(), listOf(name))
+        if (npc == null) return if (++waited >= maxWait) TaskResult.Failed("no $name came out") else TaskResult.Running
+        used = ctx.actions.useItemOnNpc(itemId, npc)
+        return attempt(used, "use the item on the $name")
+    }
+}

@@ -1257,8 +1257,16 @@ class StepScripts(private val guide: Guide) {
         // report taken there.
         "2a7fa17cef" to { _ ->
             val helper = guide.questHelpers["witchshouse"]
+            // Quest Helper stops at the mouse hole: the cheese (1985) goes on the hole (2870) at (2903, 3466) in the south room, and the
+            // magnet (2410) on the mouse that comes out. The helper's own attempt is allowed to fail so that this can do it.
+            val needsMouse: (TaskContext) -> Boolean = { ctx -> has(2410)(ctx) && has(1985)(ctx) }
             StepPlan.Auto(
-                listOfNotNull(helper?.let { QuestTask("witchshouse", it, false) }),
+                listOfNotNull(
+                    helper?.let { Optional(QuestTask("witchshouse", it, false)) },
+                    OnlyIf(needsMouse, UseItemTask(1985, null, listOf(2870), listOf("Mouse hole"), Tile(2903, 3466, 0))),
+                    OnlyIf(needsMouse, UseItemOnNamedNpcTask(2410, "Mouse")),
+                    helper?.let { QuestTask("witchshouse", it, false) },
+                ),
                 trustTasks = true,
                 ignoreStartSignal = true,
             )
