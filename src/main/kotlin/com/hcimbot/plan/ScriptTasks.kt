@@ -1613,3 +1613,45 @@ class UseItemOnNamedNpcTask(private val itemId: Int, private val name: String, p
         return attempt(used, "use the item on the $name")
     }
 }
+
+/**
+ * Runs [inner] but looks after the hitpoints: at or under [eatBelow] it uses [food] (a drink, bite or the like, id and option) every few
+ * ticks, and at or under [fleeBelow] with nothing left to eat it walks to [fleeTo] and stops with a failure so the bot pauses.
+ */
+class HpGuardTask(
+    private val inner: Task,
+    private val foodIds: List<Int>,
+    private val foodOption: String,
+    private val eatBelow: Int,
+    private val fleeBelow: Int,
+    private val fleeTo: Tile,
+) : Task {
+    private var sinceEat = EAT_GAP
+    override val description get() = inner.description
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        sinceEat++
+        val hp = game.hitpoints
+        if (hp in 1..eatBelow) {
+            val food = foodIds.firstOrNull { (game.inventory()[it] ?: 0) > 0 }
+            if (food != null) {
+                if (sinceEat >= EAT_GAP) {
+                    sinceEat = 0
+                    ctx.log("Hitpoints $hp, using item $food")
+                    ctx.actions.itemAction(food, foodOption)
+                }
+                return TaskResult.Running
+            }
+            if (hp <= fleeBelow) {
+                ctx.actions.walkTo(fleeTo)
+                return TaskResult.Failed("hitpoints down to $hp with nothing to eat, walking out to $fleeTo")
+            }
+        }
+        return inner.tick(ctx)
+    }
+
+    private companion object {
+        const val EAT_GAP = 3
+    }
+}

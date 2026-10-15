@@ -1260,6 +1260,7 @@ class StepScripts(private val guide: Guide) {
             // Quest Helper stops at the mouse hole: the cheese (1985) goes on the hole (2870) at (2903, 3466) in the south room, and the
             // magnet (2410) on the mouse that comes out. The helper's own attempt is allowed to fail so that this can do it.
             val needsMouse: (TaskContext) -> Boolean = { ctx -> has(2410)(ctx) && has(1985)(ctx) }
+            val experimentThere: (TaskContext) -> Boolean = { ctx -> ctx.game.nearestNpc(listOf(3996, 3997, 3998), emptyList()) != null }
             val needsCheese: (TaskContext) -> Boolean = { ctx ->
                 has(2410)(ctx) && !has(1985)(ctx) && !has(2411)(ctx) && ctx.game.nearestNpc(emptyList(), listOf("Mouse")) == null
             }
@@ -1271,6 +1272,18 @@ class StepScripts(private val guide: Guide) {
                     OnlyIf(needsCheese, PickUpTask(listOf(1985), 12)),
                     OnlyIf({ ctx -> has(1985)(ctx) && has(2410)(ctx) && !has(2411)(ctx) }, WalkTask(Tile(2902, 3466, 0), radius = 1)),
                     helper?.let { Optional(QuestTask("witchshouse", it, false, avoidNpc = "Nora T. Hagg", avoidWithin = 6)) },
+                    // The shed fight: the four forms of the Witch's experiment (3996, 3997, 3998). It is fought with Wind Strike from the shed's
+                    // south wall, between the crate (2935, 3460) and the sacks (2937, 3460), which the wiki gives as the safespot for the bear and
+                    // wolf. The first two forms are attacked from there too, with wine drunk at 5 hitpoints or less and the shed left at 3.
+                    OnlyIf(experimentThere, Optional(EquipTask(listOf(item("Staff of air", 1381))))),
+                    OnlyIf(experimentThere, WalkTask(Tile(2936, 3460, 0), radius = 0)),
+                    OnlyIf(
+                        experimentThere,
+                        HpGuardTask(
+                            KillTask(listOf(3996, 3997, 3998), listOf("Witch's experiment"), emptyList(), spell = "Wind Strike", maxKills = 8, killsNeeded = 4),
+                            foodIds = listOf(1993), foodOption = "Drink", eatBelow = 5, fleeBelow = 3, fleeTo = Tile(2933, 3463, 0),
+                        ),
+                    ),
                     OnlyIf(needsMouse, UseItemTask(1985, null, listOf(2870), listOf("Mouse hole"), Tile(2903, 3466, 0))),
                     // The mouse may be out already, with the cheese gone: only the magnet is needed then. With no mouse it moves on.
                     OnlyIf({ ctx -> has(2410)(ctx) }, Optional(UseItemOnNamedNpcTask(2410, "Mouse", maxWait = 12))),
@@ -1279,6 +1292,7 @@ class StepScripts(private val guide: Guide) {
                     OnlyIf({ ctx -> has(2408)(ctx) }, ItemActionTask(2408, "Read", closeAfter = true)),
                     helper?.let { QuestTask("witchshouse", it, false, avoidNpc = "Nora T. Hagg", avoidWithin = 6) },
                 ),
+                combat = true,
                 trustTasks = true,
                 ignoreStartSignal = true,
             )
