@@ -1,86 +1,83 @@
-HCIM Guide Bot 0.16.45, PAUSED
+HCIM Guide Bot 0.16.46, PAUSED
 == Step
 Step 164 of 2925: Make sure to speak to Luthas again before heading to the boat
-Detail: Tip: Make sure to speak to Luthas again before heading to the boat. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Detail: finish talking to Luthas: none of the expected chat options [Yes, ok] are in [Could you offer me employment on your plantation?, That customs officer is annoying isn't she?]. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-13:10:26  Asking the AI about this pause (try 1)
-13:10:26  Paused: Tip: Make sure to speak to Luthas again before heading to the boat
-13:10:26  Step: Make sure to speak to Luthas again before heading to the boat
-13:10:25  Done (all actions finished): Fill Crate with bananas and use Karamja rum on the crate
-13:09:18  Step: Fill Crate with bananas and use Karamja rum on the crate
-13:09:06  Step: Buy Karamja Rum
-13:09:05  Started version 0.16.45
+13:11:30  Asking the AI about this pause (try 1)
+13:11:30  Paused: finish talking to Luthas: none of the expected chat options [Yes, ok] are in [Could you offer me employment on your plantation?, That customs officer is annoying isn't she?]
+13:11:24  Step: Make sure to speak to Luthas again before heading to the boat
+13:11:24  Started version 0.16.46
 == Player
-world WorldPoint(x=2938, y=3149, plane=0), in instance false, as guide coordinates WorldPoint(x=2938, y=3149, plane=0)
+world WorldPoint(x=2939, y=3154, plane=0), in instance false, as guide coordinates WorldPoint(x=2939, y=3154, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x12684, 558x38, 303x1, 1957x1, 1269x1, 1993x1, 1993x1, 311x1, 313x50, 314x1246, 1757x1, 53x454
+995x12714, 558x38, 303x1, 1957x1, 1269x1, 1993x1, 1993x1, 311x1, 313x50, 314x1246, 1757x1, 53x454
 == NPCs within 12 tiles (id name at tile: options)
-13655 Zembo at WorldPoint(x=2928, y=3144, plane=0): [Talk-to, Trade]
-3647 Luthas at WorldPoint(x=2941, y=3154, plane=0): [Talk-to]
-3652 Man at WorldPoint(x=2943, y=3149, plane=0): [Talk-to, Attack, Pickpocket]
+13655 Zembo at WorldPoint(x=2928, y=3143, plane=0): [Talk-to, Trade]
+3647 Luthas at WorldPoint(x=2939, y=3155, plane=0): [Talk-to]
+3652 Man at WorldPoint(x=2945, y=3148, plane=0): [Talk-to, Attack, Pickpocket]
 15364 Shipwright Sally at WorldPoint(x=2946, y=3148, plane=0): [Talk-to, Buy-boat, Customise-boat, Recover-boat]
 == Named objects within 25 tiles, nearest first (id name at tile)
-2072 Crate at WorldPoint(x=2939, y=3149, plane=0)
+724 Standing torch at WorldPoint(x=2937, y=3154, plane=0)
+9519 Barrel at WorldPoint(x=2940, y=3152, plane=0)
+9536 Boxes at WorldPoint(x=2940, y=3156, plane=0)
+9519 Barrel at WorldPoint(x=2941, y=3152, plane=0)
+620 Table at WorldPoint(x=2941, y=3155, plane=0)
+9536 Boxes at WorldPoint(x=2941, y=3156, plane=0)
+419 Bed at WorldPoint(x=2936, y=3155, plane=0)
 724 Standing torch at WorldPoint(x=2937, y=3151, plane=0)
 724 Standing torch at WorldPoint(x=2939, y=3151, plane=0)
-1304 Tree at WorldPoint(x=2940, y=3147, plane=0)
 1184 Creeping plant at WorldPoint(x=2935, y=3150, plane=0)
 365 Sacks at WorldPoint(x=2935, y=3152, plane=0)
-9519 Barrel at WorldPoint(x=2940, y=3152, plane=0)
-9519 Barrel at WorldPoint(x=2941, y=3152, plane=0)
-1390 Plant at WorldPoint(x=2934, y=3151, plane=0)
-1173 Small fern at WorldPoint(x=2933, y=3144, plane=0)
-1304 Tree at WorldPoint(x=2934, y=3144, plane=0)
-1304 Tree at WorldPoint(x=2935, y=3144, plane=0)
-724 Standing torch at WorldPoint(x=2937, y=3154, plane=0)
-60296 Notice board at WorldPoint(x=2940, y=3144, plane=0)
-9534 Crate at WorldPoint(x=2943, y=3148, plane=0)
+9533 Crate at WorldPoint(x=2935, y=3156, plane=0)
 1276 Tree at WorldPoint(x=2943, y=3153, plane=0)
-1173 Small fern at WorldPoint(x=2932, y=3143, plane=0)
-1184 Creeping plant at WorldPoint(x=2932, y=3146, plane=0)
-1304 Tree at WorldPoint(x=2933, y=3143, plane=0)
-1304 Tree at WorldPoint(x=2934, y=3143, plane=0)
-1304 Tree at WorldPoint(x=2935, y=3143, plane=0)
-419 Bed at WorldPoint(x=2936, y=3155, plane=0)
-620 Table at WorldPoint(x=2941, y=3155, plane=0)
+1390 Plant at WorldPoint(x=2934, y=3151, plane=0)
+2072 Crate at WorldPoint(x=2939, y=3149, plane=0)
 59723 Shipwrights' Workbench at WorldPoint(x=2944, y=3149, plane=0)
-1400 Jungle plant at WorldPoint(x=2931, y=3142, plane=0)
-1298 Fern at WorldPoint(x=2931, y=3144, plane=0)
-1298 Fern at WorldPoint(x=2931, y=3145, plane=0)
+9534 Crate at WorldPoint(x=2943, y=3148, plane=0)
+1276 Tree at WorldPoint(x=2945, y=3151, plane=0)
+1184 Creeping plant at WorldPoint(x=2932, y=3157, plane=0)
+1184 Creeping plant at WorldPoint(x=2932, y=3159, plane=0)
+1302 Leafy tree at WorldPoint(x=2932, y=3160, plane=0)
+1184 Creeping plant at WorldPoint(x=2936, y=3161, plane=0)
+1304 Tree at WorldPoint(x=2940, y=3147, plane=0)
+9535 Crates at WorldPoint(x=2946, y=3149, plane=0)
 1173 Small fern at WorldPoint(x=2931, y=3146, plane=0)
 1184 Creeping plant at WorldPoint(x=2931, y=3147, plane=0)
-1311 Palm at WorldPoint(x=2933, y=3142, plane=0)
-1304 Tree at WorldPoint(x=2934, y=3142, plane=0)
-1304 Tree at WorldPoint(x=2935, y=3142, plane=0)
-9533 Crate at WorldPoint(x=2935, y=3156, plane=0)
-1304 Tree at WorldPoint(x=2936, y=3142, plane=0)
-9536 Boxes at WorldPoint(x=2940, y=3156, plane=0)
-9536 Boxes at WorldPoint(x=2941, y=3156, plane=0)
-1276 Tree at WorldPoint(x=2945, y=3151, plane=0)
-1390 Plant at WorldPoint(x=2930, y=3141, plane=0)
-9519 Barrel at WorldPoint(x=2930, y=3143, plane=0)
-9519 Barrel at WorldPoint(x=2930, y=3144, plane=0)
+1184 Creeping plant at WorldPoint(x=2932, y=3146, plane=0)
+1184 Creeping plant at WorldPoint(x=2930, y=3148, plane=0)
+1390 Plant at WorldPoint(x=2930, y=3149, plane=0)
+1184 Creeping plant at WorldPoint(x=2930, y=3150, plane=0)
+1303 Tree at WorldPoint(x=2930, y=3153, plane=0)
+1303 Tree at WorldPoint(x=2930, y=3154, plane=0)
+2074 Banana tree at WorldPoint(x=2930, y=3155, plane=0)
+2074 Banana tree at WorldPoint(x=2930, y=3158, plane=0)
+2074 Banana tree at WorldPoint(x=2930, y=3161, plane=0)
+1390 Plant at WorldPoint(x=2930, y=3163, plane=0)
+1298 Fern at WorldPoint(x=2931, y=3145, plane=0)
+1184 Creeping plant at WorldPoint(x=2934, y=3163, plane=0)
+1162 Bullrushes at WorldPoint(x=2935, y=3163, plane=0)
+15039 Stool at WorldPoint(x=2929, y=3146, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
 556 Air rune at WorldPoint(x=2938, y=3158, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-339 at WorldPoint(x=2938, y=3149, plane=0)
-339 at WorldPoint(x=2937, y=3149, plane=0)
-339 at WorldPoint(x=2937, y=3150, plane=0)
-339 at WorldPoint(x=2938, y=3148, plane=0)
-340 at WorldPoint(x=2938, y=3150, plane=0)
-339 at WorldPoint(x=2939, y=3149, plane=0)
-339 at WorldPoint(x=2936, y=3147, plane=0)
-1616 at WorldPoint(x=2936, y=3150, plane=0)
+15033 at WorldPoint(x=2938, y=3153, plane=0)
+15033 at WorldPoint(x=2938, y=3154, plane=0)
+15033 at WorldPoint(x=2938, y=3155, plane=0)
+15033 at WorldPoint(x=2937, y=3153, plane=0)
+15033 at WorldPoint(x=2938, y=3156, plane=0)
+1618 at WorldPoint(x=2939, y=3156, plane=0)
 1855 at WorldPoint(x=2936, y=3151, plane=0)
-339 at WorldPoint(x=2937, y=3147, plane=0)
+339 at WorldPoint(x=2936, y=3152, plane=0)
+339 at WorldPoint(x=2936, y=3153, plane=0)
+15034 at WorldPoint(x=2936, y=3153, plane=0)
+340 at WorldPoint(x=2936, y=3157, plane=0)
+1616 at WorldPoint(x=2936, y=3157, plane=0)
 176 at WorldPoint(x=2937, y=3151, plane=0)
 1616 at WorldPoint(x=2937, y=3151, plane=0)
-339 at WorldPoint(x=2938, y=3147, plane=0)
-339 at WorldPoint(x=2938, y=3151, plane=0)
-1616 at WorldPoint(x=2939, y=3151, plane=0)
+339 at WorldPoint(x=2937, y=3157, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
-995 Coins x12684
+995 Coins x12714
 558 Mind rune x38
 303 Small fishing net x1
 1957 Onion x1
@@ -93,7 +90,6 @@ hitpoints 10/10
 53 Headless arrow x454
 == Text in open windows and chat
 10
-93
 100
 All
 Game
@@ -104,44 +100,9 @@ Friends
 Channel
 Clan
 Trade
-01:07:13
-Boatyguidev3: *
-You pick a banana.
-Well done! You have completed an easy task in the Karamja area. Your Achievement Diary has been updated.
-Well done! A Karamja task has been updated.
-You catch some raw shrimps.
-You cast out your net...
-You have unlocked a new music track: @mes_hl_red@Jungle Island
-You have unlocked a new music track: @mes_hl_red@Sea Shanty
-You board the ship and sail to Musa Point.
-You pay the boarding charge of 30 coins.
-You attach feathers to 4 arrow shafts.
-Check the skill guide for more information about Fletching.
-Level 10 Fletching: Bronze darts
-Level 10 Fletching: Longbows
-You attach feathers to 15 arrow shafts.
-Congratulations, you've just advanced your Fletching level. You are now level 10.
-Congratulations, you've just advanced your Fletching level. You are now level 9.
-Level 9 Fletching: Bronze/wooden crossbows
-Level 9 Fletching: Bronze bolts
-Congratulations, you've just advanced your Fletching level. You are now level 8.
-You take an apron. It feels freshly starched and smells of laundry.
-You've started a new quest: @q_mes@Pirate's Treasure
-You add 10 charges to your book. It now has 10 charges.
-You step through the portal...
-You have unlocked a new music track: @mes_hl_red@Rune Essence
-Well done! You have completed an easy task in the Lumbridge & Draynor area. Your Achievement Diary has been updated.
-Congratulations, you've completed a quest: @q_mes@Rune Mysteries
-The skeleton in the corner suddenly comes to life!
-You pay the guards and pass through the gate.
-You have unlocked a new music track: @mes_hl_red@Arabian 2
-You have unlocked a new music track: @mes_hl_red@Arabian
-You have unlocked a new music track: @mes_hl_red@Al Kharid
-You need to wait another 24 minutes to cast this spell.
-[12:26:27] [WebWalk] sp | Al Kharid toll gate crossing unresolved confirmed=false dest=3268,3227,p0 at=3253,3226,p0
-You don't have enough coins.
-You have correctly entered your PIN.
-You have unlocked a new music track: @mes_hl_red@Mistrock
-Welcome to Old School RuneScape.
+01:08:17
+Select an option
+Could you offer me employment on your plantation?
+That customs officer is annoying isn't she?
 == Quest Helper
 DetailedQuestStep: "Please open Pirate Treasure's Quest Journal to sync the current quest state." npcs [] objects [] at null choices []
