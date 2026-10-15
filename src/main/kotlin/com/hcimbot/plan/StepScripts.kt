@@ -992,15 +992,12 @@ class StepScripts(private val guide: Guide) {
         },
 
         // 169. "Use the Deposit box by Entrana and deposit everything except: Mind Runes, Coins, 1x Raw Beef, Karamja Rum, Onion, Pickaxe &
-        // 2x wines": the bank is used (Port Sarim's), since a deposit box is only a bank that cannot give anything back. Everything the
-        // bag holds that is not on that list goes in, and one of the raw beef is taken out again.
+        // 2x wines": Port Sarim's deposit box (50902) at (3029, 3210). Everything the bag holds that is not on that list goes in, and the
+        // raw beef is put in until one is left.
         "9db1ac16c3" to { _ ->
-            val deposit = listOf(303, 311, 313, 314, 1933, 1951, 2138, 327, 53, 2132)
+            val deposit = listOf(303, 311, 313, 314, 1933, 1951, 2138, 327, 53)
             StepPlan.Auto(
-                listOf(
-                    DepositItemsTask(deposit),
-                    BankTask(depositAll = false, withdraw = listOf(item("Raw beef", 2132, 1))),
-                ),
+                listOf(DepositBoxTask(Tile(3029, 3210, 0), deposit, oneOf = 2132)),
                 trustTasks = true,
                 ignoreStartSignal = true,
             )

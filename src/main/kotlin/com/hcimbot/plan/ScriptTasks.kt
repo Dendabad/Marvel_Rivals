@@ -1464,3 +1464,41 @@ class MakeAllTask(
         const val QUIET_TICKS = 8
     }
 }
+
+/**
+ * Deposits into a deposit box: opens the one at [box], then uses "Deposit-All" on each of [deposit] in the bag, and "Deposit-1" on
+ * [oneOf] until one is left. Done once the bag holds none of [deposit] and one or fewer of [oneOf].
+ */
+class DepositBoxTask(
+    private val box: Tile,
+    private val deposit: List<Int>,
+    private val oneOf: Int? = null,
+) : BaseTask() {
+    override val description = "Deposit items in the deposit box"
+    private val opener = InteractTask(InteractTask.Kind.OBJECT, emptyList(), listOf("Bank Deposit Box"), listOf(box), "Deposit", near = box)
+    private var opened = false
+    private var settling = 0
+    private var closing = 0
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        if (game.isBusy) return TaskResult.Running
+        val have = game.inventory()
+        val held = deposit.filter { (have[it] ?: 0) > 0 }
+        val extra = oneOf != null && (have[oneOf] ?: 0) > 1
+        if (held.isEmpty() && !extra) {
+            if (!opened) return TaskResult.Done
+            return if (++closing > 2) TaskResult.Done else attempt(ctx.actions.closeInterface(), "close the deposit box")
+        }
+        if (!opened) {
+            when (val result = opener.tick(ctx)) {
+                TaskResult.Done -> { opened = true; settling = 3 }
+                else -> return result
+            }
+            return TaskResult.Running
+        }
+        if (settling > 0) { settling--; return TaskResult.Running }
+        held.firstOrNull()?.let { return attempt(ctx.actions.itemAction(it, "Deposit-All"), "deposit item $it").also { settling = 1 } }
+        return attempt(ctx.actions.itemAction(oneOf!!, "Deposit-1"), "deposit one of item $oneOf").also { settling = 1 }
+    }
+}
