@@ -1,24 +1,26 @@
-HCIM Guide Bot 0.16.69, PAUSED
+HCIM Guide Bot 0.16.70, PAUSED
 == Step
 Step 176 of 2925: Head North-West and collect a Snape Grass
 Detail: Walk to (2937, 3245, 0): could not walk to (2937, 3245, 0). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-13:53:00  Asking the AI about this pause (try 1)
-13:53:00  Paused: Walk to (2937, 3245, 0): could not walk to (2937, 3245, 0)
-13:52:46  Walking from (2940, 3225, 0) to (2937, 3245, 0)
-13:52:44  Step: Head North-West and collect a Snape Grass
-13:52:43  Started version 0.16.69
+13:54:36  Asking the AI about this pause (try 1)
+13:54:36  Paused: Walk to (2937, 3245, 0): could not walk to (2937, 3245, 0)
+13:54:30  Walking from (2940, 3236, 0) to (2937, 3245, 0)
+13:54:28  Step: Head North-West and collect a Snape Grass
+13:54:27  Started version 0.16.70
 == Player
 world WorldPoint(x=2940, y=3236, plane=0), in instance false, as guide coordinates WorldPoint(x=2940, y=3236, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
 995x11878, 558x200, 432x1, 1511x1, 1269x1, 1511x1, 1993x1, 1993x1, 221x1, 1592x1, 1595x1, 1597x1, 1597x1, 11065x1, 2976x1, 5523x1, 1733x3, 1734x50, 1925x1, 1925x1, 1925x1, 1735x1
 == NPCs within 12 tiles (id name at tile: options)
-3971 Zombie rat at WorldPoint(x=2933, y=3243, plane=0): [Attack]
-3971 Zombie rat at WorldPoint(x=2931, y=3245, plane=0): [Attack]
+2854 Rat at WorldPoint(x=2933, y=3247, plane=0): [Attack]
+3970 Zombie rat at WorldPoint(x=2928, y=3243, plane=0): [Attack]
+2854 Rat at WorldPoint(x=2931, y=3246, plane=0): [Attack]
+3971 Zombie rat at WorldPoint(x=2934, y=3244, plane=0): [Attack]
 0 Tool Leprechaun at WorldPoint(x=2940, y=3225, plane=0): [Talk-to, Exchange, Deposit-all]
-2854 Rat at WorldPoint(x=2934, y=3242, plane=0): [Attack]
-2675 Taria at WorldPoint(x=2940, y=3225, plane=0): [Talk-to, Pay, Trade]
+2854 Rat at WorldPoint(x=2938, y=3245, plane=0): [Attack]
+2675 Taria at WorldPoint(x=2944, y=3224, plane=0): [Talk-to, Pay, Trade]
 == Named objects within 25 tiles, nearest first (id name at tile)
 25046 Bookshelves at WorldPoint(x=2938, y=3237, plane=0)
 9605 Plant at WorldPoint(x=2941, y=3239, plane=0)
@@ -97,7 +99,6 @@ hitpoints 10/10
 1735 Shears x1
 == Text in open windows and chat
 10
-98
 100
 All
 Game
@@ -108,7 +109,7 @@ Friends
 Channel
 Clan
 Trade
-00:39:04
+00:40:40
 Boatyguidev3: *
 Check the skill guide for more information about Magic.
 Level 5 Magic: Water Strike
