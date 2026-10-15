@@ -655,6 +655,9 @@ class StepScripts(private val guide: Guide) {
         // at (1376, 2927). The pub's door (at (1375, 2927)) is opened if it is in the way, by the NPC task.
         "dcccfc8512" to { _ ->
             auto(
+                // The pub's west door at (1375, 2927) is locked ("The door is locked"), and the entrance is on another side. Walking to
+                // a spot inside, beside the bar, lets the walker find the way in, where clicking the Bartender from outside fails.
+                WalkTask(Tile(1379, 2927, 0), radius = 1),
                 ShopTask(
                     listOf(ShopTask.Seller("Bartender", listOf(13917), listOf(Tile(1376, 2927, 0)))),
                     listOf(item("Sunbeam ale", 29409, 3)),
