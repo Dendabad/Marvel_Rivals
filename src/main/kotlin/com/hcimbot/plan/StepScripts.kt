@@ -894,6 +894,24 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 161. "Pick 10 bananas": the banana trees (2073) in Luthas's plantation, around (2930, 3155). A tree that has been picked is
+        // another object until it grows back, so each round goes to one that still has fruit.
+        "54e5f491c0" to { _ ->
+            val bananas = 1963
+            StepPlan.Auto(
+                listOf(
+                    RepeatUntil(
+                        "pick 10 bananas",
+                        { ctx -> ctx.conditions.count(listOf(bananas)) >= 10 },
+                        { obj(listOf(2073), listOf("Banana tree"), Tile(2930, 3156, 0), "Pick") },
+                        maxRounds = 60,
+                    ),
+                ),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
