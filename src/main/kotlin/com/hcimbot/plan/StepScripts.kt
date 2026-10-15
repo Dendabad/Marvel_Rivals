@@ -1063,14 +1063,17 @@ class StepScripts(private val guide: Guide) {
             auto(ShopTask(store, listOf(item("Bucket", 1925, 3), item("Shears", 1735, 1)), hopWhenOut = true), trust = true)
         },
 
-        // 176. "Head North-West and collect a Snape Grass": the guide gives no spot, so the road north-west from Rimmington to the
-        // Crafting Guild is walked in stretches, ending by the hobgoblins west of it where the grass is, picking up the grass (231) as soon as it is in sight.
+        // 176. "Head North-West and collect a Snape Grass": the grass (231) lies at (2917, 3274), west of the cow field by the Crafting
+        // Guild, where the hobgoblins are about.
         "5fc0549ca9" to { _ ->
             val missing: (TaskContext) -> Boolean = { ctx -> !has(231)(ctx) }
-            val stretches = listOf(Tile(2937, 3245, 0), Tile(2934, 3262, 0), Tile(2931, 3278, 0), Tile(2924, 3284, 0), Tile(2933, 3290, 0))
             StepPlan.Auto(
-                stretches.flatMap { spot -> listOf(OnlyIf(missing, PickUpTask(listOf(231), 14)), OnlyIf(missing, WalkTask(spot, radius = 3))) } +
-                    listOf(OnlyIf(missing, PickUpTask(listOf(231), 14)), OnlyIf(missing, Fail("no Snape grass found on the road north-west to the Crafting Guild"))),
+                listOf(
+                    OnlyIf(missing, PickUpTask(listOf(231), 20)),
+                    OnlyIf(missing, WalkTask(Tile(2918, 3273, 0), radius = 2)),
+                    OnlyIf(missing, PickUpTask(listOf(231), 10)),
+                    OnlyIf(missing, Fail("no Snape grass at (2917, 3274), where it was seen")),
+                ),
                 trustTasks = true,
                 ignoreStartSignal = true,
             )
