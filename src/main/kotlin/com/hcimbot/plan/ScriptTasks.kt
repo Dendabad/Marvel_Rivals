@@ -1552,9 +1552,8 @@ class CookTask(
         }
         val range = game.nearestObject(emptyList(), rangeNames, spot)?.takeIf { it.tile.distanceTo(at) <= NEAR }
         if (range == null) { place++; walk = null; return TaskResult.Running }
-        // A range inside a building with the doors shut: whether it can be reached is not told reliably, so each door round it is tried
-        // once with Open before the first use. One that is open already has no Open option and the click does nothing.
-        if (opened.size < MAX_DOORS) {
+        // Only when the range cannot be reached, which standing beside it says it can: then the doors round it are tried once each.
+        if (game.canReachBeside(range.tile) == false && opened.size < MAX_DOORS) {
             val door = game.objectsNear(listOf("Door", "Large door", "Gate"), range.tile, DOOR_RANGE)
                 .filter { it.tile !in opened }
                 .minByOrNull { it.tile.distanceTo(at ?: range.tile) }
