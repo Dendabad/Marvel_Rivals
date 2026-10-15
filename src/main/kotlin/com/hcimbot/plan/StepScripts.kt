@@ -953,6 +953,20 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 166. "Trade Wydin and buy Raw Chicken, 2x Raw Beef, 3x Flour & 2x redberries": Wydin (2890) at (3012, 3205) in Port Sarim. His
+        // stock of each runs out, so the bot hops worlds and buys again until it holds all of them.
+        "5dfbcbf292" to { _ ->
+            val wydin = listOf(ShopTask.Seller("Wydin", listOf(2890), listOf(Tile(3012, 3205, 0))))
+            auto(
+                ShopTask(
+                    wydin,
+                    listOf(item("Raw chicken", 2138, 1), item("Raw beef", 2132, 2), item("Pot of flour", 1933, 3), item("Redberries", 1951, 2)),
+                    hopWhenOut = true,
+                ),
+                trust = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
