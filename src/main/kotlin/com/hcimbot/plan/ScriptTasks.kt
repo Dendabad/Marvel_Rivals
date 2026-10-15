@@ -1503,3 +1503,37 @@ class DepositBoxTask(
         return attempt(ctx.actions.itemAction(oneOf!!, "Deposit-1"), "deposit one of item $oneOf").also { settling = 1 }
     }
 }
+
+/**
+ * Cooks [raw] on the nearest range of [rangeNames] until [burnt] is held, which is the point of it ("Beef twice on range to
+ * burn"). Out of raw ones and still none burnt, it pauses: a range that cooked them properly leaves nothing for the quest.
+ */
+class CookTask(
+    private val raw: Int,
+    private val burnt: Int,
+    private val rangeNames: List<String>,
+    private val near: Tile?,
+) : BaseTask() {
+    override val description = "Burn item $raw on a range"
+    private var settling = 0
+    private var idle = 0
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        if ((game.inventory()[burnt] ?: 0) > 0) return TaskResult.Done
+        if (settling > 0) { settling--; return TaskResult.Running }
+        if (game.isBusy) { idle = 0; return TaskResult.Running }
+        if (game.showsMakeWindow()) {
+            ctx.actions.makeAll()
+            settling = 4
+            return TaskResult.Running
+        }
+        // A cook that goes on in the background shows as no work to do for a moment: wait before looking at what was left.
+        if (++idle < 4) return TaskResult.Running
+        if (raw !in game.inventory()) return TaskResult.Failed("the raw item $raw is gone and none burnt: it needs another to burn")
+        val range = game.nearestObject(emptyList(), rangeNames, near) ?: return TaskResult.Failed("no range in sight to burn the item on")
+        idle = 0
+        settling = 3
+        return attempt(ctx.actions.useItemOnObject(raw, range), "use the item on the range")
+    }
+}
