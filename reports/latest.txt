@@ -1,91 +1,103 @@
-HCIM Guide Bot 0.16.95, PAUSED
+HCIM Guide Bot 0.16.96, PAUSED
 == Step
-Step 193 of 2925: Keep the Door Key [Mournings End Pt 2]
-Detail: Keep the Door Key [Mournings End Pt 2]. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 195 of 2925: Talk with Sanfew upstairs.
+Detail: Talk with Sanfew upstairs. (unclear what to click). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-14:58:06  Asking the AI about this pause (try 1)
-14:58:06  Paused: Keep the Door Key [Mournings End Pt 2]
-14:58:06  Step: Keep the Door Key [Mournings End Pt 2]
-14:58:06  Paused by you
-14:58:06  Paused by you
-14:58:05  Resumed by you
-14:58:05  Resumed by you
-14:57:11  Paused by you
-14:57:11  Paused by you
-14:55:23  Walking from (2936, 3459, 0) to (2936, 3460, 0)
-14:55:21  Skipped optional Quest: witchshouse: combat is turned off for safety: Kill all four forms of the Witch's experiment (levels 19, 30, 42, and 53). You can safe spot the last two forms from the crate in the south of the room.
-14:55:21  Quest Helper: NpcStep "Kill all four forms of the Witch's exper" npc [3996, 3997, 3998] obj []
+14:59:48  Asking the AI about this pause (try 1)
+14:59:48  Paused: Talk with Sanfew upstairs. (unclear what to click)
+14:59:48  Step: Talk with Sanfew upstairs.
+14:59:17  Walking from (2926, 3456, 0) to (2899, 3428, 0)
+14:59:17  Step: Head South and buy 1x Vial of Water Pack
+14:59:16  Done (a reminder to keep an item, nothing to do): Keep the Door Key [Mournings End Pt 2]
+14:59:16  Step: Keep the Door Key [Mournings End Pt 2]
+14:59:15  Resumed by you
+14:59:15  Resumed by you
+14:59:09  Started version 0.16.96
 == Player
-world WorldPoint(x=2926, y=3456, plane=0), in instance false, as guide coordinates WorldPoint(x=2926, y=3456, plane=0)
+world WorldPoint(x=2896, y=3428, plane=0), in instance false, as guide coordinates WorldPoint(x=2896, y=3428, plane=0)
 hitpoints 24/24
 == Bag (item id x count)
-995x11818, 558x111, 2134x1, 2138x1, 2132x1, 1935x1, 1993x1, 1993x1, 1993x1, 1935x1, 1993x1, 1993x1, 1935x1, 1935x1, 1993x1, 1929x1, 432x1, 2408x1, 1793x6, 2136x1, 526x1, 948x1, 2409x1, 2411x1
+995x11617, 558x111, 2134x1, 2138x1, 2132x1, 1935x1, 1993x1, 1993x1, 1993x1, 1935x1, 1993x1, 1993x1, 1935x1, 1935x1, 1993x1, 1929x1, 432x1, 2408x1, 1793x6, 2136x1, 526x1, 948x1, 2409x1, 2411x1, 11879x1
 == NPCs within 12 tiles (id name at tile: options)
-3258 Druid at WorldPoint(x=2920, y=3449, plane=0): [Talk-to, Attack]
-3995 Nora T. Hagg at WorldPoint(x=2927, y=3463, plane=0): []
-3994 Boy at WorldPoint(x=2927, y=3456, plane=0): [Talk-to]
+3258 Druid at WorldPoint(x=2895, y=3437, plane=0): [Talk-to, Attack]
+3258 Druid at WorldPoint(x=2899, y=3430, plane=0): [Talk-to, Attack]
+3258 Druid at WorldPoint(x=2899, y=3434, plane=0): [Talk-to, Attack]
+8532 Jatix at WorldPoint(x=2896, y=3429, plane=0): [Talk-to, Trade]
+3258 Druid at WorldPoint(x=2885, y=3418, plane=0): [Talk-to, Attack]
+3258 Druid at WorldPoint(x=2889, y=3438, plane=0): [Talk-to, Attack]
+3258 Druid at WorldPoint(x=2893, y=3437, plane=0): [Talk-to, Attack]
+3258 Druid at WorldPoint(x=2892, y=3419, plane=0): [Talk-to, Attack]
 == Named objects within 25 tiles, nearest first (id name at tile)
-1116 Hedge at WorldPoint(x=2923, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2924, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2925, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2926, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2927, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2928, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2929, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2922, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2930, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2921, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2923, y=3461, plane=0)
-1116 Hedge at WorldPoint(x=2924, y=3461, plane=0)
-1116 Hedge at WorldPoint(x=2925, y=3461, plane=0)
-1116 Hedge at WorldPoint(x=2929, y=3461, plane=0)
-1116 Hedge at WorldPoint(x=2930, y=3461, plane=0)
-1116 Hedge at WorldPoint(x=2931, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2931, y=3461, plane=0)
-1116 Hedge at WorldPoint(x=2920, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2932, y=3459, plane=0)
-1117 Hedge at WorldPoint(x=2932, y=3461, plane=0)
-1116 Hedge at WorldPoint(x=2932, y=3462, plane=0)
-1116 Hedge at WorldPoint(x=2919, y=3459, plane=0)
-587 Statue of Zamorak at WorldPoint(x=2931, y=3463, plane=0)
-1116 Hedge at WorldPoint(x=2932, y=3463, plane=0)
-1116 Hedge at WorldPoint(x=2933, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2918, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2932, y=3464, plane=0)
-365 Sacks at WorldPoint(x=2934, y=3460, plane=0)
-693 Broom at WorldPoint(x=2934, y=3461, plane=0)
-2863 Door at WorldPoint(x=2934, y=3463, plane=0)
-603 Table at WorldPoint(x=2917, y=3449, plane=0)
-1116 Hedge at WorldPoint(x=2917, y=3459, plane=0)
-1116 Hedge at WorldPoint(x=2917, y=3461, plane=0)
-1116 Hedge at WorldPoint(x=2919, y=3465, plane=0)
-1116 Hedge at WorldPoint(x=2920, y=3465, plane=0)
-1116 Hedge at WorldPoint(x=2921, y=3465, plane=0)
-1116 Hedge at WorldPoint(x=2926, y=3465, plane=0)
-1116 Hedge at WorldPoint(x=2927, y=3465, plane=0)
-1116 Hedge at WorldPoint(x=2928, y=3465, plane=0)
-1117 Hedge at WorldPoint(x=2932, y=3465, plane=0)
+1536 Door at WorldPoint(x=2895, y=3428, plane=0)
+1158 Potted plant at WorldPoint(x=2896, y=3426, plane=0)
+1158 Potted plant at WorldPoint(x=2896, y=3430, plane=0)
+16671 Staircase at WorldPoint(x=2898, y=3428, plane=0)
+1153 Potted fern at WorldPoint(x=2895, y=3425, plane=0)
+1154 Potted fern at WorldPoint(x=2895, y=3431, plane=0)
+1154 Potted fern at WorldPoint(x=2897, y=3425, plane=0)
+1152 Potted fern at WorldPoint(x=2897, y=3431, plane=0)
+1155 Potted fern at WorldPoint(x=2898, y=3425, plane=0)
+1153 Potted fern at WorldPoint(x=2898, y=3431, plane=0)
+1153 Potted fern at WorldPoint(x=2899, y=3425, plane=0)
+1152 Potted fern at WorldPoint(x=2899, y=3431, plane=0)
+1102 Stool at WorldPoint(x=2892, y=3424, plane=0)
+1153 Potted fern at WorldPoint(x=2897, y=3424, plane=0)
+1154 Potted fern at WorldPoint(x=2897, y=3432, plane=0)
+1153 Potted fern at WorldPoint(x=2899, y=3424, plane=0)
+1154 Potted fern at WorldPoint(x=2899, y=3432, plane=0)
+1158 Potted plant at WorldPoint(x=2900, y=3426, plane=0)
+1158 Potted plant at WorldPoint(x=2900, y=3430, plane=0)
+1192 Flowers at WorldPoint(x=2891, y=3424, plane=0)
+1154 Potted fern at WorldPoint(x=2901, y=3425, plane=0)
+1536 Door at WorldPoint(x=2901, y=3428, plane=0)
+1152 Potted fern at WorldPoint(x=2901, y=3431, plane=0)
+1193 Flowers at WorldPoint(x=2890, y=3423, plane=0)
+1173 Small fern at WorldPoint(x=2890, y=3424, plane=0)
+1193 Flowers at WorldPoint(x=2890, y=3425, plane=0)
+1193 Flowers at WorldPoint(x=2890, y=3428, plane=0)
+1173 Small fern at WorldPoint(x=2890, y=3429, plane=0)
+1154 Potted fern at WorldPoint(x=2902, y=3427, plane=0)
+1152 Potted fern at WorldPoint(x=2902, y=3429, plane=0)
+1192 Flowers at WorldPoint(x=2889, y=3422, plane=0)
+1298 Fern at WorldPoint(x=2889, y=3425, plane=0)
+1192 Flowers at WorldPoint(x=2889, y=3426, plane=0)
+1173 Small fern at WorldPoint(x=2889, y=3427, plane=0)
+1173 Small fern at WorldPoint(x=2889, y=3428, plane=0)
+1192 Flowers at WorldPoint(x=2889, y=3429, plane=0)
+1199 Flowerbed at WorldPoint(x=2891, y=3435, plane=0)
+1187 Flower at WorldPoint(x=2892, y=3435, plane=0)
+1535 Door at WorldPoint(x=2893, y=3421, plane=0)
+1153 Potted fern at WorldPoint(x=2894, y=3421, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
-2407 Ball at WorldPoint(x=2935, y=3460, plane=0)
+1978 Cup of tea at WorldPoint(x=2903, y=3441, plane=0)
+2162 King worm at WorldPoint(x=2896, y=3414, plane=0)
+1978 Cup of tea at WorldPoint(x=2886, y=3412, plane=0)
+2150 Swamp toad at WorldPoint(x=2908, y=3410, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-1258 at WorldPoint(x=2925, y=3455, plane=0)
-1258 at WorldPoint(x=2926, y=3455, plane=0)
-1259 at WorldPoint(x=2927, y=3455, plane=0)
-997 at WorldPoint(x=2924, y=3458, plane=0)
-997 at WorldPoint(x=2925, y=3458, plane=0)
-1258 at WorldPoint(x=2926, y=3454, plane=0)
-997 at WorldPoint(x=2926, y=3458, plane=0)
-1259 at WorldPoint(x=2927, y=3454, plane=0)
-997 at WorldPoint(x=2927, y=3458, plane=0)
-1258 at WorldPoint(x=2928, y=3454, plane=0)
-1258 at WorldPoint(x=2928, y=3455, plane=0)
-42797 at WorldPoint(x=2928, y=3456, plane=0)
-1258 at WorldPoint(x=2928, y=3458, plane=0)
-997 at WorldPoint(x=2928, y=3458, plane=0)
-1258 at WorldPoint(x=2923, y=3458, plane=0)
+2753 at WorldPoint(x=2896, y=3428, plane=0)
+1850 at WorldPoint(x=2895, y=3427, plane=0)
+1850 at WorldPoint(x=2895, y=3429, plane=0)
+944 at WorldPoint(x=2897, y=3427, plane=0)
+944 at WorldPoint(x=2897, y=3428, plane=0)
+944 at WorldPoint(x=2897, y=3429, plane=0)
+316 at WorldPoint(x=2894, y=3426, plane=0)
+1602 at WorldPoint(x=2894, y=3426, plane=0)
+1905 at WorldPoint(x=2894, y=3427, plane=0)
+1850 at WorldPoint(x=2894, y=3427, plane=0)
+1905 at WorldPoint(x=2894, y=3429, plane=0)
+1850 at WorldPoint(x=2894, y=3429, plane=0)
+1602 at WorldPoint(x=2894, y=3430, plane=0)
+1905 at WorldPoint(x=2895, y=3426, plane=0)
+1905 at WorldPoint(x=2895, y=3430, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
-2407  x400
-995 Coins x11818
+229 Vial x800
+11877 Empty vial pack x800
+227 Vial of water x750
+11879 Water-filled vial pack x749
+233 Pestle and mortar x3
+221 Eye of newt x800
+12859 Eye of newt pack x100
+995 Coins x11617
 558 Mind rune x111
 2134 Raw rat meat x1
 2138 Raw chicken x1
@@ -101,16 +113,16 @@ hitpoints 24/24
 948 Bear fur x1
 2409 Door key x1
 2411 Key x1
+11879 Water-filled vial pack x1
 == Text in open windows and chat
-3m
-7,745
-Congratulations!
-You have completed Witch's House!
-Total Quest Points: 9
-You are awarded:
-4 Quest Points
-6,325 Hitpoints XP
+1m
+Jatix's Herblore Shop.
+Value check:
+Quantity:
+10
+50
 24
+88
 100
 All
 Game
@@ -121,8 +133,11 @@ Friends
 Channel
 Clan
 Trade
-01:44:11
+01:45:53
 Boatyguidev3:              *
+[14:59:43] Error interacting with NPC 'Jatix' for action 'Trade': Action not found. Actions=[]
+Congratulations, you've just advanced your Combat level. You are now level 11.
+Congratulations, you've just advanced your Hitpoints level. You are now level 24.
 Congratulations, you've completed a quest: @q_mes@Witch's House
 I can't reach that!
 You finally kill the shapeshifter once and for all.
@@ -160,7 +175,5 @@ You get a fresh, new haircut!
 You have unlocked a new music track: @mes_hl_red@Workshop
 You have unlocked a new music track: @mes_hl_red@Arrival
 You have unlocked a new music track: @mes_hl_red@Fanfare
-You get some wool.
-You'll need an empty bucket to collect the milk.
 == Quest Helper
 no step: null
