@@ -617,6 +617,19 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 131. "Travel with Antonia to Aldarin": Antonia, the ship's captain at Sunset Coast (13984 and 13985, at (1495, 2985)), takes
+        // the player to Aldarin, to the west. Microbot sees only her Talk-to, so she is talked to and the trip agreed to.
+        "3eaf3bdd31" to { _ ->
+            auto(
+                InteractTask(
+                    InteractTask.Kind.NPC, listOf(13984, 13985), listOf("Antonia"), listOf(Tile(1495, 2985, 0)), "Talk-to",
+                    DialoguePlan.Texts(listOf("Aldarin", "Yes", "Okay", "Let's go")),
+                ),
+                WaitUntilTask("Arrive in Aldarin", maxTicks = 100) { (it.game.playerTile?.x ?: 9999) < 1470 },
+                trust = true,
+            )
+        },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
