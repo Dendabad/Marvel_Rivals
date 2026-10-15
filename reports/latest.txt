@@ -1,84 +1,95 @@
-HCIM Guide Bot 0.16.70, PAUSED
+HCIM Guide Bot 0.16.71, PAUSED
 == Step
-Step 176 of 2925: Head North-West and collect a Snape Grass
-Detail: Walk to (2937, 3245, 0): could not walk to (2937, 3245, 0). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 177 of 2925: Milk the cow 3x by Crafting guild
+Detail: Milk the cow 3x by Crafting guild. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-13:54:36  Asking the AI about this pause (try 1)
-13:54:36  Paused: Walk to (2937, 3245, 0): could not walk to (2937, 3245, 0)
-13:54:30  Walking from (2940, 3236, 0) to (2937, 3245, 0)
-13:54:28  Step: Head North-West and collect a Snape Grass
-13:54:27  Started version 0.16.70
+13:56:05  Asking the AI about this pause (try 1)
+13:56:05  Paused: Milk the cow 3x by Crafting guild
+13:56:05  Step: Milk the cow 3x by Crafting guild
+13:56:00  Step: Head North-West and collect a Snape Grass
+13:55:59  Started version 0.16.71
 == Player
-world WorldPoint(x=2940, y=3236, plane=0), in instance false, as guide coordinates WorldPoint(x=2940, y=3236, plane=0)
+world WorldPoint(x=2917, y=3274, plane=0), in instance false, as guide coordinates WorldPoint(x=2917, y=3274, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x11878, 558x200, 432x1, 1511x1, 1269x1, 1511x1, 1993x1, 1993x1, 221x1, 1592x1, 1595x1, 1597x1, 1597x1, 11065x1, 2976x1, 5523x1, 1733x3, 1734x50, 1925x1, 1925x1, 1925x1, 1735x1
+995x11878, 558x200, 432x1, 1511x1, 1269x1, 1511x1, 1993x1, 1993x1, 221x1, 1592x1, 1595x1, 1597x1, 1597x1, 11065x1, 2976x1, 5523x1, 1733x3, 1734x50, 1925x1, 1925x1, 1925x1, 1735x1, 231x1
 == NPCs within 12 tiles (id name at tile: options)
-2854 Rat at WorldPoint(x=2933, y=3247, plane=0): [Attack]
-3970 Zombie rat at WorldPoint(x=2928, y=3243, plane=0): [Attack]
-2854 Rat at WorldPoint(x=2931, y=3246, plane=0): [Attack]
-3971 Zombie rat at WorldPoint(x=2934, y=3244, plane=0): [Attack]
-0 Tool Leprechaun at WorldPoint(x=2940, y=3225, plane=0): [Talk-to, Exchange, Deposit-all]
-2854 Rat at WorldPoint(x=2938, y=3245, plane=0): [Attack]
-2675 Taria at WorldPoint(x=2944, y=3224, plane=0): [Talk-to, Pay, Trade]
+3286 Hobgoblin at WorldPoint(x=2910, y=3279, plane=0): [Attack]
+3288 Hobgoblin at WorldPoint(x=2910, y=3280, plane=0): [Attack]
+3287 Hobgoblin at WorldPoint(x=2913, y=3274, plane=0): [Attack]
+3288 Hobgoblin at WorldPoint(x=2912, y=3277, plane=0): [Attack]
+2790 Cow at WorldPoint(x=2920, y=3286, plane=0): [Attack]
+3286 Hobgoblin at WorldPoint(x=2919, y=3270, plane=0): [Attack]
+2793 Cow at WorldPoint(x=2924, y=3284, plane=0): [Attack]
+2791 Cow at WorldPoint(x=2923, y=3282, plane=0): [Attack]
+1172  at WorldPoint(x=2923, y=3285, plane=0): []
+2793 Cow at WorldPoint(x=2925, y=3275, plane=0): [Attack]
+2790 Cow at WorldPoint(x=2927, y=3281, plane=0): [Attack]
+2790 Cow at WorldPoint(x=2923, y=3271, plane=0): [Attack]
+2801 Cow calf at WorldPoint(x=2928, y=3274, plane=0): [Attack]
 == Named objects within 25 tiles, nearest first (id name at tile)
-25046 Bookshelves at WorldPoint(x=2938, y=3237, plane=0)
-9605 Plant at WorldPoint(x=2941, y=3239, plane=0)
-17028 Ladder at WorldPoint(x=2937, y=3240, plane=0)
-10822 Yew tree at WorldPoint(x=2940, y=3232, plane=0)
-25047 Table at WorldPoint(x=2935, y=3242, plane=0)
-1276 Tree at WorldPoint(x=2946, y=3242, plane=0)
-10822 Yew tree at WorldPoint(x=2933, y=3233, plane=0)
-955 Spooky picture at WorldPoint(x=2933, y=3243, plane=0)
-10822 Yew tree at WorldPoint(x=2935, y=3229, plane=0)
-365 Sacks at WorldPoint(x=2936, y=3243, plane=0)
-365 Sacks at WorldPoint(x=2937, y=3243, plane=0)
-1189 Daisies at WorldPoint(x=2938, y=3229, plane=0)
-25040 Wardrobe at WorldPoint(x=2938, y=3243, plane=0)
-1276 Tree at WorldPoint(x=2947, y=3235, plane=0)
-2605 Ladder at WorldPoint(x=2932, y=3240, plane=0)
-9519 Barrel at WorldPoint(x=2937, y=3244, plane=0)
-25040 Wardrobe at WorldPoint(x=2938, y=3244, plane=0)
-25040 Wardrobe at WorldPoint(x=2931, y=3242, plane=0)
-9519 Barrel at WorldPoint(x=2937, y=3245, plane=0)
-1276 Tree at WorldPoint(x=2944, y=3227, plane=0)
-1276 Tree at WorldPoint(x=2949, y=3231, plane=0)
-1278 Tree at WorldPoint(x=2949, y=3234, plane=0)
-1276 Tree at WorldPoint(x=2930, y=3229, plane=0)
-25040 Wardrobe at WorldPoint(x=2930, y=3243, plane=0)
-9703 Candlestick holder at WorldPoint(x=2934, y=3246, plane=0)
-25047 Table at WorldPoint(x=2940, y=3246, plane=0)
-9624 Plough at WorldPoint(x=2947, y=3246, plane=0)
-1276 Tree at WorldPoint(x=2950, y=3229, plane=0)
-1278 Tree at WorldPoint(x=2950, y=3238, plane=0)
-17028 Ladder at WorldPoint(x=2929, y=3240, plane=0)
-25040 Wardrobe at WorldPoint(x=2929, y=3242, plane=0)
-9704 Chair at WorldPoint(x=2929, y=3247, plane=0)
-9705 Chair at WorldPoint(x=2930, y=3247, plane=0)
-9704 Chair at WorldPoint(x=2931, y=3247, plane=0)
-9704 Chair at WorldPoint(x=2932, y=3247, plane=0)
-10822 Yew tree at WorldPoint(x=2934, y=3225, plane=0)
-1298 Fern at WorldPoint(x=2939, y=3225, plane=0)
-1278 Tree at WorldPoint(x=2944, y=3225, plane=0)
-10820 Oak tree at WorldPoint(x=2946, y=3225, plane=0)
-1276 Tree at WorldPoint(x=2949, y=3225, plane=0)
+12590 Rocks at WorldPoint(x=2917, y=3277, plane=0)
+12588 Rock at WorldPoint(x=2916, y=3279, plane=0)
+12589 Rock at WorldPoint(x=2918, y=3281, plane=0)
+12589 Rock at WorldPoint(x=2908, y=3278, plane=0)
+1096 Rocking chair at WorldPoint(x=2927, y=3276, plane=0)
+1096 Rocking chair at WorldPoint(x=2927, y=3277, plane=0)
+12590 Rocks at WorldPoint(x=2906, y=3279, plane=0)
+8689 Dairy cow at WorldPoint(x=2923, y=3285, plane=0)
+5577 Trough at WorldPoint(x=2928, y=3267, plane=0)
+598 Table at WorldPoint(x=2928, y=3277, plane=0)
+1158 Potted plant at WorldPoint(x=2928, y=3278, plane=0)
+59293 Treacherous rock at WorldPoint(x=2905, y=3281, plane=0)
+26815 Poll booth at WorldPoint(x=2929, y=3275, plane=0)
+1096 Rocking chair at WorldPoint(x=2929, y=3278, plane=0)
+7512 Sacks at WorldPoint(x=2929, y=3281, plane=0)
+9534 Crate at WorldPoint(x=2929, y=3282, plane=0)
+9535 Crates at WorldPoint(x=2929, y=3283, plane=0)
+9519 Barrel at WorldPoint(x=2929, y=3284, plane=0)
+29103 Bank Deposit Box at WorldPoint(x=2929, y=3286, plane=0)
+1276 Tree at WorldPoint(x=2927, y=3261, plane=0)
+1158 Potted plant at WorldPoint(x=2928, y=3287, plane=0)
+1158 Potted plant at WorldPoint(x=2930, y=3276, plane=0)
+9694 Noticeboard at WorldPoint(x=2930, y=3283, plane=0)
+1276 Tree at WorldPoint(x=2930, y=3260, plane=0)
+5575 Trough at WorldPoint(x=2931, y=3267, plane=0)
+9582 Staircase at WorldPoint(x=2931, y=3282, plane=0)
+595 Table at WorldPoint(x=2928, y=3289, plane=0)
+9605 Plant at WorldPoint(x=2932, y=3262, plane=0)
+1173 Small fern at WorldPoint(x=2923, y=3258, plane=0)
+17028 Ladder at WorldPoint(x=2925, y=3258, plane=0)
+25214 Trapdoor at WorldPoint(x=2928, y=3258, plane=0)
+9519 Barrel at WorldPoint(x=2933, y=3278, plane=0)
+9684 Sink at WorldPoint(x=2933, y=3279, plane=0)
+9695 Noticeboard at WorldPoint(x=2933, y=3279, plane=0)
+14910 Guild Door at WorldPoint(x=2933, y=3289, plane=0)
+14915 Sand at WorldPoint(x=2906, y=3291, plane=0)
+8689 Dairy cow at WorldPoint(x=2920, y=3291, plane=0)
+208 Candles at WorldPoint(x=2923, y=3257, plane=0)
+955 Spooky picture at WorldPoint(x=2925, y=3257, plane=0)
+208 Candles at WorldPoint(x=2930, y=3257, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
+11065 Bracelet mould at WorldPoint(x=2928, y=3289, plane=0)
+1595 Amulet mould at WorldPoint(x=2928, y=3290, plane=0)
+2347 Hammer at WorldPoint(x=2934, y=3286, plane=0)
+1755 Chisel at WorldPoint(x=2935, y=3286, plane=0)
+1935 Jug at WorldPoint(x=2936, y=3292, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-9596 at WorldPoint(x=2940, y=3236, plane=0)
-5534 at WorldPoint(x=2939, y=3236, plane=0)
-9596 at WorldPoint(x=2939, y=3236, plane=0)
-1247 at WorldPoint(x=2940, y=3235, plane=0)
-9596 at WorldPoint(x=2940, y=3237, plane=0)
-1938 at WorldPoint(x=2940, y=3237, plane=0)
-4737 at WorldPoint(x=2941, y=3237, plane=0)
-9596 at WorldPoint(x=2941, y=3237, plane=0)
-4737 at WorldPoint(x=2938, y=3234, plane=0)
-4736 at WorldPoint(x=2938, y=3235, plane=0)
-5533 at WorldPoint(x=2938, y=3236, plane=0)
-9596 at WorldPoint(x=2938, y=3236, plane=0)
-4737 at WorldPoint(x=2939, y=3234, plane=0)
-4736 at WorldPoint(x=2940, y=3234, plane=0)
-5534 at WorldPoint(x=2941, y=3238, plane=0)
+729 at WorldPoint(x=2916, y=3273, plane=0)
+729 at WorldPoint(x=2915, y=3272, plane=0)
+730 at WorldPoint(x=2916, y=3272, plane=0)
+729 at WorldPoint(x=2914, y=3273, plane=0)
+729 at WorldPoint(x=2914, y=3276, plane=0)
+320 at WorldPoint(x=2918, y=3271, plane=0)
+320 at WorldPoint(x=2920, y=3271, plane=0)
+729 at WorldPoint(x=2913, y=3275, plane=0)
+730 at WorldPoint(x=2913, y=3276, plane=0)
+729 at WorldPoint(x=2913, y=3277, plane=0)
+729 at WorldPoint(x=2913, y=3278, plane=0)
+320 at WorldPoint(x=2917, y=3270, plane=0)
+321 at WorldPoint(x=2918, y=3270, plane=0)
+320 at WorldPoint(x=2919, y=3270, plane=0)
+319 at WorldPoint(x=2920, y=3270, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
 995 Coins x11878
 558 Mind rune x200
@@ -97,8 +108,10 @@ hitpoints 10/10
 1734 Thread x50
 1925 Bucket x1
 1735 Shears x1
+231 Snape grass x1
 == Text in open windows and chat
 10
+93
 100
 All
 Game
@@ -109,7 +122,7 @@ Friends
 Channel
 Clan
 Trade
-00:40:40
+00:42:09
 Boatyguidev3: *
 Check the skill guide for more information about Magic.
 Level 5 Magic: Water Strike
