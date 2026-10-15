@@ -30,6 +30,9 @@ object ItemSources {
         // 26. "Talk to Sedridor to continue Rune Mysteries (1,2,1)": Sedridor hands over the Research Package
         // (Rune Mysteries is at 3 once he has), and step 30 banks it for step 94.
         Given(setOf(290), "varplayer", 63, "666fe06edc", "Sedridor gives it in step 26, which was not done", belowValue = 3),
+        // 95. "Talk to Aubury to continue Rune Mysteries (1,2)": Aubury hands over the Research notes (Rune Mysteries is at 5 once he
+        // has), and step 148 takes them back to Sedridor.
+        Given(setOf(291), "varplayer", 63, "c0297c1e56", "Aubury gives them in step 95, which was not done", belowValue = 5),
     )
 
     /**
