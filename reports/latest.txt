@@ -3,26 +3,27 @@ HCIM Guide Bot 0.16.94, PAUSED
 Step 192 of 2925: Complete Witches House quest - Safespot guide for the spider: https://youtu.be/bDB351j-qZI?t=178
 Detail: Kill Witch's experiment for : could not attack Witch's experiment. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-14:51:46  Asking the AI about this pause (try 1)
-14:51:46  Paused: Kill Witch's experiment for : could not attack Witch's experiment
-14:51:46  could not attack Witch's experiment
-14:51:45  could not attack Witch's experiment
-14:51:44  could not attack Witch's experiment
-14:51:42  could not attack Witch's experiment
-14:51:41  could not attack Witch's experiment
-14:51:37  Walking from (2934, 3463, 0) to (2936, 3460, 0)
-14:51:35  Skipped optional Quest: witchshouse: combat is turned off for safety: Kill all four forms of the Witch's experiment (levels 19, 30, 42, and 53). You can safe spot the last two forms from the crate in the south of the room.
-14:51:35  Quest Helper: NpcStep "Kill all four forms of the Witch's exper" npc [3996, 3997, 3998] obj []
-14:51:35  Quest step: Kill all four forms of the Witch's experiment (levels 19, 30, 42, and 53). You can safe spot the last two forms from the crate in the south of the room.
-14:51:32  Step: Complete Witches House quest - Safespot guide for the spider: https://youtu.be/bDB351j-qZI?t=178
+14:52:50  Asking the AI about this pause (try 1)
+14:52:50  Paused: Kill Witch's experiment for : could not attack Witch's experiment
+14:52:50  could not attack Witch's experiment
+14:52:44  could not attack Witch's experiment
+14:52:42  could not attack Witch's experiment
+14:52:41  could not attack Witch's experiment
+14:52:35  Hitpoints 5, using item 1993
+14:52:34  could not attack Witch's experiment
+14:52:07  Walking from (2936, 3459, 0) to (2936, 3460, 0)
+14:52:05  Skipped optional Quest: witchshouse: combat is turned off for safety: Kill all four forms of the Witch's experiment (levels 19, 30, 42, and 53). You can safe spot the last two forms from the crate in the south of the room.
+14:52:05  Quest Helper: NpcStep "Kill all four forms of the Witch's exper" npc [3996, 3997, 3998] obj []
+14:52:05  Quest step: Kill all four forms of the Witch's experiment (levels 19, 30, 42, and 53). You can safe spot the last two forms from the crate in the south of the room.
 == Player
 world WorldPoint(x=2936, y=3459, plane=0), in instance false, as guide coordinates WorldPoint(x=2936, y=3459, plane=0)
-hitpoints 10/10
+hitpoints 6/10
 == Bag (item id x count)
-995x11818, 558x183, 2134x1, 2138x1, 2132x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1929x1, 432x1, 2408x1, 1793x6, 2136x1, 526x1, 948x1, 2409x1, 2411x1
+995x11818, 558x172, 2134x1, 2138x1, 2132x1, 1935x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1929x1, 432x1, 2408x1, 1793x6, 2136x1, 526x1, 948x1, 2409x1, 2411x1
 == NPCs within 12 tiles (id name at tile: options)
-3996 Witch's experiment at WorldPoint(x=2937, y=3461, plane=0): [Attack]
-3994 Boy at WorldPoint(x=2929, y=3456, plane=0): [Talk-to]
+3995 Nora T. Hagg at WorldPoint(x=2927, y=3463, plane=0): []
+3996 Witch's experiment at WorldPoint(x=2936, y=3460, plane=0): [Attack]
+3994 Boy at WorldPoint(x=2928, y=3455, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
 366 Crate at WorldPoint(x=2935, y=3460, plane=0)
 654 Bloodsplatter at WorldPoint(x=2936, y=3460, plane=0)
@@ -84,10 +85,11 @@ hitpoints 10/10
 1258 at WorldPoint(x=2934, y=3457, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
 995 Coins x11818
-558 Mind rune x183
+558 Mind rune x172
 2134 Raw rat meat x1
 2138 Raw chicken x1
 2132 Raw beef x1
+1935 Jug x1
 1993 Jug of wine x1
 1929 Bucket of water x1
 432 Chest key x1
@@ -99,9 +101,9 @@ hitpoints 10/10
 2409 Door key x1
 2411 Key x1
 == Text in open windows and chat
-9m
-10
-57
+8m
+641
+65
 100
 All
 Game
@@ -112,8 +114,10 @@ Friends
 Channel
 Clan
 Trade
-01:37:50
+01:38:54
 Boatyguidev3: *
+It makes you feel a bit dizzy, but it heals some health.
+You drink the wine.
 I can't reach that!
 You have unlocked a new music track: @mes_hl_red@Courage
 You've started a new quest: @q_mes@Druidic Ritual
@@ -157,6 +161,5 @@ There are a lot of bananas in the crate.
 There are a lot of potatoes in the crate.
 There are a lot of cabbages in the crate.
 [13:13:55] Error during overlay renderingjava.lang.NullPointerException: Cannot read the array length because "" is null
-Welcome to Old School RuneScape.
 == Quest Helper
 NpcStep: "Kill all four forms of the Witch's experiment (levels 19, 30, 42, and 53). You can safe spot the last two forms from the crate in the south of the room." npcs [3996, 3997, 3998, 3999] objects [] at null choices []
