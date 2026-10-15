@@ -719,6 +719,27 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 144. "Home Teleport to Lumbridge": step 145 goes to the Wizards' Tower, where the Research notes are handed to Sedridor in
+        // step 148. Without them (the bank had none in step 143), Aubury in south east Varrock (3253, 3401) is visited first and
+        // asked for them again, which is a Rune Mysteries step of its own and so not something the guide lists here.
+        "b2118c6c31" to { _ ->
+            val lumbridge = Tile(3222, 3218, 0)
+            val noNotes: (TaskContext) -> Boolean = { ctx -> !has(291)(ctx) }
+            val askForNotes = DialoguePlan.Texts(listOf("notes", "lost", "research", "package"))
+            StepPlan.Auto(
+                listOf(
+                    OnlyIf({ ctx -> ctx.game.playerTile?.let { it.distanceTo(lumbridge) > 10 } ?: true }, CastSpellTask("TELEPORT_HOME_STANDARD", 14286854)),
+                    WaitUntilTask("arrive in Lumbridge", 80) { ctx -> ctx.game.playerTile?.let { it.plane == 0 && it.distanceTo(lumbridge) <= 10 } == true },
+                    // Each is decided as it starts, so once the notes are in the bag the rest are skipped.
+                    OnlyIf(noNotes, WalkTask(Tile(3253, 3400, 0), radius = 3)),
+                    OnlyIf(noNotes, InteractTask(InteractTask.Kind.NPC, listOf(11434, 2886, 11435, 10681), listOf("Aubury"), listOf(Tile(3253, 3401, 0)), "Talk-to", askForNotes)),
+                    OnlyIf(noNotes, WaitUntilTask("get the Research notes from Aubury", 30, askForNotes, has(291))),
+                ),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
