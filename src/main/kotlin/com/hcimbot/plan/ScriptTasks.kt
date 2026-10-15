@@ -1505,22 +1505,25 @@ class DepositBoxTask(
 }
 
 /**
- * Cooks [raw] on the nearest range of [rangeNames] until [burnt] is held, which is the point of it ("Beef twice on range to
- * burn"). Out of raw ones and still none burnt, it pauses: a range that cooked them properly leaves nothing for the quest.
+ * Burns [raw] for [burnt]: cooked on the nearest range of [rangeNames] it turns into [cooked], and [cooked] used on a range burns
+ * (the guide's "Beef twice on range to burn"), so it goes on until [burnt] is held. With a range not in sight it walks to [lookAt].
  */
 class CookTask(
     private val raw: Int,
+    private val cooked: Int,
     private val burnt: Int,
     private val rangeNames: List<String>,
-    private val near: Tile?,
+    private val lookAt: Tile,
 ) : BaseTask() {
     override val description = "Burn item $raw on a range"
     private var settling = 0
     private var idle = 0
+    private var walk: WalkTask? = null
 
     override fun tick(ctx: TaskContext): TaskResult {
         val game = ctx.game
-        if ((game.inventory()[burnt] ?: 0) > 0) return TaskResult.Done
+        val have = game.inventory()
+        if ((have[burnt] ?: 0) > 0) return TaskResult.Done
         if (settling > 0) { settling--; return TaskResult.Running }
         if (game.isBusy) { idle = 0; return TaskResult.Running }
         if (game.showsMakeWindow()) {
@@ -1530,10 +1533,20 @@ class CookTask(
         }
         // A cook that goes on in the background shows as no work to do for a moment: wait before looking at what was left.
         if (++idle < 4) return TaskResult.Running
-        if (raw !in game.inventory()) return TaskResult.Failed("the raw item $raw is gone and none burnt: it needs another to burn")
-        val range = game.nearestObject(emptyList(), rangeNames, near) ?: return TaskResult.Failed("no range in sight to burn the item on")
+        // Cooked ones burn when used on a range again, so they go first.
+        val item = listOf(cooked, raw).firstOrNull { (have[it] ?: 0) > 0 }
+            ?: return TaskResult.Failed("nothing left to burn: no raw item $raw or cooked item $cooked and none burnt")
+        val range = game.nearestObject(emptyList(), rangeNames, lookAt)?.takeIf { game.playerTile?.let { at -> it.tile.distanceTo(at) <= NEAR } == true }
+        if (range == null) {
+            val goTo = walk ?: WalkTask(lookAt, radius = 5).also { walk = it }
+            return goTo.tick(ctx).let { if (it is TaskResult.Done) TaskResult.Failed("no range in sight near $lookAt") else it }
+        }
         idle = 0
         settling = 3
-        return attempt(ctx.actions.useItemOnObject(raw, range), "use the item on the range")
+        return attempt(ctx.actions.useItemOnObject(item, range), "use item $item on the range")
+    }
+
+    private companion object {
+        const val NEAR = 12
     }
 }

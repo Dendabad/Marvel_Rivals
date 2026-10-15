@@ -1020,14 +1020,13 @@ class StepScripts(private val guide: Guide) {
         },
 
         // 172. "Head South-West and complete Witches Potion (Beef twice on range to burn)": Hetty (4619) in Rimmington at (2968, 3205).
-        // The Burnt meat (2146) the quest asks for comes from cooking the raw beef (2132) on a range in the village, then Quest Helper
-        // carries on with the rat tail and the cauldron.
+        // The Burnt meat (2146) the quest asks for comes from the raw beef (2132) cooked on Port Sarim's cooking range, and the cooked
+        // meat (2142) used on it again, which burns it. Then Quest Helper carries on with the rat tail and the cauldron.
         "ed3286ae00" to { settings ->
             val helper = guide.questHelpers["witchspotion"]
             StepPlan.Auto(
                 listOfNotNull(
-                    WalkTask(Tile(2968, 3209, 0), radius = 4),
-                    OnlyIf({ ctx -> !has(2146)(ctx) }, CookTask(2132, 2146, listOf("Range", "Cooking range"), Tile(2970, 3210, 0))),
+                    OnlyIf({ ctx -> !has(2146)(ctx) }, CookTask(2132, 2142, 2146, listOf("Cooking range", "Range"), Tile(3018, 3233, 0))),
                     helper?.let { QuestTask("witchspotion", it, true) },
                 ),
                 combat = true,
