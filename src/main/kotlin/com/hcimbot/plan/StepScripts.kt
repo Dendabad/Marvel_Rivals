@@ -40,6 +40,21 @@ class StepScripts(private val guide: Guide) {
 
     private fun has(id: Int, count: Int = 1): (TaskContext) -> Boolean = { it.conditions.count(listOf(id)) >= count }
 
+    /**
+     * Visits Aubury in south east Varrock (3253, 3401) for the Research notes if the bag has none. The bank had none in step 143,
+     * and the Wizards' Tower in step 148 needs them for Sedridor. Each task is decided as it starts, so once the notes are in the
+     * bag the rest are skipped.
+     */
+    private fun notesFromAubury(): List<Task> {
+        val noNotes: (TaskContext) -> Boolean = { ctx -> !has(291)(ctx) }
+        val askForNotes = DialoguePlan.Texts(listOf("notes", "lost", "research", "package"))
+        return listOf(
+            OnlyIf(noNotes, WalkTask(Tile(3253, 3400, 0), radius = 3)),
+            OnlyIf(noNotes, InteractTask(InteractTask.Kind.NPC, listOf(11434, 2886, 11435, 10681), listOf("Aubury"), listOf(Tile(3253, 3401, 0)), "Talk-to", askForNotes)),
+            OnlyIf(noNotes, WaitUntilTask("get the Research notes from Aubury", 30, askForNotes, has(291))),
+        )
+    }
+
     /** Step 105 still has logs to collect: under 11 held, and the 10 planks not yet made. */
     private fun needsLogs(ctx: TaskContext): Boolean =
         (ctx.game.inventory()[LOGS] ?: 0) < 11 && (ctx.game.inventory()[PLANK] ?: 0) < 10
@@ -725,17 +740,20 @@ class StepScripts(private val guide: Guide) {
         "b2118c6c31" to { _ ->
             // Anywhere in the town counts: the castle is 16 tiles from where the teleport lands, and the spell is on a 30 minute cooldown.
             val lumbridge = Tile(3222, 3218, 0)
-            val noNotes: (TaskContext) -> Boolean = { ctx -> !has(291)(ctx) }
-            val askForNotes = DialoguePlan.Texts(listOf("notes", "lost", "research", "package"))
             StepPlan.Auto(
                 listOf(
                     OnlyIf({ ctx -> ctx.game.playerTile?.let { it.distanceTo(lumbridge) > LUMBRIDGE_AREA } ?: true }, CastSpellTask("TELEPORT_HOME_STANDARD", 14286854)),
                     WaitUntilTask("arrive in Lumbridge", 80) { ctx -> ctx.game.playerTile?.let { it.plane == 0 && it.distanceTo(lumbridge) <= LUMBRIDGE_AREA } == true },
-                    // Each is decided as it starts, so once the notes are in the bag the rest are skipped.
-                    OnlyIf(noNotes, WalkTask(Tile(3253, 3400, 0), radius = 3)),
-                    OnlyIf(noNotes, InteractTask(InteractTask.Kind.NPC, listOf(11434, 2886, 11435, 10681), listOf("Aubury"), listOf(Tile(3253, 3401, 0)), "Talk-to", askForNotes)),
-                    OnlyIf(noNotes, WaitUntilTask("get the Research notes from Aubury", 30, askForNotes, has(291))),
-                ),
+                ) + notesFromAubury(),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
+        // 145. "Head to the Wizards Tower": the notes from Aubury come first if the bag has none (see step 144).
+        "bc89942abe" to { _ ->
+            StepPlan.Auto(
+                notesFromAubury() + WalkTask(Tile(3114, 3181, 0), radius = 4),
                 trustTasks = true,
                 ignoreStartSignal = true,
             )
