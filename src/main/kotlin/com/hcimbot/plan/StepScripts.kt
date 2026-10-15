@@ -1003,6 +1003,21 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 170. "Return to Redbeard Frank": Redbeard Frank (3643) at (3052, 3254) takes the Karamjan rum (431). The chat is clicked
+        // through to its end, picking the option about the rum or treasure when he asks.
+        "ccdae77aaa" to { _ ->
+            val chat = DialoguePlan.Texts(listOf("rum", "I have", "Yes", "Okay"))
+            val chatClosed: (TaskContext) -> Boolean = { ctx -> !ctx.game.canContinueDialog && ctx.game.dialogOptions().isEmpty() }
+            StepPlan.Auto(
+                listOf(
+                    talk(listOf(3643), "Redbeard Frank", Tile(3052, 3254, 0), chat),
+                    WaitUntilTask("finish talking to Redbeard Frank", 40, chat, chatClosed),
+                ),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
