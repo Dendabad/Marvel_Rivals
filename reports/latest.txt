@@ -1,110 +1,125 @@
-HCIM Guide Bot 0.16.66, PAUSED
+HCIM Guide Bot 0.16.68, PAUSED
 == Step
-Step 174 of 2925: Buy moulds: Ring, Amulet, 2x Necklace, Bracelet, Sickle, Tiara, 3x Needle & 50 Thread (from Rommik in Rimmington)
-Detail: Buy moulds: Ring, Amulet, 2x Necklace, Bracelet, Sickle, Tiara, 3x Needle & 50 Thread (from Rommik in Rimmington) (cannot identify what to buy). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 176 of 2925: Head North-West and collect a Snape Grass
+Detail: Take Snape Grass: cannot see Snape Grass nearby. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-13:46:30  Asking the AI about this pause (try 1)
-13:46:29  Paused: Buy moulds: Ring, Amulet, 2x Necklace, Bracelet, Sickle, Tiara, 3x Needle & 50 Thread (from Rommik in Rimmington) (cannot identify what to buy)
-13:46:29  Step: Buy moulds: Ring, Amulet, 2x Necklace, Bracelet, Sickle, Tiara, 3x Needle & 50 Thread (from Rommik in Rimmington)
-13:46:20  Step: Take 2x Logs when getting the rat tail
-13:46:16  Quest Helper: Quest Helper has PiratesTreasure open, not witchspotion. Select witchspotion in the Quest Helper panel
-13:46:16  Quest step: Drink from the cauldron to finish off the quest.
-13:45:59  Quest Helper: Quest Helper has PiratesTreasure open, not witchspotion. Select witchspotion in the Quest Helper panel
-13:45:59  Quest step: Bring the ingredients to Hetty.
-13:45:53  Rat is dead after 1 attacks
-13:45:43  Attacking Rat
-13:45:42  Skipped optional Quest: witchspotion: Kill a rat in the house to the west for a rat tail. needs 1x Rat's tail
-13:45:41  Step: Head South-West and complete Witches Potion (Beef twice on range to burn)
+13:50:16  Asking the AI about this pause (try 1)
+13:50:16  Paused: Take Snape Grass: cannot see Snape Grass nearby
+13:50:09  Step: Head North-West and collect a Snape Grass
+13:50:02  Step: Buy 3x Buckets & Shears
+13:50:02  Resumed by you
+13:50:02  Resumed by you
+13:49:59  Started version 0.16.68
 == Player
-world WorldPoint(x=2959, y=3205, plane=0), in instance false, as guide coordinates WorldPoint(x=2959, y=3205, plane=0)
+world WorldPoint(x=2949, y=3217, plane=0), in instance false, as guide coordinates WorldPoint(x=2949, y=3217, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x12073, 558x200, 432x1, 1511x1, 1269x1, 1511x1, 1993x1, 1993x1, 221x1
+995x11878, 558x200, 432x1, 1511x1, 1269x1, 1511x1, 1993x1, 1993x1, 221x1, 1592x1, 1595x1, 1597x1, 1597x1, 11065x1, 2976x1, 5523x1, 1733x3, 1734x50, 1925x1, 1925x1, 1925x1, 1735x1
 == NPCs within 12 tiles (id name at tile: options)
-6530 Rommik at WorldPoint(x=2947, y=3206, plane=0): [Talk-to, Trade]
+0 Tool Leprechaun at WorldPoint(x=2940, y=3225, plane=0): [Talk-to, Exchange, Deposit-all]
+2675 Taria at WorldPoint(x=2938, y=3218, plane=0): [Talk-to, Pay, Trade]
+6530 Rommik at WorldPoint(x=2946, y=3205, plane=0): [Talk-to, Trade]
 2823 Shop keeper at WorldPoint(x=2947, y=3217, plane=0): [Talk-to, Trade]
 2824 Shop assistant at WorldPoint(x=2948, y=3217, plane=0): [Talk-to, Trade]
-1614 Phials at WorldPoint(x=2950, y=3212, plane=0): [Talk-to]
-2855 Rat at WorldPoint(x=2958, y=3202, plane=0): [Attack]
-2855 Rat at WorldPoint(x=2955, y=3203, plane=0): [Attack]
-8694 Brian at WorldPoint(x=2956, y=3203, plane=0): [Talk-to, Trade]
-2855 Rat at WorldPoint(x=2959, y=3202, plane=0): [Attack]
-2855 Rat at WorldPoint(x=2956, y=3204, plane=0): [Attack]
-3306 Henja at WorldPoint(x=2964, y=3212, plane=0): [Talk-to]
-3369 Angel at WorldPoint(x=2963, y=3210, plane=0): [Talk-to]
-4619 Hetty at WorldPoint(x=2967, y=3208, plane=0): [Talk-to]
+1614 Phials at WorldPoint(x=2950, y=3213, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
-9621 Chair at WorldPoint(x=2958, y=3204, plane=0)
-9536 Boxes at WorldPoint(x=2960, y=3204, plane=0)
-9614 Table at WorldPoint(x=2957, y=3205, plane=0)
-5615 Bench at WorldPoint(x=2958, y=3207, plane=0)
-9534 Crate at WorldPoint(x=2960, y=3203, plane=0)
-9618 Warehouse shelves at WorldPoint(x=2956, y=3202, plane=0)
-1536 Door at WorldPoint(x=2956, y=3205, plane=0)
-9619 Warehouse shelves at WorldPoint(x=2957, y=3202, plane=0)
-9535 Crates at WorldPoint(x=2960, y=3202, plane=0)
-9661 Tree stump at WorldPoint(x=2963, y=3207, plane=0)
-374 Hat stand at WorldPoint(x=2963, y=3209, plane=0)
-9620 Warehouse shelves at WorldPoint(x=2954, y=3202, plane=0)
-365 Sacks at WorldPoint(x=2954, y=3205, plane=0)
-907 Charms at WorldPoint(x=2964, y=3205, plane=0)
-375 Closed chest at WorldPoint(x=2964, y=3209, plane=0)
-365 Sacks at WorldPoint(x=2953, y=3202, plane=0)
-9519 Barrel at WorldPoint(x=2953, y=3203, plane=0)
-6213 Barrel at WorldPoint(x=2953, y=3205, plane=0)
-388 Wardrobe at WorldPoint(x=2965, y=3203, plane=0)
-9615 Table at WorldPoint(x=2965, y=3204, plane=0)
-1019 Shelf at WorldPoint(x=2965, y=3205, plane=0)
-1536 Door at WorldPoint(x=2965, y=3206, plane=0)
-388 Wardrobe at WorldPoint(x=2965, y=3207, plane=0)
+9616 Counter at WorldPoint(x=2947, y=3216, plane=0)
+9621 Chair at WorldPoint(x=2947, y=3218, plane=0)
+26815 Poll booth at WorldPoint(x=2950, y=3215, plane=0)
+1190 Sunflower at WorldPoint(x=2951, y=3216, plane=0)
+1190 Sunflower at WorldPoint(x=2951, y=3217, plane=0)
+1190 Sunflower at WorldPoint(x=2951, y=3218, plane=0)
+9620 Warehouse shelves at WorldPoint(x=2946, y=3215, plane=0)
+9618 Warehouse shelves at WorldPoint(x=2946, y=3216, plane=0)
+9619 Warehouse shelves at WorldPoint(x=2946, y=3217, plane=0)
+9620 Warehouse shelves at WorldPoint(x=2946, y=3218, plane=0)
+9617 Warehouse shelves at WorldPoint(x=2946, y=3213, plane=0)
+9558 Ladder at WorldPoint(x=2948, y=3213, plane=0)
+29091 House Advertisement at WorldPoint(x=2952, y=3221, plane=0)
+1189 Daisies at WorldPoint(x=2953, y=3220, plane=0)
+9535 Crates at WorldPoint(x=2946, y=3212, plane=0)
+15478 Portal at WorldPoint(x=2951, y=3222, plane=0)
+1189 Daisies at WorldPoint(x=2954, y=3218, plane=0)
+9605 Plant at WorldPoint(x=2943, y=3222, plane=0)
+1276 Tree at WorldPoint(x=2945, y=3223, plane=0)
+9618 Warehouse shelves at WorldPoint(x=2946, y=3211, plane=0)
+9536 Boxes at WorldPoint(x=2947, y=3211, plane=0)
+1278 Tree at WorldPoint(x=2947, y=3223, plane=0)
+9536 Boxes at WorldPoint(x=2948, y=3211, plane=0)
+9534 Crate at WorldPoint(x=2949, y=3211, plane=0)
 5615 Bench at WorldPoint(x=2952, y=3211, plane=0)
+1393 Plant at WorldPoint(x=2942, y=3215, plane=0)
+1276 Tree at WorldPoint(x=2942, y=3219, plane=0)
 884 Well at WorldPoint(x=2956, y=3212, plane=0)
-10819 Willow tree at WorldPoint(x=2966, y=3199, plane=0)
-9684 Sink at WorldPoint(x=2966, y=3209, plane=0)
-9622 Chair at WorldPoint(x=2966, y=3211, plane=0)
-9613 Table at WorldPoint(x=2966, y=3212, plane=0)
-9687 Clothes model at WorldPoint(x=2951, y=3202, plane=0)
-9689 Clothes model at WorldPoint(x=2951, y=3203, plane=0)
-9688 Clothes model at WorldPoint(x=2951, y=3204, plane=0)
-9690 Clothes model at WorldPoint(x=2951, y=3205, plane=0)
-1299 Fern at WorldPoint(x=2952, y=3197, plane=0)
-10831 Willow tree at WorldPoint(x=2961, y=3197, plane=0)
-1541 Door at WorldPoint(x=2963, y=3213, plane=0)
-1276 Tree at WorldPoint(x=2965, y=3197, plane=0)
-9622 Chair at WorldPoint(x=2966, y=3213, plane=0)
-24969 Fireplace at WorldPoint(x=2967, y=3203, plane=0)
-2024 Cauldron at WorldPoint(x=2967, y=3205, plane=0)
+1278 Tree at WorldPoint(x=2944, y=3225, plane=0)
+10820 Oak tree at WorldPoint(x=2946, y=3225, plane=0)
+1276 Tree at WorldPoint(x=2949, y=3225, plane=0)
+1188 Flower at WorldPoint(x=2940, y=3212, plane=0)
+1192 Flowers at WorldPoint(x=2940, y=3213, plane=0)
+9605 Plant at WorldPoint(x=2940, y=3217, plane=0)
+1189 Daisies at WorldPoint(x=2940, y=3219, plane=0)
+7578 Bush Patch at WorldPoint(x=2940, y=3221, plane=0)
+1188 Flower at WorldPoint(x=2941, y=3208, plane=0)
+9535 Crates at WorldPoint(x=2946, y=3208, plane=0)
+9534 Crate at WorldPoint(x=2947, y=3208, plane=0)
+888 Painting at WorldPoint(x=2948, y=3208, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
 882 Bronze arrow at WorldPoint(x=2957, y=3205, plane=0)
+1511 Logs at WorldPoint(x=2958, y=3205, plane=0)
+1511 Logs at WorldPoint(x=2959, y=3205, plane=0)
 1265 Bronze pickaxe at WorldPoint(x=2963, y=3216, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-4340 at WorldPoint(x=2959, y=3205, plane=0)
-4340 at WorldPoint(x=2958, y=3205, plane=0)
-20003 at WorldPoint(x=2958, y=3206, plane=0)
-4340 at WorldPoint(x=2959, y=3204, plane=0)
-315 at WorldPoint(x=2959, y=3206, plane=0)
-9626 at WorldPoint(x=2959, y=3206, plane=0)
-706 at WorldPoint(x=2960, y=3204, plane=0)
-4339 at WorldPoint(x=2960, y=3205, plane=0)
-316 at WorldPoint(x=2960, y=3206, plane=0)
-9626 at WorldPoint(x=2960, y=3206, plane=0)
-4340 at WorldPoint(x=2957, y=3205, plane=0)
-9626 at WorldPoint(x=2957, y=3206, plane=0)
-4340 at WorldPoint(x=2959, y=3203, plane=0)
-315 at WorldPoint(x=2960, y=3207, plane=0)
-5534 at WorldPoint(x=2961, y=3203, plane=0)
+4340 at WorldPoint(x=2949, y=3217, plane=0)
+4340 at WorldPoint(x=2948, y=3218, plane=0)
+4339 at WorldPoint(x=2949, y=3218, plane=0)
+4340 at WorldPoint(x=2950, y=3216, plane=0)
+9626 at WorldPoint(x=2950, y=3218, plane=0)
+4339 at WorldPoint(x=2947, y=3216, plane=0)
+4340 at WorldPoint(x=2947, y=3217, plane=0)
+5534 at WorldPoint(x=2947, y=3219, plane=0)
+20002 at WorldPoint(x=2947, y=3219, plane=0)
+917 at WorldPoint(x=2948, y=3215, plane=0)
+5534 at WorldPoint(x=2948, y=3219, plane=0)
+9626 at WorldPoint(x=2948, y=3219, plane=0)
+917 at WorldPoint(x=2949, y=3215, plane=0)
+5533 at WorldPoint(x=2949, y=3219, plane=0)
+9626 at WorldPoint(x=2949, y=3219, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
-995 Coins x12073
+1931 Pot x5
+1935 Jug x2
+20742 Empty jug pack x5
+1735 Shears x1
+1925 Bucket x2
+22660 Empty bucket pack x15
+1923 Bowl x2
+1887 Cake tin x2
+590 Tinderbox x2
+1755 Chisel x2
+2347 Hammer x5
+550 Newcomer map x5
+9003 Security book x5
+995 Coins x11878
 558 Mind rune x200
 432 Chest key x1
 1511 Logs x1
 1269 Steel pickaxe x1
 1993 Jug of wine x1
 221 Eye of newt x1
+1592 Ring mould x1
+1595 Amulet mould x1
+1597 Necklace mould x1
+11065 Bracelet mould x1
+2976 Sickle mould x1
+5523 Tiara mould x1
+1733 Needle x3
+1734 Thread x50
+1925 Bucket x1
 == Text in open windows and chat
-391
+Rimmington General Store
+Value check:
+Quantity:
 10
-94
+50
 100
 All
 Game
@@ -115,7 +130,7 @@ Friends
 Channel
 Clan
 Trade
-00:32:34
+00:36:21
 Boatyguidev3: *
 Check the skill guide for more information about Magic.
 Level 5 Magic: Water Strike
