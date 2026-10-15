@@ -1513,12 +1513,13 @@ class CookTask(
     private val cooked: Int,
     private val burnt: Int,
     private val rangeNames: List<String>,
-    private val lookAt: Tile,
+    private val lookAt: List<Tile>,
 ) : BaseTask() {
     override val description = "Burn item $raw on a range"
     private var settling = 0
     private var idle = 0
     private var walk: WalkTask? = null
+    private var place = 0
 
     override fun tick(ctx: TaskContext): TaskResult {
         val game = ctx.game
@@ -1536,10 +1537,15 @@ class CookTask(
         // Cooked ones burn when used on a range again, so they go first.
         val item = listOf(cooked, raw).firstOrNull { (have[it] ?: 0) > 0 }
             ?: return TaskResult.Failed("nothing left to burn: no raw item $raw or cooked item $cooked and none burnt")
-        val range = game.nearestObject(emptyList(), rangeNames, lookAt)?.takeIf { game.playerTile?.let { at -> it.tile.distanceTo(at) <= NEAR } == true }
+        val at = game.playerTile
+        val range = game.nearestObject(emptyList(), rangeNames, at)?.takeIf { at != null && it.tile.distanceTo(at) <= NEAR }
         if (range == null) {
-            val goTo = walk ?: WalkTask(lookAt, radius = 5).also { walk = it }
-            return goTo.tick(ctx).let { if (it is TaskResult.Done) TaskResult.Failed("no range in sight near $lookAt") else it }
+            // Not in sight: the places to look are tried in turn, each walked to and, with no range there, the next.
+            val spot = lookAt.getOrNull(place) ?: return TaskResult.Failed("no range in sight at any of $lookAt")
+            val goTo = walk ?: WalkTask(spot, radius = 5).also { walk = it }
+            val result = goTo.tick(ctx)
+            if (result is TaskResult.Done) { place++; walk = null; return TaskResult.Running }
+            return if (result is TaskResult.Failed) { place++; walk = null; TaskResult.Running } else result
         }
         idle = 0
         settling = 3
