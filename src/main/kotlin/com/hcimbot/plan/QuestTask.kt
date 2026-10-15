@@ -44,6 +44,7 @@ class QuestTask(
     private val endsAfterTalk: Boolean = false,
 ) : Task {
     private var startValue: Int? = null
+    private var closes = 0
     private var current: Instruction? = null
     private var currentTask: Task? = null
     private var repeats = 0
@@ -54,6 +55,14 @@ class QuestTask(
 
     override fun tick(ctx: TaskContext): TaskResult {
         val progress = helper.progressVar ?: return TaskResult.Failed("$questKey has no progress variable in guide.json")
+        // A book read for a step (the Witch's diary) stays open over the screen, and clicks go to it: closed once it has been read.
+        val windowOpen = !ctx.game.isBankOpen && !ctx.game.isShopOpen && ctx.game.showsCloseableWindow
+        if (windowOpen && closes < MAX_CLOSES) {
+            closes++
+            ctx.actions.closeWindow()
+            return TaskResult.Running
+        }
+        if (!windowOpen) closes = 0
         // Building in a house opens a menu of what can be built, which needs its piece picked (Yarlo's furniture).
         if (ctx.game.showsChoice(FURNITURE_MENU)) {
             ctx.actions.pickFurniture()
@@ -260,6 +269,8 @@ class QuestTask(
     }
 
     companion object {
+        private const val MAX_CLOSES = 4
+
         const val MAX_REPEATS = 3
         const val FURNITURE_MENU = "Furniture Creation Menu"
         private val HELPER_TALK = Regex("^(talk|speak|report|return|go back|bring|give|ask)\\b", RegexOption.IGNORE_CASE)

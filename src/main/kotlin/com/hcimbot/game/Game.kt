@@ -184,6 +184,9 @@ interface GameActions {
     /** Closes an open book or other window: its Close button, or Escape. False when nothing could be done. */
     fun closeWindow(): Boolean = false
 
+    /** A window with a Close button is open: a book read for a quest step, say. Not asked of a bank or shop. */
+    val showsCloseableWindow: Boolean get() = false
+
     /** [spellName] is RuneLite's name from guide.json ("VARROCK_TELEPORT"), [widgetId] its packed spellbook widget. */
     fun castSpell(spellName: String, widgetId: Int): Boolean
 

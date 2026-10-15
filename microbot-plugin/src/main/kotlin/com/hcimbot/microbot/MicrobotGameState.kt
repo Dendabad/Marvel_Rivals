@@ -156,6 +156,8 @@ class MicrobotGameState : GameState {
 
     override fun showsChoice(text: String): Boolean = onClient { choiceWidget(text) != null } == true
 
+    override val showsCloseableWindow: Boolean get() = onClient { widgetWithAction("Close") != null } == true
+
     override fun showsMakeWindow(): Boolean = onClient {
         // "What would you like to make?", "How many sets of 15 do you wish to feather?", "How many would you like to cook?", or the like.
         widgetWhere {
