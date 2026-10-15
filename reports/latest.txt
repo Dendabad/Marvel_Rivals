@@ -1,67 +1,106 @@
 HCIM Guide Bot 0.16.10, PAUSED
 == Step
-Step 132 of 2925: Take Pot of Flour
-Detail: Take Pot of Flour: cannot see Pot of Flour nearby. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 134 of 2925: Pick a Cabbage [Black Knight's Fortress]
+Detail: Pick a Cabbage [Black Knight's Fortress]. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-11:08:00  Asking the AI about this pause (try 1)
-11:08:00  Paused: Take Pot of Flour: cannot see Pot of Flour nearby
-11:07:53  Step: Take Pot of Flour
-11:07:52  Done (all actions finished): Travel with Antonia to Aldarin
-11:07:45  Step: Travel with Antonia to Aldarin
-11:07:45  Started version 0.16.10
+11:08:49  Asking the AI about this pause (try 1)
+11:08:48  Paused: Pick a Cabbage [Black Knight's Fortress]
+11:08:48  Step: Pick a Cabbage [Black Knight's Fortress]
+11:08:25  Walking from (1432, 2960, 0) to (1419, 2984, 0)
+11:08:25  Step: Buy 6 Onions from the Food Store [Yellow Dyes]
+11:08:12  Walking from (1443, 2976, 0) to (1432, 2960, 0)
+11:08:12  Pot of Flour is 16 tiles away, walking over
+11:08:12  Step: Take Pot of Flour
+11:08:11  AI plan finished, trying the step again
+11:08:05  AI: object 55337 Disembark
+11:08:04  AI plan: Obj(id=55337, option=Disembark); Wait(ticks=6)
+11:08:02  report uploaded to bot-reports
 == Player
-world WorldPoint(x=1446, y=2976, plane=1), in instance false, as guide coordinates WorldPoint(x=1446, y=2976, plane=1)
+world WorldPoint(x=1420, y=2980, plane=0), in instance false, as guide coordinates WorldPoint(x=1420, y=2980, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x628, 1929x1, 309x1, 301x1, 2351x1, 305x1, 314x5, 2351x1, 2351x1
+995x610, 1929x1, 309x1, 301x1, 2351x1, 305x1, 314x5, 2351x1, 2351x1, 1933x1, 1957x1, 1957x1, 1957x1, 1957x1, 1957x1, 1957x1
 == NPCs within 12 tiles (id name at tile: options)
+13913 Shopkeeper at WorldPoint(x=1413, y=2973, plane=0): [Talk-to, Trade]
+13968 Porcupine at WorldPoint(x=1414, y=2992, plane=0): [Attack]
+13992 Guard at WorldPoint(x=1418, y=2974, plane=0): [Attack, Pickpocket]
+13887 Citizen at WorldPoint(x=1421, y=2968, plane=0): [Talk-to, Pickpocket]
+13961 Chiribaya at WorldPoint(x=1422, y=2975, plane=0): [Pet, Shoo-away]
+13914 Faustus at WorldPoint(x=1420, y=2981, plane=0): [Talk-to, Trade]
+10541 Bird at WorldPoint(x=1420, y=2991, plane=0): [Attack]
+13902 Child at WorldPoint(x=1423, y=2970, plane=0): [Talk-to]
+13880 Cleaner at WorldPoint(x=1416, y=2980, plane=0): []
+13208 Tourist at WorldPoint(x=1418, y=2968, plane=0): [Talk-to, Pickpocket]
+13890 Citizen at WorldPoint(x=1426, y=2978, plane=0): [Talk-to, Pickpocket]
+13989 Guard at WorldPoint(x=1422, y=2969, plane=0): [Attack, Pickpocket]
+13889 Citizen at WorldPoint(x=1426, y=2979, plane=0): [Talk-to, Pickpocket]
+13915 Toci at WorldPoint(x=1428, y=2974, plane=0): [Talk-to, Trade]
+13986 Guard at WorldPoint(x=1429, y=2970, plane=0): [Attack, Pickpocket]
 == Named objects within 25 tiles, nearest first (id name at tile)
-55337 Gangplank at WorldPoint(x=1445, y=2977, plane=1)
-245 Ship's ladder at WorldPoint(x=1446, y=2975, plane=1)
-59911 Hoisted sail at WorldPoint(x=1447, y=2976, plane=1)
-245 Ship's ladder at WorldPoint(x=1448, y=2975, plane=1)
-59910 Hoisted sail at WorldPoint(x=1447, y=2981, plane=1)
-55333 Gangplank at WorldPoint(x=1457, y=2968, plane=1)
-59928 Ship's wheel at WorldPoint(x=1459, y=2965, plane=1)
-59911 Hoisted sail at WorldPoint(x=1459, y=2967, plane=1)
-59910 Hoisted sail at WorldPoint(x=1459, y=2972, plane=1)
-52621 Ladder at WorldPoint(x=1432, y=2974, plane=1)
-55095 Pillows at WorldPoint(x=1432, y=2976, plane=1)
-55036 Table at WorldPoint(x=1431, y=2961, plane=1)
-55033 Table at WorldPoint(x=1431, y=2962, plane=1)
-55094 Pillow at WorldPoint(x=1431, y=2963, plane=1)
-55048 Crate at WorldPoint(x=1431, y=2973, plane=1)
-52621 Ladder at WorldPoint(x=1430, y=2960, plane=1)
-54987 Plant pot at WorldPoint(x=1433, y=2960, plane=1)
-54979 Potted fan at WorldPoint(x=1429, y=2962, plane=1)
-55035 Table at WorldPoint(x=1429, y=2973, plane=1)
-55033 Table at WorldPoint(x=1429, y=2976, plane=1)
-55048 Crate at WorldPoint(x=1428, y=2973, plane=1)
-52455 Chair at WorldPoint(x=1428, y=2976, plane=1)
-55049 Crates at WorldPoint(x=1427, y=2973, plane=1)
-55048 Crate at WorldPoint(x=1427, y=2974, plane=1)
-55094 Pillow at WorldPoint(x=1422, y=2983, plane=1)
-55083 Bunk bed at WorldPoint(x=1421, y=2982, plane=1)
+52614 Ladder at WorldPoint(x=1419, y=2981, plane=0)
+51750 Food pot at WorldPoint(x=1418, y=2979, plane=0)
+51750 Food pot at WorldPoint(x=1417, y=2979, plane=0)
+55035 Table at WorldPoint(x=1421, y=2983, plane=0)
+55050 Barrel at WorldPoint(x=1423, y=2979, plane=0)
+52582 Sacks at WorldPoint(x=1423, y=2980, plane=0)
+54781 Veg stall at WorldPoint(x=1418, y=2976, plane=0)
+1276 Tree at WorldPoint(x=1415, y=2984, plane=0)
+51822 Sunflowers at WorldPoint(x=1418, y=2985, plane=0)
+1276 Tree at WorldPoint(x=1419, y=2985, plane=0)
+51752 Food pot at WorldPoint(x=1414, y=2974, plane=0)
+52449 Cypress Tree at WorldPoint(x=1414, y=2977, plane=0)
+55050 Barrel at WorldPoint(x=1413, y=2974, plane=0)
+1276 Tree at WorldPoint(x=1413, y=2979, plane=0)
+55080 Table at WorldPoint(x=1415, y=2973, plane=0)
+1276 Tree at WorldPoint(x=1421, y=2987, plane=0)
+55048 Crate at WorldPoint(x=1425, y=2973, plane=0)
+55050 Barrel at WorldPoint(x=1427, y=2973, plane=0)
+54778 Well at WorldPoint(x=1427, y=2979, plane=0)
+1278 Tree at WorldPoint(x=1427, y=2985, plane=0)
+55050 Barrel at WorldPoint(x=1412, y=2974, plane=0)
+52449 Cypress Tree at WorldPoint(x=1412, y=2976, plane=0)
+1393 Plant at WorldPoint(x=1412, y=2979, plane=0)
+55079 Table at WorldPoint(x=1428, y=2976, plane=0)
+1394 Plant at WorldPoint(x=1428, y=2981, plane=0)
+10833 Willow tree at WorldPoint(x=1428, y=2988, plane=0)
+55049 Crates at WorldPoint(x=1411, y=2972, plane=0)
+1278 Tree at WorldPoint(x=1414, y=2989, plane=0)
+51822 Sunflowers at WorldPoint(x=1416, y=2989, plane=0)
+54780 Gem stall at WorldPoint(x=1425, y=2971, plane=0)
+1278 Tree at WorldPoint(x=1425, y=2989, plane=0)
+55049 Crates at WorldPoint(x=1427, y=2971, plane=0)
+55048 Crate at WorldPoint(x=1429, y=2973, plane=0)
+52614 Ladder at WorldPoint(x=1410, y=2970, plane=0)
+55048 Crate at WorldPoint(x=1410, y=2971, plane=0)
+55079 Table at WorldPoint(x=1410, y=2973, plane=0)
+10822 Yew tree at WorldPoint(x=1410, y=2987, plane=0)
+10822 Yew tree at WorldPoint(x=1416, y=2990, plane=0)
+55050 Barrel at WorldPoint(x=1426, y=2970, plane=0)
+55049 Crates at WorldPoint(x=1430, y=2974, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
-1923 Bowl at WorldPoint(x=1431, y=2962, plane=1)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-59925 at WorldPoint(x=1446, y=2976, plane=1)
-59896 at WorldPoint(x=1445, y=2975, plane=1)
-59895 at WorldPoint(x=1445, y=2976, plane=1)
-59923 at WorldPoint(x=1446, y=2975, plane=1)
-59923 at WorldPoint(x=1446, y=2977, plane=1)
-59925 at WorldPoint(x=1447, y=2975, plane=1)
-59924 at WorldPoint(x=1447, y=2976, plane=1)
-59923 at WorldPoint(x=1447, y=2977, plane=1)
-54830 at WorldPoint(x=1444, y=2974, plane=1)
-54830 at WorldPoint(x=1444, y=2975, plane=1)
-54830 at WorldPoint(x=1444, y=2976, plane=1)
-54830 at WorldPoint(x=1444, y=2978, plane=1)
-44066 at WorldPoint(x=1445, y=2974, plane=1)
-59895 at WorldPoint(x=1445, y=2978, plane=1)
-59894 at WorldPoint(x=1446, y=2974, plane=1)
+52470 at WorldPoint(x=1420, y=2980, plane=0)
+54794 at WorldPoint(x=1419, y=2979, plane=0)
+2769 at WorldPoint(x=1419, y=2980, plane=0)
+54807 at WorldPoint(x=1419, y=2981, plane=0)
+52468 at WorldPoint(x=1420, y=2979, plane=0)
+54793 at WorldPoint(x=1420, y=2979, plane=0)
+52470 at WorldPoint(x=1420, y=2981, plane=0)
+52469 at WorldPoint(x=1421, y=2979, plane=0)
+54802 at WorldPoint(x=1421, y=2979, plane=0)
+52471 at WorldPoint(x=1421, y=2980, plane=0)
+52471 at WorldPoint(x=1421, y=2981, plane=0)
+51805 at WorldPoint(x=1418, y=2978, plane=0)
+54839 at WorldPoint(x=1418, y=2978, plane=0)
+54787 at WorldPoint(x=1418, y=2979, plane=0)
+54807 at WorldPoint(x=1418, y=2981, plane=0)
 == Text in open windows and chat
+Faustus' Fruit and Veg
+Value check:
+Quantity:
 10
+50
+77
 100
 All
 Game
@@ -72,54 +111,12 @@ Friends
 Channel
 Clan
 Trade
-00:03:09
+00:03:58
 Boatyguidev3: *
 You have unlocked a new music track: @mes_hl_red@Peace and Prosperity
 You have unlocked a new music track: @mes_hl_red@Isle of Serenity
 You board the ship and sail to Aldarin.
 Did you know? Wearing a charged Amulet of Glory while mining will increase the rate at which you find gems.
 Welcome to Old School RuneScape.
-Current world - 362
-301
-1181
-Trade - Free
-302
-1627
-Trade - Mem...
-303
-355
-304
-345
-Trouble Bre...
-305
-918
-Falador Part...
-306
-593
-Barbarian A...
-307
-851
-Wintertodt
-308
-776
-Wilderness ...
-309
-360
-310
-237
-311
-250
-312
-212
-Group Skilling
-313
-553
-314
-718
-Brimhaven ...
-315
-431
-Fishing Traw...
-316
 == Quest Helper
 no step: null
