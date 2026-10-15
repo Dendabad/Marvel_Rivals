@@ -1251,6 +1251,19 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 192. "Complete Witches House quest - Safespot guide for the spider": Quest Helper does the parts that are not a fight (the key,
+        // the garden, the house and the magnet) with combat off, so the bot stops at the shed where the experiment is fought. That fight
+        // is safespotted with magic from the shed's south wall, between the sacks and the crate with the ball, and its tiles come from a
+        // report taken there.
+        "2a7fa17cef" to { _ ->
+            val helper = guide.questHelpers["witchshouse"]
+            StepPlan.Auto(
+                listOfNotNull(helper?.let { QuestTask("witchshouse", it, false) }),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
