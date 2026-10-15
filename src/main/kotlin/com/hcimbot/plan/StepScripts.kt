@@ -979,10 +979,12 @@ class StepScripts(private val guide: Guide) {
                     OnlyIf({ ctx -> !has(rum)(ctx) }, talk(listOf(2890), "Wydin", Tile(3012, 3205, 0), chat)),
                     OnlyIf({ ctx -> !has(rum)(ctx) }, WaitUntilTask("finish talking to Wydin", 40, chat, chatClosed)),
                     OnlyIf({ ctx -> !has(rum)(ctx) && has(1757)(ctx) }, EquipTask(listOf(item("Apron", 1757)))),
-                    OnlyIf(
-                        { ctx -> !has(rum)(ctx) },
-                        InteractTask(InteractTask.Kind.OBJECT, emptyList(), listOf("Crate"), listOf(Tile(3012, 3207, 0)), "Search", near = Tile(3012, 3207, 0)),
-                    ),
+                    // The staff door (2069) at (3012, 3204) leads to the store room, which is south of it. It is skipped if it is open already.
+                    OnlyIf({ ctx -> !has(rum)(ctx) }, Optional(obj(listOf(2069), listOf("Door"), Tile(3012, 3204, 0), "Open"))),
+                    // The crates in the store room, in turn, until the rum is found. A crate with nothing in it only says so.
+                    OnlyIf({ ctx -> !has(rum)(ctx) }, Optional(obj(listOf(15031), listOf("Crate"), Tile(3010, 3203, 0), "Search"))),
+                    OnlyIf({ ctx -> !has(rum)(ctx) }, Optional(obj(listOf(15030), listOf("Crate"), Tile(3011, 3203, 0), "Search"))),
+                    OnlyIf({ ctx -> !has(rum)(ctx) }, Optional(obj(listOf(2071), listOf("Crate"), Tile(3009, 3207, 0), "Search"))),
                     WaitUntilTask("find the rum", 20, reached = has(rum)),
                 ),
                 trustTasks = true,
