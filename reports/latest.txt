@@ -1,22 +1,125 @@
-HCIM Guide Bot 0.16.9, PAUSED
+HCIM Guide Bot 0.16.10, PAUSED
 == Step
-Step 131 of 2925: Travel with Antonia to Aldarin
-Detail: Arrive in Aldarin: Arrive in Aldarin: not there after 100 ticks. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 132 of 2925: Take Pot of Flour
+Detail: Take Pot of Flour: cannot see Pot of Flour nearby. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-11:07:45  Asking the AI about this pause (try 1)
-11:07:45  Paused: Arrive in Aldarin: Arrive in Aldarin: not there after 100 ticks
-11:06:12  Walking from (1518, 2987, 0) to (1495, 2985, 0)
-11:06:12  Step: Travel with Antonia to Aldarin
-11:06:11  Started version 0.16.9
+11:08:00  Asking the AI about this pause (try 1)
+11:08:00  Paused: Take Pot of Flour: cannot see Pot of Flour nearby
+11:07:53  Step: Take Pot of Flour
+11:07:52  Done (all actions finished): Travel with Antonia to Aldarin
+11:07:45  Step: Travel with Antonia to Aldarin
+11:07:45  Started version 0.16.10
 == Player
-world WorldPoint(x=1495, y=2985, plane=0), in instance false, as guide coordinates WorldPoint(x=1495, y=2985, plane=0)
+world WorldPoint(x=1446, y=2976, plane=1), in instance false, as guide coordinates WorldPoint(x=1446, y=2976, plane=1)
 hitpoints 10/10
 == Bag (item id x count)
-995x648, 1929x1, 309x1, 301x1, 2351x1, 305x1, 314x5, 2351x1, 2351x1
+995x628, 1929x1, 309x1, 301x1, 2351x1, 305x1, 314x5, 2351x1, 2351x1
 == NPCs within 12 tiles (id name at tile: options)
 == Named objects within 25 tiles, nearest first (id name at tile)
+55337 Gangplank at WorldPoint(x=1445, y=2977, plane=1)
+245 Ship's ladder at WorldPoint(x=1446, y=2975, plane=1)
+59911 Hoisted sail at WorldPoint(x=1447, y=2976, plane=1)
+245 Ship's ladder at WorldPoint(x=1448, y=2975, plane=1)
+59910 Hoisted sail at WorldPoint(x=1447, y=2981, plane=1)
+55333 Gangplank at WorldPoint(x=1457, y=2968, plane=1)
+59928 Ship's wheel at WorldPoint(x=1459, y=2965, plane=1)
+59911 Hoisted sail at WorldPoint(x=1459, y=2967, plane=1)
+59910 Hoisted sail at WorldPoint(x=1459, y=2972, plane=1)
+52621 Ladder at WorldPoint(x=1432, y=2974, plane=1)
+55095 Pillows at WorldPoint(x=1432, y=2976, plane=1)
+55036 Table at WorldPoint(x=1431, y=2961, plane=1)
+55033 Table at WorldPoint(x=1431, y=2962, plane=1)
+55094 Pillow at WorldPoint(x=1431, y=2963, plane=1)
+55048 Crate at WorldPoint(x=1431, y=2973, plane=1)
+52621 Ladder at WorldPoint(x=1430, y=2960, plane=1)
+54987 Plant pot at WorldPoint(x=1433, y=2960, plane=1)
+54979 Potted fan at WorldPoint(x=1429, y=2962, plane=1)
+55035 Table at WorldPoint(x=1429, y=2973, plane=1)
+55033 Table at WorldPoint(x=1429, y=2976, plane=1)
+55048 Crate at WorldPoint(x=1428, y=2973, plane=1)
+52455 Chair at WorldPoint(x=1428, y=2976, plane=1)
+55049 Crates at WorldPoint(x=1427, y=2973, plane=1)
+55048 Crate at WorldPoint(x=1427, y=2974, plane=1)
+55094 Pillow at WorldPoint(x=1422, y=2983, plane=1)
+55083 Bunk bed at WorldPoint(x=1421, y=2982, plane=1)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
+1923 Bowl at WorldPoint(x=1431, y=2962, plane=1)
 == Objects without a name within 6 tiles, nearest first (id at tile)
+59925 at WorldPoint(x=1446, y=2976, plane=1)
+59896 at WorldPoint(x=1445, y=2975, plane=1)
+59895 at WorldPoint(x=1445, y=2976, plane=1)
+59923 at WorldPoint(x=1446, y=2975, plane=1)
+59923 at WorldPoint(x=1446, y=2977, plane=1)
+59925 at WorldPoint(x=1447, y=2975, plane=1)
+59924 at WorldPoint(x=1447, y=2976, plane=1)
+59923 at WorldPoint(x=1447, y=2977, plane=1)
+54830 at WorldPoint(x=1444, y=2974, plane=1)
+54830 at WorldPoint(x=1444, y=2975, plane=1)
+54830 at WorldPoint(x=1444, y=2976, plane=1)
+54830 at WorldPoint(x=1444, y=2978, plane=1)
+44066 at WorldPoint(x=1445, y=2974, plane=1)
+59895 at WorldPoint(x=1445, y=2978, plane=1)
+59894 at WorldPoint(x=1446, y=2974, plane=1)
 == Text in open windows and chat
+10
+100
+All
+Game
+On
+Public
+Private
+Friends
+Channel
+Clan
+Trade
+00:03:09
+Boatyguidev3: *
+You have unlocked a new music track: @mes_hl_red@Peace and Prosperity
+You have unlocked a new music track: @mes_hl_red@Isle of Serenity
+You board the ship and sail to Aldarin.
+Did you know? Wearing a charged Amulet of Glory while mining will increase the rate at which you find gems.
+Welcome to Old School RuneScape.
+Current world - 362
+301
+1181
+Trade - Free
+302
+1627
+Trade - Mem...
+303
+355
+304
+345
+Trouble Bre...
+305
+918
+Falador Part...
+306
+593
+Barbarian A...
+307
+851
+Wintertodt
+308
+776
+Wilderness ...
+309
+360
+310
+237
+311
+250
+312
+212
+Group Skilling
+313
+553
+314
+718
+Brimhaven ...
+315
+431
+Fishing Traw...
+316
 == Quest Helper
 no step: null
