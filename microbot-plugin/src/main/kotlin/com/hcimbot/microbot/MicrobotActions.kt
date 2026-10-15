@@ -100,6 +100,17 @@ class MicrobotActions : GameActions {
 
     override fun withdraw(itemId: Int, quantity: Int): Boolean = when {
         quantity == 1 -> Rs2Bank.withdrawOne(itemId)
+        // Several of something that does not stack: one at a time, since typing the amount into Withdraw-X has not arrived.
+        quantity > 1 && Rs2Bank.getBankItemForSavedId(itemId)?.isStackable != true -> {
+            var taken = 0
+            repeat(quantity) {
+                if (Rs2Bank.withdrawOne(itemId)) {
+                    taken++
+                    Thread.sleep(WITHDRAW_PAUSE_MS)
+                }
+            }
+            taken > 0
+        }
         quantity > 1 -> Rs2Bank.withdrawX(itemId, quantity)
         // All of a stackable (coins, runes), one of anything else.
         Rs2Bank.getBankItemForSavedId(itemId)?.isStackable == true -> Rs2Bank.withdrawAll(itemId)
@@ -296,6 +307,7 @@ class MicrobotActions : GameActions {
     }
 
     companion object {
+        private const val WITHDRAW_PAUSE_MS = 250L
         private const val ARRIVE_WITHIN = 2
 
         /** A bank further than this is left to Microbot's own choice, which may use transport. */
