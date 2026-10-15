@@ -1,29 +1,32 @@
-HCIM Guide Bot 0.16.75, PAUSED
+HCIM Guide Bot 0.16.76, PAUSED
 == Step
-Step 182 of 2925: Withdraw: Coins, Mind Runes, Raw Rat/Chicken/Beef, 10x Wines, Empty Bucket, Chest Key, Cheese (18 Inventory Slots)
-Detail: Bank, withdraw Coins, Mind rune, Raw rat meat, Raw chicken, Raw beef, Jug of wine, Bucket, Chest key, Cheese: withdrew Jug of wine but it did not arrive in the inventory. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 183 of 2925: Get a haircut North [Falador Easy Diary]
+Detail: Get a haircut North [Falador Easy Diary] (unclear what to click). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-14:03:08  Asking the AI about this pause (try 1)
-14:03:08  Paused: Bank, withdraw Coins, Mind rune, Raw rat meat, Raw chicken, Raw beef, Jug of wine, Bucket, Chest key, Cheese: withdrew Jug of wine but it did not arrive in the inventory
-14:02:50  Step: Withdraw: Coins, Mind Runes, Raw Rat/Chicken/Beef, 10x Wines, Empty Bucket, Chest Key, Cheese (18 Inventory Slots)
-14:02:49  Started version 0.16.75
+14:04:36  Asking the AI about this pause (try 1)
+14:04:36  Paused: Get a haircut North [Falador Easy Diary] (unclear what to click)
+14:04:36  Step: Get a haircut North [Falador Easy Diary]
+14:04:35  Done (the game shows it is done): Withdraw: Coins, Mind Runes, Raw Rat/Chicken/Beef, 10x Wines, Empty Bucket, Chest Key, Cheese (18 Inventory Slots)
+14:04:14  Step: Withdraw: Coins, Mind Runes, Raw Rat/Chicken/Beef, 10x Wines, Empty Bucket, Chest Key, Cheese (18 Inventory Slots)
+14:04:14  Started version 0.16.76
 == Player
 world WorldPoint(x=2945, y=3368, plane=0), in instance false, as guide coordinates WorldPoint(x=2945, y=3368, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x11878, 558x199, 2134x1, 2138x1, 2132x1, 432x1, 2132x1
+995x11878, 558x199, 2134x1, 2138x1, 2132x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1925x1, 432x1, 1985x1
 == NPCs within 12 tiles (id name at tile: options)
-3270 Guard at WorldPoint(x=2943, y=3374, plane=0): [Attack, Pickpocket]
+3270 Guard at WorldPoint(x=2946, y=3375, plane=0): [Attack, Pickpocket]
 1618 Banker at WorldPoint(x=2945, y=3366, plane=0): [Talk-to, Bank, Collect]
-14167 Archibald at WorldPoint(x=2944, y=3380, plane=0): [Pet]
+14167 Archibald at WorldPoint(x=2945, y=3377, plane=0): [Pet]
 1618 Banker at WorldPoint(x=2946, y=3366, plane=0): [Talk-to, Bank, Collect]
+1305 Hairdresser at WorldPoint(x=2945, y=3378, plane=0): [Talk-to, Haircut, Shave]
 1618 Banker at WorldPoint(x=2947, y=3366, plane=0): [Talk-to, Bank, Collect]
 1618 Banker at WorldPoint(x=2948, y=3366, plane=0): [Talk-to, Bank, Collect]
 1613 Banker at WorldPoint(x=2949, y=3366, plane=0): [Talk-to, Bank, Collect]
-11947 Guard at WorldPoint(x=2952, y=3379, plane=0): [Attack, Pickpocket]
-278 Town Crier at WorldPoint(x=2952, y=3380, plane=0): [Talk-to]
-1315 Emily at WorldPoint(x=2954, y=3374, plane=0): [Talk-to]
+11947 Guard at WorldPoint(x=2950, y=3379, plane=0): [Attack, Pickpocket]
+1315 Emily at WorldPoint(x=2954, y=3370, plane=0): [Talk-to]
 10659 Burntof at WorldPoint(x=2956, y=3367, plane=0): [Talk-to]
+1316 Kaylee at WorldPoint(x=2956, y=3372, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
 24101 Bank booth at WorldPoint(x=2945, y=3367, plane=0)
 24101 Bank booth at WorldPoint(x=2946, y=3367, plane=0)
@@ -83,94 +86,19 @@ hitpoints 10/10
 5534 at WorldPoint(x=2942, y=3368, plane=0)
 23994 at WorldPoint(x=2942, y=3368, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
-1265 Bronze pickaxe x1
-315 Shrimps x1
-1755 Chisel x1
-882 Bronze arrow x25
-1925 Bucket x1
-1931 Pot x1
-555 Water rune x6
-557 Earth rune x4
-559 Body rune x2
-1511 Logs x21
-556 Air rune x48
-2309 Bread x1
-590 Tinderbox x2
-1935 Jug x6
-1921 Bowl of water x1
-6512 Raw rat meat x1
-1061 Leather boots x1
+995 Coins x11878
+558 Mind rune x199
+2134 Raw rat meat x1
 2138 Raw chicken x1
-28136 Forestry kit x1
-1550 Garlic x5
+2132 Raw beef x1
+1993 Jug of wine x1
+1925 Bucket x1
+432 Chest key x1
 1985 Cheese x1
-952 Spade x1
-314 Feather x1255
-1917 Beer x2
-6963 Roll x1
-11849 Mark of Grace x1
-1993 Jug of wine x154
-24361 Scroll box (beginner) x1
-21259 Enchanted scroll x1
-21260 Enchanted quill x1
-1017 Wizard hat x1
-1769 Orange dye x1
-1949 Chef's hat x1
-1353 Steel axe x1
-2142 Cooked meat x1
-33 Lit candle x1
-1549 Stake x1
-950 Silk x1
-11171 Newspaper x1
-1573 Doogle leaves x1
-2400 Silverlight key x1
-757 Book x1
-1929 Bucket of water x4
-2313 Pie dish x1
-2401 Silverlight key x1
-592 Ashes x3
-8794 Saw x1
-2347 Hammer x1
-946 Knife x1
-1351 Bronze axe x1
-52 Arrow shaft x1706
-12734 Fire rune pack x1
-12728 Air rune pack x1
-12732 Earth rune pack x1
-12730 Water rune pack x2
-12736 Mind rune pack x3
-960 Plank x25
-8463 Construction guide x1
-4822 Mithril nails x50
-2353 Steel bar x5
-8778 Oak plank x10
-8790 Bolt of cloth x8
-8013 Teleport to house x5
-8009 Falador teleport x1
-1539 Steel nails x75
-4241 Nettles x2
-954 Rope x1
-233 Pestle and mortar x1
-227 Vial of water x1
-7088 Sweetcorn x1
-1733 Needle x4
-309 Fly fishing rod x1
-301 Lobster pot x1
-2351 Iron bar x3
-305 Big fishing net x1
-1933 Pot of flour x4
-1957 Onion x5
-1965 Cabbage x1
-29409 Sunbeam ale x3
-1623 Uncut sapphire x9
 == Text in open windows and chat
-The Bank of Gielinor (62.3K)
-105
-960
 10
-All
-94
 100
+All
 Game
 On
 Public
@@ -179,7 +107,7 @@ Friends
 Channel
 Clan
 Trade
-00:49:12
+00:50:40
 Boatyguidev3: *
 You have unlocked a new music track: @mes_hl_red@Workshop
 You have unlocked a new music track: @mes_hl_red@Arrival
