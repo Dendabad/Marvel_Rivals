@@ -630,13 +630,14 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
-        // 134. "Pick a Cabbage [Black Knight's Fortress]": one cabbage (1965) from a plant, picked wherever one can be seen from
-        // Aldarin's market. The guide gives no place, so if none is in view the step pauses and the AI looks at what is around.
+        // 134. "Pick a Cabbage [Black Knight's Fortress]": buy one from Faustus's fruit and veg shop in Aldarin, where the player already is,
+        // instead of looking for a cabbage patch.
         "a1db8dedf1" to { _ ->
             auto(
-                RepeatUntil("Pick a cabbage", has(1965), {
-                    obj(emptyList(), listOf("Cabbage"), Tile(1420, 2980, 0), "Pick", near = null)
-                }, maxRounds = 3),
+                ShopTask(
+                    listOf(ShopTask.Seller("Faustus", listOf(13914), listOf(Tile(1420, 2981, 0)))),
+                    listOf(item("Cabbage", 1965, 1)),
+                ),
                 trust = true,
             )
         },
