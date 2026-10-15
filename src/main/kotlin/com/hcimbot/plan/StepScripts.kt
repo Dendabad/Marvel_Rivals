@@ -802,7 +802,8 @@ class StepScripts(private val guide: Guide) {
             val gerrant = listOf(ShopTask.Seller("Gerrant", emptyList(), listOf(Tile(3014, 3224, 0))))
             auto(
                 ShopTask(gerrant, listOf(item("Harpoon", 311, 1), item("Fishing bait", 313, 50), item("Feather pack", 11881, 10))),
-                TakeItemTask(listOf(item("White apron", 1005, 1))),
+                // Only one in sight of the room the shop is in: the guide's spawn list has others, in the houses round about.
+                PickUpTask(listOf(1005), 6),
                 EquipTask(listOf(item("White apron", 1005))),
                 trust = true,
             )
