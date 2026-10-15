@@ -1201,7 +1201,7 @@ class StepScripts(private val guide: Guide) {
         // 187. "Kill a duck in Falador Park [Falador Easy Diary]": the ducks (1838, 1839) around (2989, 3379).
         "725dc319ea" to { _ ->
             StepPlan.Auto(
-                listOf(KillTask(listOf(1838, 1839), listOf("Duck"), emptyList(), maxKills = 1, lookFirst = Tile(2989, 3379, 0))),
+                listOf(KillTask(listOf(1838, 1839), listOf("Duck"), emptyList(), maxKills = 3, lookFirst = Tile(2989, 3379, 0), killsNeeded = 1)),
                 combat = true,
                 trustTasks = true,
             )

@@ -376,6 +376,8 @@ class KillTask(
     private val maxKills: Int = 5,
     /** Where to look first when none is in sight, before the spawn data's nearest spots. */
     lookFirst: Tile? = null,
+    /** With nothing to loot (a duck for a diary task), the kill itself is the point: done after this many. */
+    private val killsNeeded: Int? = null,
 ) : BaseTask() {
     private var kills = 0
     private var fighting = false
@@ -396,7 +398,9 @@ class KillTask(
                 else -> { take = null; TaskResult.Running }
             }
         }
-        if (missing.isEmpty() && !fighting) return TaskResult.Done
+        if (killsNeeded != null) {
+            if (kills >= killsNeeded && !fighting) return TaskResult.Done
+        } else if (missing.isEmpty() && !fighting) return TaskResult.Done
         if (fighting) {
             val fought = target
             // Counted every tick: being hit plays a block animation, which must not hold up the next cast.
