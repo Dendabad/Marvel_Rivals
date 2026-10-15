@@ -156,6 +156,12 @@ class MicrobotGameState : GameState {
 
     override fun showsChoice(text: String): Boolean = onClient { choiceWidget(text) != null } == true
 
+    override fun hasLineOfSight(from: Tile, to: Tile): Boolean? = onClient {
+        runCatching {
+            net.runelite.api.coords.WorldArea(from.toWorldPoint(), 1, 1).hasLineOfSightTo(Microbot.getClient().topLevelWorldView, to.toWorldPoint())
+        }.getOrNull()
+    }
+
     override val showsCloseableWindow: Boolean get() = onClient { widgetWithAction("Close") != null } == true
 
     override fun showsMakeWindow(): Boolean = onClient {

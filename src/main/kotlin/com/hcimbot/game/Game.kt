@@ -87,6 +87,9 @@ interface GameState {
     /** Whether a game window shows an entry ending in [text], e.g. "B: Shayzien East" in the minecart menu. */
     fun showsChoice(text: String): Boolean = false
 
+    /** Whether something standing on [from] can see [to], by the scene's collision data (what an NPC's line of sight uses). Null if unknown. */
+    fun hasLineOfSight(from: Tile, to: Tile): Boolean? = null
+
 
     /** A window with a Close button is open: a book read for a quest step, say. Not asked of a bank or shop. */
     val showsCloseableWindow: Boolean get() = false
