@@ -1274,6 +1274,9 @@ class StepScripts(private val guide: Guide) {
                     OnlyIf(needsMouse, UseItemTask(1985, null, listOf(2870), listOf("Mouse hole"), Tile(2903, 3466, 0))),
                     // The mouse may be out already, with the cheese gone: only the magnet is needed then. With no mouse it moves on.
                     OnlyIf({ ctx -> has(2410)(ctx) }, Optional(UseItemOnNamedNpcTask(2410, "Mouse", maxWait = 12))),
+                    // The witch's diary (2408) lies on a table in the house: picked up and read, which keeps the door unlocked.
+                    OnlyIf({ ctx -> !has(2408)(ctx) }, PickUpTask(listOf(2408), 12)),
+                    OnlyIf({ ctx -> has(2408)(ctx) }, ItemActionTask(2408, "Read", closeAfter = true)),
                     helper?.let { QuestTask("witchshouse", it, false) },
                 ),
                 trustTasks = true,
