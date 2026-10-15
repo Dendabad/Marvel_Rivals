@@ -1231,6 +1231,25 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 189. "Head North of Falador and kill a Black Bear (safespot on trees as it is a 2x2). Collect the Raw Bear Meat, Bones & fur.": the
+        // black bear (2839), found from Microbot's spawn data. The bot cannot stand in the tree safespot, so it fights in the open: a
+        // bear hits for up to 4, which is a real risk to 10 hitpoints. Raw bear meat (2136), bones (526) and bear fur (948) are taken.
+        "260e82444c" to { _ ->
+            StepPlan.Auto(
+                listOf(
+                    KillTask(
+                        listOf(2839),
+                        listOf("Black bear"),
+                        listOf(item("Raw bear meat", 2136, 1), item("Bones", 526, 1), item("Bear fur", 948, 1)),
+                        maxKills = 3,
+                    ),
+                ),
+                combat = true,
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
