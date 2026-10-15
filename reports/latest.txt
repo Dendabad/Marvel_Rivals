@@ -1,96 +1,104 @@
-HCIM Guide Bot 0.16.14, PAUSED
+HCIM Guide Bot 0.16.18, PAUSED
 == Step
-Step 138 of 2925: Head East after selling Eclipse reds and buy 3 Sunbeam ales from the Bartender in the pub. These give you a +1 agility boost to use the Taverley Dungeon shortcut later.
-Detail: Head East after selling Eclipse reds and buy 3 Sunbeam ales from the Bartender in the pub. These give you a +1 agility boost to use the Taverley Dungeon shortcut later.. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 139 of 2925: Head north-east to the Gem Store & buy 9x Uncut Sapphire, 10x Uncut Emerald, and as many Uncut Rubies as possible. (If the shop is out of stock, try to get a few or skip this step and mine a star after unlocking teleports to buy a Bag full of gems with stardust)
+Detail: Head north-east to the Gem Store & buy 9x Uncut Sapphire, 10x Uncut Emerald, and as many Uncut Rubies as possible. (If the shop is out of stock, try to get a few or skip this step and mine a star after unlocking teleports to buy a Bag full of gems with stardust) (depends on a condition or repeats). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-11:16:16  Asking the AI about this pause (try 1)
-11:16:16  Paused: Head East after selling Eclipse reds and buy 3 Sunbeam ales from the Bartender in the pub. These give you a +1 agility boost to use the Taverley Dungeon shortcut later.
-11:16:16  Step: Head East after selling Eclipse reds and buy 3 Sunbeam ales from the Bartender in the pub. These give you a +1 agility boost to use the Taverley Dungeon shortcut later.
-11:16:15  Started version 0.16.14
+11:23:09  Asking the AI about this pause (try 1)
+11:23:09  Paused: Head north-east to the Gem Store & buy 9x Uncut Sapphire, 10x Uncut Emerald, and as many Uncut Rubies as possible. (If the shop is out of stock, try to get a few or skip this step and mine a star after unlocking teleports to buy a Bag full of gems with stardust) (depends on a condition or repeats)
+11:23:09  Step: Head north-east to the Gem Store & buy 9x Uncut Sapphire, 10x Uncut Emerald, and as many Uncut Rubies as possible. (If the shop is out of stock, try to get a few or skip this step and mine a star after unlocking teleports to buy a Bag full of gems with stardust)
+11:23:08  Done (all actions finished): Head East after selling Eclipse reds and buy 3 Sunbeam ales from the Bartender in the pub. These give you a +1 agility boost to use the Taverley Dungeon shortcut later.
+11:23:00  Step: Head East after selling Eclipse reds and buy 3 Sunbeam ales from the Bartender in the pub. These give you a +1 agility boost to use the Taverley Dungeon shortcut later.
+11:22:59  Resumed by you
+11:22:59  Resumed by you
+11:22:59  Retry pressed
+11:22:48  Started version 0.16.18
 == Player
-world WorldPoint(x=1376, y=2934, plane=0), in instance false, as guide coordinates WorldPoint(x=1376, y=2934, plane=0)
+world WorldPoint(x=1378, y=2927, plane=0), in instance false, as guide coordinates WorldPoint(x=1378, y=2927, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x19600
+995x19576, 29409x1, 29409x1, 29409x1
 == NPCs within 12 tiles (id name at tile: options)
-13916 Antonius at WorldPoint(x=1364, y=2922, plane=0): [Talk-to, Trade]
-13905 Vineyard worker at WorldPoint(x=1364, y=2929, plane=0): [Talk-to]
-12765 Tool Leprechaun at WorldPoint(x=1364, y=2943, plane=0): [Talk-to, Exchange, Deposit-all]
-14030 Ercos at WorldPoint(x=1369, y=2938, plane=0): [Talk-to, Pay, Trade]
-13893 Citizen at WorldPoint(x=1370, y=2928, plane=0): [Talk-to, Pickpocket]
-13884 Citizen at WorldPoint(x=1372, y=2938, plane=0): [Talk-to, Pickpocket]
+13905 Vineyard worker at WorldPoint(x=1366, y=2929, plane=0): [Talk-to]
+14030 Ercos at WorldPoint(x=1370, y=2938, plane=0): [Talk-to, Pay, Trade]
+13908 Vineyard foreman at WorldPoint(x=1370, y=2915, plane=0): [Talk-to]
+13893 Citizen at WorldPoint(x=1367, y=2923, plane=0): [Talk-to, Pickpocket]
+13884 Citizen at WorldPoint(x=1373, y=2938, plane=0): [Talk-to, Pickpocket]
+12992 Molossus at WorldPoint(x=1374, y=2917, plane=0): [Pet, Shoo-away]
 13917 Bartender at WorldPoint(x=1376, y=2927, plane=0): [Talk-to, Trade]
-13962 Chiribaya at WorldPoint(x=1375, y=2934, plane=0): [Pet, Shoo-away]
-13889 Citizen at WorldPoint(x=1377, y=2924, plane=0): [Talk-to, Pickpocket]
-13897 Citizen at WorldPoint(x=1383, y=2925, plane=0): [Talk-to, Pickpocket]
-13209 Tourist at WorldPoint(x=1382, y=2937, plane=0): [Talk-to, Pickpocket]
-13164 Citizen at WorldPoint(x=1379, y=2936, plane=0): [Talk-to, Pickpocket]
-13891 Citizen at WorldPoint(x=1382, y=2926, plane=0): [Talk-to, Pickpocket]
-13988 Guard at WorldPoint(x=1386, y=2925, plane=0): [Attack, Pickpocket]
+13962 Chiribaya at WorldPoint(x=1376, y=2938, plane=0): [Pet, Shoo-away]
+13889 Citizen at WorldPoint(x=1379, y=2927, plane=0): [Talk-to, Pickpocket]
+13897 Citizen at WorldPoint(x=1380, y=2923, plane=0): [Talk-to, Pickpocket]
+13164 Citizen at WorldPoint(x=1379, y=2935, plane=0): [Talk-to, Pickpocket]
+13891 Citizen at WorldPoint(x=1381, y=2928, plane=0): [Talk-to, Pickpocket]
+13926 Alaxxi at WorldPoint(x=1386, y=2916, plane=0): [Talk-to]
+13207 Tourist at WorldPoint(x=1385, y=2931, plane=0): [Talk-to, Pickpocket]
+13988 Guard at WorldPoint(x=1384, y=2923, plane=0): [Attack, Pickpocket]
+13990 Guard at WorldPoint(x=1389, y=2932, plane=0): [Attack, Pickpocket]
+13896 Citizen at WorldPoint(x=1388, y=2934, plane=0): [Talk-to, Pickpocket]
+13958 Techichi at WorldPoint(x=1388, y=2937, plane=0): [Pet, Shoo-away]
+13994 Guard at WorldPoint(x=1390, y=2924, plane=0): [Attack, Pickpocket]
 == Named objects within 25 tiles, nearest first (id name at tile)
-51724 Stool at WorldPoint(x=1376, y=2935, plane=0)
-51724 Stool at WorldPoint(x=1377, y=2933, plane=0)
-52462 Table at WorldPoint(x=1377, y=2934, plane=0)
-51724 Stool at WorldPoint(x=1378, y=2936, plane=0)
-51724 Stool at WorldPoint(x=1378, y=2931, plane=0)
-52462 Table at WorldPoint(x=1379, y=2931, plane=0)
-52449 Cypress Tree at WorldPoint(x=1372, y=2931, plane=0)
-54782 Staircase at WorldPoint(x=1375, y=2930, plane=0)
-51724 Stool at WorldPoint(x=1379, y=2930, plane=0)
-51724 Stool at WorldPoint(x=1380, y=2935, plane=0)
-46805 Well at WorldPoint(x=1373, y=2939, plane=0)
-52425 Barrel at WorldPoint(x=1375, y=2929, plane=0)
+51720 Beer taps at WorldPoint(x=1377, y=2927, plane=0)
+51720 Beer taps at WorldPoint(x=1377, y=2928, plane=0)
+51724 Stool at WorldPoint(x=1379, y=2926, plane=0)
+52425 Barrel at WorldPoint(x=1376, y=2925, plane=0)
 51724 Stool at WorldPoint(x=1378, y=2929, plane=0)
+52461 Table at WorldPoint(x=1379, y=2925, plane=0)
 52461 Table at WorldPoint(x=1379, y=2929, plane=0)
-52449 Cypress Tree at WorldPoint(x=1379, y=2939, plane=0)
+54782 Staircase at WorldPoint(x=1375, y=2924, plane=0)
+52415 Bookshelf at WorldPoint(x=1375, y=2926, plane=0)
+55096 Door at WorldPoint(x=1375, y=2927, plane=0)
+52415 Bookshelf at WorldPoint(x=1375, y=2928, plane=0)
+52425 Barrel at WorldPoint(x=1375, y=2929, plane=0)
+54782 Staircase at WorldPoint(x=1375, y=2930, plane=0)
+51724 Stool at WorldPoint(x=1379, y=2924, plane=0)
+51724 Stool at WorldPoint(x=1379, y=2930, plane=0)
+51724 Stool at WorldPoint(x=1381, y=2924, plane=0)
+52461 Table at WorldPoint(x=1381, y=2925, plane=0)
 52461 Table at WorldPoint(x=1381, y=2929, plane=0)
 51724 Stool at WorldPoint(x=1381, y=2930, plane=0)
+51724 Stool at WorldPoint(x=1378, y=2931, plane=0)
+52462 Table at WorldPoint(x=1379, y=2931, plane=0)
 51724 Stool at WorldPoint(x=1381, y=2931, plane=0)
-51724 Stool at WorldPoint(x=1381, y=2932, plane=0)
-52462 Table at WorldPoint(x=1381, y=2934, plane=0)
-52415 Bookshelf at WorldPoint(x=1375, y=2928, plane=0)
-1391 Plant at WorldPoint(x=1375, y=2940, plane=0)
-51720 Beer taps at WorldPoint(x=1377, y=2928, plane=0)
+51724 Stool at WorldPoint(x=1382, y=2925, plane=0)
 51724 Stool at WorldPoint(x=1382, y=2929, plane=0)
-51724 Stool at WorldPoint(x=1382, y=2936, plane=0)
-52449 Cypress Tree at WorldPoint(x=1369, y=2931, plane=0)
-52451 Cypress Tree at WorldPoint(x=1369, y=2939, plane=0)
-55096 Door at WorldPoint(x=1375, y=2927, plane=0)
-51720 Beer taps at WorldPoint(x=1377, y=2927, plane=0)
+1393 Plant at WorldPoint(x=1373, y=2926, plane=0)
+51724 Stool at WorldPoint(x=1381, y=2932, plane=0)
 52425 Barrel at WorldPoint(x=1383, y=2928, plane=0)
 52449 Cypress Tree at WorldPoint(x=1383, y=2929, plane=0)
+52449 Cypress Tree at WorldPoint(x=1372, y=2931, plane=0)
+51724 Stool at WorldPoint(x=1377, y=2933, plane=0)
+1393 Plant at WorldPoint(x=1376, y=2920, plane=0)
+52462 Table at WorldPoint(x=1377, y=2934, plane=0)
+52462 Table at WorldPoint(x=1381, y=2934, plane=0)
+54782 Staircase at WorldPoint(x=1384, y=2920, plane=0)
+55050 Barrel at WorldPoint(x=1385, y=2920, plane=0)
+52449 Cypress Tree at WorldPoint(x=1385, y=2932, plane=0)
+1391 Plant at WorldPoint(x=1370, y=2920, plane=0)
+51724 Stool at WorldPoint(x=1376, y=2935, plane=0)
+51724 Stool at WorldPoint(x=1380, y=2935, plane=0)
 51724 Stool at WorldPoint(x=1383, y=2935, plane=0)
-1391 Plant at WorldPoint(x=1383, y=2939, plane=0)
-1391 Plant at WorldPoint(x=1368, y=2927, plane=0)
-1393 Plant at WorldPoint(x=1373, y=2926, plane=0)
-52415 Bookshelf at WorldPoint(x=1375, y=2926, plane=0)
-51724 Stool at WorldPoint(x=1379, y=2926, plane=0)
-1393 Plant at WorldPoint(x=1367, y=2935, plane=0)
-52425 Barrel at WorldPoint(x=1376, y=2925, plane=0)
-52461 Table at WorldPoint(x=1379, y=2925, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
-29409 Sunbeam ale at WorldPoint(x=1378, y=2934, plane=0)
-1919 Beer glass at WorldPoint(x=1380, y=2932, plane=0)
 1919 Beer glass at WorldPoint(x=1381, y=2925, plane=0)
-2347 Hammer at WorldPoint(x=1373, y=2949, plane=0)
-29963 Chichilihui rosé at WorldPoint(x=1387, y=2950, plane=0)
+1919 Beer glass at WorldPoint(x=1380, y=2932, plane=0)
+29409 Sunbeam ale at WorldPoint(x=1378, y=2934, plane=0)
 229 Vial at WorldPoint(x=1393, y=2917, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-51804 at WorldPoint(x=1376, y=2934, plane=0)
-51927 at WorldPoint(x=1375, y=2933, plane=0)
-51927 at WorldPoint(x=1375, y=2934, plane=0)
-54830 at WorldPoint(x=1375, y=2935, plane=0)
-51805 at WorldPoint(x=1375, y=2935, plane=0)
-54830 at WorldPoint(x=1376, y=2935, plane=0)
-51805 at WorldPoint(x=1377, y=2934, plane=0)
-51805 at WorldPoint(x=1377, y=2935, plane=0)
-51804 at WorldPoint(x=1374, y=2935, plane=0)
-54830 at WorldPoint(x=1375, y=2932, plane=0)
-51805 at WorldPoint(x=1375, y=2932, plane=0)
-51805 at WorldPoint(x=1375, y=2936, plane=0)
-51805 at WorldPoint(x=1376, y=2932, plane=0)
-54830 at WorldPoint(x=1376, y=2932, plane=0)
-54830 at WorldPoint(x=1376, y=2936, plane=0)
+2764 at WorldPoint(x=1378, y=2927, plane=0)
+51721 at WorldPoint(x=1377, y=2926, plane=0)
+54970 at WorldPoint(x=1378, y=2926, plane=0)
+54970 at WorldPoint(x=1378, y=2928, plane=0)
+52467 at WorldPoint(x=1379, y=2926, plane=0)
+52469 at WorldPoint(x=1379, y=2927, plane=0)
+52468 at WorldPoint(x=1379, y=2928, plane=0)
+54969 at WorldPoint(x=1376, y=2925, plane=0)
+54786 at WorldPoint(x=1376, y=2925, plane=0)
+54970 at WorldPoint(x=1376, y=2928, plane=0)
+54969 at WorldPoint(x=1376, y=2929, plane=0)
+54786 at WorldPoint(x=1376, y=2929, plane=0)
+51719 at WorldPoint(x=1377, y=2925, plane=0)
+54786 at WorldPoint(x=1377, y=2925, plane=0)
+51719 at WorldPoint(x=1377, y=2929, plane=0)
 == Text in open windows and chat
 10
 100
@@ -103,8 +111,9 @@ Friends
 Channel
 Clan
 Trade
-00:11:26
+00:18:18
 Boatyguidev3: *
+I can't reach that!
 You have unlocked a new music track: @mes_hl_red@Peace and Prosperity
 You have unlocked a new music track: @mes_hl_red@Isle of Serenity
 You board the ship and sail to Aldarin.
