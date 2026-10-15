@@ -642,6 +642,15 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 137. "Head West and trade Antonius and sell all 28 at once.": Antonius (13916) at (1356, 2926) buys the 28 Eclipse reds
+        // (29415) the player carries.
+        "bf4801cd5e" to { _ ->
+            auto(
+                SellTask(listOf(13916), listOf("Antonius"), Tile(1356, 2926, 0), listOf(29415)),
+                trust = true,
+            )
+        },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
