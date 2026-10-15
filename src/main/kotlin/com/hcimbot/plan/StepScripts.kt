@@ -602,6 +602,12 @@ class StepScripts(private val guide: Guide) {
             StepPlan.Auto(listOf(LootAndHopTask(29415, 28)), trustTasks = true, patient = true, ignoreStartSignal = true)
         },
 
+        // 129. "Head South-West to Sunset Coast. Be careful of the aggressive NPCs along the way": to the fly fishing rod's spawn at
+        // (1530, 2979), where the next step loots. Aggressive monsters on the way are expected, so being attacked does not pause.
+        "03b96ab731" to { settings ->
+            auto(WalkTask(Tile(1530, 2979, 0), radius = 5), combat = settings.allowCombat)
+        },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
