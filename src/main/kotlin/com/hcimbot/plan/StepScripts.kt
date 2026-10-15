@@ -1166,6 +1166,21 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 183. "Get a haircut North [Falador Easy Diary]": the Hairdresser (1305) at (2946, 3380) opens the makeover window on Haircut. A
+        // style is picked, then Apply and Confirm, which the diary task ticks on.
+        "dde4a40c17" to { _ ->
+            StepPlan.Auto(
+                listOf(
+                    InteractTask(InteractTask.Kind.NPC, listOf(1305), listOf("Hairdresser"), listOf(Tile(2946, 3380, 0)), "Haircut"),
+                    ClickChoiceTask(listOf("Cropped", "Short", "Long", "Medium")),
+                    Optional(ClickChoiceTask(listOf("Apply"), waitTicks = 5)),
+                    ClickChoiceTask(listOf("Confirm")),
+                    WaitUntilTask("finish the haircut", 6) { ctx -> !ctx.game.showsChoice("Confirm") },
+                ),
+                trustTasks = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
