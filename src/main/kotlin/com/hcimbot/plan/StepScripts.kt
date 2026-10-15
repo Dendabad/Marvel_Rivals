@@ -790,9 +790,10 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
-        // 154. "Use Pages on Chronicle and wield": the Chronicle (13660) from Diango, the Pages (4573) from the bank.
+        // 154. "Use Pages on Chronicle and wield": the guide's item id (4573) is not in the game, and the Chronicle (13660) is charged
+        // with the Teleport cards (13658) bought from Diango in step 153.
         "a168930db1" to { _ ->
-            auto(UseItemTask(4573, 13660), EquipTask(listOf(item("Chronicle", 13660))), trust = true)
+            auto(OnlyIf({ ctx -> (ctx.game.inventory()[13658] ?: 0) > 0 }, UseItemTask(13658, 13660)), EquipTask(listOf(item("Chronicle", 13660))), trust = true)
         },
 
         // 156. "Head South-West and buy a Harpoon, 50 Bait (non-packs) and 10 Feather packs": Gerrant's Fishy Business in Port Sarim.
