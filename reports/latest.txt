@@ -1,87 +1,117 @@
 HCIM Guide Bot 0.16.51, PAUSED
 == Step
-Step 168 of 2925: Buy 8x Raw Sardines
-Detail: Buy Raw Sardines: talked to the shopkeeper but no shop opened. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 169 of 2925: Use the Deposit box by Entrana and deposit everything except: Mind Runes, Coins, 1x Raw Beef, Karamja Rum, Onion, Pickaxe & 2x wines (8 Inventory Slots)
+Detail: Use the Deposit box by Entrana and deposit everything except: Mind Runes, Coins, 1x Raw Beef, Karamja Rum, Onion, Pickaxe & 2x wines (8 Inventory Slots) (asks for several things). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
+13:23:02  Asking the AI about this pause (try 1)
+13:23:02  Paused: Use the Deposit box by Entrana and deposit everything except: Mind Runes, Coins, 1x Raw Beef, Karamja Rum, Onion, Pickaxe & 2x wines (8 Inventory Slots) (asks for several things)
+13:23:02  Step: Use the Deposit box by Entrana and deposit everything except: Mind Runes, Coins, 1x Raw Beef, Karamja Rum, Onion, Pickaxe & 2x wines (8 Inventory Slots)
+13:22:28  Walking from (3011, 3204, 0) to (3013, 3226, 0)
+13:22:27  Step: Buy 8x Raw Sardines
+13:22:27  AI plan finished, trying the step again
+13:22:23  AI: NPC 2890 Trade
+13:22:22  AI plan: Npc(id=2890, option=Trade); Wait(ticks=3)
+13:22:21  report uploaded to bot-reports
 13:22:19  Asking the AI about this pause (try 1)
 13:22:19  Paused: Buy Raw Sardines: talked to the shopkeeper but no shop opened
 13:22:08  Step: Buy 8x Raw Sardines
-13:22:07  Done (its part of the quest is done): Continue Pirate's Treasure by talking to Wydin to get employed, and collect the rum from the crate.
-13:21:38  Cannot reach Wydin from here, walking over (the walker opens doors)
-13:21:38  Step: Continue Pirate's Treasure by talking to Wydin to get employed, and collect the rum from the crate.
-13:21:38  Started version 0.16.51
 == Player
-world WorldPoint(x=3010, y=3207, plane=0), in instance false, as guide coordinates WorldPoint(x=3010, y=3207, plane=0)
+world WorldPoint(x=3016, y=3223, plane=0), in instance false, as guide coordinates WorldPoint(x=3016, y=3223, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x12645, 558x38, 303x1, 1957x1, 1269x1, 2138x1, 1993x1, 1993x1, 311x1, 313x50, 314x1246, 2132x1, 2132x1, 1933x1, 1933x1, 1933x1, 1951x1, 1951x1, 431x1, 1757x1, 53x454
+995x12565, 558x38, 303x1, 1957x1, 1269x1, 2138x1, 1993x1, 1993x1, 311x1, 313x50, 314x1246, 2132x1, 2132x1, 1933x1, 1933x1, 1933x1, 1951x1, 1951x1, 431x1, 327x1, 327x1, 327x1, 53x454, 327x1, 327x1, 327x1, 327x1, 327x1
 == NPCs within 12 tiles (id name at tile: options)
-2854 Rat at WorldPoint(x=3013, y=3195, plane=0): [Attack]
-1448 Thief at WorldPoint(x=3013, y=3196, plane=0): [Attack]
-2860 Giant rat at WorldPoint(x=2998, y=3200, plane=0): [Attack]
-2890 Wydin at WorldPoint(x=3012, y=3203, plane=0): [Talk-to, Trade]
+4573 Bellemorde at WorldPoint(x=3021, y=3233, plane=0): [Talk-to]
+14982 Seaman Thresnor at WorldPoint(x=3026, y=3216, plane=0): [Talk-to, Travel]
+14978 Captain Tobias at WorldPoint(x=3028, y=3213, plane=0): [Talk-to, Travel]
+14980 Seaman Lorris at WorldPoint(x=3027, y=3219, plane=0): [Talk-to, Travel]
+2891 Gerrant at WorldPoint(x=3017, y=3223, plane=0): [Talk-to, Trade]
+3035 Goblin at WorldPoint(x=3013, y=3220, plane=0): [Attack]
+3253 Thief at WorldPoint(x=3021, y=3235, plane=0): [Attack]
+4590 The Face at WorldPoint(x=3019, y=3232, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
-2071 Crate at WorldPoint(x=3009, y=3207, plane=0)
-365 Sacks at WorldPoint(x=3009, y=3205, plane=0)
-15032 Crates at WorldPoint(x=3009, y=3209, plane=0)
-1158 Potted plant at WorldPoint(x=3012, y=3207, plane=0)
-888 Painting at WorldPoint(x=3012, y=3208, plane=0)
-1158 Potted plant at WorldPoint(x=3012, y=3209, plane=0)
-9533 Crate at WorldPoint(x=3009, y=3204, plane=0)
-9519 Barrel at WorldPoint(x=3010, y=3210, plane=0)
-9519 Barrel at WorldPoint(x=3011, y=3210, plane=0)
-2069 Door at WorldPoint(x=3012, y=3204, plane=0)
-612 Counter at WorldPoint(x=3013, y=3205, plane=0)
-683 Grandfather Clock at WorldPoint(x=3013, y=3210, plane=0)
-9535 Crates at WorldPoint(x=3009, y=3203, plane=0)
-15031 Crate at WorldPoint(x=3010, y=3203, plane=0)
-15030 Crate at WorldPoint(x=3011, y=3203, plane=0)
-16683 Ladder at WorldPoint(x=3013, y=3203, plane=0)
-1158 Potted plant at WorldPoint(x=3014, y=3209, plane=0)
-1276 Tree at WorldPoint(x=3005, y=3210, plane=0)
-9534 Crate at WorldPoint(x=3015, y=3203, plane=0)
-1158 Potted plant at WorldPoint(x=3015, y=3208, plane=0)
-9661 Tree stump at WorldPoint(x=3006, y=3213, plane=0)
-1278 Tree at WorldPoint(x=3011, y=3213, plane=0)
-9535 Crates at WorldPoint(x=3016, y=3203, plane=0)
-602 Table at WorldPoint(x=3016, y=3205, plane=0)
-375 Closed chest at WorldPoint(x=3016, y=3207, plane=0)
-1536 Door at WorldPoint(x=3017, y=3206, plane=0)
-1301 Tree at WorldPoint(x=3017, y=3213, plane=0)
-1276 Tree at WorldPoint(x=3002, y=3212, plane=0)
-9661 Tree stump at WorldPoint(x=3003, y=3216, plane=0)
-1276 Tree at WorldPoint(x=3004, y=3216, plane=0)
+9519 Barrel at WorldPoint(x=3017, y=3224, plane=0)
+969 Fishing net at WorldPoint(x=3017, y=3224, plane=0)
+9519 Barrel at WorldPoint(x=3015, y=3221, plane=0)
+9519 Barrel at WorldPoint(x=3017, y=3225, plane=0)
+969 Fishing net at WorldPoint(x=3017, y=3225, plane=0)
+1536 Door at WorldPoint(x=3014, y=3220, plane=0)
+595 Table at WorldPoint(x=3017, y=3226, plane=0)
+1278 Tree at WorldPoint(x=3019, y=3221, plane=0)
+9520 Barrel at WorldPoint(x=3012, y=3219, plane=0)
+9519 Barrel at WorldPoint(x=3012, y=3220, plane=0)
+9533 Crate at WorldPoint(x=3012, y=3221, plane=0)
+9534 Crate at WorldPoint(x=3012, y=3222, plane=0)
+595 Table at WorldPoint(x=3012, y=3227, plane=0)
+9520 Barrel at WorldPoint(x=3013, y=3219, plane=0)
+595 Table at WorldPoint(x=3014, y=3227, plane=0)
+9531 Bench at WorldPoint(x=3020, y=3219, plane=0)
+9535 Crates at WorldPoint(x=3011, y=3221, plane=0)
+1014 Shelves at WorldPoint(x=3011, y=3222, plane=0)
+969 Fishing net at WorldPoint(x=3011, y=3222, plane=0)
+1016 Shelves at WorldPoint(x=3011, y=3223, plane=0)
+969 Fishing net at WorldPoint(x=3011, y=3223, plane=0)
+1015 Shelves at WorldPoint(x=3011, y=3224, plane=0)
+969 Fishing net at WorldPoint(x=3011, y=3224, plane=0)
+965 Stuffed swordfish at WorldPoint(x=3011, y=3226, plane=0)
+964 Stuffed swordfish at WorldPoint(x=3011, y=3227, plane=0)
+969 Fishing net at WorldPoint(x=3011, y=3228, plane=0)
+1096 Rocking chair at WorldPoint(x=3012, y=3228, plane=0)
+392 Full fishing net at WorldPoint(x=3013, y=3218, plane=0)
+9520 Barrel at WorldPoint(x=3017, y=3228, plane=0)
+1018 Shelves at WorldPoint(x=3011, y=3229, plane=0)
+1018 Shelves at WorldPoint(x=3012, y=3229, plane=0)
+969 Fishing net at WorldPoint(x=3012, y=3229, plane=0)
+965 Stuffed swordfish at WorldPoint(x=3013, y=3229, plane=0)
+964 Stuffed swordfish at WorldPoint(x=3014, y=3229, plane=0)
+1015 Shelves at WorldPoint(x=3015, y=3229, plane=0)
+1017 Shelves at WorldPoint(x=3017, y=3229, plane=0)
+392 Full fishing net at WorldPoint(x=3018, y=3229, plane=0)
+9519 Barrel at WorldPoint(x=3022, y=3219, plane=0)
+1124 Bush at WorldPoint(x=3022, y=3224, plane=0)
 10820 Oak tree at WorldPoint(x=3010, y=3216, plane=0)
-9536 Boxes at WorldPoint(x=3019, y=3209, plane=0)
-9536 Boxes at WorldPoint(x=3019, y=3210, plane=0)
-1276 Tree at WorldPoint(x=3000, y=3204, plane=0)
-9665 Roots at WorldPoint(x=3000, y=3209, plane=0)
-1278 Tree at WorldPoint(x=3000, y=3215, plane=0)
-10793 Stones at WorldPoint(x=3003, y=3197, plane=0)
-1535 Door at WorldPoint(x=3011, y=3197, plane=0)
-9534 Crate at WorldPoint(x=3020, y=3202, plane=0)
-9525 Cart at WorldPoint(x=3020, y=3208, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
+1757 Brown apron at WorldPoint(x=3016, y=3223, plane=0)
+7957 White apron at WorldPoint(x=3016, y=3229, plane=0)
 1963 Banana at WorldPoint(x=3009, y=3207, plane=0)
 1005 White apron at WorldPoint(x=3009, y=3204, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-1832 at WorldPoint(x=3009, y=3208, plane=0)
-196 at WorldPoint(x=3011, y=3208, plane=0)
-4735 at WorldPoint(x=3008, y=3205, plane=0)
-9473 at WorldPoint(x=3008, y=3205, plane=0)
-1828 at WorldPoint(x=3008, y=3205, plane=0)
-4735 at WorldPoint(x=3008, y=3206, plane=0)
-9473 at WorldPoint(x=3008, y=3206, plane=0)
-4735 at WorldPoint(x=3008, y=3207, plane=0)
-9473 at WorldPoint(x=3008, y=3207, plane=0)
-9473 at WorldPoint(x=3008, y=3208, plane=0)
-1828 at WorldPoint(x=3008, y=3208, plane=0)
-4735 at WorldPoint(x=3008, y=3209, plane=0)
-9473 at WorldPoint(x=3008, y=3209, plane=0)
-1832 at WorldPoint(x=3009, y=3205, plane=0)
-196 at WorldPoint(x=3011, y=3205, plane=0)
+9473 at WorldPoint(x=3017, y=3222, plane=0)
+196 at WorldPoint(x=3017, y=3222, plane=0)
+1822 at WorldPoint(x=3017, y=3223, plane=0)
+917 at WorldPoint(x=3014, y=3221, plane=0)
+918 at WorldPoint(x=3014, y=3222, plane=0)
+918 at WorldPoint(x=3014, y=3223, plane=0)
+918 at WorldPoint(x=3014, y=3224, plane=0)
+917 at WorldPoint(x=3014, y=3225, plane=0)
+9473 at WorldPoint(x=3016, y=3221, plane=0)
+1248 at WorldPoint(x=3016, y=3225, plane=0)
+9473 at WorldPoint(x=3017, y=3221, plane=0)
+4735 at WorldPoint(x=3018, y=3221, plane=0)
+9473 at WorldPoint(x=3018, y=3222, plane=0)
+5536 at WorldPoint(x=3018, y=3223, plane=0)
+9473 at WorldPoint(x=3018, y=3223, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
-995 Coins x12645
+303 Small fishing net x5
+307 Fishing rod x5
+309 Fly fishing rod x5
+311 Harpoon x2
+301 Lobster pot x2
+313 Fishing bait x1500
+11883 Bait pack x80
+314 Feather x388
+11881 Feather pack x100
+317 Raw shrimps x0
+327 Raw sardine x200
+345 Raw herring x0
+321 Raw anchovies x0
+335 Raw trout x0
+349 Raw pike x0
+331 Raw salmon x0
+359 Raw tuna x0
+377 Raw lobster x0
+371 Raw swordfish x0
+995 Coins x12565
 558 Mind rune x38
 303 Small fishing net x1
 1957 Onion x1
@@ -95,10 +125,15 @@ hitpoints 10/10
 1933 Pot of flour x1
 1951 Redberries x1
 431 Karamjan rum x1
-1757 Brown apron x1
+327 Raw sardine x1
 53 Headless arrow x454
 == Text in open windows and chat
+Gerrant's Fishy Business.
+Value check:
+Quantity:
 10
+50
+93
 100
 All
 Game
@@ -109,8 +144,11 @@ Friends
 Channel
 Clan
 Trade
-00:08:23
+00:09:06
 Boatyguidev3: *
+You can't sell this item to this shop.
+You don't have enough inventory space.
+I can't reach that!
 You find your bottle of rum in amongst the bananas.
 There are a lot of bananas in the crate.
 There are a lot of potatoes in the crate.
