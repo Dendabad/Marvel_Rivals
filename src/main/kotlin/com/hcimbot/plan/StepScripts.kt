@@ -711,7 +711,12 @@ class StepScripts(private val guide: Guide) {
         // the guide gives an id for. They are the Rune Mysteries ones (291), taken if the bank has them, and the bank not having
         // them does not stop the step.
         "133f34c1ac" to { _ ->
-            auto(BankTask(depositAll = false, withdraw = listOf(item("Coins", 995), item("Research notes", 291))), trust = true)
+            // The coins alone make the guide call this step done, which ended it before the bank was asked for the notes.
+            StepPlan.Auto(
+                listOf(BankTask(depositAll = false, withdraw = listOf(item("Coins", 995), item("Research notes", 291)))),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
         },
 
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
