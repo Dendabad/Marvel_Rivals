@@ -156,6 +156,10 @@ class MicrobotGameState : GameState {
 
     override fun showsChoice(text: String): Boolean = onClient { choiceWidget(text) != null } == true
 
+    override fun showsMakeWindow(): Boolean = onClient {
+        widgetWhere { it.startsWith("What would you like to make", ignoreCase = true) || it.startsWith("How many sets of", ignoreCase = true) } != null
+    } == true
+
     /** A breadth first search over the scene's collision map, in which a shut door is a wall. */
     override fun canReach(tile: Tile): Boolean? =
         runCatching { Rs2Tile.isTileReachable(Instances.toInstance(WorldPoint(tile.x, tile.y, tile.plane))) }.getOrNull()
@@ -321,7 +325,10 @@ class MicrobotGameState : GameState {
                     val inside = mutableListOf<net.runelite.api.widgets.Widget>()
                     descendants(up, inside)
                     val texts = inside.map(::textOf)
-                    if (texts.any { it == "X" } && texts.any { it == "All" }) {
+                    val allOrX = texts.any { it == "X" } && texts.any { it == "All" }
+                    // "How many sets of 15 do you wish to feather?" has 1, 5 and 10 instead.
+                    val sets = texts.any { it == "1" } && texts.any { it == "5" } && texts.any { it == "10" }
+                    if (allOrX || sets) {
                         val target = if (useParent) candidate.parent ?: candidate else candidate
                         return if (target.bounds.width > 0) target else candidate
                     }
@@ -351,7 +358,7 @@ class MicrobotGameState : GameState {
             }
             val all = mutableListOf<net.runelite.api.widgets.Widget>()
             Microbot.getClient().widgetRoots?.forEach { descendants(it, all) }
-            val quantity = makeWindowButton("X", useParent = false) ?: return null
+            val quantity = makeWindowButton("X", useParent = false) ?: makeWindowButton("10", useParent = false) ?: return null
             val below = quantity.bounds.y + quantity.bounds.height
             val label = all
                 .filter { textOf(it) in ITEM_LABELS && it.bounds.width > 0 && it.bounds.y >= below }

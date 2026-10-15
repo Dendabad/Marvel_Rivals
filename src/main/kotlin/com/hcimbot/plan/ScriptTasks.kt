@@ -1435,7 +1435,7 @@ class MakeAllTask(
         }
         if (settling > 0) { settling--; return TaskResult.Running }
         if (game.isBusy || game.isBankOpen || game.isShopOpen) return TaskResult.Running
-        if (game.showsChoice("What would you like to make?")) {
+        if (game.showsMakeWindow()) {
             ctx.actions.makeAll()
             settling = 3
             return TaskResult.Running

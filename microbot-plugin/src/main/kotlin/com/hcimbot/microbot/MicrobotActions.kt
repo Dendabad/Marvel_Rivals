@@ -119,7 +119,10 @@ class MicrobotActions : GameActions {
      * quantity buttons.
      */
     override fun makeAll(): Boolean {
-        val all = onClient { MicrobotGameState.makeWindowButton("All", useParent = false)?.bounds }
+        // The window that asks for "sets" has no All: its biggest button is 10.
+        val all = onClient {
+            (MicrobotGameState.makeWindowButton("All", useParent = false) ?: MicrobotGameState.makeWindowButton("10", useParent = false))?.bounds
+        }
         if (all != null) {
             Microbot.getMouse().click(all)
             Thread.sleep(MAKE_PAUSE_MS)

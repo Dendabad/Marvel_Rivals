@@ -87,6 +87,9 @@ interface GameState {
     /** Whether a game window shows an entry ending in [text], e.g. "B: Shayzien East" in the minecart menu. */
     fun showsChoice(text: String): Boolean = false
 
+    /** The make window is open: "What would you like to make?", or the "How many sets of 15 do you wish to feather?" one. */
+    fun showsMakeWindow(): Boolean = showsChoice("What would you like to make?")
+
     /** What the open shop offers for [itemId], to explain a buy that did not work. Null when unknown. */
     fun shopOffers(itemId: Int): String? = null
 
