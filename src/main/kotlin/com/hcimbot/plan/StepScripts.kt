@@ -1115,6 +1115,26 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 179. "Shear a sheep by the Makeover Mage": the Makeover Mage's house is north of the Crafting Guild, around (2923, 3320), with
+        // the sheep in the field by it. The shears (1735) are held, and the wool (1737) is the proof. A sheared sheep walks off, so the next
+        // one nearest is tried each round.
+        "abb2c289c3" to { _ ->
+            val wool = 1737
+            StepPlan.Auto(
+                listOf(
+                    OnlyIf({ ctx -> !has(wool)(ctx) }, WalkTask(Tile(2926, 3318, 0), radius = 5)),
+                    RepeatUntil(
+                        "shear a sheep",
+                        { ctx -> ctx.conditions.count(listOf(wool)) >= 1 },
+                        { InteractTask(InteractTask.Kind.NPC, emptyList(), listOf("Sheep"), listOf(Tile(2926, 3321, 0)), "Shear") },
+                        maxRounds = 12,
+                    ),
+                ),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
