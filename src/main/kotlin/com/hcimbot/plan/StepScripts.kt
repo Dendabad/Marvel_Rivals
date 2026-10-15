@@ -759,6 +759,22 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 147. "Search the altar to collect the Ghost's skull. Run from the level 13 skeleton.": the altar (2146) at (3120, 9566) in the
+        // Wizards' Tower basement. The skeleton by it (3120, 9569) attacks, so the bot walks off towards Sedridor (3104, 9570), whom
+        // step 148 talks to, as soon as the skull is held.
+        "56dfd5848b" to { _ ->
+            val skull = 553
+            StepPlan.Auto(
+                listOf(
+                    OnlyIf({ ctx -> !has(skull)(ctx) }, obj(listOf(2146), listOf("Altar"), Tile(3120, 9566, 0), "Search")),
+                    OnlyIf({ ctx -> !has(skull)(ctx) }, WaitUntilTask("get the Ghost's skull", 12, reached = has(skull))),
+                    WalkTask(Tile(3104, 9572, 0), radius = 2),
+                ),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
