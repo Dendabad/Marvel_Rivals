@@ -1,112 +1,126 @@
-HCIM Guide Bot 0.16.19, PAUSED
+HCIM Guide Bot 0.16.23, PAUSED
 == Step
-Step 139 of 2925: Head north-east to the Gem Store & buy 9x Uncut Sapphire, 10x Uncut Emerald, and as many Uncut Rubies as possible. (If the shop is out of stock, try to get a few or skip this step and mine a star after unlocking teleports to buy a Bag full of gems with stardust)
-Detail: Buy Uncut sapphire, Uncut emerald: could not buy Uncut sapphire. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 141 of 2925: Buy Steel Pickaxe, 150 Wines, 20 mindbombs & 20 Stews (They are infinite stock so super fast to collect here)
+Detail: Buy Steel Pickaxe, Wines, mindbombs, Stews: bought Steel Pickaxe but it did not arrive. The shop may be out of stock.. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-11:25:48  Paused: Buy Uncut sapphire, Uncut emerald: could not buy Uncut sapphire
-11:25:43  Step: Head north-east to the Gem Store & buy 9x Uncut Sapphire, 10x Uncut Emerald, and as many Uncut Rubies as possible. (If the shop is out of stock, try to get a few or skip this step and mine a star after unlocking teleports to buy a Bag full of gems with stardust)
-11:25:42  AI plan finished, trying the step again
-11:25:40  AI plan: Wait(ticks=3)
-11:25:36  report uploaded to bot-reports
-11:25:34  Asking the AI about this pause (try 2)
-11:25:34  Paused: Buy Uncut sapphire, Uncut emerald: could not buy Uncut sapphire
-11:25:30  Step: Head north-east to the Gem Store & buy 9x Uncut Sapphire, 10x Uncut Emerald, and as many Uncut Rubies as possible. (If the shop is out of stock, try to get a few or skip this step and mine a star after unlocking teleports to buy a Bag full of gems with stardust)
-11:25:29  AI plan finished, trying the step again
-11:25:26  AI: NPC 13915 Trade
-11:25:23  AI plan: Wait(ticks=2); Npc(id=13915, option=Trade); Wait(ticks=3)
-11:25:21  report uploaded to bot-reports
+12:04:59  Asking the AI about this pause (try 1)
+12:04:59  Paused: Buy Steel Pickaxe, Wines, mindbombs, Stews: bought Steel Pickaxe but it did not arrive. The shop may be out of stock.
+12:04:35  Walking from (1383, 2866, 0) to (1399, 2867, 0)
+12:04:35  Step: Buy Steel Pickaxe, 150 Wines, 20 mindbombs & 20 Stews (They are infinite stock so super fast to collect here)
+12:04:34  Done (all actions finished): Head South to Mistrock & deposit all there
+12:04:28  Entering the bank PIN
+12:04:20  The bank is asking for its PIN: type it into the Bank PIN box in the sidebar
+12:03:27  Walking from (1429, 2975, 0) to (1387, 2862, 0)
+12:03:27  Step: Head South to Mistrock & deposit all there
+12:03:26  Done (all actions finished): Head north-east to the Gem Store & buy 9x Uncut Sapphire, 10x Uncut Emerald, and as many Uncut Rubies as possible. (If the shop is out of stock, try to get a few or skip this step and mine a star after unlocking teleports to buy a Bag full of gems with stardust)
+12:03:25  Skipped optional Buy Uncut ruby: could not buy Uncut ruby
+12:03:06  Shop out of stock, hopping worlds (hop 56, not back to [327, 389, 422, 534, 700])
 == Player
-world WorldPoint(x=1429, y=2975, plane=0), in instance false, as guide coordinates WorldPoint(x=1429, y=2975, plane=0)
+world WorldPoint(x=1399, y=2866, plane=0), in instance false, as guide coordinates WorldPoint(x=1399, y=2866, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x19576, 29409x1, 29409x1, 29409x1
+
 == NPCs within 12 tiles (id name at tile: options)
-13988 Guard at WorldPoint(x=1417, y=2966, plane=0): [Attack, Pickpocket]
-13992 Guard at WorldPoint(x=1420, y=2975, plane=0): [Attack, Pickpocket]
-13887 Citizen at WorldPoint(x=1422, y=2966, plane=0): [Talk-to, Pickpocket]
-13961 Chiribaya at WorldPoint(x=1426, y=2975, plane=0): [Pet, Shoo-away]
-13914 Faustus at WorldPoint(x=1422, y=2982, plane=0): [Talk-to, Trade]
-13880 Cleaner at WorldPoint(x=1430, y=2978, plane=0): []
-13208 Tourist at WorldPoint(x=1427, y=2972, plane=0): [Talk-to, Pickpocket]
-13890 Citizen at WorldPoint(x=1421, y=2971, plane=0): [Talk-to, Pickpocket]
-13989 Guard at WorldPoint(x=1425, y=2970, plane=0): [Attack, Pickpocket]
-13903 Child at WorldPoint(x=1427, y=2965, plane=0): [Talk-to]
-13889 Citizen at WorldPoint(x=1430, y=2978, plane=0): [Talk-to, Pickpocket]
-13915 Toci at WorldPoint(x=1430, y=2975, plane=0): [Talk-to, Trade]
-13986 Guard at WorldPoint(x=1431, y=2966, plane=0): [Attack, Pickpocket]
-13895 Citizen at WorldPoint(x=1428, y=2963, plane=0): [Talk-to, Pickpocket]
-13995 Guard at WorldPoint(x=1431, y=2969, plane=0): [Attack, Pickpocket]
-14047 Gull at WorldPoint(x=1440, y=2984, plane=0): []
-1338 Seagull at WorldPoint(x=1436, y=2966, plane=0): [Attack]
-13248 Sailor at WorldPoint(x=1441, y=2968, plane=0): [Talk-to]
-1338 Seagull at WorldPoint(x=1441, y=2974, plane=0): [Attack]
+13944 Child at WorldPoint(x=1387, y=2861, plane=0): [Talk-to]
+13929 Ichta at WorldPoint(x=1387, y=2868, plane=0): [Talk-to, Trade]
+13956 Overseer Khougo at WorldPoint(x=1387, y=2857, plane=0): [Talk-to]
+13928 Bartender at WorldPoint(x=1390, y=2860, plane=0): [Talk-to, Trade]
+13933 Guard at WorldPoint(x=1393, y=2869, plane=0): [Talk-to]
+13940 Citizen at WorldPoint(x=1391, y=2859, plane=0): [Talk-to]
+13941 Citizen at WorldPoint(x=1393, y=2868, plane=0): [Talk-to]
+238 Butterfly at WorldPoint(x=1388, y=2872, plane=0): []
+13930 Necto at WorldPoint(x=1402, y=2868, plane=0): [Talk-to, Trade]
+12856 Squirrel at WorldPoint(x=1397, y=2854, plane=0): []
+238 Butterfly at WorldPoint(x=1402, y=2859, plane=0): []
 == Named objects within 25 tiles, nearest first (id name at tile)
-55079 Table at WorldPoint(x=1428, y=2976, plane=0)
-55049 Crates at WorldPoint(x=1430, y=2974, plane=0)
-55050 Barrel at WorldPoint(x=1427, y=2973, plane=0)
-55048 Crate at WorldPoint(x=1429, y=2973, plane=0)
-55050 Barrel at WorldPoint(x=1431, y=2973, plane=0)
-1391 Plant at WorldPoint(x=1431, y=2977, plane=0)
-52614 Ladder at WorldPoint(x=1432, y=2974, plane=0)
-54780 Gem stall at WorldPoint(x=1425, y=2971, plane=0)
-55048 Crate at WorldPoint(x=1425, y=2973, plane=0)
-55049 Crates at WorldPoint(x=1427, y=2971, plane=0)
-54778 Well at WorldPoint(x=1427, y=2979, plane=0)
-51822 Sunflowers at WorldPoint(x=1431, y=2979, plane=0)
-52449 Cypress Tree at WorldPoint(x=1432, y=2971, plane=0)
-55050 Barrel at WorldPoint(x=1426, y=2970, plane=0)
-1392 Plant at WorldPoint(x=1430, y=2980, plane=0)
-1276 Tree at WorldPoint(x=1433, y=2980, plane=0)
-55050 Barrel at WorldPoint(x=1423, y=2979, plane=0)
-52582 Sacks at WorldPoint(x=1423, y=2980, plane=0)
-1394 Plant at WorldPoint(x=1428, y=2981, plane=0)
-55035 Table at WorldPoint(x=1421, y=2983, plane=0)
-1276 Tree at WorldPoint(x=1431, y=2983, plane=0)
-55048 Crate at WorldPoint(x=1437, y=2969, plane=0)
-60301 Notice board at WorldPoint(x=1438, y=2969, plane=0)
-52614 Ladder at WorldPoint(x=1419, y=2981, plane=0)
-1276 Tree at WorldPoint(x=1419, y=2985, plane=0)
-1278 Tree at WorldPoint(x=1427, y=2985, plane=0)
-54779 Market stall at WorldPoint(x=1418, y=2969, plane=0)
-54781 Veg stall at WorldPoint(x=1418, y=2976, plane=0)
-51750 Food pot at WorldPoint(x=1418, y=2979, plane=0)
-51822 Sunflowers at WorldPoint(x=1418, y=2985, plane=0)
-55352 House Advertisement at WorldPoint(x=1425, y=2964, plane=0)
-51750 Food pot at WorldPoint(x=1417, y=2979, plane=0)
-1276 Tree at WorldPoint(x=1421, y=2987, plane=0)
-52449 Cypress Tree at WorldPoint(x=1426, y=2963, plane=0)
-52684 Fishing boat at WorldPoint(x=1441, y=2963, plane=0)
-55050 Barrel at WorldPoint(x=1441, y=2975, plane=0)
-55353 Portal at WorldPoint(x=1420, y=2962, plane=0)
-10833 Willow tree at WorldPoint(x=1428, y=2988, plane=0)
-51750 Food pot at WorldPoint(x=1429, y=2962, plane=0)
-10831 Willow tree at WorldPoint(x=1432, y=2988, plane=0)
+52612 Door at WorldPoint(x=1398, y=2867, plane=0)
+51550 Crates at WorldPoint(x=1399, y=2868, plane=0)
+51549 Crate at WorldPoint(x=1400, y=2868, plane=0)
+52458 Table at WorldPoint(x=1401, y=2866, plane=0)
+51563 Barrel at WorldPoint(x=1401, y=2868, plane=0)
+51501 Anvil at WorldPoint(x=1401, y=2863, plane=0)
+51548 Crate at WorldPoint(x=1401, y=2869, plane=0)
+1278 Tree at WorldPoint(x=1395, y=2865, plane=0)
+10832 Maple tree at WorldPoint(x=1395, y=2869, plane=0)
+3366 Onion at WorldPoint(x=1402, y=2870, plane=0)
+42084 Wooden cart at WorldPoint(x=1403, y=2865, plane=0)
+1276 Tree at WorldPoint(x=1394, y=2862, plane=0)
+47371 Plant at WorldPoint(x=1395, y=2871, plane=0)
+1276 Tree at WorldPoint(x=1398, y=2871, plane=0)
+1278 Tree at WorldPoint(x=1404, y=2861, plane=0)
+52646 Water pump at WorldPoint(x=1393, y=2870, plane=0)
+1278 Tree at WorldPoint(x=1393, y=2871, plane=0)
+1278 Tree at WorldPoint(x=1404, y=2872, plane=0)
+52461 Table at WorldPoint(x=1392, y=2860, plane=0)
+42403 Plant at WorldPoint(x=1392, y=2862, plane=0)
+51724 Stool at WorldPoint(x=1393, y=2859, plane=0)
+10832 Maple tree at WorldPoint(x=1394, y=2873, plane=0)
+10832 Maple tree at WorldPoint(x=1400, y=2859, plane=0)
+51724 Stool at WorldPoint(x=1391, y=2860, plane=0)
+47371 Plant at WorldPoint(x=1401, y=2858, plane=0)
+1289 Dead tree at WorldPoint(x=1402, y=2858, plane=0)
+1289 Dead tree at WorldPoint(x=1407, y=2860, plane=0)
+1276 Tree at WorldPoint(x=1407, y=2866, plane=0)
+51720 Beer taps at WorldPoint(x=1390, y=2857, plane=0)
+52612 Door at WorldPoint(x=1390, y=2861, plane=0)
+51720 Beer taps at WorldPoint(x=1391, y=2857, plane=0)
+51720 Beer taps at WorldPoint(x=1392, y=2857, plane=0)
+51720 Beer taps at WorldPoint(x=1393, y=2857, plane=0)
+10832 Maple tree at WorldPoint(x=1396, y=2857, plane=0)
+42405 Plant at WorldPoint(x=1407, y=2857, plane=0)
+52594 Door at WorldPoint(x=1389, y=2868, plane=0)
+10832 Maple tree at WorldPoint(x=1399, y=2876, plane=0)
+1276 Tree at WorldPoint(x=1400, y=2856, plane=0)
+1278 Tree at WorldPoint(x=1406, y=2876, plane=0)
+55130 Rockslide at WorldPoint(x=1409, y=2871, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
-1933 Pot of flour at WorldPoint(x=1432, y=2960, plane=0)
-954 Rope at WorldPoint(x=1442, y=2959, plane=0)
+2347 Hammer at WorldPoint(x=1401, y=2866, plane=0)
+1919 Beer glass at WorldPoint(x=1392, y=2860, plane=0)
+29412 Steamforge brew at WorldPoint(x=1389, y=2857, plane=0)
+1917 Beer at WorldPoint(x=1388, y=2859, plane=0)
+526 Bones at WorldPoint(x=1411, y=2858, plane=0)
+526 Bones at WorldPoint(x=1413, y=2855, plane=0)
+1925 Bucket at WorldPoint(x=1388, y=2851, plane=0)
+954 Rope at WorldPoint(x=1383, y=2862, plane=0)
+526 Bones at WorldPoint(x=1418, y=2861, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-52471 at WorldPoint(x=1429, y=2975, plane=0)
-52470 at WorldPoint(x=1428, y=2974, plane=0)
-52471 at WorldPoint(x=1428, y=2975, plane=0)
-52470 at WorldPoint(x=1428, y=2976, plane=0)
-54796 at WorldPoint(x=1428, y=2976, plane=0)
-52470 at WorldPoint(x=1429, y=2974, plane=0)
-52470 at WorldPoint(x=1429, y=2976, plane=0)
-54787 at WorldPoint(x=1429, y=2976, plane=0)
-52468 at WorldPoint(x=1430, y=2974, plane=0)
-54807 at WorldPoint(x=1430, y=2974, plane=0)
-52469 at WorldPoint(x=1430, y=2975, plane=0)
-54805 at WorldPoint(x=1430, y=2975, plane=0)
-54809 at WorldPoint(x=1430, y=2976, plane=0)
-52467 at WorldPoint(x=1430, y=2976, plane=0)
-38848 at WorldPoint(x=1430, y=2976, plane=0)
+12931 at WorldPoint(x=1398, y=2865, plane=0)
+54854 at WorldPoint(x=1398, y=2865, plane=0)
+54854 at WorldPoint(x=1398, y=2866, plane=0)
+12931 at WorldPoint(x=1399, y=2865, plane=0)
+54854 at WorldPoint(x=1399, y=2865, plane=0)
+54854 at WorldPoint(x=1400, y=2865, plane=0)
+2776 at WorldPoint(x=1400, y=2867, plane=0)
+21363 at WorldPoint(x=1397, y=2865, plane=0)
+21363 at WorldPoint(x=1397, y=2866, plane=0)
+54857 at WorldPoint(x=1397, y=2866, plane=0)
+17324 at WorldPoint(x=1397, y=2866, plane=0)
+54856 at WorldPoint(x=1397, y=2868, plane=0)
+17324 at WorldPoint(x=1397, y=2868, plane=0)
+21363 at WorldPoint(x=1398, y=2864, plane=0)
+54854 at WorldPoint(x=1398, y=2868, plane=0)
+== Items shown in open windows, such as a shop or bank (item id name x quantity)
+2347 Hammer x6
+1755 Chisel x6
+1265 Bronze pickaxe x6
+1267 Iron pickaxe x5
+1269 Steel pickaxe x4
+436 Copper ore x0
+438 Tin ore x0
+440 Iron ore x0
+447 Mithril ore x0
+449 Adamantite ore x0
+451 Runite ore x0
+453 Coal x0
+442 Silver ore x0
+444 Gold ore x0
 == Text in open windows and chat
-Toci's Gem Store
+Mistrock Mining Supplies
 Value check:
 Quantity:
 10
 50
-84
+55
 100
 All
 Game
@@ -117,13 +131,12 @@ Friends
 Channel
 Clan
 Trade
-00:20:57
+00:01:46
 Boatyguidev3: *
-I can't reach that!
-You have unlocked a new music track: @mes_hl_red@Peace and Prosperity
-You have unlocked a new music track: @mes_hl_red@Isle of Serenity
-You board the ship and sail to Aldarin.
-Did you know? Wearing a charged Amulet of Glory while mining will increase the rate at which you find gems.
+You don't have enough coins.
+You have correctly entered your PIN.
+You have unlocked a new music track: @mes_hl_red@Mistrock
+Did you know? There is a setting to allow you to get Strength XP when pushing through the wheat in Puro-Puro.
 Welcome to Old School RuneScape.
 == Quest Helper
 no step: null
