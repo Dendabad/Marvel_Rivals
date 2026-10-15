@@ -20,7 +20,7 @@ object ItemSources {
     )
 
     /** Items a withdraw step lists that the guide gives later (the Research Package), so a bank without them is no reason to stop. */
-    val LATER = setOf(290)
+    val LATER = setOf(290, 291)
 
     private val given = listOf(
         // 7. "Head East & Start X Marks the Spot on Veos": Veos hands over the scroll.

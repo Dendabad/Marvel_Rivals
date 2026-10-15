@@ -708,8 +708,11 @@ class StepScripts(private val guide: Guide) {
         },
 
         // 143. "Withdraw: Coins, Research Notes (2 inventory Slots) / Bronze pickaxe not needed": the Research Notes are not an item
-        // the guide names, so only the coins come out.
-        "133f34c1ac" to { _ -> auto(BankTask(depositAll = false, withdraw = listOf(item("Coins", 995))), trust = true) },
+        // the guide gives an id for. They are the Rune Mysteries ones (291), taken if the bank has them, and the bank not having
+        // them does not stop the step.
+        "133f34c1ac" to { _ ->
+            auto(BankTask(depositAll = false, withdraw = listOf(item("Coins", 995), item("Research notes", 291))), trust = true)
+        },
 
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
