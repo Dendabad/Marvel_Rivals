@@ -3,24 +3,26 @@ HCIM Guide Bot 0.16.80, PAUSED
 Step 188 of 2925: Buy 6x Woad Leaves from Wyson the Gardener (1,4)
 Detail: the actions finished but the game does not show the step as done. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
+14:12:54  Asking the AI about this pause (try 2)
+14:12:54  Paused: the actions finished but the game does not show the step as done
+14:12:31  Step: Buy 6x Woad Leaves from Wyson the Gardener (1,4)
+14:12:30  AI plan finished, trying the step again
+14:12:30  AI plan stopped: could not do com.hcimbot.ai.AiAction$Continue@52767900
+14:12:30  AI: continue
+14:12:27  AI: continue
+14:12:23  AI: NPC 5422 Talk-to
+14:12:23  AI plan: Npc(id=5422, option=Talk-to); Wait(ticks=3); com.hcimbot.ai.AiAction$Continue@52767900; Wait(ticks=2); com.hcimbot.ai.AiAction$Continue@52767900; Wait(ticks=2); Choose(text=Woad leaves)
+14:12:19  report uploaded to bot-reports
 14:12:18  Asking the AI about this pause (try 1)
 14:12:17  Paused: the actions finished but the game does not show the step as done
-14:11:38  Walking from (2998, 3380, 0) to (3027, 3379, 0)
-14:11:38  Step: Buy 6x Woad Leaves from Wyson the Gardener (1,4)
-14:11:37  Duck is dead after 1 attacks
-14:11:31  Attacking Duck
-14:11:31  Step: Kill a duck in Falador Park [Falador Easy Diary]
-14:11:30  Done (the Mahogany Homes contract is optional in the guide, and done later): Get a Mahogany Home Beginner Contract from Amy (try and do these whenever passing if viable (aka if Hosidius and you're nearby, detour and complete it. If not they're done later but may be inefficient) - Mahogany homes plugin or notepad to remember your tasks.
-14:11:30  Step: Get a Mahogany Home Beginner Contract from Amy (try and do these whenever passing if viable (aka if Hosidius and you're nearby, detour and complete it. If not they're done later but may be inefficient) - Mahogany homes plugin or notepad to remember your tasks.
-14:11:30  Started version 0.16.80
 == Player
 world WorldPoint(x=3026, y=3379, plane=0), in instance false, as guide coordinates WorldPoint(x=3026, y=3379, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x11858, 558x197, 2134x1, 2138x1, 2132x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1929x1, 432x1, 1985x1, 1793x2
+995x11838, 558x197, 2134x1, 2138x1, 2132x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1929x1, 432x1, 1985x1, 1793x4
 == NPCs within 12 tiles (id name at tile: options)
-3102 Garden supplier at WorldPoint(x=3020, y=3372, plane=0): [Talk-to, Trade]
-3275 Gardener at WorldPoint(x=3020, y=3369, plane=0): [Talk-to, Attack]
+3102 Garden supplier at WorldPoint(x=3016, y=3374, plane=0): [Talk-to, Trade]
+3275 Gardener at WorldPoint(x=3021, y=3371, plane=0): [Talk-to, Attack]
 5422 Wyson the gardener at WorldPoint(x=3026, y=3378, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
 24051 Door at WorldPoint(x=3027, y=3379, plane=0)
@@ -81,7 +83,7 @@ hitpoints 10/10
 24093 at WorldPoint(x=3028, y=3381, plane=0)
 24232 at WorldPoint(x=3025, y=3376, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
-995 Coins x11858
+995 Coins x11838
 558 Mind rune x197
 2134 Raw rat meat x1
 2138 Raw chicken x1
@@ -90,10 +92,10 @@ hitpoints 10/10
 1929 Bucket of water x1
 432 Chest key x1
 1985 Cheese x1
-1793 Woad leaf x2
+1793 Woad leaf x4
 == Text in open windows and chat
 10
-60
+69
 100
 All
 Game
@@ -104,7 +106,7 @@ Friends
 Channel
 Clan
 Trade
-00:58:22
+00:58:59
 Boatyguidev3: *
 Well done! You have completed an easy task in the Falador area. Your Achievement Diary has been updated.
 You've started a new quest: @q_mes@The Knight's Sword
