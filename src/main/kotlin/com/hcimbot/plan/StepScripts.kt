@@ -1207,6 +1207,30 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 188. "Buy 6x Woad Leaves from Wyson the Gardener (1,4)": Wyson (5422) at (3026, 3378) in Falador Park's hut. The chat options are
+        // 1, then 4, and each talk gave 4 leaves, so he is talked to again until 6 are held.
+        "672dfee966" to { _ ->
+            val wyson = Tile(3027, 3379, 0)
+            val woad = 1793
+            StepPlan.Auto(
+                listOf(
+                    RepeatUntil(
+                        "buy 6 woad leaves",
+                        { ctx -> ctx.conditions.count(listOf(woad)) >= 6 },
+                        {
+                            TaskList(
+                                talk(listOf(5422), "Wyson the gardener", Tile(3026, 3378, 0), DialoguePlan.Numbered(listOf(1, 4))),
+                                WaitUntilTask("finish talking to Wyson", 30, DialoguePlan.Numbered(listOf(1, 4))) { ctx -> !ctx.game.canContinueDialog && ctx.game.dialogOptions().isEmpty() },
+                            )
+                        },
+                        maxRounds = 4,
+                    ),
+                ),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"

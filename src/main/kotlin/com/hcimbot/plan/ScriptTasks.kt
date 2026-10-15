@@ -1582,3 +1582,17 @@ class CookTask(
         const val MAX_DOORS = 4
     }
 }
+
+/** Runs [tasks] one after the other as one task, for a round of a [RepeatUntil] that is more than a single click. */
+class TaskList(private vararg val tasks: Task) : Task {
+    private var index = 0
+    override val description get() = tasks.getOrNull(index)?.description ?: tasks.lastOrNull()?.description ?: "Nothing to do"
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val task = tasks.getOrNull(index) ?: return TaskResult.Done
+        return when (val result = task.tick(ctx)) {
+            TaskResult.Done -> { index++; if (index >= tasks.size) TaskResult.Done else TaskResult.Running }
+            else -> result
+        }
+    }
+}
