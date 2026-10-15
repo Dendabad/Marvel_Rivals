@@ -1,103 +1,103 @@
-HCIM Guide Bot 0.16.37, PAUSED
+HCIM Guide Bot 0.16.39, PAUSED
 == Step
-Step 156 of 2925: Head South-West and buy a Harpoon, 50 Bait (non-packs) and 10 Feather packs. Take Apron from the wall & wear.
-Detail: Equip White apron: White apron is not in the inventory. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 158 of 2925: Take Ship to Karamja (Seamen dressed in blue)
+Detail: Take Ship to Karamja (Seamen dressed in blue) (cannot identify what to pick up). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-12:55:32  Asking the AI about this pause (try 1)
-12:55:32  Paused: Equip White apron: White apron is not in the inventory
-12:55:29  Step: Head South-West and buy a Harpoon, 50 Bait (non-packs) and 10 Feather packs. Take Apron from the wall & wear.
-12:55:28  Resumed by you
-12:55:28  Resumed by you
-12:55:25  Started version 0.16.37
+12:58:40  Asking the AI about this pause (try 1)
+12:58:40  Paused: Take Ship to Karamja (Seamen dressed in blue) (cannot identify what to pick up)
+12:58:40  Step: Take Ship to Karamja (Seamen dressed in blue)
+12:58:39  Done (all actions finished): Make 454 Headless Arrows
+12:58:32  Step: Make 454 Headless Arrows
+12:58:31  Started version 0.16.39
 == Player
-world WorldPoint(x=3015, y=3226, plane=0), in instance false, as guide coordinates WorldPoint(x=3015, y=3226, plane=0)
+world WorldPoint(x=3016, y=3229, plane=0), in instance false, as guide coordinates WorldPoint(x=3016, y=3229, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x12744, 558x38, 303x1, 1957x1, 1269x1, 52x454, 1993x1, 1993x1, 311x1, 313x50, 314x700, 11881x1, 11881x1, 11881x1, 11881x1, 11881x1, 11881x1, 11881x1, 11881x1, 11881x1, 11881x1
+995x12744, 558x38, 303x1, 1957x1, 1269x1, 1993x1, 1993x1, 311x1, 313x50, 314x846, 11881x1, 11881x1, 11881x1, 11881x1, 1757x1, 53x454
 == NPCs within 12 tiles (id name at tile: options)
-4573 Bellemorde at WorldPoint(x=3019, y=3234, plane=0): [Talk-to]
-14982 Seaman Thresnor at WorldPoint(x=3026, y=3216, plane=0): [Talk-to, Travel]
-14980 Seaman Lorris at WorldPoint(x=3027, y=3221, plane=0): [Talk-to, Travel]
-3111 Woman at WorldPoint(x=3013, y=3233, plane=0): [Talk-to, Attack, Pickpocket]
-2891 Gerrant at WorldPoint(x=3017, y=3223, plane=0): [Talk-to, Trade]
-3253 Thief at WorldPoint(x=3015, y=3231, plane=0): [Attack]
-3106 Man at WorldPoint(x=3015, y=3236, plane=0): [Talk-to, Attack, Pickpocket]
-4590 The Face at WorldPoint(x=3019, y=3231, plane=0): [Talk-to]
+4573 Bellemorde at WorldPoint(x=3020, y=3231, plane=0): [Talk-to]
+14980 Seaman Lorris at WorldPoint(x=3028, y=3220, plane=0): [Talk-to, Travel]
+3111 Woman at WorldPoint(x=3010, y=3232, plane=0): [Talk-to, Attack, Pickpocket]
+2891 Gerrant at WorldPoint(x=3013, y=3222, plane=0): [Talk-to, Trade]
+3252 Thief at WorldPoint(x=3009, y=3233, plane=0): [Attack]
+3253 Thief at WorldPoint(x=3022, y=3228, plane=0): [Attack]
+3106 Man at WorldPoint(x=3017, y=3239, plane=0): [Talk-to, Attack, Pickpocket]
+4590 The Face at WorldPoint(x=3018, y=3230, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
-595 Table at WorldPoint(x=3014, y=3227, plane=0)
-9519 Barrel at WorldPoint(x=3017, y=3224, plane=0)
-969 Fishing net at WorldPoint(x=3017, y=3224, plane=0)
-9519 Barrel at WorldPoint(x=3017, y=3225, plane=0)
-969 Fishing net at WorldPoint(x=3017, y=3225, plane=0)
-595 Table at WorldPoint(x=3017, y=3226, plane=0)
+1015 Shelves at WorldPoint(x=3015, y=3229, plane=0)
 9520 Barrel at WorldPoint(x=3017, y=3228, plane=0)
+1017 Shelves at WorldPoint(x=3017, y=3229, plane=0)
+595 Table at WorldPoint(x=3014, y=3227, plane=0)
+964 Stuffed swordfish at WorldPoint(x=3014, y=3229, plane=0)
+392 Full fishing net at WorldPoint(x=3018, y=3229, plane=0)
+965 Stuffed swordfish at WorldPoint(x=3013, y=3229, plane=0)
+595 Table at WorldPoint(x=3017, y=3226, plane=0)
+10321 Manhole at WorldPoint(x=3018, y=3232, plane=0)
 595 Table at WorldPoint(x=3012, y=3227, plane=0)
 1096 Rocking chair at WorldPoint(x=3012, y=3228, plane=0)
 1018 Shelves at WorldPoint(x=3012, y=3229, plane=0)
 969 Fishing net at WorldPoint(x=3012, y=3229, plane=0)
-965 Stuffed swordfish at WorldPoint(x=3013, y=3229, plane=0)
-964 Stuffed swordfish at WorldPoint(x=3014, y=3229, plane=0)
-1015 Shelves at WorldPoint(x=3015, y=3229, plane=0)
-1017 Shelves at WorldPoint(x=3017, y=3229, plane=0)
-392 Full fishing net at WorldPoint(x=3018, y=3229, plane=0)
-1014 Shelves at WorldPoint(x=3011, y=3222, plane=0)
-969 Fishing net at WorldPoint(x=3011, y=3222, plane=0)
-1016 Shelves at WorldPoint(x=3011, y=3223, plane=0)
-969 Fishing net at WorldPoint(x=3011, y=3223, plane=0)
+9519 Barrel at WorldPoint(x=3017, y=3225, plane=0)
+969 Fishing net at WorldPoint(x=3017, y=3225, plane=0)
 1015 Shelves at WorldPoint(x=3011, y=3224, plane=0)
 969 Fishing net at WorldPoint(x=3011, y=3224, plane=0)
 965 Stuffed swordfish at WorldPoint(x=3011, y=3226, plane=0)
 964 Stuffed swordfish at WorldPoint(x=3011, y=3227, plane=0)
 969 Fishing net at WorldPoint(x=3011, y=3228, plane=0)
 1018 Shelves at WorldPoint(x=3011, y=3229, plane=0)
+1088 Chair at WorldPoint(x=3013, y=3234, plane=0)
+9519 Barrel at WorldPoint(x=3017, y=3224, plane=0)
+969 Fishing net at WorldPoint(x=3017, y=3224, plane=0)
+1016 Shelves at WorldPoint(x=3011, y=3223, plane=0)
+969 Fishing net at WorldPoint(x=3011, y=3223, plane=0)
+16683 Ladder at WorldPoint(x=3011, y=3235, plane=0)
+595 Table at WorldPoint(x=3013, y=3235, plane=0)
+1088 Chair at WorldPoint(x=3014, y=3235, plane=0)
+1124 Bush at WorldPoint(x=3022, y=3224, plane=0)
+1014 Shelves at WorldPoint(x=3011, y=3222, plane=0)
+969 Fishing net at WorldPoint(x=3011, y=3222, plane=0)
 9534 Crate at WorldPoint(x=3012, y=3222, plane=0)
+26814 Poll booth at WorldPoint(x=3016, y=3236, plane=0)
+1276 Tree at WorldPoint(x=3008, y=3229, plane=0)
+348 Drawers at WorldPoint(x=3010, y=3237, plane=0)
 9535 Crates at WorldPoint(x=3011, y=3221, plane=0)
 9533 Crate at WorldPoint(x=3012, y=3221, plane=0)
+1535 Door at WorldPoint(x=3014, y=3237, plane=0)
 9519 Barrel at WorldPoint(x=3015, y=3221, plane=0)
-1278 Tree at WorldPoint(x=3019, y=3221, plane=0)
-9519 Barrel at WorldPoint(x=3012, y=3220, plane=0)
-1536 Door at WorldPoint(x=3014, y=3220, plane=0)
-10321 Manhole at WorldPoint(x=3018, y=3232, plane=0)
-1276 Tree at WorldPoint(x=3008, y=3229, plane=0)
-9520 Barrel at WorldPoint(x=3012, y=3219, plane=0)
-9520 Barrel at WorldPoint(x=3013, y=3219, plane=0)
-9531 Bench at WorldPoint(x=3020, y=3219, plane=0)
-9519 Barrel at WorldPoint(x=3022, y=3219, plane=0)
-1124 Bush at WorldPoint(x=3022, y=3224, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
 7957 White apron at WorldPoint(x=3016, y=3229, plane=0)
-1963 Banana at WorldPoint(x=3009, y=3207, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-917 at WorldPoint(x=3014, y=3225, plane=0)
-1248 at WorldPoint(x=3016, y=3225, plane=0)
-918 at WorldPoint(x=3013, y=3224, plane=0)
-917 at WorldPoint(x=3013, y=3225, plane=0)
-2758 at WorldPoint(x=3013, y=3226, plane=0)
-918 at WorldPoint(x=3014, y=3224, plane=0)
-1022 at WorldPoint(x=3017, y=3227, plane=0)
-1822 at WorldPoint(x=3017, y=3228, plane=0)
-918 at WorldPoint(x=3013, y=3223, plane=0)
-918 at WorldPoint(x=3014, y=3223, plane=0)
 15042 at WorldPoint(x=3016, y=3229, plane=0)
-1822 at WorldPoint(x=3017, y=3223, plane=0)
-5536 at WorldPoint(x=3018, y=3223, plane=0)
-9473 at WorldPoint(x=3018, y=3223, plane=0)
-1821 at WorldPoint(x=3018, y=3223, plane=0)
+5534 at WorldPoint(x=3015, y=3230, plane=0)
+9473 at WorldPoint(x=3015, y=3230, plane=0)
+5533 at WorldPoint(x=3016, y=3230, plane=0)
+9473 at WorldPoint(x=3016, y=3230, plane=0)
+1822 at WorldPoint(x=3017, y=3228, plane=0)
+5533 at WorldPoint(x=3017, y=3230, plane=0)
+9473 at WorldPoint(x=3017, y=3230, plane=0)
+5534 at WorldPoint(x=3014, y=3230, plane=0)
+9473 at WorldPoint(x=3014, y=3230, plane=0)
+4735 at WorldPoint(x=3015, y=3231, plane=0)
+4735 at WorldPoint(x=3016, y=3231, plane=0)
+1022 at WorldPoint(x=3017, y=3227, plane=0)
+4736 at WorldPoint(x=3017, y=3231, plane=0)
+5533 at WorldPoint(x=3018, y=3227, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
 995 Coins x12744
 558 Mind rune x38
 303 Small fishing net x1
 1957 Onion x1
 1269 Steel pickaxe x1
-52 Arrow shaft x454
 1993 Jug of wine x1
 311 Harpoon x1
 313 Fishing bait x50
-314 Feather x700
+314 Feather x846
 11881 Feather pack x1
+1757 Brown apron x1
+53 Headless arrow x454
 == Text in open windows and chat
+1,174
 10
-78
 100
 All
 Game
@@ -108,25 +108,6 @@ Friends
 Channel
 Clan
 Trade
-00:52:19
-Boatyguidev3: *
-You've started a new quest: @q_mes@Pirate's Treasure
-You add 10 charges to your book. It now has 10 charges.
-You step through the portal...
-You have unlocked a new music track: @mes_hl_red@Rune Essence
-Well done! You have completed an easy task in the Lumbridge & Draynor area. Your Achievement Diary has been updated.
-Congratulations, you've completed a quest: @q_mes@Rune Mysteries
-The skeleton in the corner suddenly comes to life!
-You pay the guards and pass through the gate.
-You have unlocked a new music track: @mes_hl_red@Arabian 2
-You have unlocked a new music track: @mes_hl_red@Arabian
-You have unlocked a new music track: @mes_hl_red@Al Kharid
-You need to wait another 24 minutes to cast this spell.
-[12:26:27] [WebWalk] sp | Al Kharid toll gate crossing unresolved confirmed=false dest=3268,3227,p0 at=3253,3226,p0
-You don't have enough coins.
-You have correctly entered your PIN.
-You have unlocked a new music track: @mes_hl_red@Mistrock
-Did you know? There is a setting to allow you to get Strength XP when pushing through the wheat in Puro-Puro.
-Welcome to Old School RuneScape.
+00:55:26
 == Quest Helper
 DetailedQuestStep: "Please open Pirate Treasure's Quest Journal to sync the current quest state." npcs [] objects [] at null choices []
