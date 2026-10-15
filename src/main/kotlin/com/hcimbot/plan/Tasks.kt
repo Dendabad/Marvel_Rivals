@@ -453,10 +453,17 @@ class UseItemTask(
 class ShopTask(
     private val sellers: List<Seller>,
     private val items: List<ItemRef>,
+    /** When the shop is out of stock, hop worlds and ask again until the full amount is held. */
+    private val hopWhenOut: Boolean = false,
 ) : BaseTask() {
     class Seller(val name: String, val ids: List<Int>, val tiles: List<Tile>)
 
     private var open: InteractTask? = null
+    private var needHop = false
+    private var loadingFrom: Int? = null
+    private var loadTicks = 0
+    private var hops = 0
+    private val visited = HashMap<Int, Long>()
     private var waitingForShop = 0
     private val requested = mutableMapOf<Int, Int>()
     private val heldWhenBought = mutableMapOf<Int, Long>()
@@ -464,6 +471,7 @@ class ShopTask(
 
     override fun tick(ctx: TaskContext): TaskResult {
         val missing = items.filter { ctx.conditions.count(it.ids) < (it.count ?: 1) }
+        if (missing.isNotEmpty() && hopWhenOut) hopStep(ctx)?.let { return it }
         if (missing.isEmpty()) {
             return if (ctx.game.isShopOpen) attempt(ctx.actions.closeInterface(), "close the shop") else TaskResult.Done
         }
@@ -487,7 +495,10 @@ class ShopTask(
             // Some arrived but not enough yet, e.g. a shop that sells one per click: buy again.
             requested.remove(id)
         } else if (waited != null) {
-            if (waited >= ARRIVAL_TICKS) return TaskResult.Failed("bought ${next.name} but it did not arrive. The shop may be out of stock.")
+            if (waited >= ARRIVAL_TICKS) {
+                if (hopWhenOut) { requested.remove(id); needHop = true; return TaskResult.Running }
+                return TaskResult.Failed("bought ${next.name} but it did not arrive. The shop may be out of stock.")
+            }
             requested[id] = waited + 1
             return TaskResult.Running
         }
@@ -496,6 +507,7 @@ class ShopTask(
             requested[id] = 0
             heldWhenBought[id] = have
         }
+        if (!started && hopWhenOut) { needHop = true; return TaskResult.Running }
         val result = attempt(started, "buy ${next.name}")
         // Say what the shop offered, so a shop window the bot does not understand can be fixed.
         return if (result is TaskResult.Failed) {
@@ -505,6 +517,31 @@ class ShopTask(
         }
     }
 
+    /** While out of stock: close the shop, hop to a world not visited in the last minute, wait for it to load. Null when not hopping. */
+    private fun hopStep(ctx: TaskContext): TaskResult? {
+        val game = ctx.game
+        if (loadingFrom != null) {
+            val arrived = game.isLoggedIn && game.playerTile != null && game.world > 0 && game.world != loadingFrom
+            if (!arrived && ++loadTicks < 40) return TaskResult.Running
+            loadingFrom = null
+            open = null
+            return null
+        }
+        if (!needHop) return null
+        if (game.isShopOpen) return attempt(ctx.actions.closeInterface(), "close the shop")
+        if (++hops > MAX_HOPS) return TaskResult.Failed("still out of stock after $MAX_HOPS world hops")
+        val now = System.currentTimeMillis()
+        val here = game.world
+        if (here > 0) visited[here] = now
+        val avoid = visited.filter { now - it.value < 60_000 }.keys
+        ctx.log("Shop out of stock, hopping worlds (hop $hops, not back to ${avoid.sorted()})")
+        ctx.actions.hopWorldAvoiding(avoid)
+        loadingFrom = if (here > 0) here else -2
+        loadTicks = 0
+        needHop = false
+        return TaskResult.Running
+    }
+
     /** The guide brings the player near the right shop first, so the nearest seller is the one meant. */
     private fun opener(ctx: TaskContext): InteractTask? {
         val at = ctx.game.playerTile ?: return null
@@ -512,6 +549,10 @@ class ShopTask(
         // A shopkeeper stands behind a counter, which the walking map reads as out of reach, so the bot would walk away to look
         // for a way round. Click them wherever they can be seen.
         return InteractTask(InteractTask.Kind.NPC, seller.ids, listOf(seller.name), seller.tiles, "Trade", ignoreReach = true)
+    }
+
+    private companion object {
+        const val MAX_HOPS = 80
     }
 }
 

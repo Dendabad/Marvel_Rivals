@@ -671,9 +671,8 @@ class StepScripts(private val guide: Guide) {
         "381733ed40" to { _ ->
             val toci = listOf(ShopTask.Seller("Toci", listOf(13915), listOf(Tile(1428, 2974, 0))))
             auto(
-                // The guide allows a few or none when the shop is out of stock, so each gem is optional.
-                Optional(ShopTask(toci, listOf(item("Uncut sapphire", 1623, 9)))),
-                Optional(ShopTask(toci, listOf(item("Uncut emerald", 1621, 10)))),
+                // The guide allows a few or none when the shop is out of stock, so the ruby is optional, and sapphires and emeralds hop worlds until all are bought.
+                ShopTask(toci, listOf(item("Uncut sapphire", 1623, 9), item("Uncut emerald", 1621, 10)), hopWhenOut = true),
                 Optional(ShopTask(toci, listOf(item("Uncut ruby", 1619, 5)))),
                 trust = true,
             )
