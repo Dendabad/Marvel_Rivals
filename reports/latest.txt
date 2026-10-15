@@ -1,78 +1,75 @@
 HCIM Guide Bot 0.16.34, PAUSED
 == Step
-Step 149 of 2925: Teleport to Rune Essence Mine [Lumbridge Easy Diary]
-Detail: Use Portal: unexpected chat options [Can you teleport me to the Rune Essence Mine?, Who else knows the teleport to the Rune Essence Mine?, Could you tell me about the old Wizards' Tower?, I'd better get going.]. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 151 of 2925: Head North to Draynor and Deposit all
+Detail: Walk to (3103, 3265, 0): could not walk to (3103, 3265, 0). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
+12:47:05  Asking the AI about this pause (try 1)
+12:47:05  Paused: Walk to (3103, 3265, 0): could not walk to (3103, 3265, 0)
+12:46:57  Walking from (2922, 4811, 0) to (3103, 3265, 0)
+12:46:57  Step: Head North to Draynor and Deposit all
+12:46:56  AI plan finished, trying the step again
+12:46:51  AI: continue
+12:46:47  AI: choose "Can you teleport me to the Rune Essence Mine?"
+12:46:47  AI plan: Choose(text=Can you teleport me to the Rune Essence Mine?); Wait(ticks=3); com.hcimbot.ai.AiAction$Continue@1592a3f8; Wait(ticks=5)
+12:46:45  report uploaded to bot-reports
 12:46:43  Asking the AI about this pause (try 1)
 12:46:43  Paused: Use Portal: unexpected chat options [Can you teleport me to the Rune Essence Mine?, Who else knows the teleport to the Rune Essence Mine?, Could you tell me about the old Wizards' Tower?, I'd better get going.]
 12:46:41  Step: Teleport to Rune Essence Mine [Lumbridge Easy Diary]
-12:46:41  Started version 0.16.34
 == Player
-world WorldPoint(x=3102, y=9572, plane=0), in instance false, as guide coordinates WorldPoint(x=3102, y=9572, plane=0)
+world WorldPoint(x=13629, y=10072, plane=0), in instance true, as guide coordinates WorldPoint(x=2925, y=4808, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
 995x18331, 1438x1, 1511x1, 1511x1, 1511x1, 553x1
 == NPCs within 12 tiles (id name at tile: options)
-11433 Archmage Sedridor at WorldPoint(x=3102, y=9573, plane=0): [Talk-to, Teleport]
-1173 Chicken at WorldPoint(x=3108, y=9572, plane=0): [Attack]
 == Named objects within 25 tiles, nearest first (id name at tile)
-575 Statue at WorldPoint(x=3102, y=9574, plane=0)
-43841 Stool at WorldPoint(x=3104, y=9574, plane=0)
-427 Bed at WorldPoint(x=3099, y=9572, plane=0)
-1102 Stool at WorldPoint(x=3104, y=9569, plane=0)
-1102 Stool at WorldPoint(x=3105, y=9569, plane=0)
-899 Hanging banner at WorldPoint(x=3105, y=9574, plane=0)
-575 Statue at WorldPoint(x=3098, y=9574, plane=0)
-603 Table at WorldPoint(x=3103, y=9568, plane=0)
-2148 Ladder at WorldPoint(x=3103, y=9576, plane=0)
-901 Hanging banner at WorldPoint(x=3106, y=9574, plane=0)
-1102 Stool at WorldPoint(x=3103, y=9567, plane=0)
-1102 Stool at WorldPoint(x=3104, y=9567, plane=0)
-1536 Door at WorldPoint(x=3107, y=9570, plane=0)
-724 Standing torch at WorldPoint(x=3107, y=9572, plane=0)
-381 Bookcase at WorldPoint(x=3096, y=9566, plane=0)
-380 Bookcase at WorldPoint(x=3096, y=9571, plane=0)
-724 Standing torch at WorldPoint(x=3096, y=9574, plane=0)
-381 Bookcase at WorldPoint(x=3098, y=9566, plane=0)
-1016 Shelves at WorldPoint(x=3104, y=9566, plane=0)
-1017 Shelves at WorldPoint(x=3105, y=9566, plane=0)
-203 Candles at WorldPoint(x=3110, y=9566, plane=0)
-203 Candles at WorldPoint(x=3110, y=9571, plane=0)
-203 Candles at WorldPoint(x=3110, y=9576, plane=0)
-595 Table at WorldPoint(x=3106, y=9562, plane=0)
-203 Candles at WorldPoint(x=3110, y=9561, plane=0)
-595 Table at WorldPoint(x=3114, y=9567, plane=0)
-1088 Chair at WorldPoint(x=3114, y=9569, plane=0)
-595 Table at WorldPoint(x=3106, y=9559, plane=0)
-1536 Door at WorldPoint(x=3110, y=9559, plane=0)
-1088 Chair at WorldPoint(x=3115, y=9559, plane=0)
-1088 Chair at WorldPoint(x=3115, y=9569, plane=0)
-595 Table at WorldPoint(x=3114, y=9558, plane=0)
-350 Drawers at WorldPoint(x=3116, y=9562, plane=0)
-1088 Chair at WorldPoint(x=3113, y=9557, plane=0)
-595 Table at WorldPoint(x=3117, y=9567, plane=0)
-1088 Chair at WorldPoint(x=3117, y=9569, plane=0)
-595 Table at WorldPoint(x=3114, y=9556, plane=0)
-350 Drawers at WorldPoint(x=3118, y=9561, plane=0)
-350 Drawers at WorldPoint(x=3118, y=9564, plane=0)
-1088 Chair at WorldPoint(x=3118, y=9569, plane=0)
+11433 Rockslide at WorldPoint(x=2926, y=4808, plane=0)
+11434 Rockslide at WorldPoint(x=2926, y=4810, plane=0)
+743 Ladder at WorldPoint(x=2928, y=4811, plane=0)
+11434 Rockslide at WorldPoint(x=2925, y=4812, plane=0)
+11924 Rocks at WorldPoint(x=2924, y=4814, plane=0)
+34773 Rune Essence at WorldPoint(x=2927, y=4814, plane=0)
+744 Scaffold at WorldPoint(x=2922, y=4815, plane=0)
+11432 Rockslide at WorldPoint(x=2924, y=4815, plane=0)
+34825 Portal at WorldPoint(x=2933, y=4815, plane=0)
+744 Scaffold at WorldPoint(x=2935, y=4816, plane=0)
+11433 Rockslide at WorldPoint(x=2926, y=4820, plane=0)
+11434 Rockslide at WorldPoint(x=2928, y=4820, plane=0)
+1291 Dead tree at WorldPoint(x=2934, y=4820, plane=0)
+11922 Rockslide at WorldPoint(x=2927, y=4822, plane=0)
+1291 Dead tree at WorldPoint(x=2933, y=4822, plane=0)
+1291 Dead tree at WorldPoint(x=2910, y=4823, plane=0)
+1291 Dead tree at WorldPoint(x=2909, y=4825, plane=0)
+1291 Dead tree at WorldPoint(x=2913, y=4825, plane=0)
+1291 Dead tree at WorldPoint(x=2907, y=4827, plane=0)
+743 Ladder at WorldPoint(x=2911, y=4827, plane=0)
+744 Scaffold at WorldPoint(x=2916, y=4827, plane=0)
+11922 Rockslide at WorldPoint(x=2905, y=4828, plane=0)
+11921 Rockslide at WorldPoint(x=2912, y=4828, plane=0)
+11921 Rockslide at WorldPoint(x=2907, y=4829, plane=0)
+11920 Rockslide at WorldPoint(x=2905, y=4830, plane=0)
+11921 Rockslide at WorldPoint(x=2916, y=4830, plane=0)
+11920 Rockslide at WorldPoint(x=2907, y=4831, plane=0)
+1291 Dead tree at WorldPoint(x=2904, y=4832, plane=0)
+11920 Rockslide at WorldPoint(x=2905, y=4832, plane=0)
+11920 Rockslide at WorldPoint(x=2913, y=4832, plane=0)
+11921 Rockslide at WorldPoint(x=2907, y=4833, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-921 at WorldPoint(x=3102, y=9572, plane=0)
-921 at WorldPoint(x=3101, y=9572, plane=0)
-921 at WorldPoint(x=3101, y=9573, plane=0)
-921 at WorldPoint(x=3102, y=9573, plane=0)
-920 at WorldPoint(x=3103, y=9572, plane=0)
-920 at WorldPoint(x=3103, y=9573, plane=0)
-921 at WorldPoint(x=3100, y=9570, plane=0)
-921 at WorldPoint(x=3100, y=9572, plane=0)
-921 at WorldPoint(x=3101, y=9570, plane=0)
-921 at WorldPoint(x=3102, y=9570, plane=0)
-920 at WorldPoint(x=3103, y=9570, plane=0)
-197 at WorldPoint(x=3103, y=9574, plane=0)
-7389 at WorldPoint(x=3104, y=9572, plane=0)
-921 at WorldPoint(x=3099, y=9569, plane=0)
-197 at WorldPoint(x=3099, y=9569, plane=0)
+559 at WorldPoint(x=2925, y=4808, plane=0)
+1440 at WorldPoint(x=2924, y=4807, plane=0)
+1440 at WorldPoint(x=2924, y=4808, plane=0)
+559 at WorldPoint(x=2924, y=4808, plane=0)
+559 at WorldPoint(x=2924, y=4809, plane=0)
+1440 at WorldPoint(x=2925, y=4807, plane=0)
+559 at WorldPoint(x=2925, y=4809, plane=0)
+1440 at WorldPoint(x=2926, y=4807, plane=0)
+559 at WorldPoint(x=2926, y=4808, plane=0)
+1441 at WorldPoint(x=2923, y=4806, plane=0)
+1441 at WorldPoint(x=2923, y=4807, plane=0)
+1440 at WorldPoint(x=2923, y=4808, plane=0)
+1440 at WorldPoint(x=2923, y=4809, plane=0)
+559 at WorldPoint(x=2923, y=4810, plane=0)
+1441 at WorldPoint(x=2924, y=4806, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
 995 Coins x18331
 1438 Air talisman x1
@@ -91,11 +88,22 @@ Friends
 Channel
 Clan
 Trade
-00:43:30
-Select an option
-Can you teleport me to the Rune Essence Mine?
-Who else knows the teleport to the Rune Essence Mine?
-Could you tell me about the old Wizards' Tower?
-I'd better get going.
+00:43:52
+Boatyguidev3: *
+You have unlocked a new music track: @mes_hl_red@Rune Essence
+Well done! You have completed an easy task in the Lumbridge & Draynor area. Your Achievement Diary has been updated.
+Congratulations, you've completed a quest: @q_mes@Rune Mysteries
+The skeleton in the corner suddenly comes to life!
+You pay the guards and pass through the gate.
+You have unlocked a new music track: @mes_hl_red@Arabian 2
+You have unlocked a new music track: @mes_hl_red@Arabian
+You have unlocked a new music track: @mes_hl_red@Al Kharid
+You need to wait another 24 minutes to cast this spell.
+[12:26:27] [WebWalk] sp | Al Kharid toll gate crossing unresolved confirmed=false dest=3268,3227,p0 at=3253,3226,p0
+You don't have enough coins.
+You have correctly entered your PIN.
+You have unlocked a new music track: @mes_hl_red@Mistrock
+Did you know? There is a setting to allow you to get Strength XP when pushing through the wheat in Puro-Puro.
+Welcome to Old School RuneScape.
 == Quest Helper
 no step: null
