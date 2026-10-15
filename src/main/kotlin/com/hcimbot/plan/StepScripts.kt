@@ -1057,6 +1057,12 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 175. "Buy 3x Buckets & Shears": Rimmington's general store, whose shop keeper (2823) and assistant (2824) stand at (2947, 3217).
+        "1b277c2bf6" to { _ ->
+            val store = listOf(ShopTask.Seller("Shop keeper", listOf(2823, 2824), listOf(Tile(2947, 3217, 0))))
+            auto(ShopTask(store, listOf(item("Bucket", 1925, 3), item("Shears", 1735, 1)), hopWhenOut = true), trust = true)
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
