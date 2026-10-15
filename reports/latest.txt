@@ -1,23 +1,21 @@
-HCIM Guide Bot 0.16.81, PAUSED
+HCIM Guide Bot 0.16.82, PAUSED
 == Step
 Step 189 of 2925: Head North of Falador and kill a Black Bear (safespot on trees as it is a 2x2). Collect the Raw Bear Meat, Bones & fur.
-Detail: Head North of Falador and kill a Black Bear (safespot on trees as it is a 2x2). Collect the Raw Bear Meat, Bones & fur. (asks for several things). Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Detail: Kill Black bear for Raw bear meat, Bones, Bear fur: no Black bear nearby, and no known spawn spot within 60 tiles. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-14:14:20  Asking the AI about this pause (try 1)
-14:14:20  Paused: Head North of Falador and kill a Black Bear (safespot on trees as it is a 2x2). Collect the Raw Bear Meat, Bones & fur. (asks for several things)
-14:14:20  Step: Head North of Falador and kill a Black Bear (safespot on trees as it is a 2x2). Collect the Raw Bear Meat, Bones & fur.
-14:14:10  Step: Buy 6x Woad Leaves from Wyson the Gardener (1,4)
-14:14:10  Started version 0.16.81
+14:15:28  Asking the AI about this pause (try 1)
+14:15:28  Paused: Kill Black bear for Raw bear meat, Bones, Bear fur: no Black bear nearby, and no known spawn spot within 60 tiles
+14:15:28  Step: Head North of Falador and kill a Black Bear (safespot on trees as it is a 2x2). Collect the Raw Bear Meat, Bones & fur.
+14:15:28  Started version 0.16.82
 == Player
 world WorldPoint(x=3026, y=3379, plane=0), in instance false, as guide coordinates WorldPoint(x=3026, y=3379, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
 995x11818, 558x197, 2134x1, 2138x1, 2132x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1993x1, 1929x1, 432x1, 1985x1, 1793x6
 == NPCs within 12 tiles (id name at tile: options)
-3102 Garden supplier at WorldPoint(x=3022, y=3371, plane=0): [Talk-to, Trade]
-3275 Gardener at WorldPoint(x=3015, y=3369, plane=0): [Talk-to, Attack]
+3102 Garden supplier at WorldPoint(x=3019, y=3373, plane=0): [Talk-to, Trade]
+3275 Gardener at WorldPoint(x=3015, y=3368, plane=0): [Talk-to, Attack]
 5422 Wyson the gardener at WorldPoint(x=3026, y=3378, plane=0): [Talk-to]
-3291 Postie Pete at WorldPoint(x=3037, y=3372, plane=0): [Talk-to]
 == Named objects within 25 tiles, nearest first (id name at tile)
 24051 Door at WorldPoint(x=3027, y=3379, plane=0)
 1156 Potted flower at WorldPoint(x=3025, y=3376, plane=0)
@@ -90,7 +88,6 @@ hitpoints 10/10
 1793 Woad leaf x6
 == Text in open windows and chat
 10
-91
 100
 All
 Game
@@ -101,7 +98,7 @@ Friends
 Channel
 Clan
 Trade
-01:00:24
+01:01:33
 Click here to continue
 You buy a pair of woad leaves from Wyson.
 == Quest Helper
