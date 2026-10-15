@@ -651,6 +651,18 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 138. "Head East after selling Eclipse reds and buy 3 Sunbeam ales from the Bartender in the pub": the Bartender (13917)
+        // at (1376, 2927). The pub's door (at (1375, 2927)) is opened if it is in the way, by the NPC task.
+        "dcccfc8512" to { _ ->
+            auto(
+                ShopTask(
+                    listOf(ShopTask.Seller("Bartender", listOf(13917), listOf(Tile(1376, 2927, 0)))),
+                    listOf(item("Sunbeam ale", 29409, 3)),
+                ),
+                trust = true,
+            )
+        },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
