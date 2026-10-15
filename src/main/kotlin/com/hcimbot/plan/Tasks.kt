@@ -232,13 +232,26 @@ class InteractTask(
             Kind.NPC -> game.canReach(entity.tile) == false
             Kind.OBJECT -> game.canReachBeside(entity.tile) == false
         }
+        // In range of someone who cannot be reached: a shut door, gate or the like is in the way, so open the one nearest
+        // the player among those round the target, right away, rather than walking about first.
+        val here = game.playerTile
+        val inRange = here != null && here.distanceTo(entity.tile) <= CLOSE_RANGE
+        if (outOfReach && inRange && doorTries < MAX_DOOR_TRIES && here != null) {
+            val door = game.objectsNear(DOORS, entity.tile, DOOR_RANGE).minByOrNull { it.tile.distanceTo(here) }
+            if (door != null) {
+                doorTries++
+                ctx.log("In range of ${entity.name} but cannot reach, opening the ${door.name.ifBlank { "door" }} at ${door.tile}")
+                ctx.actions.interactObject(door, "Open")
+                return TaskResult.Running
+            }
+        }
         if (approaches < MAX_APPROACHES && outOfReach) {
             approaches++
             ctx.log("Cannot reach ${entity.name} from here, walking over (the walker opens doors)")
             ctx.actions.walkTo(entity.tile)
             return TaskResult.Running
         }
-        // The walker did not get through: open the shut door nearest the target ourselves, a few times.
+        // The walker did not get through either: open the shut door nearest the target ourselves, a few times.
         if (outOfReach && doorTries < MAX_DOOR_TRIES) {
             val door = game.nearestObject(emptyList(), DOORS, entity.tile)?.takeIf { it.tile.distanceTo(entity.tile) <= DOOR_RANGE }
             if (door != null) {
@@ -264,7 +277,8 @@ class InteractTask(
     companion object {
         private const val MAX_APPROACHES = 3
         private const val MAX_DOOR_TRIES = 3
-        private const val DOOR_RANGE = 6
+        private const val DOOR_RANGE = 8
+        private const val CLOSE_RANGE = 14
 
         /** Objects that are a shut way through, tried when a target is out of reach. */
         val DOORS = listOf("Door", "Large door", "Gate")
