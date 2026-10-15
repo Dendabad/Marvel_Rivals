@@ -1079,6 +1079,42 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 177. "Milk the cow 3x by Crafting guild": the dairy cows (8689) at (2923, 3285) and (2920, 3291), with the 3 buckets held.
+        "7267a74c3d" to { _ ->
+            val milk = 1927
+            StepPlan.Auto(
+                listOf(
+                    RepeatUntil(
+                        "milk the dairy cow 3 times",
+                        { ctx -> ctx.conditions.count(listOf(milk)) >= 3 },
+                        { obj(listOf(8689), listOf("Dairy cow"), Tile(2923, 3285, 0), "Milk") },
+                        maxRounds = 12,
+                    ),
+                ),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
+        // 178. "Kill a cow & take everything": the cows (2790, 2791, 2793) of the field by the Crafting Guild. The cow hide (1739), raw beef
+        // (2132) and bones (526) are taken.
+        "2e6f3bc7bc" to { _ ->
+            StepPlan.Auto(
+                listOf(
+                    KillTask(
+                        listOf(2790, 2791, 2793, 2795),
+                        listOf("Cow"),
+                        listOf(item("Cowhide", 1739, 1), item("Raw beef", 2132, 1), item("Bones", 526, 1)),
+                        maxKills = 4,
+                        lookFirst = Tile(2924, 3284, 0),
+                    ),
+                ),
+                combat = true,
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
