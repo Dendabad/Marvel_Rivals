@@ -1520,6 +1520,7 @@ class CookTask(
     private var idle = 0
     private var walk: WalkTask? = null
     private var place = 0
+    private var arrivedAt = -1
     private val opened = HashSet<Tile>()
 
     override fun tick(ctx: TaskContext): TaskResult {
@@ -1538,16 +1539,19 @@ class CookTask(
         // Cooked ones burn when used on a range again, so they go first.
         val item = listOf(cooked, raw).firstOrNull { (have[it] ?: 0) > 0 }
             ?: return TaskResult.Failed("nothing left to burn: no raw item $raw or cooked item $cooked and none burnt")
-        val at = game.playerTile
-        val range = game.nearestObject(emptyList(), rangeNames, at)?.takeIf { at != null && it.tile.distanceTo(at) <= NEAR }
-        if (range == null) {
-            // Not in sight: the places to look are tried in turn, each walked to and, with no range there, the next.
-            val spot = lookAt.getOrNull(place) ?: return TaskResult.Failed("no range in sight at any of $lookAt")
-            val goTo = walk ?: WalkTask(spot, radius = 5).also { walk = it }
-            val result = goTo.tick(ctx)
-            if (result is TaskResult.Done) { place++; walk = null; return TaskResult.Running }
-            return if (result is TaskResult.Failed) { place++; walk = null; TaskResult.Running } else result
+        val at = game.playerTile ?: return TaskResult.Running
+        val spot = lookAt.getOrNull(place) ?: return TaskResult.Failed("no range reachable at any of $lookAt")
+        // Walked to first, even with the range in sight: it may be inside a building, and the walker finds the way in through its door.
+        if (at.plane != spot.plane || at.distanceTo(spot) > ARRIVED) {
+            val goTo = walk ?: WalkTask(spot, radius = ARRIVED).also { walk = it }
+            return when (val result = goTo.tick(ctx)) {
+                TaskResult.Done -> { walk = null; arrivedAt = place; TaskResult.Running }
+                is TaskResult.Failed -> { ctx.log("Could not walk to $spot: ${result.reason}"); place++; walk = null; TaskResult.Running }
+                else -> result
+            }
         }
+        val range = game.nearestObject(emptyList(), rangeNames, spot)?.takeIf { it.tile.distanceTo(at) <= NEAR }
+        if (range == null) { place++; walk = null; return TaskResult.Running }
         // A range inside a building with the doors shut: whether it can be reached is not told reliably, so each door round it is tried
         // once with Open before the first use. One that is open already has no Open option and the click does nothing.
         if (opened.size < MAX_DOORS) {
@@ -1569,7 +1573,8 @@ class CookTask(
     }
 
     private companion object {
-        const val NEAR = 12
+        const val NEAR = 6
+        const val ARRIVED = 2
         const val DOOR_RANGE = 8
         const val MAX_DOORS = 4
     }
