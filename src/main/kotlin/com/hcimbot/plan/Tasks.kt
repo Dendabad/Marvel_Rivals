@@ -509,7 +509,9 @@ class ShopTask(
     private fun opener(ctx: TaskContext): InteractTask? {
         val at = ctx.game.playerTile ?: return null
         val seller = sellers.minByOrNull { s -> s.tiles.minOfOrNull { at.distanceTo(it) } ?: Int.MAX_VALUE } ?: return null
-        return InteractTask(InteractTask.Kind.NPC, seller.ids, listOf(seller.name), seller.tiles, "Trade")
+        // A shopkeeper stands behind a counter, which the walking map reads as out of reach, so the bot would walk away to look
+        // for a way round. Click them wherever they can be seen.
+        return InteractTask(InteractTask.Kind.NPC, seller.ids, listOf(seller.name), seller.tiles, "Trade", ignoreReach = true)
     }
 }
 
