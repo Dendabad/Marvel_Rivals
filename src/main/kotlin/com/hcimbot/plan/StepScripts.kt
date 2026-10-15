@@ -679,6 +679,17 @@ class StepScripts(private val guide: Guide) {
         },
 
         // 99. "Take 2x Logs & 2x ashes after cutscene"
+        // 141. "Buy Steel Pickaxe, 150 Wines, 20 mindbombs & 20 Stews": step 140 deposited everything, coins too, so the coins come
+        // out of the bank first. Necto (13930) runs Mistrock Mining Supplies at (1399, 2867), where the steel pickaxe is.
+        "480b030dea" to { _ ->
+            val necto = listOf(ShopTask.Seller("Necto", listOf(13930), listOf(Tile(1399, 2867, 0))))
+            auto(
+                BankTask(depositAll = false, withdraw = listOf(item("Coins", 995))),
+                ShopTask(necto, listOf(item("Steel pickaxe", 1269, 1))),
+                trust = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
