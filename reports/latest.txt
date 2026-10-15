@@ -1,28 +1,20 @@
-HCIM Guide Bot 0.16.33, PAUSED
+HCIM Guide Bot 0.16.34, PAUSED
 == Step
 Step 149 of 2925: Teleport to Rune Essence Mine [Lumbridge Easy Diary]
-Detail: Teleport to Rune Essence Mine [Lumbridge Easy Diary]. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Detail: Use Portal: unexpected chat options [Can you teleport me to the Rune Essence Mine?, Who else knows the teleport to the Rune Essence Mine?, Could you tell me about the old Wizards' Tower?, I'd better get going.]. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-12:43:04  Asking the AI about this pause (try 1)
-12:43:04  Paused: Teleport to Rune Essence Mine [Lumbridge Easy Diary]
-12:43:04  Step: Teleport to Rune Essence Mine [Lumbridge Easy Diary]
-12:42:52  Quest Helper: Quest Helper has no quest open, not runemysteries. Select runemysteries in the Quest Helper panel
-12:42:52  Quest step: Talk to Sedridor in the Wizard Tower's basement to finish the quest.
-12:42:31  Walking from (3119, 9566, 0) to (3104, 9571, 0)
-12:42:30  Quest Helper: Quest Helper has no quest open, not runemysteries. Select runemysteries in the Quest Helper panel
-12:42:30  Quest step: Bring the notes to Sedridor in the Wizard Tower's basement.
-12:42:30  Step: Complete Rune Mysteries
-12:42:11  Cannot reach Altar from here, walking over (the walker opens doors)
-12:42:11  Step: Search the altar to collect the Ghost's skull. Run from the level 13 skeleton.
-12:42:11  Started version 0.16.33
+12:46:43  Asking the AI about this pause (try 1)
+12:46:43  Paused: Use Portal: unexpected chat options [Can you teleport me to the Rune Essence Mine?, Who else knows the teleport to the Rune Essence Mine?, Could you tell me about the old Wizards' Tower?, I'd better get going.]
+12:46:41  Step: Teleport to Rune Essence Mine [Lumbridge Easy Diary]
+12:46:41  Started version 0.16.34
 == Player
 world WorldPoint(x=3102, y=9572, plane=0), in instance false, as guide coordinates WorldPoint(x=3102, y=9572, plane=0)
-hitpoints 7/10
+hitpoints 10/10
 == Bag (item id x count)
 995x18331, 1438x1, 1511x1, 1511x1, 1511x1, 553x1
 == NPCs within 12 tiles (id name at tile: options)
 11433 Archmage Sedridor at WorldPoint(x=3102, y=9573, plane=0): [Talk-to, Teleport]
-1173 Chicken at WorldPoint(x=3104, y=9572, plane=0): [Attack]
+1173 Chicken at WorldPoint(x=3108, y=9572, plane=0): [Attack]
 == Named objects within 25 tiles, nearest first (id name at tile)
 575 Statue at WorldPoint(x=3102, y=9574, plane=0)
 43841 Stool at WorldPoint(x=3104, y=9574, plane=0)
@@ -82,20 +74,13 @@ hitpoints 7/10
 921 at WorldPoint(x=3099, y=9569, plane=0)
 197 at WorldPoint(x=3099, y=9569, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
-1438  x400
 995 Coins x18331
 1438 Air talisman x1
 1511 Logs x1
 553 Ghost's skull x1
 == Text in open windows and chat
-8m
-Congratulations!
-You have completed Rune Mysteries!
-Total Quest Points: 4
-You are awarded:
-1 Quest Point
-An Air Talisman
-Rune Essence Mine Access
+4m
+10
 100
 All
 Game
@@ -106,20 +91,11 @@ Friends
 Channel
 Clan
 Trade
-00:39:51
-Boatyguidev3: *
-Congratulations, you've completed a quest: @q_mes@Rune Mysteries
-The skeleton in the corner suddenly comes to life!
-You pay the guards and pass through the gate.
-You have unlocked a new music track: @mes_hl_red@Arabian 2
-You have unlocked a new music track: @mes_hl_red@Arabian
-You have unlocked a new music track: @mes_hl_red@Al Kharid
-You need to wait another 24 minutes to cast this spell.
-[12:26:27] [WebWalk] sp | Al Kharid toll gate crossing unresolved confirmed=false dest=3268,3227,p0 at=3253,3226,p0
-You don't have enough coins.
-You have correctly entered your PIN.
-You have unlocked a new music track: @mes_hl_red@Mistrock
-Did you know? There is a setting to allow you to get Strength XP when pushing through the wheat in Puro-Puro.
-Welcome to Old School RuneScape.
+00:43:30
+Select an option
+Can you teleport me to the Rune Essence Mine?
+Who else knows the teleport to the Rune Essence Mine?
+Could you tell me about the old Wizards' Tower?
+I'd better get going.
 == Quest Helper
 no step: null
