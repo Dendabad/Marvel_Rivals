@@ -1264,7 +1264,8 @@ class StepScripts(private val guide: Guide) {
                 listOfNotNull(
                     helper?.let { Optional(QuestTask("witchshouse", it, false)) },
                     OnlyIf(needsMouse, UseItemTask(1985, null, listOf(2870), listOf("Mouse hole"), Tile(2903, 3466, 0))),
-                    OnlyIf(needsMouse, UseItemOnNamedNpcTask(2410, "Mouse")),
+                    // The mouse may be out already, with the cheese gone: only the magnet is needed then. With no mouse it moves on.
+                    OnlyIf({ ctx -> has(2410)(ctx) }, Optional(UseItemOnNamedNpcTask(2410, "Mouse", maxWait = 12))),
                     helper?.let { QuestTask("witchshouse", it, false) },
                 ),
                 trustTasks = true,
