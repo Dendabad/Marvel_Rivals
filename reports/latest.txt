@@ -1,89 +1,90 @@
-HCIM Guide Bot 0.16.44, PAUSED
+HCIM Guide Bot 0.16.45, PAUSED
 == Step
-Step 162 of 2925: Buy Karamja Rum
-Detail: Buy Karamja Rum. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 164 of 2925: Make sure to speak to Luthas again before heading to the boat
+Detail: Tip: Make sure to speak to Luthas again before heading to the boat. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-13:08:10  Asking the AI about this pause (try 1)
-13:08:10  Paused: Buy Karamja Rum
-13:08:10  Step: Buy Karamja Rum
-13:07:28  Step: Pick 10 bananas
-13:07:27  Started version 0.16.44
+13:10:26  Asking the AI about this pause (try 1)
+13:10:26  Paused: Tip: Make sure to speak to Luthas again before heading to the boat
+13:10:26  Step: Make sure to speak to Luthas again before heading to the boat
+13:10:25  Done (all actions finished): Fill Crate with bananas and use Karamja rum on the crate
+13:09:18  Step: Fill Crate with bananas and use Karamja rum on the crate
+13:09:06  Step: Buy Karamja Rum
+13:09:05  Started version 0.16.45
 == Player
-world WorldPoint(x=2925, y=3157, plane=0), in instance false, as guide coordinates WorldPoint(x=2925, y=3157, plane=0)
+world WorldPoint(x=2938, y=3149, plane=0), in instance false, as guide coordinates WorldPoint(x=2938, y=3149, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x12714, 558x38, 303x1, 1957x1, 1269x1, 1963x1, 1993x1, 1993x1, 311x1, 313x50, 314x1246, 1963x1, 1963x1, 1963x1, 1963x1, 1963x1, 1963x1, 1963x1, 1963x1, 1963x1, 1757x1, 53x454
+995x12684, 558x38, 303x1, 1957x1, 1269x1, 1993x1, 1993x1, 311x1, 313x50, 314x1246, 1757x1, 53x454
 == NPCs within 12 tiles (id name at tile: options)
-14942 Rebecca at WorldPoint(x=2919, y=3148, plane=0): [Talk-to]
-3647 Luthas at WorldPoint(x=2936, y=3153, plane=0): [Talk-to]
+13655 Zembo at WorldPoint(x=2928, y=3144, plane=0): [Talk-to, Trade]
+3647 Luthas at WorldPoint(x=2941, y=3154, plane=0): [Talk-to]
+3652 Man at WorldPoint(x=2943, y=3149, plane=0): [Talk-to, Attack, Pickpocket]
+15364 Shipwright Sally at WorldPoint(x=2946, y=3148, plane=0): [Talk-to, Buy-boat, Customise-boat, Recover-boat]
 == Named objects within 25 tiles, nearest first (id name at tile)
-2074 Banana tree at WorldPoint(x=2924, y=3158, plane=0)
-1390 Plant at WorldPoint(x=2926, y=3156, plane=0)
-1390 Plant at WorldPoint(x=2923, y=3155, plane=0)
-1184 Creeping plant at WorldPoint(x=2923, y=3158, plane=0)
-2075 Banana tree at WorldPoint(x=2924, y=3155, plane=0)
-1390 Plant at WorldPoint(x=2926, y=3155, plane=0)
-2074 Banana tree at WorldPoint(x=2927, y=3155, plane=0)
-1390 Plant at WorldPoint(x=2922, y=3154, plane=0)
-1184 Creeping plant at WorldPoint(x=2922, y=3156, plane=0)
-1390 Plant at WorldPoint(x=2923, y=3154, plane=0)
-1184 Creeping plant at WorldPoint(x=2923, y=3160, plane=0)
-1390 Plant at WorldPoint(x=2924, y=3160, plane=0)
-1184 Creeping plant at WorldPoint(x=2925, y=3154, plane=0)
-1390 Plant at WorldPoint(x=2926, y=3154, plane=0)
-1184 Creeping plant at WorldPoint(x=2928, y=3157, plane=0)
-1184 Creeping plant at WorldPoint(x=2921, y=3154, plane=0)
-1390 Plant at WorldPoint(x=2921, y=3155, plane=0)
-2073 Banana tree at WorldPoint(x=2921, y=3158, plane=0)
-2073 Banana tree at WorldPoint(x=2921, y=3161, plane=0)
-1390 Plant at WorldPoint(x=2923, y=3161, plane=0)
-2073 Banana tree at WorldPoint(x=2924, y=3161, plane=0)
-2074 Banana tree at WorldPoint(x=2927, y=3161, plane=0)
-1303 Tree at WorldPoint(x=2928, y=3153, plane=0)
-1303 Tree at WorldPoint(x=2929, y=3153, plane=0)
-1184 Creeping plant at WorldPoint(x=2929, y=3160, plane=0)
-1390 Plant at WorldPoint(x=2920, y=3154, plane=0)
-1390 Plant at WorldPoint(x=2920, y=3155, plane=0)
-1390 Plant at WorldPoint(x=2920, y=3156, plane=0)
-1390 Plant at WorldPoint(x=2920, y=3157, plane=0)
-1390 Plant at WorldPoint(x=2920, y=3158, plane=0)
-1390 Plant at WorldPoint(x=2920, y=3159, plane=0)
-1390 Plant at WorldPoint(x=2923, y=3162, plane=0)
-1390 Plant at WorldPoint(x=2929, y=3162, plane=0)
-1303 Tree at WorldPoint(x=2930, y=3153, plane=0)
-1303 Tree at WorldPoint(x=2930, y=3154, plane=0)
-2074 Banana tree at WorldPoint(x=2930, y=3155, plane=0)
-2074 Banana tree at WorldPoint(x=2930, y=3158, plane=0)
-2074 Banana tree at WorldPoint(x=2930, y=3161, plane=0)
-1390 Plant at WorldPoint(x=2919, y=3154, plane=0)
-1184 Creeping plant at WorldPoint(x=2925, y=3163, plane=0)
+2072 Crate at WorldPoint(x=2939, y=3149, plane=0)
+724 Standing torch at WorldPoint(x=2937, y=3151, plane=0)
+724 Standing torch at WorldPoint(x=2939, y=3151, plane=0)
+1304 Tree at WorldPoint(x=2940, y=3147, plane=0)
+1184 Creeping plant at WorldPoint(x=2935, y=3150, plane=0)
+365 Sacks at WorldPoint(x=2935, y=3152, plane=0)
+9519 Barrel at WorldPoint(x=2940, y=3152, plane=0)
+9519 Barrel at WorldPoint(x=2941, y=3152, plane=0)
+1390 Plant at WorldPoint(x=2934, y=3151, plane=0)
+1173 Small fern at WorldPoint(x=2933, y=3144, plane=0)
+1304 Tree at WorldPoint(x=2934, y=3144, plane=0)
+1304 Tree at WorldPoint(x=2935, y=3144, plane=0)
+724 Standing torch at WorldPoint(x=2937, y=3154, plane=0)
+60296 Notice board at WorldPoint(x=2940, y=3144, plane=0)
+9534 Crate at WorldPoint(x=2943, y=3148, plane=0)
+1276 Tree at WorldPoint(x=2943, y=3153, plane=0)
+1173 Small fern at WorldPoint(x=2932, y=3143, plane=0)
+1184 Creeping plant at WorldPoint(x=2932, y=3146, plane=0)
+1304 Tree at WorldPoint(x=2933, y=3143, plane=0)
+1304 Tree at WorldPoint(x=2934, y=3143, plane=0)
+1304 Tree at WorldPoint(x=2935, y=3143, plane=0)
+419 Bed at WorldPoint(x=2936, y=3155, plane=0)
+620 Table at WorldPoint(x=2941, y=3155, plane=0)
+59723 Shipwrights' Workbench at WorldPoint(x=2944, y=3149, plane=0)
+1400 Jungle plant at WorldPoint(x=2931, y=3142, plane=0)
+1298 Fern at WorldPoint(x=2931, y=3144, plane=0)
+1298 Fern at WorldPoint(x=2931, y=3145, plane=0)
+1173 Small fern at WorldPoint(x=2931, y=3146, plane=0)
+1184 Creeping plant at WorldPoint(x=2931, y=3147, plane=0)
+1311 Palm at WorldPoint(x=2933, y=3142, plane=0)
+1304 Tree at WorldPoint(x=2934, y=3142, plane=0)
+1304 Tree at WorldPoint(x=2935, y=3142, plane=0)
+9533 Crate at WorldPoint(x=2935, y=3156, plane=0)
+1304 Tree at WorldPoint(x=2936, y=3142, plane=0)
+9536 Boxes at WorldPoint(x=2940, y=3156, plane=0)
+9536 Boxes at WorldPoint(x=2941, y=3156, plane=0)
+1276 Tree at WorldPoint(x=2945, y=3151, plane=0)
+1390 Plant at WorldPoint(x=2930, y=3141, plane=0)
+9519 Barrel at WorldPoint(x=2930, y=3143, plane=0)
+9519 Barrel at WorldPoint(x=2930, y=3144, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
 556 Air rune at WorldPoint(x=2938, y=3158, plane=0)
-1963 Banana at WorldPoint(x=2907, y=3146, plane=0)
-1935 Jug at WorldPoint(x=2905, y=3146, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-4735 at WorldPoint(x=2928, y=3157, plane=0)
-15037 at WorldPoint(x=2921, y=3153, plane=0)
-15037 at WorldPoint(x=2922, y=3153, plane=0)
-15037 at WorldPoint(x=2923, y=3153, plane=0)
-15037 at WorldPoint(x=2924, y=3153, plane=0)
-15037 at WorldPoint(x=2925, y=3153, plane=0)
-339 at WorldPoint(x=2926, y=3153, plane=0)
-15037 at WorldPoint(x=2926, y=3153, plane=0)
-15037 at WorldPoint(x=2927, y=3153, plane=0)
-4735 at WorldPoint(x=2929, y=3155, plane=0)
-4735 at WorldPoint(x=2929, y=3156, plane=0)
-4735 at WorldPoint(x=2929, y=3157, plane=0)
-4735 at WorldPoint(x=2929, y=3158, plane=0)
-15037 at WorldPoint(x=2920, y=3153, plane=0)
-16420 at WorldPoint(x=2920, y=3162, plane=0)
+339 at WorldPoint(x=2938, y=3149, plane=0)
+339 at WorldPoint(x=2937, y=3149, plane=0)
+339 at WorldPoint(x=2937, y=3150, plane=0)
+339 at WorldPoint(x=2938, y=3148, plane=0)
+340 at WorldPoint(x=2938, y=3150, plane=0)
+339 at WorldPoint(x=2939, y=3149, plane=0)
+339 at WorldPoint(x=2936, y=3147, plane=0)
+1616 at WorldPoint(x=2936, y=3150, plane=0)
+1855 at WorldPoint(x=2936, y=3151, plane=0)
+339 at WorldPoint(x=2937, y=3147, plane=0)
+176 at WorldPoint(x=2937, y=3151, plane=0)
+1616 at WorldPoint(x=2937, y=3151, plane=0)
+339 at WorldPoint(x=2938, y=3147, plane=0)
+339 at WorldPoint(x=2938, y=3151, plane=0)
+1616 at WorldPoint(x=2939, y=3151, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
-995 Coins x12714
+995 Coins x12684
 558 Mind rune x38
 303 Small fishing net x1
 1957 Onion x1
 1269 Steel pickaxe x1
-1963 Banana x1
 1993 Jug of wine x1
 311 Harpoon x1
 313 Fishing bait x50
@@ -92,7 +93,7 @@ hitpoints 10/10
 53 Headless arrow x454
 == Text in open windows and chat
 10
-81
+93
 100
 All
 Game
@@ -103,7 +104,7 @@ Friends
 Channel
 Clan
 Trade
-01:04:57
+01:07:13
 Boatyguidev3: *
 You pick a banana.
 Well done! You have completed an easy task in the Karamja area. Your Achievement Diary has been updated.
