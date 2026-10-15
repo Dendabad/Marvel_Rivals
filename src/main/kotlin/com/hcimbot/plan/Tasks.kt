@@ -460,6 +460,7 @@ class ShopTask(
 
     private var open: InteractTask? = null
     private var needHop = false
+    private val outHere = HashSet<Int>()
     private var loadingFrom: Int? = null
     private var loadTicks = 0
     private var hops = 0
@@ -487,7 +488,9 @@ class ShopTask(
         }
         waitingForShop = 0
         if (ctx.game.isBusy) return TaskResult.Running
-        val next = missing.first()
+        // Out of stock here: try the others in this world, and only hop once every one still needed is out.
+        val next = missing.firstOrNull { it.ids.first() !in outHere }
+        if (next == null) { needHop = true; return TaskResult.Running }
         val id = next.ids.first()
         val waited = requested[id]
         val have = ctx.conditions.count(next.ids)
@@ -496,7 +499,7 @@ class ShopTask(
             requested.remove(id)
         } else if (waited != null) {
             if (waited >= ARRIVAL_TICKS) {
-                if (hopWhenOut) { requested.remove(id); needHop = true; return TaskResult.Running }
+                if (hopWhenOut) { requested.remove(id); outHere += id; return TaskResult.Running }
                 return TaskResult.Failed("bought ${next.name} but it did not arrive. The shop may be out of stock.")
             }
             requested[id] = waited + 1
@@ -507,7 +510,7 @@ class ShopTask(
             requested[id] = 0
             heldWhenBought[id] = have
         }
-        if (!started && hopWhenOut) { needHop = true; return TaskResult.Running }
+        if (!started && hopWhenOut) { outHere += id; return TaskResult.Running }
         val result = attempt(started, "buy ${next.name}")
         // Say what the shop offered, so a shop window the bot does not understand can be fixed.
         return if (result is TaskResult.Failed) {
@@ -539,6 +542,7 @@ class ShopTask(
         loadingFrom = if (here > 0) here else -2
         loadTicks = 0
         needHop = false
+        outHere.clear()
         return TaskResult.Running
     }
 
