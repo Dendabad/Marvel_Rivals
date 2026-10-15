@@ -1241,3 +1241,63 @@ class LootAndHopTask(private val itemId: Int, private val count: Int, private va
         const val MAX_IDLE_TICKS = 400
     }
 }
+
+
+/**
+ * Collects several items that lie about (a fishing rod, a pot, three iron bars...), taking whichever of those still needed is
+ * in sight, nearest first, and hopping to another world when none is: a spawn taken here is back on the next world. Never
+ * back to a world visited in the last minute, and it acts as soon as the new world has loaded.
+ */
+class LootManyAndHopTask(private val wants: Map<Int, Int>, private val reach: Int = 30) : BaseTask() {
+    override val description = "Loot ${wants.keys}, hopping when none is in sight"
+    private var loadingFrom: Int? = null
+    private var loadTicks = 0
+    private var noItem = 0
+    private var idle = 0
+    private var hops = 0
+    private var lastTotal = -1L
+    private val visited = HashMap<Int, Long>()
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        val missing = wants.filter { (id, count) -> ctx.conditions.count(listOf(id)) < count }
+        if (missing.isEmpty()) return TaskResult.Done
+        if (loadingFrom != null) {
+            val arrived = game.isLoggedIn && game.playerTile != null && game.world > 0 && game.world != loadingFrom
+            if (!arrived && ++loadTicks < MAX_LOAD_TICKS) return TaskResult.Running
+            loadingFrom = null
+            noItem = 0
+        }
+        if (!game.isLoggedIn || game.playerTile == null) return TaskResult.Running
+        if (game.isBusy || game.isBankOpen || game.isShopOpen) return TaskResult.Running
+        val total = wants.keys.sumOf { ctx.conditions.count(listOf(it)) }
+        if (total != lastTotal) { lastTotal = total; idle = 0 }
+        if (++idle > MAX_IDLE_TICKS) return TaskResult.Failed("no progress after $MAX_IDLE_TICKS ticks, still needing ${missing.keys}")
+        val at = game.playerTile ?: return TaskResult.Running
+        val item = missing.keys.mapNotNull { id -> game.nearestGroundItem(listOf(id))?.takeIf { it.tile.plane == at.plane && it.tile.distanceTo(at) <= reach } }
+            .minByOrNull { it.tile.distanceTo(at) }
+        if (item != null) {
+            noItem = 0
+            return attempt(ctx.actions.takeGroundItem(item), "take ${item.name} at ${item.tile}")
+        }
+        if (++noItem < NO_ITEM_TICKS) return TaskResult.Running
+        hops++
+        val now = System.currentTimeMillis()
+        val here = game.world
+        if (here > 0) visited[here] = now
+        val avoid = visited.filter { now - it.value < AVOID_MS }.keys
+        ctx.log("Hopping worlds (still need ${missing.entries.joinToString { "${it.key}x${it.value}" }}, hop $hops, not back to ${avoid.sorted()})")
+        ctx.actions.hopWorldAvoiding(avoid)
+        loadingFrom = if (here > 0) here else -2
+        loadTicks = 0
+        noItem = 0
+        return TaskResult.Running
+    }
+
+    private companion object {
+        const val MAX_LOAD_TICKS = 40
+        const val NO_ITEM_TICKS = 6
+        const val MAX_IDLE_TICKS = 600
+        const val AVOID_MS = 60_000L
+    }
+}

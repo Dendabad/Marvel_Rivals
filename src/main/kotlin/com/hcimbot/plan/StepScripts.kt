@@ -608,6 +608,15 @@ class StepScripts(private val guide: Guide) {
             auto(WalkTask(Tile(1530, 2979, 0), radius = 5), combat = settings.allowCombat)
         },
 
+        // 130. "Loot Fly Fishing Rod, Lobster Pot, 3x Iron Bar (hop worlds), Big Fishing Net & Feather": at Sunset Coast. The ground items
+        // the report listed are the rod (309), the pot (301) and an iron bar (2351). Take what is in sight, hop for the rest.
+        "cadc3a1bed" to { _ ->
+            StepPlan.Auto(
+                listOf(LootManyAndHopTask(mapOf(309 to 1, 301 to 1, 2351 to 3, 305 to 1, 314 to 1))),
+                trustTasks = true, patient = true, ignoreStartSignal = true,
+            )
+        },
+
         // 99. "Take 2x Logs & 2x ashes after cutscene"
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
