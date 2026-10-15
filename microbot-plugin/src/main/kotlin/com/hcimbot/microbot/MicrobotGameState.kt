@@ -157,8 +157,11 @@ class MicrobotGameState : GameState {
     override fun showsChoice(text: String): Boolean = onClient { choiceWidget(text) != null } == true
 
     override fun showsMakeWindow(): Boolean = onClient {
-        widgetWhere { it.startsWith("What would you like to make", ignoreCase = true) || it.startsWith("How many sets of", ignoreCase = true) ||
-                it.startsWith("How many would you like to", ignoreCase = true) } != null
+        // "What would you like to make?", "How many sets of 15 do you wish to feather?", "How many would you like to cook?", or the like.
+        widgetWhere {
+            it.startsWith("What would you like to ", ignoreCase = true) || it.startsWith("How many sets of", ignoreCase = true) ||
+                it.startsWith("How many would you like to", ignoreCase = true) || it.startsWith("How many do you wish to", ignoreCase = true)
+        } != null
     } == true
 
     /** A breadth first search over the scene's collision map, in which a shut door is a wall. */
