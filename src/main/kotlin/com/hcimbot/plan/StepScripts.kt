@@ -686,6 +686,19 @@ class StepScripts(private val guide: Guide) {
             auto(
                 BankTask(depositAll = false, withdraw = listOf(item("Coins", 995))),
                 ShopTask(necto, listOf(item("Steel pickaxe", 1269, 1))),
+                // 150 wines do not fit in a bag, so it is bought in trips: fill up, bank, come back. The drinks and the stew are
+                // sold by one of the Bartender (13928) or Ichta (13929), whichever has them.
+                StockUpTask(
+                    listOf(
+                        StockUpTask.Want("Mind bomb", 1907, 20),
+                        StockUpTask.Want("Stew", 2003, 20),
+                        StockUpTask.Want("Jug of wine", 1993, 150),
+                    ),
+                    listOf(
+                        ShopTask.Seller("Bartender", listOf(13928), listOf(Tile(1390, 2860, 0))),
+                        ShopTask.Seller("Ichta", listOf(13929), listOf(Tile(1387, 2868, 0))),
+                    ),
+                ),
                 trust = true,
             )
         },

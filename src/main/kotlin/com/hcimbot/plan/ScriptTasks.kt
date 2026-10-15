@@ -1324,3 +1324,86 @@ class LootManyAndHopTask(private val wants: Map<Int, Int>, private val reach: In
         const val AVOID_MS = 60_000L
     }
 }
+
+/**
+ * Buys more than the inventory holds, in trips: fill the free slots from a shop, bank what was bought (the coins and the
+ * rest of the bag stay), and go back, until [wanted] have all been bought. Each item is looked for in the [sellers] in
+ * turn, and a seller that does not sell it, or cannot be paid, is not tried again for that item.
+ */
+class StockUpTask(
+    private val wanted: List<Want>,
+    private val sellers: List<ShopTask.Seller>,
+    private val maxTrips: Int = 30,
+) : Task {
+    class Want(val name: String, val id: Int, val total: Int)
+
+    private val stored = HashMap<Int, Int>()
+    private val pending = HashMap<Int, Int>()
+    private val refused = HashMap<Int, MutableSet<Int>>()
+    private var buying: Task? = null
+    private var buyingId = 0
+    private var buyingSeller = 0
+    private var banking = false
+    private var trips = 0
+    override val description = "Buy ${wanted.joinToString { "${it.total} ${it.name}" }}, banking between trips"
+
+    private fun held(ctx: TaskContext, id: Int) = ctx.game.inventory()[id] ?: 0
+    private fun remaining(ctx: TaskContext, w: Want) = w.total - (stored[w.id] ?: 0) - held(ctx, w.id)
+    private fun freeSlots(ctx: TaskContext) = 28 - ctx.game.inventory().entries.sumOf { if (it.key == COINS) 1 else it.value }
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        if (ctx.game.isBusy) return TaskResult.Running
+        if (banking) return bank(ctx)
+        buying?.let { task ->
+            return when (val result = task.tick(ctx)) {
+                TaskResult.Done -> { buying = null; TaskResult.Running }
+                is TaskResult.Failed -> {
+                    ctx.log("${sellers[buyingSeller].name} cannot sell ${wanted.first { it.id == buyingId }.name}: ${result.reason}")
+                    refused.getOrPut(buyingId) { mutableSetOf() } += buyingSeller
+                    buying = null
+                    TaskResult.Running
+                }
+                else -> result
+            }
+        }
+        val todo = wanted.filter { remaining(ctx, it) > 0 }
+        if (todo.isEmpty()) return if (ctx.game.isShopOpen) { ctx.actions.closeInterface(); TaskResult.Running } else TaskResult.Done
+        val free = freeSlots(ctx)
+        val next = todo.firstOrNull { w -> sellers.indices.any { it !in refused[w.id].orEmpty() } && free > 0 }
+        if (next == null) {
+            val stuck = todo.firstOrNull { w -> sellers.indices.all { it in refused[w.id].orEmpty() } }
+            if (stuck != null) return TaskResult.Failed("no shop here sells ${stuck.name}")
+            // The bag is full: bank it.
+            if (++trips > maxTrips) return TaskResult.Failed("still short after $maxTrips trips")
+            ctx.log("Bag full, banking (trip $trips)")
+            banking = true
+            return TaskResult.Running
+        }
+        val seller = sellers.indices.first { it !in refused[next.id].orEmpty() }
+        val amount = minOf(remaining(ctx, next), free)
+        buyingId = next.id
+        buyingSeller = seller
+        buying = ShopTask(listOf(sellers[seller]), listOf(ItemRef(next.name, listOf(next.id), held(ctx, next.id) + amount)))
+        return TaskResult.Running
+    }
+
+    private fun bank(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        if (!game.isBankOpen) { ctx.actions.openNearestBank(); return TaskResult.Running }
+        for ((id, n) in pending.entries.toList()) if (held(ctx, id) == 0) { stored.merge(id, n, Int::plus); pending.remove(id) }
+        val next = wanted.firstOrNull { held(ctx, it.id) > 0 && it.id !in pending }
+        if (next != null) {
+            val h = held(ctx, next.id)
+            if (ctx.actions.depositItem(next.id)) pending[next.id] = h
+            return TaskResult.Running
+        }
+        if (pending.isNotEmpty()) return TaskResult.Running
+        ctx.actions.closeInterface()
+        banking = false
+        return TaskResult.Running
+    }
+
+    private companion object {
+        const val COINS = 995
+    }
+}

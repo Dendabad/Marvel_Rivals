@@ -706,4 +706,25 @@ class PartsTest {
         assertEquals(setOf("a", "b", "c", "d"), store.completedIds())
         assertEquals(setOf("x", "y"), ProgressFormat.decode(" x, ,y,"))
     }
+
+    @Test
+    fun `150 wines are bought in trips between the shop and the bank`() {
+        val game = FakeGame()
+        game.playerTile = Tile(1390, 2862, 0)
+        game.inv[995] = 5000
+        game.npcs += com.hcimbot.game.SceneEntity(13928, "Bartender", Tile(1390, 2860, 0))
+        val ctx = com.hcimbot.plan.TaskContext(game, game, Conditions(game))
+        val seller = com.hcimbot.plan.ShopTask.Seller("Bartender", listOf(13928), listOf(Tile(1390, 2860, 0)))
+        val task = com.hcimbot.plan.StockUpTask(listOf(com.hcimbot.plan.StockUpTask.Want("Jug of wine", 1993, 150)), listOf(seller))
+        var result: com.hcimbot.plan.TaskResult = com.hcimbot.plan.TaskResult.Running
+        var ticks = 0
+        while (result == com.hcimbot.plan.TaskResult.Running && ticks++ < 2000) {
+            // The fake does not open a shop by itself, so open it after the Bartender is clicked.
+            if (game.calls.lastOrNull()?.endsWith("Trade") == true) game.isShopOpen = true
+            result = task.tick(ctx)
+        }
+        assertEquals(com.hcimbot.plan.TaskResult.Done, result, game.calls.takeLast(10).toString())
+        assertEquals(150, (game.bank[1993] ?: 0) + (game.inv[1993] ?: 0))
+        assertEquals(5000, game.inv[995])
+    }
 }
