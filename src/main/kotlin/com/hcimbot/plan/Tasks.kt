@@ -195,6 +195,7 @@ class InteractTask(
     private var walk: WalkTask? = null
     private var approaches = 0
     private var doorTries = 0
+    private val triedDoors = HashSet<Tile>()
 
     override val description: String =
         "${action ?: "Interact with"} ${names.firstOrNull() ?: ids.toString()}"
@@ -232,14 +233,16 @@ class InteractTask(
             Kind.NPC -> game.canReach(entity.tile) == false
             Kind.OBJECT -> game.canReachBeside(entity.tile) == false
         }
-        // In range of someone who cannot be reached: a shut door, gate or the like is in the way, so open the one nearest
-        // the player among those round the target, right away, rather than walking about first.
+        // In range of someone who cannot be reached, after the walker has had a go (it knows the way round to a building's real
+        // entrance): a shut door or gate in the way is opened, the nearest to the player first. Each door is tried once only,
+        // so a locked one (a pub's front door, with another way in) is not tried over and over.
         val here = game.playerTile
         val inRange = here != null && here.distanceTo(entity.tile) <= CLOSE_RANGE
-        if (outOfReach && inRange && doorTries < MAX_DOOR_TRIES && here != null) {
-            val door = game.objectsNear(DOORS, entity.tile, DOOR_RANGE).minByOrNull { it.tile.distanceTo(here) }
+        if (outOfReach && inRange && approaches >= 1 && doorTries < MAX_DOOR_TRIES && here != null) {
+            val door = game.objectsNear(DOORS, entity.tile, DOOR_RANGE).filter { it.tile !in triedDoors }.minByOrNull { it.tile.distanceTo(here) }
             if (door != null) {
                 doorTries++
+                triedDoors += door.tile
                 ctx.log("In range of ${entity.name} but cannot reach, opening the ${door.name.ifBlank { "door" }} at ${door.tile}")
                 ctx.actions.interactObject(door, "Open")
                 return TaskResult.Running
@@ -253,9 +256,10 @@ class InteractTask(
         }
         // The walker did not get through either: open the shut door nearest the target ourselves, a few times.
         if (outOfReach && doorTries < MAX_DOOR_TRIES) {
-            val door = game.nearestObject(emptyList(), DOORS, entity.tile)?.takeIf { it.tile.distanceTo(entity.tile) <= DOOR_RANGE }
+            val door = game.nearestObject(emptyList(), DOORS, entity.tile)?.takeIf { it.tile.distanceTo(entity.tile) <= DOOR_RANGE && it.tile !in triedDoors }
             if (door != null) {
                 doorTries++
+                triedDoors += door.tile
                 ctx.log("Still cannot reach ${entity.name}, opening the door at ${door.tile}")
                 ctx.actions.interactObject(door, "Open")
                 return TaskResult.Running
