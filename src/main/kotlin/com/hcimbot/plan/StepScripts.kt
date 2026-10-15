@@ -856,6 +856,26 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 160. "Fish Raw Shrimps [Karamja Easy Diary] Drop Shrimps": the net fishing spots on the south coast of Musa Point, around
+        // (2924, 3178), with the small fishing net (303) the bag already holds. The shrimps (317) are dropped afterwards, so the bag
+        // has room for the bananas.
+        "d36b23fa85" to { _ ->
+            val shrimp = 317
+            StepPlan.Auto(
+                listOf(
+                    OnlyIf({ ctx -> !has(shrimp)(ctx) }, WalkTask(Tile(2924, 3176, 0), radius = 4)),
+                    OnlyIf(
+                        { ctx -> !has(shrimp)(ctx) },
+                        InteractTask(InteractTask.Kind.NPC, listOf(1525), listOf("Fishing spot"), listOf(Tile(2924, 3178, 0)), "Small Net"),
+                    ),
+                    OnlyIf({ ctx -> !has(shrimp)(ctx) }, WaitUntilTask("catch the shrimps", 120, reached = has(shrimp))),
+                    DropTask(listOf(shrimp)),
+                ),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
