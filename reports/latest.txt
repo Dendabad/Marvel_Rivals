@@ -1,83 +1,85 @@
-HCIM Guide Bot 0.16.50, PAUSED
+HCIM Guide Bot 0.16.51, PAUSED
 == Step
-Step 167 of 2925: Continue Pirate's Treasure by talking to Wydin to get employed, and collect the rum from the crate.
-Detail: find the rum: find the rum: not there after 20 ticks. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
+Step 168 of 2925: Buy 8x Raw Sardines
+Detail: Buy Raw Sardines: talked to the shopkeeper but no shop opened. Do it yourself and the bot carries on once the game shows it done, or press Skip or Retry.
 == Recent, newest first
-13:20:02  Asking the AI about this pause (try 1)
-13:20:01  Paused: find the rum: find the rum: not there after 20 ticks
-13:19:20  Step: Continue Pirate's Treasure by talking to Wydin to get employed, and collect the rum from the crate.
-13:19:20  Started version 0.16.50
+13:22:19  Asking the AI about this pause (try 1)
+13:22:19  Paused: Buy Raw Sardines: talked to the shopkeeper but no shop opened
+13:22:08  Step: Buy 8x Raw Sardines
+13:22:07  Done (its part of the quest is done): Continue Pirate's Treasure by talking to Wydin to get employed, and collect the rum from the crate.
+13:21:38  Cannot reach Wydin from here, walking over (the walker opens doors)
+13:21:38  Step: Continue Pirate's Treasure by talking to Wydin to get employed, and collect the rum from the crate.
+13:21:38  Started version 0.16.51
 == Player
-world WorldPoint(x=3011, y=3204, plane=0), in instance false, as guide coordinates WorldPoint(x=3011, y=3204, plane=0)
+world WorldPoint(x=3010, y=3207, plane=0), in instance false, as guide coordinates WorldPoint(x=3010, y=3207, plane=0)
 hitpoints 10/10
 == Bag (item id x count)
-995x12645, 558x38, 303x1, 1957x1, 1269x1, 2138x1, 1993x1, 1993x1, 311x1, 313x50, 314x1246, 2132x1, 2132x1, 1933x1, 1933x1, 1933x1, 1951x1, 1951x1, 1757x1, 53x454
+995x12645, 558x38, 303x1, 1957x1, 1269x1, 2138x1, 1993x1, 1993x1, 311x1, 313x50, 314x1246, 2132x1, 2132x1, 1933x1, 1933x1, 1933x1, 1951x1, 1951x1, 431x1, 1757x1, 53x454
 == NPCs within 12 tiles (id name at tile: options)
-5444 Cap'n Hand at WorldPoint(x=3013, y=3192, plane=0): [Talk-to]
-2854 Rat at WorldPoint(x=3013, y=3196, plane=0): [Attack]
-1448 Thief at WorldPoint(x=3013, y=3195, plane=0): [Attack]
-3051 Goblin at WorldPoint(x=3008, y=3209, plane=0): [Attack]
+2854 Rat at WorldPoint(x=3013, y=3195, plane=0): [Attack]
+1448 Thief at WorldPoint(x=3013, y=3196, plane=0): [Attack]
+2860 Giant rat at WorldPoint(x=2998, y=3200, plane=0): [Attack]
 2890 Wydin at WorldPoint(x=3012, y=3203, plane=0): [Talk-to, Trade]
 == Named objects within 25 tiles, nearest first (id name at tile)
-15031 Crate at WorldPoint(x=3010, y=3203, plane=0)
-15030 Crate at WorldPoint(x=3011, y=3203, plane=0)
-2069 Door at WorldPoint(x=3012, y=3204, plane=0)
-9535 Crates at WorldPoint(x=3009, y=3203, plane=0)
-9533 Crate at WorldPoint(x=3009, y=3204, plane=0)
-365 Sacks at WorldPoint(x=3009, y=3205, plane=0)
-16683 Ladder at WorldPoint(x=3013, y=3203, plane=0)
-612 Counter at WorldPoint(x=3013, y=3205, plane=0)
 2071 Crate at WorldPoint(x=3009, y=3207, plane=0)
+365 Sacks at WorldPoint(x=3009, y=3205, plane=0)
+15032 Crates at WorldPoint(x=3009, y=3209, plane=0)
 1158 Potted plant at WorldPoint(x=3012, y=3207, plane=0)
 888 Painting at WorldPoint(x=3012, y=3208, plane=0)
+1158 Potted plant at WorldPoint(x=3012, y=3209, plane=0)
+9533 Crate at WorldPoint(x=3009, y=3204, plane=0)
+9519 Barrel at WorldPoint(x=3010, y=3210, plane=0)
+9519 Barrel at WorldPoint(x=3011, y=3210, plane=0)
+2069 Door at WorldPoint(x=3012, y=3204, plane=0)
+612 Counter at WorldPoint(x=3013, y=3205, plane=0)
+683 Grandfather Clock at WorldPoint(x=3013, y=3210, plane=0)
+9535 Crates at WorldPoint(x=3009, y=3203, plane=0)
+15031 Crate at WorldPoint(x=3010, y=3203, plane=0)
+15030 Crate at WorldPoint(x=3011, y=3203, plane=0)
+16683 Ladder at WorldPoint(x=3013, y=3203, plane=0)
+1158 Potted plant at WorldPoint(x=3014, y=3209, plane=0)
+1276 Tree at WorldPoint(x=3005, y=3210, plane=0)
 9534 Crate at WorldPoint(x=3015, y=3203, plane=0)
 1158 Potted plant at WorldPoint(x=3015, y=3208, plane=0)
-15032 Crates at WorldPoint(x=3009, y=3209, plane=0)
-1158 Potted plant at WorldPoint(x=3012, y=3209, plane=0)
-1158 Potted plant at WorldPoint(x=3014, y=3209, plane=0)
+9661 Tree stump at WorldPoint(x=3006, y=3213, plane=0)
+1278 Tree at WorldPoint(x=3011, y=3213, plane=0)
 9535 Crates at WorldPoint(x=3016, y=3203, plane=0)
 602 Table at WorldPoint(x=3016, y=3205, plane=0)
 375 Closed chest at WorldPoint(x=3016, y=3207, plane=0)
-1276 Tree at WorldPoint(x=3005, y=3210, plane=0)
-9519 Barrel at WorldPoint(x=3010, y=3210, plane=0)
-9519 Barrel at WorldPoint(x=3011, y=3210, plane=0)
-683 Grandfather Clock at WorldPoint(x=3013, y=3210, plane=0)
 1536 Door at WorldPoint(x=3017, y=3206, plane=0)
-1535 Door at WorldPoint(x=3011, y=3197, plane=0)
-10793 Stones at WorldPoint(x=3003, y=3197, plane=0)
-9568 Bucket at WorldPoint(x=3014, y=3196, plane=0)
+1301 Tree at WorldPoint(x=3017, y=3213, plane=0)
+1276 Tree at WorldPoint(x=3002, y=3212, plane=0)
+9661 Tree stump at WorldPoint(x=3003, y=3216, plane=0)
+1276 Tree at WorldPoint(x=3004, y=3216, plane=0)
+10820 Oak tree at WorldPoint(x=3010, y=3216, plane=0)
 9536 Boxes at WorldPoint(x=3019, y=3209, plane=0)
 9536 Boxes at WorldPoint(x=3019, y=3210, plane=0)
-10793 Stones at WorldPoint(x=3002, y=3195, plane=0)
-1276 Tree at WorldPoint(x=3002, y=3212, plane=0)
-10790 Boulder at WorldPoint(x=3003, y=3195, plane=0)
-9661 Tree stump at WorldPoint(x=3006, y=3213, plane=0)
-1278 Tree at WorldPoint(x=3011, y=3213, plane=0)
-9563 Cell door at WorldPoint(x=3012, y=3195, plane=0)
-1301 Tree at WorldPoint(x=3017, y=3213, plane=0)
+1276 Tree at WorldPoint(x=3000, y=3204, plane=0)
+9665 Roots at WorldPoint(x=3000, y=3209, plane=0)
+1278 Tree at WorldPoint(x=3000, y=3215, plane=0)
+10793 Stones at WorldPoint(x=3003, y=3197, plane=0)
+1535 Door at WorldPoint(x=3011, y=3197, plane=0)
 9534 Crate at WorldPoint(x=3020, y=3202, plane=0)
 9525 Cart at WorldPoint(x=3020, y=3208, plane=0)
-9536 Boxes at WorldPoint(x=3020, y=3210, plane=0)
-10791 Boulder at WorldPoint(x=3001, y=3196, plane=0)
 == Items on the ground within 20 tiles, nearest first (id name at tile)
-1005 White apron at WorldPoint(x=3009, y=3204, plane=0)
 1963 Banana at WorldPoint(x=3009, y=3207, plane=0)
+1005 White apron at WorldPoint(x=3009, y=3204, plane=0)
 == Objects without a name within 6 tiles, nearest first (id at tile)
-196 at WorldPoint(x=3010, y=3203, plane=0)
-196 at WorldPoint(x=3011, y=3205, plane=0)
-9473 at WorldPoint(x=3012, y=3203, plane=0)
-9473 at WorldPoint(x=3012, y=3205, plane=0)
-4738 at WorldPoint(x=3009, y=3202, plane=0)
-9473 at WorldPoint(x=3009, y=3202, plane=0)
+1832 at WorldPoint(x=3009, y=3208, plane=0)
+196 at WorldPoint(x=3011, y=3208, plane=0)
+4735 at WorldPoint(x=3008, y=3205, plane=0)
+9473 at WorldPoint(x=3008, y=3205, plane=0)
+1828 at WorldPoint(x=3008, y=3205, plane=0)
+4735 at WorldPoint(x=3008, y=3206, plane=0)
+9473 at WorldPoint(x=3008, y=3206, plane=0)
+4735 at WorldPoint(x=3008, y=3207, plane=0)
+9473 at WorldPoint(x=3008, y=3207, plane=0)
+9473 at WorldPoint(x=3008, y=3208, plane=0)
+1828 at WorldPoint(x=3008, y=3208, plane=0)
+4735 at WorldPoint(x=3008, y=3209, plane=0)
+9473 at WorldPoint(x=3008, y=3209, plane=0)
 1832 at WorldPoint(x=3009, y=3205, plane=0)
-5536 at WorldPoint(x=3010, y=3202, plane=0)
-9473 at WorldPoint(x=3010, y=3202, plane=0)
-5533 at WorldPoint(x=3011, y=3202, plane=0)
-9473 at WorldPoint(x=3011, y=3202, plane=0)
-5534 at WorldPoint(x=3012, y=3202, plane=0)
-9473 at WorldPoint(x=3012, y=3202, plane=0)
-9473 at WorldPoint(x=3012, y=3206, plane=0)
-5533 at WorldPoint(x=3013, y=3202, plane=0)
+196 at WorldPoint(x=3011, y=3205, plane=0)
 == Items shown in open windows, such as a shop or bank (item id name x quantity)
 995 Coins x12645
 558 Mind rune x38
@@ -92,6 +94,7 @@ hitpoints 10/10
 2132 Raw beef x1
 1933 Pot of flour x1
 1951 Redberries x1
+431 Karamjan rum x1
 1757 Brown apron x1
 53 Headless arrow x454
 == Text in open windows and chat
@@ -106,11 +109,13 @@ Friends
 Channel
 Clan
 Trade
-00:06:06
+00:08:23
 Boatyguidev3: *
+You find your bottle of rum in amongst the bananas.
+There are a lot of bananas in the crate.
 There are a lot of potatoes in the crate.
 There are a lot of cabbages in the crate.
 [13:13:55] Error during overlay renderingjava.lang.NullPointerException: Cannot read the array length because "" is null
 Welcome to Old School RuneScape.
 == Quest Helper
-DetailedQuestStep: "Please open Pirate Treasure's Quest Journal to sync the current quest state." npcs [] objects [] at null choices []
+NpcStep: "Bring the Karamjan rum to Redbeard Frank in Port Sarim." npcs [3643] objects [] at null choices []
