@@ -1423,6 +1423,8 @@ class MakeAllTask(
     private var settling = 0
     private var idle = 0
     private var lastMade = -1L
+    private var sinceChange = QUIET_TICKS
+    private var started = false
 
     override fun canStopHere(ctx: TaskContext): Boolean = ctx.conditions.count(listOf(product)) >= target
 
@@ -1430,24 +1432,35 @@ class MakeAllTask(
         val game = ctx.game
         val made = ctx.conditions.count(listOf(product))
         if (made >= target) return TaskResult.Done
-        if (made != lastMade) { lastMade = made; idle = 0 } else if (++idle > STALL_TICKS) {
+        if (made != lastMade) { lastMade = made; idle = 0; sinceChange = 0 } else {
+            sinceChange++
+            idle++
+        }
+        if (idle > STALL_TICKS) {
             return TaskResult.Failed("no progress making $label, stuck at $made of $target")
         }
         if (settling > 0) { settling--; return TaskResult.Running }
         if (game.isBusy || game.isBankOpen || game.isShopOpen) return TaskResult.Running
         if (game.showsMakeWindow()) {
             ctx.actions.makeAll()
+            started = true
+            sinceChange = 0
             settling = 3
             return TaskResult.Running
         }
+        // Making goes on for a while after the click, and the animation is not always showing as busy: wait until the count
+        // has not changed for a few ticks before using the items again, which would open the window over the work.
+        if (started && sinceChange < QUIET_TICKS) return TaskResult.Running
         val have = game.inventory()
         if (first !in have || second !in have) return TaskResult.Failed("out of ${if (first !in have) first else second} with $made of $target $label made")
         ctx.actions.useItemOnItem(first, second)
+        started = false
         settling = 3
         return TaskResult.Running
     }
 
     private companion object {
         const val STALL_TICKS = 150
+        const val QUIET_TICKS = 8
     }
 }
