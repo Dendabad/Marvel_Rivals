@@ -1147,6 +1147,25 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 182. "Withdraw: Coins, Mind Runes, Raw Rat/Chicken/Beef, 10x Wines, Empty Bucket, Chest Key, Cheese": the guide has no id for the
+        // Chest key, which is 432 (Redbeard Frank gave it in step 170).
+        "2d0a43e7c7" to { _ ->
+            StepPlan.Auto(
+                listOf(
+                    BankTask(
+                        depositAll = false,
+                        withdraw = listOf(
+                            item("Coins", 995), item("Mind rune", 558), item("Raw rat meat", 2134, 1), item("Raw chicken", 2138, 1),
+                            item("Raw beef", 2132, 1), item("Jug of wine", 1993, 10), item("Bucket", 1925, 1), item("Chest key", 432, 1),
+                            item("Cheese", 1985, 1),
+                        ),
+                    ),
+                ),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"
