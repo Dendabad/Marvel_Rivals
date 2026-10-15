@@ -1270,14 +1270,14 @@ class StepScripts(private val guide: Guide) {
                     OnlyIf(needsCheese, WalkTask(Tile(3084, 3259, 0), radius = 3)),
                     OnlyIf(needsCheese, PickUpTask(listOf(1985), 12)),
                     OnlyIf({ ctx -> has(1985)(ctx) && has(2410)(ctx) && !has(2411)(ctx) }, WalkTask(Tile(2902, 3466, 0), radius = 1)),
-                    helper?.let { Optional(QuestTask("witchshouse", it, false)) },
+                    helper?.let { Optional(QuestTask("witchshouse", it, false, avoidNpc = "Nora T. Hagg", avoidWithin = 6)) },
                     OnlyIf(needsMouse, UseItemTask(1985, null, listOf(2870), listOf("Mouse hole"), Tile(2903, 3466, 0))),
                     // The mouse may be out already, with the cheese gone: only the magnet is needed then. With no mouse it moves on.
                     OnlyIf({ ctx -> has(2410)(ctx) }, Optional(UseItemOnNamedNpcTask(2410, "Mouse", maxWait = 12))),
                     // The witch's diary (2408) lies on a table in the house: picked up and read, which keeps the door unlocked.
                     OnlyIf({ ctx -> !has(2408)(ctx) }, PickUpTask(listOf(2408), 12)),
                     OnlyIf({ ctx -> has(2408)(ctx) }, ItemActionTask(2408, "Read", closeAfter = true)),
-                    helper?.let { QuestTask("witchshouse", it, false) },
+                    helper?.let { QuestTask("witchshouse", it, false, avoidNpc = "Nora T. Hagg", avoidWithin = 6) },
                 ),
                 trustTasks = true,
                 ignoreStartSignal = true,

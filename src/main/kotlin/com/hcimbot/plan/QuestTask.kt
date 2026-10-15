@@ -42,9 +42,13 @@ class QuestTask(
      * moved the quest on. Not for a step that says to talk again, which is two talks to the same person.
      */
     private val endsAfterTalk: Boolean = false,
+    /** A roaming NPC to keep clear of (the witch of Witch's House): no new move is made while it is within this many tiles. */
+    private val avoidNpc: String? = null,
+    private val avoidWithin: Int = 6,
 ) : Task {
     private var startValue: Int? = null
     private var closes = 0
+    private var waitedForNpc = 0
     private var current: Instruction? = null
     private var currentTask: Task? = null
     private var repeats = 0
@@ -56,6 +60,15 @@ class QuestTask(
     override fun tick(ctx: TaskContext): TaskResult {
         val progress = helper.progressVar ?: return TaskResult.Failed("$questKey has no progress variable in guide.json")
         // A book read for a step (the Witch's diary) stays open over the screen, and clicks go to it: closed once it has been read.
+        if (avoidNpc != null) {
+            val at = ctx.game.playerTile
+            val near = ctx.game.nearestNpc(emptyList(), listOf(avoidNpc))
+            if (at != null && near != null && near.tile.plane == at.plane && near.tile.distanceTo(at) <= avoidWithin) {
+                if (++waitedForNpc % 10 == 1) ctx.log("${near.name} is ${near.tile.distanceTo(at)} tiles away, waiting for her to move off")
+                return TaskResult.Running
+            }
+            waitedForNpc = 0
+        }
         val windowOpen = !ctx.game.isBankOpen && !ctx.game.isShopOpen && ctx.game.showsCloseableWindow
         if (windowOpen && closes < MAX_CLOSES) {
             closes++
