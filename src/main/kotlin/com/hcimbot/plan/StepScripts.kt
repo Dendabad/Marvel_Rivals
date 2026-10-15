@@ -992,12 +992,12 @@ class StepScripts(private val guide: Guide) {
         },
 
         // 169. "Use the Deposit box by Entrana and deposit everything except: Mind Runes, Coins, 1x Raw Beef, Karamja Rum, Onion, Pickaxe &
-        // 2x wines": Port Sarim's deposit box (50902) at (3029, 3210). Everything the bag holds that is not on that list goes in, and the
+        // 2x wines": The deposit box (26254) by the Entrana monks at (3045, 3234), in Port Sarim. Everything the bag holds that is not on that list goes in, and the
         // raw beef is put in until one is left.
         "9db1ac16c3" to { _ ->
             val deposit = listOf(303, 311, 313, 314, 1933, 1951, 2138, 327, 53)
             StepPlan.Auto(
-                listOf(DepositBoxTask(Tile(3029, 3210, 0), deposit, oneOf = 2132)),
+                listOf(DepositBoxTask(Tile(3045, 3234, 0), listOf(26254), deposit, oneOf = 2132)),
                 trustTasks = true,
                 ignoreStartSignal = true,
             )

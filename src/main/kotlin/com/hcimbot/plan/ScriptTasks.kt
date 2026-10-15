@@ -1471,11 +1471,12 @@ class MakeAllTask(
  */
 class DepositBoxTask(
     private val box: Tile,
+    boxIds: List<Int>,
     private val deposit: List<Int>,
     private val oneOf: Int? = null,
 ) : BaseTask() {
     override val description = "Deposit items in the deposit box"
-    private val opener = InteractTask(InteractTask.Kind.OBJECT, emptyList(), listOf("Bank Deposit Box"), listOf(box), "Deposit", near = box)
+    private val opener = InteractTask(InteractTask.Kind.OBJECT, boxIds, listOf("Bank deposit box", "Bank Deposit Box"), listOf(box), "Deposit", near = box)
     private var opened = false
     private var settling = 0
     private var closing = 0
