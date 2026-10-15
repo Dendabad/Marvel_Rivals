@@ -775,6 +775,53 @@ class StepScripts(private val guide: Guide) {
             )
         },
 
+        // 149. "Teleport to Rune Essence Mine [Lumbridge Easy Diary]": Sedridor (11432) in the Wizards' Tower basement teleports
+        // once Rune Mysteries is done, then the portal there leads back out.
+        "4b327ee13c" to { _ ->
+            val inMine: (TaskContext) -> Boolean = { ctx -> ctx.game.playerTile?.let { it.y > 4700 } == true }
+            StepPlan.Auto(
+                listOf(
+                    OnlyIf({ ctx -> !inMine(ctx) }, InteractTask(InteractTask.Kind.NPC, listOf(11432), listOf("Archmage Sedridor", "Sedridor"), listOf(Tile(3104, 9570, 0)), "Teleport")),
+                    WaitUntilTask("arrive in the Rune Essence Mine", 40, reached = inMine),
+                    InteractTask(InteractTask.Kind.OBJECT, emptyList(), listOf("Portal"), emptyList(), "Use"),
+                ),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
+        // 154. "Use Pages on Chronicle and wield": the Chronicle (13660) from Diango, the Pages (4573) from the bank.
+        "a168930db1" to { _ ->
+            auto(UseItemTask(4573, 13660), EquipTask(listOf(item("Chronicle", 13660))), trust = true)
+        },
+
+        // 156. "Head South-West and buy a Harpoon, 50 Bait (non-packs) and 10 Feather packs": Gerrant's Fishy Business in Port Sarim.
+        // The apron on the wall is left for the person to wear when the bot asks, since where it hangs is not in the guide.
+        "2d2e048246" to { _ ->
+            val gerrant = listOf(ShopTask.Seller("Gerrant", emptyList(), listOf(Tile(3014, 3224, 0))))
+            auto(
+                ShopTask(gerrant, listOf(item("Harpoon", 311, 1), item("Fishing bait", 313, 50), item("Feather pack", 11881, 10))),
+                trust = true,
+            )
+        },
+
+        // 157. "Make 454 Headless Arrows": the feather packs are opened, and the feathers used on the arrow shafts.
+        "7a92b7572a" to { _ ->
+            StepPlan.Auto(
+                listOf(
+                    RepeatUntil("open the feather packs", { ctx -> ctx.conditions.count(listOf(314)) >= 454 || 11881 !in ctx.game.inventory() }, { ItemActionTask(11881, "Open") }, maxRounds = 12),
+                    MakeAllTask(314, 52, 53, 454, "headless arrows"),
+                ),
+                trustTasks = true,
+                ignoreStartSignal = true,
+            )
+        },
+
+        // 197. "Chronicle to Varrock": the Chronicle teleports to the Champions' Guild, on Varrock's doorstep.
+        "6f4e6c292e" to { _ ->
+            auto(ItemTeleportTask("Chronicle", listOf(13660), "Champions' Guild"), trust = true)
+        },
+
         "86ad75cbe2" to { _ -> auto(TakeItemTask(listOf(item("Logs", 1511, 2), item("Ashes", 592, 2)))) },
 
         // 100. "Search crates for 3x Waxwood log"

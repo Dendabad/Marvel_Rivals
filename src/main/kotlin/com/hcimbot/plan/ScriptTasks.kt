@@ -1407,3 +1407,47 @@ class StockUpTask(
         const val COINS = 995
     }
 }
+
+/**
+ * Uses [first] on [second] and makes all of [product] from the window that opens, until [target] of it are held. For headless
+ * arrows (feathers on arrow shafts), where each use makes a whole inventory's worth.
+ */
+class MakeAllTask(
+    private val first: Int,
+    private val second: Int,
+    private val product: Int,
+    private val target: Int,
+    private val label: String,
+) : BaseTask() {
+    override val description = "Make $target $label"
+    private var settling = 0
+    private var idle = 0
+    private var lastMade = -1L
+
+    override fun canStopHere(ctx: TaskContext): Boolean = ctx.conditions.count(listOf(product)) >= target
+
+    override fun tick(ctx: TaskContext): TaskResult {
+        val game = ctx.game
+        val made = ctx.conditions.count(listOf(product))
+        if (made >= target) return TaskResult.Done
+        if (made != lastMade) { lastMade = made; idle = 0 } else if (++idle > STALL_TICKS) {
+            return TaskResult.Failed("no progress making $label, stuck at $made of $target")
+        }
+        if (settling > 0) { settling--; return TaskResult.Running }
+        if (game.isBusy || game.isBankOpen || game.isShopOpen) return TaskResult.Running
+        if (game.showsChoice("What would you like to make?")) {
+            ctx.actions.makeAll()
+            settling = 3
+            return TaskResult.Running
+        }
+        val have = game.inventory()
+        if (first !in have || second !in have) return TaskResult.Failed("out of ${if (first !in have) first else second} with $made of $target $label made")
+        ctx.actions.useItemOnItem(first, second)
+        settling = 3
+        return TaskResult.Running
+    }
+
+    private companion object {
+        const val STALL_TICKS = 150
+    }
+}
