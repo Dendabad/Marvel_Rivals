@@ -117,6 +117,16 @@ class MicrobotActions : GameActions {
         else -> Rs2Bank.withdrawOne(itemId)
     }
 
+    override fun openGrandExchange(): Boolean = GrandExchangeBridge.open()
+
+    override val isGrandExchangeOpen: Boolean get() = GrandExchangeBridge.isOpen()
+
+    override fun grandExchangeBuy(name: String, itemId: Int, quantity: Int): Boolean = GrandExchangeBridge.buy(name, itemId, quantity)
+
+    override fun collectGrandExchange(): Boolean = GrandExchangeBridge.collect()
+
+    override val grandExchangeProblem: String? get() = GrandExchangeBridge.problem
+
     override fun closeInterface(): Boolean {
         if (Rs2Bank.isOpen()) return Rs2Bank.closeBank()
         if (Rs2Shop.isOpen()) Rs2Shop.closeShop()

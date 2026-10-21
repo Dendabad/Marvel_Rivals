@@ -35,6 +35,17 @@ public interface HcimGuideBotConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "buyQuestItems",
+		name = "Buy quest items at the Grand Exchange",
+		description = "Before a quest starts, buy the items Quest Helper lists for it, needed and recommended. Not for ironmen, who cannot trade.",
+		position = 19
+	)
+	default boolean buyQuestItems()
+	{
+		return false;
+	}
+
+	@ConfigItem(
 		keyName = "allowCombat",
 		name = "Allow combat",
 		description = "Let the bot fight when a step says to. Off means combat steps pause for you.",

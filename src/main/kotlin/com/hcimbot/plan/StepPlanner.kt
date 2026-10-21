@@ -151,8 +151,11 @@ class StepPlanner(
         // "Check the Notice board ... to Start A Porcine of Interest": with no NPC to bound it,
         // the step's part is only the start. Its data may still say done at the quest's end.
         val startOnly = ids.isEmpty() && (step.questStartOnly || START.containsMatchIn(step.text))
+        // The first step of a quest: what Quest Helper lists for it is bought first, if the player has said to.
+        val startsQuest = step.questStartOnly || START.containsMatchIn(step.text)
         return StepPlan.Auto(
-            listOf(
+            listOfNotNull(
+                if (settings.buyQuestItems && startsQuest) GrandExchangeTask(key) else null,
                 QuestTask(
                     key, helper, settings.allowCombat, boundedTo = ids, finishesQuest = step.questCompletes,
                     stopAtValue = if (startOnly) 1 else null,

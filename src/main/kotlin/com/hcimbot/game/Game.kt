@@ -11,6 +11,9 @@ data class SceneEntity(
     val index: Int = -1,
 )
 
+/** One item Quest Helper asks for, or recommends. [ids] are every id it accepts for it. */
+data class QuestItem(val name: String, val ids: List<Int>, val quantity: Int, val recommended: Boolean)
+
 /** What the Quest Helper plugin is pointing at: its instruction and the NPC ids it highlights. */
 data class HelperStep(val text: String, val npcIds: List<Int>, val tile: Tile? = null,
     /** The chat options Quest Helper lists for this step, when it has any. */
@@ -114,6 +117,9 @@ interface GameState {
      * not running or is showing another quest. It only follows one quest at a time.
      */
     fun helperStep(quest: String? = null): HelperStep? = null
+
+    /** The items Quest Helper lists for [quest], needed and recommended, or null when it cannot be read. */
+    fun questItems(quest: String? = null): List<QuestItem>? = null
 
     /** Why the last [helperStep] gave nothing, for the log: another quest selected, plugin missing. Null when fine. */
     fun helperProblem(): String? = null
@@ -226,6 +232,21 @@ interface GameActions {
 
     /** Cast a combat spell on an NPC, e.g. "WIND_STRIKE". */
     fun castOnNpc(spellName: String, npc: SceneEntity): Boolean
+
+    /** Opens the Grand Exchange window at a booth or clerk nearby. */
+    fun openGrandExchange(): Boolean = false
+
+    /** Whether the Grand Exchange window is open. */
+    val isGrandExchangeOpen: Boolean get() = false
+
+    /** Puts in an offer to buy [quantity] of the item [name] (id [itemId]), priced to fill quickly. False if it could not. */
+    fun grandExchangeBuy(name: String, itemId: Int, quantity: Int): Boolean = false
+
+    /** Collects whatever the Grand Exchange has for the player, into the bag. */
+    fun collectGrandExchange(): Boolean = false
+
+    /** Why the last Grand Exchange call failed, for the pause message. */
+    val grandExchangeProblem: String? get() = null
 
     /** Change a game setting the guide asks for. The only one so far is [DISABLE_LEVEL_UP]. */
     fun applySetting(setting: String): Boolean

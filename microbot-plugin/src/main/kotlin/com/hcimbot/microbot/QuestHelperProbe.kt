@@ -64,6 +64,37 @@ object QuestHelperProbe {
         com.hcimbot.game.HelperStep(text, ids, tile, choices(step), objects, step.javaClass.simpleName)
     }.getOrNull()
 
+    /**
+     * The items Quest Helper lists for [wanted], the needed ones and the recommended ones. Each is an ItemRequirement, read by name: its
+     * name, its quantity and every id it accepts. Null when Quest Helper is not running or shows no such quest.
+     */
+    fun items(wanted: String?): List<com.hcimbot.game.QuestItem>? = runCatching {
+        problem = null
+        val plugin = loadedPlugins().firstOrNull { it.javaClass.name.endsWith("QuestHelperPlugin") }
+        if (plugin == null) { problem = "the Quest Helper plugin is not running"; return null }
+        val selected = call(plugin, "getSelectedQuest")
+        val quest = when {
+            wanted == null -> selected
+            selected != null && matches(selected.javaClass.simpleName, wanted) -> selected
+            else -> helperFor(plugin, wanted)
+        } ?: run { problem = "Quest Helper has no quest called $wanted"; return null }
+        // A quest's lists are filled in when it is started up, so a quest not selected may be empty until it is.
+        val result = mutableListOf<com.hcimbot.game.QuestItem>()
+        for ((method, recommended) in listOf("getItemRequirements" to false, "getItemRecommended" to true)) {
+            val list = call(quest, method) as? Collection<*> ?: continue
+            for (requirement in list) {
+                requirement ?: continue
+                val name = (call(requirement, "getName") as? String)?.trim().orEmpty()
+                val quantity = (call(requirement, "getQuantity") as? Number)?.toInt() ?: 1
+                val ids = ((call(requirement, "getAllIds") as? Collection<*>)?.mapNotNull { (it as? Number)?.toInt() }.orEmpty()
+                    .ifEmpty { listOfNotNull((call(requirement, "getId") as? Number)?.toInt()) }).filter { it > 0 }
+                if (name.isNotEmpty() && quantity > 0 && ids.isNotEmpty()) result += com.hcimbot.game.QuestItem(name, ids, quantity, recommended)
+            }
+        }
+        // The same item can be both needed and recommended: needed wins.
+        result.groupBy { it.ids.first() }.map { (_, same) -> same.firstOrNull { !it.recommended } ?: same.first() }
+    }.getOrElse { problem = "could not read Quest Helper's items: ${it.javaClass.simpleName}"; null }
+
     /** The chat options Quest Helper wants picked: its DialogChoiceSteps hold a list of steps with a `choice` text. */
     private fun choices(step: Any): List<String> = runCatching {
         val holder = field(step, "choices") ?: return emptyList()

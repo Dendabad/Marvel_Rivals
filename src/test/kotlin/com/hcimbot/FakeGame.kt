@@ -311,4 +311,22 @@ class FakeGame : GameState, GameActions {
         if (got > 0) inv.merge(itemId, got, Int::plus)
         return true
     }
+
+    // The Grand Exchange: offers placed are held until collected.
+    var questItemList: List<com.hcimbot.game.QuestItem>? = null
+    override fun questItems(quest: String?) = questItemList
+    override var isGrandExchangeOpen = false
+    private val pendingOffers = mutableListOf<Pair<Int, Int>>()
+    override fun openGrandExchange(): Boolean { calls += "open exchange"; isGrandExchangeOpen = true; return true }
+    override fun grandExchangeBuy(name: String, itemId: Int, quantity: Int): Boolean {
+        calls += "buy offer $name x$quantity"
+        pendingOffers += itemId to quantity
+        return true
+    }
+    override fun collectGrandExchange(): Boolean {
+        calls += "collect"
+        pendingOffers.forEach { (id, n) -> inv.merge(id, n, Int::plus) }
+        pendingOffers.clear()
+        return true
+    }
 }

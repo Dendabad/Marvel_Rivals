@@ -593,6 +593,7 @@ class HcimGuideBotScript(private val bankPin: () -> String? = { null }) : Script
 
         fun settingsFrom(config: HcimGuideBotConfig) = BotSettings(
             allowCombat = config.allowCombat(),
+            buyQuestItems = config.buyQuestItems(),
             pauseOnAdvice = config.pauseOnTips(),
             eatAtPercent = config.eatAtPercent(),
             stopAtPercent = config.stopAtPercent(),
