@@ -136,7 +136,11 @@ class StepPlanner(
         val carriesOn = step.questFollow || step.questStopValue != null ||
             step.questStopCondition != null || step.questStopItems.isNotEmpty()
         if (carriesOn) {
-            return StepPlan.Auto(listOf(QuestTask(key, helper, settings.allowCombat)), combat = settings.allowCombat)
+            // Where the guide data has nothing to click for a part of the quest, Quest Helper itself is followed.
+            return StepPlan.Auto(
+                listOf(QuestWithHelperFallback(QuestTask(key, helper, settings.allowCombat), key, settings.allowCombat)),
+                combat = settings.allowCombat,
+            )
         }
         val ids = step.target?.ids.orEmpty().toSet() + step.approach?.ids.orEmpty()
         val mentioned = helper.steps.values.any { instruction ->
