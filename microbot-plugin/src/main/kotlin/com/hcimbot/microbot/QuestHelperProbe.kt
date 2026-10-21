@@ -26,6 +26,15 @@ object QuestHelperProbe {
         }.getOrElse { "Quest Helper probe failed: ${it.javaClass.simpleName} ${it.message}" }
     }
 
+    /** The quest Quest Helper has open, lower case letters and digits only (witchshouse), or null. */
+    fun selectedName(): String? = runCatching {
+        val plugin = loadedPlugins().firstOrNull { it.javaClass.name.endsWith("QuestHelperPlugin") } ?: return null
+        call(plugin, "getSelectedQuest")?.javaClass?.simpleName?.let(::normal)?.takeIf { it.isNotEmpty() }
+    }.getOrNull()
+
+    /** Lower case letters and digits only, as the bot names quests: Witch's House is witchshouse. */
+    fun normalName(name: String): String = normal(name)
+
     /** The step Quest Helper shows, as the bot can use it: its text and the NPC ids it highlights. */
     fun currentStep(wanted: String? = null): com.hcimbot.game.HelperStep? = runCatching {
         problem = null

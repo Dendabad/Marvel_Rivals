@@ -16,8 +16,6 @@ data class BotSettings(
     val foodIds: List<Int> = emptyList(),
     /** Pause when something attacks the player during a step that is not a combat step. */
     val pauseWhenAttacked: Boolean = true,
-    /** Before a quest starts, buy what Quest Helper lists for it (needed and recommended) from the Grand Exchange. Not for ironmen. */
-    val buyQuestItems: Boolean = false,
     /** Pause if one step takes longer than this many ticks (0.6s each). */
     val stepTimeoutTicks: Int = 1000,
 )

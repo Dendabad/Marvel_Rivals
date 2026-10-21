@@ -150,10 +150,3 @@ NPC, object or item with a menu option, take an item, pick a chat option, contin
 the Wilderness are refused. It asks at most twice per step and 25 times per session. The key is read from the environment and
 never stored. The report sent holds position, bag, nearby things and chat text. Without the variable nothing is sent.
 
-
-## Buying quest items at the Grand Exchange
-
-Tick "Buy quest items at the Grand Exchange" in the settings, and before a quest starts the bot reads the items Quest Helper lists for it,
-needed and recommended. It takes what the bank holds, walks to the Grand Exchange in Varrock, puts in a buy offer at a generous price for
-the rest, collects them and carries on. It is off by default and not for ironmen, who cannot trade. If Microbot's Grand Exchange helper
-differs from what the bot expects, the bot pauses and the Recent list says which call it could not make.
