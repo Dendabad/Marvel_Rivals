@@ -13,8 +13,7 @@ the place where you start it.
 ## Use
 
 Black chinchompas are caught with box traps at Hunter 73 (Eagles' Peak done), southeast of the Lava Maze in the Wilderness, around level 32 to 36.
-Stand there with box traps in the bag, then turn the plugin on: the spot where you stand is the centre of the hunt. The bot does not walk
-there or bank for you.
+Stand there with box traps in the bag, then turn the plugin on: the spot where you stand is the centre of the hunt. It walks back to that spot after each bank trip, but the first walk there is yours.
 
 Each tick it:
 1. checks a trap that has caught something ("Shaking box"), and resets one that failed,
@@ -22,6 +21,18 @@ Each tick it:
 3. watches for danger: another player within the range makes it hop worlds, and your health falling under the set share stops it.
 
 It stops and tells you when it is out of box traps.
+
+## The bank trip
+
+When the bag holds the number of black chinchompas you set (100 by default), the bot:
+1. checks and dismantles every trap, so none is left out for the next player,
+2. walks to the bank tile you set (Edgeville bank by default), accepting the Wilderness ditch warning if it shows,
+3. banks the chinchompas, and takes out box traps if the bag holds fewer than the number you set,
+4. walks back to the spot where you started it and hunts again.
+
+It walks the way Microbot's walker finds, which on the way out passes through the Wilderness. Nothing is done about players on the walk
+except the health stop, so keep an eye on it. If anything on the trip fails, such as no bank to open or a PIN screen, it pauses and says
+what happened.
 
 ## Settings
 
@@ -33,6 +44,8 @@ It stops and tells you when it is out of box traps.
 | Hop worlds when a player is near | Hops as soon as any other player is within the range. Advised in the Wilderness. |
 | Player range | How close, in tiles, a player must be to make it hop. |
 | Stop under this health % | Stops the bot when your health falls under this share of your maximum. |
+| Bank at this many chinchompas | The count in the bag that starts the bank trip. |
+| Bank tile X and Y | Where to walk to bank. The defaults are Edgeville bank. |
 
 ## Be careful
 

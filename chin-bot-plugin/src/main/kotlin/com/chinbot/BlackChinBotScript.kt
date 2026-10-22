@@ -3,7 +3,15 @@ package com.chinbot
 import com.hcimbot.game.SceneEntity
 import com.hcimbot.guide.Tile
 import com.hcimbot.microbot.MicrobotActions
+import com.hcimbot.engine.Conditions
+import com.hcimbot.guide.ItemRef
 import com.hcimbot.microbot.MicrobotGameState
+import com.hcimbot.plan.BankTask
+import com.hcimbot.plan.DepositItemsTask
+import com.hcimbot.plan.Task
+import com.hcimbot.plan.TaskContext
+import com.hcimbot.plan.TaskResult
+import com.hcimbot.plan.WalkTask
 import java.awt.Color
 import java.util.concurrent.TimeUnit
 import net.runelite.client.plugins.microbot.Microbot
@@ -29,6 +37,11 @@ class BlackChinBotScript : Script() {
     @Volatile private var stateColor = IDLE
     @Volatile private var detail: String? = null
     private var anchor: Tile? = null
+
+    /** The trip to the bank and back, once the bag holds enough chinchompas: dismantle first, then this. */
+    private var trip: Task? = null
+    private var dismantling = false
+    private var dismantleStarted = 0L
     private var waitUntil = 0L
     private var lastHop = 0L
     private var caught = 0
@@ -90,7 +103,16 @@ class BlackChinBotScript : Script() {
                 hop()
                 return
             }
+            // The Wilderness warning at the ditch has to be accepted for the walk to go on.
+            if (game.showsChoice("Enter Wilderness")) { actions.clickChoice("Enter Wilderness"); return }
+            if (trip != null || dismantling) { travel(cfg, home); return }
             if (System.currentTimeMillis() < waitUntil || game.isBusy) { show("Running", RUNNING_COLOR); return }
+            if (chinchompas() >= cfg.bankAt()) {
+                note("Holding ${chinchompas()} chinchompas, taking the traps in to bank")
+                dismantling = true
+                dismantleStarted = System.currentTimeMillis()
+                return
+            }
 
             val traps = trapsNear(home, cfg.radius() + 3)
             // A trap that caught something is checked first, then one that failed is reset. Both clicks do nothing for a trap that is just set.
@@ -120,6 +142,67 @@ class BlackChinBotScript : Script() {
             note("Error: ${e.message}")
             paused = true
             show("PAUSED", PAUSED_COLOR, "Unexpected error: ${e.message}. Check the client log.")
+        }
+    }
+
+    private fun chinchompas(): Int = game.inventory()[BLACK_CHIN] ?: 0
+
+    /**
+     * The bank trip. The traps are checked and dismantled first (a trap left out is a trap lost to the next player), then the bot walks to
+     * the bank, banks the chinchompas, takes out box traps if the bag is short, and walks back to the spot it started from.
+     */
+    private fun travel(cfg: BlackChinBotConfig, home: Tile) {
+        if (dismantling) {
+            show("Taking the traps in", RUNNING_COLOR)
+            if (System.currentTimeMillis() < waitUntil || game.isBusy) return
+            val traps = trapsNear(home, cfg.radius() + 4)
+            val timedOut = System.currentTimeMillis() - dismantleStarted > DISMANTLE_MS
+            if (traps.isEmpty() || timedOut) {
+                if (timedOut && traps.isNotEmpty()) note("${traps.size} traps could not be taken in, leaving them")
+                dismantling = false
+                trip = Sequence(
+                    listOf(
+                        WalkTask(Tile(cfg.bankX(), cfg.bankY(), 0), radius = 4),
+                        DepositItemsTask(listOf(BLACK_CHIN)),
+                        BankTask(depositAll = false, withdraw = listOf(ItemRef("Box trap", listOf(BOX_TRAP), cfg.traps()))),
+                        WalkTask(home, radius = 2),
+                    ),
+                )
+                note("Walking to the bank")
+                return
+            }
+            val trap = traps.first()
+            val option = if (trap.name.equals("Shaking box", ignoreCase = true)) "Check" else "Dismantle"
+            if (actions.interactObject(trap, option)) pause(2400) else pause(1200)
+            return
+        }
+        val current = trip ?: return
+        show("Banking trip", RUNNING_COLOR, current.description)
+        val ctx = TaskContext(game, actions, Conditions(game)) { note(it) }
+        when (val result = current.tick(ctx)) {
+            TaskResult.Running -> Unit
+            TaskResult.Done -> { trip = null; note("Back at the spot, hunting again") }
+            is TaskResult.Failed -> {
+                trip = null
+                paused = true
+                show("PAUSED", PAUSED_COLOR, "${result.reason}. Sort it out, then untick Pause.")
+                note("Paused: ${result.reason}")
+            }
+            else -> Unit
+        }
+    }
+
+    /** Runs its tasks one after the other. */
+    private class Sequence(private val tasks: List<Task>) : Task {
+        private var index = 0
+        override val description get() = tasks.getOrNull(index)?.description ?: "Finished"
+
+        override fun tick(ctx: TaskContext): TaskResult {
+            val current = tasks.getOrNull(index) ?: return TaskResult.Done
+            return when (val result = current.tick(ctx)) {
+                TaskResult.Done -> { index++; if (index >= tasks.size) TaskResult.Done else TaskResult.Running }
+                else -> result
+            }
         }
     }
 
@@ -196,6 +279,8 @@ class BlackChinBotScript : Script() {
     private companion object {
         const val TICK_MS = 600L
         const val BOX_TRAP = 10008
+        const val BLACK_CHIN = 11959
+        const val DISMANTLE_MS = 60_000L
         const val RESET_RETRY_MS = 20_000L
         const val HOP_GAP_MS = 15_000L
         const val HOP_WAIT_MS = 8_000L

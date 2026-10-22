@@ -76,4 +76,37 @@ public interface BlackChinBotConfig extends Config
 	{
 		return 60;
 	}
+
+	@ConfigItem(
+		keyName = "bankAt",
+		name = "Bank at this many chinchompas",
+		description = "When the bag holds this many black chinchompas, the bot takes its traps in, walks to the bank, banks them and walks back.",
+		position = 5
+	)
+	default int bankAt()
+	{
+		return 100;
+	}
+
+	@ConfigItem(
+		keyName = "bankX",
+		name = "Bank tile X",
+		description = "Where to walk to bank. The default is Edgeville bank. The bot opens the nearest bank from there.",
+		position = 6
+	)
+	default int bankX()
+	{
+		return 3094;
+	}
+
+	@ConfigItem(
+		keyName = "bankY",
+		name = "Bank tile Y",
+		description = "Where to walk to bank. The default is Edgeville bank.",
+		position = 7
+	)
+	default int bankY()
+	{
+		return 3491;
+	}
 }
