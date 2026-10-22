@@ -5,3 +5,6 @@ include("microbot-plugin")
 
 // The standalone Quest Helper Bot plugin: follows Quest Helper for any quest and can buy its items at the Grand Exchange.
 include("quest-bot-plugin")
+
+// The standalone Black Chin Bot plugin: traps black chinchompas in the Wilderness.
+include("chin-bot-plugin")
